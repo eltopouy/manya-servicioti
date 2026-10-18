@@ -1,103 +1,76 @@
 {
-  "actualizado": "18/10/2026 12:46",
-  "proximo_partido": {
-    "id": "next-cds-2026",
-    "fecha_iso": "2026-10-21T20:00:00-03:00",
-    "fecha_legible": "21/10/2026 20:00 hs",
-    "torneo": "Campeonato Uruguayo • Torneo Clausura / Tabla Anual",
-    "estadio": "Estadio Campeón del Siglo (Montevideo)",
+  "actualizado": "18/10/2026 13:10",
+  "fase_partido": "PREVIA",
+  "alerta_banner": "⚡ ¡HOY JUEGA PEÑAROL! Peñarol at Liverpool a las 18/10/2026 18:30 hs en Estadio de Primera División. Vivilo en vivo por VTV Plus / Disney+ Premium.",
+  "partido_activo": {
+    "es_hoy": true,
+    "fase": "PREVIA",
+    "id": "401929259",
+    "nombre": "Peñarol at Liverpool",
+    "fecha_iso": "2026-10-18T18:30:00-03:00",
+    "fecha_legible": "18/10/2026 18:30 hs",
+    "torneo": "Campeonato Uruguayo • Clausura",
+    "estadio": "Estadio de Primera División",
     "local": {
-      "nombre": "Peñarol",
-      "abreviatura": "CAP",
-      "goles": "-",
-      "es_penarol": true
-    },
-    "visitante": {
-      "nombre": "Defensor Sporting",
-      "abreviatura": "DEF",
-      "goles": "-",
-      "es_penarol": false
-    },
-    "completado": false,
-    "estado_texto": "Venta y Canje en TickAntel / TuApp",
-    "tv": "VTV Plus / Disney+ Premium",
-    "entradas": {
-      "Cataldi": "Socios: Canje Gratuito | Generales: $420",
-      "Damiani": "Socios: Canje Gratuito | Generales: $650",
-      "Güelfi": "Socios: Canje Gratuito | Generales: $350",
-      "Henderson": "Socios: $950 | Butaquistas: Gratis | Generales: $1.450"
-    }
-  },
-  "ultimo_partido": {
-    "fecha_legible": "Última Fecha Disputada",
-    "torneo": "Campeonato Uruguayo",
-    "estadio": "Estadio Campeón del Siglo",
-    "local": {
-      "nombre": "Peñarol",
-      "abreviatura": "CAP",
-      "goles": "2",
-      "es_penarol": true
-    },
-    "visitante": {
-      "nombre": "Boston River",
-      "abreviatura": "BOS",
+      "id": "5492",
+      "nombre": "Liverpool",
+      "abreviatura": "LIV",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
       "goles": "0",
       "es_penarol": false
     },
-    "completado": true,
-    "estado_texto": "Finalizado • Victoria Aurinegra"
+    "visitante": {
+      "id": "2683",
+      "nombre": "Peñarol",
+      "abreviatura": "PEN",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+      "goles": "0",
+      "es_penarol": true
+    },
+    "minuto_reloj": "0'",
+    "completado": false,
+    "tv": "VTV Plus / Disney+ Premium",
+    "detalles_avanzados": {
+      "goles": [],
+      "tarjetas": [],
+      "estadisticas": {
+        "Liverpool": {},
+        "Peñarol": {}
+      },
+      "titulares_penarol": [],
+      "suplentes_penarol": [],
+      "titulares_rival": []
+    }
   },
-  "ultimos_resultados": [
-    {
-      "fecha_legible": "Última Fecha Disputada",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Estadio Campeón del Siglo",
-      "local": {
-        "nombre": "Peñarol",
-        "abreviatura": "CAP",
-        "goles": "2",
-        "es_penarol": true
-      },
-      "visitante": {
-        "nombre": "Boston River",
-        "abreviatura": "BOS",
-        "goles": "0",
-        "es_penarol": false
-      },
-      "completado": true,
-      "estado_texto": "Finalizado • Victoria Aurinegra"
-    }
-  ],
-  "proximos_partidos": [
-    {
-      "id": "next-cds-2026",
-      "fecha_iso": "2026-10-21T20:00:00-03:00",
-      "fecha_legible": "21/10/2026 20:00 hs",
-      "torneo": "Campeonato Uruguayo • Torneo Clausura / Tabla Anual",
-      "estadio": "Estadio Campeón del Siglo (Montevideo)",
-      "local": {
-        "nombre": "Peñarol",
-        "abreviatura": "CAP",
-        "goles": "-",
-        "es_penarol": true
-      },
-      "visitante": {
-        "nombre": "Defensor Sporting",
-        "abreviatura": "DEF",
-        "goles": "-",
-        "es_penarol": false
-      },
-      "completado": false,
-      "estado_texto": "Venta y Canje en TickAntel / TuApp",
-      "tv": "VTV Plus / Disney+ Premium",
-      "entradas": {
-        "Cataldi": "Socios: Canje Gratuito | Generales: $420",
-        "Damiani": "Socios: Canje Gratuito | Generales: $650",
-        "Güelfi": "Socios: Canje Gratuito | Generales: $350",
-        "Henderson": "Socios: $950 | Butaquistas: Gratis | Generales: $1.450"
-      }
-    }
-  ],
+  "proximo_partido": {
+    "event_id": "401929259",
+    "nombre": "Peñarol at Liverpool",
+    "fecha_iso": "2026-10-18T18:30:00-03:00",
+    "fecha_legible": "18/10/2026 18:30 hs",
+    "torneo": "Campeonato Uruguayo • Clausura",
+    "estadio": "Estadio de Primera División",
+    "local": {
+      "id": "5492",
+      "nombre": "Liverpool",
+      "abreviatura": "LIV",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
+      "goles": "0",
+      "es_penarol": false
+    },
+    "visitante": {
+      "id": "2683",
+      "nombre": "Peñarol",
+      "abreviatura": "PEN",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+      "goles": "0",
+      "es_penarol": true
+    },
+    "minuto_reloj": "0'",
+    "tiempo_periodo": 0,
+    "completado": false,
+    "tv": "VTV Plus / Disney+ Premium",
+    "es_hoy": true
+  },
   "tabla_posiciones": [
     {
       "pos": 1,

@@ -1,183 +1,121 @@
 {
-  "actualizado": "18/10/2026 12:46",
+  "actualizado": "18/10/2026 13:10",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "titular_dia": "Peñarol se fortalece: retornos de peso y rodaje en Los Aromos rumbo al torneo",
-  "bajada_seo": "Toda la actualidad de Peñarol: vueltas de Arezo y Cruz, bajas del plantel, preparación en Los Aromos y el duelo frente a Defensor Sporting.",
+  "fase_publicacion": "PREVIA",
+  "partido_id": "",
+  "titular_dia": "¡HOY JUEGA PEÑAROL! El Manya visita a Liverpool en una prueba de fuego por la Anual y el Clausura",
+  "bajada_seo": "Peñarol visita a Liverpool este domingo 18 de octubre a las 18:30 hs por la fecha del torneo. Conocé la previa, formaciones y dónde ver en vivo por VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Actualidad en Los Aromos",
-      "detalle": "El aurinegro suma minutos de fútbol ante Juventud en Los Aromos, ajustando la idea táctica y afianzando a las nuevas incorporaciones con miras al inminente arranque de la competencia oficial."
-    },
-    {
-      "icono": "📊",
-      "titulo": "Tabla Anual y Campeonato",
-      "detalle": "Tras vencer dos a cero a Boston River, el equipo carbonero llega en alza, respaldado por el rendimiento deportivo y el envión anímico que otorgó el campeonato juvenil de Sub 15."
-    },
-    {
-      "icono": "🎟️",
-      "titulo": "Entradas y Campeón del Siglo",
-      "detalle": "El Campeón del Siglo se prepara para albergar el duelo ante Defensor Sporting. Se aguardan definiciones sobre la presencia de la hinchada y el operativo de seguridad para los próximos compromisos."
+      "titulo": "Clave Táctica",
+      "detalle": "El planteo de Diego Aguirre buscará presionar alto en la salida del rival, aprovechando el desequilibrio por las bandas y el retorno en ataque para golpear de entrada."
     },
     {
       "icono": "🔥",
-      "titulo": "Figuras y Rendimiento",
-      "detalle": "Los retornos de Matías Arezo y Alejo Cruz potencian el frente de ataque, mientras la dirigencia reorganiza la plantilla tras las rescisiones contractuales de Guillermo de Amores y Leo Coelho."
+      "titulo": "La Figura a Seguir",
+      "detalle": "Atentos a Matías Arezo y la jerarquía de los atacantes aurinegros, decisivos en los metros finales para romper el cero y marcar la diferencia en Belo Belvedere/Estadio."
+    },
+    {
+      "icono": "📺",
+      "titulo": "Transmisión y Horario",
+      "detalle": "El encuentro arranca a las 18:30 hs (hora oficial de Uruguay) y será transmitido en vivo por VTV Plus y la plataforma Disney+ Premium."
+    },
+    {
+      "icono": "📊",
+      "titulo": "Puntos en Juego",
+      "detalle": "Tres puntos clave en la recta final para mantener la ventaja en la Tabla Anual y abrochar el objetivo de meterse de lleno en la definición del campeonato."
     }
   ],
   "articulo_principal": {
-    "titulo": "Peñarol reestructura su plantel y afina el funcionamiento colectivo para ir por todo",
-    "subtitulo": "Entre el regreso de figuras determinantes y la puesta a punto en Los Aromos, el carbonero prepara su artillería para el compromiso ante Defensor Sporting.",
+    "titulo": "Tarde de fútbol, jerarquía y obligación: Peñarol sale a defender la cima ante Liverpool",
+    "subtitulo": "El equipo de Diego Aguirre afronta un choque determinante en el calendario de la recta final del campeonato.",
     "parrafos": [
-      "El Club Atlético Peñarol atraviesa semanas decisivas en la configuración de su proyecto deportivo. La dirección técnica, enfocada en maximizar el rendimiento individual y colectivo, ha impulsado un reacondicionamiento en Los Aromos mediante encuentros de entrenamiento frente a Juventud de Las Piedras. Estas pruebas permitieron probar distintas variantes tácticas y dar rodaje a un plantel que busca consolidar una identidad voraz. A esto se le suma una intensa reestructuración de la plantilla, marcada por la salida de futbolistas experimentados como Leo Coelho, quien continuará su carrera en Brasil, y Guillermo de Amores, abriendo espacio a una renovación necesaria para afrontar con solvencia las exigencias del calendario.",
-      "En el plano estrictamente futbolístico, la repatriación de Matías Arezo a préstamo desde Gremio y la llegada de Alejo Cruz representan dos saltos de calidad significativos para el esquema ofensivo. Arezo aporta esa cuota goleadora y presencia física en el área que suele resolver partidos cerrados, mientras que Cruz ofrece desborde, velocidad por la banda izquierda y buena pegada. El cuerpo técnico busca sincronizar a estas piezas en el circuito de juego, exigiendo transiciones rápidas y presión alta desde la salida rival. El triunfo previo dos a cero ante Boston River dejó sensaciones positivas en la elaboración, pero el cuerpo técnico sabe que mantener la intensidad será clave para sostener la ventaja competitiva.",
-      "El contexto institucional e histórico también empuja al decano hacia el éxito deportivo. El reciente título obtenido en la categoría Sub 15 tras golear a Nacional en el clásico refleja el trabajo sostenido en las formativas, alimentando el sentido de pertenencia y asegurando el futuro del club. Con el horizonte puesto en el choque ante Defensor Sporting en el Estadio Campeón del Siglo, las estadísticas muestran a un Peñarol sólido en condición de local, respaldado por una estructura defensiva que busca afianzarse definitivamente. Sostener la regularidad en la Tabla Anual requerirá no ceder puntos ante rivales directos en la lucha por el título nacional.",
-      "Para la multitud que acompaña incondicionalmente en cada jornada, el reencuentro en el Estadio Campeón del Siglo promete ser una fiesta teñida de oro y carbón. La hinchada aurinegra, siempre vigilante ante las decisiones de seguridad y la organización de los espectáculos deportivos, se alista para empujar desde las tribunas en este tramo crucial. Con figuras que regresan por la gloria y un equipo que gana cohesión día a día, Peñarol ratifica su ambición histórica: pelear cada pelota, defender el prestigio del club decano y dar la vuelta olímpica al final del camino."
+      "El clima de concentración en Los Aromos se vivió con la máxima intensidad durante toda la semana. Sabedores de lo que hay en juego en este tramo definitivo de la temporada, el plantel aurinegro que conduce Diego Aguirre cerró su preparación enfocado únicamente en sumar de a tres para seguir firmes en la parte alta.",
+      "Frente a Peñarol estará un Liverpool siempre peligroso y combativo en su escenario, que buscará imponer condiciones a través de la posesión y transiciones rápidas. Aguirre trabajó tácticamente durante los entrenamientos en Los Aromos para contrarrestar la dinámica del rival, cortar sus circuitos de juego y hacer valer la jerarquía colectiva del Manya.",
+      "En cuanto al once probable, el entrenador alineará a sus mejores piezas tras la reestructuración del plantel. Con el rodaje que viene ganando Matías Arezo en ofensiva y la frescura de variantes como Alejo Cruz por las bandas, Peñarol perfila una alineación agresiva, compacta en la línea defensiva y con mucha velocidad en el frente de ataque.",
+      "Para el pueblo carbonero, cada partido de esta recta final se juega como una verdadera final. La necesidad de sostener la ventaja en la Tabla Anual y abrochar la clasificación directa a la definición del campeonato exige máxima concentración desde el primer minuto. Hoy la camiseta pide garra, fútbol y una victoria que mantenga al Manya en lo más alto."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cuándo juega Peñarol su próximo partido y dónde verlo en vivo?",
-        "a": "El próximo encuentro de Peñarol será el 21 de octubre de 2026 a las 20:00 hs frente a Defensor Sporting en el Estadio Campeón del Siglo. Podrá verse en vivo a través de VTV Plus y la plataforma de streaming Disney+."
+        "q": "¿A qué hora juega Peñarol hoy y dónde verlo?",
+        "a": "Peñarol juega a las 18:30 hs (Uruguay) en el Estadio de Primera División, con transmisión en vivo por VTV Plus y Disney+ Premium."
       },
       {
-        "q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?",
-        "a": "Peñarol llega tras derrotar 2-0 a Boston River en su última presentación, manteniéndose en las colocaciones de vanguardia de la Tabla Anual y peleando palmo a palmo la definición del Campeonato Uruguayo."
+        "q": "¿Cómo formaría Peñarol?",
+        "a": "Diego Aguirre perfila un esquema ofensivo con los futbolistas en mejor rodaje físico, destacando el peso ofensivo de Arezo y los extremos aurinegros."
       },
       {
-        "q": "¿Cómo canjear o comprar entradas para el Estadio Campeón del Siglo?",
-        "a": "Las entradas y canjes para socios se gestionan a través del sitio web oficial Tickantel y la app de Peñarol. Los socios entran gratis previo canje, mientras que los generales pueden adquirir sus boletos según el cronograma de venta fijado."
+        "q": "¿Qué se juega Peñarol en este partido?",
+        "a": "Puntos vitales para abrochar la Tabla Anual y encaminar la definición del Torneo Clausura en la recta final del año."
       }
     ]
   },
   "noticias_fuentes": [
     {
       "titulo": "Defiendan al hincha",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
+      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
+      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
       "fuente": "Padre y Decano",
-      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol p",
-      "fecha": "Wed, 30 Jul 2025 01:00",
-      "imagen_origen": ""
+      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Regresa al Club",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
+      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
+      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
       "fuente": "Padre y Decano",
-      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el car",
-      "fecha": "Mon, 28 Jul 2025 21:47",
-      "imagen_origen": ""
+      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Peñarol hizo futbol ante Juventud",
-      "url_origen": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
+      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
+      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
       "fuente": "Padre y Decano",
-      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; J",
-      "fecha": "Sat, 26 Jul 2025 17:54",
-      "imagen_origen": ""
+      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Coelho continuará en Brasil",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
+      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
+      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
       "fuente": "Padre y Decano",
-      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el bras",
-      "fecha": "Tue, 15 Jul 2025 12:14",
-      "imagen_origen": ""
+      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Regreso esperado",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
+      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
+      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
       "fuente": "Padre y Decano",
-      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a su",
-      "fecha": "Tue, 15 Jul 2025 10:42",
-      "imagen_origen": ""
+      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "De Amores rescindió con Peñarol",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
+      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
+      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
       "fuente": "Padre y Decano",
-      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotar",
-      "fecha": "Thu, 10 Jul 2025 23:32",
-      "imagen_origen": ""
+      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Análisis punto por punto del informe de seguridad",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
+      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
+      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
       "fuente": "Padre y Decano",
-      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudiero",
-      "fecha": "Thu, 10 Jul 2025 14:04",
-      "imagen_origen": ""
+      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
+      "peso": 1.3
     },
     {
       "titulo": "Fecha clásica",
-      "url_origen": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
+      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
+      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
       "fuente": "Padre y Decano",
-      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mi",
-      "fecha": "Wed, 02 Jul 2025 23:48",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Cambios en el equipo",
-      "url_origen": "https://www.padreydecano.com/cms/noticias/cambios-en-el-equipo/",
-      "fuente": "Padre y Decano",
-      "resumen": "Peñarol tendrá variantes para enfrentar a Montevideo Wanderers en el Estadio Campeón del Siglo por la sexta fecha del Torneo Intermedio 2025. El equipo de Diego Aguirre formará con: Guillermo De Amores; Damián Suárez, Leo Coelho, Nahuel Herrera, Juan Rodríguez",
-      "fecha": "Sun, 22 Jun 2025 19:05",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Tomás Olase: \"Peñarol y el fútbol me salvaron la vida\" - ESPN Deportes",
-      "url_origen": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYUVhSUp1blFUV1dxSTNkNlVXcTlYWU5oNTJvS0Rib1RjRGxnZU5yWEJfRjF3X1JvT1k2aTZLUjJLc0EyTDZlSmpLR19QeGNFVC1WWFVwd2F2aXJORVJydDhtRGR3eUpzNXBMSWhzQXZQRm1pQjhTSi1PRE9vOFE0TDFKOXYtRDJJWVplZ2MtajZ2a1lLRFlORDNRb3ZNSDhzdlFWb3ljUUlGVGIzS3FvMkUtdldROXFyUGk0NA?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Tomás Olase: \"Peñarol y el fútbol me salvaron la vida\" &nbsp;&nbsp; ESPN Deportes",
-      "fecha": "Fri, 16 Oct 2026 14:30",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Posible alineación de Peñarol ante Liverpool en la Liga Uruguaya - 365Scores",
-      "url_origen": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1TVURuanhPSC1yWGlHa2h2ZEd3T2dvcEJVbE9mVzlBaWRZRllGenVaWVN0cVRQaFdvc1FobTNVVmNKZDFPMXEtempXdEpUMVp2bTlzMnVNTFRqNW9RZmViNV93dHhjQ1FlX1RpNGJ0UTd4VDlUMUhMWnZrZDhmN1U?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Posible alineación de Peñarol ante Liverpool en la Liga Uruguaya &nbsp;&nbsp; 365Scores",
-      "fecha": "Sat, 17 Oct 2026 19:17",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Liverpool vs Peñarol, hoy por la Liga AUF Uruguaya: horario, formaciones y cómo ver en vivo - dsports",
-      "url_origen": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNR09PN0FoMi1YTGdjdUNiLXc3RzBiS1NhZ0J4NXlOZTBNM3h3VXo3M21ucHBaZnhzMmk2OW9jX1lhTGRNRmpKVU0yZHZBekNhY25vQ0ZzQkRrWWVnTUZOUl9WNUVOYU5BVnEyWkZVVk1XRkRVVkFKd0xtNm5tT0lEcFUxQ3Njc0MyU211cmpqUTFuWk5xWXFjaGpNVjRBZXpJME5UNlZKRnk5TXpyaHZ3Yk5aZGlyRS0tRkYyRldvak1mVUtCYjRiSlVOdEo2aFNRTXdmTGFpYlJ6SS1y0gHiAUFVX3lxTFAzdGtLSldqQTlJdHdfa3d4X1Zpcm1XcmdKdUQ1SE5NNk5Qa2FPY0NidXFIX0E3TmxPbHYwa093Sk9oZXJjUzE3X01mY3hjclZVT0hwSXpHMXUweWZDS1lJUjEzNWY4elh0VWk5WXhiajQzOWY5RmFHcDJyd1NzV01EdGhITEdjd3ZMUENRUHpoRFo3T0JLeERZUUxvb0N4RWNlb3hFazBsbHpEeXBrcUt4RDFJVjJNSlB2XzNXWUtHb0U0ckk1LXRjQ0tYVHI1RVhIYV85VzhWUjJxQ1VMM05MUEE?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Liverpool vs Peñarol, hoy por la Liga AUF Uruguaya: horario, formaciones y cómo ver en vivo &nbsp;&nbsp; dsports",
-      "fecha": "Sun, 18 Oct 2026 13:54",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Clausura: Peñarol visita a Liverpool a las 18:30 en el Viera. Alineaciones y cómo verlo - Montevideo Portal",
-      "url_origen": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNNU8xWml3RnExaVd3Wmx2TF9CSk5mb0d3clFETnloUnp5V1lDYUxmRklVMkcwQ1pUeGlPSDBkSzVOemtJX3B4dEdqcWRJZ2ZBV0NjSmZHNjRwaUpjV3Riczk5VHFwc0xNNkw2R2NPMHVPUXhlazVYRDk2VzhOZlE5c2t5cDZSY3hqRnE0a2piNGVpMVhnZ3VhQVJDVDNySzE0bFg2NS1WWGFNUjFaTzVCYS1RaVd5SVg2TTdaUnJvcElBZWgtakduZzljcGRQd9IB8gFBVV95cUxQQlNXcmU4TENnOGh0a01ZZU9sb0U2TkhGRUZZU0ZhTjc5N2hyUnFWMWJFbzZFekw4dVhNMDJvbEV3ejFUX0t2UDNKaEs3cno1dWxaZHBJOE93aUxqLXNXVWFfbWhHX195N2pVa2NYeFpkMTRsTEhoWWQzQ2ZJbjdpeHFjR0h1SjVmWUM5Z2RDaWsxaHlvRHMtMHhyYS1nYWN2SG1SQnYzRUJTNG1MaWpxZlpxLWN6T0x5c1p3ZnNmOHN0bUlTZU5mV1FReGo4MnJSdGFZcGhGRUpaNmdENzRGUDFvbzBOYWtKTjZUM1hGZ3ZJQQ?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Clausura: Peñarol visita a Liverpool a las 18:30 en el Viera. Alineaciones y cómo verlo &nbsp;&nbsp; Montevideo Portal",
-      "fecha": "Sun, 18 Oct 2026 12:15",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Peñarol se hizo fuerte en Boedo - QZ | Noticias",
-      "url_origen": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBneTl6Smd4ZTNDelh3QzBNRnltdElLNTZPdk8yS2Jtc3AxWmk3b3oydnlPVENOQWVxZGVVOEc1eWhJVFFGa050WUFCcDZNVXlIMGVxeWRjTFIzZkFCRXVFTVgySUVNWDBad1YyeW1MS29jWjV6Z2c?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Peñarol se hizo fuerte en Boedo &nbsp;&nbsp; QZ | Noticias",
-      "fecha": "Sat, 17 Oct 2026 03:32",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Goles y asistencias - Estadísticas de Club Atletico Peñarol para Liga AUF Uruguaya 2026 - FotMob",
-      "url_origen": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPODhFZkxoWU40Q3hsUk0tX3JCZDl1S2xqYnlTbEJ0TEdGZlVwOFVpTkdORmJ0RUZfU1BucTNta3dmaDJ1Yk1qckhRaTlIdU9GeHNoMkNmWnVNN19obzF2M2hqb2dkTVVIbVp5bUpzMEs3V3NycGt4MnptRGdxVXZTRFV3U0lEZnMzQnlHSUNISWJYa3JvaG9xckQ5NV93UGNYbzZvNkpWTGhUczhWTXJ6Ny1CRVdDUlZ2ZWZwbmRWR3AtYlpSd1E?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Goles y asistencias - Estadísticas de Club Atletico Peñarol para Liga AUF Uruguaya 2026 &nbsp;&nbsp; FotMob",
-      "fecha": "Sat, 17 Oct 2026 18:38",
-      "imagen_origen": ""
-    },
-    {
-      "titulo": "Juventud vs. Peñarol (24 Oct., 2026) Resultados en Vivo - ESPN Uruguay",
-      "url_origen": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOVHNrbHBReVVJWDFFSWVSS1JZZVNlbDNDQ3NUcTZLcDRvaWh1MnFGXzdzWUhBeTU4Z2xrOWhXZ2YzT08xbDBoWEFDQmYtZDBqbmRvdVUzSTFrZVNOZktvblFuNGYxdnRqYU9VTUJqdDVzam9TVHB4bWdSVUU1WEJpMg?oc=5",
-      "fuente": "Google News Peñarol",
-      "resumen": "Juventud vs. Peñarol (24 Oct., 2026) Resultados en Vivo &nbsp;&nbsp; ESPN Uruguay",
-      "fecha": "Sun, 18 Oct 2026 13:53",
-      "imagen_origen": ""
+      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
+      "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-penarol-reestructura-su.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-tarde-de.html"
 }
