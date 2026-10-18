@@ -52,7 +52,7 @@ def run():
     fig1_rep = (
         f'<figure style="margin:0 0 20px 0;text-align:center;">'
         f'<img src="{img_hero}" alt="Peñarol vs Liverpool - Balón en el césped del Campeón del Siglo en la previa oficial" width="1280" height="714" loading="eager" fetchpriority="high" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.15);" />'
-        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Previa Oficial • Balón sobre el césped al atardecer en el Estadio Campeón del Siglo. Arte fotográfico cinematográfico generado con Google Gemini e Imagen 3 blindado con metadatos SEO para Manya ServicioTI.</figcaption>'
+        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Previa Oficial • Balón sobre el césped al atardecer en el Estadio Campeón del Siglo. Cobertura gráfica exclusiva para Manya ServicioTI.</figcaption>'
         f'</figure>'
     )
     new_content, count1 = re.subn(fig1_pat, fig1_rep, old_content, count=1, flags=re.DOTALL)
@@ -63,7 +63,7 @@ def run():
     fig_tactica_html = (
         f'</p><figure style="margin:20px 0;text-align:center;">'
         f'<img src="{img_tactica}" alt="Entrenamiento y trabajos tácticos de Peñarol en Los Aromos preparando el partido ante Liverpool" width="1280" height="714" loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.12);" />'
-        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Los Aromos (Complejo Deportivo Washington Cataldi) • Sesión de entrenamiento y táctica aurinegra generada con Google Gemini e Imagen 3.</figcaption>'
+        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Los Aromos (Complejo Deportivo Washington Cataldi) • Sesión de entrenamiento y táctica aurinegra preparando el choque ante Liverpool.</figcaption>'
         f'</figure><p>Respecto al once probable'
     )
     if parrafo_target in new_content:
@@ -77,7 +77,7 @@ def run():
     fig2_rep = (
         f'<figure style="margin:20px 0;text-align:center;">'
         f'<img src="{img_hinchada}" alt="Fiesta popular de la hinchada de Peñarol en el Estadio Campeón del Siglo con banderas aurinegras y humo amarillo" width="1280" height="714" loading="lazy" decoding="async" style="width:100%;height:auto;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.12);" />'
-        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Tribuna Aurinegra • Fiesta y recibimiento carbonero en el Estadio Campeón del Siglo. Generación fotográfica con Google Gemini e Imagen 3 con metadatos oficiales.</figcaption>'
+        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Tribuna Aurinegra • Fiesta y recibimiento carbonero en el Estadio Campeón del Siglo con el aliento de las cuatro tribunas.</figcaption>'
         f'</figure>'
     )
     new_content, count2 = re.subn(fig2_pat, fig2_rep, new_content, count=1, flags=re.DOTALL)

@@ -1,6 +1,6 @@
 # Manya ServicioTI — El Portal, Radar en Tiempo Real y Museo Interactivo del Club Atlético Peñarol
 
-> Plataforma oficial del ecosistema ServicioTI Uruguay (`https://manya.servicioti.com.uy` y `https://www.servicioti.com.uy`), creada por el Prof. Andrés Franchi Ugartemendía. Centraliza datos oficiales (AUF, CONMEBOL, ESPN API), estadísticas en vivo, Tabla Anual, Pizarra Táctica, galería curada con Gemini Web Vision, transporte en ómnibus (CUTCSA/COPSA) hacia el Estadio Campeón del Siglo e historia completa desde el 28 de septiembre de 1891.
+> Plataforma oficial del ecosistema ServicioTI Uruguay (`https://manya.servicioti.com.uy` y `https://www.servicioti.com.uy`), creada por Andrés Franchi Ugartemendía. Centraliza datos oficiales (AUF, CONMEBOL, ESPN API), estadísticas en vivo, Tabla Anual, Pizarra Táctica, galería curada, transporte en ómnibus (CUTCSA/COPSA) hacia el Estadio Campeón del Siglo e historia completa desde el 28 de septiembre de 1891.
 
 ## Datos Clave del Club Atlético Peñarol (Entidad Canónica)
 - **Nombre Oficial:** Club Atlético Peñarol (fundado el 28 de septiembre de 1891 como CURCC)

@@ -16,6 +16,7 @@
     ig: [],
     squad: null,
     history: null,
+    escudosCatalog: null,
     formation: '4-2-3-1',
     selectedSlotIndex: null,
     lineup: [],
@@ -131,6 +132,51 @@
     setInterval(tick, 1000);
   }
 
+  function resolveClubCrest(team) {
+    if (!team) return 'assets/img/escudos/escudo_penarol.webp';
+    if (team.es_penarol || (team.nombre && team.nombre.toLowerCase().includes('peñarol'))) {
+      return 'assets/img/escudos/escudo_penarol.webp';
+    }
+    const rawName = (team.nombre || team.equipo || '').toLowerCase();
+    const norm = rawName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9 ]/g, '')
+      .trim();
+
+    if (state.escudosCatalog && state.escudosCatalog.alias_index) {
+      const slug = state.escudosCatalog.alias_index[norm];
+      if (slug && state.escudosCatalog.clubes && state.escudosCatalog.clubes[slug]) {
+        return state.escudosCatalog.clubes[slug].ruta_webp;
+      }
+    }
+    // Mapeos rápidos directos por palabras clave
+    if (norm.includes('liverpool')) return 'assets/img/escudos/escudo_liverpool.webp';
+    if (norm.includes('nacional')) return 'assets/img/escudos/escudo_nacional.webp';
+    if (norm.includes('defensor')) return 'assets/img/escudos/escudo_defensor_sporting.webp';
+    if (norm.includes('danubio')) return 'assets/img/escudos/escudo_danubio.webp';
+    if (norm.includes('boston')) return 'assets/img/escudos/escudo_boston_river.webp';
+    if (norm.includes('wanderers')) return 'assets/img/escudos/escudo_montevideo_wanderers.webp';
+    if (norm.includes('cerro largo')) return 'assets/img/escudos/escudo_cerro_largo.webp';
+    if (norm.includes('cerro')) return 'assets/img/escudos/escudo_cerro.webp';
+    if (norm.includes('racing')) return 'assets/img/escudos/escudo_racing.webp';
+    if (norm.includes('progreso')) return 'assets/img/escudos/escudo_progreso.webp';
+    if (norm.includes('maldonado')) return 'assets/img/escudos/escudo_deportivo_maldonado.webp';
+    if (norm.includes('torque')) return 'assets/img/escudos/escudo_montevideo_city_torque.webp';
+    if (norm.includes('albion')) return 'assets/img/escudos/escudo_albion.webp';
+    if (norm.includes('juventud')) return 'assets/img/escudos/escudo_juventud.webp';
+    if (norm.includes('central')) return 'assets/img/escudos/escudo_central_espanol.webp';
+    if (norm.includes('miramar')) return 'assets/img/escudos/escudo_miramar_misiones.webp';
+    if (norm.includes('rampla')) return 'assets/img/escudos/escudo_rampla_juniors.webp';
+    if (norm.includes('river')) return 'assets/img/escudos/escudo_river_plate.webp';
+    if (norm.includes('plaza')) return 'assets/img/escudos/escudo_plaza_colonia.webp';
+    if (norm.includes('rentistas')) return 'assets/img/escudos/escudo_rentistas.webp';
+    if (norm.includes('fenix')) return 'assets/img/escudos/escudo_fenix.webp';
+
+    if (team.logo && team.logo.startsWith('http')) return team.logo;
+    return 'assets/img/escudos/escudo_penarol.webp';
+  }
+
   function renderMatchHero(live) {
     if (!live) return;
     const prox = live.proximo_partido || {};
@@ -144,18 +190,50 @@
 
     const tHome = document.getElementById('hero-home-name');
     const tAway = document.getElementById('hero-away-name');
+    const tHomeCrest = document.getElementById('hero-home-crest');
+    const tAwayCrest = document.getElementById('hero-away-crest');
+    const tHomeWrap = document.getElementById('hero-home-crest-wrap');
+    const tAwayWrap = document.getElementById('hero-away-crest-wrap');
+    const tHomeTag = document.getElementById('hero-home-tag');
+    const tAwayTag = document.getElementById('hero-away-tag');
     const tDate = document.getElementById('hero-match-date');
     const tVenue = document.getElementById('hero-match-venue');
     const tLast = document.getElementById('hero-last-result');
 
-    if (tHome && prox.local) {
-      tHome.textContent = prox.local.nombre;
-      tHome.className = 'match-team-name ' + (prox.local.es_penarol ? 'is-penarol' : '');
+    if (prox.local) {
+      if (tHome) {
+        tHome.textContent = prox.local.nombre;
+        tHome.className = 'match-team-name ' + (prox.local.es_penarol ? 'is-penarol' : '');
+      }
+      if (tHomeCrest) {
+        tHomeCrest.src = resolveClubCrest(prox.local);
+        tHomeCrest.alt = 'Escudo Oficial de ' + prox.local.nombre;
+      }
+      if (tHomeWrap) {
+        tHomeWrap.className = 'hero-crest-wrap ' + (prox.local.es_penarol ? 'is-penarol' : 'is-rival');
+      }
+      if (tHomeTag) {
+        tHomeTag.textContent = prox.local.es_penarol ? 'El Decano • 1891' : 'Local • Torneo Oficial AUF';
+      }
     }
-    if (tAway && prox.visitante) {
-      tAway.textContent = prox.visitante.nombre;
-      tAway.className = 'match-team-name ' + (prox.visitante.es_penarol ? 'is-penarol' : '');
+
+    if (prox.visitante) {
+      if (tAway) {
+        tAway.textContent = prox.visitante.nombre;
+        tAway.className = 'match-team-name ' + (prox.visitante.es_penarol ? 'is-penarol' : '');
+      }
+      if (tAwayCrest) {
+        tAwayCrest.src = resolveClubCrest(prox.visitante);
+        tAwayCrest.alt = 'Escudo Oficial de ' + prox.visitante.nombre;
+      }
+      if (tAwayWrap) {
+        tAwayWrap.className = 'hero-crest-wrap ' + (prox.visitante.es_penarol ? 'is-penarol' : 'is-rival');
+      }
+      if (tAwayTag) {
+        tAwayTag.textContent = prox.visitante.es_penarol ? 'El Decano • 1891' : 'Visitante • Torneo Oficial AUF';
+      }
     }
+
     if (tDate && prox.fecha_legible) tDate.textContent = prox.fecha_legible;
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
     if (tLast && ult.local && ult.visitante) {
@@ -194,18 +272,26 @@
 
     rows.sort((a, b) => b.pts_calc - a.pts_calc);
 
-    tbody.innerHTML = rows.map((r, i) => `
-      <tr class="${r.es_penarol ? 'row-penarol' : ''}">
-        <td>${i + 1}</td>
-        <td>${r.es_penarol ? '★ ' : ''}${r.equipo}</td>
-        <td>${r.pj_calc}</td>
-        <td>${r.pg}</td>
-        <td>${r.pe}</td>
-        <td>${r.pp}</td>
-        <td>${r.dg}</td>
-        <td><strong>${r.pts_calc}</strong></td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = rows.map((r, i) => {
+      const crest = resolveClubCrest({ nombre: r.equipo, es_penarol: r.es_penarol });
+      return `
+        <tr class="${r.es_penarol ? 'row-penarol' : ''}">
+          <td>${i + 1}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <img src="${crest}" alt="${r.equipo}" width="20" height="20" style="object-fit:contain;vertical-align:middle;border-radius:2px;" />
+              <span>${r.es_penarol ? '★ ' : ''}${r.equipo}</span>
+            </div>
+          </td>
+          <td>${r.pj_calc}</td>
+          <td>${r.pg}</td>
+          <td>${r.pe}</td>
+          <td>${r.pp}</td>
+          <td>${r.dg}</td>
+          <td><strong>${r.pts_calc}</strong></td>
+        </tr>
+      `;
+    }).join('');
   }
 
   function initSimulator() {
@@ -422,14 +508,54 @@
     });
   }
 
+  function renderInstagramFeed(feed) {
+    if (!feed || !feed.length) return;
+    const grid = document.querySelector('#muro-visual .ig-grid');
+    if (!grid) return;
+
+    grid.innerHTML = feed.map(item => {
+      const postUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.instagram.com/padreydecano/' : 'https://www.instagram.com/oficialcap/');
+      const badgeTxt = item.categoria_badge || `📸 ${item.categoria || 'Peñarol'}`;
+      const likesTxt = item.likes ? (item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + 'K' : item.likes) : '25K';
+      const commentsTxt = item.comments || 450;
+
+      return `
+        <article class="ig-card">
+          <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original de ${item.cuenta} en Instagram">
+            <div class="ig-img-wrap">
+              <img src="${item.imagen_webp}" alt="${item.seo_alt || item.titulo}" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">${badgeTxt}</span>
+            </div>
+          </a>
+          <div class="ig-body">
+            <div class="ig-meta">
+              <span>${item.cuenta} • ${item.categoria}</span>
+              <span>❤️ ${likesTxt} • 💬 ${commentsTxt}</span>
+            </div>
+            <h3 class="ig-title">
+              <a href="${postUrl}" target="_blank" rel="noopener noreferrer">${item.titulo}</a>
+            </h3>
+            <p class="ig-caption">${item.caption}</p>
+            <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
   async function init() {
-    const [live, digest, ig, squad, history] = await Promise.all([
+    const [live, digest, ig, squad, history, escudosCatalog] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
       loadJsonSafe('data/squad_2026.json'),
-      loadJsonSafe('data/history_1891.json')
+      loadJsonSafe('data/history_1891.json'),
+      loadJsonSafe('data/escudos_uruguay.json')
     ]);
+
+    if (escudosCatalog) {
+      state.escudosCatalog = escudosCatalog;
+    }
 
     if (live) {
       state.live = live;
@@ -437,6 +563,11 @@
       renderStandings();
     }
     initSimulator();
+
+    if (ig && ig.length) {
+      state.ig = ig;
+      renderInstagramFeed(ig);
+    }
 
     if (squad && squad.jugadores) {
       state.squad = squad;

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
+  <defs>
+    <!-- Filtro de sombra y brillo aurinegro -->
+    <filter id="manya-glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#ffd100" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff066"/>
+      <stop offset="50%" stop-color="#ffd100"/>
+      <stop offset="100%" stop-color="#e6b800"/>
+    </linearGradient>
+    <clipPath id="shield-clip">
+      <!-- Silueta del escudo clásico -->
+      <path d="M 30,30 L 570,30 L 570,420 C 570,610 300,720 300,720 C 300,720 30,610 30,420 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Borde exterior dorado con sombra -->
+  <path d="M 20,20 L 580,20 L 580,425 C 580,625 300,740 300,740 C 300,740 20,625 20,425 Z" 
+        fill="#ffd100" stroke="#b39200" stroke-width="4" filter="url(#manya-glow)"/>
+
+  <!-- Borde interior negro de separación -->
+  <path d="M 26,26 L 574,26 L 574,422 C 574,615 300,727 300,727 C 300,727 26,615 26,422 Z" 
+        fill="#000000"/>
+
+  <!-- Grupo contenido recortado al escudo -->
+  <g clip-path="url(#shield-clip)">
+    <!-- Fondo inferior con 11 franjas verticales: 6 negras y 5 doradas -->
+    <!-- Ancho total = 540 (de 30 a 570). Cada franja = 540 / 11 = 49.09 px -->
+    <!-- Franja 1 (Negro) -->
+    <rect x="30.00" y="270" width="49.09" height="460" fill="#000000" />
+    <!-- Franja 2 (Oro) -->
+    <rect x="79.09" y="270" width="49.09" height="460" fill="url(#gold-grad)" />
+    <!-- Franja 3 (Negro) -->
+    <rect x="128.18" y="270" width="49.09" height="460" fill="#000000" />
+    <!-- Franja 4 (Oro) -->
+    <rect x="177.27" y="270" width="49.09" height="460" fill="url(#gold-grad)" />
+    <!-- Franja 5 (Negro) -->
+    <rect x="226.36" y="270" width="49.09" height="460" fill="#000000" />
+    <!-- Franja 6 (Oro) - Central -->
+    <rect x="275.45" y="270" width="49.09" height="460" fill="url(#gold-grad)" />
+    <!-- Franja 7 (Negro) -->
+    <rect x="324.54" y="270" width="49.09" height="460" fill="#000000" />
+    <!-- Franja 8 (Oro) -->
+    <rect x="373.63" y="270" width="49.09" height="460" fill="url(#gold-grad)" />
+    <!-- Franja 9 (Negro) -->
+    <rect x="422.72" y="270" width="49.09" height="460" fill="#000000" />
+    <!-- Franja 10 (Oro) -->
+    <rect x="471.81" y="270" width="49.09" height="460" fill="url(#gold-grad)" />
+    <!-- Franja 11 (Negro) -->
+    <rect x="520.90" y="270" width="49.10" height="460" fill="#000000" />
+
+    <!-- Campo superior negro para las 11 estrellas -->
+    <rect x="30" y="30" width="540" height="240" fill="#000000" />
+    <!-- Línea divisoria dorada entre campo de estrellas y franjas -->
+    <line x1="30" y1="270" x2="570" y2="270" stroke="#ffd100" stroke-width="6" />
+
+    <!-- 11 Estrellas Doradas de Peñarol (Distribución oficial: 4 arriba, 3 centro, 4 abajo) -->
+    <!-- Fila 1 (4 estrellas) - Y = 85 -->
+    <!-- Estrella 1-1 (cx=120) -->
+    <polygon points="120,60 126,78 145,78 130,89 135,107 120,96 105,107 110,89 95,78 114,78" fill="url(#gold-grad)"/>
+    <!-- Estrella 1-2 (cx=240) -->
+    <polygon points="240,60 246,78 265,78 250,89 255,107 240,96 225,107 230,89 215,78 234,78" fill="url(#gold-grad)"/>
+    <!-- Estrella 1-3 (cx=360) -->
+    <polygon points="360,60 366,78 385,78 370,89 375,107 360,96 345,107 350,89 335,78 354,78" fill="url(#gold-grad)"/>
+    <!-- Estrella 1-4 (cx=480) -->
+    <polygon points="480,60 486,78 505,78 490,89 495,107 480,96 465,107 470,89 455,78 474,78" fill="url(#gold-grad)"/>
+
+    <!-- Fila 2 (3 estrellas) - Y = 150 -->
+    <!-- Estrella 2-1 (cx=180) -->
+    <polygon points="180,125 186,143 205,143 190,154 195,172 180,161 165,172 170,154 155,143 174,143" fill="url(#gold-grad)"/>
+    <!-- Estrella 2-2 (cx=300) - Estrella Central Mayor -->
+    <polygon points="300,120 307,141 329,141 311,154 318,175 300,162 282,175 289,154 271,141 293,141" fill="url(#gold-grad)"/>
+    <!-- Estrella 2-3 (cx=420) -->
+    <polygon points="420,125 426,143 445,143 430,154 435,172 420,161 405,172 410,154 395,143 414,143" fill="url(#gold-grad)"/>
+
+    <!-- Fila 3 (4 estrellas) - Y = 215 -->
+    <!-- Estrella 3-1 (cx=120) -->
+    <polygon points="120,190 126,208 145,208 130,219 135,237 120,226 105,237 110,219 95,208 114,208" fill="url(#gold-grad)"/>
+    <!-- Estrella 3-2 (cx=240) -->
+    <polygon points="240,190 246,208 265,208 250,219 255,237 240,226 225,237 230,219 215,208 234,208" fill="url(#gold-grad)"/>
+    <!-- Estrella 3-3 (cx=360) -->
+    <polygon points="360,190 366,208 385,208 370,219 375,237 360,226 345,237 350,219 335,208 354,208" fill="url(#gold-grad)"/>
+    <!-- Estrella 3-4 (cx=480) -->
+    <polygon points="480,190 486,208 505,208 490,219 495,237 480,226 465,237 470,219 455,208 474,208" fill="url(#gold-grad)"/>
+  </g>
+
+  <!-- Ribete interior de acabado de alta gama -->
+  <path d="M 30,30 L 570,30 L 570,420 C 570,610 300,720 300,720 C 300,720 30,610 30,420 Z" 
+        fill="none" stroke="#ffd100" stroke-width="4"/>
+</svg>

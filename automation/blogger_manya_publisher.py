@@ -124,11 +124,38 @@ def publish_manya_article_to_blogger(post_type: str = "NOTICIA_DIARIA", match_id
         estadio = partido_activo.get("estadio", "Estadio Campeón del Siglo")
         tv = partido_activo.get("tv", "VTV Plus / Disney+")
         fase_txt = live.get("fase_partido", "PREVIA")
+
+        from manya_match_engine import resolve_team_crest
+        loc_nombre = loc.get("nombre", "Local")
+        vis_nombre = vis.get("nombre", "Visitante")
+        loc_crest = resolve_team_crest(loc_nombre, loc.get("logo", ""))
+        vis_crest = resolve_team_crest(vis_nombre, vis.get("logo", ""))
+
+        def _to_logo_url(crest_path, espn_logo):
+            if espn_logo and espn_logo.startswith("http"):
+                return espn_logo
+            if crest_path and not crest_path.startswith("http"):
+                return f"https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/{crest_path}"
+            return crest_path or "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png"
+
+        loc_img = _to_logo_url(loc_crest, loc.get("logo"))
+        vis_img = _to_logo_url(vis_crest, vis.get("logo"))
+
         partido_header_html = f"""
-        <div style="background:#111827;border:1px solid #eab308;padding:16px 20px;border-radius:10px;margin-bottom:20px;color:#f9fafb;">
-          <div style="font-size:12px;font-weight:800;color:#facc15;text-transform:uppercase;margin-bottom:6px;">⚽ Cobertura Especial • Fase: {fase_txt}</div>
-          <div style="font-size:18px;font-weight:900;color:#ffffff;margin-bottom:4px;">{html.escape(loc.get("nombre",""))} {loc.get("goles","-")} vs {vis.get("goles","-")} {html.escape(vis.get("nombre",""))}</div>
-          <div style="font-size:13.5px;color:#d1d5db;">📍 <strong>Estadio:</strong> {html.escape(estadio)} | 📺 <strong>TV:</strong> {html.escape(tv)}</div>
+        <div style="background:#111827;border:1px solid #eab308;padding:16px 20px;border-radius:12px;margin-bottom:20px;color:#f9fafb;">
+          <div style="font-size:12px;font-weight:800;color:#facc15;text-transform:uppercase;margin-bottom:10px;text-align:center;">⚽ Cobertura Oficial • {fase_txt}</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:10px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="{loc_img}" alt="{html.escape(loc_nombre)}" width="38" height="38" style="object-fit:contain;vertical-align:middle;" />
+              <strong style="font-size:18px;color:#ffffff;">{html.escape(loc_nombre)} {loc.get('goles','-')}</strong>
+            </div>
+            <div style="font-weight:900;color:#ffd100;font-size:16px;">VS</div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <strong style="font-size:18px;color:#ffffff;">{vis.get('goles','-')} {html.escape(vis_nombre)}</strong>
+              <img src="{vis_img}" alt="{html.escape(vis_nombre)}" width="38" height="38" style="object-fit:contain;vertical-align:middle;" />
+            </div>
+          </div>
+          <div style="font-size:13px;color:#d1d5db;text-align:center;">📍 <strong>Estadio:</strong> {html.escape(estadio)} | 📺 <strong>TV:</strong> {html.escape(tv)}</div>
         </div>
         """
 
@@ -180,7 +207,7 @@ def publish_manya_article_to_blogger(post_type: str = "NOTICIA_DIARIA", match_id
         f'</div>'
         f'<figure style="margin:0 0 20px 0;text-align:center;">'
         f'<img src="{hero_img_cdn}" alt="{html.escape(title)}" width="1280" height="720" loading="eager" fetchpriority="high" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.15);" />'
-        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Estadio Campeón del Siglo • Imagen curada con Gemini Web Vision y metadatos SEO verificados por Manya ServicioTI.</figcaption>'
+        f'<figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Estadio Campeón del Siglo • Cobertura gráfica exclusiva de Manya ServicioTI.</figcaption>'
         f'</figure>'
         f'{parrafos_html}'
         f'<figure style="margin:20px 0;text-align:center;">'

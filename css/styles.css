@@ -104,15 +104,13 @@ body {
 
 .manya-brand-title {
   font-weight: 900;
-  font-size: 19px;
-  letter-spacing: -0.02em;
+  font-size: 22px;
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.manya-brand-title span {
+  gap: 6px;
   color: var(--manya-gold);
+  text-shadow: 0 0 14px rgba(255, 209, 0, 0.4);
 }
 
 .manya-brand-sub {
@@ -246,20 +244,28 @@ body {
 }
 
 .hero-crest-wrap {
-  width: 86px;
+  width: 90px;
   height: 108px;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 6px 20px rgba(255, 209, 0, 0.45));
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.hero-crest-wrap.is-penarol {
+  filter: drop-shadow(0 6px 22px rgba(255, 209, 0, 0.5));
+}
+
+.hero-crest-wrap.is-rival {
+  filter: drop-shadow(0 4px 18px rgba(255, 255, 255, 0.22));
 }
 
 .hero-crest-wrap:hover {
   transform: scale(1.1) rotate(1deg);
 }
 
+.hero-crest-img,
 .hero-crest-penarol {
   width: 100%;
   height: 100%;
@@ -614,24 +620,38 @@ body {
   overflow: hidden;
 }
 
+.ig-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
 .ig-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
 }
 
-.ig-badge-ai {
+.ig-card:hover .ig-img-wrap img {
+  transform: scale(1.05);
+}
+
+.ig-badge-tag, .ig-badge-ai {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(9, 9, 11, 0.86);
+  background: rgba(9, 9, 11, 0.88);
   color: var(--manya-gold);
   border: 1px solid var(--manya-gold);
   font-size: 11px;
   font-weight: 800;
   padding: 3px 10px;
   border-radius: 999px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
 }
 
 .ig-body {
@@ -652,6 +672,38 @@ body {
   font-weight: 800;
   margin-bottom: 6px;
   color: var(--text-primary);
+}
+
+.ig-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ig-title a:hover {
+  color: var(--manya-gold);
+}
+
+.ig-external-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 209, 0, 0.1);
+  border: 1px solid var(--manya-gold);
+  color: var(--manya-gold);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.ig-external-btn:hover {
+  background: var(--manya-gold);
+  color: #09090b;
+  transform: translateY(-1px);
 }
 
 .ig-caption {

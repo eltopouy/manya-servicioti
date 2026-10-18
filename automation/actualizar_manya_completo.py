@@ -148,12 +148,16 @@ def fetch_espn_penarol_live_data() -> Dict[str, Any]:
             val = score_obj.get("displayValue", "-") if isinstance(score_obj, dict) else (str(score_obj) if score_obj is not None else "-")
             logos = t.get("logos", [])
             logo_url = logos[0].get("href", "") if logos else ""
+            nom = t.get("displayName") or t.get("name") or "Equipo"
+            from manya_match_engine import resolve_team_crest
+            escudo_res = resolve_team_crest(nom, logo_url)
             return {
-                "nombre": t.get("displayName") or t.get("name") or "Equipo",
+                "nombre": nom,
                 "abreviatura": t.get("abbreviation", "EQP"),
                 "goles": val,
                 "logo": logo_url,
-                "es_penarol": str(t.get("id")) == "2892" or "peñarol" in (t.get("displayName") or "").lower()
+                "escudo": escudo_res,
+                "es_penarol": str(t.get("id")) == "2892" or "peñarol" in nom.lower()
             }
 
         status_type = (comps.get("status") or {}).get("type", {})
@@ -546,13 +550,14 @@ def sync_instagram_and_transform_with_gemini_web(news_items: List[Dict[str, Any]
             "titulo": tema["titulo"],
             "cuenta": tema["cuenta"],
             "categoria": tema["categoria"],
+            "categoria_badge": f"📸 {tema['categoria']}",
             "likes": tema["likes"],
             "comments": tema["comments"],
+            "url_post": "https://www.instagram.com/oficialcap/" if tema["cuenta"] == "@oficialcap" else "https://www.instagram.com/padreydecano/",
             "caption": tema["caption"],
             "imagen_webp": f"assets/ig/manya_{slug}.webp",
             "imagen_jpg": f"assets/ig/manya_{slug}.jpg",
-            "seo_alt": f"{tema['titulo']} - Club Atlético Peñarol (Manya ServicioTI)",
-            "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
+            "seo_alt": f"{tema['titulo']} - Club Atlético Peñarol",
             "kb_webp": meta_res.get("webp_kb", 65.0)
         })
 
@@ -749,6 +754,15 @@ def main():
     print("=" * 78)
     print(" INICIANDO ORQUESTADOR MAESTRO DE MANYA.SERVICIOTI.COM.UY")
     print("=" * 78)
+
+    # 0. Garantizar catálogo oficial de escudos de todos los rivales
+    escudos_file = DATA_DIR / "escudos_uruguay.json"
+    if not escudos_file.exists():
+        print("[*] Catálogo de escudos no detectado. Descargando y optimizando escudos oficiales...")
+        from descargar_y_optimizar_escudos import procesar_todos
+        procesar_todos()
+    else:
+        print("[✓] Catálogo oficial de escudos del fútbol uruguayo verificado")
 
     # 1. Datos en vivo (ESPN API + Clima Campeón del Siglo)
     live_data = fetch_espn_penarol_live_data()

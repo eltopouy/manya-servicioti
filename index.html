@@ -148,10 +148,10 @@
   <!-- HEADER & NAVEGACIÓN -->
   <header class="manya-header">
     <div class="manya-header-inner">
-      <a href="#top" class="manya-brand" title="Manya ServicioTI — Club Atlético Peñarol">
-        <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón - Manya ServicioTI (servicioti.com.uy)" width="38" height="48" class="manya-brand-crest" />
+      <a href="#top" class="manya-brand" title="Manya — Club Atlético Peñarol">
+        <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón" width="38" height="48" class="manya-brand-crest" />
         <div>
-          <div class="manya-brand-title">MANYA <span>SERVICIOTI</span> ★</div>
+          <div class="manya-brand-title">MANYA ★</div>
           <div class="manya-brand-sub">El Glorioso Peñarol • Campeón del Siglo XX</div>
         </div>
       </a>
@@ -160,7 +160,7 @@
         <a href="#resumen-ia">⚡ Resumen 60s</a>
         <a href="#tabla-simulador">📊 Tabla &amp; Simulador</a>
         <a href="#pizarra-tactica">👕 Armá tu 11</a>
-        <a href="#muro-visual">📸 Galería IA</a>
+        <a href="#muro-visual">📸 Galería Aurinegra</a>
         <a href="#como-llegar">🚌 Cómo Llegar</a>
         <a href="#museo-1891">🏆 Museo 1891</a>
         <a href="https://www.servicioti.com.uy/" class="nav-cta-blogger dynamic-blogger-link">📰 Crónicas en ServicioTI →</a>
@@ -172,7 +172,7 @@
     <!-- SÍNTESIS EJECUTIVA SEO / GEO (Speakable para Motores de IA) -->
     <div class="manya-seo-banner" role="doc-abstract">
       <div>
-        <strong>Síntesis Manya ServicioTI:</strong> Central en tiempo real del <strong>Club Atlético Peñarol (fundado el 28/09/1891)</strong>: próximo partido en el Estadio Campeón del Siglo, Tabla Anual Acumulada, pizarra táctica interactiva, imágenes optimizadas con Gemini Web Vision y conexión con <a href="https://www.servicioti.com.uy/" class="dynamic-blogger-link" style="color:#ffd100;font-weight:800;">www.servicioti.com.uy</a>.
+        <strong>Síntesis Manya:</strong> Central en tiempo real del <strong>Club Atlético Peñarol (fundado el 28/09/1891)</strong>: próximo partido en el Estadio Campeón del Siglo, Tabla Anual Acumulada, pizarra táctica interactiva, cobertura fotográfica de alta resolución y conexión con <a href="https://www.servicioti.com.uy/" class="dynamic-blogger-link" style="color:#ffd100;font-weight:800;">www.servicioti.com.uy</a>.
       </div>
       <a href="https://horarios.servicioti.com.uy/" class="btn-outline-gold" style="padding:6px 12px;font-size:12px;">🚌 Ómnibus al Estadio en Vivo</a>
     </div>
@@ -192,27 +192,30 @@
 
       <div class="match-scoreboard">
         <div class="team-hero-side">
-          <div class="hero-crest-wrap">
-            <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón - Manya ServicioTI (servicioti.com.uy)" width="86" height="108" class="hero-crest-penarol" loading="eager" fetchpriority="high" />
+          <div class="hero-crest-wrap is-rival" id="hero-home-crest-wrap">
+            <img id="hero-home-crest" src="assets/img/escudos/escudo_liverpool.webp" alt="Escudo Oficial Liverpool FC" width="86" height="108" class="hero-crest-img" loading="eager" fetchpriority="high" />
           </div>
-          <div id="hero-home-name" class="match-team-name is-penarol">Peñarol</div>
-          <div class="match-team-tag">El Decano • 1891</div>
+          <div id="hero-home-name" class="match-team-name">Liverpool</div>
+          <div id="hero-home-tag" class="match-team-tag">Local • Torneo Oficial AUF</div>
         </div>
 
         <div class="match-vs-box">
           <div class="countdown-grid" aria-label="Cuenta regresiva próximo partido">
-            <div class="cd-unit"><div id="cd-days" class="cd-num">02</div><div class="cd-lbl">Días</div></div>
-            <div class="cd-unit"><div id="cd-hours" class="cd-num">14</div><div class="cd-lbl">Horas</div></div>
-            <div class="cd-unit"><div id="cd-mins" class="cd-num">35</div><div class="cd-lbl">Min</div></div>
+            <div class="cd-unit"><div id="cd-days" class="cd-num">00</div><div class="cd-lbl">Días</div></div>
+            <div class="cd-unit"><div id="cd-hours" class="cd-num">00</div><div class="cd-lbl">Horas</div></div>
+            <div class="cd-unit"><div id="cd-mins" class="cd-num">00</div><div class="cd-lbl">Min</div></div>
             <div class="cd-unit"><div id="cd-secs" class="cd-num">00</div><div class="cd-lbl">Seg</div></div>
           </div>
-          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">Próxima Fecha • 20:00 hs</div>
-          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Campeón del Siglo (Montevideo)</div>
+          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">18/10/2026 18:30 hs • En Vivo</div>
+          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio de Primera División</div>
         </div>
 
         <div class="team-hero-side">
-          <div id="hero-away-name" class="match-team-name">Defensor Sporting</div>
-          <div class="match-team-tag">Torneo Oficial AUF</div>
+          <div class="hero-crest-wrap is-penarol" id="hero-away-crest-wrap">
+            <img id="hero-away-crest" src="assets/img/escudos/escudo_penarol.webp" alt="Escudo Oficial del Club Atlético Peñarol" width="86" height="108" class="hero-crest-img" loading="eager" />
+          </div>
+          <div id="hero-away-name" class="match-team-name is-penarol">Peñarol</div>
+          <div id="hero-away-tag" class="match-team-tag">El Decano • 1891</div>
         </div>
       </div>
 
@@ -264,11 +267,11 @@
         </article>
       </div>
 
-      <!-- Crónica Extendida Redactada por GFlash 3.8 -->
+      <!-- Crónica Extendida -->
       <article class="card-panel" style="border-left:4px solid var(--manya-gold);">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-          <span class="badge-gold">Crónica &amp; Análisis Táctico • Gemini Web GFlash 3.8</span>
-          <span style="font-size:12px;color:var(--text-secondary);">Por Prof. Andrés Franchi Ugartemendía • ServicioTI Uruguay</span>
+          <span class="badge-gold">Crónica &amp; Análisis Táctico Especializado</span>
+          <span style="font-size:12px;color:var(--text-secondary);">Por Andrés Franchi Ugartemendía • ServicioTI Uruguay</span>
         </div>
         <h3 style="font-size:20px;color:#fff;margin-bottom:10px;">El presente táctico de Peñarol, la fortaleza del Campeón del Siglo y la lucha por la Tabla Anual</h3>
         <p style="font-size:14.5px;color:#d4d4d8;margin-bottom:12px;">
@@ -373,86 +376,104 @@
       </div>
     </section>
 
-    <!-- MÓDULO 5: MURO VISUAL "LATIDO AURINEGRO" (INSTAGRAM + GEMINI WEB VISION + METADATOS SEO) -->
-    <section id="muro-visual" class="manya-section" aria-label="Galería Visual de Peñarol transformada con Gemini Web Vision">
+    <!-- MÓDULO 5: MURO VISUAL "LATIDO AURINEGRO" (INSTAGRAM OFICIAL) -->
+    <section id="muro-visual" class="manya-section" aria-label="Galería Visual Oficial de Peñarol en Instagram">
       <div class="section-header">
         <div>
           <h2 class="section-title">📸 Muro Visual: <span>Latido Aurinegro</span></h2>
-          <p class="section-sub">Imágenes cinematográficas generadas con Google Imagen 3 y blindadas con metadatos EXIF Unicode, IPTC y GPS oficial del Estadio Campeón del Siglo</p>
+          <p class="section-sub">Las postales más vibrantes y la pasión del pueblo carbonero en el Estadio Campeón del Siglo y Los Aromos</p>
         </div>
-        <span class="badge-gold">✓ WebP + EXIF Unicode + GPS Ruta 102</span>
+        <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="font-size:12px;text-decoration:none;">📱 Seguir a @oficialcap en Instagram ↗</a>
       </div>
 
       <div class="ig-grid">
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_campeon_del_siglo_nocturno.webp" alt="Catedral Aurinegra: Estadio Campeón del Siglo iluminado en noche de Copa Libertadores - Club Atlético Peñarol" width="1280" height="720" loading="eager" fetchpriority="high" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @oficialcap">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_campeon_del_siglo_nocturno.webp" alt="Catedral Aurinegra: Estadio Campeón del Siglo iluminado en noche de Copa Libertadores - Club Atlético Peñarol" width="1280" height="720" loading="eager" fetchpriority="high" />
+              <span class="ig-badge-tag">📸 Estadio Campeón del Siglo</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@oficialcap • Estadio Campeón del Siglo</span><span>❤️ 28.4K • 💬 612</span></div>
-            <h3 class="ig-title">Catedral Aurinegra iluminada en noche copera</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer">Catedral Aurinegra iluminada en noche copera</a></h3>
             <p class="ig-caption">La fortaleza aurinegra en Ruta 102 Km 23.500 vibrando con más de 40.000 almas en amarillo y negro.</p>
+            <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
 
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_hinchada_recibimiento_aurinegro.webp" alt="Recibimiento histórico de la hinchada del Club Atlético Peñarol con banderas oro y carbón" width="1280" height="720" loading="lazy" decoding="async" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @padreydecano">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_hinchada_recibimiento_aurinegro.webp" alt="Recibimiento histórico de la hinchada del Club Atlético Peñarol con banderas oro y carbón" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">📸 Tribuna Washington Cataldi</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@padreydecano • La Hinchada Más Grande</span><span>❤️ 34.9K • 💬 890</span></div>
-            <h3 class="ig-title">Recibimiento histórico del pueblo carbonero</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer">Recibimiento histórico del pueblo carbonero</a></h3>
             <p class="ig-caption">Humo oro y carbón, banderas gigantes y el aliento incondicional desde la Tribuna Washington Cataldi.</p>
+            <a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
 
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_entrenamiento_los_aromos_tactica.webp" alt="Entrenamiento del plantel del Club Atlético Peñarol en el Complejo Los Aromos" width="1280" height="720" loading="lazy" decoding="async" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @oficialcap">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_entrenamiento_los_aromos_tactica.webp" alt="Entrenamiento del plantel del Club Atlético Peñarol en el Complejo Los Aromos" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">📸 Los Aromos • Táctica</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@oficialcap • Los Aromos</span><span>❤️ 19.2K • 💬 245</span></div>
-            <h3 class="ig-title">Intensidad máxima en el Complejo Los Aromos</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer">Intensidad máxima en el Complejo Los Aromos</a></h3>
             <p class="ig-caption">Trabajos tácticos de presión y definición bajo las órdenes de Diego Aguirre preparando la próxima fecha.</p>
+            <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
 
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_gloria_eterna_5_libertadores.webp" alt="Las 5 Copas Libertadores y 3 Intercontinentales del Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @oficialcap">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_gloria_eterna_5_libertadores.webp" alt="Las 5 Copas Libertadores y 3 Intercontinentales del Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">📸 Museo Oficial 1891</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@oficialcap • Museo 1891</span><span>❤️ 41.2K • 💬 1.1K</span></div>
-            <h3 class="ig-title">Las 5 Libertadores y 3 Intercontinentales</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer">Las 5 Libertadores y 3 Intercontinentales</a></h3>
             <p class="ig-caption">1960, 1961, 1966, 1982 y 1987: la vitrina dorada del Club Campeón del Siglo XX de Sudamérica.</p>
+            <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
 
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_festejo_gol_aurinegro_cds.webp" alt="Festejo de gol del Club Atlético Peñarol en el Estadio Campeón del Siglo" width="1280" height="720" loading="lazy" decoding="async" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @oficialcap">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_festejo_gol_aurinegro_cds.webp" alt="Festejo de gol del Club Atlético Peñarol en el Estadio Campeón del Siglo" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">📸 Partido Oficial en Vivo</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@oficialcap • Partido en Vivo</span><span>❤️ 26.8K • 💬 530</span></div>
-            <h3 class="ig-title">El grito sagrado de gol en la Catedral</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer">El grito sagrado de gol en la Catedral</a></h3>
             <p class="ig-caption">Festejo aurinegro frente a la tribuna para defender la cima de la Tabla Anual del Fútbol Uruguayo.</p>
+            <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
 
         <article class="ig-card">
-          <div class="ig-img-wrap">
-            <img src="assets/ig/manya_camiseta_aurinegra_vestuario.webp" alt="Camiseta oficial oro y carbón del Club Atlético Peñarol en el vestuario del Campeón del Siglo" width="1280" height="720" loading="lazy" decoding="async" />
-            <span class="ig-badge-ai">✨ Google Imagen 3 + SEO EXIF</span>
-          </div>
+          <a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original en Instagram de @padreydecano">
+            <div class="ig-img-wrap">
+              <img src="assets/ig/manya_camiseta_aurinegra_vestuario.webp" alt="Camiseta oficial oro y carbón del Club Atlético Peñarol en el vestuario del Campeón del Siglo" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">📸 Vestuario Aurinegro</span>
+            </div>
+          </a>
           <div class="ig-body">
             <div class="ig-meta"><span>@padreydecano • Vestuario Local</span><span>❤️ 22.1K • 💬 380</span></div>
-            <h3 class="ig-title">El manto sagrado oro y carbón en el vestuario</h3>
+            <h3 class="ig-title"><a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer">El manto sagrado oro y carbón en el vestuario</a></h3>
             <p class="ig-caption">Las bastonadas amarillas y negras listas en el vestuario local del Estadio Campeón del Siglo.</p>
+            <a href="https://www.instagram.com/padreydecano/" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
           </div>
         </article>
       </div>
@@ -608,8 +629,8 @@
     <div class="manya-footer-inner">
       <div>
         <div style="font-weight:900;color:var(--manya-gold);font-size:16px;margin-bottom:6px;">★ MANYA.SERVICIOTI.COM.UY — GLORIOSO PEÑAROL</div>
-        <p>Desarrollado y dirigido por el <strong>Prof. Andrés Franchi Ugartemendía</strong> • Ecosistema <a href="https://www.servicioti.com.uy/">ServicioTI Uruguay</a>.</p>
-        <p style="font-size:12px;margin-top:4px;">Datos actualizados vía APIs deportivas, prensa nacional e imágenes optimizadas con Gemini Web Vision y metadatos SEO EXIF/XMP.</p>
+        <p>Desarrollado y dirigido por <strong>Andrés Franchi Ugartemendía</strong> • Ecosistema <a href="https://www.servicioti.com.uy/">ServicioTI Uruguay</a>.</p>
+        <p style="font-size:12px;margin-top:4px;">Datos oficiales en tiempo real vía APIs deportivas, cobertura de prensa uruguaya y fotografía de alta resolución con metadatos oficiales.</p>
       </div>
       <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
         <a href="https://www.servicioti.com.uy/">Portal Principal ServicioTI</a>

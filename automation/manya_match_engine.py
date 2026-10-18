@@ -45,6 +45,30 @@ TEAM_API_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams
 SUMMARY_BASE_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/summary?event="
 
 
+def resolve_team_crest(team_name: str, fallback_logo: str = "") -> str:
+    """Resuelve la ruta del escudo oficial del club desde el catálogo local o fuentes verificadas."""
+    import unicodedata
+    if "peñarol" in team_name.lower() or "penarol" in team_name.lower():
+        return "assets/img/escudos/escudo_penarol.webp"
+
+    escudos_file = DATA_DIR / "escudos_uruguay.json"
+    if escudos_file.exists():
+        try:
+            d = json.loads(escudos_file.read_text(encoding="utf-8"))
+            alias_index = d.get("alias_index", {})
+            clubes = d.get("clubes", {})
+            norm = unicodedata.normalize("NFKD", team_name)
+            norm = "".join(c for c in norm if not unicodedata.combining(c))
+            norm = "".join(c for c in norm.lower() if c.isalnum() or c.isspace()).strip()
+            slug = alias_index.get(norm)
+            if slug and slug in clubes:
+                return clubes[slug].get("ruta_webp", f"assets/img/escudos/escudo_{slug}.webp")
+        except Exception:
+            pass
+
+    return fallback_logo or "assets/img/escudos/escudo_penarol.webp"
+
+
 class ManyaMatchEngine:
     """Orquestador del estado y datos de partidos de Peñarol."""
 
@@ -96,11 +120,14 @@ class ManyaMatchEngine:
                     away_team = {}
                     for c in competitors:
                         is_home = c.get("homeAway") == "home"
+                        nombre_tm = c.get("team", {}).get("displayName", "")
+                        logo_tm = c.get("team", {}).get("logo", "")
                         t_info = {
                             "id": c.get("id"),
-                            "nombre": c.get("team", {}).get("displayName", ""),
+                            "nombre": nombre_tm,
                             "abreviatura": c.get("team", {}).get("abbreviation", ""),
-                            "logo": c.get("team", {}).get("logo", ""),
+                            "logo": logo_tm,
+                            "escudo": resolve_team_crest(nombre_tm, logo_tm),
                             "goles": c.get("score", "0"),
                             "es_penarol": "2892" in str(c.get("id")) or "peñarol" in c.get("team", {}).get("name", "").lower()
                         }
@@ -158,10 +185,14 @@ class ManyaMatchEngine:
                 competitors = comps.get("competitors", [])
                 home_team, away_team = {}, {}
                 for c in competitors:
+                    nombre_tm = c.get("team", {}).get("name", "")
+                    logo_tm = c.get("team", {}).get("logo", "")
                     t_info = {
                         "id": c.get("id"),
-                        "nombre": c.get("team", {}).get("name", ""),
+                        "nombre": nombre_tm,
                         "abreviatura": c.get("team", {}).get("abbreviation", ""),
+                        "logo": logo_tm,
+                        "escudo": resolve_team_crest(nombre_tm, logo_tm),
                         "goles": "-",
                         "es_penarol": "2892" in str(c.get("id")) or "peñarol" in c.get("team", {}).get("name", "").lower()
                     }
