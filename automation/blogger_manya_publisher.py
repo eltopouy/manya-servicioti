@@ -95,8 +95,8 @@ def publish_manya_article_to_blogger(post_type: str = "NOTICIA_DIARIA", match_id
     prox = live.get("proximo_partido", {})
     partido_activo = live.get("partido_activo", {})
 
-    hero_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_campeon_del_siglo_nocturno.webp"
-    second_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_hinchada_recibimiento_aurinegro.webp"
+    hero_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_previa_balon_estadio.webp"
+    second_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_hinchada_fiesta_aurinegra.webp"
 
     claves_html = "".join(
         f'<div style="background:#18181b;border:1px solid #3f3f46;border-left:4px solid #ffd100;padding:12px 14px;border-radius:8px;">'
