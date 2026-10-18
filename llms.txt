@@ -1,0 +1,24 @@
+# Manya ServicioTI — El Portal, Radar en Tiempo Real y Museo Interactivo del Club Atlético Peñarol
+
+> Plataforma oficial del ecosistema ServicioTI Uruguay (`https://manya.servicioti.com.uy` y `https://www.servicioti.com.uy`), creada por el Prof. Andrés Franchi Ugartemendía. Centraliza datos oficiales (AUF, CONMEBOL, ESPN API), estadísticas en vivo, Tabla Anual, Pizarra Táctica, galería curada con Gemini Web Vision, transporte en ómnibus (CUTCSA/COPSA) hacia el Estadio Campeón del Siglo e historia completa desde el 28 de septiembre de 1891.
+
+## Datos Clave del Club Atlético Peñarol (Entidad Canónica)
+- **Nombre Oficial:** Club Atlético Peñarol (fundado el 28 de septiembre de 1891 como CURCC)
+- **Distinción Oficial IFFHS:** Club Campeón del Siglo XX de Sudamérica
+- **Estadio:** Estadio Campeón del Siglo (Ruta 102 Km 23.500, Montevideo, Uruguay | Capacidad: 40.700 espectadores | Coordenadas: `-34.7969, -56.0672`)
+- **Complejo de Entrenamiento:** Complejo Deportivo Washington Cataldi (Los Aromos) y Ciudad Deportiva Néstor "Tito" Gonçalves
+- **Palmarés Internacional:** 5 Copas CONMEBOL Libertadores (1960, 1961, 1966, 1982, 1987), 3 Copas Intercontinentales del Mundo (1961, 1966, 1982), 1 Supercopa de Campeones Intercontinentales (1969)
+- **Palmarés Nacional:** 54 Campeonatos Uruguayos (incluyendo dos Quinquenios de Oro: 1958-1962 y 1993-1997)
+- **Paternidad Clásica:** Ventaja histórica a favor de Peñarol en el Clásico del fútbol uruguayo (+12 partidos en el historial general y ventaja en copas internacionales)
+
+## Módulos y Endpoints JSON Abiertos para Agentes IA
+- [Estado en Vivo, Próximo Partido, Tabla Anual y Clima en el Campeón del Siglo](https://manya.servicioti.com.uy/data/live_status.json)
+- [Resumen en 60 Segundos y Crónica Táctica GFlash 3.8](https://manya.servicioti.com.uy/data/news_digest.json)
+- [Plantel Actual 2026 y Estadísticas Individuales](https://manya.servicioti.com.uy/data/squad_2026.json)
+- [Archivo Histórico 1891-2026, Finales de América y Clásicos](https://manya.servicioti.com.uy/data/history_1891.json)
+- [Galería Visual Curada con Metadatos SEO](https://manya.servicioti.com.uy/data/instagram_feed.json)
+
+## Ecosistema ServicioTI Conectado
+- [Portal Principal y Crónicas Extendidas de Peñarol](https://www.servicioti.com.uy/)
+- [Radar de Ómnibus CUTCSA y COPSA al Estadio Campeón del Siglo](https://horarios.servicioti.com.uy/)
+- [Simulador de Truco Uruguayo Online](https://truco-uruguayo.servicioti.com.uy/)

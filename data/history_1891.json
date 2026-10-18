@@ -1,0 +1,136 @@
+{
+  "fundacion": "28 de septiembre de 1891 (CURCC / Club Atlético Peñarol)",
+  "distincion_iffhs": "Club Campeón del Siglo XX de Sudamérica (IFFHS)",
+  "resumen_palmares": {
+    "copas_libertadores": 5,
+    "copas_intercontinentales": 3,
+    "supercopa_intercontinental": 1,
+    "campeonatos_uruguayos": 54,
+    "quinquenios_de_oro": [
+      "1958-1962 (Primer Quinquenio)",
+      "1993-1997 (Segundo Quinquenio)"
+    ]
+  },
+  "detalle_libertadores": [
+    {
+      "anio": 1960,
+      "rival_final": "Olimpia (Paraguay)",
+      "resultado": "1-0 en Montevideo y 1-1 en Asunción (Gol de Luis Cubilla)",
+      "dt": "Roberto Scarone",
+      "figura": "Alberto Spencer"
+    },
+    {
+      "anio": 1961,
+      "rival_final": "Palmeiras (Brasil)",
+      "resultado": "1-0 en Montevideo y 1-1 en São Paulo (Goles de Spencer y Sasía)",
+      "dt": "Roberto Scarone",
+      "figura": "Alberto Spencer / José Sasía"
+    },
+    {
+      "anio": 1966,
+      "rival_final": "River Plate (Argentina)",
+      "resultado": "2-0, 2-3 y 4-2 en Santiago de Chile (Remontada histórica de 0-2 a 4-2)",
+      "dt": "Roque Máspoli",
+      "figura": "Alberto Spencer / Julio César Cortés / Pedro Rocha"
+    },
+    {
+      "anio": 1982,
+      "rival_final": "Cobreloa (Chile)",
+      "resultado": "0-0 en Montevideo y 1-0 en Santiago en el min. 89 (Gol de Fernando Morena)",
+      "dt": "Hugo Bagnulo",
+      "figura": "Fernando Morena / Jair Gonçalves"
+    },
+    {
+      "anio": 1987,
+      "rival_final": "América de Cali (Colombia)",
+      "resultado": "0-2, 2-1 y 1-0 en Santiago en el min. 120 (Gol agónico de Diego Aguirre)",
+      "dt": "Óscar Washington Tabárez",
+      "figura": "Diego Aguirre / Eduardo Pereira"
+    }
+  ],
+  "detalle_intercontinentales": [
+    {
+      "anio": 1961,
+      "rival": "Benfica (Portugal)",
+      "resultado": "0-1 en Lisboa, 5-0 en Montevideo y 2-1 en el desempate (Doblete de Sasía)",
+      "sede": "Estadio Centenario"
+    },
+    {
+      "anio": 1966,
+      "rival": "Real Madrid (España)",
+      "resultado": "2-0 en Montevideo y 2-0 en el Santiago Bernabéu de Madrid",
+      "sede": "Montevideo y Madrid"
+    },
+    {
+      "anio": 1982,
+      "rival": "Aston Villa (Inglaterra)",
+      "resultado": "2-0 en Tokio (Goles de Jair y Walkir Silva)",
+      "sede": "Estadio Nacional de Tokio"
+    }
+  ],
+  "paternidad_clasica": {
+    "total_partidos_historial": 571,
+    "victorias_penarol": 197,
+    "empates": 189,
+    "victorias_rival": 185,
+    "ventaja_aurinegra": "+12 clásicos de ventaja histórica",
+    "clasicos_inolvidables": [
+      {
+        "fecha": "09/10/1949",
+        "titulo": "El Clásico de la Fuga",
+        "marcador": "Peñarol 2 - 0 Nacional",
+        "hito": "La Máquina del 49 ganaba 2-0 bajo lluvia y el rival no salió a jugar el segundo tiempo."
+      },
+      {
+        "fecha": "23/04/1987",
+        "titulo": "El Clásico de los 8 contra 11",
+        "marcador": "Peñarol 2 - 1 Nacional",
+        "hito": "Con tres jugadores expulsados, Peñarol lo ganó con gol de Jorge Cabrera."
+      },
+      {
+        "fecha": "27/04/2014",
+        "titulo": "La Mayor Goleada del Siglo XXI",
+        "marcador": "Peñarol 5 - 0 Nacional",
+        "hito": "Tarde histórica en el Centenario con goles de Zalayeta, Macaluso, Japo Rodríguez y Aguiar (2)."
+      },
+      {
+        "fecha": "13/07/2023",
+        "titulo": "Copa Sudamericana y Paternidad Internacional",
+        "marcador": "Eliminación directa internacional",
+        "hito": "Peñarol domina también el historial en torneos internacionales CONMEBOL."
+      }
+    ]
+  },
+  "idolos_eternos": [
+    {
+      "nombre": "Fernando Morena",
+      "rol": "Máximo goleador histórico del fútbol uruguayo (667 goles) y leyenda del 82",
+      "goles_penarol": 440
+    },
+    {
+      "nombre": "Alberto Spencer",
+      "rol": "Máximo goleador histórico de la Copa Libertadores de América (54 goles) y tricampeón de América",
+      "goles_penarol": 326
+    },
+    {
+      "nombre": "Néstor 'Tito' Gonçalves",
+      "rol": "El Capitán de Capitanes: toda su carrera en Peñarol (574 partidos, 1957-1970)",
+      "goles_penarol": 6
+    },
+    {
+      "nombre": "Obdulio Varela",
+      "rol": "El Negro Jefe: símbolo de rebeldía y gloria en Peñarol y Maracaná 1950",
+      "goles_penarol": 45
+    },
+    {
+      "nombre": "Pablo Bengoechea",
+      "rol": "El Profesor: cerebro y capitán del Segundo Quinquenio de Oro (1993-1997)",
+      "goles_penarol": 124
+    },
+    {
+      "nombre": "Antonio Pacheco",
+      "rol": "El Tony: ídolo contemporáneo y máximo ganador de clásicos en la era moderna",
+      "goles_penarol": 133
+    }
+  ]
+}

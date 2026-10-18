@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://manya.servicioti.com.uy/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://manya.servicioti.com.uy/assets/ig/manya_campeon_del_siglo_nocturno.webp</image:loc>
+      <image:title>Estadio Campeón del Siglo - Club Atlético Peñarol</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://manya.servicioti.com.uy/assets/ig/manya_hinchada_recibimiento_aurinegro.webp</image:loc>
+      <image:title>Hinchada del Club Atlético Peñarol en el Campeón del Siglo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://manya.servicioti.com.uy/llms.txt</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>

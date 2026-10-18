@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.env
+_ref_temp_*
+_raw_seed_*

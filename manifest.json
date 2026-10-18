@@ -1,0 +1,18 @@
+{
+  "name": "Manya ServicioTI — El Portal Definitivo del Glorioso Peñarol",
+  "short_name": "Manya STI",
+  "description": "Match Center en vivo, Tabla Anual, Pizarra Táctica Armá tu 11, Muro Instagram, Transporte al Campeón del Siglo y Museo 1891 del Club Atlético Peñarol.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#ffd100",
+  "lang": "es-UY",
+  "icons": [
+    {
+      "src": "assets/ig/manya_campeon_del_siglo_nocturno.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}
