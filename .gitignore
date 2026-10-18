@@ -1,5 +1,38 @@
+# Python bytecode and cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Environment variables, credentials, and secrets
 .env
+.env.*
+*.env
+*secret*
+*credential*
+*.token.json
+token.json
+client_secret*.json
+
+# SQLite and runtime local databases
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite*
+
+# Automation logs and temporary artifacts
+*.log
+*.bak
+*.tmp
 _ref_temp_*
 _raw_seed_*
+
+# Browser automation profiles and session caches
+.gemini_automation_profile/
+.playwright/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

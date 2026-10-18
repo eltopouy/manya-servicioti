@@ -9,10 +9,16 @@
   "lang": "es-UY",
   "icons": [
     {
-      "src": "assets/ig/manya_campeon_del_siglo_nocturno.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
+      "src": "assets/img/escudo_penarol_oficial.png",
+      "sizes": "800x1000",
+      "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/escudo_penarol_oficial.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

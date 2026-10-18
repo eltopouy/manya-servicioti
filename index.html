@@ -10,6 +10,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://manya.servicioti.com.uy/" />
   <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/escudo_penarol_oficial.svg" />
+  <link rel="apple-touch-icon" href="assets/img/escudo_penarol_oficial.png" />
   <meta name="theme-color" content="#ffd100" />
 
   <!-- Open Graph / WhatsApp / Redes -->
@@ -18,14 +20,14 @@
   <meta property="og:title" content="Peñarol en Vivo: Match Center, Tabla Anual, Armá tu 11 y Museo 1891" />
   <meta property="og:description" content="El radar más completo del Club Atlético Peñarol: próximo partido, clima y ómnibus al Campeón del Siglo, simulador de Tabla Anual, galería curada y museo interactivo." />
   <meta property="og:url" content="https://manya.servicioti.com.uy/" />
-  <meta property="og:image" content="https://manya.servicioti.com.uy/assets/ig/manya_campeon_del_siglo_nocturno.webp" />
+  <meta property="og:image" content="https://manya.servicioti.com.uy/assets/img/escudo_penarol_oficial.jpg" />
   <meta property="og:locale" content="es_UY" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Peñarol en Vivo | Manya ServicioTI" />
   <meta name="twitter:description" content="Match Center en el Campeón del Siglo, Simulador de Tabla Anual, Pizarra Táctica y Museo 1891 del Glorioso Peñarol." />
-  <meta name="twitter:image" content="https://manya.servicioti.com.uy/assets/ig/manya_campeon_del_siglo_nocturno.webp" />
+  <meta name="twitter:image" content="https://manya.servicioti.com.uy/assets/img/escudo_penarol_oficial.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,6 +47,22 @@
         "foundingDate": "1891-09-28",
         "sport": "Fútbol",
         "url": "https://manya.servicioti.com.uy/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://manya.servicioti.com.uy/assets/img/escudo_penarol_oficial.png",
+          "contentUrl": "https://manya.servicioti.com.uy/assets/img/escudo_penarol_oficial.png",
+          "width": 800,
+          "height": 1000,
+          "caption": "Escudo Oficial del Club Atlético Peñarol - Manya ServicioTI (servicioti.com.uy)",
+          "creator": {
+            "@type": "Organization",
+            "name": "ServicioTI Uruguay",
+            "url": "https://www.servicioti.com.uy/"
+          },
+          "creditText": "ServicioTI Uruguay (servicioti.com.uy)",
+          "copyrightNotice": "Club Atlético Peñarol / ServicioTI"
+        },
+        "image": "https://manya.servicioti.com.uy/assets/img/escudo_penarol_oficial.jpg",
         "location": {
           "@type": "StadiumOrArena",
           "name": "Estadio Campeón del Siglo",
@@ -130,8 +148,8 @@
   <!-- HEADER & NAVEGACIÓN -->
   <header class="manya-header">
     <div class="manya-header-inner">
-      <a href="#top" class="manya-brand">
-        <div class="manya-crest" aria-label="1891 CAP">1891</div>
+      <a href="#top" class="manya-brand" title="Manya ServicioTI — Club Atlético Peñarol">
+        <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón - Manya ServicioTI (servicioti.com.uy)" width="38" height="48" class="manya-brand-crest" />
         <div>
           <div class="manya-brand-title">MANYA <span>SERVICIOTI</span> ★</div>
           <div class="manya-brand-sub">El Glorioso Peñarol • Campeón del Siglo XX</div>
@@ -173,7 +191,10 @@
       </div>
 
       <div class="match-scoreboard">
-        <div>
+        <div class="team-hero-side">
+          <div class="hero-crest-wrap">
+            <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón - Manya ServicioTI (servicioti.com.uy)" width="86" height="108" class="hero-crest-penarol" loading="eager" fetchpriority="high" />
+          </div>
           <div id="hero-home-name" class="match-team-name is-penarol">Peñarol</div>
           <div class="match-team-tag">El Decano • 1891</div>
         </div>
@@ -189,7 +210,7 @@
           <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Campeón del Siglo (Montevideo)</div>
         </div>
 
-        <div>
+        <div class="team-hero-side">
           <div id="hero-away-name" class="match-team-name">Defensor Sporting</div>
           <div class="match-team-tag">Torneo Oficial AUF</div>
         </div>

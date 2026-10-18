@@ -85,20 +85,21 @@ body {
   color: var(--text-primary);
 }
 
+.manya-brand-crest {
+  width: 38px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(255, 209, 0, 0.45));
+  transition: transform 0.25s ease;
+  display: block;
+}
+
+.manya-brand:hover .manya-brand-crest {
+  transform: rotate(-3deg) scale(1.08);
+}
+
 .manya-crest {
-  width: 44px;
-  height: 44px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, var(--manya-gold) 0%, #eab308 100%);
-  color: var(--manya-black);
-  font-weight: 900;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 18px rgba(255, 209, 0, 0.45);
-  border: 2px solid #fff;
-  letter-spacing: -0.5px;
+  display: none;
 }
 
 .manya-brand-title {
@@ -234,6 +235,35 @@ body {
   gap: 20px;
   text-align: center;
   margin: 18px 0 26px;
+}
+
+.team-hero-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hero-crest-wrap {
+  width: 86px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 6px 20px rgba(255, 209, 0, 0.45));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-bottom: 4px;
+}
+
+.hero-crest-wrap:hover {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.hero-crest-penarol {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .match-team-name {
