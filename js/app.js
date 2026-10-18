@@ -162,6 +162,22 @@
       tLast.textContent = `${ult.local.nombre} ${ult.local.goles} - ${ult.visitante.goles} ${ult.visitante.nombre}`;
     }
 
+    // Ticker interactivo de alerta de partido
+    const tickerEl = document.getElementById('manya-live-ticker');
+    const tickerTxt = document.getElementById('ticker-text');
+    if (tickerEl && live.alerta_banner) {
+      tickerEl.style.display = 'flex';
+      if (tickerTxt) tickerTxt.textContent = live.alerta_banner;
+      if (live.fase_partido === 'EN_VIVO') {
+        tickerEl.style.borderColor = '#ef4444';
+        tickerEl.style.background = '#450a0a';
+        tickerEl.style.animation = 'pulse 2s infinite';
+      } else if (live.fase_partido === 'PREVIA') {
+        tickerEl.style.borderColor = '#ffd100';
+        tickerEl.style.background = '#18181b';
+      }
+    }
+
     startCountdown(prox.fecha_iso);
   }
 

@@ -6,12 +6,14 @@
     "categoria": "Estadio Campeón del Siglo",
     "likes": 28450,
     "comments": 612,
-    "caption": "La fortaleza aurinegra en Ruta 102 iluminada a pleno con más de 40.000 almas latiendo en amarillo y negro.",
+    "caption": "La fortaleza aurinegra en Ruta 102 Km 23.500 iluminada a pleno con más de 40.000 almas latiendo en amarillo y negro.",
     "imagen_webp": "assets/ig/manya_campeon_del_siglo_nocturno.webp",
     "imagen_jpg": "assets/ig/manya_campeon_del_siglo_nocturno.jpg",
     "seo_alt": "Catedral Aurinegra: Estadio Campeón del Siglo iluminado en noche de Copa Libertadores - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 55.4
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Campeón del Siglo",
+    "kb_webp": 124.5,
+    "kb_jpg": 161.8,
+    "dims": "1024x572"
   },
   {
     "id": "hinchada_recibimiento_aurinegro",
@@ -24,8 +26,10 @@
     "imagen_webp": "assets/ig/manya_hinchada_recibimiento_aurinegro.webp",
     "imagen_jpg": "assets/ig/manya_hinchada_recibimiento_aurinegro.jpg",
     "seo_alt": "Recibimiento histórico de la hinchada de Peñarol con banderas oro y carbón - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 53.7
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Campeón del Siglo",
+    "kb_webp": 138.0,
+    "kb_jpg": 174.5,
+    "dims": "1024x572"
   },
   {
     "id": "entrenamiento_los_aromos_tactica",
@@ -38,8 +42,10 @@
     "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
     "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg",
     "seo_alt": "Entrenamiento de alta intensidad del plantel de Peñarol en Los Aromos - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 33.3
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Los Aromos",
+    "kb_webp": 163.3,
+    "kb_jpg": 228.3,
+    "dims": "1280x714"
   },
   {
     "id": "gloria_eterna_5_libertadores",
@@ -52,8 +58,10 @@
     "imagen_webp": "assets/ig/manya_gloria_eterna_5_libertadores.webp",
     "imagen_jpg": "assets/ig/manya_gloria_eterna_5_libertadores.jpg",
     "seo_alt": "Las 5 Copas Libertadores y 3 Intercontinentales del Campeón del Siglo XX - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 132.4
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Museo 1891",
+    "kb_webp": 80.7,
+    "kb_jpg": 117.9,
+    "dims": "1024x572"
   },
   {
     "id": "festejo_gol_aurinegro_cds",
@@ -66,8 +74,10 @@
     "imagen_webp": "assets/ig/manya_festejo_gol_aurinegro_cds.webp",
     "imagen_jpg": "assets/ig/manya_festejo_gol_aurinegro_cds.jpg",
     "seo_alt": "Grito sagrado de gol aurinegro frente a la Tribuna Washington Cataldi - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 103.2
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Campeón del Siglo",
+    "kb_webp": 107.7,
+    "kb_jpg": 144.2,
+    "dims": "1024x572"
   },
   {
     "id": "camiseta_aurinegra_vestuario",
@@ -80,7 +90,9 @@
     "imagen_webp": "assets/ig/manya_camiseta_aurinegra_vestuario.webp",
     "imagen_jpg": "assets/ig/manya_camiseta_aurinegra_vestuario.jpg",
     "seo_alt": "El manto sagrado oro y carbón listo en el vestuario local del Campeón del Siglo - Club Atlético Peñarol (Manya ServicioTI)",
-    "transformacion_gemini_web": "Imagen transformada con Gemini Web Vision + Metadatos EXIF/XMP/GPS Campeón del Siglo",
-    "kb_webp": 41.4
+    "transformacion_gemini_web": "Google Imagen 3 Fotografía Cinematográfica + Blindaje SEO EXIF/XMP/GPS Campeón del Siglo",
+    "kb_webp": 50.2,
+    "kb_jpg": 126.8,
+    "dims": "1280x714"
   }
 ]
