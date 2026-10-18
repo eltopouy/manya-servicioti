@@ -1,10 +1,10 @@
 {
-  "actualizado": "18/10/2026 18:30",
-  "fase_partido": "PREVIA",
-  "alerta_banner": "⚡ ¡HOY JUEGA PEÑAROL! Peñarol at Liverpool a las 18/10/2026 18:30 hs en Estadio de Primera División. Vivilo en vivo por VTV Plus / Disney+ Premium.",
+  "actualizado": "18/10/2026 19:00",
+  "fase_partido": "EN_VIVO",
+  "alerta_banner": "🔴 EN VIVO AHORA: Liverpool 0 - 0 Peñarol (28')",
   "partido_activo": {
     "es_hoy": true,
-    "fase": "PREVIA",
+    "fase": "EN_VIVO",
     "id": "401929259",
     "nombre": "Peñarol at Liverpool",
     "fecha_iso": "2026-10-18T18:30:00-03:00",
@@ -27,7 +27,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "0'",
+    "minuto_reloj": "28'",
     "completado": false,
     "tv": "VTV Plus / Disney+ Premium",
     "detalles_avanzados": {
@@ -65,8 +65,8 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "0'",
-    "tiempo_periodo": 0,
+    "minuto_reloj": "28'",
+    "tiempo_periodo": 1,
     "completado": false,
     "tv": "VTV Plus / Disney+ Premium",
     "es_hoy": true
