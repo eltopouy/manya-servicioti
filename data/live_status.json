@@ -1,10 +1,10 @@
 {
-  "actualizado": "18/10/2026 20:00",
-  "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 EN VIVO AHORA: Liverpool 0 - 0 Peñarol (71')",
+  "actualizado": "18/10/2026 20:30",
+  "fase_partido": "FINALIZADO",
+  "alerta_banner": "🏁 FINAL: Liverpool 1 - 0 Peñarol (Estadio de Primera División)",
   "partido_activo": {
     "es_hoy": true,
-    "fase": "EN_VIVO",
+    "fase": "FINALIZADO",
     "id": "401929259",
     "nombre": "Peñarol at Liverpool",
     "fecha_iso": "2026-10-18T18:30:00-03:00",
@@ -16,7 +16,7 @@
       "nombre": "Liverpool",
       "abreviatura": "LIV",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
     "visitante": {
@@ -27,8 +27,8 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "71'",
-    "completado": false,
+    "minuto_reloj": "90'+3'",
+    "completado": true,
     "tv": "VTV Plus / Disney+ Premium",
     "detalles_avanzados": {
       "goles": [],
@@ -54,7 +54,7 @@
       "nombre": "Liverpool",
       "abreviatura": "LIV",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
     "visitante": {
@@ -65,9 +65,9 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "71'",
+    "minuto_reloj": "90'+3'",
     "tiempo_periodo": 2,
-    "completado": false,
+    "completado": true,
     "tv": "VTV Plus / Disney+ Premium",
     "es_hoy": true
   },

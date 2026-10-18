@@ -1,53 +1,49 @@
 {
-  "actualizado": "18/10/2026 18:30",
+  "actualizado": "18/10/2026 20:30",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "fase_publicacion": "PREVIA",
+  "fase_publicacion": "CRONICA",
   "partido_id": "",
-  "titular_dia": "¡Hoy juega el Campeón del Siglo! Peñarol va por un triunfo clave de visitante frente a Liverpool",
-  "bajada_seo": "Peñarol se enfrenta a Liverpool este 18 de octubre de 2026 a las 18:30 hs por el Campeonato Uruguayo. Mirá los detalles del partido, formaciones probables y dónde verlo en vivo por VTV Plus y Disney+ Premium.",
+  "titular_dia": "Trago amargo en Belvedere: Peñarol cayó 1-0 ante Liverpool en un final electrizante",
+  "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Clave Táctica",
-      "detalle": "Diego Aguirre apuesta a un bloque de alta intensidad y transiciones rápidas por las bandas, buscando asfixiar la salida de Liverpool desde el inicio."
+      "titulo": "Resultado Final",
+      "detalle": "Liverpool se impuso por 1-0 ante Peñarol tras aprovechar una de las pocas ocasiones claras del encuentro, dejando al carbonero con las manos vacías en un duro choque."
     },
     {
-      "icono": "🔥",
-      "titulo": "La Figura a Seguir",
-      "detalle": "Atención al momento ofensivo de Matías Arezo y la creatividad por las puntas, factores determinantes para vulnerar el cerrojo defensivo local."
-    },
-    {
-      "icono": "📺",
-      "titulo": "Transmisión y Horario",
-      "detalle": "El encuentro arranca a las 18:30 hs (hora de Uruguay) con transmisión en directo de VTV Plus en televisión y Disney+ Premium en streaming."
+      "icono": "⭐",
+      "titulo": "Figura del Partido",
+      "detalle": "El bloque defensivo del rival y su guardameta, quienes sostuvieron el cero ante los reiterados embates del aurinegro en la recta final."
     },
     {
       "icono": "📊",
-      "titulo": "Puntos en Juego",
-      "detalle": "Tres puntos vitales en la pelea de la Tabla Anual y la tabla de posiciones para mantener el liderazgo en el Torneo Clausura."
+      "titulo": "Estadísticas Clave",
+      "detalle": "Peñarol dominó el trámite territorial en la segunda mitad y acumuló saques de esquina, pero adoleció de efectividad en los últimos metros."
+    },
+    {
+      "icono": "🏆",
+      "titulo": "Tabla de Posiciones",
+      "detalle": "A pesar del tropezón, el aurinegro se mantiene firme en los puestos de vanguardia de la Tabla Anual, obligado a dar vuelta la página de inmediato."
     }
   ],
   "articulo_principal": {
-    "titulo": "Peñarol visita a Liverpool en una tarde decisiva para afirmarse en lo más alto de la Anual",
-    "subtitulo": "El equipo dirigido por Diego Aguirre sale a la cancha con la obligación y el temple que exige la camiseta aurinegra para traer los tres puntos.",
+    "titulo": "Crónica: Análisis exhaustivo del partido",
+    "subtitulo": "El balance del aurinegro tras el pitazo final",
     "parrafos": [
-      "La concentración en Los Aromos se vivió con la intensidad y el enfoque que caracteriza a los planteles de Diego Aguirre en momentos decisivos. Con la mira puesta únicamente en sumar de a tres, el Decano llega a este compromiso tras una semana de entrenamientos muy exigentes, ajustando piezas tanto en el sector defensivo como en la contundencia dentro del área rival.",
-      "Liverpool, siempre un adversario duro en su recinto, propondrá un juego físico y de mucha presión en la mitad de la cancha. El conjunto negriazul intentará cerrarle los caminos al Carbonero, por lo que la inteligencia táctica, la paciencia con la pelota y la contundencia en los últimos metros serán fundamentales para inclinar la balanza a nuestro favor.",
-      "En cuanto al once probable, la vuelta de futbolistas gravitantes le otorga a la Fiera variantes de peso para armar un esquema agresivo y equilibrado. Se prevé un frente de ataque incisivo aprovechando la jerarquía de Matías Arezo y el desborde por los extremos de Alejo Cruz, respaldados por una mitad de cancha firme para adueñarse de la segunda pelota.",
-      "La parcialidad aurinegra vuelve a demostrar su fidelidad absoluta apoyando desde cada rincón. En este tramo del campeonato, cada pelota disputada vale oro y Peñarol sabe que ganar hoy significa dar un paso gigante en la pelea por la Tabla Anual y la definición de la temporada."
+      "El encuentro comenzó con un ritmo frenético y de dientes apretados en el Estadio de Primera División. Peñarol buscó imponer sus condiciones desde el pitazo inicial, manejando la circulación de la pelota e intentando abastecer a las bandas para romper el cerrojo defensivo de Liverpool. Sin embargo, el equipo local cerró bien las líneas internas y apostó a un juego físico, interrumpiendo constantemente la fluidez del juego carbonero.",
+      "En el complemento llegaron las acciones más determinantes de la tarde. Liverpool logró asestar el golpe decisivo en una jugada aislada donde encontró espacio en el área y decretó el 1-0 que descolocó el esquema mirasol. Tras el impacto, Peñarol empujó con más ímpetu que claridad, arrinconando a su rival y generando oportunidades claras que lamentablemente no terminaron en la red por falta de contundencia e intervenciones del arquero rival.",
+      "Las intervenciones del cuerpo técnico desde el banco buscaron revitalizar el ataque con el ingreso de piernas frescas en la delantera y mayor peso en mitad de cancha. Si bien el equipo ganó metros y generó constantes centros sobre el área negriazul, el desgaste físico y la férrea postura defensiva del adversario impidieron lograr la igualdad antes del silbatazo final.",
+      "El tropezón no debe opacar el objetivo de fondo. Este plantel ha demostrado temple en los momentos difíciles y la entrega de hoy deja en claro que la actitud no se negocia. Toca corregir los detalles en la definición, ajustar la concentración en la pelota parada y poner la cabeza desde mañana en el próximo desafío, sabiendo que la hinchada siempre acompaña y la lucha por el título sigue intacta."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿A qué hora juega Peñarol hoy y dónde verlo?",
-        "a": "Peñarol juega este domingo 18 de octubre de 2026 a las 18:30 hs frente a Liverpool en el Estadio de Primera División. La transmisión en vivo estará a cargo de VTV Plus y Disney+ Premium."
+        "q": "¿Cómo terminó el partido de Peñarol?",
+        "a": "El encuentro finalizó con marcador Liverpool 1 - 0 Peñarol."
       },
       {
-        "q": "¿Cómo formaría Peñarol?",
-        "a": "Diego Aguirre perfila un esquema ofensivo con los futbolistas en mejor rodaje físico, destacando el peso de Matías Arezo en ataque y el dinamismo en la mitad de la cancha."
-      },
-      {
-        "q": "¿Qué se juega Peñarol en este partido?",
-        "a": "Peñarol se juega puntos vitales para mantenerse firme en la cima de la Tabla Anual y seguir marcando el ritmo en el Torneo Clausura."
+        "q": "¿Cómo impacta este resultado en la Tabla Anual?",
+        "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo."
       }
     ]
   },
@@ -117,5 +113,5 @@
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-tarde-de.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica.html"
 }
