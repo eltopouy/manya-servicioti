@@ -1,49 +1,49 @@
 {
-  "actualizado": "18/10/2026 21:00",
+  "actualizado": "18/10/2026 21:30",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "CRONICA",
   "partido_id": "",
-  "titular_dia": "Trago amargo en el Estadio de Primera División: Peñarol cayó 1-0 ante Liverpool",
-  "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones.",
+  "titular_dia": "Tropiezo amargo en una batalla táctica: Peñarol cayó 1-0 ante Liverpool y deja puntos clave en el camino",
+  "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones. El Decano batalló hasta el pitazo final pero pagó caro la falta de contundencia.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Resultado Final",
-      "detalle": "Liverpool se impuso por 1-0 ante Peñarol en un encuentro donde la eficacia en las áreas definió el marcador a favor del conjunto local."
+      "detalle": "Liverpool se impuso por la mínima diferencia (1-0) ante un Peñarol que volcó la cancha en el tramo final sin lograr romper el cerrojo rival."
     },
     {
       "icono": "⭐",
       "titulo": "Figura del Partido",
-      "detalle": "El bloque defensivo del rival logró neutralizar los embates aurinegros, marcando la diferencia en los momentos de mayor presión."
+      "detalle": "El bloque defensivo negriazul y las respuestas de su golero neutralizaron la rebeldía aurinegra comandada por el empuje de la mitad de la cancha."
     },
     {
       "icono": "📊",
       "titulo": "Estadísticas Clave",
-      "detalle": "Un trámite de lucha constante en mitad de cancha, donde el Carbonero buscó adueñarse de la pelota pero careció de contundencia en el último tercio."
+      "detalle": "Peñarol asumió el protagonismo con mayor posesión y centros constantes, pero Liverpool fue certero en su golpe y defendió con máxima disciplina táctica."
     },
     {
       "icono": "🏆",
       "titulo": "Tabla de Posiciones",
-      "detalle": "Pese al tropezón, Peñarol mantiene la mirada firme en la pelea del campeonato y en los puestos de vanguardia de la Tabla Anual."
+      "detalle": "El Carbonero cede terreno en la pelea por el torneo corto, manteniendo la obligación insoslayable de corregir errores y blindar la Tabla Anual en la próxima fecha."
     }
   ],
   "articulo_principal": {
-    "titulo": "Crónica: Análisis exhaustivo del partido",
-    "subtitulo": "El balance del aurinegro tras el pitazo final",
+    "titulo": "Crónica: Entre el asedio estéril y el rigor del marcador adverso",
+    "subtitulo": "El balance del aurinegro tras el pitazo final en una tarde que exige autocrítica y temple",
     "parrafos": [
-      "El encuentro comenzó con un ritmo intenso en el Estadio de Primera División. Peñarol intentó imponer condiciones desde el pitazo inicial, buscando adueñarse de la pelota y generar circuitos de juego por las bandas, mientras Liverpool respondía con transiciones rápidas y una presión asfixiante en la mitad de la cancha.",
-      "Los momentos determinantes llegaron a medida que el cronómetro avanzaba y el trámite se volvía cada vez más trabado. El conjunto local encontró el gol en una jugada puntual donde logró vulnerar la resistencia mirasol, forzando a Peñarol a volcarse masivamente al ataque en busca del empate con más ímpetu que claridad.",
-      "Desde el banco de suplentes, el cuerpo técnico movió las piezas para refrescar la ofensiva y sumar hombres de peso en el área rival. A pesar del desgaste físico y los esfuerzos individuales por reordenar la táctica, la solidez defensiva del rival terminó cerrando los caminos al gol.",
-      "Con la derrota consumada por 1-0, el balance deja sensaciones de amargura pero también de aprendizaje. El plantel ya da vuelta la página para corregir errores puntuales, fortalecer el trabajo semanal y reencontrarse con la victoria en el próximo compromiso ante la fiel hinchada aurinegra."
+      "El pitazo inicial dio paso a un libreto de dientes apretados, fricción en el mediocampo y máxima intensidad física. Peñarol intentó adueñarse de las acciones mediante transiciones veloces y la búsqueda de espacios por las bandas, pero se topó con un Liverpool sumamente replegado, atento a la segunda pelota y decidido a cortar los circuitos de gestación del conjunto carbonero.",
+      "El desequilibrio en el marcador llegó en un pasaje de desconcentración que el elenco de la Cuchilla castigó con contundencia letal. A partir del 1-0 adverso, el Decano acusó el golpe emocional y debió redoblar esfuerzos contra el reloj y el orden ajeno, estrellándose repetidamente contra una zaga local que cerró todos los resquicios en su propia área.",
+      "Con los cambios en el complemento, el cuerpo técnico aurinegro modificó el esquema, inyectando frescura en ofensiva y acumulando efectivos cerca del arco rival. Pese a que el equipo mostró rebeldía, corazón y presencia territorial, la claridad futbolística escaseó en el último tercio para traducir los envíos aéreos y remates de media distancia en el ansiado gol del empate.",
+      "La derrota duele y deja lecciones ineludibles para lo que resta de la temporada: la jerarquía debe traducirse en eficacia en los momentos cumbres. Con la hidalguía que demanda la historia mirasol, el plantel deberá pasar de página de inmediato, ajustar detalles en la definición y transformar este revés en combustible competitivo para defender el liderato en la Tabla Anual."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cómo terminó el partido de Peñarol?",
-        "a": "El encuentro finalizó con marcador Liverpool 1 - 0 Peñarol."
+        "q": "¿Cómo terminó el partido de Peñarol ante Liverpool?",
+        "a": "El encuentro finalizó con marcador Liverpool 1 - 0 Peñarol tras un trámite disputado de principio a fin."
       },
       {
         "q": "¿Cómo impacta este resultado en la Tabla Anual?",
-        "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo."
+        "a": "Pese al resultado adverso, Peñarol mantiene su enfoque prioritario en la vanguardia de la Tabla Anual, acortando el margen de error para las siguientes fechas."
       }
     ]
   },
@@ -113,5 +113,5 @@
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica_01406647915.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica-entre.html"
 }
