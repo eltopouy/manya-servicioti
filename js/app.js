@@ -553,9 +553,11 @@
     if (titleEl) titleEl.textContent = item.titulo;
     if (descEl) descEl.textContent = item.descripcion || item.caption || '';
     if (linkEl) {
-      const pUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.padreydecano.com/cms/' : 'https://www.instagram.com/oficialcap/');
+      const isTenfield = (item.cuenta === '@tenfield') || (item.url_post && item.url_post.includes('tenfield'));
+      const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
+      const pUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
       linkEl.href = pUrl;
-      linkEl.textContent = item.cuenta === '@padreydecano' ? 'Ver artículo original en Padre y Decano ↗' : 'Ver publicación original en Instagram ↗';
+      linkEl.textContent = isPD ? 'Ver artículo en Padre y Decano ↗' : (isTenfield ? 'Ver cobertura oficial en Tenfield Deportes ↗' : 'Ver publicación original en Instagram ↗');
     }
 
     modal.style.display = 'flex';
@@ -725,7 +727,10 @@
     }
 
     grid.innerHTML = filtered.map((item, idx) => {
-      const postUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.padreydecano.com/cms/' : 'https://www.instagram.com/oficialcap/');
+      const isTenfield = (item.cuenta === '@tenfield') || (item.url_post && item.url_post.includes('tenfield'));
+      const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
+      const postUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
+      const sourceLabel = isPD ? 'Padre y Decano ↗' : (isTenfield ? 'Tenfield ↗' : 'Instagram ↗');
       const badgeTxt = `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
       const likesTxt = item.likes ? (item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + 'K' : item.likes) : '25K';
       const commentsTxt = item.comments || 450;
@@ -750,7 +755,7 @@
             <p class="ig-caption">${descTxt}</p>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;">
               <button type="button" class="btn-outline-gold open-lightbox-btn" style="padding:4px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar Foto</button>
-              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${item.cuenta === '@padreydecano' ? 'Padre y Decano ↗' : 'Instagram ↗'}</a>
+              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${sourceLabel}</a>
             </div>
           </div>
         </article>

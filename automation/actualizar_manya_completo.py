@@ -265,15 +265,15 @@ def fetch_espn_penarol_live_data() -> Dict[str, Any]:
 
 def fetch_penarol_news_multi_source() -> List[Dict[str, Any]]:
     """
-    Recolecta noticias frescas de Peñarol desde:
-    1. Google News RSS filtrado para Peñarol (Uruguay).
-    2. Padre y Decano RSS (`https://www.padreydecano.com/cms/feed/`).
-    3. Montevideo Portal Deportes (`https://www.montevideo.com.uy/anxml.aspx?60`).
+    Recolecta noticias frescas de Peñarol verificadas (2026) desde:
+    1. Tenfield Deportes (cobertura fotográfica y actualidad de partidos).
+    2. Google News RSS filtrado para Peñarol (Uruguay).
+    3. Padre y Decano RSS (solo si tiene artículos publicados en 2026).
     """
     feeds = [
+        ("Tenfield Deportes", "https://www.tenfield.com.uy/tag/penarol/feed/", False),
+        ("Google News Peñarol", "https://news.google.com/rss/search?q=Pe%C3%B1arol+Uruguay+when:7d&hl=es-419&gl=UY&ceid=UY:es-419", False),
         ("Padre y Decano", "https://www.padreydecano.com/cms/feed/", False),
-        ("Google News Peñarol", "https://news.google.com/rss/search?q=Pe%C3%B1arol+when:3d&hl=es-419&gl=UY&ceid=UY:es-419", False),
-        ("FútbolUy / Montevideo Portal", "https://www.montevideo.com.uy/anxml.aspx?60", True),
     ]
     collected = []
     seen_titles = set()
@@ -289,6 +289,7 @@ def fetch_penarol_news_multi_source() -> List[Dict[str, Any]]:
                 l_el = item.find("link")
                 d_el = item.find("description")
                 p_el = item.find("pubDate")
+                s_el = item.find("source")
                 title = (t_el.text or "").strip() if t_el is not None else ""
                 link = (l_el.text or "").strip() if l_el is not None else ""
                 desc = re.sub(r"<[^>]+>", " ", (d_el.text or "") if d_el is not None else "").strip()
@@ -297,32 +298,43 @@ def fetch_penarol_news_multi_source() -> List[Dict[str, Any]]:
 
                 if not title or not link:
                     continue
+
+                # FILTRO ESTRICTO: Descartar noticias de 2025 o años anteriores
+                if "2025" in pub or "2024" in pub or "2023" in pub:
+                    continue
+
                 if filter_kw and not any(k in (title + " " + desc).lower() for k in ["peñarol", "aurinegro", "carbonero", "aguirre", "campeón del siglo", "los aromos", "leo fernández"]):
                     continue
 
-                norm_t = re.sub(r"\W+", "", title.lower())[:45]
+                # Limpiar sufijo '- NombreFuente' si viene de Google News
+                clean_title = re.sub(r"\s*-\s*[A-Za-z0-9\.\s]+$", "", title).strip()
+                norm_t = re.sub(r"\W+", "", clean_title.lower())[:45]
                 if norm_t in seen_titles:
                     continue
                 seen_titles.add(norm_t)
 
-                # Intentar extraer imagen de media:content o enclosure si existe
+                src = s_el.text if s_el is not None and s_el.text else source_name
+
+                # Intentar extraer imagen de enclosure o media si existe
                 img_url = ""
                 enc = item.find("enclosure")
                 if enc is not None and enc.attrib.get("url"):
                     img_url = enc.attrib["url"]
 
                 collected.append({
-                    "titulo": title,
+                    "titulo": clean_title,
+                    "url": link,
                     "url_origen": link,
-                    "fuente": source_name,
-                    "resumen": desc if len(desc) > 30 else f"Cobertura actualizada sobre el Club Atlético Peñarol en {source_name}.",
+                    "fuente": src,
+                    "resumen": desc if len(desc) > 30 else f"Cobertura actualizada sobre el Club Atlético Peñarol en {src}.",
                     "fecha": pub[:22] if pub else datetime.now(UY_TZ).strftime("%d/%m/%Y"),
+                    "fecha_raw": pub[:22] if pub else datetime.now(UY_TZ).strftime("%d/%m/%Y"),
                     "imagen_origen": img_url
                 })
         except Exception as e_rss:
             logger.warning(f"[RSS Peñarol] Aviso en fuente {source_name}: {e_rss}")
 
-    logger.info(f"[RSS Peñarol] Recolectadas {len(collected)} noticias verificadas sobre Peñarol.")
+    logger.info(f"[RSS Peñarol] Recolectadas {len(collected)} noticias verificadas 2026 sobre Peñarol.")
     return collected[:16]
 
 

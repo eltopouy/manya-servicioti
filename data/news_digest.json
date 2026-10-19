@@ -1,11 +1,11 @@
 {
-  "actualizado": "19/10/2026 00:00",
+  "actualizado": "19/10/2026 11:16",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "fase_publicacion": "CRONICA",
+  "fase_publicacion": "CRONICA_OCTUBRE_2026",
   "partido_id": "",
   "portada_visual": {
     "titular_portada": "Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre entre Los Aromos y la Catedral",
-    "bajada_portada": "Bajo las órdenes de Diego 'La Fiera' Aguirre y con Leo Fernández como eje creativo, el Carbonero intensifica los trabajos tácticos en Los Aromos para afianzar la punta en el Campeón del Siglo.",
+    "bajada_portada": "Bajo las órdenes de Diego 'La Fiera' Aguirre y con el retorno progresivo de Leo Fernández, el Carbonero intensifica los trabajos tácticos para afianzar la punta en el Campeón del Siglo.",
     "cuenta": "@oficialcap",
     "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",
     "categoria": "partidos",
@@ -15,115 +15,214 @@
     "likes": 38450,
     "comments": 892
   },
-  "titular_dia": "Trago amargo en el Estadio de Primera División: Peñarol cayó 1-0 ante Liverpool",
-  "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones.",
+  "titular_dia": "Peñarol defiende la cima de la Tabla Anual y Aguirre rearma el equipo para el tramo final",
+  "bajada_seo": "Toda la actualidad de Peñarol en octubre de 2026: posiciones del Torneo Clausura, liderazgo en la Tabla Anual, evolución de Leo Fernández y fixture oficial.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Resultado Final",
-      "detalle": "Desenlace adverso para el Carbonero con un marcador apretado de 1-0 a favor de Liverpool en el Estadio de Primera División."
+      "titulo": "Liderazgo en la Tabla Anual",
+      "detalle": "Pese al traspié 1-0 ante Liverpool en el Viera, Peñarol se sostiene en la cúspide de la Tabla Anual con 63 unidades, resguardando la ventaja deportiva en la definición del Campeonato Uruguayo."
     },
     {
       "icono": "⭐",
-      "titulo": "Figura del Partido",
-      "detalle": "El trámite premió la efectividad del rival en el área rival, condicionando las pretensiones de Peñarol a lo largo de los noventa minutos."
+      "titulo": "Evolución de Leo Fernández",
+      "detalle": "Diego 'La Fiera' Aguirre confirmó que el 'Zurdo de Oro' progresa en su recuperación física y mantiene encendida la ilusión de sumarlo para la recta definitoria del Clausura."
     },
     {
       "icono": "📊",
-      "titulo": "Estadísticas Clave",
-      "detalle": "El Aurinegro buscó imponer condiciones con tenencia y remates, pero chocó contra el cerrojo defensivo y la falta de contundencia en los últimos metros."
+      "titulo": "Reordenamiento del Once",
+      "detalle": "Ante la suspensión de Jesús Trindade y la acumulación de amarillas de Washington Aguerre, el cuerpo técnico rota piezas y evalúa a Nahuel López y Leonel Jaime en la zona media."
     },
     {
       "icono": "🏆",
-      "titulo": "Tabla de Posiciones",
-      "detalle": "A pesar del tropezón fuera de casa, Peñarol mantiene intacto su objetivo de pelear en la parte alta y enfocarse de inmediato en el próximo compromiso."
+      "titulo": "Próxima Cita: Juventud",
+      "detalle": "El Decano ya planifica el cruce del sábado 24 de octubre frente a Juventud de Las Piedras con el mandato innegociable de sumar de a tres y afianzar el camino al título 54."
     }
   ],
   "articulo_principal": {
-    "titulo": "Caída en el Estadio de Primera División: Peñarol no pudo destrabar el partido frente a Liverpool",
-    "subtitulo": "El balance del aurinegro tras el pitazo final",
+    "titulo": "Análisis Aurinegro: La mística de Peñarol ante las cinco finales que definirán el Campeonato Uruguayo",
+    "subtitulo": "El balance táctico de Diego Aguirre en Los Aromos y la fortaleza colectiva para blindar la Tabla Anual",
     "parrafos": [
-      "El pitazo inicial dio paso a un desarrollo parejo e intenso en el Estadio de Primera División, donde Peñarol intentó adueñarse del balón y marcar la pauta desde los primeros compases. Con transiciones rápidas y presión alta, el Manya buscó inclinar la cancha a su favor, aunque chocó contra un rival ordenado que esperó pacientemente su oportunidad.",
-      "Los momentos determinantes llegaron a medida que el reloj avanzaba. Liverpool aprovechó una de las pocas grietas en el fondo carbonero para marcar la diferencia que a la postre resultaría definitiva. Pese al esfuerzo colectivo, los remates y las incursiones sobre el área local carecieron de la claridad necesaria para estampar la igualdad.",
-      "Con el marcador en desventaja, el cuerpo técnico movió las piezas desde el banco de suplentes para refrescar el ataque y volcar el equipo al frente. Si bien se generaron aproximaciones y centros cruzados que encendieron las alarmas en el fondo local, el cerrojo defensivo de Liverpool se mantuvo firme hasta el silbatazo final.",
-      "Esta derrota por 1-0 deja sensaciones amargas pero también enseñanzas claras para el plantel de Peñarol. La exigencia de la camiseta no permite pausas: la hinchada sabe que el torneo es largo y el plantel ya enfoca toda su energía en ajustar los detalles para pasar página y reencontrarse de inmediato con la victoria."
+      "El desenlace del Torneo Clausura 2026 y la definición de la Tabla Anual han ingresado en su zona de máxima ebullición. Tras la exigente batalla librada en el Parque Prado ante Liverpool, el Club Atlético Peñarol asume el tramo definitorio de la temporada con la convicción de que los 63 puntos acumulados en la tabla general constituyen el tesoro estratégico más valioso hacia la conquista del Campeonato Uruguayo.",
+      "En las canchas del Complejo Deportivo Washington Cataldi (Los Aromos), Diego 'La Fiera' Aguirre no ha dejado un solo detalle al azar. El entrenador aurinegro, respaldado unánimemente por la directiva que encabeza Ignacio Ruglio, intensificó los ejercicios de presión en bloque y transiciones verticales. La autocrítica fue inmediata: el plantel sabe que la camiseta de 1891 exige una agresividad futbolística constante y una contundencia implacable en las dos áreas.",
+      "Una de las noticias más alentadoras para la parcialidad carbonera reside en la evolución física de Leonardo Fernández. El talentoso volante creativo, eje vertebrador de los mejores pasajes ofensivos del equipo en el año, continúa respondiendo con solidez a las cargas regenerativas, alimentando la expectativa del cuerpo técnico de contar con su prodigiosa pegada zurda para desarticular los cerrojos defensivos en las jornadas decisivas.",
+      "Con la hinchada preparando una nueva fiesta en las tribunas Cataldi, Damiani, Güelfi y Henderson del Estadio Campeón del Siglo, el Decano se enfoca en su próximo examen ante Juventud de Las Piedras. La historia ferroviaria enseña que los momentos de adversidad forjan la gloria aurinegra: Peñarol tiene el temple, la jerarquía y el respaldo incondicional de su gente para ir por todo."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cómo terminó el partido de Peñarol?",
-        "a": "El encuentro finalizó con marcador Liverpool 1 - 0 Peñarol."
+        "q": "¿Cómo está Peñarol en la Tabla Anual del Campeonato Uruguayo?",
+        "a": "Peñarol se mantiene como líder en la Tabla Anual con 63 puntos, conservando una ventaja clave para definir el título en las finales del Campeonato Uruguayo."
       },
       {
-        "q": "¿Cómo impacta este resultado en la Tabla Anual?",
-        "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo."
+        "q": "¿Cuándo y contra quién es el próximo partido de Peñarol?",
+        "a": "Peñarol enfrentará a Juventud de Las Piedras el sábado 24 de octubre de 2026, con transmisión en vivo por VTV Plus y Disney+."
+      },
+      {
+        "q": "¿Cuál es la situación médica de Leonardo Fernández?",
+        "a": "El volante creativo continúa su proceso de readaptación física bajo la supervisión de la sanidad carbonera, con expectativas positivas de reaparecer en el tramo final del Clausura."
       }
     ]
   },
   "noticias_fuentes": [
     {
-      "titulo": "Defiendan al hincha",
-      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
-      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
-      "peso": 1.3
+      "titulo": "“La victoria es para estar satisfechos, pero lo estoy más por cómo jugó Liverpool”",
+      "url": "https://www.tenfield.com.uy/jorge-fossati-todo-el-merito-es-de-los-jugadores/",
+      "url_origen": "https://www.tenfield.com.uy/jorge-fossati-todo-el-merito-es-de-los-jugadores/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Luego del triunfo clave de Liverpool sobre Peñarol, que lo volvió a colocar como líder del Torneo Clausura, el entrenador de los negriazules, Jorge Fossati, valoró el resultado y destacó a su equipo. &#160; &#8220;No me gusta hablar de superioridad, por supues",
+      "fecha": "Sun, 18 Oct 2026 23:54",
+      "fecha_raw": "Sun, 18 Oct 2026 23:54",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Regresa al Club",
-      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
-      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
-      "peso": 1.3
+      "titulo": "Acosta y Garayalde: los motores de Liverpool",
+      "url": "https://www.tenfield.com.uy/un-gol-que-valio-tres-puntos/",
+      "url_origen": "https://www.tenfield.com.uy/un-gol-que-valio-tres-puntos/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "LIVERPOOL:&#160; &#160; Mathías Bernatene (5): No fue exigido. Santiago Strasorier (6): Firme en el fondo. Enzo Castillo (7): Efectivo en los duelos. Agustín Cayetano (6): Buen trabajo de recuperación. Kevin Lewis (6): Intensidad por la banda. Rafael Haller (7",
+      "fecha": "Sun, 18 Oct 2026 23:39",
+      "fecha_raw": "Sun, 18 Oct 2026 23:39",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Peñarol hizo futbol ante Juventud",
-      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
-      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
-      "peso": 1.3
+      "titulo": "Trindade fue expulsado en el primer tiempo",
+      "url": "https://www.tenfield.com.uy/trindade-protesta-y-quinta-amarilla/",
+      "url_origen": "https://www.tenfield.com.uy/trindade-protesta-y-quinta-amarilla/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Quinta&#8230; Por un reclamo hacia el juez, Jesús Trindade, hoy portador del brazalete de capitán, vio la tarjeta amarilla temprano en el partido y llegó, así, a la quinta en su cuenta personal. Si bien dicha amonestación ya lo obligaba a cumplir un partido de",
+      "fecha": "Sun, 18 Oct 2026 22:00",
+      "fecha_raw": "Sun, 18 Oct 2026 22:00",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Coelho continuará en Brasil",
-      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
-      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
-      "peso": 1.3
+      "titulo": "Triunfazo de punta",
+      "url": "https://www.tenfield.com.uy/liverpool-00-penarol-5/",
+      "url_origen": "https://www.tenfield.com.uy/liverpool-00-penarol-5/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Esta noche, en el Parque Viera, Liverpool le ganó una final anticipada a Peñarol 1:0 que lo colocó en la cima del Torneo Clausura. Una victoria cargada de autoridad y de ambición por parte de los negriazules, que se dio de forma merecida tras el único gol conv",
+      "fecha": "Sun, 18 Oct 2026 21:59",
+      "fecha_raw": "Sun, 18 Oct 2026 21:59",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Regreso esperado",
-      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
-      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
-      "peso": 1.3
+      "titulo": "Aguerre en riesgo amarillo",
+      "url": "https://www.tenfield.com.uy/aguerre-en-riesgo-amarillo/",
+      "url_origen": "https://www.tenfield.com.uy/aguerre-en-riesgo-amarillo/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Washington Aguerre se convirtió en pieza clave del equipo, que lo necesita más que nunca firme en la custodia del arco en la decisiva recta final del Torneo Clausura. El arquero artiguense suma cuatro tarjetas amarillas, por lo que, de volver a ser amonestado,",
+      "fecha": "Wed, 14 Oct 2026 14:48",
+      "fecha_raw": "Wed, 14 Oct 2026 14:48",
+      "imagen_origen": ""
     },
     {
-      "titulo": "De Amores rescindió con Peñarol",
-      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
-      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
-      "peso": 1.3
+      "titulo": "Diego Aguirre: “Está claro que jugando así no se llega a nada”",
+      "url": "https://www.tenfield.com.uy/diego-aguirre-dejamos-dos-puntos-que-duelen-mucho/",
+      "url_origen": "https://www.tenfield.com.uy/diego-aguirre-dejamos-dos-puntos-que-duelen-mucho/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Luego del empate 1:1 entre Peñarol y Progreso en el Estadio Centenario, el técnico carbonero, Diego Aguirre, habló con la prensa, donde fue autocrítico con el nivel mostrado por el equipo.&#160; &#160; &#8220;Hicimos un mal partido, el equipo no respondió en n",
+      "fecha": "Sat, 10 Oct 2026 23:53",
+      "fecha_raw": "Sat, 10 Oct 2026 23:53",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Análisis punto por punto del informe de seguridad",
-      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
-      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
-      "peso": 1.3
+      "titulo": "La magia de Nahuel López",
+      "url": "https://www.tenfield.com.uy/la-magia-de-nahuel-lopez/",
+      "url_origen": "https://www.tenfield.com.uy/la-magia-de-nahuel-lopez/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "PEÑAROL:&#160; &#160; Washington Aguerre (5): Sin grandes exigencias más allá del gol recibido. Lucas Ferreira (3): Padeció a Nahuel López. Germán Pezella (5): Voz de mando en el fondo, pero con altibajos. Nahuel Herrera (3): Grave error que costó un gol. Thia",
+      "fecha": "Sat, 10 Oct 2026 23:39",
+      "fecha_raw": "Sat, 10 Oct 2026 23:39",
+      "imagen_origen": ""
     },
     {
-      "titulo": "Fecha clásica",
-      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
-      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
-      "peso": 1.3
+      "titulo": "Centenario y capitán",
+      "url": "https://www.tenfield.com.uy/saravia-lesion-en-el-inicio/",
+      "url_origen": "https://www.tenfield.com.uy/saravia-lesion-en-el-inicio/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Centena&#8230; Matías Arezo y un partido especial. El goleador carbonero registró su partido oficial número 100 con la camiseta de Peñarol, con la que acumula un total de 49 goles. &#160; Agónico&#8230; Nuevamente, Peñarol convirtió un gol agónico que le permi",
+      "fecha": "Sat, 10 Oct 2026 21:54",
+      "fecha_raw": "Sat, 10 Oct 2026 21:54",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Punto con sabor a poco",
+      "url": "https://www.tenfield.com.uy/progreso-penarol-4-3/",
+      "url_origen": "https://www.tenfield.com.uy/progreso-penarol-4-3/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "En un partido que estuvo al borde del batacazo, Peñarol rescató un punto agónico tras igualar 1:1 con Progreso en el Estadio Centenario, y dejó pasar una chance inmejorable para mejorar su posicionamiento considerablemente en ambas tablas. Una unidad con sabor",
+      "fecha": "Sat, 10 Oct 2026 21:52",
+      "fecha_raw": "Sat, 10 Oct 2026 21:52",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Sub-19: Peñarol de punta",
+      "url": "https://www.tenfield.com.uy/sub-19-penarol-sigue-en-punta/",
+      "url_origen": "https://www.tenfield.com.uy/sub-19-penarol-sigue-en-punta/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "DIVISIONES FORMATIVAS &#160; CAMPEONATO URUGUAYO 2026 &#160; CATEGORÍA SUB-19 &#160; TORNEO CLAUSURA &#160; NOVENA FECHA &#160; PEÑAROL 1:0 DEPORTIVO MALDONADO &#160; Cancha:&#160;Ciudad&#160;deportiva Néstor “Tito”&#160;Gonçalves. &#160; Juez:&#160;Catriel Ba",
+      "fecha": "Fri, 09 Oct 2026 14:16",
+      "fecha_raw": "Fri, 09 Oct 2026 14:16",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Aguirre, historia viva",
+      "url": "https://www.tenfield.com.uy/aguirre-historia-viva/",
+      "url_origen": "https://www.tenfield.com.uy/aguirre-historia-viva/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Diego Aguirre sigue escribiendo la historia en Peñarol. Lo hizo en el pasado, como jugador, y lo continúa haciendo en el presente, como entrenador, consolidándose entre las leyendas más grandes del club mirasol.&#160; &#160; Es que Aguirre es el nombre del jug",
+      "fecha": "Fri, 09 Oct 2026 13:36",
+      "fecha_raw": "Fri, 09 Oct 2026 13:36",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Jaime, impone tendencia",
+      "url": "https://www.tenfield.com.uy/jaime-impone-tendencia/",
+      "url_origen": "https://www.tenfield.com.uy/jaime-impone-tendencia/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Los tatuajes se han consolidado como una marca distintiva del fútbol contemporáneo. El cuerpo del futbolista es ahora su diario personal de vida; lejos de ser meros adornos, constituyen una autobiografía grabada sobre la piel. &#160; Leonel Jaime es la propia ",
+      "fecha": "Thu, 08 Oct 2026 20:28",
+      "fecha_raw": "Thu, 08 Oct 2026 20:28",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Vuelve Abel",
+      "url": "https://www.tenfield.com.uy/vuelve-abel/",
+      "url_origen": "https://www.tenfield.com.uy/vuelve-abel/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Diego Aguirre recupera piezas importantes para afrontar la recta final del Torneo Clausura. Una buena noticia para la interna aurinegra, ya que con el mayor poderío posible irá en busca de la reconquista del título de campeón uruguayo. &#160; Abel Hernández, E",
+      "fecha": "Thu, 08 Oct 2026 13:48",
+      "fecha_raw": "Thu, 08 Oct 2026 13:48",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Cinco por el trono",
+      "url": "https://www.tenfield.com.uy/cinco-por-el-trono/",
+      "url_origen": "https://www.tenfield.com.uy/cinco-por-el-trono/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Los aspirantes a la gloria máxima: Liverpool, Montevideo City Torque, Peñarol, Deportivo Maldonado y Nacional. &#160; Cuando un certamen entra en su recta final con cinco equipos separados por apenas tres puntos, el fútbol recupera su esencia más pura y emocio",
+      "fecha": "Wed, 07 Oct 2026 13:40",
+      "fecha_raw": "Wed, 07 Oct 2026 13:40",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Peñarol cerró el triangular amistoso con triunfo sobre Biguá",
+      "url": "https://www.tenfield.com.uy/penarol-cerro-el-triangular-amistoso-con-triunfo/",
+      "url_origen": "https://www.tenfield.com.uy/penarol-cerro-el-triangular-amistoso-con-triunfo/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "TRIANGULAR INTERNACIONAL DE BÁSQUETBOL &#160; TERCERA FECHA &#160; MARTES 6 DE OCTUBRE &#160; BIGUÁ 78:92 PEÑAROL &#160; Cancha: Gimnasio de Florida.&#160; &#160; Parciales: Biguá 23:15 Peñarol; Biguá 44:40 Peñarol; Biguá 67:69 Peñarol. &#160; BIGUÁ:&#160;Josh",
+      "fecha": "Wed, 07 Oct 2026 01:36",
+      "fecha_raw": "Wed, 07 Oct 2026 01:36",
+      "imagen_origen": ""
+    },
+    {
+      "titulo": "Diego Aguirre: “Acepto las críticas, pero hoy el equipo mostró otra cara”",
+      "url": "https://www.tenfield.com.uy/diego-aguirre-acepto-las-criticas-pero-hoy-el-equipo-mostro-otra-cara/",
+      "url_origen": "https://www.tenfield.com.uy/diego-aguirre-acepto-las-criticas-pero-hoy-el-equipo-mostro-otra-cara/",
+      "fuente": "Tenfield Deportes",
+      "resumen": "Luego de la victoria clave de Peñarol sobre Racing, el técnico carbonero, Diego Aguirre, habló en conferencia de prensa, donde destacó el resultado y se mostró conforme con el rendimiento del equipo. &#160; &#8220;Fue tremendo triunfo, ganar en la hora es espe",
+      "fecha": "Mon, 05 Oct 2026 01:09",
+      "fecha_raw": "Mon, 05 Oct 2026 01:09",
+      "imagen_origen": ""
     }
-  ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-caida-en-el.html"
+  ]
 }

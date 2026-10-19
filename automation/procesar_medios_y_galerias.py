@@ -130,16 +130,17 @@ def descargar_fotos_padreydecano(max_items: int = 6) -> List[Dict[str, Any]]:
             if len(data) > 10000:
                 dest.write_bytes(data)
                 cat = "los-aromos" if "los-aromos" in n["url"].lower() or "entrenamiento" in n["titulo"].lower() else "noticias"
+                cuenta_handle = "@tenfield" if "tenfield" in n.get("fuente", "").lower() else ("@padreydecano" if "padre" in n.get("fuente", "").lower() else "@oficialcap")
                 items_pd.append({
                     "id": f"pd_{idx}",
                     "url_post": n["url"],
-                    "cuenta": "@padreydecano",
+                    "cuenta": cuenta_handle,
                     "local_raw_path": dest,
                     "categoria": cat,
                     "titulo": n["titulo"],
                     "resumen": n["resumen"]
                 })
-                print(f" -> Descargada foto de Padre y Decano: {n['titulo'][:50]} ({len(data)//1024} KB)")
+                print(f" -> Descargada foto deportiva 2026: {n['titulo'][:50]} ({len(data)//1024} KB)")
         except Exception as e:
             print(f" [!] Error descargando foto de PD ({img_url}): {e}")
 

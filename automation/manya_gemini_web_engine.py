@@ -29,7 +29,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any, List
-from PIL import Image, ImageEnhance, ImageFilter, ImageOps
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageDraw
 
 from manya_seo_metadata import ManyaSEOMetadataService
 
@@ -73,6 +73,57 @@ class ManyaGeminiWebEngine:
     """Orquesta Gemini Web (Playwright) y la cascada Gemini 3.8 Flash para imágenes y textos de Peñarol."""
 
     @classmethod
+    def aplicar_marca_visual_aurinegra(
+        cls,
+        img: Image.Image,
+        opacidad_negro: float = 0.20,
+        opacidad_oro: float = 0.20,
+        color_oro: tuple = (255, 209, 0),    # #FFD100 Oro Peñarol
+        color_negro: tuple = (12, 12, 12),   # #0C0C0C Negro carbón
+        angulo_offset: float = 0.10,        # Inclinación diagonal balanceada
+        blur_borde: int = 5
+    ) -> Image.Image:
+        """
+        Aplica la marca visual editorial oficial de Manya ServicioTI:
+        División diagonal al medio:
+        - Izquierda: filtro negro carbón con sutil transparencia (~20%)
+        - Derecha: filtro amarillo oro con sutil transparencia (~20%)
+        - Línea de corte diagonal con feathering y acento dorado tenue.
+        """
+        base = img.convert("RGBA")
+        w, h = base.size
+
+        # Puntos de corte diagonal (de arriba a la derecha hacia abajo a la izquierda)
+        x_top = int(w * (0.5 + angulo_offset))
+        x_bottom = int(w * (0.5 - angulo_offset))
+
+        # Crear overlay
+        overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
+
+        # Polígono izquierdo (Negro)
+        poly_izq = [(0, 0), (x_top, 0), (x_bottom, h), (0, h)]
+        draw.polygon(poly_izq, fill=(color_negro[0], color_negro[1], color_negro[2], int(opacidad_negro * 255)))
+
+        # Polígono derecho (Amarillo Oro)
+        poly_der = [(x_top, 0), (w, 0), (w, h), (x_bottom, h)]
+        draw.polygon(poly_der, fill=(color_oro[0], color_oro[1], color_oro[2], int(opacidad_oro * 255)))
+
+        if blur_borde > 0:
+            overlay = overlay.filter(ImageFilter.GaussianBlur(radius=blur_borde))
+
+        # Componer overlay sobre la base
+        comp = Image.alpha_composite(base, overlay)
+
+        # Sutil línea diagonal dorada de acento
+        line_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        line_draw = ImageDraw.Draw(line_layer)
+        line_draw.line([(x_top, 0), (x_bottom, h)], fill=(color_oro[0], color_oro[1], color_oro[2], 80), width=2)
+        comp = Image.alpha_composite(comp, line_layer)
+
+        return comp.convert("RGB")
+
+    @classmethod
     def aplicar_transformacion_cinematografica_local(
         cls,
         input_path: Path,
@@ -84,25 +135,43 @@ class ManyaGeminiWebEngine:
         """
         Transformación visual determinista de respaldo (Grado Editorial Aurinegro):
         - Recorta el 4% de bordes exteriores para eliminar marcos o marcas de agua periféricas.
-        - Aplica reencuadre 16:9 inteligente, contraste cinematográfico, realce de tonos cálidos
-          oro (#FFD100) y negros profundos (#0A0A0A), filtro de nitidez UnsharpMask e inyecta
-          los metadatos SEO EXIF/GPS/XMP completos.
+        - Aplica reencuadre 16:9 cinematográfico inteligente.
+        - Aplica la Marca Visual Oficial Aurinegra (división diagonal: negro izquierda, oro derecha).
+        - Mejora contraste, nitidez 35mm e inyecta los metadatos SEO EXIF/GPS/XMP completos.
         """
         with Image.open(input_path) as img:
             rgb = img.convert("RGB")
             w, h = rgb.size
-            # Recorte sutil del 4% para limpiar bordes y cambiar el hash perceptual (pHash único para SEO)
+            # Recorte sutil del 4% para limpiar bordes periféricos
             crop_x = int(w * 0.04)
             crop_y = int(h * 0.04)
             if w > 300 and h > 300:
                 rgb = rgb.crop((crop_x, crop_y, w - crop_x, h - crop_y))
+                w, h = rgb.size
+
+            # Reencuadre 16:9 si es necesario
+            target_ratio = 16.0 / 9.0
+            cur_ratio = w / h
+            if abs(cur_ratio - target_ratio) > 0.06:
+                if cur_ratio > target_ratio:
+                    new_w = int(h * target_ratio)
+                    left = (w - new_w) // 2
+                    rgb = rgb.crop((left, 0, left + new_w, h))
+                else:
+                    new_h = int(w / target_ratio)
+                    top = (h - new_h) // 2
+                    rgb = rgb.crop((0, top, w, top + new_h))
+
+            # Aplicar Marca Visual Aurinegra Oficial (Diagonal Negro / Amarillo Oro)
+            rgb = cls.aplicar_marca_visual_aurinegra(rgb)
 
             # Mejorar contraste, color y nitidez editorial
-            rgb = ImageEnhance.Contrast(rgb).enhance(1.12)
-            rgb = ImageEnhance.Color(rgb).enhance(1.15)
-            rgb = ImageEnhance.Sharpness(rgb).enhance(1.25)
-            rgb = rgb.filter(ImageFilter.UnsharpMask(radius=1.5, percent=115, threshold=3))
+            rgb = ImageEnhance.Contrast(rgb).enhance(1.08)
+            rgb = ImageEnhance.Color(rgb).enhance(1.06)
+            rgb = ImageEnhance.Sharpness(rgb).enhance(1.15)
+            rgb = rgb.filter(ImageFilter.UnsharpMask(radius=1.2, percent=110, threshold=3))
 
+            output_path.parent.mkdir(parents=True, exist_ok=True)
             rgb.save(output_path, format="JPEG", quality=92)
 
         meta = ManyaSEOMetadataService.blindar_y_optimizar_imagen(
@@ -111,7 +180,7 @@ class ManyaGeminiWebEngine:
             descripcion=descripcion,
             categoria="Peñarol",
             keywords=keywords,
-            transformacion_ia="Transformación editorial Aurinegra (Reencuadre, Color Grading Oro/Carbón y Nitidez 35mm)"
+            transformacion_ia="Marca Visual Aurinegra Oficial (Diagonal Negro/Oro con Transparencia y Nitidez 35mm)"
         )
         return meta
 

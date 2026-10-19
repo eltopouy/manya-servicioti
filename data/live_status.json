@@ -1,80 +1,24 @@
 {
-  "actualizado": "19/10/2026 00:00",
-  "fase_partido": "FINALIZADO",
-  "alerta_banner": "🏁 FINAL: Liverpool 1 - 0 Peñarol (Estadio de Primera División)",
+  "actualizado": "19/10/2026 11:00",
+  "fase_partido": "SIN_PARTIDO_HOY",
+  "alerta_banner": "🟡⚫ Próximo partido del Glorioso Peñarol: Por definir ()",
   "partido_activo": {
     "es_hoy": false,
-    "fase": "FINALIZADO",
-    "id": "401929259",
-    "nombre": "Peñarol at Liverpool",
-    "fecha_iso": "2026-10-18T18:30:00-03:00",
-    "fecha_legible": "18/10/2026 18:30 hs",
-    "torneo": "Campeonato Uruguayo • Clausura",
-    "estadio": "Estadio de Primera División",
-    "local": {
-      "id": "5492",
-      "nombre": "Liverpool",
-      "abreviatura": "LIV",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-      "escudo": "assets/img/escudos/escudo_liverpool.webp",
-      "goles": "1",
-      "es_penarol": false
-    },
-    "visitante": {
-      "id": "2683",
-      "nombre": "Peñarol",
-      "abreviatura": "PEN",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-      "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
-      "es_penarol": true
-    },
-    "minuto_reloj": "90'+3'",
-    "completado": true,
-    "tv": "VTV Plus / Disney+ Premium",
-    "detalles_avanzados": {
-      "goles": [],
-      "tarjetas": [],
-      "estadisticas": {
-        "Liverpool": {},
-        "Peñarol": {}
-      },
-      "titulares_penarol": [],
-      "suplentes_penarol": [],
-      "titulares_rival": []
-    }
+    "fase": "SIN_PARTIDO_HOY",
+    "id": "",
+    "nombre": "",
+    "fecha_iso": "",
+    "fecha_legible": "",
+    "torneo": "",
+    "estadio": "",
+    "local": {},
+    "visitante": {},
+    "minuto_reloj": "0'",
+    "completado": false,
+    "tv": "VTV Plus / Disney+",
+    "detalles_avanzados": {}
   },
-  "proximo_partido": {
-    "event_id": "401929259",
-    "nombre": "Peñarol at Liverpool",
-    "fecha_iso": "2026-10-18T18:30:00-03:00",
-    "fecha_legible": "18/10/2026 18:30 hs",
-    "torneo": "Campeonato Uruguayo • Clausura",
-    "estadio": "Estadio de Primera División",
-    "local": {
-      "id": "5492",
-      "nombre": "Liverpool",
-      "abreviatura": "LIV",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-      "escudo": "assets/img/escudos/escudo_liverpool.webp",
-      "goles": "1",
-      "es_penarol": false
-    },
-    "visitante": {
-      "id": "2683",
-      "nombre": "Peñarol",
-      "abreviatura": "PEN",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-      "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
-      "es_penarol": true
-    },
-    "minuto_reloj": "90'+3'",
-    "tiempo_periodo": 2,
-    "completado": true,
-    "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false
-  },
+  "proximo_partido": {},
   "tabla_posiciones": [
     {
       "pos": 1,
