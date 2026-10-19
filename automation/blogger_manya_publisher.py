@@ -175,11 +175,54 @@ def publish_manya_article_to_blogger(post_type: str = "NOTICIA_DIARIA", match_id
                 "@type": "NewsArticle",
                 "headline": title[:110],
                 "description": seo_desc,
-                "image": [hero_img_cdn],
+                "image": [
+                    {
+                        "@type": "ImageObject",
+                        "url": hero_img_cdn,
+                        "contentUrl": hero_img_cdn,
+                        "caption": title[:110],
+                        "description": seo_desc[:200],
+                        "width": 1280,
+                        "height": 714,
+                        "creditText": "Andrés Franchi Ugartemendía / Manya ServicioTI",
+                        "copyrightNotice": "Copyright © 2026 Andrés Franchi Ugartemendía - manya.servicioti.com.uy",
+                        "license": "https://www.servicioti.com.uy/p/terminos-y-condiciones.html",
+                        "acquireLicensePage": "https://www.servicioti.com.uy/p/contacto.html",
+                        "creator": {"@type": "Person", "name": "Andrés Franchi Ugartemendía", "url": "https://www.servicioti.com.uy/"},
+                        "copyrightHolder": {"@type": "Organization", "name": "Manya ServicioTI", "url": "https://manya.servicioti.com.uy/"}
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "url": second_img_cdn,
+                        "contentUrl": second_img_cdn,
+                        "caption": "Tribuna Aurinegra y Recibimiento en el Estadio Campeón del Siglo",
+                        "width": 1280,
+                        "height": 714,
+                        "creditText": "Andrés Franchi Ugartemendía / Manya ServicioTI",
+                        "copyrightNotice": "Copyright © 2026 Andrés Franchi Ugartemendía - manya.servicioti.com.uy",
+                        "license": "https://www.servicioti.com.uy/p/terminos-y-condiciones.html",
+                        "acquireLicensePage": "https://www.servicioti.com.uy/p/contacto.html",
+                        "creator": {"@type": "Person", "name": "Andrés Franchi Ugartemendía", "url": "https://www.servicioti.com.uy/"},
+                        "copyrightHolder": {"@type": "Organization", "name": "Manya ServicioTI", "url": "https://manya.servicioti.com.uy/"}
+                    }
+                ],
                 "datePublished": datetime.now(UY_TZ).strftime("%Y-%m-%dT%H:%M:%S-03:00"),
                 "dateModified": datetime.now(UY_TZ).strftime("%Y-%m-%dT%H:%M:%S-03:00"),
                 "author": {"@type": "Person", "name": "Andrés Franchi Ugartemendía", "url": "https://www.servicioti.com.uy/"},
-                "publisher": {"@type": "Organization", "name": "ServicioTI Uruguay", "url": "https://www.servicioti.com.uy/"},
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "ServicioTI Uruguay",
+                    "url": "https://www.servicioti.com.uy/",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.servicioti.com.uy/favicon.ico",
+                        "caption": "ServicioTI Logo",
+                        "creditText": "ServicioTI Uruguay",
+                        "copyrightNotice": "Copyright © 2026 ServicioTI",
+                        "license": "https://www.servicioti.com.uy/p/terminos-y-condiciones.html",
+                        "acquireLicensePage": "https://www.servicioti.com.uy/p/contacto.html"
+                    }
+                },
                 "about": {"@id": "https://manya.servicioti.com.uy/#penarol"}
             },
             {
