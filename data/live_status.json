@@ -1,9 +1,9 @@
 {
-  "actualizado": "18/10/2026 23:30",
+  "actualizado": "19/10/2026 00:00",
   "fase_partido": "FINALIZADO",
   "alerta_banner": "🏁 FINAL: Liverpool 1 - 0 Peñarol (Estadio de Primera División)",
   "partido_activo": {
-    "es_hoy": true,
+    "es_hoy": false,
     "fase": "FINALIZADO",
     "id": "401929259",
     "nombre": "Peñarol at Liverpool",
@@ -73,7 +73,7 @@
     "tiempo_periodo": 2,
     "completado": true,
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": true
+    "es_hoy": false
   },
   "tabla_posiciones": [
     {
