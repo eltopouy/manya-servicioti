@@ -1,40 +1,40 @@
 {
-  "actualizado": "18/10/2026 22:30",
+  "actualizado": "18/10/2026 23:00",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "CRONICA",
   "partido_id": "",
-  "titular_dia": "Trago amargo en el Estadio de Primera División: Peñarol cayó 1-0 ante Liverpool pese al empuje aurinegro",
+  "titular_dia": "Caída ajustada en Belvedere: Peñarol tropieza 1-0 ante Liverpool en un duelo directo de alta intensidad",
   "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Resultado Final",
-      "detalle": "Liverpool se impuso por 1-0 ante Peñarol en un cotejo trabado y disputado de principio a fin."
+      "detalle": "Liverpool se impuso 1-0 ante Peñarol en un trámite trabado y disputado de principio a fin."
     },
     {
       "icono": "⭐",
       "titulo": "Figura del Partido",
-      "detalle": "El bloque defensivo negriazul logró neutralizar las embestidas mirasoles en los momentos de mayor presión."
+      "detalle": "El bloque defensivo local y la eficacia en el área rival terminaron desequilibrando la balanza."
     },
     {
       "icono": "📊",
       "titulo": "Estadísticas Clave",
-      "detalle": "Peñarol buscó adueñarse de la pelota y generar juego, pero la falta de contundencia en el área rival inclinó la balanza en contra."
+      "detalle": "Peñarol empujó sobre el cierre pero careció de contundencia en los últimos metros para igualar."
     },
     {
       "icono": "🏆",
       "titulo": "Tabla de Posiciones",
-      "detalle": "A pesar del tropezón fuera de casa, el aurinegro mantiene la guardia en alto en la lucha por el campeonato y la Tabla Anual."
+      "detalle": "Peñarol mantiene el enfoque en los primeros puestos mientras ajusta detalles de cara a la definición."
     }
   ],
   "articulo_principal": {
-    "titulo": "Crónica: Golpe en el camino para un Peñarol que luchó hasta el final",
-    "subtitulo": "El balance del aurinegro tras el pitazo final en la visita a Liverpool",
+    "titulo": "Crónica: Análisis exhaustivo del partido",
+    "subtitulo": "El balance del aurinegro tras el pitazo final",
     "parrafos": [
-      "El pitazo inicial en el Estadio de Primera División marcó el comienzo de un encuentro disputado centímetro a centímetro. Peñarol saltó al campo con la premisa clara de asumir la iniciativa, imponiendo intensidad en la mitad de la cancha y buscando lastimar por las bandas con transiciones rápidas. Durante la primera mitad, el conjunto aurinegro logró asociarse en campo rival, generando aproximaciones de peligro que exigieron a la zaga negriazul, aunque el cero se mantuvo firme en el marcador al cabo de los primeros 45 minutos.",
-      "En el complemento llegaron los momentos determinantes que torcieron el destino del cotejo. Liverpool aprovechó una de las pocas grietas en el fondo mirasol para asestar un golpe certero y marcar el 1-0 definitivo. Tras el gol encajado, Peñarol volcó sus armas al frente, cargando el área rival con empuje, rebeldía y orgullo, pero la férrea resistencia del conjunto local y la falta de eficacia en la estocada final impidieron rescatar el ansiado empate.",
-      "Desde el banco de suplentes, la conducción técnica buscó variantes tácticas refrescando el ataque e ingresando futbolistas de pie fino para romper el cerrojo defensivo. Pese al esfuerzo individual de figuras que mostraron temperamento en los momentos de mayor adversidad, las ideas se fueron diluyendo con el correr de los minutos ante un rival que supo abroquelarse con solidez y enfriar las acciones en el tramo final.",
-      "El trago amargo de esta derrota deja valiosas lecturas para el plantel del Decano. Con la hidalguía que exige la camiseta mirasol, el grupo ya da vuelta la página centrándose de inmediato en el próximo desafío. La lucha por la Tabla Anual y el torneo local no da tregua, y la hinchada aurinegra sabe que la respuesta de este equipo será con trabajo, garra y convicción de cara a lo que viene."
+      "El encuentro comenzó con máxima fricción y un ritmo trabado en el mediocampo. Peñarol intentó adueñarse del balón desde los primeros minutos proponiendo un bloque alto, mientras que Liverpool apostó a transiciones rápidas para aprovechar los espacios en la zona defensiva del Carbonero.",
+      "Las jugadas más claras se definieron en los detalles. Tras un primer tiempo parejo y de pocas concesiones, la apertura del marcador llegó a través de una acción puntual donde el rival logró capitalizar su oportunidad en el área. A partir de allí, el Carbonero redobló esfuerzos y sumó hombres en ataque buscando el tanto de la igualdad.",
+      "Desde el banco de suplentes se buscaron variantes para refrescar la ofensiva y darle mayor movilidad al equipo. A pesar de los cambios tácticos y del empuje en el tramo final del compromiso, la muralla defensiva del conjunto local impidió la concreción de las opciones de gol generadas.",
+      "El pitazo final deja enseñanzas claves para el cuerpo técnico y el plantel aurinegro. Si bien el resultado no fue el esperado, el equipo ya da vuelta la página centrándose en corregir errores para mantener firme el objetivo en las próximas jornadas del Campeonato Uruguayo."
     ],
     "preguntas_frecuentes": [
       {
@@ -43,7 +43,7 @@
       },
       {
         "q": "¿Cómo impacta este resultado en la Tabla Anual?",
-        "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo y buscará la rápida recuperación en la próxima fecha."
+        "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo."
       }
     ]
   },
@@ -113,5 +113,5 @@
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica-golpe.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica_01422458285.html"
 }
