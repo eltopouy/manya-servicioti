@@ -37,20 +37,29 @@ if not COMMONS_SVG.exists():
 
 raw_svg = COMMONS_SVG.read_text(encoding="utf-8")
 
-# Limpieza profunda de namespaces y tags de Inkscape
-clean = re.sub(r'xmlns:sodipodi=["\'][^"\']+["\']', '', raw_svg)
-clean = re.sub(r'xmlns:inkscape=["\'][^"\']+["\']', '', clean)
-clean = re.sub(r'<sodipodi:namedview[\s\S]*?</sodipodi:namedview>', '', clean)
+# Limpieza profunda de namespaces y tags de Inkscape / Sodipodi
+# Eliminar completamente sodipodi y inkscape (tanto bloques como tags autocerrados)
+clean = re.sub(r'<sodipodi:namedview[\s\S]*?(?:/>|</sodipodi:namedview>)', '', raw_svg)
 clean = re.sub(r'<metadata[\s\S]*?</metadata>', '', clean)
-clean = re.sub(r'sodipodi:[a-zA-Z0-9_\-]+="[^"]*"', '', clean)
-clean = re.sub(r'inkscape:[a-zA-Z0-9_\-]+="[^"]*"', '', clean)
+clean = re.sub(r'xmlns:(?:sodipodi|inkscape|dc|cc|rdf|svg)=["\'][^"\']+["\']\s*', '', clean)
+clean = re.sub(r'(?:sodipodi|inkscape):[a-zA-Z0-9_\-]+="[^"]*"\s*', '', clean)
+clean = re.sub(r'<!-- Created with Inkscape[\s\S]*?-->', '', clean)
 
 # Estandarización al color oro oficial de Peñarol (#FFC20E)
 clean = clean.replace('#ffe600', '#FFC20E').replace('#FFE600', '#FFC20E')
 
-# Asegurar viewBox y dimensiones limpias
-clean = re.sub(r'width="[^"]+"', 'width="100%"', clean, count=1)
-clean = re.sub(r'height="[^"]+"', 'height="100%"', clean, count=1)
+# Asegurar width y height explícitos en px junto al viewBox
+clean = re.sub(r'\bwidth="[^"]+"', 'width="716.56"', clean, count=1)
+clean = re.sub(r'\bheight="[^"]+"', 'height="961.89"', clean, count=1)
+
+# Validar que sea XML perfectamente válido
+import xml.etree.ElementTree as ET
+try:
+    ET.fromstring(clean)
+    print("[✓] XML de SVG validado correctamente con ElementTree")
+except Exception as e_xml:
+    print(f"[!] Error validando XML: {e_xml}")
+    raise
 
 # Guardar SVG oficial principal
 dest_svg = BASE_DIR / "assets" / "img" / "escudo_penarol_oficial.svg"
