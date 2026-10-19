@@ -777,11 +777,15 @@ def main():
         json.dump(news_digest, f, ensure_ascii=False, indent=2)
     print("[✓] Generado data/news_digest.json (con Resumen 60s y Artículo GFlash 3.8)")
 
-    # 3. Extracción de Instagram + Transformación Multimodal en Gemini Web + Blindaje SEO EXIF/XMP
-    ig_feed = sync_instagram_and_transform_with_gemini_web(news_items)
-    with open(DATA_DIR / "instagram_feed.json", "w", encoding="utf-8") as f:
-        json.dump(ig_feed, f, ensure_ascii=False, indent=2)
-    print(f"[✓] Generado data/instagram_feed.json ({len(ig_feed)} imágenes transformadas y blindadas con SEO)")
+    # 3. Extracción de Instagram + Padre y Decano + Transformación Multimodal en Gemini Web + Blindaje SEO EXIF/XMP
+    try:
+        from procesar_medios_y_galerias import procesar_y_publicar_galerias
+        procesar_y_publicar_galerias()
+    except Exception as e_medios:
+        print(f"[!] Fallback en procesador de medios: {e_medios}")
+        ig_feed = sync_instagram_and_transform_with_gemini_web(news_items)
+        with open(DATA_DIR / "instagram_feed.json", "w", encoding="utf-8") as f:
+            json.dump(ig_feed, f, ensure_ascii=False, indent=2)
 
     # 4. Plantel e Historia 1891
     build_squad_and_history_datasets()
@@ -791,3 +795,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
