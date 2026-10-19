@@ -1,0 +1,41 @@
+name: Sincronización Automática de Partidos y Match Center Manya
+
+on:
+  schedule:
+    # Ejecuta automáticamente cada 4 horas todos los días
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # Permite ejecución manual con un click desde GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-matches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Configurar Entorno Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Actualizar Match Center y Estado en Vivo
+        run: |
+          python automation/manya_match_engine.py
+
+      - name: Verificar Cambios y Commit a Main
+        run: |
+          git config user.name "Manya Bot [GitHub Action]"
+          git config user.email "bot@manya.servicioti.com.uy"
+          git add data/live_status.json
+          if git diff --staged --quiet; then
+            echo "Sin cambios en el estado de partidos. Todo al día."
+          else
+            git commit -m "chore(match-center): sincronización automática próximo partido [skip ci]"
+            git push
+          fi

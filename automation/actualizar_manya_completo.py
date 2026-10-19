@@ -29,8 +29,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from manya_seo_metadata import ManyaSEOMetadataService
 from manya_gemini_web_engine import ManyaGeminiWebEngine
@@ -113,154 +112,13 @@ def fetch_campeon_del_siglo_weather() -> Dict[str, Any]:
 
 def fetch_espn_penarol_live_data() -> Dict[str, Any]:
     """
-    Consulta los endpoints oficiales de ESPN para el Club Atlético Peñarol (ID: 2892)
-    en Liga Uruguaya (uru.1) y CONMEBOL Libertadores.
+    Consulta los datos oficiales en tiempo real utilizando ManyaMatchEngine
+    (Scoreboard en vivo, Team API, próximo partido y último resultado oficial).
     """
-    logger.info("[Datos Oficiales] Consultando API ESPN para Peñarol (ID 2892)...")
-    team_data = fetch_json_url("https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams/2892")
-    sched_data = fetch_json_url("https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams/2892/schedule")
-    standings_data = fetch_json_url("https://site.web.api.espn.com/apis/v2/sports/soccer/uru.1/standings")
+    logger.info("[Datos Oficiales] Sincronizando con ManyaMatchEngine...")
+    from manya_match_engine import ManyaMatchEngine
+    return ManyaMatchEngine.generate_updated_live_status()
 
-    events = sched_data.get("events", [])
-    now_utc = datetime.now(timezone.utc)
-
-    past_matches = []
-    upcoming_matches = []
-
-    for ev in events:
-        date_str = ev.get("date", "")
-        try:
-            ev_dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
-        except Exception:
-            ev_dt = now_utc
-
-        comps = (ev.get("competitions") or [{}])[0]
-        competitors = comps.get("competitors", [])
-        if len(competitors) < 2:
-            continue
-
-        home = next((c for c in competitors if c.get("homeAway") == "home"), competitors[0])
-        away = next((c for c in competitors if c.get("homeAway") == "away"), competitors[1])
-
-        def _parse_team(c):
-            t = c.get("team", {})
-            score_obj = c.get("score")
-            val = score_obj.get("displayValue", "-") if isinstance(score_obj, dict) else (str(score_obj) if score_obj is not None else "-")
-            logos = t.get("logos", [])
-            logo_url = logos[0].get("href", "") if logos else ""
-            nom = t.get("displayName") or t.get("name") or "Equipo"
-            from manya_match_engine import resolve_team_crest
-            escudo_res = resolve_team_crest(nom, logo_url)
-            return {
-                "nombre": nom,
-                "abreviatura": t.get("abbreviation", "EQP"),
-                "goles": val,
-                "logo": logo_url,
-                "escudo": escudo_res,
-                "es_penarol": str(t.get("id")) == "2892" or "peñarol" in nom.lower()
-            }
-
-        status_type = (comps.get("status") or {}).get("type", {})
-        completed = status_type.get("completed", False)
-        venue = (comps.get("venue") or {}).get("fullName", "Estadio Campeón del Siglo")
-
-        item = {
-            "id": ev.get("id"),
-            "fecha_iso": ev_dt.astimezone(UY_TZ).isoformat(),
-            "fecha_legible": ev_dt.astimezone(UY_TZ).strftime("%d/%m/%Y %H:%M hs"),
-            "torneo": (ev.get("season") or {}).get("displayName", "Campeonato Uruguayo - Primera División"),
-            "estadio": venue,
-            "local": _parse_team(home),
-            "visitante": _parse_team(away),
-            "completado": completed,
-            "estado_texto": status_type.get("detail", "Programado")
-        }
-
-        if completed:
-            past_matches.append(item)
-        else:
-            upcoming_matches.append(item)
-
-    # Extraer tabla de posiciones si está disponible
-    tabla_posiciones = []
-    try:
-        children = standings_data.get("children", [])
-        if children:
-            entries = (children[0].get("standings") or {}).get("entries", [])
-            for idx, ent in enumerate(entries, 1):
-                tm = ent.get("team", {})
-                stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
-                tabla_posiciones.append({
-                    "pos": idx,
-                    "equipo": tm.get("displayName", tm.get("name", "")),
-                    "es_penarol": str(tm.get("id")) == "2892" or "peñarol" in (tm.get("displayName") or "").lower(),
-                    "pj": int(stats.get("gamesPlayed", 0) or 0),
-                    "pg": int(stats.get("wins", 0) or 0),
-                    "pe": int(stats.get("ties", 0) or 0),
-                    "pp": int(stats.get("losses", 0) or 0),
-                    "gf": int(stats.get("pointsFor", 0) or 0),
-                    "gc": int(stats.get("pointsAgainst", 0) or 0),
-                    "dg": stats.get("pointDifferential", "+0"),
-                    "pts": int(stats.get("points", 0) or 0)
-                })
-    except Exception as e_st:
-        logger.warning(f"[Tabla ESPN] Aviso parseando standings: {e_st}")
-
-    if not tabla_posiciones:
-        tabla_posiciones = [
-            {"pos": 1, "equipo": "Peñarol", "es_penarol": True, "pj": 28, "pg": 21, "pe": 5, "pp": 2, "gf": 54, "gc": 14, "dg": "+40", "pts": 68},
-            {"pos": 2, "equipo": "Nacional", "es_penarol": False, "pj": 28, "pg": 19, "pe": 6, "pp": 3, "gf": 51, "gc": 21, "dg": "+30", "pts": 63},
-            {"pos": 3, "equipo": "Boston River", "es_penarol": False, "pj": 28, "pg": 15, "pe": 6, "pp": 7, "gf": 38, "gc": 26, "dg": "+12", "pts": 51},
-            {"pos": 4, "equipo": "Defensor Sporting", "es_penarol": False, "pj": 28, "pg": 13, "pe": 9, "pp": 6, "gf": 41, "gc": 27, "dg": "+14", "pts": 48},
-            {"pos": 5, "equipo": "Danubio", "es_penarol": False, "pj": 28, "pg": 12, "pe": 10, "pp": 6, "gf": 33, "gc": 24, "dg": "+9", "pts": 46},
-            {"pos": 6, "equipo": "Wanderers", "es_penarol": False, "pj": 28, "pg": 11, "pe": 7, "pp": 10, "gf": 31, "gc": 32, "dg": "-1", "pts": 40},
-            {"pos": 7, "equipo": "Cerro Largo", "es_penarol": False, "pj": 28, "pg": 10, "pe": 8, "pp": 10, "gf": 27, "gc": 29, "dg": "-2", "pts": 38},
-            {"pos": 8, "equipo": "Liverpool", "es_penarol": False, "pj": 28, "pg": 9, "pe": 8, "pp": 11, "gf": 29, "gc": 34, "dg": "-5", "pts": 35}
-        ]
-
-    # Próximo partido (o fallback si hay receso entre fechas)
-    if upcoming_matches:
-        next_match = upcoming_matches[0]
-    else:
-        next_dt = (datetime.now(UY_TZ) + timedelta(days=3)).replace(hour=20, minute=0, second=0, microsecond=0)
-        next_match = {
-            "id": "next-cds-2026",
-            "fecha_iso": next_dt.isoformat(),
-            "fecha_legible": next_dt.strftime("%d/%m/%Y 20:00 hs"),
-            "torneo": "Campeonato Uruguayo • Torneo Clausura / Tabla Anual",
-            "estadio": "Estadio Campeón del Siglo (Montevideo)",
-            "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True},
-            "visitante": {"nombre": "Defensor Sporting", "abreviatura": "DEF", "goles": "-", "es_penarol": False},
-            "completado": False,
-            "estado_texto": "Venta y Canje en TickAntel / TuApp",
-            "tv": "VTV Plus / Disney+ Premium",
-            "entradas": {
-                "Cataldi": "Socios: Canje Gratuito | Generales: $420",
-                "Damiani": "Socios: Canje Gratuito | Generales: $650",
-                "Güelfi": "Socios: Canje Gratuito | Generales: $350",
-                "Henderson": "Socios: $950 | Butaquistas: Gratis | Generales: $1.450"
-            }
-        }
-
-    last_match = past_matches[-1] if past_matches else {
-        "fecha_legible": "Última Fecha Disputada",
-        "torneo": "Campeonato Uruguayo",
-        "estadio": "Estadio Campeón del Siglo",
-        "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "2", "es_penarol": True},
-        "visitante": {"nombre": "Boston River", "abreviatura": "BOS", "goles": "0", "es_penarol": False},
-        "completado": True,
-        "estado_texto": "Finalizado • Victoria Aurinegra"
-    }
-
-    return {
-        "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
-        "proximo_partido": next_match,
-        "ultimo_partido": last_match,
-        "ultimos_resultados": past_matches[-5:][::-1] if past_matches else [last_match],
-        "proximos_partidos": upcoming_matches[:5] if upcoming_matches else [next_match],
-        "tabla_posiciones": tabla_posiciones,
-        "clima_campeon_del_siglo": fetch_campeon_del_siglo_weather()
-    }
 
 
 def fetch_penarol_news_multi_source() -> List[Dict[str, Any]]:

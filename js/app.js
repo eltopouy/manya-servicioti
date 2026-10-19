@@ -112,9 +112,17 @@
   }
 
   function startCountdown(isoString) {
-    const target = isoString ? new Date(isoString).getTime() : (Date.now() + 3 * 86400000);
+    if (!isoString) return;
+    const target = new Date(isoString).getTime();
+    if (isNaN(target)) return;
+
+    if (window._manyaCountdownInterval) {
+      clearInterval(window._manyaCountdownInterval);
+    }
+
     function tick() {
-      const diff = Math.max(0, target - Date.now());
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
@@ -129,13 +137,17 @@
       if (elS) elS.textContent = String(s).padStart(2, '0');
     }
     tick();
-    setInterval(tick, 1000);
+    window._manyaCountdownInterval = setInterval(tick, 1000);
   }
 
   function resolveClubCrest(team) {
     if (!team) return 'assets/img/escudos/escudo_penarol.webp';
     if (team.es_penarol || (team.nombre && team.nombre.toLowerCase().includes('peñarol'))) {
       return 'assets/img/escudos/escudo_penarol.webp';
+    }
+    // Si el objeto ya trae el escudo oficial verificado localmente, usarlo directamente
+    if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || team.escudo.endsWith('.webp') || team.escudo.endsWith('.png'))) {
+      return team.escudo;
     }
     const rawName = (team.nombre || team.equipo || '').toLowerCase();
     const norm = rawName
@@ -151,6 +163,7 @@
       }
     }
     // Mapeos rápidos directos por palabras clave
+    if (norm.includes('juventud')) return 'assets/img/escudos/escudo_juventud.webp';
     if (norm.includes('liverpool')) return 'assets/img/escudos/escudo_liverpool.webp';
     if (norm.includes('nacional')) return 'assets/img/escudos/escudo_nacional.webp';
     if (norm.includes('defensor')) return 'assets/img/escudos/escudo_defensor_sporting.webp';
@@ -164,7 +177,6 @@
     if (norm.includes('maldonado')) return 'assets/img/escudos/escudo_deportivo_maldonado.webp';
     if (norm.includes('torque')) return 'assets/img/escudos/escudo_montevideo_city_torque.webp';
     if (norm.includes('albion')) return 'assets/img/escudos/escudo_albion.webp';
-    if (norm.includes('juventud')) return 'assets/img/escudos/escudo_juventud.webp';
     if (norm.includes('central')) return 'assets/img/escudos/escudo_central_espanol.webp';
     if (norm.includes('miramar')) return 'assets/img/escudos/escudo_miramar_misiones.webp';
     if (norm.includes('rampla')) return 'assets/img/escudos/escudo_rampla_juniors.webp';
@@ -234,7 +246,22 @@
       }
     }
 
-    if (tDate && prox.fecha_legible) tDate.textContent = prox.fecha_legible;
+    if (live.fase_partido === 'EN_VIVO') {
+      if (tDate) {
+        tDate.textContent = `🔴 EN VIVO (${prox.minuto_reloj || '1T'}) • ${prox.torneo || 'Campeonato Uruguayo'}`;
+        tDate.style.color = '#ef4444';
+      }
+    } else if (live.fase_partido === 'FINALIZADO') {
+      if (tDate) {
+        tDate.textContent = `🏁 FINALIZADO • ${prox.torneo || 'Campeonato Uruguayo'}`;
+        tDate.style.color = '#ffd100';
+      }
+    } else {
+      if (tDate && prox.fecha_legible) {
+        tDate.textContent = `${prox.fecha_legible} • ${prox.torneo || 'Campeonato Uruguayo'}`;
+        tDate.style.color = 'var(--manya-gold)';
+      }
+    }
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
     if (tLast && ult.local && ult.visitante) {
       tLast.textContent = `${ult.local.nombre} ${ult.local.goles} - ${ult.visitante.goles} ${ult.visitante.nombre}`;
