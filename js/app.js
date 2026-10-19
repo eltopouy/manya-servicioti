@@ -508,46 +508,196 @@
     });
   }
 
-  function renderInstagramFeed(feed) {
-    if (!feed || !feed.length) return;
-    const grid = document.querySelector('#muro-visual .ig-grid');
+  function setupLightbox() {
+    const modal = document.getElementById('manya-lightbox');
+    const overlay = document.getElementById('lightbox-overlay');
+    const closeBtn = document.getElementById('lightbox-close');
+    if (!modal) return;
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display !== 'none') {
+        closeModal();
+      }
+    });
+  }
+
+  function openLightbox(item) {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal) return;
+
+    const imgEl = document.getElementById('lightbox-img');
+    const badgeEl = document.getElementById('lightbox-badge');
+    const metaEl = document.getElementById('lightbox-meta');
+    const titleEl = document.getElementById('lightbox-title');
+    const descEl = document.getElementById('lightbox-desc');
+    const linkEl = document.getElementById('lightbox-external-link');
+
+    if (imgEl) {
+      imgEl.src = item.imagen_webp || item.imagen_jpg;
+      imgEl.alt = item.titulo;
+    }
+    if (badgeEl) {
+      badgeEl.textContent = `📸 ${item.categoria ? item.categoria.toUpperCase() : 'PEÑAROL'}`;
+    }
+    if (metaEl) {
+      metaEl.textContent = `${item.cuenta} • ❤️ ${item.likes ? item.likes.toLocaleString() : '25.000'} • 💬 ${item.comments || 350}`;
+    }
+    if (titleEl) titleEl.textContent = item.titulo;
+    if (descEl) descEl.textContent = item.descripcion || item.caption || '';
+    if (linkEl) {
+      const pUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.padreydecano.com/cms/' : 'https://www.instagram.com/oficialcap/');
+      linkEl.href = pUrl;
+      linkEl.textContent = item.cuenta === '@padreydecano' ? 'Ver artículo original en Padre y Decano ↗' : 'Ver publicación original en Instagram ↗';
+    }
+
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderGallery(items, currentFilter) {
+    const grid = document.getElementById('gallery-main-grid') || document.querySelector('#muro-visual .ig-grid');
     if (!grid) return;
 
-    grid.innerHTML = feed.map(item => {
-      const postUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.instagram.com/padreydecano/' : 'https://www.instagram.com/oficialcap/');
-      const badgeTxt = item.categoria_badge || `📸 ${item.categoria || 'Peñarol'}`;
+    const filter = currentFilter || 'all';
+    const filtered = (filter === 'all')
+      ? items
+      : items.filter(it => (it.categoria || '').toLowerCase().includes(filter.toLowerCase()));
+
+    if (!filtered.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-secondary);">No se encontraron fotos en esta categoría.</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map((item, idx) => {
+      const postUrl = item.url_post || (item.cuenta === '@padreydecano' ? 'https://www.padreydecano.com/cms/' : 'https://www.instagram.com/oficialcap/');
+      const badgeTxt = `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
       const likesTxt = item.likes ? (item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + 'K' : item.likes) : '25K';
       const commentsTxt = item.comments || 450;
+      const descTxt = item.descripcion || item.caption || '';
 
       return `
-        <article class="ig-card">
-          <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-card-link" title="Ver publicación original de ${item.cuenta} en Instagram">
+        <article class="ig-card" data-idx="${idx}">
+          <div class="ig-card-link" style="cursor:pointer;" title="Click para ampliar en alta definición (16:9)">
             <div class="ig-img-wrap">
-              <img src="${item.imagen_webp}" alt="${item.seo_alt || item.titulo}" width="1280" height="720" loading="lazy" decoding="async" />
+              <img src="${item.imagen_webp || item.imagen_jpg}" alt="${item.titulo} - Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
               <span class="ig-badge-tag">${badgeTxt}</span>
             </div>
-          </a>
+          </div>
           <div class="ig-body">
             <div class="ig-meta">
-              <span>${item.cuenta} • ${item.categoria}</span>
+              <span>${item.cuenta} • ${(item.categoria || '').toUpperCase()}</span>
               <span>❤️ ${likesTxt} • 💬 ${commentsTxt}</span>
             </div>
             <h3 class="ig-title">
               <a href="${postUrl}" target="_blank" rel="noopener noreferrer">${item.titulo}</a>
             </h3>
-            <p class="ig-caption">${item.caption}</p>
-            <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn">Ver en Instagram ↗</a>
+            <p class="ig-caption">${descTxt}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;">
+              <button type="button" class="btn-outline-gold open-lightbox-btn" style="padding:4px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar Foto</button>
+              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${item.cuenta === '@padreydecano' ? 'Padre y Decano ↗' : 'Instagram ↗'}</a>
+            </div>
           </div>
         </article>
       `;
     }).join('');
+
+    grid.querySelectorAll('.ig-card').forEach((card) => {
+      const idx = parseInt(card.getAttribute('data-idx'), 10);
+      const targetItem = filtered[idx];
+      const linkArea = card.querySelector('.ig-card-link');
+      const zoomBtn = card.querySelector('.open-lightbox-btn');
+
+      if (linkArea) {
+        linkArea.addEventListener('click', () => openLightbox(targetItem));
+      }
+      if (zoomBtn) {
+        zoomBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openLightbox(targetItem);
+        });
+      }
+    });
+  }
+
+  function setupGalleryFilters(allItems) {
+    const tabs = document.querySelectorAll('#gallery-filters .gallery-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.getAttribute('data-filter') || 'all';
+        renderGallery(allItems, filter);
+      });
+    });
+  }
+
+  function hydrateEditorialSection(digest) {
+    if (!digest) return;
+    const headlineEl = document.getElementById('editorial-headline');
+    const p1El = document.getElementById('editorial-p1');
+    const p2El = document.getElementById('editorial-p2');
+    const p3El = document.getElementById('editorial-p3');
+    const clavesBox = document.getElementById('claves-editorial-container');
+    const newsBox = document.getElementById('live-news-list');
+
+    const art = digest.articulo_principal || {};
+    if (headlineEl && (art.titulo || digest.titular_dia)) {
+      headlineEl.textContent = art.titulo || digest.titular_dia;
+    }
+    if (art.parrafos && art.parrafos.length >= 3) {
+      if (p1El) p1El.innerHTML = art.parrafos[0];
+      if (p2El) p2El.innerHTML = art.parrafos[1];
+      if (p3El) p3El.innerHTML = art.parrafos[2];
+    }
+
+    if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
+      clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
+        <div class="clave-item">
+          <div class="clave-item-title">${c.icono || '⚽'} ${c.titulo}</div>
+          <p class="clave-item-desc">${c.detalle}</p>
+        </div>
+      `).join('');
+    }
+
+    if (newsBox && digest.noticias_fuentes && digest.noticias_fuentes.length) {
+      newsBox.innerHTML = digest.noticias_fuentes.slice(0, 7).map(n => `
+        <div class="clave-item" style="border-left-color:#71717a;">
+          <div style="font-size:11px;color:var(--manya-gold);font-weight:800;margin-bottom:3px;">
+            ${n.fuente} • ${n.fecha_raw ? n.fecha_raw.slice(0, 16) : 'Actualidad'}
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">
+            <a href="${n.url || digest.blogger_post_url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">
+              ${n.titulo}
+            </a>
+          </div>
+          <p style="font-size:12px;color:#a1a1aa;line-height:1.4;margin-bottom:6px;">
+            ${(n.resumen || '').slice(0, 130)}...
+          </p>
+          <a href="${n.url || digest.blogger_post_url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:var(--manya-gold);font-weight:800;text-decoration:none;">
+            Leer cobertura completa ↗
+          </a>
+        </div>
+      `).join('');
+    }
   }
 
   async function init() {
-    const [live, digest, ig, squad, history, escudosCatalog] = await Promise.all([
+    setupLightbox();
+
+    const [live, digest, ig, galleries, squad, history, escudosCatalog] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
+      loadJsonSafe('data/galleries.json'),
       loadJsonSafe('data/squad_2026.json'),
       loadJsonSafe('data/history_1891.json'),
       loadJsonSafe('data/escudos_uruguay.json')
@@ -564,9 +714,12 @@
     }
     initSimulator();
 
-    if (ig && ig.length) {
-      state.ig = ig;
-      renderInstagramFeed(ig);
+    // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json
+    const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
+    if (allGalleryItems.length) {
+      state.galleries = allGalleryItems;
+      renderGallery(allGalleryItems, 'all');
+      setupGalleryFilters(allGalleryItems);
     }
 
     if (squad && squad.jugadores) {
@@ -595,19 +748,7 @@
           a.href = bUrl;
         });
       }
-      if (digest.noticias_fuentes && digest.noticias_fuentes.length) {
-        const newsListEl = document.getElementById('live-news-list');
-        if (newsListEl) {
-          newsListEl.innerHTML = digest.noticias_fuentes.slice(0, 8).map(n => `
-            <article class="clave-card" style="border-top-color:#3f3f46;">
-              <div style="font-size:11.5px;color:var(--manya-gold);font-weight:800;margin-bottom:4px;">📰 ${n.fuente} • ${n.fecha}</div>
-              <h3 style="font-size:15px;color:#fff;margin-bottom:6px;">${n.titulo}</h3>
-              <p style="font-size:13px;color:#a1a1aa;margin-bottom:10px;">${n.resumen}</p>
-              <a href="${bUrl || 'https://www.servicioti.com.uy'}" class="btn-outline-gold" style="padding:5px 12px;font-size:12px;">Leer análisis en ServicioTI →</a>
-            </article>
-          `).join('');
-        }
-      }
+      hydrateEditorialSection(digest);
     }
 
     renderTrivia();
@@ -623,3 +764,4 @@
     init();
   }
 })();
+
