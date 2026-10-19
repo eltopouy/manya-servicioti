@@ -167,7 +167,7 @@ def procesar_y_publicar_galerias():
         ("Noche Mágica en la Catedral Aurinegra", "La fortaleza del Campeón del Siglo iluminada en todo su esplendor bajo el aliento incondicional de más de 40.000 socios e hinchas."),
         ("La Muralla y el Despliegue en Los Aromos", "Intenso trabajo táctico y físico en el Complejo Washington Cataldi preparando la recta decisiva de la temporada."),
         ("El Abrazo de Gol que Hace Temblar la Ruta 102", "Festejo colectivo frente a la Tribuna Cataldi tras una definición letal que aseguró tres puntos clave en la Anual."),
-        ("El Manto Sagrado de 1891 Listo para la Batalla", "Las once camisetas aurinegras con sus 11 franjas de gloria y honor aguardan en el vestuario local."),
+        ("El Manto Sagrado de 1891 Listo para la Batalla", "Las once camisetas aurinegras con sus tradicionales bastones oro y carbón aguardan en el vestuario local."),
         ("La Hinchada Más Fiel del Continente", "Recibimiento con telones históricos, humo amarillo y negro y fiesta total en las cuatro tribunas del Campeón del Siglo."),
         ("El Decanato y la Identidad Ferroviaria", "Más de un siglo y tres décadas de gloria eterna, 5 Copas Libertadores y 3 Copas Intercontinentales que marcan el ADN aurinegro.")
     ]

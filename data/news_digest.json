@@ -3,6 +3,18 @@
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "CRONICA",
   "partido_id": "",
+  "portada_visual": {
+    "titular_portada": "Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre entre Los Aromos y la Catedral",
+    "bajada_portada": "Bajo las órdenes de Diego 'La Fiera' Aguirre y con Leo Fernández como eje creativo, el Carbonero intensifica los trabajos tácticos en Los Aromos para afianzar la punta en el Campeón del Siglo.",
+    "cuenta": "@oficialcap",
+    "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",
+    "categoria": "partidos",
+    "url_post": "https://www.instagram.com/oficialcap/p/Dep3Fc3jp_z/",
+    "imagen_webp": "assets/ig/manya_campeon_del_siglo_nocturno.webp",
+    "imagen_jpg": "assets/ig/manya_campeon_del_siglo_nocturno.jpg",
+    "likes": 38450,
+    "comments": 892
+  },
   "titular_dia": "Trago amargo en el Estadio de Primera División: Peñarol cayó 1-0 ante Liverpool",
   "bajada_seo": "Crónica y análisis del partido Liverpool 1 - 0 Peñarol, figuras, goles y tabla de posiciones.",
   "claves_60_segundos": [

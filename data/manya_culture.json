@@ -1,0 +1,121 @@
+{
+  "club": {
+    "nombre_oficial": "Club Atlético Peñarol",
+    "fundacion": "28 de septiembre de 1891",
+    "origen": "Central Uruguay Railway Cricket Club (CURCC) en Villa Peñarol, Montevideo",
+    "distincion_iffhs": "Mejor Club de América del Sur del Siglo XX (IFFHS)",
+    "decanato": "Decano indiscutible del fútbol uruguayo (fundado en 1891, continuidad jurídica y deportiva ininterrumpida)",
+    "colores": {
+      "oro": "#FFC20E",
+      "negro": "#000000",
+      "significado": "Colores tomados de las locomotoras a vapor del ferrocarril británico y señales de seguridad ferroviaria"
+    },
+    "escudo": {
+      "autor": "Arq. Constante Facello",
+      "silueta": "Cúspide de 3 puntas en arco cóncavo y base acorazada simétrica",
+      "estrellas": 11,
+      "significado_estrellas": "Los 11 jugadores que salen al campo de juego a defender la camiseta",
+      "franjas": 9,
+      "composicion_franjas": "5 franjas negras y 4 franjas amarillas alternadas, comenzando y terminando en negro"
+    }
+  },
+  "terminologia_hincha": {
+    "manya": {
+      "termino": "Manya / Manyas",
+      "origen": "Expresión popular nacida en 1914 tras la célebre frase de Carlos Scarone ('¿A qué me iba a quedar en Peñarol? ¿A mangiare merda?'). Los hinchas rivales lo usaron como burla y el pueblo de Peñarol lo adoptó con orgullo eterno.",
+      "uso": "El pueblo manya, la pasión manya, locura manya, sentimiento que no se cura."
+    },
+    "carbonero": {
+      "termino": "Carbonero / Carboneros",
+      "origen": "Homenaje a los obreros de los talleres del ferrocarril de Villa Peñarol que alimentaban con carbón las calderas de las locomotoras.",
+      "uso": "El Carbonero, la fuerza carbonera, el rugido del Carbonero."
+    },
+    "mirasol": {
+      "termino": "Mirasol / Mirasoles",
+      "origen": "Bautizado a principios del siglo XX por las flores silvestres amarillas que cubrían el entorno de los campos de juego de la Villa Peñarol.",
+      "uso": "La escuadra mirasol, el conjunto mirasol, la fiesta mirasol."
+    },
+    "aurinegro": {
+      "termino": "Aurinegro / Oro y Carbón",
+      "origen": "Combinación clásica del amarillo oro y el negro carbón institucional.",
+      "uso": "El manto sagrado oro y carbón, la mística aurinegra, la camiseta aurinegra."
+    },
+    "padre_y_decano": {
+      "termino": "Padre y Decano",
+      "origen": "Afirmación institucional y popular de su primogenitura histórica desde 1891.",
+      "uso": "El Padre y Decano de nuestro fútbol, jerarquía decana."
+    }
+  },
+  "lugares_sagrados": {
+    "estadio_campeon_del_siglo": {
+      "nombre": "Estadio Campeón del Siglo",
+      "apodo": "La Catedral Aurinegra / La Fortaleza de la 102",
+      "ubicacion": "Ruta 102 Km 23.500 y Camino Mangangá (Montevideo)",
+      "coordenadas": "-34.7969, -56.0672",
+      "inauguracion": "28 de marzo de 2016",
+      "capacidad": "40.005 espectadores",
+      "tribunas": {
+        "frank_henderson": "Tribuna Norte (Platea y Palcos oficiales). Homenaje al primer presidente del CURCC (Frank Henderson).",
+        "jose_pedro_damiani": "Tribuna Sur (Lateral enfrente). Homenaje al Cr. José Pedro Damiani, emblemático presidente de los Quinquenios.",
+        "washington_cataldi": "Tribuna Oeste (Cabecera popular / Barra Ámsterdam). Homenaje a Don Washington Cataldi, gestor de las Copas del Siglo XX.",
+        "gaston_guelfi": "Tribuna Este (Cabecera opuesta). Homenaje al Cr. Gastón Güelfi, bajo cuyo mandato se conquistaron 9 campeonatos uruguayos y 3 Libertadores."
+      }
+    },
+    "los_aromos": {
+      "nombre": "Complejo Deportivo Washington Cataldi (Los Aromos)",
+      "ubicacion": "Ruta 8 Km 23, Barros Blancos (Canelones)",
+      "rol": "Concentración y laboratorio táctico del plantel principal desde 1947."
+    },
+    "ciudad_deportiva": {
+      "nombre": "Ciudad Deportiva Néstor 'Tito' Gonçalves",
+      "ubicacion": "Lindera al Estadio Campeón del Siglo",
+      "rol": "Sede de entrenamiento y formación de las divisiones juveniles (Formativas) de Peñarol."
+    },
+    "palacio_penarol": {
+      "nombre": "Palacio Peñarol Contador Gastón Güelfi",
+      "ubicacion": "Magallanes 1721 (Montevideo)",
+      "rol": "Sede social, museo histórico, básquetbol oficial y administración del club."
+    }
+  },
+  "palmares_epico": {
+    "copas_libertadores": [
+      {"anio": 1960, "rival": "Olimpia (Paraguay)", "nota": "Primera Copa Libertadores de la historia, gol de Luis Cubilla."},
+      {"anio": 1961, "rival": "Palmeiras (Brasil)", "nota": "Bicampeonato de América consecutivo con goles de Spencer y Sasía."},
+      {"anio": 1966, "rival": "River Plate (Argentina)", "nota": "Remontada histórica en Santiago de Chile: de 0-2 a 4-2 en tiempo extra."},
+      {"anio": 1982, "rival": "Cobreloa (Chile)", "nota": "Gol agónico de Fernando Morena en el minuto 89 en Santiago."},
+      {"anio": 1987, "rival": "América de Cali (Colombia)", "nota": "Gol agónico de Diego Aguirre en el minuto 120 de la tercera final en Santiago."}
+    ],
+    "copas_intercontinentales": [
+      {"anio": 1961, "rival": "Benfica (Portugal)", "nota": "Primer campeón intercontinental uruguayo ante el Benfica de Eusébio."},
+      {"anio": 1966, "rival": "Real Madrid (España)", "nota": "Victoria 2-0 en Montevideo y 2-0 en el Estadio Santiago Bernabéu de Madrid."},
+      {"anio": 1982, "rival": "Aston Villa (Inglaterra)", "nota": "Victoria 2-0 en Tokio con goles de Jair Gonçalves y Walkir Silva."}
+    ],
+    "quinquenios_de_oro": [
+      "Primer Quinquenio: 1958 - 1962",
+      "Segundo Quinquenio: 1993 - 1997"
+    ],
+    "clasicos_inolvidables": [
+      {"nombre": "El Clásico de los 8 contra 11", "fecha": "23/04/1987", "detalle": "Con 3 jugadores expulsados, Peñarol venció 2-1 con gol de Jorge Cabrera tras asistencia de Diego Aguirre."},
+      {"nombre": "El Clásico de la Fuga", "fecha": "09/10/1949", "detalle": "Peñarol vencía 2-0 en el primer tiempo bajo un diluvio y el tradicional rival no se presentó a disputar el complemento."},
+      {"nombre": "La Mayor Goleada del Siglo XXI", "fecha": "27/04/2014", "detalle": "Victoria 5-0 en el Estadio Centenario con goles de Zalayeta, Macaluso, Japo Rodríguez y Aguiar (2)."}
+    ]
+  },
+  "apodos_plantel_actual": {
+    "diego_aguirre": {"apodo": "La Fiera", "rol": "Director Técnico", "frase_clave": "El estratega de la mística y de las noches coperas"},
+    "leonardo_fernandez": {"apodo": "Leo / El Zurdo de Oro", "dorsal": 8, "posicion": "MCO", "frase_clave": "Pegada teledirigida, maestro de la pelota quieta y conductor del equipo"},
+    "washington_aguerre": {"apodo": "Washi / El Batiwashi", "dorsal": 1, "posicion": "ARQ", "frase_clave": "Seguridad bajo los palos, personalidad y liderazgo"},
+    "javier_cabrera": {"apodo": "El Cangrejo", "dorsal": 7, "posicion": "ED", "frase_clave": "Velocidad de ruptura y desborde por banda"},
+    "gaston_ramirez": {"apodo": "Peter", "dorsal": 21, "posicion": "MC", "frase_clave": "Jerarquía, panorama de juego y manejo del ritmo"},
+    "damian_garcia": {"apodo": "El Motor", "dorsal": 14, "posicion": "MCD", "frase_clave": "Quite limpio, despliegue y equilibrio táctico"},
+    "jaime_baez": {"apodo": "La Chinita", "dorsal": 19, "posicion": "EI", "frase_clave": "Diagonal punzante, pegada y sacrificio"},
+    "javier_mendez": {"apodo": "El Caudillo", "dorsal": 23, "posicion": "DFC", "frase_clave": "Firmeza en los duelos, temperamento de final"},
+    "guzman_rodriguez": {"apodo": "El Muro", "dorsal": 4, "posicion": "DFC", "frase_clave": "Salida limpia desde el fondo y anticipo"},
+    "maximiliano_olivera": {"apodo": "Maxi", "dorsal": 15, "posicion": "LI", "frase_clave": "Capitán aurinegro, entrega y empuje por la banda"},
+    "pedro_milans": {"apodo": "El Rayo", "dorsal": 20, "posicion": "LD", "frase_clave": "Proyección y velocidad por el lateral derecho"}
+  },
+  "criterio_editorial_rival": {
+    "admitidos": ["Nacional", "el tradicional rival", "el conjunto tricolor", "los albos"],
+    "prohibidos": ["términos denigrantes", "insultos callejeros", "apología de violencia de barras"],
+    "enfoque": "Periodismo deportivo serio, mordaz y fundamentado en estadísticas oficiales, superioridad histórica en clásicos y palmarés internacional."
+  }
+}

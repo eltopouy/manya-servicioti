@@ -149,19 +149,20 @@
   <header class="manya-header">
     <div class="manya-header-inner">
       <a href="#top" class="manya-brand" title="Manya — Club Atlético Peñarol">
-        <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 11 franjas oro y carbón" width="38" height="48" class="manya-brand-crest" />
+        <img src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial del Club Atlético Peñarol con 11 estrellas y 9 franjas oro y carbón (Arq. Constante Facello)" width="38" height="48" class="manya-brand-crest" />
         <div>
           <div class="manya-brand-title">MANYA ★</div>
           <div class="manya-brand-sub">El Glorioso Peñarol • Campeón del Siglo XX</div>
         </div>
       </a>
       <nav class="manya-nav" aria-label="Secciones principales">
-        <a href="#match-center" class="active">🏟️ Match Center</a>
-        <a href="#resumen-ia">⚡ Resumen 60s</a>
-        <a href="#tabla-simulador">📊 Tabla &amp; Simulador</a>
+        <a href="#portada-visual" class="active">🔥 Portada Hoy</a>
+        <a href="#match-center">🏟️ Match Center</a>
+        <a href="#resumen-ia">⚡ El Diario</a>
+        <a href="#tabla-simulador">📊 Tabla</a>
         <a href="#pizarra-tactica">👕 Armá tu 11</a>
-        <a href="#muro-visual">📸 Galería Aurinegra</a>
-        <a href="#como-llegar">🚌 Cómo Llegar</a>
+        <a href="#muro-visual">📸 Galerías</a>
+        <a href="#como-llegar">🚌 Ómnibus</a>
         <a href="#museo-1891">🏆 Museo 1891</a>
         <a href="https://www.servicioti.com.uy/" class="nav-cta-blogger dynamic-blogger-link">📰 Crónicas en ServicioTI →</a>
       </nav>
@@ -182,6 +183,76 @@
       <div id="ticker-text">⚡ ¡HOY JUEGA PEÑAROL!</div>
       <a href="https://www.servicioti.com.uy/" class="dynamic-blogger-link btn-gold" style="padding:6px 14px;font-size:12px;text-decoration:none;">Leer Cobertura en Vivo en ServicioTI →</a>
     </div>
+
+    <!-- MÓDULO 0: POST VISUAL DE PORTADA (ESTILO PUBLICACIÓN DE INSTAGRAM) -->
+    <section id="portada-visual" class="hero-instagram-post" aria-label="Noticia Gráfica de Portada en Formato Instagram">
+      <div class="ig-post-card">
+        <!-- Encabezado estilo Instagram -->
+        <div class="ig-post-header">
+          <div class="ig-post-user-info">
+            <div class="ig-avatar-ring">
+              <img id="hero-post-avatar" src="assets/img/escudo_penarol_oficial.svg" alt="Escudo Oficial Club Atlético Peñarol" width="40" height="40" class="ig-avatar-img" />
+            </div>
+            <div>
+              <div class="ig-user-name-line">
+                <span id="hero-post-account" class="ig-user-handle">@oficialcap</span>
+                <span class="ig-verified-badge" title="Cuenta Oficial Verificada">✓</span>
+                <span class="ig-dot-separator">•</span>
+                <span id="hero-post-time" class="ig-post-time">Última Hora</span>
+              </div>
+              <div id="hero-post-location" class="ig-post-location">📍 Complejo Deportivo Los Aromos • Montevideo</div>
+            </div>
+          </div>
+          <a id="hero-post-external-link" href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-header-link" title="Abrir publicación original en Instagram">
+            <span>Ver en Instagram</span> ↗
+          </a>
+        </div>
+
+        <!-- Imagen principal 16:9 con tratamiento visual -->
+        <div class="ig-post-media-wrap" id="hero-post-media" style="cursor:pointer;" title="Click para ampliar en alta definición">
+          <img id="hero-post-img" src="assets/ig/manya_campeon_del_siglo_nocturno.webp" alt="Noticia Gráfica Principal de Peñarol" width="1280" height="720" fetchpriority="high" />
+          <span id="hero-post-badge" class="ig-media-badge">📸 NOTICIA CENTRAL DEL DÍA</span>
+          <button type="button" class="ig-expand-btn" id="hero-post-expand-btn" aria-label="Ampliar fotografía en alta resolución">🔍</button>
+        </div>
+
+        <!-- Barra de acciones e interacciones estilo Instagram -->
+        <div class="ig-post-actions-bar">
+          <div class="ig-action-left-group">
+            <button type="button" class="ig-action-btn" id="hero-post-like-btn" title="Me gusta">
+              <span id="hero-post-like-icon" class="ig-heart-icon">❤️</span>
+              <strong id="hero-post-likes-count">38.450</strong>
+            </button>
+            <button type="button" class="ig-action-btn" id="hero-post-comment-btn" title="Comentarios">
+              <span>💬</span>
+              <span id="hero-post-comments-count">892</span>
+            </button>
+            <button type="button" class="ig-action-btn" id="hero-post-share-btn" title="Compartir">
+              <span>🔁</span>
+              <span>Compartir</span>
+            </button>
+          </div>
+          <span class="ig-action-pill" id="hero-post-category-tag">⭐ EDICIÓN OFICIAL</span>
+        </div>
+
+        <!-- Pie de publicación: Titular, crónica y enlaces -->
+        <div class="ig-post-caption-box">
+          <h2 id="hero-post-headline" class="ig-post-headline">
+            Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre entre Los Aromos y la Catedral
+          </h2>
+          <p id="hero-post-text" class="ig-post-text">
+            Bajo las órdenes de <strong>Diego Aguirre</strong> y con <strong>Leo Fernández</strong> como eje creativo, el Carbonero intensifica los trabajos tácticos en el Complejo Washington Cataldi. La consigna es mantener la contundencia en el Estadio Campeón del Siglo para asegurar el título y la ventaja en la definición.
+          </p>
+          <div class="ig-post-footer-actions">
+            <a href="https://www.servicioti.com.uy/" class="btn-manya dynamic-blogger-link" id="hero-post-read-more">
+              📰 Leer Análisis Completo en ServicioTI →
+            </a>
+            <button type="button" class="btn-outline-gold" id="hero-post-zoom-btn">
+              🔍 Pantalla Completa (16:9 HD)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- MÓDULO 1: HERO MATCH CENTER CAMPEÓN DEL SIGLO -->
     <section id="match-center" class="match-hero" aria-label="Centro de Partido en Vivo del Club Atlético Peñarol">
@@ -569,7 +640,7 @@
       <div class="section-header">
         <div>
           <h2 class="section-title">❓ Preguntas Frecuentes del <span>Hincha Aurinegro</span></h2>
-          <p class="section-sub">Respuestas directas estructuradas para buscadores y asistentes de Inteligencia Artificial</p>
+          <p class="section-sub">Respuestas clave y datos oficiales verificados para el socio y el hincha aurinegro</p>
         </div>
       </div>
 

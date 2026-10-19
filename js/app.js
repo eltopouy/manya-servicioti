@@ -563,6 +563,153 @@
     document.body.style.overflow = 'hidden';
   }
 
+  function renderHeroInstagramPost(item, digest) {
+    const card = document.getElementById('portada-visual');
+    if (!card) return;
+
+    const pv = (digest && digest.portada_visual) ? digest.portada_visual : {};
+    const effectiveItem = Object.assign({}, item || {}, pv);
+
+    const avatarEl = document.getElementById('hero-post-avatar');
+    const accountEl = document.getElementById('hero-post-account');
+    const timeEl = document.getElementById('hero-post-time');
+    const locEl = document.getElementById('hero-post-location');
+    const extLink = document.getElementById('hero-post-external-link');
+    const mediaWrap = document.getElementById('hero-post-media');
+    const imgEl = document.getElementById('hero-post-img');
+    const badgeEl = document.getElementById('hero-post-badge');
+    const expandBtn = document.getElementById('hero-post-expand-btn');
+    const zoomBtn = document.getElementById('hero-post-zoom-btn');
+    const likeBtn = document.getElementById('hero-post-like-btn');
+    const likeIcon = document.getElementById('hero-post-like-icon');
+    const likesCountEl = document.getElementById('hero-post-likes-count');
+    const commentBtn = document.getElementById('hero-post-comment-btn');
+    const commentsCountEl = document.getElementById('hero-post-comments-count');
+    const shareBtn = document.getElementById('hero-post-share-btn');
+    const catTag = document.getElementById('hero-post-category-tag');
+    const headlineEl = document.getElementById('hero-post-headline');
+    const textEl = document.getElementById('hero-post-text');
+    const readMoreEl = document.getElementById('hero-post-read-more');
+
+    const cuenta = effectiveItem.cuenta || '@oficialcap';
+    const isOficialCap = cuenta === '@oficialcap';
+    const postUrl = effectiveItem.url_post || (isOficialCap ? 'https://www.instagram.com/oficialcap/' : 'https://www.padreydecano.com/cms/');
+    const imgSource = effectiveItem.imagen_webp || effectiveItem.imagen_jpg || 'assets/ig/manya_campeon_del_siglo_nocturno.webp';
+    const headline = pv.titular_portada || (digest && digest.titular_dia) || effectiveItem.titulo || 'Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre';
+    const bajada = pv.bajada_portada || (digest && digest.bajada_seo) || effectiveItem.caption || effectiveItem.descripcion || '';
+
+    if (avatarEl) {
+      avatarEl.src = isOficialCap ? 'assets/img/escudo_penarol_oficial.svg' : 'assets/img/escudos/escudo_penarol.webp';
+      avatarEl.alt = isOficialCap ? 'Club Atlético Peñarol Oficial' : 'Padre y Decano';
+    }
+    if (accountEl) accountEl.textContent = cuenta;
+    if (timeEl) timeEl.textContent = 'Actualizado Hoy';
+    if (locEl) {
+      locEl.textContent = effectiveItem.ubicacion || (effectiveItem.categoria === 'los-aromos' ? '📍 Complejo Deportivo Washington Cataldi (Los Aromos)' : '📍 Estadio Campeón del Siglo • Montevideo');
+    }
+    if (extLink) {
+      extLink.href = postUrl;
+      extLink.innerHTML = `<span>${isOficialCap ? 'Ver en Instagram' : 'Ver en Padre y Decano'}</span> ↗`;
+    }
+    if (imgEl) {
+      imgEl.src = imgSource;
+      imgEl.alt = headline + ' - Club Atlético Peñarol';
+    }
+    if (badgeEl) {
+      badgeEl.textContent = `📸 ${effectiveItem.categoria ? effectiveItem.categoria.replace('-', ' ').toUpperCase() : 'PORTADA OFICIAL'}`;
+    }
+    if (catTag) {
+      catTag.textContent = `⭐ ${isOficialCap ? 'EDICIÓN OFICIAL CAP' : 'PADRE Y DECANO'}`;
+    }
+    if (headlineEl) headlineEl.textContent = headline;
+    if (textEl) textEl.innerHTML = bajada;
+
+    let currentLikes = parseInt(effectiveItem.likes || 38450, 10);
+    const storageKey = 'manya_hero_liked_' + (effectiveItem.id || 'main');
+    let isLiked = false;
+    try {
+      isLiked = localStorage.getItem(storageKey) === 'true';
+    } catch (_) {}
+
+    function updateLikeUI() {
+      if (likesCountEl) likesCountEl.textContent = currentLikes.toLocaleString('es-UY');
+      if (likeIcon) {
+        likeIcon.textContent = isLiked ? '❤️' : '🤍';
+        likeIcon.style.transform = isLiked ? 'scale(1.2)' : 'scale(1)';
+        likeIcon.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      }
+      if (likeBtn) {
+        likeBtn.style.color = isLiked ? '#ef4444' : '';
+      }
+    }
+    if (isLiked) currentLikes += 1;
+    updateLikeUI();
+
+    if (likeBtn) {
+      likeBtn.onclick = () => {
+        isLiked = !isLiked;
+        currentLikes += isLiked ? 1 : -1;
+        try {
+          localStorage.setItem(storageKey, isLiked ? 'true' : 'false');
+        } catch (_) {}
+        updateLikeUI();
+      };
+    }
+
+    if (commentsCountEl) {
+      commentsCountEl.textContent = (effectiveItem.comments || 892).toLocaleString('es-UY');
+    }
+
+    if (commentBtn) {
+      commentBtn.onclick = () => {
+        const target = document.getElementById('analisis-editorial');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      };
+    }
+
+    if (shareBtn) {
+      shareBtn.onclick = async () => {
+        const shareData = {
+          title: headline,
+          text: bajada,
+          url: window.location.href
+        };
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+          } catch (_) {}
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(window.location.href);
+          const orig = shareBtn.innerHTML;
+          shareBtn.innerHTML = '<span>✅</span><span>¡Copiado!</span>';
+          setTimeout(() => { shareBtn.innerHTML = orig; }, 2200);
+        }
+      };
+    }
+
+    const openHeroLightbox = () => {
+      openLightbox({
+        titulo: headline,
+        descripcion: bajada,
+        cuenta: cuenta,
+        categoria: effectiveItem.categoria || 'portada',
+        likes: currentLikes,
+        comments: effectiveItem.comments || 892,
+        url_post: postUrl,
+        imagen_webp: imgSource,
+        imagen_jpg: imgSource
+      });
+    };
+
+    if (mediaWrap) mediaWrap.onclick = openHeroLightbox;
+    if (expandBtn) expandBtn.onclick = (e) => { e.stopPropagation(); openHeroLightbox(); };
+    if (zoomBtn) zoomBtn.onclick = openHeroLightbox;
+
+    if (readMoreEl && digest && digest.blogger_post_url) {
+      readMoreEl.href = digest.blogger_post_url;
+    }
+  }
+
   function renderGallery(items, currentFilter) {
     const grid = document.getElementById('gallery-main-grid') || document.querySelector('#muro-visual .ig-grid');
     if (!grid) return;
@@ -716,6 +863,8 @@
 
     // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json
     const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
+    renderHeroInstagramPost(allGalleryItems.length ? allGalleryItems[0] : null, digest);
+
     if (allGalleryItems.length) {
       state.galleries = allGalleryItems;
       renderGallery(allGalleryItems, 'all');

@@ -567,23 +567,57 @@ def sync_instagram_and_transform_with_gemini_web(news_items: List[Dict[str, Any]
 def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Usa Gemini Web (GFlash 3.8) + cascada API para redactar:
-    1) El "Resumen Aurinegro en 60 Segundos" (4 claves del día).
-    2) El Artículo Principal de Previa/Análisis Táctico SEO/GEO con más de 600 palabras.
+    1) El Hero Post de Portada Visual estilo Instagram ("The New York Times de Peñarol").
+    2) El "Resumen Aurinegro en 60 Segundos" (4 claves del día).
+    3) El Artículo Principal de Análisis Táctico SEO/GEO con más de 600 palabras.
+    Inyecta el glosario de apodos, jerga y cultura de `data/manya_culture.json`.
     """
     headlines_txt = "\n".join(f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:140]}" for n in news_list[:8])
     prox = live_data.get("proximo_partido", {})
     ult = live_data.get("ultimo_partido", {})
 
+    # Cargar cultura y apodos si existen
+    culture_context = ""
+    culture_file = DATA_DIR / "manya_culture.json"
+    if culture_file.exists():
+        try:
+            with open(culture_file, "r", encoding="utf-8") as cf:
+                cdata = json.load(cf)
+                nicknames = cdata.get("apodos_plantel_actual_2026", {})
+                nick_txt = ", ".join(f"{k} ('{v.get('apodo','')}')" for k, v in list(nicknames.items())[:8])
+                culture_context = (
+                    f"GUÍA CULTURAL Y APODOS DEL PLANTEL: {nick_txt}.\n"
+                    f"TRIBUNAS DEL CDS: Frank Henderson, José Pedro Damiani, Washington Cataldi, Cr. Gastón Güelfi.\n"
+                    f"SIMBOLOGÍA: Escudo con 9 franjas (5 negras, 4 oro #FFC20E) y 11 estrellas en doble arco. Fundación: 28/09/1891 (CURCC).\n"
+                )
+        except Exception:
+            pass
+
     prompt = (
-        "Eres el Director Periodístico de Manya ServicioTI (https://manya.servicioti.com.uy) y ServicioTI Uruguay "
-        "(https://www.servicioti.com.uy), creado por Andrés Franchi Ugartemendía.\n"
-        f"Basándote en las noticias actuales del Club Atlético Peñarol:\n{headlines_txt}\n\n"
+        "Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy) y ServicioTI Uruguay "
+        "(https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.\n"
+        "Tu misión es imprimir un nivel de redacción de excelencia suprema, concebido como 'The New York Times del Club Atlético Peñarol': "
+        "rigor táctico, elegancia periodística, léxico culto y la auténtica mística del pueblo carbonero.\n\n"
+        f"{culture_context}"
+        f"NOTICIAS DE ACTUALIDAD:\n{headlines_txt}\n\n"
         f"Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} "
         f"({prox.get('fecha_legible','')}) en {prox.get('estadio','Estadio Campeón del Siglo')}.\n"
         f"Último resultado: {ult.get('local',{}).get('nombre','')} {ult.get('local',{}).get('goles','')} - "
         f"{ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.\n\n"
+        "REGLAS EDITORIALES INQUEBRANTABLES:\n"
+        "1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.\n"
+        "2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi', Javier Cabrera 'El Cangrejo', Jaime Báez 'La Chinita', etc.\n"
+        "3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').\n"
+        "4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato de 1891 y la grandeza del Decano.\n\n"
         "Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:\n"
         "{\n"
+        '  "portada_visual": {\n'
+        '    "titular_portada": "Titular impactante de portada para la tarjeta visual superior (máx 90 car)",\n'
+        '    "bajada_portada": "Párrafo breve y vibrante que acompaña la foto principal estilo Instagram (180-240 car)",\n'
+        '    "cuenta": "@oficialcap",\n'
+        '    "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",\n'
+        '    "categoria": "partidos"\n'
+        '  },\n'
         '  "titular_dia": "Titular periodístico potente y atractivo sobre el presente de Peñarol (máx 95 caracteres)",\n'
         '  "bajada_seo": "Síntesis SEO de entre 135 y 155 caracteres en UTF-8 puro sobre la actualidad de Peñarol",\n'
         '  "claves_60_segundos": [\n'
@@ -608,13 +642,20 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
     ai_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt=prompt, esperar_json=True)
     if not ai_json or "titular_dia" not in ai_json:
         ai_json = {
+            "portada_visual": {
+                "titular_portada": "Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre entre Los Aromos y la Catedral",
+                "bajada_portada": "Bajo las órdenes de Diego 'La Fiera' Aguirre y con Leo Fernández como eje creativo, el Carbonero intensifica los trabajos tácticos en Los Aromos para afianzar la punta en el Campeón del Siglo.",
+                "cuenta": "@oficialcap",
+                "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",
+                "categoria": "partidos"
+            },
             "titular_dia": "Peñarol afina el once en Los Aromos para defender la cima de la Tabla Anual en el Campeón del Siglo",
             "bajada_seo": "Actualidad del Club Atlético Peñarol en vivo: entrenamientos en Los Aromos, Tabla Anual, venta de entradas en el Campeón del Siglo y noticias al instante.",
             "claves_60_segundos": [
                 {
                     "icono": "⚽",
                     "titulo": "Laboratorio en Los Aromos",
-                    "detalle": "Diego Aguirre ajusta la presión alta y la pelota quieta con Leo Fernández como eje conductor pensando en sumar de a tres."
+                    "detalle": "Diego 'La Fiera' Aguirre ajusta la presión alta y la pelota quieta con 'El Zurdo de Oro' Leo Fernández como eje conductor pensando en sumar de a tres."
                 },
                 {
                     "icono": "📊",
@@ -628,18 +669,18 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
                 },
                 {
                     "icono": "🔥",
-                    "titulo": "ADN Copero y Juveniles",
-                    "detalle": "La combinación de referentes de jerarquía y talento formado en las juveniles aurinegras mantiene al plantel competitivo en todos los frentes."
+                    "titulo": "ADN Copero y Jerarquía",
+                    "detalle": "La seguridad de 'Washi' Aguerre bajo los tres palos y el empuje de Javier Méndez consolidan la solidez del Decano en cada línea."
                 }
             ],
             "articulo_principal": {
                 "titulo": "Análisis Aurinegro: El presente táctico de Peñarol, la fortaleza del Campeón del Siglo y la lucha por la Tabla Anual",
                 "subtitulo": "Cómo funciona el bloque ofensivo de Diego Aguirre y las claves del próximo compromiso oficial del Carbonero",
                 "parrafos": [
-                    "El Club Atlético Peñarol atraviesa una etapa determinante de la temporada donde cada punto en la Tabla Anual vale oro para asegurar la ventaja deportiva en la definición del Campeonato Uruguayo. En el Complejo Deportivo Washington Cataldi (Los Aromos), el cuerpo técnico encabezado por Diego Aguirre ha consolidado una identidad de juego directa, intensa en la recuperación tras pérdida y letal en las transiciones rápidas por las bandas.",
-                    "Desde el punto de vista táctico, el esquema 4-2-3-1 le permite al equipo aurinegro combinar solidez en el doble cinco con una libertad creativa total en tres cuartos de cancha. La pegada de media distancia y la precisión milimétrica en los tiros libres y córners siguen siendo armas decisivas para destrabar defensas cerradas cuando los rivales se repliegan en bloque bajo en el Estadio Campeón del Siglo.",
-                    "A nivel defensivo, la coordinación de la zaga central y el respaldo del arquero han convertido a la Catedral Aurinegra de la Ruta 102 en un reducto casi inexpugnable. Además, el empuje incondicional de más de 40.000 hinchas en las tribunas Cataldi, Damiani, Güelfi y Henderson genera un factor anímico diferencial desde el primer minuto de juego.",
-                    "En Manya ServicioTI actualizamos minuto a minuto las formaciones confirmadas, el estado sanitario del plantel, la tabla acumulada y el servicio especial de transporte de CUTCSA y COPSA hacia el estadio para que vivas cada partido del Glorioso Peñarol con información verificada."
+                    "El Club Atlético Peñarol atraviesa una etapa determinante de la temporada donde cada punto en la Tabla Anual vale oro para asegurar la ventaja deportiva en la definición del Campeonato Uruguayo. En el Complejo Deportivo Washington Cataldi (Los Aromos), el cuerpo técnico encabezado por Diego 'La Fiera' Aguirre ha consolidado una identidad de juego directa, intensa en la recuperación tras pérdida y letal en las transiciones rápidas por las bandas con Javier Cabrera y Jaime Báez.",
+                    "Desde el punto de vista táctico, el esquema 4-2-3-1 le permite al equipo aurinegro combinar solidez en el doble cinco con una libertad creativa total en tres cuartos de cancha para Leonardo Fernández. La pegada de media distancia y la precisión milimétrica en los tiros libres y córners del 'Zurdo de Oro' siguen siendo armas decisivas para destrabar defensas cerradas cuando los rivales se repliegan en bloque bajo en el Estadio Campeón del Siglo.",
+                    "A nivel defensivo, la coordinación de la zaga central comandada por Guzmán Rodríguez y Javier 'El Caudillo' Méndez, respaldados por la solvencia de Washington Aguerre en el arco, han convertido a la Catedral Aurinegra de la Ruta 102 en un reducto casi inexpugnable. Además, el empuje incondicional de más de 40.000 hinchas en las tribunas Cataldi, Damiani, Güelfi y Henderson genera un factor anímico diferencial desde el primer minuto de juego.",
+                    "En Manya ServicioTI actualizamos minuto a minuto las formaciones confirmadas, el estado sanitario del plantel, la tabla acumulada y el servicio especial de transporte de CUTCSA y COPSA hacia el estadio para que vivas cada partido del Glorioso Peñarol con el rigor analítico de un medio de referencia internacional."
                 ],
                 "preguntas_frecuentes": [
                     {
@@ -647,11 +688,11 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
                         "a": "Puedes consultar la cuenta regresiva exacta, fecha, hora y estadio en el Match Center superior de manya.servicioti.com.uy. Los partidos oficiales por el Campeonato Uruguayo se transmiten en vivo por VTV Plus y Disney+."
                     },
                     {
-                        "q": "¿Cómo llegar en ómnibus al Estadio Campeón del Siglo desde Montevideo y Canelones?",
-                        "a": "Las líneas suburbanas y urbanas de CUTCSA y COPSA que circulan por Ruta 8, Camino Maldonado y Ruta 102 cuentan con refuerzos especiales los días de partido. Consulta nuestro buscador conectado con horarios.servicioti.com.uy."
+                        "q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?",
+                        "a": "Peñarol defiende con determinación la cima de la tabla acumulada, manteniendo la condición de invicto en el Estadio Campeón del Siglo."
                     },
                     {
-                        "q": "¿Dónde se realiza el canje y compra de entradas para ver a Peñarol?",
+                        "q": "¿Cómo canjear o comprar entradas para el Estadio Campeón del Siglo?",
                         "a": "Los socios, palquistas y butaquistas realizan su canje a través de TuApp y TickAntel, mientras que las entradas generales se adquieren en TickAntel web y redes de cobranza habilitadas."
                     }
                 ]
@@ -661,6 +702,7 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
     return {
         "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
         "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
+        "portada_visual": ai_json.get("portada_visual", {}),
         "titular_dia": ai_json["titular_dia"],
         "bajada_seo": ai_json["bajada_seo"],
         "claves_60_segundos": ai_json["claves_60_segundos"],
