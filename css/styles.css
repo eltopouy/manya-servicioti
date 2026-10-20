@@ -1905,4 +1905,197 @@ body {
   }
 }
 
+/* ==========================================================================
+   COMPONENTES 1891 BD (COMISIÓN DE HISTORIA Y PATRIMONIO DE PEÑAROL)
+   ========================================================================== */
+
+/* Historial Frente a Frente en Match Center */
+.match-h2h-bar {
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(20, 20, 24, 0.96), rgba(9, 9, 11, 0.98));
+  border: 1px solid rgba(255, 209, 0, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.match-h2h-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 209, 0, 0.2);
+}
+
+.match-h2h-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.match-h2h-source {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.match-h2h-source strong {
+  color: #f4f4f5;
+}
+
+.match-h2h-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.match-h2h-stat {
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.match-h2h-stat-num {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.match-h2h-stat-num.gold {
+  color: var(--manya-gold);
+}
+
+.match-h2h-stat-lbl {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.match-h2h-recent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #d4d4d8;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.match-h2h-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 209, 0, 0.15);
+  border: 1px solid rgba(255, 209, 0, 0.35);
+  color: var(--manya-gold);
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Efemérides Aurinegras "Un día como hoy" */
+.efemerides-card {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(20, 20, 25, 0.95), rgba(9, 9, 11, 0.98));
+  border: 1px solid rgba(255, 209, 0, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.efemerides-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 209, 0, 0.2);
+}
+
+.efemerides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.efemeride-item {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--manya-gold);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.efemeride-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.05);
+}
+
+.efemeride-top-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.efemeride-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 12.5px;
+  color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.12);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.efemeride-torneo {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.efemeride-score {
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.efemeride-meta {
+  font-size: 11.5px;
+  color: #a1a1aa;
+  line-height: 1.4;
+}
+
+.efemerides-glorias {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+
 

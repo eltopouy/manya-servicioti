@@ -1,0 +1,53 @@
+{
+  "rival": "Juventud de Las Piedras",
+  "rival_id": 260,
+  "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
+  "resumen": {
+    "partidos_jugados": 33,
+    "ganados_penarol": 23,
+    "empatados": 7,
+    "perdidos_penarol": 3,
+    "goles_penarol": 67,
+    "goles_rival": 22,
+    "diferencia_goles": "+45",
+    "ventaja_victorias": "+20 partidos a favor del Decano",
+    "efectividad_pct": "76.7%"
+  },
+  "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-04-20",
+      "marcador": "Peñarol 2 - 2 Juventud",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Renzo Rabino (J) 45+2', Abel Hernández (P) 73', Fernando Mimbacas (J) 78' y Leandro Umpiérrez (P) 81'"
+    },
+    {
+      "fecha": "2025-09-21",
+      "marcador": "Peñarol 1 - 0 Juventud",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Leonardo Fernández (P) 49'"
+    },
+    {
+      "fecha": "2025-03-27",
+      "marcador": "Peñarol 2 - 0 Juventud",
+      "estadio": "Municipal Parque Artigas de Las Piedras",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Leonardo Fernández (P) 56' de penal y Nahuel Herrera (P) 74'"
+    },
+    {
+      "fecha": "2019-09-21",
+      "marcador": "Peñarol 1 - 1 Juventud",
+      "estadio": "Municipal Parque Artigas de Las Piedras",
+      "torneo": "Torneo Clausura",
+      "incidencias": "José Varela (J) 16' y Fabricio Formiliano (P) 47'"
+    },
+    {
+      "fecha": "2019-08-18",
+      "marcador": "Peñarol 0 - 0 Juventud",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": null
+    }
+  ]
+}

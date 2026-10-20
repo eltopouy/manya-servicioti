@@ -24,18 +24,20 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Actualizar Match Center y Estado en Vivo
+      - name: Actualizar Match Center, Historial y Efemérides 1891 BD
         run: |
+          pip install pillow
           python automation/manya_match_engine.py
+          python automation/extraer_datos_1891.py
 
       - name: Verificar Cambios y Commit a Main
         run: |
           git config user.name "Manya Bot [GitHub Action]"
           git config user.email "bot@manya.servicioti.com.uy"
-          git add data/live_status.json
+          git add data/live_status.json data/efemerides_hoy.json data/historial_juventud.json data/galleries.json assets/gallery/
           if git diff --staged --quiet; then
-            echo "Sin cambios en el estado de partidos. Todo al día."
+            echo "Sin cambios en el estado de partidos y efemérides. Todo al día."
           else
-            git commit -m "chore(match-center): sincronización automática próximo partido [skip ci]"
+            git commit -m "chore(match-center): sincronización automática próximo partido y efemérides 1891 BD [skip ci]"
             git push
           fi

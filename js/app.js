@@ -558,6 +558,7 @@
 
   function openLightbox(item) {
     const modal = document.getElementById('manya-lightbox');
+    const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy')) || (item.fuente && item.fuente.includes('1891'));
     if (!modal) return;
 
     const imgEl = document.getElementById('lightbox-img');
@@ -572,10 +573,14 @@
       imgEl.alt = item.titulo;
     }
     if (badgeEl) {
-      badgeEl.textContent = `📸 ${item.categoria ? item.categoria.toUpperCase() : 'PEÑAROL'}`;
+      badgeEl.textContent = is1891 ? '📜 FICHA OFICIAL 1891 BD' : `📸 ${item.categoria ? item.categoria.toUpperCase() : 'PEÑAROL'}`;
     }
     if (metaEl) {
-      metaEl.textContent = `${item.cuenta} • ❤️ ${item.likes ? item.likes.toLocaleString() : '25.000'} • 💬 ${item.comments || 350}`;
+      if (is1891) {
+        metaEl.textContent = `1891 BD (Comisión de Historia) • ${item.estadio || 'Estadio Centenario'} • ${item.fecha || '2026'}`;
+      } else {
+        metaEl.textContent = `${item.cuenta} • ❤️ ${item.likes ? item.likes.toLocaleString() : '25.000'} • 💬 ${item.comments || 350}`;
+      }
     }
     if (titleEl) titleEl.textContent = item.titulo;
     if (descEl) descEl.textContent = item.descripcion || item.caption || '';
@@ -583,8 +588,9 @@
       const isTenfield = (item.cuenta === '@tenfield') || (item.url_post && item.url_post.includes('tenfield'));
       const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
       const pUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
-      linkEl.href = pUrl;
-      linkEl.textContent = isPD ? 'Ver artículo en Padre y Decano ↗' : (isTenfield ? 'Ver cobertura oficial en Tenfield Deportes ↗' : 'Ver publicación original en Instagram ↗');
+      const pUrl1891 = is1891 ? 'https://1891.uy/partidos' : pUrl;
+      linkEl.href = pUrl1891;
+      linkEl.textContent = is1891 ? 'Ver ficha del partido en 1891.uy ↗' : (isPD ? 'Ver artículo en Padre y Decano ↗' : (isTenfield ? 'Ver cobertura oficial en Tenfield Deportes ↗' : 'Ver publicación original en Instagram ↗'));
     }
 
     modal.style.display = 'flex';
@@ -758,7 +764,8 @@
       const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
       const postUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
       const sourceLabel = isPD ? 'Padre y Decano ↗' : (isTenfield ? 'Tenfield ↗' : 'Instagram ↗');
-      const badgeTxt = `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
+      const isItem1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy')) || (item.fuente && item.fuente.includes('1891'));
+      const badgeTxt = isItem1891 ? '📜 FICHA 1891 BD' : `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
       const likesTxt = item.likes ? (item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + 'K' : item.likes) : '25K';
       const commentsTxt = item.comments || 450;
       const descTxt = item.descripcion || item.caption || '';
@@ -869,17 +876,70 @@
     }
   }
 
+
+  function renderHeadToHead(h2h) {
+    if (!h2h || !h2h.resumen) return;
+    const res = h2h.resumen;
+    const elPJ = document.getElementById('h2h-pj');
+    const elPG = document.getElementById('h2h-pg');
+    const elPE = document.getElementById('h2h-pe');
+    const elPP = document.getElementById('h2h-pp');
+    const elGF = document.getElementById('h2h-gf');
+    const elEff = document.getElementById('h2h-eff');
+    if (elPJ) elPJ.textContent = res.partidos_jugados;
+    if (elPG) elPG.textContent = res.ganados_penarol;
+    if (elPE) elPE.textContent = res.empatados;
+    if (elPP) elPP.textContent = res.perdidos_penarol;
+    if (elGF) elGF.textContent = `${res.goles_penarol} - ${res.goles_rival}`;
+    if (elEff) elEff.textContent = res.efectividad_pct;
+  }
+
+  function renderEfemerides(efem) {
+    if (!efem || !efem.partidos_historicos) return;
+    const tagEl = document.getElementById('efemerides-date-tag');
+    if (tagEl && efem.dia_mes) tagEl.textContent = efem.dia_mes;
+
+    const gridEl = document.getElementById('efemerides-matches-grid');
+    if (gridEl && efem.partidos_historicos.length) {
+      gridEl.innerHTML = efem.partidos_historicos.slice(0, 6).map(m => {
+        return `
+          <article class="efemeride-item">
+            <div class="efemeride-top-line">
+              <span class="efemeride-year">${m.ano}</span>
+              <span class="efemeride-torneo">${m.torneo || 'Torneo Oficial'}</span>
+            </div>
+            <div class="efemeride-score">${m.resultado}</div>
+            <div class="efemeride-meta">
+              <div>🏟️ ${m.estadio || 'Estadio Centenario'}</div>
+              ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${m.goles_detalle}</div>` : ''}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    const gloriasEl = document.getElementById('efemerides-glorias-line');
+    if (gloriasEl && efem.cumpleanos_glorias && efem.cumpleanos_glorias.length) {
+      // Filtrar nombres duplicados
+      const nombresSet = new Set(efem.cumpleanos_glorias.map(g => g.nombre));
+      const nombres = Array.from(nombresSet).map(n => `<strong>${n}</strong>`).join(' • ');
+      gloriasEl.innerHTML = `<span>🎂 <strong>Glorias del Club:</strong> En estas fechas celebran su nacimiento: ${nombres}.</span>`;
+    }
+  }
+
   async function init() {
     setupLightbox();
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog] = await Promise.all([
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
       loadJsonSafe('data/galleries.json'),
       loadJsonSafe('data/squad_2026.json'),
       loadJsonSafe('data/history_1891.json'),
-      loadJsonSafe('data/escudos_uruguay.json')
+      loadJsonSafe('data/escudos_uruguay.json'),
+      loadJsonSafe('data/historial_juventud.json'),
+      loadJsonSafe('data/efemerides_hoy.json')
     ]);
 
     if (escudosCatalog) {
@@ -890,6 +950,12 @@
       state.live = live;
       renderMatchHero(live);
       renderStandings();
+    }
+    if (h2hJuventud) {
+      renderHeadToHead(h2hJuventud);
+    }
+    if (efemeridesHoy) {
+      renderEfemerides(efemeridesHoy);
     }
     initSimulator();
 

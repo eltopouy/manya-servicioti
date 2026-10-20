@@ -51,7 +51,7 @@ from blogger_manya_publisher import publish_manya_article_to_blogger
 def git_commit_and_push(mensaje: str):
     """Sincroniza los cambios hacia GitHub Pages."""
     try:
-        subprocess.run(["git", "add", "data/", "assets/ig/", "index.html"], cwd=str(BASE_DIR), check=False)
+        subprocess.run(["git", "add", "data/", "assets/", "index.html"], cwd=str(BASE_DIR), check=False)
         res = subprocess.run(["git", "commit", "-m", mensaje], cwd=str(BASE_DIR), capture_output=True, text=True)
         if "nothing to commit" not in res.stdout and "nothing to commit" not in res.stderr:
             subprocess.run(["git", "push", "origin", "main"], cwd=str(BASE_DIR), check=True, timeout=45)
@@ -247,6 +247,13 @@ def ejecutar_orquestador(modo: str = "once"):
             status_live = ManyaMatchEngine.generate_updated_live_status()
             fase = status_live.get("fase_partido", "SIN_PARTIDO_HOY")
             match_info = status_live.get("partido_activo", {})
+
+            # 1b. Sincronizar efemérides del día (1891 BD)
+            try:
+                from extraer_datos_1891 import extraer_efemerides_hoy
+                extraer_efemerides_hoy()
+            except Exception as ex_1891:
+                logger.warning(f"[1891 BD] Aviso actualizando efemérides: {ex_1891}")
 
             # 2. Recolectar prensa deportiva exhaustiva
             noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)

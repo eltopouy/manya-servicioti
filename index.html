@@ -331,6 +331,49 @@
           <a href="https://www.servicioti.com.uy/" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Leer Previa Táctica y Puntajes 1x1 →</a>
         </div>
       </div>
+
+      <!-- Historial Oficial Frente a Frente (1891 BD) -->
+      <div class="match-h2h-bar" id="match-h2h-box" aria-label="Historial Oficial Frente a Frente contra Juventud">
+        <div class="match-h2h-header">
+          <div class="match-h2h-title">
+            <span>📜 Historial Oficial Frente a Frente: Peñarol vs Juventud</span>
+          </div>
+          <span class="match-h2h-source">Fuente Oficial: <strong>1891 BD</strong> (Comisión de Historia y Patrimonio)</span>
+        </div>
+
+        <div class="match-h2h-stats">
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num" id="h2h-pj">33</div>
+            <div class="match-h2h-stat-lbl">Partidos Jugados</div>
+          </div>
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num gold" id="h2h-pg">23</div>
+            <div class="match-h2h-stat-lbl">Ganados Peñarol</div>
+          </div>
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num" id="h2h-pe">7</div>
+            <div class="match-h2h-stat-lbl">Empates</div>
+          </div>
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num" id="h2h-pp">3</div>
+            <div class="match-h2h-stat-lbl">Derrotas</div>
+          </div>
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num gold" id="h2h-gf">67 - 22</div>
+            <div class="match-h2h-stat-lbl">Goles (Dif: +45)</div>
+          </div>
+          <div class="match-h2h-stat">
+            <div class="match-h2h-stat-num gold" id="h2h-eff">76.7%</div>
+            <div class="match-h2h-stat-lbl">Efectividad Aurinegra</div>
+          </div>
+        </div>
+
+        <div class="match-h2h-recent">
+          <span class="match-h2h-pill">★ +20 partidos a favor del Decano</span>
+          <span><strong>Últimos choques oficiales:</strong> 2-2 en Campeón del Siglo (Apertura 2026), 1-0 en CDS (Clausura 2025, gol de Leo Fernández 49'), 2-0 en Parque Artigas (Apertura 2025).</span>
+          <a href="https://1891.uy/partidos" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);text-decoration:underline;margin-left:auto;font-size:11.5px;font-weight:700;">Ver fichas completas en 1891.uy ↗</a>
+        </div>
+      </div>
     </section>
 
     <!-- MÓDULO 2: EDICIÓN PERIODÍSTICA DE ÉLITE — "THE NEW YORK TIMES DE PEÑAROL" -->
@@ -521,6 +564,7 @@
         </div>
         <div class="gallery-filter-tabs" id="gallery-filters" role="tablist">
           <button type="button" class="gallery-tab active" data-filter="all">Todas las Fotos</button>
+          <button type="button" class="gallery-tab" data-filter="1891">Fichas 1891 BD</button>
           <button type="button" class="gallery-tab" data-filter="partidos">Partidos &amp; Goles</button>
           <button type="button" class="gallery-tab" data-filter="los-aromos">Los Aromos</button>
           <button type="button" class="gallery-tab" data-filter="hinchada">Tribunas &amp; Hinchada</button>
@@ -655,6 +699,32 @@
               <strong>1949, 1987 y 2014 — Paternidad Clásica:</strong> Desde el <em>Clásico de la Fuga</em> (2-0 en 1949) y el <em>Clásico de los 8 contra 11</em> (2-1 en 1987) hasta el histórico <em>5 a 0</em> del 27 de abril de 2014.
             </li>
           </ul>
+        </div>
+      </div>
+
+      <!-- Efemérides "Un día como hoy en la historia aurinegra" (1891 BD) -->
+      <div class="efemerides-card" id="efemerides-1891-card" aria-label="Efemérides aurinegras del día">
+        <div class="efemerides-header">
+          <div>
+            <h3 style="font-size:18px;color:var(--manya-gold);margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+              <span>📅 Efemérides Aurinegras: "Un día como hoy"</span>
+              <span id="efemerides-date-tag" class="badge-gold">20 de Octubre</span>
+            </h3>
+            <p style="font-size:13px;color:var(--text-secondary);margin:0;">
+              Partidos históricos y glorias decanas registradas en la base oficial de la Comisión de Historia y Patrimonio de Peñarol (1891 BD).
+            </p>
+          </div>
+          <a href="https://1891.uy/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="font-size:12px;padding:6px 12px;">
+            Consultar Archivo 1891.uy ↗
+          </a>
+        </div>
+
+        <div class="efemerides-grid" id="efemerides-matches-grid">
+          <!-- Renderizado dinámicamente desde data/efemerides_hoy.json -->
+        </div>
+
+        <div class="efemerides-glorias" id="efemerides-glorias-line">
+          <!-- Cumpleaños de glorias aurinegras -->
         </div>
       </div>
     </section>
