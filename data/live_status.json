@@ -1,14 +1,14 @@
 {
-  "actualizado": "19/10/2026 13:36",
+  "actualizado": "20/10/2026 20:31",
   "fase_partido": "SIN_PARTIDO_HOY",
-  "alerta_banner": "🟡⚫ Próximo partido: Peñarol at Juventud el Sábado 24/10/2026 16:00 hs (Estadio Juventud Parque Artigas)",
+  "alerta_banner": "🟡⚫ Próximo partido: Juventud vs Peñarol el Viernes 23/10/2026 20:00 hs (Estadio Centenario)",
   "partido_activo": {
     "event_id": "401930317",
-    "nombre": "Peñarol at Juventud",
-    "fecha_iso": "2026-10-24T16:00:00-03:00",
-    "fecha_legible": "Sábado 24/10/2026 16:00 hs",
-    "torneo": "Torneo Clausura",
-    "estadio": "Estadio Juventud Parque Artigas",
+    "nombre": "Juventud vs Peñarol",
+    "fecha_iso": "2026-10-23T20:00:00-03:00",
+    "fecha_legible": "Viernes 23/10/2026 20:00 hs",
+    "torneo": "Torneo Clausura 2026",
+    "estadio": "Estadio Centenario",
     "local": {
       "id": "8416",
       "nombre": "Juventud",
@@ -48,11 +48,11 @@
   },
   "proximo_partido": {
     "event_id": "401930317",
-    "nombre": "Peñarol at Juventud",
-    "fecha_iso": "2026-10-24T16:00:00-03:00",
-    "fecha_legible": "Sábado 24/10/2026 16:00 hs",
-    "torneo": "Torneo Clausura",
-    "estadio": "Estadio Juventud Parque Artigas",
+    "nombre": "Juventud vs Peñarol",
+    "fecha_iso": "2026-10-23T20:00:00-03:00",
+    "fecha_legible": "Viernes 23/10/2026 20:00 hs",
+    "torneo": "Torneo Clausura 2026",
+    "estadio": "Estadio Centenario",
     "local": {
       "id": "8416",
       "nombre": "Juventud",
@@ -80,7 +80,7 @@
   },
   "ultimo_partido": {
     "event_id": "401929259",
-    "nombre": "Peñarol at Liverpool",
+    "nombre": "Liverpool vs Peñarol",
     "fecha_iso": "2026-10-18T18:30:00-03:00",
     "fecha_legible": "Domingo 18/10/2026 18:30 hs",
     "torneo": "Campeonato Uruguayo • Clausura",
@@ -113,7 +113,7 @@
   "ultimos_resultados": [
     {
       "event_id": "401929259",
-      "nombre": "Peñarol at Liverpool",
+      "nombre": "Liverpool vs Peñarol",
       "fecha_iso": "2026-10-18T18:30:00-03:00",
       "fecha_legible": "Domingo 18/10/2026 18:30 hs",
       "torneo": "Campeonato Uruguayo • Clausura",
@@ -147,11 +147,11 @@
   "proximos_partidos": [
     {
       "event_id": "401930317",
-      "nombre": "Peñarol at Juventud",
-      "fecha_iso": "2026-10-24T16:00:00-03:00",
-      "fecha_legible": "Sábado 24/10/2026 16:00 hs",
-      "torneo": "Torneo Clausura",
-      "estadio": "Estadio Juventud Parque Artigas",
+      "nombre": "Juventud vs Peñarol",
+      "fecha_iso": "2026-10-23T20:00:00-03:00",
+      "fecha_legible": "Viernes 23/10/2026 20:00 hs",
+      "torneo": "Torneo Clausura 2026",
+      "estadio": "Estadio Centenario",
       "local": {
         "id": "8416",
         "nombre": "Juventud",
@@ -194,6 +194,19 @@
     },
     {
       "pos": 2,
+      "equipo": "Nacional",
+      "es_penarol": false,
+      "pj": 11,
+      "pg": 7,
+      "pe": 2,
+      "pp": 2,
+      "gf": 17,
+      "gc": 11,
+      "dg": "+6",
+      "pts": 23
+    },
+    {
+      "pos": 3,
       "equipo": "Montevideo City Torque",
       "es_penarol": false,
       "pj": 11,
@@ -206,7 +219,7 @@
       "pts": 22
     },
     {
-      "pos": 3,
+      "pos": 4,
       "equipo": "Peñarol",
       "es_penarol": true,
       "pj": 11,
@@ -219,29 +232,16 @@
       "pts": 20
     },
     {
-      "pos": 4,
-      "equipo": "Nacional",
-      "es_penarol": false,
-      "pj": 10,
-      "pg": 6,
-      "pe": 2,
-      "pp": 2,
-      "gf": 14,
-      "gc": 9,
-      "dg": "+5",
-      "pts": 20
-    },
-    {
       "pos": 5,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 10,
+      "pj": 11,
       "pg": 5,
       "pe": 3,
-      "pp": 2,
-      "gf": 14,
-      "gc": 6,
-      "dg": "+8",
+      "pp": 3,
+      "gf": 16,
+      "gc": 9,
+      "dg": "+7",
       "pts": 18
     },
     {
@@ -391,12 +391,12 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.3,
-    "sensacion_c": 13.1,
-    "viento_kmh": 6.9,
-    "humedad_pct": 58,
+    "temperatura_c": 12.9,
+    "sensacion_c": 10.6,
+    "viento_kmh": 12.8,
+    "humedad_pct": 74,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "19/10/2026 13:36"
+    "actualizado": "20/10/2026 20:31"
   }
 }

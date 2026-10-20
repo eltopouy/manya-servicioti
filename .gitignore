@@ -6,3 +6,4 @@ _raw_seed_*
 
 _audit_*.png
 _temp_*
+*.db
