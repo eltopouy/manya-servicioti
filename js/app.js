@@ -70,34 +70,164 @@
 
   const TRIVIA_QUESTIONS = [
     {
-      q: '¿En qué fecha exacta se fundó nuestra gloriosa institución (CURCC / Club Atlético Peñarol)?',
-      opts: ['28 de septiembre de 1891', '14 de mayo de 1899', '18 de julio de 1900', '25 de agosto de 1891'],
+      cat: 'general',
+      catName: 'Fundación & Raíces',
+      q: '¿En qué fecha exacta y en qué histórico enclave se fundó nuestra institución (CURCC / Club Atlético Peñarol)?',
+      opts: ['28 de septiembre de 1891 en la Villa Peñarol', '14 de mayo de 1899 en La Blanqueada', '18 de julio de 1900 en el Centro de Montevideo', '25 de agosto de 1891 en Pocitos'],
       ans: 0,
-      exp: 'El 28 de septiembre de 1891 en la Villa Peñarol se fundó el Central Uruguay Railway Cricket Club (CURCC), decano del fútbol uruguayo.'
+      exp: 'El 28 de septiembre de 1891 los trabajadores ferroviarios británicos y criollos fundaron el Central Uruguay Railway Cricket Club (CURCC) en la Villa Peñarol, decano indiscutido del fútbol uruguayo.'
     },
     {
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
       q: '¿Quién convirtió el gol agónico en el minuto 120 en Santiago de Chile para ganar la quinta Copa Libertadores en 1987?',
-      opts: ['Diego Aguirre', 'Fernando Morena', 'Alberto Spencer', 'Jorge Cabrera'],
+      opts: ['Diego "La Fiera" Aguirre', 'Fernando Morena', 'Alberto Spencer', 'Jorge Cabrera'],
       ans: 0,
-      exp: 'Diego "La Fiera" Aguirre anotó de zurda a los 120 minutos ante América de Cali el 31 de octubre de 1987 en el Estadio Nacional de Santiago.'
+      exp: 'Diego Aguirre recibió de zurda y cruzó un remate legendario a los 120 minutos ante América de Cali en el Estadio Nacional de Santiago, sellando la quinta Libertadores.'
     },
     {
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
       q: '¿Quién es el máximo goleador histórico de toda la Copa CONMEBOL Libertadores de América con 54 goles?',
       opts: ['Alberto "Cabeza Mágica" Spencer', 'Fernando Morena', 'Pedro Virgilio Rocha', 'Juan Alberto Schiaffino'],
       ans: 0,
-      exp: 'Alberto Spencer convirtió 54 goles en la Copa Libertadores (48 de ellos con la camiseta de Peñarol), récord absoluto desde 1960 hasta hoy.'
+      exp: 'Alberto Spencer ostenta el récord absoluto de la Copa Libertadores con 54 goles (48 de ellos convertidos con la gloriosa camiseta de Peñarol).'
     },
     {
-      q: '¿Contra qué gigantes europeos e ingleses ganó Peñarol sus 3 Copas Intercontinentales del Mundo?',
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
+      q: '¿Contra qué tres gigantes de Europa conquistó Peñarol sus 3 Copas Intercontinentales del Mundo?',
       opts: ['Benfica (1961), Real Madrid (1966) y Aston Villa (1982)', 'Milan (1961), Real Madrid (1966) y Liverpool (1982)', 'Benfica (1960), Inter (1966) y Hamburgo (1982)', 'Ajax (1961), Real Madrid (1966) y Juventus (1982)'],
       ans: 0,
-      exp: 'Peñarol fue tricampeón del mundo superando al Benfica de Eusébio (1961), al Real Madrid (1966, ganando en Montevideo y en el Bernabéu) y al Aston Villa en Tokio (1982).'
+      exp: 'Peñarol fue tricampeón del mundo venciendo al Benfica de Eusébio (1961), al Real Madrid en Montevideo y en el Bernabéu (1966) y al Aston Villa en Tokio (1982).'
     },
     {
-      q: '¿Cómo se llama el histórico capitán que jugó toda su carrera profesional en Peñarol (1957–1970) y da nombre a nuestra Ciudad Deportiva?',
+      cat: 'idolos',
+      catName: 'Ídolos Eternos',
+      q: '¿Cómo se llama el legendario capitán que disputó 574 partidos oficiales jugando exclusivamente en Peñarol toda su carrera?',
       opts: ['Néstor "Tito" Gonçalves', 'Obdulio Varela', 'William Martínez', 'Walter Olivera'],
       ans: 0,
-      exp: 'Néstor "Tito" Gonçalves, el "Capitán de Capitanes", disputó 574 partidos oficiales exclusivamente con la camiseta oro y carbón.'
+      exp: 'Néstor "Tito" Gonçalves, el "Capitán de Capitanes", defendió únicamente la camiseta oro y carbón entre 1957 y 1970, conquistando 3 Libertadores, 2 Intercontinentales y 9 Campeonatos Uruguayos.'
+    },
+    {
+      cat: 'records',
+      catName: 'Récords & Hazañas',
+      q: '¿Qué récord imbatible estableció Fernando Morena el 16 de julio de 1978 ante Huracán Buceo en el Estadio Centenario?',
+      opts: ['Anotó 7 goles en un mismo partido oficial', 'Convirtió 5 goles de cabeza en un solo tiempo', 'Marcó 3 goles en menos de 4 minutos', 'Anotó 4 goles de tiro libre en un partido'],
+      ans: 0,
+      exp: 'Fernando Morena anotó 7 goles en la victoria 7-0 ante Huracán Buceo, récord absoluto en la historia de la Primera División uruguaya.'
+    },
+    {
+      cat: 'records',
+      catName: 'Récords & Hazañas',
+      q: '¿Cuántos minutos con valla invicta consecutiva acumuló Ladislao Mazurkiewicz en 1968, récord récord histórico del fútbol uruguayo?',
+      opts: ['987 minutos', '720 minutos', '840 minutos', '1040 minutos'],
+      ans: 0,
+      exp: 'Ladislao Mazurkiewicz mantuvo su arco invicto durante 987 minutos (casi 11 partidos completos) en el Campeonato Uruguayo de 1968, marca insuperada.'
+    },
+    {
+      cat: 'clasicos',
+      catName: 'Clásicos Inolvidables',
+      q: '¿Por qué se conoce al clásico del 23 de abril de 1987 como "El Clásico de los 8 contra 11"?',
+      opts: ['Peñarol sufrió 3 expulsiones y aun así ganó 2-1 con gol de Diego Aguirre', 'Nacional jugó con 8 futbolistas por lesión', 'Peñarol defendió un 0-0 con 8 jugadores durante 85 minutos', 'El partido terminó con 8 jugadores aurinegros festejando'],
+      ans: 0,
+      exp: 'Con 3 futbolistas menos por expulsiones, el Peñarol de Washington Tabárez atacó heroicamente y Diego Aguirre anotó el 2-1 definitivo en el minuto 82.'
+    },
+    {
+      cat: 'clasicos',
+      catName: 'Clásicos Inolvidables',
+      q: '¿Qué hecho histórico originó el célebre "Clásico de la Fuga" el 9 de octubre de 1949?',
+      opts: ['Nacional perdía 2-0 ante la Máquina del 49 y decidió no salir a jugar el 2° tiempo', 'Peñarol ganó 5-0 escapándose en la Tabla Anual', 'El clásico se suspendió por un apagón en el Centenario', 'El arquero rival se retiró por el túnel sin autorización'],
+      ans: 0,
+      exp: 'Peñarol arrollaba 2-0 con goles de Ghiggia y Míguez; en el entretiempo, Nacional abandonó el Estadio Centenario por la chimenea/ventana del vestuario sin disputar el complemento.'
+    },
+    {
+      cat: 'clasicos',
+      catName: 'Clásicos Inolvidables',
+      q: '¿Cuál fue el marcador del histórico clásico del 27 de abril de 2014, mayor goleada clásica en torneos cortos modernos?',
+      opts: ['Peñarol 5 - 0 Nacional', 'Peñarol 4 - 0 Nacional', 'Peñarol 5 - 1 Nacional', 'Peñarol 6 - 0 Nacional'],
+      ans: 0,
+      exp: 'Histórico 5 a 0 aurinegro con goles de Marcelo Zalayeta, Damián Macaluso, Jorge "Japo" Rodríguez y doblete inolvidable de Luis Aguiar.'
+    },
+    {
+      cat: 'records',
+      catName: 'Récords & Hazañas',
+      q: '¿Cuántos goles oficiales convirtió Fernando Morena con la camiseta del Club Atlético Peñarol según 1891 BD?',
+      opts: ['350 goles', '280 goles', '310 goles', '215 goles'],
+      ans: 0,
+      exp: 'Fernando Morena es el máximo artillero de la historia del Decano con 350 goles oficiales certificados por la Comisión de Historia y Patrimonio de Peñarol.'
+    },
+    {
+      cat: 'cds',
+      catName: 'Estadio Campeón del Siglo',
+      q: '¿En qué fecha se inauguró oficialmente el Estadio Campeón del Siglo y quién convirtió el primer gol en su campo?',
+      opts: ['28 de marzo de 2016 — Diego Forlán', '28 de septiembre de 2015 — Marcelo Zalayeta', '19 de abril de 2016 — Leonardo Fernández', '31 de octubre de 2016 — Diego Aguirre'],
+      ans: 0,
+      exp: 'El Campeón del Siglo se inauguró el 28 de marzo de 2016 con triunfo 4-1 ante River Plate argentino; Diego Forlán convirtió el histórico primer gol en la Catedral.'
+    },
+    {
+      cat: 'records',
+      catName: 'Récords & Hazañas',
+      q: '¿En qué años conquistó Peñarol sus dos célebres Quinquenios de Oro en el Campeonato Uruguayo?',
+      opts: ['1958-1962 y 1993-1997', '1960-1964 y 1995-1999', '1955-1959 y 1990-1994', '1965-1969 y 1980-1984'],
+      ans: 0,
+      exp: 'Peñarol es el único club uruguayo con dos Quinquenios de Oro: 1958-1962 (bajo Hugo Bagnulo y Roberto Scarone) y 1993-1997 (con Gregorio Pérez y Pablo Bengoechea).'
+    },
+    {
+      cat: 'general',
+      catName: 'Distinciones Mundiales',
+      q: '¿Qué histórica distinción otorgó la IFFHS a Peñarol en septiembre de 2009 tras el balance del siglo?',
+      opts: ['Club Campeón del Siglo XX de Sudamérica (con 531 puntos)', 'Mejor club de la década de 1980', 'Club con mayor hinchada proporcional del planeta', 'Institución deportiva más laureada de América'],
+      ans: 0,
+      exp: 'La Federación Internacional de Historia y Estadística de Fútbol (IFFHS) proclamó oficialmente a Peñarol como el Mejor Club del Siglo XX de Sudamérica por su palmarés continental.'
+    },
+    {
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
+      q: '¿Quién anotó el gol agónico en el minuto 89 en Santiago de Chile para consagrar a Peñarol campeón de América ante Cobreloa en 1982?',
+      opts: ['Fernando Morena', 'Venancio Ramos', 'Jair Gonçalves', 'Ernesto Vargas'],
+      ans: 0,
+      exp: 'Tras empatar 0-0 en Montevideo, Morena conectó de derecha un centro de Ramos a los 89 minutos en el Estadio Nacional de Santiago, conquistando la cuarta Libertadores.'
+    },
+    {
+      cat: 'idolos',
+      catName: 'Ídolos Eternos',
+      q: '¿Quién fue el capitán y emblema del Segundo Quinquenio (1993-1997), célebre por su precisión quirúrgica en tiros libres?',
+      opts: ['Pablo Javier Bengoechea', 'Gabriel Cedrés', 'Antonio Pacheco', 'Darío Silva'],
+      ans: 0,
+      exp: 'Pablo "El Profesor" Bengoechea fue el capitán y arquitecto del Quinquenio 93-97, autor de goles clásicos decisivos y dueño de una pegada de tiro libre inolvidable.'
+    },
+    {
+      cat: 'idolos',
+      catName: 'Ídolos Eternos',
+      q: '¿Qué ídolo moderno disputó 475 partidos oficiales con Peñarol en el siglo XXI y conquistó 8 títulos de Campeón Uruguayo?',
+      opts: ['Antonio "Tony" Pacheco', 'Marcelo Zalayeta', 'Darío Rodríguez', 'Cristian "Cebolla" Rodríguez'],
+      ans: 0,
+      exp: 'Antonio "Tony" Pacheco vistió la aurinegra en 475 encuentros oficiales, convirtiéndose en el gran referente del siglo XXI y en uno de los jugadores más queridos de la hinchada.'
+    },
+    {
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
+      q: '¿Quién anotó el primer gol de la historia de la Copa Libertadores el 19 de abril de 1960 en la goleada 7-1 de Peñarol a Jorge Wilstermann?',
+      opts: ['Carlos "Lucho" Borges', 'Alberto Spencer', 'Luis Cubilla', 'José Sasía'],
+      ans: 0,
+      exp: 'Carlos "Lucho" Borges abrió la cuenta a los 13 minutos, convirtiendo el primer gol de la historia de la Copa Libertadores de América.'
+    },
+    {
+      cat: 'records',
+      catName: 'Récords & Hazañas',
+      q: '¿Cuál es el récord histórico de partidos oficiales invicto en el Campeonato Uruguayo que ostenta Peñarol?',
+      opts: ['56 partidos consecutivos invicto (1966-1969)', '42 partidos consecutivos invicto', '34 partidos consecutivos invicto', '62 partidos consecutivos invicto'],
+      ans: 0,
+      exp: 'Entre 1966 y 1969, el Glorioso Peñarol hilvanó 56 partidos consecutivos sin conocer la derrota en el Campeonato Uruguayo, récord absoluto hasta nuestros días.'
+    },
+    {
+      cat: 'libertadores',
+      catName: 'Copas Libertadores',
+      q: '¿En qué final épica de Copa Libertadores Peñarol perdía 0-2 en Santiago y terminó consagrándose campeón con remontada 4-2 ante River Plate argentino?',
+      opts: ['Final de 1966 en Santiago de Chile', 'Final de 1961 en San Pablo', 'Final de 1982 en Santiago', 'Final de 1960 en Asunción'],
+      ans: 0,
+      exp: 'El 20 de mayo de 1966 en el Estadio Nacional de Santiago, Peñarol remontó un 0-2 para ganar 4-2 en tiempo extra con goles de Spencer (2), Abbadie y Rocha.'
     }
   ];
 
@@ -490,51 +620,231 @@
     link.click();
   }
 
+  let triviaState = {
+    category: 'all',
+    currentIndex: 0,
+    score: 0,
+    streak: 0,
+    maxStreak: 0,
+    answered: false,
+    questionsPool: []
+  };
+
+  function getTriviaQuestionsPool(cat) {
+    if (!cat || cat === 'all') {
+      return [...TRIVIA_QUESTIONS];
+    }
+    const filtered = TRIVIA_QUESTIONS.filter(q => q.cat === cat);
+    return filtered.length ? filtered : [...TRIVIA_QUESTIONS];
+  }
+
   function renderTrivia() {
     const box = document.getElementById('trivia-box');
     if (!box) return;
-    const item = TRIVIA_QUESTIONS[state.triviaIndex % TRIVIA_QUESTIONS.length];
+
+    if (!triviaState.questionsPool.length) {
+      triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
+    }
+
+    const pool = triviaState.questionsPool;
+    const total = pool.length;
+    const idx = triviaState.currentIndex;
+
+    // Si terminó la tanda de preguntas
+    if (idx >= total) {
+      const pct = Math.round((triviaState.score / (total * 100)) * 100);
+      let rankBadge = '';
+      let rankTitle = '';
+      let rankMsg = '';
+
+      if (pct >= 90) {
+        rankBadge = '🏆 Rango: Capitán de Capitanes';
+        rankTitle = '¡Nivel Tito Gonçalves!';
+        rankMsg = 'Tenés la mística y los datos del club grabados a fuego en el corazón. ¡Orgullo aurinegro total!';
+      } else if (pct >= 70) {
+        rankBadge = '⭐ Rango: Gloria de Primera';
+        rankTitle = '¡Sabiduría de la Tribuna Damiani!';
+        rankMsg = 'Gran conocimiento de las copas, clásicos y hazañas. Estás listo para cualquier debate futbolero.';
+      } else if (pct >= 50) {
+        rankBadge = '🟡 Rango: Carbonero de Ley';
+        rankTitle = '¡Pasión de la Tribuna Ámsterdam!';
+        rankMsg = 'Buen puntaje. Conocés las hazañas esenciales, aunque todavía quedan joyitas por repasar en 1891.uy.';
+      } else {
+        rankBadge = '📖 Rango: Hincha en Formación';
+        rankTitle = '¡A estudiar las fichas decanas!';
+        rankMsg = 'Peñarol tiene 135 años de gloria. Date una vuelta por el archivo de 1891.uy para revivir la historia.';
+      }
+
+      box.innerHTML = `
+        <div class="trivia-container trivia-game-over">
+          <div style="font-size:38px;margin-bottom:8px;">🏆</div>
+          <h4 style="font-size:20px;color:#fff;margin-bottom:4px;">${rankTitle}</h4>
+          <div class="trivia-rank-badge">${rankBadge}</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0;background:rgba(0,0,0,0.5);padding:14px;border-radius:8px;border:1px solid rgba(255,209,0,0.2);">
+            <div>
+              <div style="font-size:20px;font-weight:900;color:var(--manya-gold);font-family:'JetBrains Mono',monospace;">${triviaState.score}</div>
+              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Puntos Totales</div>
+            </div>
+            <div>
+              <div style="font-size:20px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;">${pct}%</div>
+              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Efectividad</div>
+            </div>
+            <div>
+              <div style="font-size:20px;font-weight:900;color:#f97316;font-family:'JetBrains Mono',monospace;">🔥 x${triviaState.maxStreak}</div>
+              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Mejor Racha</div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:#d4d4d8;line-height:1.5;margin-bottom:16px;">${rankMsg}</p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button type="button" class="btn-manya" id="trivia-restart-btn">🔄 Jugar de Nuevo</button>
+            <a href="https://1891.uy/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="font-size:13px;padding:8px 14px;">Explorar Archivo 1891.uy ↗</a>
+          </div>
+        </div>
+      `;
+
+      const rBtn = box.querySelector('#trivia-restart-btn');
+      if (rBtn) {
+        rBtn.addEventListener('click', () => {
+          triviaState.currentIndex = 0;
+          triviaState.score = 0;
+          triviaState.streak = 0;
+          triviaState.maxStreak = 0;
+          triviaState.answered = false;
+          triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
+          renderTrivia();
+        });
+      }
+      return;
+    }
+
+    const item = pool[idx];
+    triviaState.answered = false;
+    const progressPct = Math.round(((idx) / total) * 100);
+
+    const categoriesList = [
+      { id: 'all', label: 'Todas (20)' },
+      { id: 'libertadores', label: '🏆 Libertadores' },
+      { id: 'clasicos', label: '⚡ Clásicos' },
+      { id: 'idolos', label: '⭐ Ídolos' },
+      { id: 'records', label: '📊 Récords' },
+      { id: 'cds', label: '🏟️ CDS' }
+    ];
 
     box.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span class="badge-gold">Pregunta ${(state.triviaIndex % TRIVIA_QUESTIONS.length) + 1} de ${TRIVIA_QUESTIONS.length}</span>
-        <span style="color:var(--manya-gold);font-weight:800;">Puntaje Aurinegro: ${state.triviaScore} pts</span>
+      <div class="trivia-container">
+        <!-- Selector de Categorías -->
+        <div class="trivia-cat-chips" role="tablist">
+          ${categoriesList.map(cat => `
+            <button type="button" class="trivia-chip ${triviaState.category === cat.id ? 'active' : ''}" data-cat="${cat.id}">
+              ${cat.label}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Barra de Progreso y Estadísticas -->
+        <div class="trivia-stats-row">
+          <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${item.catName || 'Historia'}</em></span>
+          <div style="display:flex;align-items:center;gap:12px;">
+            ${triviaState.streak > 1 ? `<span class="trivia-streak-badge">🔥 Racha: x${triviaState.streak}</span>` : ''}
+            <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${triviaState.score} pts</span>
+          </div>
+        </div>
+        <div class="trivia-progress-bar-wrap">
+          <div class="trivia-progress-fill" style="width:${progressPct}%;"></div>
+        </div>
+
+        <!-- Pregunta -->
+        <h4 class="trivia-q-title">${item.q}</h4>
+
+        <!-- Opciones -->
+        <div class="trivia-opts-grid" id="trivia-opts">
+          ${item.opts.map((o, i) => {
+            const letter = ['A', 'B', 'C', 'D'][i] || (i + 1);
+            return `
+              <button type="button" class="trivia-opt-btn" data-idx="${i}">
+                <span class="trivia-opt-letter">${letter}</span>
+                <span>${o}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Feedback y Explicación -->
+        <div id="trivia-feedback" style="display:none;"></div>
       </div>
-      <h4 style="font-size:17px;margin-bottom:14px;color:#fff;">${item.q}</h4>
-      <div style="display:grid;gap:10px;" id="trivia-opts">
-        ${item.opts.map((o, i) => `
-          <button type="button" class="sim-btn" style="text-align:left;padding:12px 14px;font-size:14px;" data-idx="${i}">
-            ${o}
-          </button>
-        `).join('')}
-      </div>
-      <div id="trivia-feedback" style="margin-top:14px;font-size:13.5px;color:#fde047;display:none;"></div>
     `;
 
-    const fb = box.querySelector('#trivia-feedback');
-    box.querySelectorAll('#trivia-opts button').forEach(btn => {
+    // Asignar eventos a las fichas de categoría
+    box.querySelectorAll('.trivia-chip').forEach(btn => {
       btn.addEventListener('click', () => {
+        const selectedCat = btn.getAttribute('data-cat');
+        triviaState.category = selectedCat;
+        triviaState.currentIndex = 0;
+        triviaState.score = 0;
+        triviaState.streak = 0;
+        triviaState.maxStreak = 0;
+        triviaState.answered = false;
+        triviaState.questionsPool = getTriviaQuestionsPool(selectedCat);
+        renderTrivia();
+      });
+    });
+
+    // Asignar eventos a las opciones de respuesta
+    const fb = box.querySelector('#trivia-feedback');
+    const optBtns = box.querySelectorAll('#trivia-opts .trivia-opt-btn');
+
+    optBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (triviaState.answered) return;
+        triviaState.answered = true;
+
         const chosen = parseInt(btn.getAttribute('data-idx'), 10);
+        optBtns.forEach(b => b.disabled = true);
+
         if (chosen === item.ans) {
-          state.triviaScore += 100;
-          btn.style.background = '#15803d';
-          fb.innerHTML = `✅ <strong>¡Correcto, Carbonero!</strong> ${item.exp} <br><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;" id="trivia-next">Siguiente Pregunta →</button>`;
+          triviaState.streak++;
+          if (triviaState.streak > triviaState.maxStreak) {
+            triviaState.maxStreak = triviaState.streak;
+          }
+          const bonus = (triviaState.streak - 1) * 25;
+          const gained = 100 + bonus;
+          triviaState.score += gained;
+
+          btn.classList.add('is-correct');
+          fb.className = 'trivia-feedback-card correct';
+          fb.innerHTML = `
+            <div style="font-weight:800;font-size:14px;color:#22c55e;display:flex;align-items:center;justify-content:space-between;">
+              <span>✅ ¡Correcto, Carbonero! (+${gained} pts)</span>
+              ${triviaState.streak > 1 ? `<span style="font-size:11.5px;color:#f97316;">🔥 Racha x${triviaState.streak}</span>` : ''}
+            </div>
+            <div class="trivia-feedback-exp">${item.exp}</div>
+            <button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente Pregunta →</button>
+          `;
         } else {
-          btn.style.background = '#b91c1c';
-          fb.innerHTML = `❌ <strong>Respuesta histórica:</strong> ${item.exp} <br><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;" id="trivia-next">Siguiente Pregunta →</button>`;
+          triviaState.streak = 0;
+          btn.classList.add('is-wrong');
+          const correctBtn = box.querySelector(`#trivia-opts .trivia-opt-btn[data-idx="${item.ans}"]`);
+          if (correctBtn) correctBtn.classList.add('is-correct');
+
+          fb.className = 'trivia-feedback-card wrong';
+          fb.innerHTML = `
+            <div style="font-weight:800;font-size:14px;color:#ef4444;">❌ Respuesta Histórica Certificada</div>
+            <div class="trivia-feedback-exp">${item.exp}</div>
+            <button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente Pregunta →</button>
+          `;
         }
         fb.style.display = 'block';
-        const nxt = box.querySelector('#trivia-next');
-        if (nxt) {
-          nxt.addEventListener('click', () => {
-            state.triviaIndex++;
+
+        const nxtBtn = box.querySelector('#trivia-next-btn');
+        if (nxtBtn) {
+          nxtBtn.addEventListener('click', () => {
+            triviaState.currentIndex++;
             renderTrivia();
           });
         }
       });
     });
   }
-
   function setupLightbox() {
     const modal = document.getElementById('manya-lightbox');
     const overlay = document.getElementById('lightbox-overlay');
@@ -740,8 +1050,10 @@
     if (expandBtn) expandBtn.onclick = (e) => { e.stopPropagation(); openHeroLightbox(); };
     if (zoomBtn) zoomBtn.onclick = openHeroLightbox;
 
-    if (readMoreEl && digest && digest.blogger_post_url) {
-      readMoreEl.href = digest.blogger_post_url;
+    if (readMoreEl) {
+      readMoreEl.href = (digest && digest.blogger_post_url) ? digest.blogger_post_url : 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html';
+      readMoreEl.target = '_blank';
+      readMoreEl.rel = 'noopener noreferrer';
     }
   }
 
@@ -1061,12 +1373,12 @@
     if (expBtn) expBtn.addEventListener('click', exportLineupPNG);
 
     if (digest) {
-      const bUrl = digest.blogger_post_url;
-      if (bUrl) {
-        document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
-          a.href = bUrl;
-        });
-      }
+      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html';
+      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
+        a.href = bUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
       hydrateEditorialSection(digest);
     }
 

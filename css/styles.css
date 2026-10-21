@@ -2382,3 +2382,203 @@ body {
 .duel-verdict strong {
   color: var(--manya-gold);
 }
+
+/* ==========================================================================
+   SABIDURÍA CARBONERA: EL GRAN DESAFÍO 1891 (TRIVIA INTERACTIVA COMPLETA)
+   ========================================================================== */
+.trivia-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trivia-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.trivia-cat-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.trivia-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d4d4d8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trivia-chip:hover {
+  border-color: var(--manya-gold);
+  color: #fff;
+}
+
+.trivia-chip.active {
+  background: rgba(255, 209, 0, 0.18);
+  border-color: var(--manya-gold);
+  color: var(--manya-gold);
+}
+
+.trivia-progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin: 4px 0 8px;
+}
+
+.trivia-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ca8a04, #ffd100);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.trivia-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.trivia-streak-badge {
+  color: #f97316;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trivia-q-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.45;
+  margin: 6px 0 12px;
+}
+
+.trivia-opts-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.trivia-opt-btn {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #e4e4e7;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.trivia-opt-btn:hover:not(:disabled) {
+  background: rgba(255, 209, 0, 0.1);
+  border-color: var(--manya-gold);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.trivia-opt-btn:disabled {
+  cursor: default;
+}
+
+.trivia-opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  flex-shrink: 0;
+}
+
+.trivia-opt-btn.is-correct {
+  background: rgba(22, 101, 52, 0.45) !important;
+  border-color: #22c55e !important;
+  color: #ffffff !important;
+}
+
+.trivia-opt-btn.is-correct .trivia-opt-letter {
+  background: #22c55e !important;
+  color: #000 !important;
+}
+
+.trivia-opt-btn.is-wrong {
+  background: rgba(153, 27, 27, 0.45) !important;
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+
+.trivia-opt-btn.is-wrong .trivia-opt-letter {
+  background: #ef4444 !important;
+  color: #fff !important;
+}
+
+.trivia-feedback-card {
+  margin-top: 12px;
+  border-radius: 8px;
+  padding: 12px 14px;
+  animation: fadeIn 0.3s ease;
+}
+
+.trivia-feedback-card.correct {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #bbf7d0;
+}
+
+.trivia-feedback-card.wrong {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fecaca;
+}
+
+.trivia-feedback-exp {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 4px;
+  color: #f4f4f5;
+}
+
+.trivia-game-over {
+  text-align: center;
+  padding: 18px 8px;
+}
+
+.trivia-rank-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(255, 209, 0, 0.2), rgba(255, 209, 0, 0.05));
+  border: 1px solid var(--manya-gold);
+  color: var(--manya-gold);
+  font-weight: 800;
+  font-size: 14.5px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin: 10px 0 14px;
+}
