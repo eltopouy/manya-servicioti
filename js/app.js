@@ -877,6 +877,34 @@
   }
 
 
+
+  function renderRivalIntelligence(rival) {
+    if (!rival) return;
+    const dtEl = document.getElementById('scout-dt');
+    const schEl = document.getElementById('scout-esquema');
+    const estEl = document.getElementById('scout-estadio');
+    const funEl = document.getElementById('scout-fundacion');
+    const propEl = document.getElementById('scout-propuesta');
+    const figEl = document.getElementById('scout-figuras');
+
+    const sc = rival.scouting_tactico || {};
+    const inst = rival.datos_institucionales_auf || {};
+
+    if (dtEl && sc.entrenador) dtEl.textContent = sc.entrenador;
+    if (schEl && sc.esquema_base) schEl.textContent = sc.esquema_base;
+    if (estEl && inst.estadio_propio) estEl.textContent = inst.estadio_propio;
+    if (funEl && inst.fundacion) funEl.textContent = inst.fundacion;
+    if (propEl && sc.propuesta_juego) propEl.textContent = sc.propuesta_juego;
+
+    if (figEl && sc.figuras_a_seguir && sc.figuras_a_seguir.length) {
+      figEl.innerHTML = sc.figuras_a_seguir.map(f => `
+        <div style="margin-bottom:4px;">
+          • <strong>${f.nombre} (${f.rol}):</strong> <span style="color:#a1a1aa;">${f.analisis}</span>
+        </div>
+      `).join('');
+    }
+  }
+
   function renderHeadToHead(h2h) {
     if (!h2h || !h2h.resumen) return;
     const res = h2h.resumen;
@@ -930,7 +958,7 @@
   async function init() {
     setupLightbox();
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy] = await Promise.all([
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
@@ -939,7 +967,8 @@
       loadJsonSafe('data/history_1891.json'),
       loadJsonSafe('data/escudos_uruguay.json'),
       loadJsonSafe('data/historial_juventud.json'),
-      loadJsonSafe('data/efemerides_hoy.json')
+      loadJsonSafe('data/efemerides_hoy.json'),
+      loadJsonSafe('data/rival_intelligence.json')
     ]);
 
     if (escudosCatalog) {
@@ -956,6 +985,9 @@
     }
     if (efemeridesHoy) {
       renderEfemerides(efemeridesHoy);
+    }
+    if (rivalIntel) {
+      renderRivalIntelligence(rivalIntel);
     }
     initSimulator();
 

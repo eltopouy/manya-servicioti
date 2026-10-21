@@ -29,12 +29,13 @@ jobs:
           pip install pillow
           python automation/manya_match_engine.py
           python automation/extraer_datos_1891.py
+          python automation/manya_rival_intelligence.py
 
       - name: Verificar Cambios y Commit a Main
         run: |
           git config user.name "Manya Bot [GitHub Action]"
           git config user.email "bot@manya.servicioti.com.uy"
-          git add data/live_status.json data/efemerides_hoy.json data/historial_juventud.json data/galleries.json assets/gallery/
+          git add data/ assets/ index.html
           if git diff --staged --quiet; then
             echo "Sin cambios en el estado de partidos y efemérides. Todo al día."
           else

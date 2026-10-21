@@ -255,6 +255,22 @@ def ejecutar_orquestador(modo: str = "once"):
             except Exception as ex_1891:
                 logger.warning(f"[1891 BD] Aviso actualizando efemérides: {ex_1891}")
 
+            # 1c. Sincronizar scouting táctico del rival (AUF + 1891 + Ovación)
+            try:
+                from manya_rival_intelligence import generar_informe_rival
+                rival_equipo = match_info.get("visitante", {}) if match_info.get("local", {}).get("es_penarol") else match_info.get("local", {})
+                generar_informe_rival(rival_equipo.get("nombre", "juventud"))
+            except Exception as ex_scout:
+                logger.warning(f"[Scout] Aviso generando scouting del rival: {ex_scout}")
+
+            # 1c. Sincronizar scouting táctico del rival (AUF + 1891 + Ovación)
+            try:
+                from manya_rival_intelligence import generar_informe_rival
+                rival_equipo = match_info.get("visitante", {}) if match_info.get("local", {}).get("es_penarol") else match_info.get("local", {})
+                generar_informe_rival(rival_equipo.get("nombre", "juventud"))
+            except Exception as ex_scout:
+                logger.warning(f"[Scout] Aviso generando scouting del rival: {ex_scout}")
+
             # 2. Recolectar prensa deportiva exhaustiva
             noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)
 

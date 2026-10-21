@@ -1,0 +1,350 @@
+{
+  "fuente": "AUF - Asociación Uruguaya de Fútbol (https://www.auf.org.uy/liga-auf-uruguaya/)",
+  "total_clubes_registrados": 16,
+  "clubes": {
+    "Def. Sporting": {
+      "nombre": "Def. Sporting",
+      "abreviatura": "DEF",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/defensor_22.png"
+    },
+    "Liverpool": {
+      "nombre": "Liverpool",
+      "abreviatura": "LIV",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/logo-dark.png"
+    },
+    "M.C. Torque": {
+      "nombre": "M.C. Torque",
+      "abreviatura": "MCT",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/mdeocitytorque-escudo.png"
+    },
+    "Central Espaol": {
+      "nombre": "Central Espaol",
+      "abreviatura": "CES",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1916.png"
+    },
+    "Nacional": {
+      "nombre": "Nacional",
+      "abreviatura": "NAC",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/nacional248709.png"
+    },
+    "D. Maldonado": {
+      "nombre": "D. Maldonado",
+      "abreviatura": "CDM",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/116309.png"
+    },
+    "Cerro Largo": {
+      "nombre": "Cerro Largo",
+      "abreviatura": "CRL",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/cerrolargo.png"
+    },
+    "Danubio": {
+      "nombre": "Danubio",
+      "abreviatura": "DAN",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/danubio.png"
+    },
+    "Wanderers": {
+      "nombre": "Wanderers",
+      "abreviatura": "WAN",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1926.png"
+    },
+    "Progreso": {
+      "nombre": "Progreso",
+      "abreviatura": "PRO",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/proescdd0e7f389ecd12f0d0141750.png"
+    },
+    "Racing": {
+      "nombre": "Racing",
+      "abreviatura": "RAC",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/130849.png"
+    },
+    "PearolPE": {
+      "nombre": "PearolPE",
+      "abreviatura": "",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1922.png"
+    },
+    "Boston River": {
+      "nombre": "Boston River",
+      "abreviatura": "BRI",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/300x300briveriajwbanva.png"
+    },
+    "Juventud": {
+      "nombre": "Juventud",
+      "abreviatura": "JUV",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/juventud.png"
+    },
+    "Cerro": {
+      "nombre": "Cerro",
+      "abreviatura": "CRR",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/cerro.png"
+    },
+    "Albion": {
+      "nombre": "Albion",
+      "abreviatura": "ALB",
+      "escudo_auf": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/alibakjbnombapomajwbom.png"
+    }
+  },
+  "tablas": [
+    {
+      "header_sample": "TABLA Apertura - APERTURAPOSICIONESPTSPJ",
+      "total_filas": 16,
+      "primeras_filas": [
+        [
+          "RacingRAC311594223149",
+          "RacingRAC",
+          "Racing",
+          "RAC",
+          "31",
+          "15",
+          "9",
+          "4",
+          "2",
+          "23",
+          "14",
+          "9"
+        ],
+        [
+          "D. MaldonadoCDM291592424168",
+          "D. MaldonadoCDM",
+          "D. Maldonado",
+          "CDM",
+          "29",
+          "15",
+          "9",
+          "2",
+          "4",
+          "24",
+          "16",
+          "8"
+        ],
+        [
+          "AlbionALB2815843261610",
+          "AlbionALB",
+          "Albion",
+          "ALB",
+          "28",
+          "15",
+          "8",
+          "4",
+          "3",
+          "26",
+          "16",
+          "10"
+        ],
+        [
+          "PearolPE271583423167",
+          "PearolPE",
+          "Pearol",
+          "PE",
+          "27",
+          "15",
+          "8",
+          "3",
+          "4",
+          "23",
+          "16",
+          "7"
+        ],
+        [
+          "Central EspaolCES241573523221",
+          "Central EspaolCES",
+          "Central Espaol",
+          "CES",
+          "24",
+          "15",
+          "7",
+          "3",
+          "5",
+          "23",
+          "22",
+          "1"
+        ]
+      ]
+    },
+    {
+      "header_sample": "TABLA Torneo Intermedio - TORNEO INTERME",
+      "total_filas": 8,
+      "primeras_filas": [
+        [
+          "PearolPE1675111239",
+          "PearolPE",
+          "Pearol",
+          "PE",
+          "16",
+          "7",
+          "5",
+          "1",
+          "1",
+          "12",
+          "3",
+          "9"
+        ],
+        [
+          "Cerro LargoCRL117322752",
+          "Cerro LargoCRL",
+          "Cerro Largo",
+          "CRL",
+          "11",
+          "7",
+          "3",
+          "2",
+          "2",
+          "7",
+          "5",
+          "2"
+        ],
+        [
+          "RacingRAC107241431",
+          "RacingRAC",
+          "Racing",
+          "RAC",
+          "10",
+          "7",
+          "2",
+          "4",
+          "1",
+          "4",
+          "3",
+          "1"
+        ],
+        [
+          "LiverpoolLIV97232550",
+          "LiverpoolLIV",
+          "Liverpool",
+          "LIV",
+          "9",
+          "7",
+          "2",
+          "3",
+          "2",
+          "5",
+          "5",
+          "0"
+        ],
+        [
+          "Central EspaolCES97232440",
+          "Central EspaolCES",
+          "Central Espaol",
+          "CES",
+          "9",
+          "7",
+          "2",
+          "3",
+          "2",
+          "4",
+          "4",
+          "0"
+        ]
+      ]
+    },
+    {
+      "header_sample": "TABLA Torneo Intermedio - TORNEO INTERME",
+      "total_filas": 8,
+      "primeras_filas": [
+        [
+          "WanderersWAN1574301248",
+          "WanderersWAN",
+          "Wanderers",
+          "WAN",
+          "15",
+          "7",
+          "4",
+          "3",
+          "0",
+          "12",
+          "4",
+          "8"
+        ],
+        [
+          "NacionalNAC137412880",
+          "NacionalNAC",
+          "Nacional",
+          "NAC",
+          "13",
+          "7",
+          "4",
+          "1",
+          "2",
+          "8",
+          "8",
+          "0"
+        ],
+        [
+          "D. MaldonadoCDM1273311266",
+          "D. MaldonadoCDM",
+          "D. Maldonado",
+          "CDM",
+          "12",
+          "7",
+          "3",
+          "3",
+          "1",
+          "12",
+          "6",
+          "6"
+        ],
+        [
+          "M.C. TorqueMCT12740311110",
+          "M.C. TorqueMCT",
+          "M.C. Torque",
+          "MCT",
+          "12",
+          "7",
+          "4",
+          "0",
+          "3",
+          "11",
+          "11",
+          "0"
+        ],
+        [
+          "JuventudJUV87223811-3",
+          "JuventudJUV",
+          "Juventud",
+          "JUV",
+          "8",
+          "7",
+          "2",
+          "2",
+          "3",
+          "8",
+          "11",
+          "-3"
+        ]
+      ]
+    },
+    {
+      "header_sample": "TABLA Torneo Intermedio - FINAL TORNEO I",
+      "total_filas": 2,
+      "primeras_filas": [
+        [
+          "PearolPE31100514",
+          "PearolPE",
+          "Pearol",
+          "PE",
+          "3",
+          "1",
+          "1",
+          "0",
+          "0",
+          "5",
+          "1",
+          "4"
+        ],
+        [
+          "WanderersWAN0100115-4",
+          "WanderersWAN",
+          "Wanderers",
+          "WAN",
+          "0",
+          "1",
+          "0",
+          "0",
+          "1",
+          "1",
+          "5",
+          "-4"
+        ]
+      ]
+    }
+  ]
+}

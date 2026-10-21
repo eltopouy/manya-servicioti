@@ -1,0 +1,277 @@
+{
+  "version": "1.0.0",
+  "actualizado": "2026-10-20T20:55:00-03:00",
+  "descripcion": "Directorio Centralizado de Fuentes, APIs y Portales Oficiales para la Automatización de Manya ServicioTI",
+  "organismos_oficiales": {
+    "auf_liga": {
+      "nombre": "AUF - Liga AUF Uruguaya",
+      "url": "https://www.auf.org.uy/liga-auf-uruguaya/",
+      "descripcion": "Portal oficial del Campeonato Uruguayo con tablas oficiales, fixtures, estadios y fichas institucionales.",
+      "tipo": "HTML/DOM"
+    },
+    "auf_tv": {
+      "nombre": "AUF TV",
+      "url": "https://auftv.com/",
+      "descripcion": "Plataforma de streaming y resúmenes oficiales de la Asociación Uruguaya de Fútbol.",
+      "tipo": "Streaming/Multimedia"
+    },
+    "conmebol": {
+      "nombre": "CONMEBOL Oficial",
+      "url": "https://www.conmebol.com/",
+      "descripcion": "Confederación Sudamericana de Fútbol - Fixture y estatutos de Copa Libertadores y Sudamericana.",
+      "tipo": "Institucional"
+    }
+  },
+  "historia_y_patrimonio": {
+    "1891_bd_portal": {
+      "nombre": "1891 BD — Comisión de Historia y Patrimonio de Peñarol",
+      "url": "https://1891.uy/",
+      "descripcion": "Base de datos histórica oficial del Club Atlético Peñarol.",
+      "tipo": "Web Oficial"
+    },
+    "1891_bd_partidos": {
+      "nombre": "1891 BD — Fichas de Partidos",
+      "url": "https://1891.uy/partidos",
+      "descripcion": "Fichas completas de partidos disputados con fotografías en alta definición de las acciones.",
+      "tipo": "Fichas Técnicas & Multimedia"
+    },
+    "1891_bd_mcp": {
+      "nombre": "1891 BD MCP Server (JSON-RPC 2.0)",
+      "url": "https://mcp.1891.uy/mcp",
+      "ping_url": "https://mcp.1891.uy/ping",
+      "protocolo": "Streamable HTTP (JSON-RPC 2.0, 2024-11-05)",
+      "descripcion": "Servidor de Inteligencia Contextual con herramientas get_head_to_head, on_this_day, get_home_overview, find_records.",
+      "tipo": "API MCP"
+    }
+  },
+  "prensa_deportiva": {
+    "ovacion": {
+      "nombre": "Ovación Digital (Diario El País)",
+      "url": "https://www.elpais.com.uy/ovacion",
+      "seccion_penarol": "https://www.elpais.com.uy/noticias/penarol",
+      "seccion_futbol": "https://www.elpais.com.uy/ovacion/futbol",
+      "descripcion": "Decano de la prensa deportiva uruguaya, análisis tácticos de fondo y actualidad del plantel.",
+      "tipo": "Prensa Deportiva"
+    },
+    "tenfield": {
+      "nombre": "Tenfield Deportes",
+      "url": "https://www.tenfield.com.uy/",
+      "seccion_penarol": "https://www.tenfield.com.uy/categoria/penarol/",
+      "descripcion": "Cobertura en campo de juego, incidencias y declaraciones exclusivas del fútbol uruguayo.",
+      "tipo": "Prensa Deportiva / TV"
+    },
+    "referi": {
+      "nombre": "Referí (El Observador)",
+      "url": "https://www.elobservador.com.uy/seccion/referi",
+      "seccion_penarol": "https://www.elobservador.com.uy/tag/penarol",
+      "descripcion": "Periodismo analítico, estadísticas y entrevistas del deporte nacional.",
+      "tipo": "Prensa Deportiva"
+    },
+    "padre_y_decano": {
+      "nombre": "Padre y Decano",
+      "url": "https://www.padreydecano.com/cms/",
+      "descripcion": "Portal partidario de análisis de Peñarol por y para hinchas aurinegros.",
+      "tipo": "Prensa Partidaria"
+    }
+  },
+  "clubes_primera_division_2026": {
+    "juventud": {
+      "id_1891": 260,
+      "nombre_oficial": "Club Atlético Juventud de Las Piedras",
+      "nombre_corto": "Juventud",
+      "abreviatura": "JUV",
+      "fundacion": "24 de diciembre de 1935",
+      "sede": "Las Piedras, Canelones, Uruguay",
+      "estadio_propio": "Estadio Municipal Parque Artigas (Las Piedras)",
+      "capacidad_estadio": 12000,
+      "colores": "Azul y Blanco",
+      "web_oficial": "https://juventud.uy/",
+      "twitter": "https://x.com/JuventudUy",
+      "instagram": "https://www.instagram.com/juventuddelaspiedras/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/juventud.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_juventud.webp",
+      "dt_actual": "Christian 'Kily' González",
+      "sistema_tactico_predilecto": "4-4-2 / 5-3-2 de repliegue y transición vertical",
+      "estilo_juego": "Equipo intenso en el mediocampo, busca bloquear el juego interno del rival y salir rápido por las bandas o aprovechar la pelota quieta.",
+      "figuras_clave": ["Fernando Mimbacas", "Renzo Rabino", "Agustín Rodríguez"]
+    },
+    "penarol": {
+      "id_1891": 1,
+      "nombre_oficial": "Club Atlético Peñarol",
+      "nombre_corto": "Peñarol",
+      "abreviatura": "PEN",
+      "fundacion": "28 de septiembre de 1891",
+      "sede": "Montevideo, Uruguay",
+      "estadio_propio": "Estadio Campeón del Siglo",
+      "capacidad_estadio": 40700,
+      "colores": "Oro y Carbón (Amarillo y Negro)",
+      "web_oficial": "https://www.peñarol.org/",
+      "twitter": "https://x.com/OficialCAP",
+      "instagram": "https://www.instagram.com/oficialcap/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1922.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_penarol.webp",
+      "dt_actual": "Diego 'La Fiera' Aguirre",
+      "sistema_tactico_predilecto": "4-2-3-1 ofensivo con presión alta",
+      "figuras_clave": ["Leonardo Fernández", "Maximiliano Silvera", "Washington Aguerre", "Jesús Trindade", "Jaime Báez"]
+    },
+    "liverpool": {
+      "id_1891": 2,
+      "nombre_oficial": "Liverpool Fútbol Club",
+      "nombre_corto": "Liverpool",
+      "abreviatura": "LIV",
+      "fundacion": "15 de febrero de 1915",
+      "sede": "Belvedere, Montevideo",
+      "estadio_propio": "Estadio Belvedere",
+      "web_oficial": "https://liverpoolfc.com.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/logo-dark.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_liverpool.webp"
+    },
+    "nacional": {
+      "id_1891": 3,
+      "nombre_oficial": "Club Nacional de Football",
+      "nombre_corto": "Nacional",
+      "abreviatura": "NAC",
+      "fundacion": "14 de mayo de 1899",
+      "sede": "La Blanqueada, Montevideo",
+      "estadio_propio": "Gran Parque Central",
+      "web_oficial": "https://nacional.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/nacional248709.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_nacional.webp"
+    },
+    "defensor_sporting": {
+      "id_1891": 4,
+      "nombre_oficial": "Defensor Sporting Club",
+      "nombre_corto": "Defensor Sporting",
+      "abreviatura": "DEF",
+      "fundacion": "15 de marzo de 1913",
+      "sede": "Parque Rodó, Montevideo",
+      "estadio_propio": "Estadio Luis Franzini",
+      "web_oficial": "https://defensorsporting.com.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/defensor_22.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_defensor_sporting.webp"
+    },
+    "danubio": {
+      "id_1891": 5,
+      "nombre_oficial": "Danubio Fútbol Club",
+      "nombre_corto": "Danubio",
+      "abreviatura": "DAN",
+      "fundacion": "1 de marzo de 1932",
+      "sede": "Maroñas, Montevideo",
+      "estadio_propio": "Estadio Jardines del Hipódromo María Mincheff de Lazaroff",
+      "web_oficial": "https://www.danubio.org.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/danubio.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_danubio.webp"
+    },
+    "boston_river": {
+      "id_1891": 6,
+      "nombre_oficial": "Club Atlético Boston River",
+      "nombre_corto": "Boston River",
+      "abreviatura": "BRI",
+      "fundacion": "20 de febrero de 1939",
+      "sede": "Montevideo / Florida",
+      "estadio_propio": "Estadio Campeones Olímpicos (Florida)",
+      "web_oficial": "https://bostonriver.com.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/300x300briveriajwbanva.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_boston_river.webp"
+    },
+    "wanderers": {
+      "id_1891": 7,
+      "nombre_oficial": "Montevideo Wanderers Fútbol Club",
+      "nombre_corto": "Wanderers",
+      "abreviatura": "WAN",
+      "fundacion": "15 de agosto de 1902",
+      "sede": "Prado, Montevideo",
+      "estadio_propio": "Parque Alfredo Víctor Viera",
+      "web_oficial": "https://mwfc.com.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1926.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_montevideo_wanderers.webp"
+    },
+    "racing": {
+      "id_1891": 8,
+      "nombre_oficial": "Racing Club de Montevideo",
+      "nombre_corto": "Racing",
+      "abreviatura": "RAC",
+      "fundacion": "6 de abril de 1919",
+      "sede": "Sayago, Montevideo",
+      "estadio_propio": "Parque Osvaldo Roberto",
+      "web_oficial": "https://racingclub.com.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/130849.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_racing.webp"
+    },
+    "progreso": {
+      "id_1891": 9,
+      "nombre_oficial": "Club Atlético Progreso",
+      "nombre_corto": "Progreso",
+      "abreviatura": "PRO",
+      "fundacion": "30 de abril de 1917",
+      "sede": "La Teja, Montevideo",
+      "estadio_propio": "Parque Abraham Paladino",
+      "web_oficial": "https://progreso.uy/",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/proescdd0e7f389ecd12f0d0141750.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_progreso.webp"
+    },
+    "cerro": {
+      "id_1891": 10,
+      "nombre_oficial": "Club Atlético Cerro",
+      "nombre_corto": "Cerro",
+      "abreviatura": "CRR",
+      "fundacion": "1 de diciembre de 1922",
+      "sede": "Villa del Cerro, Montevideo",
+      "estadio_propio": "Estadio Monumental Luis Tróccoli",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/cerro.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_cerro.webp"
+    },
+    "cerro_largo": {
+      "id_1891": 11,
+      "nombre_oficial": "Cerro Largo Fútbol Club",
+      "nombre_corto": "Cerro Largo",
+      "abreviatura": "CRL",
+      "fundacion": "19 de noviembre de 2002",
+      "sede": "Melo, Cerro Largo",
+      "estadio_propio": "Estadio Municipal Arq. Antonio Eleuterio Ubilla",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/cerrolargo.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_cerro_largo.webp"
+    },
+    "deportivo_maldonado": {
+      "id_1891": 12,
+      "nombre_oficial": "Club Deportivo Maldonado",
+      "nombre_corto": "Deportivo Maldonado",
+      "abreviatura": "CDM",
+      "fundacion": "25 de agosto de 1928",
+      "sede": "Maldonado, Uruguay",
+      "estadio_propio": "Estadio Domingo Burgueño Miguel",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/116309.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_deportivo_maldonado.webp"
+    },
+    "montevideo_city_torque": {
+      "id_1891": 13,
+      "nombre_oficial": "Montevideo City Torque",
+      "nombre_corto": "Montevideo City Torque",
+      "abreviatura": "MCT",
+      "fundacion": "26 de diciembre de 2007",
+      "sede": "Montevideo, Uruguay",
+      "estadio_propio": "Estadio Charrúa / Parque Viera",
+      "escudo_auf_url": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/mdeocitytorque-escudo.png",
+      "escudo_local_webp": "assets/img/escudos/escudo_montevideo_city_torque.webp"
+    }
+  },
+  "apis_servicios": {
+    "open_meteo_cds": {
+      "nombre": "Open-Meteo Clima Campeón del Siglo",
+      "lat": -34.8016,
+      "lon": -56.0649,
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=-34.8016&longitude=-56.0649&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=America%2FMontevideo",
+      "descripcion": "Estación meteorológica virtual en Ruta 102 Km 21.4 para el estadio Campeón del Siglo."
+    },
+    "espn_soccer_uy": {
+      "nombre": "ESPN Soccer Live Score Uruguay",
+      "url_base": "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/scoreboard",
+      "descripcion": "Feed de marcadores, reloj en vivo, eventos (goles, tarjetas) y alineaciones."
+    },
+    "tickantel": {
+      "nombre": "TickAntel Entradas Oficiales Peñarol",
+      "url": "https://tickantel.com.uy/",
+      "descripcion": "Canje y venta de entradas para socios e hinchas aurinegros."
+    }
+  }
+}
