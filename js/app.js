@@ -903,6 +903,46 @@
         </div>
       `).join('');
     }
+
+    const duelosContainer = document.getElementById('duelos-tacticos-container');
+    if (duelosContainer && rival.duelos_tacticos_1x1 && rival.duelos_tacticos_1x1.length) {
+      duelosContainer.innerHTML = rival.duelos_tacticos_1x1.map(d => `
+        <div class="duel-item">
+          <div class="duel-title-bar">
+            <span class="duel-zone">${d.zona_campo}</span>
+            <span class="duel-headline">${d.titulo}</span>
+          </div>
+          <div class="duel-sides-wrap">
+            <div class="duel-side is-penarol">
+              <div class="duel-player-header">
+                <span class="duel-num">${d.penarol.dorsal || '★'}</span>
+                <div>
+                  <strong class="duel-player-name">${d.penarol.jugador}</strong>
+                  <div class="duel-player-role">${d.penarol.rol}</div>
+                </div>
+              </div>
+              <p class="duel-player-desc">${d.penarol.atributos_clave}</p>
+            </div>
+
+            <div class="duel-vs-divider">VS</div>
+
+            <div class="duel-side is-rival">
+              <div class="duel-player-header">
+                <span class="duel-num rival">${d.rival.dorsal || 'R'}</span>
+                <div>
+                  <strong class="duel-player-name">${d.rival.jugador}</strong>
+                  <div class="duel-player-role">${d.rival.rol}</div>
+                </div>
+              </div>
+              <p class="duel-player-desc">${d.rival.atributos_clave}</p>
+            </div>
+          </div>
+          <div class="duel-verdict">
+            <strong>Clave del Duelo:</strong> ${d.clave_del_duelo}
+          </div>
+        </div>
+      `).join('');
+    }
   }
 
   function renderHeadToHead(h2h) {

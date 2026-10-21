@@ -1,5 +1,5 @@
 {
-  "generado_el": "20/10/2026 20:57",
+  "generado_el": "20/10/2026 21:05",
   "rival_nombre": "Club Atlético Juventud de Las Piedras",
   "rival_corto": "Juventud",
   "rival_slug": "juventud",
@@ -48,6 +48,80 @@
       "Desgaste físico en la última media hora en la cancha grande del Estadio Centenario."
     ]
   },
+  "duelos_tacticos_1x1": [
+    {
+      "id": "duelo_cerebro_contencion",
+      "titulo": "El Cerebro Aurinegro vs. El Tapón Pedrense",
+      "zona_campo": "Zona 14 / Tres Cuartos Central",
+      "penarol": {
+        "jugador": "Leonardo Fernández",
+        "dorsal": "8",
+        "rol": "Enganche / Generador de Juego",
+        "atributos_clave": "Visión panorámica, pegada letal de tiro libre y pases filtrados milimétricos."
+      },
+      "rival": {
+        "jugador": "Agustín Rodríguez",
+        "dorsal": "5",
+        "rol": "Pivote Defensivo de Juventud",
+        "atributos_clave": "Corte escalonado, anticipo en el suelo y marca asfixiante sobre el receptor."
+      },
+      "clave_del_duelo": "Si Leo recibe perfilado y con 2 metros de luz, destrozará el cerrojo pedrense asistiendo a las bandas o rematando de media distancia. La misión de Rodríguez es no dejarlo girar nunca."
+    },
+    {
+      "id": "duelo_presion_zaga",
+      "titulo": "La Fiera de Presión vs. La Muralla del Fondo",
+      "zona_campo": "Punto Penal / Salida Defensiva de Juventud",
+      "penarol": {
+        "jugador": "Maximiliano Silvera",
+        "dorsal": "11",
+        "rol": "Centrodelantero de Presión",
+        "atributos_clave": "Presión incansable, diagonales de ruptura, desgaste de zagueros y anticipación."
+      },
+      "rival": {
+        "jugador": "Zaga Central de Juventud",
+        "dorsal": "2 / 3",
+        "rol": "Defensa de Bloque Bajo",
+        "atributos_clave": "Fuerza física en balones divididos, despejes expeditivos y cierre del área chica."
+      },
+      "clave_del_duelo": "Silvera forzará el error pedrense con su presión asfixiante, arrastrando a los centrales hacia los costados para abrir los pasillos interiores a las diagonales de Jaime Báez."
+    },
+    {
+      "id": "duelo_bandas_transicion",
+      "titulo": "Punzadas por Bandas vs. Despliegue de Carrileros",
+      "zona_campo": "Bandas / Pasillos Exteriores",
+      "penarol": {
+        "jugador": "Jaime Báez & Javier Cabrera",
+        "dorsal": "7 / 23",
+        "rol": "Extremos Mirasoles",
+        "atributos_clave": "Desborde 1x1 en velocidad, cambio de ritmo y centros rasantes venenosos atrás."
+      },
+      "rival": {
+        "jugador": "Renzo Rabino & Laterales",
+        "dorsal": "6 / 4",
+        "rol": "Carrileros de Juventud",
+        "atributos_clave": "Buena pegada y desdoble al ataque, pero tendencia a quedar desprotegidos al volver."
+      },
+      "clave_del_duelo": "Rabino es la principal arma de salida pedrense; si Peñarol roba el balón en transición, encontrará una autopista a sus espaldas para lastimar mano a mano."
+    },
+    {
+      "id": "duelo_cerrojo_pelotaquieta",
+      "titulo": "El Cerrojo Mirasol vs. El Contragolpe & Pelota Parada",
+      "zona_campo": "Área Aurinegra / Balón Parado Defensivo",
+      "penarol": {
+        "jugador": "Washington Aguerre & Guzmán Rodríguez",
+        "dorsal": "1 / 4",
+        "rol": "Arco y Zaga Central Decana",
+        "atributos_clave": "Voz de mando, dominio aéreo absoluto, salida limpia y seguridad de manos."
+      },
+      "rival": {
+        "jugador": "Fernando Mimbacas",
+        "dorsal": "9",
+        "rol": "Goleador Oportunista de Juventud",
+        "atributos_clave": "Pivoteo para segundas pelotas, búsqueda de la espalda zaguera y definición rápida."
+      },
+      "clave_del_duelo": "Mimbacas ya anotó en el Campeón del Siglo en el último 2-2. Peñarol debe mantener la línea alta concentrada y evitar conceder tiros libres frontales o córners innecesarios."
+    }
+  ],
   "historial_certificacion_1891": {
     "partidos_jugados": 33,
     "ganados_penarol": 23,

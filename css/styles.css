@@ -2204,3 +2204,181 @@ body {
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
+
+/* ==========================================================================
+   PIZARRA DE DUELOS TÁCTICOS 1x1 (CLAVES FRENTE A FRENTE EN EL CENTENARIO)
+   ========================================================================== */
+.duelos-1x1-card {
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(20, 20, 25, 0.96), rgba(9, 9, 11, 0.98));
+  border: 1px solid rgba(255, 209, 0, 0.32);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
+}
+
+.duelos-1x1-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 209, 0, 0.2);
+}
+
+.duelos-1x1-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duelos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.duel-item {
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.duel-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 209, 0, 0.4);
+}
+
+.duel-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.duel-zone {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.duel-headline {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  text-align: right;
+}
+
+.duel-sides-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.duel-side {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.duel-side.is-penarol {
+  border-left: 2px solid var(--manya-gold);
+}
+
+.duel-side.is-rival {
+  border-right: 2px solid #60a5fa;
+  text-align: right;
+}
+
+.duel-player-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.duel-side.is-rival .duel-player-header {
+  justify-content: flex-end;
+}
+
+.duel-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 900;
+  font-size: 11px;
+  background: var(--manya-gold);
+  color: #000;
+  padding: 2px 5px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.duel-num.rival {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.duel-player-name {
+  font-size: 12.5px;
+  color: #fff;
+  display: block;
+  line-height: 1.2;
+}
+
+.duel-player-role {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+}
+
+.duel-player-desc {
+  font-size: 11px;
+  color: #a1a1aa;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.duel-vs-divider {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--manya-gold);
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 209, 0, 0.3);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.duel-verdict {
+  background: rgba(255, 209, 0, 0.06);
+  border: 1px solid rgba(255, 209, 0, 0.2);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  color: #e4e4e7;
+  line-height: 1.4;
+}
+
+.duel-verdict strong {
+  color: var(--manya-gold);
+}

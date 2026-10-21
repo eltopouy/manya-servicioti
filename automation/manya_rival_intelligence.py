@@ -2,8 +2,8 @@
 """
 MANYA RIVAL INTELLIGENCE ENGINE (manya_rival_intelligence.py)
 ============================================================
-Compila un informe de Scouting Táctico y Datos Oficiales veraz y conciso
-para el próximo rival de Peñarol, cruzando fuentes de:
+Compila un informe de Scouting Táctico, Duelos 1x1 y Datos Oficiales
+veraz y conciso para el próximo rival de Peñarol, cruzando fuentes de:
 1. AUF (auf.org.uy/liga-auf-uruguaya/) - Institucional, estadios, fichas.
 2. 1891 BD (mcp.1891.uy) - Historial certificado y antecedentes.
 3. Ovación Digital / Prensa Deportiva - Rendimiento táctico reciente.
@@ -28,7 +28,7 @@ from manya_directory_registry import ManyaDirectoryRegistry
 
 
 def generar_informe_rival(rival_query: str = "juventud") -> dict:
-    """Genera el informe de scouting táctico y estadístico del rival."""
+    """Genera el informe de scouting táctico, duelos 1x1 y estadístico del rival."""
     logger.info(f"=== COMPILANDO INFORME DE INTELIGENCIA TÁCTICA DEL RIVAL: {rival_query.upper()} ===")
 
     club_info = ManyaDirectoryRegistry.get_club(rival_query) or {}
@@ -52,8 +52,8 @@ def generar_informe_rival(rival_query: str = "juventud") -> dict:
         "escudo_auf_remoto": club_info.get("escudo_auf_url", ""),
         "datos_institucionales_auf": {
             "fundacion": club_info.get("fundacion", "24 de diciembre de 1935"),
-            "sede": club_info.get("sede", "Las Piedras, Canelones"),
-            "estadio_propio": club_info.get("estadio_propio", "Estadio Municipal Parque Artigas"),
+            "sede": club_info.get("sede", "Las Piedras, Canelones, Uruguay"),
+            "estadio_propio": club_info.get("estadio_propio", "Estadio Municipal Parque Artigas (Las Piedras)"),
             "capacidad": club_info.get("capacidad_estadio", 12000),
             "web_oficial": club_info.get("web_oficial", "https://juventud.uy/"),
             "redes": {
@@ -97,6 +97,80 @@ def generar_informe_rival(rival_query: str = "juventud") -> dict:
                 "Desgaste físico en la última media hora en la cancha grande del Estadio Centenario."
             ]
         },
+        "duelos_tacticos_1x1": [
+            {
+                "id": "duelo_cerebro_contencion",
+                "titulo": "El Cerebro Aurinegro vs. El Tapón Pedrense",
+                "zona_campo": "Zona 14 / Tres Cuartos Central",
+                "penarol": {
+                    "jugador": "Leonardo Fernández",
+                    "dorsal": "8",
+                    "rol": "Enganche / Generador de Juego",
+                    "atributos_clave": "Visión panorámica, pegada letal de tiro libre y pases filtrados milimétricos."
+                },
+                "rival": {
+                    "jugador": "Agustín Rodríguez",
+                    "dorsal": "5",
+                    "rol": "Pivote Defensivo de Juventud",
+                    "atributos_clave": "Corte escalonado, anticipo en el suelo y marca asfixiante sobre el receptor."
+                },
+                "clave_del_duelo": "Si Leo recibe perfilado y con 2 metros de luz, destrozará el cerrojo pedrense asistiendo a las bandas o rematando de media distancia. La misión de Rodríguez es no dejarlo girar nunca."
+            },
+            {
+                "id": "duelo_presion_zaga",
+                "titulo": "La Fiera de Presión vs. La Muralla del Fondo",
+                "zona_campo": "Punto Penal / Salida Defensiva de Juventud",
+                "penarol": {
+                    "jugador": "Maximiliano Silvera",
+                    "dorsal": "11",
+                    "rol": "Centrodelantero de Presión",
+                    "atributos_clave": "Presión incansable, diagonales de ruptura, desgaste de zagueros y anticipación."
+                },
+                "rival": {
+                    "jugador": "Zaga Central de Juventud",
+                    "dorsal": "2 / 3",
+                    "rol": "Defensa de Bloque Bajo",
+                    "atributos_clave": "Fuerza física en balones divididos, despejes expeditivos y cierre del área chica."
+                },
+                "clave_del_duelo": "Silvera forzará el error pedrense con su presión asfixiante, arrastrando a los centrales hacia los costados para abrir los pasillos interiores a las diagonales de Jaime Báez."
+            },
+            {
+                "id": "duelo_bandas_transicion",
+                "titulo": "Punzadas por Bandas vs. Despliegue de Carrileros",
+                "zona_campo": "Bandas / Pasillos Exteriores",
+                "penarol": {
+                    "jugador": "Jaime Báez & Javier Cabrera",
+                    "dorsal": "7 / 23",
+                    "rol": "Extremos Mirasoles",
+                    "atributos_clave": "Desborde 1x1 en velocidad, cambio de ritmo y centros rasantes venenosos atrás."
+                },
+                "rival": {
+                    "jugador": "Renzo Rabino & Laterales",
+                    "dorsal": "6 / 4",
+                    "rol": "Carrileros de Juventud",
+                    "atributos_clave": "Buena pegada y desdoble al ataque, pero tendencia a quedar desprotegidos al volver."
+                },
+                "clave_del_duelo": "Rabino es la principal arma de salida pedrense; si Peñarol roba el balón en transición, encontrará una autopista a sus espaldas para lastimar mano a mano."
+            },
+            {
+                "id": "duelo_cerrojo_pelotaquieta",
+                "titulo": "El Cerrojo Mirasol vs. El Contragolpe & Pelota Parada",
+                "zona_campo": "Área Aurinegra / Balón Parado Defensivo",
+                "penarol": {
+                    "jugador": "Washington Aguerre & Guzmán Rodríguez",
+                    "dorsal": "1 / 4",
+                    "rol": "Arco y Zaga Central Decana",
+                    "atributos_clave": "Voz de mando, dominio aéreo absoluto, salida limpia y seguridad de manos."
+                },
+                "rival": {
+                    "jugador": "Fernando Mimbacas",
+                    "dorsal": "9",
+                    "rol": "Goleador Oportunista de Juventud",
+                    "atributos_clave": "Pivoteo para segundas pelotas, búsqueda de la espalda zaguera y definición rápida."
+                },
+                "clave_del_duelo": "Mimbacas ya anotó en el Campeón del Siglo en el último 2-2. Peñarol debe mantener la línea alta concentrada y evitar conceder tiros libres frontales o córners innecesarios."
+            }
+        ],
         "historial_certificacion_1891": h2h_data.get("resumen", {
             "partidos_jugados": 33,
             "ganados_penarol": 23,
@@ -125,5 +199,6 @@ if __name__ == "__main__":
     print(f"Scouting para {inf['rival_nombre']}:")
     print(f" - DT: {inf['scouting_tactico']['entrenador']}")
     print(f" - Esquema: {inf['scouting_tactico']['esquema_base']}")
-    print(f" - Figuras: {', '.join(f['nombre'] for f in inf['scouting_tactico']['figuras_a_seguir'])}")
-    print(f" - Ventaja 1891 BD: {inf['historial_certificacion_1891'].get('ventaja_victorias')}")
+    print(f" - Duelos 1x1 generados: {len(inf.get('duelos_tacticos_1x1', []))}")
+    for d in inf.get("duelos_tacticos_1x1", []):
+        print(f"   * {d['titulo']} ({d['penarol']['jugador']} vs {d['rival']['jugador']})")
