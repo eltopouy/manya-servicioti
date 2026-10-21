@@ -23,10 +23,15 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+
+      - name: Instalar Dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Actualizar Match Center, Historial y Efemérides 1891 BD
         run: |
-          pip install pillow
           python automation/manya_match_engine.py
           python automation/extraer_datos_1891.py
           python automation/manya_rival_intelligence.py

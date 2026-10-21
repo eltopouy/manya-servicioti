@@ -1,96 +1,96 @@
 {
-  "fecha_consulta": "20/10/2026",
-  "dia_mes": "20 de Octubre",
+  "fecha_consulta": "21/10/2026",
+  "dia_mes": "21 de Octubre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
   "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2021-10-20",
-      "ano": "2021",
-      "rival": "Montevideo City Torque",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Montevideo City Torque",
-      "torneo": "Torneo Clausura",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "Facundo Torres (P) 40', Facundo Torres (P) 55', Agustín Álvarez Martínez (P) 63' y Álvaro Brum (M) 88'"
-    },
-    {
-      "fecha": "2020-10-20",
-      "ano": "2020",
-      "rival": "Athletico Paranaense (Bra)",
-      "goles_penarol": 3,
-      "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Athletico Paranaense (Bra)",
-      "torneo": "Copa Libertadores de América",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "Fabricio Formiliano (P) 2', Lucho González (A) 36', Richard Candido Coelho (A) 45', Gary Kagelmacher (P) 63' y Matías Britos (P) 81'"
-    },
-    {
-      "fecha": "2019-10-20",
-      "ano": "2019",
-      "rival": "Boston River",
-      "goles_penarol": 1,
+      "fecha": "2012-10-21",
+      "ano": "2012",
+      "rival": "El Tanque Sisley",
+      "goles_penarol": 4,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Boston River",
-      "torneo": "Torneo Clausura",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "Cristian Rodríguez (P) 60'"
-    },
-    {
-      "fecha": "2010-10-20",
-      "ano": "2010",
-      "rival": "Goiás (Bra)",
-      "goles_penarol": 3,
-      "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Goiás (Bra)",
-      "torneo": "Copa Sudamericana",
+      "resultado": "Peñarol 4 - 0 El Tanque Sisley",
+      "torneo": "Torneo Apertura",
       "estadio": "Centenario",
-      "goles_detalle": "Rafael Moura (G) 17', Mathías Corujo (P) 38', Marcelo Sosa (P) 42', Carlos Alberto de Oliveira Júnior (G) 77' y Alejandro Martinuccio (P) 84'"
+      "goles_detalle": "Fabián Estoyanoff (P) 32', Juan Manuel Olivera (P) 78', Fabián Estoyanoff (P) 80' y Fabián Estoyanoff (P) 85'"
     },
     {
-      "fecha": "1996-10-20",
-      "ano": "1996",
-      "rival": "Nacional",
-      "goles_penarol": 1,
-      "goles_rival": 1,
-      "resultado": "Peñarol 1 - 1 Nacional",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Antonio Pacheco (P) 54' y Juan Martín Parodi (N) 60'"
-    },
-    {
-      "fecha": "1990-10-20",
-      "ano": "1990",
-      "rival": "Racing",
-      "goles_penarol": 1,
+      "fecha": "2007-10-21",
+      "ano": "2007",
+      "rival": "Liverpool",
+      "goles_penarol": 4,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Racing",
-      "torneo": "Campeonato Uruguayo",
+      "resultado": "Peñarol 4 - 0 Liverpool",
+      "torneo": "Torneo Apertura",
       "estadio": "Centenario",
-      "goles_detalle": "Adrian Paz (P) 40'"
+      "goles_detalle": "José María Franco (P) 7', Fernando Correa (P) 51', José María Franco (P) 85' y Fernando Correa (P) 90'"
     },
     {
-      "fecha": "1984-10-20",
-      "ano": "1984",
-      "rival": "Miramar Misiones",
+      "fecha": "2006-10-21",
+      "ano": "2006",
+      "rival": "Bella Vista",
       "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Miramar Misiones",
-      "torneo": "Torneo 60mo. Aniversario de Colombes",
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Bella Vista",
+      "torneo": "Torneo Apertura",
       "estadio": "Centenario",
-      "goles_detalle": "Walkir Silva 21' y Fernando Morena 79'"
+      "goles_detalle": "Alejandro Delorte (P) 11', Ismael Espiga (B) 23' y Alberto Acosta (P) 71'"
     },
     {
-      "fecha": "1974-10-20",
-      "ano": "1974",
-      "rival": "River Plate",
+      "fecha": "2004-10-21",
+      "ano": "2004",
+      "rival": "Cerro Porteño (Par)",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Cerro Porteño (Par)",
+      "torneo": "Copa Sudamericana",
+      "estadio": "General Pablo Rojas (La Olla) de Asunción",
+      "goles_detalle": "Cristian Rodríguez (P) 61', Carlos Diogo (P) 74' y César Ramírez (C) 75'"
+    },
+    {
+      "fecha": "2000-10-21",
+      "ano": "2000",
+      "rival": "Frontera Rivera",
+      "goles_penarol": 3,
+      "goles_rival": 2,
+      "resultado": "Peñarol 3 - 2 Frontera Rivera",
+      "torneo": "Torneo Clausura",
+      "estadio": "Atilio Paiva Olivera de Rivera",
+      "goles_detalle": "Guillermo Giacomazzi (P) 3', Walter Surraco (F) 6', Luis Romero (P) 26', Walter Guglielmone (F) 90' y Santiago Trinidad (F e/c) 90+3'"
+    },
+    {
+      "fecha": "1973-10-21",
+      "ano": "1973",
+      "rival": "Rentistas",
       "goles_penarol": 1,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 River Plate",
+      "resultado": "Peñarol 1 - 0 Rentistas",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Fernando Morena 82'"
+      "goles_detalle": "Fernando Morena 86'"
+    },
+    {
+      "fecha": "1961-10-21",
+      "ano": "1961",
+      "rival": "Danubio",
+      "goles_penarol": 5,
+      "goles_rival": 1,
+      "resultado": "Peñarol 5 - 1 Danubio",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Alberto Spencer (4) 11', 27', 56' y 66' y Ernesto Ledesma 50'"
+    },
+    {
+      "fecha": "1951-10-21",
+      "ano": "1951",
+      "rival": "Montevideo Wanderers",
+      "goles_penarol": 3,
+      "goles_rival": 0,
+      "resultado": "Peñarol 3 - 0 Montevideo Wanderers",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Obdulio Varela 14', Juan Eduardo Hohberg 19' y Hugo Villamide 58'"
     }
   ],
   "cumpleanos_glorias": [
@@ -111,6 +111,20 @@
     {
       "nombre": "Ernesto Ledesma",
       "fecha_nacimiento": "1930-10-23T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Elías Ricardo Figueroa",
+      "fecha_nacimiento": "1946-10-25T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Óscar Aguirregaray",
+      "fecha_nacimiento": "1959-10-25T00:00:00.000Z",
       "partidos": null,
       "goles": null,
       "titulos": 0
