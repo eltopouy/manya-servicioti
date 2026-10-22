@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v5.0';
+const CACHE_NAME = 'manya-servicioti-v5.2';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -8,13 +8,24 @@ const CORE_ASSETS = [
   '/data/live_status.json',
   '/data/news_digest.json',
   '/data/instagram_feed.json',
+  '/data/galleries.json',
   '/data/squad_2026.json',
-  '/data/history_1891.json'
+  '/data/history_1891.json',
+  '/data/escudos_uruguay.json',
+  '/data/historial_juventud.json',
+  '/data/efemerides_hoy.json',
+  '/data/rival_intelligence.json'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const asset of CORE_ASSETS) {
+        try {
+          await cache.add(asset);
+        } catch (_) {}
+      }
+    }).then(() => self.skipWaiting())
   );
 });
 
@@ -33,8 +44,10 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(event.request)
         .then(res => {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          if (res && res.status === 200) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          }
           return res;
         })
         .catch(() => caches.match(event.request))

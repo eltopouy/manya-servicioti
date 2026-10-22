@@ -265,6 +265,14 @@
       if (elH) elH.textContent = String(h).padStart(2, '0');
       if (elM) elM.textContent = String(m).padStart(2, '0');
       if (elS) elS.textContent = String(s).padStart(2, '0');
+
+      if (diff === 0) {
+        const tDate = document.getElementById('hero-match-date');
+        if (tDate) {
+          tDate.textContent = '🔴 ¡HORA DE JUGAR! • EN VIVO / POR COMENZAR';
+          tDate.style.color = '#ef4444';
+        }
+      }
     }
     tick();
     window._manyaCountdownInterval = setInterval(tick, 1000);
@@ -400,16 +408,25 @@
     // Ticker interactivo de alerta de partido
     const tickerEl = document.getElementById('manya-live-ticker');
     const tickerTxt = document.getElementById('ticker-text');
-    if (tickerEl && live.alerta_banner) {
-      tickerEl.style.display = 'flex';
-      if (tickerTxt) tickerTxt.textContent = live.alerta_banner;
-      if (live.fase_partido === 'EN_VIVO') {
-        tickerEl.style.borderColor = '#ef4444';
-        tickerEl.style.background = '#450a0a';
-        tickerEl.style.animation = 'pulse 2s infinite';
-      } else if (live.fase_partido === 'PREVIA') {
-        tickerEl.style.borderColor = '#ffd100';
-        tickerEl.style.background = '#18181b';
+    if (tickerEl) {
+      if (live.alerta_banner) {
+        tickerEl.style.display = 'flex';
+        if (tickerTxt) tickerTxt.textContent = live.alerta_banner;
+        if (live.fase_partido === 'EN_VIVO') {
+          tickerEl.style.borderColor = '#ef4444';
+          tickerEl.style.background = '#450a0a';
+          tickerEl.style.animation = 'pulse 2s infinite';
+        } else if (live.fase_partido === 'PREVIA') {
+          tickerEl.style.borderColor = '#ffd100';
+          tickerEl.style.background = '#18181b';
+          tickerEl.style.animation = 'none';
+        } else {
+          tickerEl.style.borderColor = 'rgba(255, 209, 0, 0.35)';
+          tickerEl.style.background = '#09090b';
+          tickerEl.style.animation = 'none';
+        }
+      } else {
+        tickerEl.style.display = 'none';
       }
     }
 
@@ -573,26 +590,100 @@
     ctx.fillText('★ MI 11 TITULAR DEL GLORIOSO PEÑAROL ★', 540, 85);
 
     ctx.fillStyle = '#e4e4e7';
-    ctx.font = '700 26px Inter, sans-serif';
+    ctx.font = '700 24px Inter, sans-serif';
     ctx.fillText(`Esquema Táctico: ${state.formation} • manya.servicioti.com.uy`, 540, 130);
 
-    // Cancha
+    // Cancha reglamentaria completa
+    const px0 = 90, py0 = 170, pw = 900, ph = 1020;
+    const midY = py0 + ph / 2;
+    const midX = px0 + pw / 2;
+
+    // Césped
     ctx.fillStyle = '#14532d';
-    ctx.fillRect(90, 170, 900, 1020);
-    ctx.strokeStyle = '#ffffff';
+    ctx.fillRect(px0, py0, pw, ph);
+
+    // Franjas de corte de césped sutiles
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+    const stripH = ph / 8;
+    for (let i = 0; i < 8; i += 2) {
+      ctx.fillRect(px0, py0 + i * stripH, pw, stripH);
+    }
+
+    // Líneas perimetrales y de medio campo
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
     ctx.lineWidth = 4;
-    ctx.strokeRect(90, 170, 900, 1020);
+    ctx.strokeRect(px0, py0, pw, ph);
+
     ctx.beginPath();
-    ctx.moveTo(90, 680);
-    ctx.lineTo(990, 680);
+    ctx.moveTo(px0, midY);
+    ctx.lineTo(px0 + pw, midY);
     ctx.stroke();
 
+    // Círculo central y punto medio
+    ctx.beginPath();
+    ctx.arc(midX, midY, 110, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(midX, midY, 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+
+    // Área Grande Superior (Rival)
+    ctx.strokeRect(midX - 250, py0, 500, 160);
+    // Área Chica Superior
+    ctx.strokeRect(midX - 120, py0, 240, 60);
+    // Punto Penal Superior
+    ctx.beginPath();
+    ctx.arc(midX, py0 + 115, 6, 0, Math.PI * 2);
+    ctx.fill();
+    // Medialuna Superior
+    ctx.beginPath();
+    ctx.arc(midX, py0 + 115, 80, 0.23 * Math.PI, 0.77 * Math.PI);
+    ctx.stroke();
+
+    // Área Grande Inferior (Arco Decano)
+    ctx.strokeRect(midX - 250, py0 + ph - 160, 500, 160);
+    // Área Chica Inferior
+    ctx.strokeRect(midX - 120, py0 + ph - 60, 240, 60);
+    // Punto Penal Inferior
+    ctx.beginPath();
+    ctx.arc(midX, py0 + ph - 115, 6, 0, Math.PI * 2);
+    ctx.fill();
+    // Medialuna Inferior
+    ctx.beginPath();
+    ctx.arc(midX, py0 + ph - 115, 80, 1.23 * Math.PI, 1.77 * Math.PI);
+    ctx.stroke();
+
+    // Arcos de córner en las 4 esquinas
+    const cornerR = 26;
+    ctx.beginPath();
+    ctx.arc(px0, py0, cornerR, 0, 0.5 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(px0 + pw, py0, cornerR, 0.5 * Math.PI, Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(px0, py0 + ph, cornerR, 1.5 * Math.PI, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(px0 + pw, py0 + ph, cornerR, Math.PI, 1.5 * Math.PI);
+    ctx.stroke();
+
+    // Dibujar futbolistas con dorsales y etiquetas legibles
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
     state.lineup.slice(0, 11).forEach((p, idx) => {
       const c = coords[idx] || { x: 50, y: 50 };
-      const px = 90 + (c.x / 100) * 900;
-      const py = 170 + (c.y / 100) * 1020;
+      const px = px0 + (c.x / 100) * pw;
+      const py = py0 + (c.y / 100) * ph;
 
+      // Sombra
+      ctx.beginPath();
+      ctx.arc(px, py + 4, 34, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fill();
+
+      // Ficha Oro y Carbón
       ctx.beginPath();
       ctx.arc(px, py, 34, 0, Math.PI * 2);
       ctx.fillStyle = '#ffd100';
@@ -601,13 +692,25 @@
       ctx.strokeStyle = '#09090b';
       ctx.stroke();
 
+      // Dorsal
       ctx.fillStyle = '#09090b';
       ctx.font = '900 26px Inter, sans-serif';
       ctx.fillText(String(p.numero), px, py + 9);
 
+      // Nombre y Rol
+      const lastName = p.nombre.split(' ').slice(-1)[0];
+      const nameTxt = `${lastName} (${c.role})`;
+      ctx.font = '800 20px Inter, sans-serif';
+      const textMetrics = ctx.measureText(nameTxt);
+      const textW = textMetrics.width + 16;
+      ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
+      ctx.fillRect(px - textW / 2, py + 42, textW, 26);
+      ctx.strokeStyle = 'rgba(255, 209, 0, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(px - textW / 2, py + 42, textW, 26);
+
       ctx.fillStyle = '#ffffff';
-      ctx.font = '800 22px Inter, sans-serif';
-      ctx.fillText(p.nombre, px, py + 62);
+      ctx.fillText(nameTxt, px, py + 61);
     });
 
     ctx.fillStyle = '#ffd100';
@@ -618,6 +721,87 @@
     link.download = `mi-11-penarol-${state.formation}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
+  }
+
+  let triviaAudioEnabled = true;
+
+  function playAudioTone(type) {
+    if (!triviaAudioEnabled) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.09, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.25);
+      } else if (type === 'wrong') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(260, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(170, ctx.currentTime + 0.22);
+        gain.gain.setValueAtTime(0.09, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.25);
+      } else if (type === 'fanfare') {
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.25);
+          o.start(ctx.currentTime + i * 0.1);
+          o.stop(ctx.currentTime + i * 0.1 + 0.25);
+        });
+      }
+    } catch (_) {}
+  }
+
+  function getTriviaHighScore() {
+    try {
+      return parseInt(localStorage.getItem('manya_trivia_highscore') || '0', 10);
+    } catch (_) {
+      return 0;
+    }
+  }
+
+  function saveTriviaHighScore(score) {
+    try {
+      const cur = getTriviaHighScore();
+      if (score > cur) {
+        localStorage.setItem('manya_trivia_highscore', String(score));
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  function prepareTriviaQuestion(q) {
+    // Generar opciones barajadas dinámicamente para que la respuesta correcta no esté siempre en 'A'
+    const paired = q.opts.map((opt, idx) => ({
+      text: opt,
+      isCorrect: idx === q.ans
+    }));
+    // Fisher-Yates shuffle
+    for (let i = paired.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [paired[i], paired[j]] = [paired[j], paired[i]];
+    }
+    return Object.assign({}, q, {
+      opts: paired.map(p => p.text),
+      ans: paired.findIndex(p => p.isCorrect)
+    });
   }
 
   let triviaState = {
@@ -631,11 +815,13 @@
   };
 
   function getTriviaQuestionsPool(cat) {
-    if (!cat || cat === 'all') {
-      return [...TRIVIA_QUESTIONS];
-    }
-    const filtered = TRIVIA_QUESTIONS.filter(q => q.cat === cat);
-    return filtered.length ? filtered : [...TRIVIA_QUESTIONS];
+    const rawList = (!cat || cat === 'all')
+      ? TRIVIA_QUESTIONS
+      : TRIVIA_QUESTIONS.filter(q => q.cat === cat);
+    const list = rawList.length ? rawList : TRIVIA_QUESTIONS;
+    // Barajar aleatoriamente el orden de las preguntas y sus opciones
+    const shuffled = [...list].sort(() => Math.random() - 0.5);
+    return shuffled.map(prepareTriviaQuestion);
   }
 
   function renderTrivia() {
@@ -649,10 +835,16 @@
     const pool = triviaState.questionsPool;
     const total = pool.length;
     const idx = triviaState.currentIndex;
+    const personalRecord = getTriviaHighScore();
 
     // Si terminó la tanda de preguntas
     if (idx >= total) {
       const pct = Math.round((triviaState.score / (total * 100)) * 100);
+      const isNewRecord = saveTriviaHighScore(triviaState.score);
+      if (pct >= 70 || isNewRecord) {
+        playAudioTone('fanfare');
+      }
+
       let rankBadge = '';
       let rankTitle = '';
       let rankMsg = '';
@@ -679,6 +871,7 @@
         <div class="trivia-container trivia-game-over">
           <div style="font-size:38px;margin-bottom:8px;">🏆</div>
           <h4 style="font-size:20px;color:#fff;margin-bottom:4px;">${rankTitle}</h4>
+          ${isNewRecord ? '<div style="background:#22c55e;color:#000;font-weight:900;padding:4px 12px;border-radius:999px;font-size:12px;display:inline-block;margin-bottom:8px;">🎉 ¡NUEVO RÉCORD PERSONAL!</div>' : ''}
           <div class="trivia-rank-badge">${rankBadge}</div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0;background:rgba(0,0,0,0.5);padding:14px;border-radius:8px;border:1px solid rgba(255,209,0,0.2);">
             <div>
@@ -722,7 +915,7 @@
     const progressPct = Math.round(((idx) / total) * 100);
 
     const categoriesList = [
-      { id: 'all', label: 'Todas (20)' },
+      { id: 'all', label: 'Todas' },
       { id: 'libertadores', label: '🏆 Libertadores' },
       { id: 'clasicos', label: '⚡ Clásicos' },
       { id: 'idolos', label: '⭐ Ídolos' },
@@ -732,20 +925,26 @@
 
     box.innerHTML = `
       <div class="trivia-container">
-        <!-- Selector de Categorías -->
-        <div class="trivia-cat-chips" role="tablist">
-          ${categoriesList.map(cat => `
-            <button type="button" class="trivia-chip ${triviaState.category === cat.id ? 'active' : ''}" data-cat="${cat.id}">
-              ${cat.label}
-            </button>
-          `).join('')}
+        <!-- Selector de Categorías y Sonido -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div class="trivia-cat-chips" role="tablist">
+            ${categoriesList.map(cat => `
+              <button type="button" class="trivia-chip ${triviaState.category === cat.id ? 'active' : ''}" data-cat="${cat.id}">
+                ${cat.label}
+              </button>
+            `).join('')}
+          </div>
+          <button type="button" id="trivia-sound-toggle" title="Activar/Desactivar Sonido" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#d4d4d8;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;">
+            ${triviaAudioEnabled ? '🔊 Sonido' : '🔇 Mudo'}
+          </button>
         </div>
 
         <!-- Barra de Progreso y Estadísticas -->
         <div class="trivia-stats-row">
           <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${item.catName || 'Historia'}</em></span>
           <div style="display:flex;align-items:center;gap:12px;">
-            ${triviaState.streak > 1 ? `<span class="trivia-streak-badge">🔥 Racha: x${triviaState.streak}</span>` : ''}
+            ${personalRecord > 0 ? `<span style="font-size:11px;color:#a1a1aa;">🏅 Récord: <strong style="color:#ffd100;">${personalRecord}</strong></span>` : ''}
+            ${triviaState.streak > 1 ? `<span class="trivia-streak-badge">🔥 x${triviaState.streak}</span>` : ''}
             <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${triviaState.score} pts</span>
           </div>
         </div>
@@ -756,7 +955,7 @@
         <!-- Pregunta -->
         <h4 class="trivia-q-title">${item.q}</h4>
 
-        <!-- Opciones -->
+        <!-- Opciones (Distribuidas aleatoriamente) -->
         <div class="trivia-opts-grid" id="trivia-opts">
           ${item.opts.map((o, i) => {
             const letter = ['A', 'B', 'C', 'D'][i] || (i + 1);
@@ -774,7 +973,16 @@
       </div>
     `;
 
-    // Asignar eventos a las fichas de categoría
+    // Toggle de sonido
+    const sndBtn = box.querySelector('#trivia-sound-toggle');
+    if (sndBtn) {
+      sndBtn.addEventListener('click', () => {
+        triviaAudioEnabled = !triviaAudioEnabled;
+        sndBtn.textContent = triviaAudioEnabled ? '🔊 Sonido' : '🔇 Mudo';
+      });
+    }
+
+    // Eventos a las fichas de categoría
     box.querySelectorAll('.trivia-chip').forEach(btn => {
       btn.addEventListener('click', () => {
         const selectedCat = btn.getAttribute('data-cat');
@@ -789,7 +997,7 @@
       });
     });
 
-    // Asignar eventos a las opciones de respuesta
+    // Eventos a las opciones de respuesta
     const fb = box.querySelector('#trivia-feedback');
     const optBtns = box.querySelectorAll('#trivia-opts .trivia-opt-btn');
 
@@ -802,6 +1010,7 @@
         optBtns.forEach(b => b.disabled = true);
 
         if (chosen === item.ans) {
+          playAudioTone('correct');
           triviaState.streak++;
           if (triviaState.streak > triviaState.maxStreak) {
             triviaState.maxStreak = triviaState.streak;
@@ -821,6 +1030,7 @@
             <button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente Pregunta →</button>
           `;
         } else {
+          playAudioTone('wrong');
           triviaState.streak = 0;
           btn.classList.add('is-wrong');
           const correctBtn = box.querySelector(`#trivia-opts .trivia-opt-btn[data-idx="${item.ans}"]`);
@@ -1371,6 +1581,34 @@
 
     const expBtn = document.getElementById('export-lineup-btn');
     if (expBtn) expBtn.addEventListener('click', exportLineupPNG);
+
+    const shareLineupBtn = document.getElementById('share-lineup-btn');
+    if (shareLineupBtn) {
+      shareLineupBtn.addEventListener('click', async () => {
+        const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation}) armado en manya.servicioti.com.uy:\n` +
+          state.lineup.slice(0, 11).map((p, i) => `#${p.numero} ${p.nombre}`).join('\n') +
+          '\n\n¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !';
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Mi 11 Titular del Glorioso Peñarol',
+              text: text,
+              url: 'https://manya.servicioti.com.uy/#pizarra-tactica'
+            });
+          } catch (e) {
+            if (e.name !== 'AbortError') {
+              navigator.clipboard?.writeText(text);
+              alert('¡11 Titular copiado al portapapeles!');
+            }
+          }
+        } else {
+          navigator.clipboard?.writeText(text);
+          const orig = shareLineupBtn.textContent;
+          shareLineupBtn.textContent = '✅ ¡Copiado!';
+          setTimeout(() => { shareLineupBtn.textContent = orig; }, 2000);
+        }
+      });
+    }
 
     if (digest) {
       const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html';

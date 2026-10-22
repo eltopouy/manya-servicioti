@@ -1,5 +1,5 @@
 {
-  "actualizado": "22/10/2026 06:05",
+  "actualizado": "22/10/2026 08:55",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "🟡⚫ Próximo partido: Juventud vs Peñarol el Viernes 23/10/2026 20:00 hs (Estadio Centenario)",
   "partido_activo": {
@@ -391,12 +391,12 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 12.0,
-    "sensacion_c": 10.1,
-    "viento_kmh": 13.0,
-    "humedad_pct": 88,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
-    "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "22/10/2026 06:05"
+    "temperatura_c": 17.3,
+    "sensacion_c": 14.7,
+    "viento_kmh": 21.2,
+    "humedad_pct": 70,
+    "condicion": "Parcialmente nublado en Ruta 102",
+    "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
+    "actualizado": "22/10/2026 08:55"
   }
 }

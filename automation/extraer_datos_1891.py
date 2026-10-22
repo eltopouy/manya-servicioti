@@ -324,6 +324,24 @@ def extraer_efemerides_hoy():
     }
     (DATA_DIR / "efemerides_hoy.json").write_text(json.dumps(efemerides_doc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"✓ data/efemerides_hoy.json guardado con {len(matches_clean)} partidos históricos y {len(birthdays_clean)} cumpleaños aurinegros.")
+
+    # Sincronizar badge en index.html
+    index_file = BASE_DIR / "index.html"
+    if index_file.exists():
+        try:
+            content_h = index_file.read_text(encoding="utf-8")
+            import re
+            updated_h = re.sub(
+                r'(<span id="efemerides-date-tag" class="badge-gold">)[^<]+(</span>)',
+                rf'\g<1>{dia_mes}\g<2>',
+                content_h
+            )
+            if updated_h != content_h:
+                index_file.write_text(updated_h, encoding="utf-8")
+                print(f"✓ index.html sincronizado con la fecha de hoy: '{dia_mes}'.")
+        except Exception as err:
+            print(f"[Warning] No se pudo sincronizar index.html: {err}")
+
     return efemerides_doc
 
 if __name__ == "__main__":

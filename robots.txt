@@ -6,6 +6,8 @@ Allow: /
 
 User-agent: Googlebot-Image
 Allow: /assets/ig/
+Allow: /assets/gallery/
+Allow: /assets/img/
 
 User-agent: Mediapartners-Google
 Allow: /
