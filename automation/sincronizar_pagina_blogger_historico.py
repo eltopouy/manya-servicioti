@@ -24,7 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 sys.path.insert(0, str(BASE_DIR / "automation"))
 
-from blogger_manya_publisher import get_blogger_service, BLOG_ID
+try:
+    from blogger_manya_publisher import get_blogger_service, BLOG_ID, TOKEN_PATH
+    HAS_BLOGGER_LIBS = True
+except (ImportError, Exception) as e_imp:
+    HAS_BLOGGER_LIBS = False
+    BLOG_ID = "8220787747664379807"
+    TOKEN_PATH = Path("non_existent_token.json")
 
 logger = logging.getLogger("BloggerHistoricoSync")
 if not logger.handlers:
@@ -251,9 +257,18 @@ def generar_contenido_html(digest: dict, live: dict, h2h_juv: dict) -> str:
 
 def sincronizar_pagina_blogger() -> str:
     """Busca si la página ya existe en Blogger; si existe la actualiza, si no la crea."""
-    from blogger_manya_publisher import TOKEN_PATH
+    if not HAS_BLOGGER_LIBS:
+        logger.info("[Blogger Sync] Librerías de Google Blogger no disponibles en este entorno. Saltando sync remoto.")
+        if STATE_FILE.exists():
+            try:
+                cached = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+                return cached.get("url", "")
+            except Exception:
+                pass
+        return "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
+
     if not TOKEN_PATH.exists():
-        logger.info("[Blogger Sync] token.json no disponible en este entorno (ej. runner de CI sin secrets). Saltando sync remoto.")
+        logger.info("[Blogger Sync] token.json no disponible en este entorno. Saltando sync remoto.")
         if STATE_FILE.exists():
             try:
                 cached = json.loads(STATE_FILE.read_text(encoding="utf-8"))
