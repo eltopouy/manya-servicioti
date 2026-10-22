@@ -142,6 +142,11 @@ REGLAS EDITORIALES OBLIGATORIAS:
 
         # Publicar en Blogger
         post_url = publish_manya_article_to_blogger(post_type="PREVIA", match_id=event_id)
+        try:
+            from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+            sincronizar_pagina_blogger()
+        except Exception as ex_sync:
+            logger.warning(f"[Blogger Sync] Aviso actualizando archivo histórico: {ex_sync}")
         git_commit_and_push(f"feat(previa): publicar previa {match_title} en vivo")
 
 
@@ -233,6 +238,11 @@ REGLAS EDITORIALES OBLIGATORIAS:
 
         # Publicar en Blogger
         post_url = publish_manya_article_to_blogger(post_type="CRONICA", match_id=event_id)
+        try:
+            from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+            sincronizar_pagina_blogger()
+        except Exception as ex_sync:
+            logger.warning(f"[Blogger Sync] Aviso actualizando archivo histórico: {ex_sync}")
         git_commit_and_push(f"feat(cronica): publicar crónica oficial {marcador}")
 
 
@@ -263,13 +273,12 @@ def ejecutar_orquestador(modo: str = "once"):
             except Exception as ex_scout:
                 logger.warning(f"[Scout] Aviso generando scouting del rival: {ex_scout}")
 
-            # 1c. Sincronizar scouting táctico del rival (AUF + 1891 + Ovación)
+            # 1d. Sincronizar página de archivo histórico en Blogger
             try:
-                from manya_rival_intelligence import generar_informe_rival
-                rival_equipo = match_info.get("visitante", {}) if match_info.get("local", {}).get("es_penarol") else match_info.get("local", {})
-                generar_informe_rival(rival_equipo.get("nombre", "juventud"))
-            except Exception as ex_scout:
-                logger.warning(f"[Scout] Aviso generando scouting del rival: {ex_scout}")
+                from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+                sincronizar_pagina_blogger()
+            except Exception as ex_p:
+                logger.warning(f"[Blogger Archivo] Aviso sincronizando página central: {ex_p}")
 
             # 2. Recolectar prensa deportiva exhaustiva
             noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)

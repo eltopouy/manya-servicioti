@@ -19,6 +19,7 @@
 - [Galería Visual Curada con Metadatos SEO](https://manya.servicioti.com.uy/data/instagram_feed.json)
 
 ## Ecosistema ServicioTI Conectado
+- [Archivo Histórico de Análisis Tácticos, Crónicas e Historial de Partidos 1891 BD](https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html)
 - [Portal Principal y Crónicas Extendidas de Peñarol](https://www.servicioti.com.uy/)
 - [Radar de Ómnibus CUTCSA y COPSA al Estadio Campeón del Siglo](https://horarios.servicioti.com.uy/)
 - [Simulador de Truco Uruguayo Online](https://truco-uruguayo.servicioti.com.uy/)

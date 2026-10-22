@@ -361,10 +361,10 @@ class ManyaMatchEngine:
     def get_last_match(cls) -> Dict[str, Any]:
         """
         Obtiene el último partido disputado por Peñarol escaneando hacia atrás
-        (-1 a -14 días en el Scoreboard) con fallback a la última fecha disputada.
+        (0 a -14 días en el Scoreboard) con fallback a la última fecha disputada.
         """
         now_uy = datetime.now(UY_TZ)
-        for d in range(1, 15):
+        for d in range(0, 15):
             scan_dt = now_uy - timedelta(days=d)
             scan_ds = scan_dt.strftime("%Y%m%d")
             url = f"{SCOREBOARD_URL}?dates={scan_ds}"
@@ -382,6 +382,49 @@ class ManyaMatchEngine:
 
         # Fallback al partido con Liverpool (18/10/2026)
         return VERIFIED_FIXTURE_2026[0]
+
+    @classmethod
+    def get_next_upcoming_match(cls, exclude_event_id: str = "") -> Optional[Dict[str, Any]]:
+        """Busca el siguiente encuentro futuro en el calendario que no sea el recién finalizado."""
+        now_uy = datetime.now(UY_TZ)
+        # 1. Team API
+        team_data = cls._fetch_json(TEAM_API_URL)
+        if team_data:
+            next_ev_list = team_data.get("team", {}).get("nextEvent", [])
+            for ev in next_ev_list:
+                ev_id = str(ev.get("id", ""))
+                if ev_id != exclude_event_id:
+                    match_info = cls._parse_espn_event(ev)
+                    match_info["es_hoy"] = False
+                    return match_info
+
+        # 2. Scoreboard forward scan (+1 a +21 días)
+        for d in range(1, 22):
+            scan_dt = now_uy + timedelta(days=d)
+            scan_ds = scan_dt.strftime("%Y%m%d")
+            data = cls._fetch_json(f"{SCOREBOARD_URL}?dates={scan_ds}")
+            if data:
+                for ev in data.get("events", []):
+                    name = ev.get("name", "").lower()
+                    if ("peñarol" in name or "penarol" in name) and str(ev.get("id", "")) != exclude_event_id:
+                        status = ev.get("status", {}).get("type", {})
+                        if not status.get("completed"):
+                            match_info = cls._parse_espn_event(ev)
+                            match_info["es_hoy"] = False
+                            return match_info
+
+        # 3. Fixture oficial AUF verificado
+        for fix in VERIFIED_FIXTURE_2026:
+            if not fix.get("completado"):
+                try:
+                    f_dt = datetime.fromisoformat(fix["fecha_iso"])
+                    if f_dt > now_uy and str(fix.get("event_id", "")) != exclude_event_id:
+                        fix_copy = dict(fix)
+                        fix_copy["es_hoy"] = False
+                        return fix_copy
+                except Exception:
+                    continue
+        return None
 
     @classmethod
     def fetch_standings(cls) -> List[Dict[str, Any]]:
@@ -540,6 +583,14 @@ class ManyaMatchEngine:
         if match_info and match_info.get("event_id"):
             summary_adv = cls.fetch_match_summary_details(match_info["event_id"])
 
+        # Si hoy terminó un partido (FINALIZADO), actualizar referencias
+        proximo_partido_data = match_info or {}
+        if fase == "FINALIZADO" and match_info:
+            last_match = match_info
+            next_upcoming = cls.get_next_upcoming_match(exclude_event_id=match_info.get("event_id"))
+            if next_upcoming:
+                proximo_partido_data = next_upcoming
+
         # Generar alerta banner interactiva
         if fase == "EN_VIVO":
             alerta_banner = f"🔴 EN VIVO AHORA: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info.get('minuto_reloj', '1T')})"
@@ -548,7 +599,7 @@ class ManyaMatchEngine:
         elif fase == "FINALIZADO":
             alerta_banner = f"🏁 FINAL: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info['estadio']})"
         else:
-            alerta_banner = f"🟡⚫ Próximo partido: {match_info['nombre']} el {match_info['fecha_legible']} ({match_info['estadio']})"
+            alerta_banner = f"🟡⚫ Próximo partido: {proximo_partido_data.get('nombre', 'Peñarol')} el {proximo_partido_data.get('fecha_legible', '')} ({proximo_partido_data.get('estadio', '')})"
 
         # Si no juega hoy, partido_activo mantiene la referencia al próximo encuentro
         partido_activo_data = dict(match_info) if match_info else {}
@@ -561,10 +612,10 @@ class ManyaMatchEngine:
             "fase_partido": fase,
             "alerta_banner": alerta_banner,
             "partido_activo": partido_activo_data,
-            "proximo_partido": match_info or {},
+            "proximo_partido": proximo_partido_data,
             "ultimo_partido": last_match or {},
             "ultimos_resultados": [last_match] if last_match else [],
-            "proximos_partidos": [match_info] if match_info else [],
+            "proximos_partidos": [proximo_partido_data] if proximo_partido_data else [],
             "tabla_posiciones": standings,
             "clima_campeon_del_siglo": weather
         }
@@ -575,7 +626,7 @@ class ManyaMatchEngine:
 
         logger.info(f"[MatchEngine] ✓ data/live_status.json generado con éxito.")
         logger.info(f"             - Fase: {fase}")
-        logger.info(f"             - Próximo: {match_info['nombre']} ({match_info['fecha_legible']})")
+        logger.info(f"             - Próximo: {proximo_partido_data.get('nombre', '')} ({proximo_partido_data.get('fecha_legible', '')})")
         logger.info(f"             - Último: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']}")
         return doc_live
 

@@ -35,6 +35,7 @@ jobs:
           python automation/manya_match_engine.py
           python automation/extraer_datos_1891.py
           python automation/manya_rival_intelligence.py
+          python automation/sincronizar_pagina_blogger_historico.py
 
       - name: Verificar Cambios y Commit a Main
         run: |
