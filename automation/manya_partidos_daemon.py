@@ -100,7 +100,7 @@ REGLAS EDITORIALES OBLIGATORIAS:
   "bajada_seo": "Resumen periodístico SEO con Peñarol, rival, estadio y cómo verlo.",
   "claves_60_segundos": [
     {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Detalle del planteo de Diego Aguirre..."}},
-    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Arezo / atacantes..."}},
+    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Leonardo Fernández / Maximiliano Silvera / atacantes..."}},
     {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay y canales VTV Plus / Disney+..."}},
     {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en el Clausura y la Tabla Anual..."}}
   ],

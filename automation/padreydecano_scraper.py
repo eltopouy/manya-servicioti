@@ -10,6 +10,7 @@ del Club Atlético Peñarol desde fuentes deportivas uruguayas verificadas:
 """
 import os
 import re
+import html
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -82,7 +83,7 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
             d_el = item.find("description")
             p_el = item.find("pubDate")
 
-            titulo = (t_el.text or "").strip() if t_el is not None else ""
+            titulo = html.unescape((t_el.text or "").strip()).replace("\xa0", " ") if t_el is not None else ""
             link = (l_el.text or "").strip() if l_el is not None else ""
             desc = (d_el.text or "").strip() if d_el is not None else ""
             pub = (p_el.text or "").strip() if p_el is not None else ""
@@ -96,7 +97,8 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
                 continue
             seen_titles.add(norm_t)
 
-            desc_clean = re.sub(r"<[^>]+>", " ", desc).strip()
+            desc_clean = html.unescape(desc).replace("\xa0", " ")
+            desc_clean = re.sub(r"<[^>]+>", " ", desc_clean).strip()
             desc_clean = re.sub(r"\s+", " ", desc_clean)[:240]
 
             # Buscar imagen en el HTML del artículo
@@ -141,10 +143,10 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
             c_el = item.find("category")
             p_el = item.find("pubDate")
 
-            titulo = (t_el.text or "").strip() if t_el is not None else ""
+            titulo = html.unescape((t_el.text or "").strip()).replace("\xa0", " ") if t_el is not None else ""
             link = (l_el.text or "").strip() if l_el is not None else ""
             desc = (d_el.text or "").strip() if d_el is not None else ""
-            cat = (c_el.text or "Actualidad").strip() if c_el is not None else "Actualidad"
+            cat = html.unescape((c_el.text or "Actualidad").strip()) if c_el is not None else "Actualidad"
             pub = (p_el.text or "").strip() if p_el is not None else ""
 
             # FILTRO ESTRICTO: Descartar noticias de 2025 o años anteriores
@@ -156,7 +158,8 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
                 continue
             seen_titles.add(norm_t)
 
-            desc_clean = re.sub(r"<[^>]+>", " ", desc).strip()
+            desc_clean = html.unescape(desc).replace("\xa0", " ")
+            desc_clean = re.sub(r"<[^>]+>", " ", desc_clean).strip()
             desc_clean = re.sub(r"\s+", " ", desc_clean)[:240]
             img_url = extraer_imagen_de_articulo(link)
 
@@ -190,11 +193,11 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
                 p_el = item.find("pubDate")
                 s_el = item.find("source")
 
-                titulo = (t_el.text or "").strip() if t_el is not None else ""
+                titulo = html.unescape((t_el.text or "").strip()).replace("\xa0", " ") if t_el is not None else ""
                 link = (l_el.text or "").strip() if l_el is not None else ""
                 desc = (d_el.text or "").strip() if d_el is not None else ""
                 pub = (p_el.text or "").strip() if p_el is not None else ""
-                source_name = s_el.text if s_el is not None else "Prensa Uruguaya"
+                source_name = html.unescape(s_el.text).strip() if s_el is not None and s_el.text else "Prensa Uruguaya"
 
                 # Descartar cualquier noticia que no sea 2026
                 if "2025" in pub or "2024" in pub or not titulo or not link:
@@ -206,7 +209,8 @@ def obtener_noticias_e_imagenes_padreydecano(max_items: int = 8) -> List[Dict[st
                     continue
                 seen_titles.add(norm_t)
 
-                desc_clean = re.sub(r"<[^>]+>", " ", desc).strip()
+                desc_clean = html.unescape(desc).replace("\xa0", " ")
+                desc_clean = re.sub(r"<[^>]+>", " ", desc_clean).strip()
                 desc_clean = re.sub(r"\s+", " ", desc_clean)[:240]
 
                 noticias.append({

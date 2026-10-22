@@ -641,7 +641,7 @@ def build_squad_and_history_datasets():
             "ventaja_aurinegra": "+12 clásicos de ventaja histórica",
             "clasicos_inolvidables": [
                 {"fecha": "09/10/1949", "titulo": "El Clásico de la Fuga", "marcador": "Peñarol 2 - 0 Nacional", "hito": "La Máquina del 49 ganaba 2-0 bajo lluvia y el rival no salió a jugar el segundo tiempo."},
-                {"fecha": "23/04/1987", "titulo": "El Clásico de los 8 contra 11", "marcador": "Peñarol 2 - 1 Nacional", "hito": "Con tres jugadores expulsados, Peñarol lo ganó con gol de Jorge Cabrera."},
+                {"fecha": "23/04/1987", "titulo": "El Clásico de los 8 contra 11", "marcador": "Peñarol 2 - 1 Nacional", "hito": "Con tres jugadores expulsados, Peñarol lo ganó heroicamente con tantos de Jorge Cabrera y la definición agónica de Diego Aguirre a los 82'."},
                 {"fecha": "27/04/2014", "titulo": "La Mayor Goleada del Siglo XXI", "marcador": "Peñarol 5 - 0 Nacional", "hito": "Tarde histórica en el Centenario con goles de Zalayeta, Macaluso, Japo Rodríguez y Aguiar (2)."},
                 {"fecha": "13/07/2023", "titulo": "Copa Sudamericana y Paternidad Internacional", "marcador": "Eliminación directa internacional", "hito": "Peñarol domina también el historial en torneos internacionales CONMEBOL."}
             ]

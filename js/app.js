@@ -471,17 +471,27 @@
   function initSimulator() {
     const container = document.getElementById('sim-matches-box');
     if (!container) return;
+    const proxMatch = state.live && state.live.proximo_partido ? state.live.proximo_partido : null;
+    const match1Label = proxMatch
+      ? `Fecha 11: ${proxMatch.nombre || 'Juventud vs Peñarol'} (${proxMatch.estadio || 'Estadio Centenario'})`
+      : 'Fecha 11: Juventud vs Peñarol (Estadio Centenario)';
     const fechas = [
-      { id: 1, label: 'Próxima Fecha (Local en el CDS)' },
-      { id: 2, label: 'Fecha +2 (Visitante)' },
-      { id: 3, label: 'Fecha +3 (Local en el CDS)' }
+      { id: 1, label: match1Label },
+      { id: 2, label: 'Fecha 12: Peñarol vs Cerro Largo (Campeón del Siglo)' },
+      { id: 3, label: 'Fecha 13: Danubio vs Peñarol (Jardines del Hipódromo)' }
     ];
-    const picks = { 1: 3, 2: 3, 3: 3 };
+    const picks = { 1: 0, 2: 0, 3: 0 };
 
     function updateSim() {
       state.simPointsDelta = Object.values(picks).reduce((a, b) => a + b, 0);
       const ptsEl = document.getElementById('sim-delta-label');
-      if (ptsEl) ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol`;
+      if (ptsEl) {
+        if (state.simPointsDelta > 0) {
+          ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol`;
+        } else {
+          ptsEl.textContent = 'Tabla actual oficial (sin proyección)';
+        }
+      }
       renderStandings();
     }
 
@@ -489,7 +499,7 @@
       <div class="sim-row" data-fid="${f.id}">
         <span><strong>${f.label}</strong></span>
         <div class="sim-btns">
-          <button type="button" class="sim-btn active" data-pts="3">Gana (+3)</button>
+          <button type="button" class="sim-btn" data-pts="3">Gana (+3)</button>
           <button type="button" class="sim-btn" data-pts="1">Empata (+1)</button>
           <button type="button" class="sim-btn" data-pts="0">Pierde (0)</button>
         </div>
@@ -512,6 +522,9 @@
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
         state.simPointsDelta = 0;
+        picks[1] = 0;
+        picks[2] = 0;
+        picks[3] = 0;
         container.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
         const ptsEl = document.getElementById('sim-delta-label');
         if (ptsEl) ptsEl.textContent = 'Tabla actual oficial (sin proyección)';

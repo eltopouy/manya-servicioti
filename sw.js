@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v5.2';
+const CACHE_NAME = 'manya-servicioti-v5.3';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -14,7 +14,8 @@ const CORE_ASSETS = [
   '/data/escudos_uruguay.json',
   '/data/historial_juventud.json',
   '/data/efemerides_hoy.json',
-  '/data/rival_intelligence.json'
+  '/data/rival_intelligence.json',
+  '/data/blogger_pagina_historica.json'
 ];
 
 self.addEventListener('install', event => {
@@ -50,11 +51,11 @@ self.addEventListener('fetch', event => {
           }
           return res;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => caches.match(event.request, { ignoreSearch: true }))
     );
     return;
   }
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request))
+    caches.match(event.request, { ignoreSearch: true }).then(cached => cached || fetch(event.request))
   );
 });

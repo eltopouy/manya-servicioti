@@ -44,7 +44,8 @@ HEADERS_HTTP = {
 
 KEYWORDS_RELEVANTES = [
     "peñarol", "aurinegro", "carbonero", "manya", "campeón del siglo",
-    "diego aguirre", "arezo", "viera", "liverpool", "clausura", "tabla anual"
+    "diego aguirre", "leonardo fernández", "silvera", "baez", "juventud",
+    "liverpool", "clausura", "tabla anual"
 ]
 
 
