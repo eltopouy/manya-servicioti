@@ -1,7 +1,7 @@
 {
-  "actualizado": "22/10/2026 23:59",
-  "fase_partido": "SIN_PARTIDO_HOY",
-  "alerta_banner": "🟡⚫ Próximo partido: Juventud vs Peñarol el Viernes 23/10/2026 20:00 hs (Estadio Centenario)",
+  "actualizado": "23/10/2026 06:00",
+  "fase_partido": "PREVIA",
+  "alerta_banner": "⚡ ¡HOY JUEGA PEÑAROL! Juventud vs Peñarol a las Viernes 23/10/2026 20:00 hs en Estadio Centenario. Vivilo en vivo por VTV Plus / Disney+ Premium",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -13,18 +13,18 @@
       "id": "8416",
       "nombre": "Juventud",
       "abreviatura": "JUV",
-      "logo": "",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
       "escudo": "assets/img/escudos/escudo_juventud.webp",
-      "goles": "-",
+      "goles": "0",
       "es_penarol": false
     },
     "visitante": {
       "id": "2683",
       "nombre": "Peñarol",
       "abreviatura": "PEN",
-      "logo": "",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "-",
+      "goles": "0",
       "es_penarol": true
     },
     "minuto_reloj": "0'",
@@ -32,8 +32,8 @@
     "completado": false,
     "state": "pre",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false,
-    "fase": "SIN_PARTIDO_HOY",
+    "es_hoy": true,
+    "fase": "PREVIA",
     "detalles_avanzados": {
       "goles": [],
       "tarjetas": [],
@@ -57,18 +57,18 @@
       "id": "8416",
       "nombre": "Juventud",
       "abreviatura": "JUV",
-      "logo": "",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
       "escudo": "assets/img/escudos/escudo_juventud.webp",
-      "goles": "-",
+      "goles": "0",
       "es_penarol": false
     },
     "visitante": {
       "id": "2683",
       "nombre": "Peñarol",
       "abreviatura": "PEN",
-      "logo": "",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "-",
+      "goles": "0",
       "es_penarol": true
     },
     "minuto_reloj": "0'",
@@ -76,7 +76,7 @@
     "completado": false,
     "state": "pre",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false
+    "es_hoy": true
   },
   "ultimo_partido": {
     "event_id": "401929259",
@@ -156,18 +156,18 @@
         "id": "8416",
         "nombre": "Juventud",
         "abreviatura": "JUV",
-        "logo": "",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
         "escudo": "assets/img/escudos/escudo_juventud.webp",
-        "goles": "-",
+        "goles": "0",
         "es_penarol": false
       },
       "visitante": {
         "id": "2683",
         "nombre": "Peñarol",
         "abreviatura": "PEN",
-        "logo": "",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
         "escudo": "assets/img/escudos/escudo_penarol.webp",
-        "goles": "-",
+        "goles": "0",
         "es_penarol": true
       },
       "minuto_reloj": "0'",
@@ -175,7 +175,7 @@
       "completado": false,
       "state": "pre",
       "tv": "VTV Plus / Disney+ Premium",
-      "es_hoy": false
+      "es_hoy": true
     }
   ],
   "tabla_posiciones": [
@@ -391,12 +391,12 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 15.3,
-    "sensacion_c": 14.7,
-    "viento_kmh": 15.0,
-    "humedad_pct": 97,
-    "condicion": "Parcialmente nublado en Ruta 102",
+    "temperatura_c": 15.8,
+    "sensacion_c": 15.8,
+    "viento_kmh": 12.7,
+    "humedad_pct": 98,
+    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "22/10/2026 23:59"
+    "actualizado": "23/10/2026 06:00"
   }
 }
