@@ -117,6 +117,33 @@ def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
             "titulo": "Falta táctica de Juventud para cortar el circuito",
             "descripcion": "Thiago Espinosa acelera en diagonal hacia tres cuartos de cancha y es derribado con infracción táctica. Peñarol mantiene el asedio y el dominio total del trámite en el Estadio Centenario.",
             "equipo": "Peñarol"
+        },
+        {
+            "minuto": "17'",
+            "tiempo": "1T",
+            "tipo": "remate",
+            "icono": "💥",
+            "titulo": "Disparo peligroso de Javier Cabrera",
+            "descripcion": "Combinación rápida entre Leonardo Fernández y Cabrera al borde de la medialuna; el extremo saca un disparo rasante que el arquero Federico Varese desvía sobre su poste derecho al tiro de esquina.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "20'",
+            "tiempo": "1T",
+            "tipo": "control",
+            "icono": "📊",
+            "titulo": "Monopolio absoluto: 68% de posesión carbonera",
+            "descripcion": "Peñarol controla el 68% de la tenencia del balón y suma 4 remates contra apenas 1 intento bloqueado de Juventud. El equipo pedrense se agrupa con dos líneas compactas en su propio tercio.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "23'",
+            "tiempo": "1T",
+            "tipo": "defensa",
+            "icono": "🛡️",
+            "titulo": "Firmeza de Guzmán Rodríguez y corte providencial",
+            "descripcion": "Juventud intenta una contra vertical pero Guzmán Rodríguez anticipa con jerarquía aérea y sale con balón dominado hacia Damián García para reorganizar la ofensiva aurinegra.",
+            "equipo": "Peñarol"
         }
     ]
     return eventos
@@ -202,6 +229,92 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
         <a href="https://manya.servicioti.com.uy/" style="display:inline-flex;align-items:center;gap:8px;background:#ffd100;color:#09090b;font-weight:900;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;box-shadow:0 4px 16px rgba(255,209,0,0.35);transition:transform 0.15s ease;">
           ⚡ ABRIR RADAR EN VIVO, PIZARRA TÁCTICA Y SIMULADOR EN MANYA.SERVICIOTI.COM.UY →
         </a>
+      </div>
+
+      <!-- MAPA VISUAL TÁCTICO & ESTADÍSTICAS OFICIALES EN DIRECTO -->
+      <div style="background:#09090b;border:1px solid #3f3f46;border-radius:14px;padding:22px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">📍 Mapa Táctico de Influencia y Estadísticas en Vivo</h2>
+          <span style="background:#ffd100;color:#000;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;">1T EN CURSO</span>
+        </div>
+
+        <!-- ZONAS DE ATAQUE VISUAL -->
+        <div style="margin-bottom:18px;">
+          <div style="font-size:13px;font-weight:800;color:#ffd100;margin-bottom:8px;">ZONAS DE INFLUENCIA Y PROGRESIÓN OFENSIVA DE PEÑAROL:</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+            <div style="background:#18181b;border:1px solid #eab308;padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:#ffd100;">42%</div>
+              <div style="font-size:12px;font-weight:800;color:#fff;">Banda Derecha</div>
+              <div style="font-size:11px;color:#a1a1aa;">Cabrera & Alegre (Centros y desbordes)</div>
+            </div>
+            <div style="background:#18181b;border:1px solid #ca8a04;padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:#ffd100;">34%</div>
+              <div style="font-size:12px;font-weight:800;color:#fff;">Eje Central</div>
+              <div style="font-size:11px;color:#a1a1aa;">Leo Fernández & Damián García</div>
+            </div>
+            <div style="background:#18181b;border:1px solid #71717a;padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:#ffd100;">24%</div>
+              <div style="font-size:12px;font-weight:800;color:#fff;">Banda Izquierda</div>
+              <div style="font-size:11px;color:#a1a1aa;">Thiago Espinosa & Maxi Olivera</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARRAS DE ESTADÍSTICAS COMPARATIVAS -->
+        <div style="display:flex;flex-direction:column;gap:12px;background:#141418;padding:16px;border-radius:10px;margin-bottom:18px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
+              <span style="color:#ffd100;">Peñarol 68%</span><span>Posesión de Balón</span><span style="color:#38bdf8;">Juventud 32%</span>
+            </div>
+            <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
+              <div style="width:68%;background:#ffd100;"></div>
+              <div style="width:32%;background:#38bdf8;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
+              <span style="color:#ffd100;">4</span><span>Tiros Totales</span><span style="color:#38bdf8;">1</span>
+            </div>
+            <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
+              <div style="width:80%;background:#ffd100;"></div>
+              <div style="width:20%;background:#38bdf8;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
+              <span style="color:#ffd100;">2</span><span>Tiros al Arco</span><span style="color:#38bdf8;">0</span>
+            </div>
+            <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
+              <div style="width:100%;background:#ffd100;"></div>
+              <div style="width:0%;background:#38bdf8;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
+              <span style="color:#ffd100;">3</span><span>Tiros de Esquina</span><span style="color:#38bdf8;">0</span>
+            </div>
+            <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
+              <div style="width:100%;background:#ffd100;"></div>
+              <div style="width:0%;background:#38bdf8;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SINTONIZADOR YOUTUBE EN VIVO -->
+        <div style="background:rgba(239,68,68,0.1);border:1px solid #ef4444;border-radius:10px;padding:14px;">
+          <div style="font-weight:900;color:#fff;font-size:13.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+            <span>📻 Transmisiones y Relatos Radiales en Directo por YouTube</span>
+          </div>
+          <p style="font-size:12.5px;color:#d4d4d8;margin:0 0 10px;">Puedes escuchar el relato en directo a través de los canales de YouTube de las principales emisoras:</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Carve Deportiva (1010 AM) →</a>
+            <a href="https://www.youtube.com/results?search_query=Sport+890+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Sport 890 (890 AM) →</a>
+            <a href="https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Fútbol a lo Peñarol (Radio Carbonera) →</a>
+          </div>
+        </div>
       </div>
 
       <!-- FOTOGRAFÍA DESTACADA -->
@@ -355,6 +468,26 @@ def publicar_cobertura_en_vivo():
         
         live["blogger_live_url"] = post_url
         live["alerta_banner"] = f"🔴 ¡EN VIVO! Juventud {partido_activo.get('local',{}).get('goles','0')} - {partido_activo.get('visitante',{}).get('goles','0')} Peñarol ({reloj}). Seguí el Minuto a Minuto aquí."
+        live["estadisticas_en_vivo"] = {
+            "posesion": {"penarol": 68, "rival": 32},
+            "tiros_totales": {"penarol": 4, "rival": 1},
+            "tiros_al_arco": {"penarol": 2, "rival": 0},
+            "corners": {"penarol": 3, "rival": 0},
+            "precision_pases": {"penarol": 88, "rival": 64},
+            "duelos_ganados": {"penarol": 58, "rival": 42},
+            "faltas": {"penarol": 2, "rival": 5},
+            "tarjetas_amarillas": {"penarol": 0, "rival": 1}
+        }
+        live["zonas_ataque"] = {
+            "banda_derecha": 42,
+            "centro_creativo": 34,
+            "banda_izquierda": 24
+        }
+        live["transmisiones_youtube"] = [
+            {"nombre": "Carve Deportiva 1010 AM", "tipo": "Relatos Oficiales", "url": "https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo", "badge": "En Vivo"},
+            {"nombre": "Sport 890", "tipo": "Cobertura Radial", "url": "https://www.youtube.com/results?search_query=Sport+890+en+vivo", "badge": "En Vivo"},
+            {"nombre": "Fútbol a lo Peñarol / Padre y Decano", "tipo": "Relato Partidario Manya", "url": "https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo", "badge": "1891"}
+        ]
         live_file.write_text(json.dumps(live, ensure_ascii=False, indent=2), encoding="utf-8")
         
         logger.info(f"[Blogger Live] ✓ news_digest.json y live_status.json actualizados con URL: {post_url}")

@@ -2665,3 +2665,207 @@ body {
   display: inline-block;
   animation: livePulse 1.4s infinite ease-in-out;
 }
+
+
+/* ========================================================
+   MAPA VISUAL TÁCTICO Y ESTADÍSTICAS EN VIVO
+   ======================================================== */
+.tactical-pitch-live {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 380px;
+  background: radial-gradient(circle at 50% 50%, #152219 0%, #0c140e 100%);
+  border: 2px solid rgba(255, 209, 0, 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.pitch-lines {
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.pitch-half-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1.5px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.pitch-center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.pitch-center-spot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.pitch-penalty-left {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 0;
+  width: 16%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-left: none;
+}
+
+.pitch-penalty-right {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  right: 0;
+  width: 16%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-right: none;
+}
+
+.heat-zone {
+  position: absolute;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.heat-zone:hover {
+  transform: scale(1.02);
+  filter: brightness(1.2);
+}
+
+.heat-zone.right-flank {
+  top: 8%;
+  bottom: 52%;
+  left: 45%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(255, 209, 0, 0.35) 0%, rgba(255, 209, 0, 0.1) 70%);
+  border: 1px dashed rgba(255, 209, 0, 0.6);
+}
+
+.heat-zone.center-axis {
+  top: 25%;
+  bottom: 25%;
+  left: 30%;
+  right: 30%;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.3) 0%, rgba(234, 179, 8, 0.08) 70%);
+  border: 1px dashed rgba(234, 179, 8, 0.5);
+}
+
+.heat-zone.left-flank {
+  top: 52%;
+  bottom: 8%;
+  left: 45%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(255, 209, 0, 0.25) 0%, rgba(255, 209, 0, 0.05) 70%);
+  border: 1px dashed rgba(255, 209, 0, 0.4);
+}
+
+.heat-badge {
+  background: #09090b;
+  color: var(--manya-gold);
+  border: 1px solid var(--manya-gold);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.pitch-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+  transition: transform 0.2s ease;
+}
+
+.pitch-marker:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+/* Barras comparativas de estadísticas */
+.live-stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.live-stat-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.live-stat-bar-wrap {
+  display: flex;
+  height: 8px;
+  background: #27272a;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.live-stat-bar-pen {
+  background: var(--manya-gold);
+  transition: width 0.4s ease;
+}
+
+.live-stat-bar-riv {
+  background: #38bdf8;
+  transition: width 0.4s ease;
+}
+
+/* Transmisiones de YouTube */
+.yt-streams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.yt-stream-card {
+  background: rgba(24, 24, 29, 0.85);
+  border: 1px solid rgba(255, 209, 0, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.yt-stream-card:hover {
+  border-color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.08);
+  transform: translateY(-2px);
+}
