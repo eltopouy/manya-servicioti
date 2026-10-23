@@ -1,7 +1,7 @@
 {
-  "actualizado": "23/10/2026 20:13",
+  "actualizado": "23/10/2026 20:17",
   "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (14'). Seguí el Minuto a Minuto aquí.",
+  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (18'). Seguí el Minuto a Minuto aquí.",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -27,7 +27,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "14'",
+    "minuto_reloj": "18'",
     "tiempo_periodo": 1,
     "completado": false,
     "state": "in",
@@ -71,7 +71,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "14'",
+    "minuto_reloj": "18'",
     "tiempo_periodo": 1,
     "completado": false,
     "state": "in",
@@ -170,7 +170,7 @@
         "goles": "0",
         "es_penarol": true
       },
-      "minuto_reloj": "14'",
+      "minuto_reloj": "18'",
       "tiempo_periodo": 1,
       "completado": false,
       "state": "in",
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 17.7,
-    "sensacion_c": 17.3,
-    "viento_kmh": 13.9,
+    "temperatura_c": 17.5,
+    "sensacion_c": 17.1,
+    "viento_kmh": 13.4,
     "humedad_pct": 84,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 20:13"
+    "actualizado": "23/10/2026 20:17"
   },
   "minuto_a_minuto": [
     {
