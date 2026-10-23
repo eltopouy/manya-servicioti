@@ -2582,3 +2582,71 @@ body {
   border-radius: 9999px;
   margin: 10px 0 14px;
 }
+
+
+/* ========================================================
+   CONMUTADOR DINÁMICO DE CAMPEONATOS (STANDINGS TABS)
+   ======================================================== */
+.standings-toggle-pills {
+  display: inline-flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 209, 0, 0.25);
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.standings-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #a1a1aa;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.standings-pill:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.standings-pill.active {
+  background: var(--manya-gold) !important;
+  color: #09090b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(255, 209, 0, 0.3);
+}
+
+.standings-pill .pill-badge {
+  font-size: 9.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  background: rgba(0, 0, 0, 0.25);
+  color: #d4d4d8;
+}
+
+.standings-pill.active .pill-badge {
+  background: #09090b;
+  color: var(--manya-gold);
+}
+
+.row-rival-proximo {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-left: 3px solid #71717a !important;
+}
+.row-rival-proximo:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}

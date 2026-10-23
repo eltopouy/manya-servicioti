@@ -22,7 +22,7 @@
     lineup: [],
     bench: [],
     simPointsDelta: 0,
-    standingsTab: 'anual',
+    standingsTab: 'clausura',
     triviaIndex: 0,
     triviaScore: 0
   };
@@ -434,32 +434,151 @@
     startCountdown(prox.fecha_iso);
   }
 
+  function renderStandingsTabs() {
+    const container = document.getElementById('standings-tabs-container');
+    if (!container) return;
+
+    const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
+      ? state.live.tablas_campeonatos
+      : [
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: 'Hoy Juega', es_proximo: true },
+          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 64p', es_proximo: false },
+          { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
+        ];
+
+    // Por defecto en la carga: asignar el torneo del próximo partido a jugar
+    if (!state.standingsTab || !tabs.some(t => t.id === state.standingsTab)) {
+      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'clausura';
+    }
+
+    container.innerHTML = tabs.map(t => {
+      const isActive = t.id === state.standingsTab;
+      const badgeHtml = t.badge ? `<span class="pill-badge">${t.badge}</span>` : '';
+      return `
+        <button type="button" class="standings-pill ${isActive ? 'active' : ''}" data-tab="${t.id}" title="Ver ${t.nombre}">
+          <span>${t.icono || '🏆'} ${t.nombre_corto || t.nombre}</span>
+          ${badgeHtml}
+        </button>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.standings-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        if (tabId && tabId !== state.standingsTab) {
+          state.standingsTab = tabId;
+          renderStandingsTabs();
+          renderStandings();
+          // Actualizar texto del simulador si hay puntos proyectados
+          const ptsEl = document.getElementById('sim-delta-label');
+          if (ptsEl && state.simPointsDelta > 0) {
+            const activeTourn = tabs.find(t => t.id === state.standingsTab);
+            const tournName = activeTourn ? activeTourn.nombre_corto : 'campeonato';
+            ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol en ${tournName}`;
+          }
+        }
+      });
+    });
+  }
+
   function renderStandings() {
     if (!state.live) return;
     const tbody = document.getElementById('standings-tbody');
     if (!tbody) return;
 
-    const sourceData = (state.standingsTab === 'clausura' && state.live.tabla_clausura && state.live.tabla_clausura.length)
-      ? state.live.tabla_clausura
-      : (state.live.tabla_anual || state.live.tabla_posiciones || []);
+    const tabs = state.live.tablas_campeonatos || [];
+    const activeTourn = tabs.find(t => t.id === state.standingsTab) || {
+      id: state.standingsTab,
+      nombre: state.standingsTab === 'clausura' ? 'Torneo Clausura 2026' : 'Tabla Anual Acumulada Oficial (AUF)',
+      nombre_corto: state.standingsTab === 'clausura' ? 'Torneo Clausura' : 'Tabla Anual',
+      icono: state.standingsTab === 'clausura' ? '⚽' : '🏆',
+      es_proximo: state.standingsTab === (state.live.torneo_activo_id || 'clausura')
+    };
+
+    // Actualizar encabezados y badges
+    const titleEl = document.getElementById('standings-table-title');
+    const badgeEl = document.getElementById('standings-context-badge');
+    const subInfoEl = document.getElementById('standings-sub-info');
+
+    if (titleEl) {
+      titleEl.innerHTML = `${activeTourn.icono || '🏆'} ${activeTourn.nombre}`;
+    }
+
+    if (badgeEl) {
+      if (activeTourn.es_proximo) {
+        badgeEl.textContent = 'PRÓXIMO PARTIDO';
+        badgeEl.style.display = 'inline-block';
+      } else if (activeTourn.id === 'anual') {
+        badgeEl.textContent = 'OFICIAL AUF';
+        badgeEl.style.display = 'inline-block';
+      } else if (activeTourn.id === 'libertadores') {
+        badgeEl.textContent = 'CONMEBOL';
+        badgeEl.style.display = 'inline-block';
+      } else {
+        badgeEl.textContent = 'OFICIAL';
+        badgeEl.style.display = 'inline-block';
+      }
+    }
+
+    if (subInfoEl) {
+      if (activeTourn.id === 'clausura') {
+        subInfoEl.textContent = 'Torneo Clausura Oficial AUF. Tabla del torneo actual correspondiente al cruce de hoy ante Juventud.';
+      } else if (activeTourn.id === 'anual') {
+        subInfoEl.textContent = 'Tabla Anual Oficial AUF Acumulada (Apertura + Intermedio + Clausura). Peñarol es líder en solitario con 64 puntos.';
+      } else if (activeTourn.id === 'libertadores') {
+        subInfoEl.textContent = 'Copa CONMEBOL Libertadores. Tabla de posiciones del grupo de Peñarol con datos oficiales de Conmebol.';
+      } else {
+        subInfoEl.textContent = `Clasificación oficial actualizada de ${activeTourn.nombre}.`;
+      }
+    }
+
+    // Resolver fuente de datos
+    let sourceData = [];
+    if (activeTourn && activeTourn.datos && activeTourn.datos.length) {
+      sourceData = activeTourn.datos;
+    } else if (state.standingsTab === 'clausura') {
+      sourceData = state.live.tabla_clausura || state.live.tabla_posiciones || [];
+    } else if (state.standingsTab === 'libertadores') {
+      sourceData = state.live.tabla_libertadores || [];
+    } else {
+      sourceData = state.live.tabla_anual || state.live.tabla_posiciones || [];
+    }
+
+    // Nombre del próximo rival para destacarlo en la tabla
+    const proxMatch = state.live.proximo_partido || {};
+    const rivalName = (proxMatch.local && !proxMatch.local.es_penarol)
+      ? proxMatch.local.nombre
+      : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : '');
+    const rivalNorm = (rivalName || '').toLowerCase().trim();
 
     const rows = sourceData.map(r => {
-      const pts = r.es_penarol ? (r.pts + state.simPointsDelta) : r.pts;
-      const pj = r.es_penarol && state.simPointsDelta > 0 ? (r.pj + Math.ceil(state.simPointsDelta / 3)) : r.pj;
-      return Object.assign({}, r, { pts_calc: pts, pj_calc: pj });
+      const isPenarol = r.es_penarol || (r.equipo && r.equipo.toLowerCase().includes('peñarol'));
+      const pts = isPenarol ? (r.pts + state.simPointsDelta) : r.pts;
+      const pj = isPenarol && state.simPointsDelta > 0 ? (r.pj + Math.ceil(state.simPointsDelta / 3)) : r.pj;
+      return Object.assign({}, r, { es_penarol: isPenarol, pts_calc: pts, pj_calc: pj });
     });
 
     rows.sort((a, b) => b.pts_calc - a.pts_calc);
 
     tbody.innerHTML = rows.map((r, i) => {
-      const crest = resolveClubCrest({ nombre: r.equipo, es_penarol: r.es_penarol });
+      const isRivalNext = activeTourn.es_proximo && rivalNorm && r.equipo.toLowerCase().includes(rivalNorm);
+      const crest = resolveClubCrest({ nombre: r.equipo, es_penarol: r.es_penarol, logo: r.logo, escudo: r.escudo });
+      const rowClass = r.es_penarol ? 'row-penarol' : (isRivalNext ? 'row-rival-proximo' : '');
+
+      let tagExtra = '';
+      if (r.es_penarol) {
+        tagExtra = '<span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span>';
+      } else if (isRivalNext) {
+        tagExtra = '<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">RIVAL DE HOY</span>';
+      }
+
       return `
-        <tr class="${r.es_penarol ? 'row-penarol' : ''}">
+        <tr class="${rowClass}">
           <td>${i + 1}</td>
           <td>
             <div style="display:flex;align-items:center;gap:8px;">
-              <img src="${crest}" alt="${r.equipo}" width="20" height="20" style="object-fit:contain;vertical-align:middle;border-radius:2px;" />
-              <span>${r.es_penarol ? '★ ' : ''}${r.equipo}</span>
+              <img src="${crest}" alt="${r.equipo}" width="20" height="20" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.src='assets/img/escudos/escudo_auf.webp'" />
+              <span style="white-space:nowrap;">${r.equipo}${tagExtra}</span>
             </div>
           </td>
           <td>${r.pj_calc}</td>
@@ -474,41 +593,7 @@
   }
 
   function initStandingsTabs() {
-    const btnAnual = document.getElementById('btn-tab-anual');
-    const btnClausura = document.getElementById('btn-tab-clausura');
-    const titleEl = document.getElementById('standings-table-title');
-
-    if (btnAnual) {
-      btnAnual.addEventListener('click', () => {
-        state.standingsTab = 'anual';
-        btnAnual.classList.add('active');
-        btnAnual.style.background = '#ffd100';
-        btnAnual.style.color = '#09090b';
-        if (btnClausura) {
-          btnClausura.classList.remove('active');
-          btnClausura.style.background = 'transparent';
-          btnClausura.style.color = '#a1a1aa';
-        }
-        if (titleEl) titleEl.textContent = '🏆 Tabla Anual Acumulada Oficial (AUF)';
-        renderStandings();
-      });
-    }
-
-    if (btnClausura) {
-      btnClausura.addEventListener('click', () => {
-        state.standingsTab = 'clausura';
-        btnClausura.classList.add('active');
-        btnClausura.style.background = '#ffd100';
-        btnClausura.style.color = '#09090b';
-        if (btnAnual) {
-          btnAnual.classList.remove('active');
-          btnAnual.style.background = 'transparent';
-          btnAnual.style.color = '#a1a1aa';
-        }
-        if (titleEl) titleEl.textContent = '⚽ Clasificación Torneo Clausura 2026';
-        renderStandings();
-      });
-    }
+    renderStandingsTabs();
   }
 
   function initSimulator() {
@@ -530,7 +615,10 @@
       const ptsEl = document.getElementById('sim-delta-label');
       if (ptsEl) {
         if (state.simPointsDelta > 0) {
-          ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol`;
+          const tabs = (state.live && state.live.tablas_campeonatos) ? state.live.tablas_campeonatos : [];
+          const activeTourn = tabs.find(t => t.id === state.standingsTab);
+          const tournName = activeTourn ? activeTourn.nombre_corto : 'la tabla';
+          ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol en ${tournName}`;
         } else {
           ptsEl.textContent = 'Tabla actual oficial (sin proyección)';
         }
@@ -1595,7 +1683,9 @@
 
     if (live) {
       state.live = live;
+      state.standingsTab = live.torneo_activo_id || 'clausura';
       renderMatchHero(live);
+      initStandingsTabs();
       renderStandings();
     }
     if (h2hJuventud) {

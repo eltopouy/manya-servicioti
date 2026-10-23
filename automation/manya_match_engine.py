@@ -634,6 +634,60 @@ class ManyaMatchEngine:
         ]
 
     @classmethod
+    def fetch_libertadores_standings(cls) -> Dict[str, Any]:
+        """Obtiene la tabla de posiciones de la Copa CONMEBOL Libertadores (grupo de Peñarol)."""
+        url = "https://site.web.api.espn.com/apis/v2/sports/soccer/conmebol.libertadores/standings"
+        data = cls._fetch_json(url) or {}
+
+        libertadores_group = []
+        group_name = "Copa CONMEBOL Libertadores • Grupo E"
+        try:
+            for c in data.get("children", []):
+                entries = (c.get("standings") or {}).get("entries", [])
+                has_pen = any(
+                    "peñarol" in (e.get("team") or {}).get("displayName", "").lower()
+                    or "penarol" in (e.get("team") or {}).get("displayName", "").lower()
+                    for e in entries
+                )
+                if has_pen:
+                    group_name = f"Copa CONMEBOL Libertadores • {c.get('name', 'Grupo E')}"
+                    for idx, ent in enumerate(entries, 1):
+                        tm = ent.get("team", {})
+                        t_name = tm.get("displayName") or tm.get("name") or "Equipo"
+                        logo_url = tm.get("logo") or ""
+                        stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
+                        libertadores_group.append({
+                            "pos": idx,
+                            "equipo": t_name,
+                            "logo": logo_url,
+                            "es_penarol": "peñarol" in t_name.lower() or "penarol" in t_name.lower(),
+                            "pj": int(stats.get("gamesPlayed", 0) or 0),
+                            "pg": int(stats.get("wins", 0) or 0),
+                            "pe": int(stats.get("ties", 0) or 0),
+                            "pp": int(stats.get("losses", 0) or 0),
+                            "gf": int(stats.get("pointsFor", 0) or 0),
+                            "gc": int(stats.get("pointsAgainst", 0) or 0),
+                            "dg": stats.get("pointDifferential", "+0"),
+                            "pts": int(stats.get("points", 0) or 0)
+                        })
+                    break
+        except Exception as e:
+            logger.warning(f"[MatchEngine] Aviso al consultar Copa Libertadores: {e}")
+
+        if not libertadores_group:
+            libertadores_group = [
+                {"pos": 1, "equipo": "Corinthians", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png", "es_penarol": False, "pj": 6, "pg": 3, "pe": 2, "pp": 1, "gf": 8, "gc": 4, "dg": "+4", "pts": 11},
+                {"pos": 2, "equipo": "Platense", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10.png", "es_penarol": False, "pj": 6, "pg": 3, "pe": 1, "pp": 2, "gf": 8, "gc": 7, "dg": "+1", "pts": 10},
+                {"pos": 3, "equipo": "Independiente Santa Fe", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2884.png", "es_penarol": False, "pj": 6, "pg": 2, "pe": 2, "pp": 2, "gf": 6, "gc": 7, "dg": "-1", "pts": 8},
+                {"pos": 4, "equipo": "Peñarol", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png", "es_penarol": True, "pj": 6, "pg": 0, "pe": 3, "pp": 3, "gf": 4, "gc": 8, "dg": "-4", "pts": 3}
+            ]
+
+        return {
+            "nombre": group_name,
+            "datos": libertadores_group
+        }
+
+    @classmethod
     def fetch_campeon_del_siglo_weather(cls) -> Dict[str, Any]:
         """Obtiene el clima actual en el Estadio Campeón del Siglo (-34.7969, -56.0672)."""
         url = (
@@ -764,6 +818,59 @@ class ManyaMatchEngine:
         partido_activo_data["fase"] = fase
         partido_activo_data["detalles_avanzados"] = summary_adv
 
+        libertadores_info = cls.fetch_libertadores_standings()
+        torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
+
+        # Determinar dinámicamente cuál es el campeonato del próximo partido
+        if "clausura" in torneo_prox:
+            torneo_defecto_id = "clausura"
+        elif "libertadores" in torneo_prox:
+            torneo_defecto_id = "libertadores"
+        elif "anual" in torneo_prox:
+            torneo_defecto_id = "anual"
+        elif "apertura" in torneo_prox:
+            torneo_defecto_id = "apertura"
+        else:
+            torneo_defecto_id = "clausura"
+
+        tablas_campeonatos = [
+            {
+                "id": "clausura",
+                "nombre": "Torneo Clausura 2026",
+                "nombre_corto": "Torneo Clausura",
+                "icono": "⚽",
+                "badge": "Próximo Partido • Fecha 11" if torneo_defecto_id == "clausura" else "Torneo Corto",
+                "es_proximo": (torneo_defecto_id == "clausura"),
+                "datos": tabla_clausura
+            },
+            {
+                "id": "anual",
+                "nombre": "Tabla Anual Acumulada Oficial (AUF)",
+                "nombre_corto": "Tabla Anual",
+                "icono": "🏆",
+                "badge": "Líder Solitario • 64 pts",
+                "es_proximo": (torneo_defecto_id == "anual"),
+                "datos": tabla_anual
+            },
+            {
+                "id": "libertadores",
+                "nombre": libertadores_info.get("nombre", "Copa CONMEBOL Libertadores"),
+                "nombre_corto": "Copa Libertadores",
+                "icono": "🌎",
+                "badge": "Conmebol Internacional" if torneo_defecto_id != "libertadores" else "Próximo Partido",
+                "es_proximo": (torneo_defecto_id == "libertadores"),
+                "datos": libertadores_info.get("datos", [])
+            }
+        ]
+
+        # La tabla activa por defecto es siempre la que corresponde al próximo partido a jugar
+        mapa_tablas = {
+            "clausura": tabla_clausura,
+            "anual": tabla_anual,
+            "libertadores": libertadores_info.get("datos", [])
+        }
+        tabla_activa_por_defecto = mapa_tablas.get(torneo_defecto_id, tabla_clausura)
+
         doc_live = {
             "actualizado": now_uy.strftime("%d/%m/%Y %H:%M"),
             "fase_partido": fase,
@@ -773,9 +880,12 @@ class ManyaMatchEngine:
             "ultimo_partido": last_match or {},
             "ultimos_resultados": [last_match] if last_match else [],
             "proximos_partidos": [proximo_partido_data] if proximo_partido_data else [],
-            "tabla_posiciones": tabla_anual,
+            "torneo_activo_id": torneo_defecto_id,
+            "tabla_posiciones": tabla_activa_por_defecto,
             "tabla_anual": tabla_anual,
             "tabla_clausura": tabla_clausura,
+            "tabla_libertadores": libertadores_info.get("datos", []),
+            "tablas_campeonatos": tablas_campeonatos,
             "clima_campeon_del_siglo": weather
         }
 

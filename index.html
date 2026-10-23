@@ -689,13 +689,20 @@
 
       <div class="dual-grid">
         <div class="card-panel">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-            <h3 id="standings-table-title" style="font-size:16px;color:var(--manya-gold);margin:0;">🏆 Tabla Anual Acumulada Oficial (AUF)</h3>
-            <div class="standings-toggle-pills" style="display:inline-flex;gap:6px;background:rgba(0,0,0,0.6);padding:4px;border-radius:8px;border:1px solid rgba(255,209,0,0.25);">
-              <button type="button" class="standings-pill active" id="btn-tab-anual" style="background:#ffd100;color:#09090b;font-weight:800;border:none;border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer;">🏆 Tabla Anual</button>
-              <button type="button" class="standings-pill" id="btn-tab-clausura" style="background:transparent;color:#a1a1aa;font-weight:700;border:none;border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer;">⚽ Torneo Clausura</button>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <h3 id="standings-table-title" style="font-size:16px;color:var(--manya-gold);margin:0;">⚽ Torneo Clausura 2026</h3>
+              <span id="standings-context-badge" class="badge-gold" style="font-size:10.5px;padding:2px 8px;font-weight:800;">PRÓXIMO PARTIDO</span>
+            </div>
+            <div class="standings-toggle-pills" id="standings-tabs-container">
+              <button type="button" class="standings-pill active" data-tab="clausura"><span>⚽ Torneo Clausura</span><span class="pill-badge">Hoy Juega</span></button>
+              <button type="button" class="standings-pill" data-tab="anual"><span>🏆 Tabla Anual</span><span class="pill-badge">Líder 64p</span></button>
+              <button type="button" class="standings-pill" data-tab="libertadores"><span>🌎 Copa Libertadores</span><span class="pill-badge">Conmebol</span></button>
             </div>
           </div>
+          <p id="standings-sub-info" style="font-size:12px;color:var(--text-secondary);margin:0 0 12px;display:block;">
+            Fase regular oficial AUF. Tabla correspondiente al próximo partido de Peñarol.
+          </p>
           <div class="manya-table-wrap">
             <table class="manya-table">
               <thead>
