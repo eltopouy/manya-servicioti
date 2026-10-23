@@ -1,5 +1,5 @@
 {
-  "actualizado": "23/10/2026 10:14",
+  "actualizado": "23/10/2026 10:17",
   "fase_partido": "PREVIA",
   "alerta_banner": "⚡ ¡HOY JUEGA PEÑAROL! Juventud vs Peñarol a las 20:00 hs el Viernes 23/10/2026 en Estadio Centenario. Vivilo en vivo por VTV Plus / Disney+ Premium.",
   "partido_activo": {
@@ -811,12 +811,12 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 18.2,
-    "sensacion_c": 18.9,
+    "temperatura_c": 18.4,
+    "sensacion_c": 19.2,
     "viento_kmh": 14.5,
-    "humedad_pct": 98,
-    "condicion": "Templado en el Campeón del Siglo",
+    "humedad_pct": 97,
+    "condicion": "Garúa leve en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 10:14"
+    "actualizado": "23/10/2026 10:17"
   }
 }
