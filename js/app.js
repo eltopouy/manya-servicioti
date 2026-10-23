@@ -22,6 +22,7 @@
     lineup: [],
     bench: [],
     simPointsDelta: 0,
+    standingsTab: 'anual',
     triviaIndex: 0,
     triviaScore: 0
   };
@@ -434,11 +435,15 @@
   }
 
   function renderStandings() {
-    if (!state.live || !state.live.tabla_posiciones) return;
+    if (!state.live) return;
     const tbody = document.getElementById('standings-tbody');
     if (!tbody) return;
 
-    const rows = state.live.tabla_posiciones.map(r => {
+    const sourceData = (state.standingsTab === 'clausura' && state.live.tabla_clausura && state.live.tabla_clausura.length)
+      ? state.live.tabla_clausura
+      : (state.live.tabla_anual || state.live.tabla_posiciones || []);
+
+    const rows = sourceData.map(r => {
       const pts = r.es_penarol ? (r.pts + state.simPointsDelta) : r.pts;
       const pj = r.es_penarol && state.simPointsDelta > 0 ? (r.pj + Math.ceil(state.simPointsDelta / 3)) : r.pj;
       return Object.assign({}, r, { pts_calc: pts, pj_calc: pj });
@@ -466,6 +471,44 @@
         </tr>
       `;
     }).join('');
+  }
+
+  function initStandingsTabs() {
+    const btnAnual = document.getElementById('btn-tab-anual');
+    const btnClausura = document.getElementById('btn-tab-clausura');
+    const titleEl = document.getElementById('standings-table-title');
+
+    if (btnAnual) {
+      btnAnual.addEventListener('click', () => {
+        state.standingsTab = 'anual';
+        btnAnual.classList.add('active');
+        btnAnual.style.background = '#ffd100';
+        btnAnual.style.color = '#09090b';
+        if (btnClausura) {
+          btnClausura.classList.remove('active');
+          btnClausura.style.background = 'transparent';
+          btnClausura.style.color = '#a1a1aa';
+        }
+        if (titleEl) titleEl.textContent = '🏆 Tabla Anual Acumulada Oficial (AUF)';
+        renderStandings();
+      });
+    }
+
+    if (btnClausura) {
+      btnClausura.addEventListener('click', () => {
+        state.standingsTab = 'clausura';
+        btnClausura.classList.add('active');
+        btnClausura.style.background = '#ffd100';
+        btnClausura.style.color = '#09090b';
+        if (btnAnual) {
+          btnAnual.classList.remove('active');
+          btnAnual.style.background = 'transparent';
+          btnAnual.style.color = '#a1a1aa';
+        }
+        if (titleEl) titleEl.textContent = '⚽ Clasificación Torneo Clausura 2026';
+        renderStandings();
+      });
+    }
   }
 
   function initSimulator() {
@@ -1564,6 +1607,7 @@
     if (rivalIntel) {
       renderRivalIntelligence(rivalIntel);
     }
+    initStandingsTabs();
     initSimulator();
 
     // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json

@@ -199,7 +199,7 @@
 
     <!-- LIVE MATCH ALERT TICKER (Hidratado dinámicamente) -->
     <div id="manya-live-ticker" class="manya-live-ticker" style="display:none;margin-bottom:16px;background:#09090b;border:2px solid #ffd100;border-radius:10px;padding:12px 18px;color:#ffffff;font-weight:800;font-size:14.5px;box-shadow:0 4px 20px rgba(255,209,0,0.25);align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-      <div id="ticker-text">🟡⚫ Próximo partido: Juventud vs Peñarol el Viernes 23/10/2026 20:00 hs (Estadio Centenario)</div>
+      <div id="ticker-text">⚡ ¡HOY JUEGA PEÑAROL! Juventud vs Peñarol a las 20:00 hs el Viernes 23/10/2026 en Estadio Centenario. Vivilo en vivo por VTV Plus / Disney+ Premium.</div>
       <a href="https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html" target="_blank" rel="noopener noreferrer" class="dynamic-blogger-link" style="color:var(--manya-gold);font-weight:800;border:1px solid var(--manya-gold);background:rgba(255,209,0,0.12);padding:6px 14px;border-radius:6px;font-size:12.5px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">⚡ Cobertura en Vivo en ServicioTI ↗</a>
     </div>
 
@@ -689,7 +689,13 @@
 
       <div class="dual-grid">
         <div class="card-panel">
-          <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:12px;">🏆 Clasificación Primera División / Tabla Anual</h3>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+            <h3 id="standings-table-title" style="font-size:16px;color:var(--manya-gold);margin:0;">🏆 Tabla Anual Acumulada Oficial (AUF)</h3>
+            <div class="standings-toggle-pills" style="display:inline-flex;gap:6px;background:rgba(0,0,0,0.6);padding:4px;border-radius:8px;border:1px solid rgba(255,209,0,0.25);">
+              <button type="button" class="standings-pill active" id="btn-tab-anual" style="background:#ffd100;color:#09090b;font-weight:800;border:none;border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer;">🏆 Tabla Anual</button>
+              <button type="button" class="standings-pill" id="btn-tab-clausura" style="background:transparent;color:#a1a1aa;font-weight:700;border:none;border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer;">⚽ Torneo Clausura</button>
+            </div>
+          </div>
           <div class="manya-table-wrap">
             <table class="manya-table">
               <thead>
