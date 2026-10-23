@@ -144,6 +144,24 @@ def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
             "titulo": "Firmeza de Guzmán Rodríguez y corte providencial",
             "descripcion": "Juventud intenta una contra vertical pero Guzmán Rodríguez anticipa con jerarquía aérea y sale con balón dominado hacia Damián García para reorganizar la ofensiva aurinegra.",
             "equipo": "Peñarol"
+        },
+        {
+            "minuto": "33'",
+            "tiempo": "1T",
+            "tipo": "fair_play",
+            "icono": "⚠️",
+            "titulo": "Freno por Fair Play y reclamo de la tribuna",
+            "descripcion": "Peñarol frena el ataque con hidalguía deportiva al ver a un rival dolorido en el césped. La parcialidad aurinegra en las gradas del Centenario pide no perder el ritmo y seguir asediando el área rival.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "38'",
+            "tiempo": "1T",
+            "tipo": "defensa",
+            "icono": "🛡️",
+            "titulo": "Corte de Maxi Olivera al tiro de esquina",
+            "descripcion": "Avanza Juventud frente a la Torre de los Homenajes. Gastón Pereiro busca enviar el centro al corazón del área pero Maximiliano Olivera bloquea con prestancia enviando el balón al tiro de esquina.",
+            "equipo": "Peñarol"
         }
     ]
     return eventos
