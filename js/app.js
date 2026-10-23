@@ -385,12 +385,38 @@
       }
     }
 
+    const cdGrid = document.getElementById('hero-countdown-grid');
+    const liveScoreBox = document.getElementById('hero-live-score-container');
+    const sHome = document.getElementById('hero-live-score-home');
+    const sAway = document.getElementById('hero-live-score-away');
+    const clkTxt = document.getElementById('hero-live-clock-text');
+    const bLiveUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html';
+
     if (live.fase_partido === 'EN_VIVO') {
+      if (cdGrid) cdGrid.style.display = 'none';
+      if (liveScoreBox) liveScoreBox.style.display = 'flex';
+      if (sHome) sHome.textContent = prox.local ? (prox.local.goles || '0') : '0';
+      if (sAway) sAway.textContent = prox.visitante ? (prox.visitante.goles || '0') : '0';
+      if (clkTxt) clkTxt.textContent = `EN VIVO • 1T (${prox.minuto_reloj || "12'"})`;
+
       if (tDate) {
         tDate.textContent = `🔴 EN VIVO (${prox.minuto_reloj || '1T'}) • ${prox.torneo || 'Campeonato Uruguayo'}`;
         tDate.style.color = '#ef4444';
       }
-    } else if (live.fase_partido === 'FINALIZADO') {
+
+      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
+        a.textContent = '⚡ SEGUIR MINUTO A MINUTO EN DIRECTO →';
+        a.style.background = '#ffd100';
+        a.style.color = '#09090b';
+        a.style.fontWeight = '900';
+        a.href = bLiveUrl;
+      });
+    } else {
+      if (cdGrid) cdGrid.style.display = 'grid';
+      if (liveScoreBox) liveScoreBox.style.display = 'none';
+    }
+
+    if (live.fase_partido === 'FINALIZADO') {
       if (tDate) {
         tDate.textContent = `🏁 FINALIZADO • ${prox.torneo || 'Campeonato Uruguayo'}`;
         tDate.style.color = '#ffd100';
@@ -431,7 +457,58 @@
       }
     }
 
-    startCountdown(prox.fecha_iso);
+    if (live.fase_partido !== 'EN_VIVO' && live.fase_partido !== 'FINALIZADO') {
+      startCountdown(prox.fecha_iso);
+    }
+    renderLiveTimeline(live);
+  }
+
+  function renderLiveTimeline(live) {
+    const card = document.getElementById('match-center-live-card');
+    const feed = document.getElementById('live-timeline-feed');
+    if (!card || !feed) return;
+
+    const eventos = live.minuto_a_minuto || [];
+    if (!eventos.length) {
+      if (live.fase_partido !== 'EN_VIVO' && live.fase_partido !== 'FINALIZADO') {
+        card.style.display = 'none';
+        return;
+      }
+    }
+
+    card.style.display = 'block';
+    const bUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html';
+    const btnCard = document.getElementById('btn-live-blogger-card');
+    if (btnCard) btnCard.href = bUrl;
+
+    feed.innerHTML = eventos.slice().reverse().map(e => `
+      <div style="display:flex;gap:12px;padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--manya-gold);border-radius:8px;">
+        <div style="flex-shrink:0;width:52px;text-align:center;">
+          <span style="background:var(--manya-gold);color:#09090b;font-weight:900;font-size:11.5px;padding:2px 7px;border-radius:999px;">${e.minuto}</span>
+        </div>
+        <div style="flex-grow:1;">
+          <div style="font-weight:800;color:#ffffff;font-size:14.5px;margin-bottom:3px;">${e.icono || '⚡'} ${e.titulo}</div>
+          <div style="font-size:13px;color:#d4d4d8;line-height:1.5;">${e.descripcion}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function setupLivePolling() {
+    if (window._manyaLivePolling) return;
+    window._manyaLivePolling = setInterval(async () => {
+      if (state.live && (state.live.fase_partido === 'EN_VIVO' || state.live.fase_partido === 'PREVIA')) {
+        try {
+          const fresh = await loadJsonSafe(`data/live_status.json?v=${Date.now()}`);
+          if (fresh && fresh.actualizado !== state.live.actualizado) {
+            state.live = fresh;
+            renderMatchHero(fresh);
+            renderLiveTimeline(fresh);
+            renderStandings();
+          }
+        } catch (_) {}
+      }
+    }, 30000);
   }
 
   function renderStandingsTabs() {
@@ -1685,8 +1762,10 @@
       state.live = live;
       state.standingsTab = live.torneo_activo_id || 'clausura';
       renderMatchHero(live);
+      renderLiveTimeline(live);
       initStandingsTabs();
       renderStandings();
+      setupLivePolling();
     }
     if (h2hJuventud) {
       renderHeadToHead(h2hJuventud);

@@ -297,11 +297,23 @@
         </div>
 
         <div class="match-vs-box">
-          <div class="countdown-grid" aria-label="Cuenta regresiva próximo partido">
-            <div class="cd-unit"><div id="cd-days" class="cd-num">01</div><div class="cd-lbl">Días</div></div>
-            <div class="cd-unit"><div id="cd-hours" class="cd-num">11</div><div class="cd-lbl">Horas</div></div>
-            <div class="cd-unit"><div id="cd-mins" class="cd-num">15</div><div class="cd-lbl">Min</div></div>
+          <div class="countdown-grid" id="hero-countdown-grid" aria-label="Cuenta regresiva próximo partido">
+            <div class="cd-unit"><div id="cd-days" class="cd-num">00</div><div class="cd-lbl">Días</div></div>
+            <div class="cd-unit"><div id="cd-hours" class="cd-num">00</div><div class="cd-lbl">Horas</div></div>
+            <div class="cd-unit"><div id="cd-mins" class="cd-num">00</div><div class="cd-lbl">Min</div></div>
             <div class="cd-unit"><div id="cd-secs" class="cd-num">00</div><div class="cd-lbl">Seg</div></div>
+          </div>
+          <!-- Marcador en Vivo cuando el partido está en juego -->
+          <div id="hero-live-score-container" style="display:none;flex-direction:column;align-items:center;margin-bottom:8px;">
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.25);border:1px solid #ef4444;color:#fca5a5;padding:4px 12px;border-radius:999px;font-size:11.5px;font-weight:900;letter-spacing:0.06em;margin-bottom:8px;">
+              <span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:50%;box-shadow:0 0 10px #ef4444;" class="live-pulse-dot"></span>
+              <span id="hero-live-clock-text">EN VIVO • 1T</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;background:#000000;padding:6px 22px;border-radius:14px;border:1px solid rgba(255,209,0,0.4);box-shadow:0 0 20px rgba(255,209,0,0.15);">
+              <span id="hero-live-score-home" style="font-size:38px;font-weight:900;color:#ffffff;line-height:1;">0</span>
+              <span style="font-size:24px;font-weight:900;color:var(--manya-gold);">-</span>
+              <span id="hero-live-score-away" style="font-size:38px;font-weight:900;color:var(--manya-gold);line-height:1;">0</span>
+            </div>
           </div>
           <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">Viernes 23/10/2026 20:00 hs • Clausura Fecha 11</div>
           <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Centenario (Montevideo)</div>
@@ -331,6 +343,33 @@
         </div>
         <div class="match-meta-item" style="display:flex;align-items:center;justify-content:center;">
           <a href="https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Leer Previa Táctica y Puntajes 1x1 →</a>
+        </div>
+      </div>
+
+      <!-- Match Center Minuto a Minuto en Vivo (Actualizado en Directo) -->
+      <div id="match-center-live-card" style="display:none;background:linear-gradient(145deg,#0d0d11 0%,#18181d 100%);border:2px solid var(--manya-gold);border-radius:var(--radius-lg);padding:22px;margin:20px 0;box-shadow:0 12px 36px rgba(0,0,0,0.8),0 0 20px rgba(255,209,0,0.15);">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,209,0,0.3);padding-bottom:12px;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#ef4444;color:#fff;font-weight:900;font-size:11px;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;">
+              <span style="display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;"></span>
+              TRANSMISIÓN EN DIRECTO
+            </span>
+            <h3 style="font-size:18px;font-weight:900;color:#ffffff;margin:0;">⚡ Minuto a Minuto Oficial • Juventud vs Peñarol</h3>
+          </div>
+          <div>
+            <a id="btn-live-blogger-card" href="https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html" target="_blank" rel="noopener noreferrer" class="btn-manya" style="font-size:12px;padding:7px 16px;background:#ffd100;color:#09090b;font-weight:900;box-shadow:0 2px 10px rgba(255,209,0,0.3);">
+              📡 Cobertura Completa en ServicioTI →
+            </a>
+          </div>
+        </div>
+
+        <div id="live-timeline-feed" style="display:flex;flex-direction:column;gap:10px;max-height:460px;overflow-y:auto;padding-right:6px;">
+          <!-- Inyectado dinámicamente desde live.minuto_a_minuto -->
+        </div>
+
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text-secondary);">
+          <div>📍 Estadio Centenario • Árbitro: Andrés Matonte • VAR: Jonathan Fuentes y Javier Irazoqui</div>
+          <div style="color:var(--manya-gold);font-weight:700;">🔄 Polling en vivo activo (auto-refresco)</div>
         </div>
       </div>
 

@@ -2650,3 +2650,18 @@ body {
 .row-rival-proximo:hover {
   background: rgba(255, 255, 255, 0.08) !important;
 }
+
+
+/* ========================================================
+   ANIMACIONES DE COBERTURA EN VIVO (LIVE BEACON)
+   ======================================================== */
+@keyframes livePulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.live-pulse-dot {
+  display: inline-block;
+  animation: livePulse 1.4s infinite ease-in-out;
+}

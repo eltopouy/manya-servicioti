@@ -190,7 +190,10 @@ class ManyaBloggerCatalog:
 
         with sqlite3.connect(cls.DB_PATH) as conn:
             cursor = conn.cursor()
-            if match_id and post_type in ("PREVIA", "CRONICA"):
+            if match_id and post_type == "EN_VIVO":
+                # Para EN_VIVO, siempre se permite publicar o actualizar la cobertura en directo
+                return True, f"Permitido publicar / actualizar cobertura EN VIVO para el partido {match_id}."
+            elif match_id and post_type in ("PREVIA", "CRONICA"):
                 cursor.execute(
                     "SELECT blogger_url, title FROM manya_posts WHERE match_id = ? AND post_type = ? LIMIT 1",
                     (str(match_id), post_type)

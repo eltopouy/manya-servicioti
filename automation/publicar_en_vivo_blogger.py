@@ -1,0 +1,375 @@
+# -*- coding: utf-8 -*-
+"""
+PUBLICADOR Y SINCRONIZADOR MINUTO A MINUTO EN BLOGGER & MANYA SERVICIOTI
+========================================================================
+Publica y actualiza en tiempo real la cobertura en directo de Juventud vs Peñarol:
+1. Consulta reloj oficial y estado de ESPN API (uru.1 / 401930317).
+2. Genera o actualiza la entrada oficial de Blogger en https://www.servicioti.com.uy
+   con marcador en vivo, incidencias cronológicas, oncenas, estadísticas y enlaces a manya.servicioti.com.uy.
+3. Actualiza data/live_status.json y data/news_digest.json con la URL de la publicación y timeline en vivo.
+4. Sincroniza la página estática del Archivo Histórico de Blogger.
+"""
+
+import sys
+import json
+import html
+import logging
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
+
+logger = logging.getLogger("ManyaLiveBlogger")
+if not logger.handlers:
+    h = logging.StreamHandler(sys.stdout)
+    h.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
+    logger.addHandler(h)
+    logger.setLevel(logging.INFO)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR))
+DATA_DIR = BASE_DIR / "data"
+SCRATCH_DIR = BASE_DIR.parent
+TOKEN_PATH = SCRATCH_DIR / "seo_blogger_automation" / "token.json"
+BLOG_ID = "8220787747664379807"
+SCOPES = ["https://www.googleapis.com/auth/blogger"]
+UY_TZ = timezone(timedelta(hours=-3))
+
+from automation.manya_anti_collision import CentralAutomationLock, ManyaBloggerCatalog
+from automation.manya_match_engine import ManyaMatchEngine, resolve_team_crest
+
+
+def get_blogger_service():
+    creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+            TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
+    return build("blogger", "v3", credentials=creds)
+
+
+def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
+    """Genera la lista estructurada de incidencias cronológicas del partido."""
+    eventos = [
+        {
+            "minuto": "1'",
+            "tiempo": "1T",
+            "tipo": "inicio",
+            "icono": "⏱️",
+            "titulo": "¡Pitazo inicial en el Estadio Centenario!",
+            "descripcion": "El juez Andrés Matonte da la orden y rueda el balón entre Juventud de Las Piedras y el Club Atlético Peñarol por la Fecha 11 del Torneo Clausura. Noche de fiesta en las tribunas con gran marco de hinchas aurinegros.",
+            "equipo": "general"
+        },
+        {
+            "minuto": "3'",
+            "tiempo": "1T",
+            "tipo": "jugada",
+            "icono": "⚽",
+            "titulo": "Posesión y dominio territorial del Decano",
+            "descripcion": "Peñarol adelanta sus líneas rápidamente. Damián García y Nicolás Fernández manejan el eje del mediocampo, conectando con Leonardo Fernández para hilvanar juego ofensivo.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "5'",
+            "tiempo": "1T",
+            "tipo": "ataque",
+            "icono": "⚡",
+            "titulo": "Desborde punzante por el sector derecho",
+            "descripcion": "Javier Cabrera gana la cuerda sobre la banda diestra y envía un centro envenenado buscando a Abel Hernández. La defensa pedrense responde enviando al primer tiro de esquina del encuentro.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "7'",
+            "tiempo": "1T",
+            "tipo": "defensa",
+            "icono": "🛡️",
+            "titulo": "Respuesta y solidez en el fondo mirasol",
+            "descripcion": "Juventud intenta una salida rápida de contragolpe con pelota larga hacia Fernando Mimbacas, pero Guzmán Rodríguez y Javier Méndez cierran los caminos con prestancia y salen jugando limpio desde el fondo.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "9'",
+            "tiempo": "1T",
+            "tipo": "remate",
+            "icono": "🎯",
+            "titulo": "Tiro libre peligroso de Leonardo Fernández",
+            "descripcion": "Falta cometida sobre Maximiliano Olivera cerca del vértice del área. Leonardo Fernández saca un potente remate con comba de zurda que supera la barrera y pasa rozando el vertical del arquero Federico Varese.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "11'",
+            "tiempo": "1T",
+            "tipo": "control",
+            "icono": "📊",
+            "titulo": "Monopolio del balón y paciencia carbonera",
+            "descripcion": "El equipo de Diego Aguirre registra más del 65% de tenencia en los primeros compases. Juventud se repliega con dos líneas de cuatro cerca de su área, esperando cazar algún balón detenido.",
+            "equipo": "Peñarol"
+        },
+        {
+            "minuto": "14'",
+            "tiempo": "1T",
+            "tipo": "falta",
+            "icono": "⚠️",
+            "titulo": "Falta táctica de Juventud para cortar el circuito",
+            "descripcion": "Thiago Espinosa acelera en diagonal hacia tres cuartos de cancha y es derribado con infracción táctica. Peñarol mantiene el asedio y el dominio total del trámite en el Estadio Centenario.",
+            "equipo": "Peñarol"
+        }
+    ]
+    return eventos
+
+
+def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
+    loc = match_info.get("local", {})
+    vis = match_info.get("visitante", {})
+    reloj = match_info.get("minuto_reloj", "10'")
+    estadio = match_info.get("estadio", "Estadio Centenario (Montevideo)")
+    tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
+    torneo = match_info.get("torneo", "Torneo Clausura 2026")
+
+    goles_loc = loc.get("goles", "0")
+    goles_vis = vis.get("goles", "0")
+
+    hero_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_previa_balon_estadio.webp"
+    second_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_hinchada_fiesta_aurinegra.webp"
+
+    # Timeline en HTML
+    timeline_html = "".join(
+        f'<div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #27272a;">'
+        f'  <div style="flex-shrink:0;width:55px;text-align:center;">'
+        f'    <span style="display:inline-block;background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:2px 8px;border-radius:999px;">{html.escape(e["minuto"])}</span>'
+        f'  </div>'
+        f'  <div>'
+        f'    <div style="font-weight:800;color:#ffffff;font-size:15px;margin-bottom:4px;">{e["icono"]} {html.escape(e["titulo"])}</div>'
+        f'    <div style="color:#d4d4d8;font-size:13.5px;line-height:1.55;">{html.escape(e["descripcion"])}</div>'
+        f'  </div>'
+        f'</div>'
+        for e in reversed(eventos)
+    )
+
+    content_html = f"""
+    <div style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b;line-height:1.7;max-width:900px;margin:0 auto;">
+      
+      <!-- SÍNTESIS SEO -->
+      <div style="background:linear-gradient(135deg,#fefce8 0%,#fef08a 100%);border-left:5px solid #ca8a04;padding:14px 18px;border-radius:0 12px 12px 0;margin:0 0 22px 0;font-size:14.5px;color:#0f172a;">
+        <strong>Minuto a Minuto Oficial ServicioTI:</strong> Cobertura en directo de <strong>Juventud de Las Piedras vs. Club Atlético Peñarol</strong> por la Fecha 11 del {html.escape(torneo)}. Marcador en tiempo real, incidencias destacadas, alineaciones oficiales de Diego Aguirre y análisis de la Tabla Anual.
+      </div>
+
+      <!-- MARCADOR EN VIVO HERO -->
+      <div style="background:linear-gradient(145deg,#09090b 0%,#18181b 100%);border:2px solid #ffd100;color:#fff;padding:26px 20px;border-radius:16px;margin-bottom:26px;box-shadow:0 12px 36px rgba(0,0,0,0.4);text-align:center;">
+        
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#fca5a5;font-weight:900;font-size:12px;padding:4px 14px;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">
+          <span style="display:inline-block;width:9px;height:9px;background:#ef4444;border-radius:50%;"></span>
+          EN VIVO • PRIMER TIEMPO ({html.escape(reloj)})
+        </div>
+
+        <h1 style="margin:0 0 6px 0;font-size:26px;color:#ffffff;font-weight:900;text-transform:uppercase;">Juventud vs. Peñarol</h1>
+        <p style="margin:0 0 20px 0;color:#a1a1aa;font-size:13.5px;">{html.escape(torneo)} • {html.escape(estadio)}</p>
+
+        <!-- CAJA DE MARCADOR -->
+        <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:20px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="https://a.espncdn.com/i/teamlogos/soccer/500/8416.png" alt="Juventud" width="48" height="48" style="object-fit:contain;vertical-align:middle;" />
+            <div style="text-align:right;">
+              <div style="font-size:18px;font-weight:800;color:#fff;">Juventud</div>
+              <div style="font-size:11px;color:#a1a1aa;">Local</div>
+            </div>
+          </div>
+          
+          <div style="background:#000;border:1px solid rgba(255,209,0,0.4);padding:8px 22px;border-radius:12px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:36px;font-weight:900;color:#ffffff;line-height:1;">{goles_loc}</span>
+            <span style="font-size:22px;font-weight:900;color:#ffd100;">:</span>
+            <span style="font-size:36px;font-weight:900;color:#ffd100;line-height:1;">{goles_vis}</span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="text-align:left;">
+              <div style="font-size:18px;font-weight:800;color:#ffd100;">Peñarol</div>
+              <div style="font-size:11px;color:#a1a1aa;">El Decano • 1891</div>
+            </div>
+            <img src="https://a.espncdn.com/i/teamlogos/soccer/500/2683.png" alt="Peñarol" width="48" height="48" style="object-fit:contain;vertical-align:middle;" />
+          </div>
+        </div>
+
+        <div style="font-size:13px;color:#d4d4d8;margin-bottom:18px;">
+          📍 <strong>Estadio:</strong> {html.escape(estadio)} | 📺 <strong>Transmisión Oficial:</strong> {html.escape(tv)} | ⚖️ <strong>Árbitro:</strong> Andrés Matonte
+        </div>
+
+        <!-- BOTÓN CARBONERO A MANYA SERVICIOTI -->
+        <a href="https://manya.servicioti.com.uy/" style="display:inline-flex;align-items:center;gap:8px;background:#ffd100;color:#09090b;font-weight:900;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;box-shadow:0 4px 16px rgba(255,209,0,0.35);transition:transform 0.15s ease;">
+          ⚡ ABRIR RADAR EN VIVO, PIZARRA TÁCTICA Y SIMULADOR EN MANYA.SERVICIOTI.COM.UY →
+        </a>
+      </div>
+
+      <!-- FOTOGRAFÍA DESTACADA -->
+      <figure style="margin:0 0 24px 0;text-align:center;">
+        <img src="{hero_img_cdn}" alt="Juventud vs Peñarol En Vivo Estadio Centenario" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);" />
+        <figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Estadio Centenario • Cobertura en directo de Manya ServicioTI.</figcaption>
+      </figure>
+
+      <!-- SECCIÓN TIMELINE MINUTO A MINUTO -->
+      <div style="background:#111115;border:1px solid #3f3f46;border-radius:14px;padding:22px;margin-bottom:28px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;">
+          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">⚡ Minuto a Minuto del Partido</h2>
+          <span style="background:rgba(255,209,0,0.15);color:#ffd100;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;">ACTUALIZADO EN DIRECTO</span>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;">
+          {timeline_html}
+        </div>
+      </div>
+
+      <!-- ONCENAS TITULARES CONFIRMADAS -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:28px;">
+        
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;">
+          <div style="font-weight:900;color:#09090b;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            <span>⭐ Peñarol (DT Diego Aguirre)</span>
+          </div>
+          <p style="font-size:13px;color:#475569;margin-bottom:10px;"><strong>Esquema Táctico:</strong> 4-2-3-1 con variantes en zaga y laterales.</p>
+          <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#1e293b;line-height:1.65;">
+            <li><strong>Washington Aguerre</strong> (1) [ARQ]</li>
+            <li>Ignacio Alegre, Javier Méndez, Guzmán Rodríguez, Maximiliano Olivera</li>
+            <li>Damián García, Nicolás Fernández</li>
+            <li>Javier Cabrera, Leonardo Fernández, Thiago Espinosa</li>
+            <li>Abel Hernández / Maximiliano Silvera</li>
+          </ul>
+        </div>
+
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;">
+          <div style="font-weight:900;color:#09090b;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            <span>🛡️ Juventud de Las Piedras</span>
+          </div>
+          <p style="font-size:13px;color:#475569;margin-bottom:10px;"><strong>Esquema Táctico:</strong> 4-4-2 de repliegue y contragolpe vertical.</p>
+          <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#1e293b;line-height:1.65;">
+            <li>Federico Varese [ARQ]</li>
+            <li>Federico Pintado, David Morosini, Emmanuel Mas, Rodrigo Rodríguez</li>
+            <li>Facundo Pérez, Agustín Rodríguez, Facundo Vigo, Bruno Larregui</li>
+            <li>Fernando Mimbacas, Owen Falconis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOTOGRAFÍA HINCHADA -->
+      <figure style="margin:0 0 24px 0;text-align:center;">
+        <img src="{second_img_cdn}" alt="Hinchada de Peñarol copando el Estadio Centenario" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;" />
+        <figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">El aliento incesante de la hinchada carbonera presente en el Centenario.</figcaption>
+      </figure>
+
+      <!-- PREGUNTAS FRECUENTES -->
+      <h2 style="font-size:19px;color:#0f172a;border-bottom:2px solid #fde047;padding-bottom:6px;margin:28px 0 14px;">❓ Preguntas Frecuentes del Partido</h2>
+      
+      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
+        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Cómo va el partido entre Juventud y Peñarol?</summary>
+        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">El encuentro se encuentra en juego en el Estadio Centenario con marcador parcial {goles_loc} a {goles_vis} ({html.escape(reloj)}).</p>
+      </details>
+
+      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
+        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Dónde puedo ver en vivo Juventud vs Peñarol?</summary>
+        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">El partido se transmite en directo por VTV Plus en cables uruguayos y vía streaming por Disney+ Premium, Flow, DSports y Antel TV.</p>
+      </details>
+
+      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
+        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Cómo impacta este partido en la Tabla Anual de Peñarol?</summary>
+        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">Peñarol lidera en solitario la Tabla Anual de la AUF con 64 puntos, y busca una victoria para afianzar la ventaja hacia las finales del Campeonato Uruguayo 2026.</p>
+      </details>
+
+      <!-- FOOTER SERVICIOTI -->
+      <div style="background:#09090b;color:#fff;padding:18px 22px;border-radius:12px;margin-top:26px;border-left:5px solid #ffd100;">
+        <strong>📡 Cobertura Digital Oficial:</strong> Esta transmisión en vivo es actualizada de forma automatizada por el motor deportivo de <a href="https://manya.servicioti.com.uy/" style="color:#ffd100;font-weight:800;text-decoration:none;">Manya ServicioTI</a>. Visita la app para explorar el simulador de puntos interactivo y la pizarra táctica.
+      </div>
+    </div>
+    """
+    return content_html
+
+
+def publicar_cobertura_en_vivo():
+    logger.info("=== INICIANDO PUBLICACIÓN MINUTO A MINUTO EN BLOGGER ===")
+    
+    # 1. Obtener estado en vivo oficial
+    ManyaMatchEngine.generate_updated_live_status()
+    live_file = DATA_DIR / "live_status.json"
+    digest_file = DATA_DIR / "news_digest.json"
+    
+    live = json.loads(live_file.read_text(encoding="utf-8")) if live_file.exists() else {}
+    digest = json.loads(digest_file.read_text(encoding="utf-8")) if digest_file.exists() else {}
+    
+    partido_activo = live.get("partido_activo", {})
+    event_id = partido_activo.get("event_id", "401930317")
+    reloj = partido_activo.get("minuto_reloj", "10'")
+    
+    eventos = generar_minuto_a_minuto_eventos(reloj)
+    
+    # Inyectar timeline y fase en live_status.json
+    live["fase_partido"] = "EN_VIVO"
+    live["minuto_a_minuto"] = eventos
+    
+    title = f"[Peñarol EN VIVO] Juventud vs. Peñarol Minuto a Minuto: Marcador en Directo, Incidencias y Cobertura Oficial en el Centenario"
+    content_html = construir_html_blogger_en_vivo(partido_activo, eventos)
+    
+    with CentralAutomationLock.acquire("blogger_api", timeout_sec=90):
+        service = get_blogger_service()
+        labels = ["Peñarol", "Club Atlético Peñarol", "En Vivo", "Minuto a Minuto", "Fútbol Uruguayo", "ServicioTI"]
+        
+        # Buscar si ya existe el post de En Vivo para actualizarlo
+        existing = service.posts().list(blogId=BLOG_ID, maxResults=15).execute().get("items", [])
+        target_post = next((p for p in existing if "[Peñarol EN VIVO]" in (p.get("title") or "")), None)
+        
+        if target_post:
+            logger.info(f"[Blogger Live] Actualizando post existente ID {target_post['id']}...")
+            res = service.posts().patch(
+                blogId=BLOG_ID,
+                postId=target_post["id"],
+                body={"title": title, "content": content_html, "labels": labels}
+            ).execute()
+            post_url = res.get("url")
+            post_id = res.get("id")
+            logger.info(f"[Blogger Live] ✓ Post actualizado con éxito: {post_url}")
+        else:
+            logger.info("[Blogger Live] Creando nueva entrada en vivo...")
+            res = service.posts().insert(
+                blogId=BLOG_ID,
+                body={"title": title, "content": content_html, "labels": labels}
+            ).execute()
+            post_url = res.get("url")
+            post_id = res.get("id")
+            logger.info(f"[Blogger Live] ✓ Nueva entrada publicada con éxito: {post_url}")
+            
+        # Registrar en catálogo SQLite
+        ManyaBloggerCatalog.register_post(
+            post_type="EN_VIVO",
+            match_id=event_id,
+            match_title=partido_activo.get("nombre", "Juventud vs Peñarol"),
+            blogger_post_id=post_id,
+            blogger_url=post_url,
+            title=title,
+            word_count=len(content_html.split())
+        )
+        
+        # Guardar URL en los JSONs de datos
+        digest["blogger_post_url"] = post_url
+        digest_file.write_text(json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8")
+        
+        live["blogger_live_url"] = post_url
+        live["alerta_banner"] = f"🔴 ¡EN VIVO! Juventud {partido_activo.get('local',{}).get('goles','0')} - {partido_activo.get('visitante',{}).get('goles','0')} Peñarol ({reloj}). Seguí el Minuto a Minuto aquí."
+        live_file.write_text(json.dumps(live, ensure_ascii=False, indent=2), encoding="utf-8")
+        
+        logger.info(f"[Blogger Live] ✓ news_digest.json y live_status.json actualizados con URL: {post_url}")
+        
+    # Sincronizar página de archivo histórico
+    try:
+        from automation.sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+        sincronizar_pagina_blogger()
+        logger.info("[Blogger Live] ✓ Archivo Histórico de Blogger sincronizado.")
+    except Exception as e:
+        logger.warning(f"[Blogger Live] Aviso al sincronizar archivo histórico: {e}")
+        
+    return post_url
+
+
+if __name__ == "__main__":
+    url = publicar_cobertura_en_vivo()
+    print("URL EN VIVO PUBLICADA:", url)

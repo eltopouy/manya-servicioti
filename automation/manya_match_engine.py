@@ -871,6 +871,16 @@ class ManyaMatchEngine:
         }
         tabla_activa_por_defecto = mapa_tablas.get(torneo_defecto_id, tabla_clausura)
 
+        existing_doc = {}
+        if (DATA_DIR / "live_status.json").exists():
+            try:
+                existing_doc = json.loads((DATA_DIR / "live_status.json").read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        minuto_a_minuto = existing_doc.get("minuto_a_minuto", [])
+        blogger_live_url = existing_doc.get("blogger_live_url", "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html")
+
         doc_live = {
             "actualizado": now_uy.strftime("%d/%m/%Y %H:%M"),
             "fase_partido": fase,
@@ -886,7 +896,9 @@ class ManyaMatchEngine:
             "tabla_clausura": tabla_clausura,
             "tabla_libertadores": libertadores_info.get("datos", []),
             "tablas_campeonatos": tablas_campeonatos,
-            "clima_campeon_del_siglo": weather
+            "clima_campeon_del_siglo": weather,
+            "minuto_a_minuto": minuto_a_minuto,
+            "blogger_live_url": blogger_live_url
         }
 
         output_file = DATA_DIR / "live_status.json"

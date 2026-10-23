@@ -151,11 +151,16 @@ REGLAS EDITORIALES OBLIGATORIAS:
 
 
 def ejecutar_ciclo_en_vivo(match_info: dict):
-    """Actualización en tiempo real durante el partido (polling ESPN hacia manya.servicioti.com.uy)."""
+    """Actualización en tiempo real durante el partido (polling ESPN hacia manya.servicioti.com.uy y Blogger)."""
     match_title = match_info.get("nombre", "")
     reloj = match_info.get("minuto_reloj", "")
     logger.info(f"[En Vivo] 🔴 Partido en juego: {match_title} | Reloj: {reloj}")
-    ManyaMatchEngine.generate_updated_live_status()
+    try:
+        from automation.publicar_en_vivo_blogger import publicar_cobertura_en_vivo
+        publicar_cobertura_en_vivo()
+    except Exception as e:
+        logger.warning(f"[En Vivo] Aviso al sincronizar en vivo con Blogger: {e}. Fallback a match engine.")
+        ManyaMatchEngine.generate_updated_live_status()
     git_commit_and_push(f"live(partido): actualización en directo {match_title} ({reloj})")
 
 
