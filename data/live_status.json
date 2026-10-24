@@ -1,5 +1,5 @@
 {
-  "actualizado": "24/10/2026 14:30",
+  "actualizado": "24/10/2026 15:32",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -457,19 +457,6 @@
     },
     {
       "pos": 6,
-      "equipo": "Liverpool",
-      "es_penarol": false,
-      "pj": 32,
-      "pg": 13,
-      "pe": 11,
-      "pp": 8,
-      "gf": 40,
-      "gc": 31,
-      "dg": "+9",
-      "pts": 50
-    },
-    {
-      "pos": 7,
       "equipo": "Montevideo Wanderers",
       "es_penarol": false,
       "pj": 32,
@@ -482,16 +469,29 @@
       "pts": 49
     },
     {
+      "pos": 7,
+      "equipo": "Liverpool",
+      "es_penarol": false,
+      "pj": 31,
+      "pg": 12,
+      "pe": 11,
+      "pp": 8,
+      "gf": 39,
+      "gc": 31,
+      "dg": "+8",
+      "pts": 47
+    },
+    {
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 32,
+      "pj": 31,
       "pg": 12,
       "pe": 7,
-      "pp": 13,
+      "pp": 12,
       "gf": 43,
-      "gc": 41,
-      "dg": "+2",
+      "gc": 40,
+      "dg": "+3",
       "pts": 43
     },
     {
@@ -509,19 +509,6 @@
     },
     {
       "pos": 10,
-      "equipo": "Central Español",
-      "es_penarol": false,
-      "pj": 32,
-      "pg": 10,
-      "pe": 8,
-      "pp": 14,
-      "gf": 31,
-      "gc": 42,
-      "dg": "-11",
-      "pts": 38
-    },
-    {
-      "pos": 11,
       "equipo": "Boston River",
       "es_penarol": false,
       "pj": 33,
@@ -534,7 +521,7 @@
       "pts": 37
     },
     {
-      "pos": 12,
+      "pos": 11,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
       "pj": 32,
@@ -544,6 +531,19 @@
       "gf": 30,
       "gc": 36,
       "dg": "-6",
+      "pts": 35
+    },
+    {
+      "pos": 12,
+      "equipo": "Central Español",
+      "es_penarol": false,
+      "pj": 31,
+      "pg": 9,
+      "pe": 8,
+      "pp": 14,
+      "gf": 30,
+      "gc": 42,
+      "dg": "-12",
       "pts": 35
     },
     {
@@ -589,13 +589,13 @@
       "pos": 16,
       "equipo": "Progreso",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 9,
       "pe": 5,
-      "pp": 19,
+      "pp": 18,
       "gf": 30,
-      "gc": 47,
-      "dg": "-17",
+      "gc": 46,
+      "dg": "-16",
       "pts": 32
     }
   ],
@@ -1161,19 +1161,6 @@
         },
         {
           "pos": 6,
-          "equipo": "Liverpool",
-          "es_penarol": false,
-          "pj": 32,
-          "pg": 13,
-          "pe": 11,
-          "pp": 8,
-          "gf": 40,
-          "gc": 31,
-          "dg": "+9",
-          "pts": 50
-        },
-        {
-          "pos": 7,
           "equipo": "Montevideo Wanderers",
           "es_penarol": false,
           "pj": 32,
@@ -1186,16 +1173,29 @@
           "pts": 49
         },
         {
+          "pos": 7,
+          "equipo": "Liverpool",
+          "es_penarol": false,
+          "pj": 31,
+          "pg": 12,
+          "pe": 11,
+          "pp": 8,
+          "gf": 39,
+          "gc": 31,
+          "dg": "+8",
+          "pts": 47
+        },
+        {
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 32,
+          "pj": 31,
           "pg": 12,
           "pe": 7,
-          "pp": 13,
+          "pp": 12,
           "gf": 43,
-          "gc": 41,
-          "dg": "+2",
+          "gc": 40,
+          "dg": "+3",
           "pts": 43
         },
         {
@@ -1213,19 +1213,6 @@
         },
         {
           "pos": 10,
-          "equipo": "Central Español",
-          "es_penarol": false,
-          "pj": 32,
-          "pg": 10,
-          "pe": 8,
-          "pp": 14,
-          "gf": 31,
-          "gc": 42,
-          "dg": "-11",
-          "pts": 38
-        },
-        {
-          "pos": 11,
           "equipo": "Boston River",
           "es_penarol": false,
           "pj": 33,
@@ -1238,7 +1225,7 @@
           "pts": 37
         },
         {
-          "pos": 12,
+          "pos": 11,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
           "pj": 32,
@@ -1248,6 +1235,19 @@
           "gf": 30,
           "gc": 36,
           "dg": "-6",
+          "pts": 35
+        },
+        {
+          "pos": 12,
+          "equipo": "Central Español",
+          "es_penarol": false,
+          "pj": 31,
+          "pg": 9,
+          "pe": 8,
+          "pp": 14,
+          "gf": 30,
+          "gc": 42,
+          "dg": "-12",
           "pts": 35
         },
         {
@@ -1293,13 +1293,13 @@
           "pos": 16,
           "equipo": "Progreso",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 9,
           "pe": 5,
-          "pp": 19,
+          "pp": 18,
           "gf": 30,
-          "gc": 47,
-          "dg": "-17",
+          "gc": 46,
+          "dg": "-16",
           "pts": 32
         }
       ]
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 15.5,
-    "sensacion_c": 12.6,
-    "viento_kmh": 22.2,
+    "temperatura_c": 15.1,
+    "sensacion_c": 12.2,
+    "viento_kmh": 21.7,
     "humedad_pct": 76,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "24/10/2026 14:30"
+    "actualizado": "24/10/2026 15:32"
   },
   "minuto_a_minuto": [
     {
