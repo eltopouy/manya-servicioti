@@ -1,7 +1,7 @@
 {
-  "actualizado": "23/10/2026 20:45",
+  "actualizado": "23/10/2026 21:00",
   "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (45'+1'). Seguí el Minuto a Minuto aquí.",
+  "alerta_banner": "🔴 EN VIVO AHORA: Juventud 0 - 0 Peñarol (45'+4')",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -27,7 +27,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "45'+1'",
+    "minuto_reloj": "45'+4'",
     "tiempo_periodo": 1,
     "completado": false,
     "state": "in",
@@ -71,7 +71,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "45'+1'",
+    "minuto_reloj": "45'+4'",
     "tiempo_periodo": 1,
     "completado": false,
     "state": "in",
@@ -170,7 +170,7 @@
         "goles": "0",
         "es_penarol": true
       },
-      "minuto_reloj": "45'+1'",
+      "minuto_reloj": "45'+4'",
       "tiempo_periodo": 1,
       "completado": false,
       "state": "in",
@@ -418,19 +418,6 @@
     },
     {
       "pos": 3,
-      "equipo": "Nacional",
-      "es_penarol": false,
-      "pj": 33,
-      "pg": 18,
-      "pe": 4,
-      "pp": 11,
-      "gf": 51,
-      "gc": 40,
-      "dg": "+11",
-      "pts": 58
-    },
-    {
-      "pos": 4,
       "equipo": "Montevideo City Torque",
       "es_penarol": false,
       "pj": 33,
@@ -443,17 +430,30 @@
       "pts": 57
     },
     {
-      "pos": 5,
+      "pos": 4,
       "equipo": "Racing",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 15,
       "pe": 11,
-      "pp": 7,
+      "pp": 6,
       "gf": 39,
-      "gc": 27,
-      "dg": "+12",
+      "gc": 25,
+      "dg": "+14",
       "pts": 56
+    },
+    {
+      "pos": 5,
+      "equipo": "Nacional",
+      "es_penarol": false,
+      "pj": 32,
+      "pg": 17,
+      "pe": 4,
+      "pp": 11,
+      "gf": 50,
+      "gc": 40,
+      "dg": "+10",
+      "pts": 55
     },
     {
       "pos": 6,
@@ -485,40 +485,40 @@
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 33,
-      "pg": 12,
+      "pj": 32,
+      "pg": 11,
       "pe": 7,
       "pp": 14,
-      "gf": 44,
+      "gf": 43,
       "gc": 43,
-      "dg": "+1",
-      "pts": 43
-    },
-    {
-      "pos": 9,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 33,
-      "pg": 10,
-      "pe": 10,
-      "pp": 13,
-      "gf": 37,
-      "gc": 41,
-      "dg": "-4",
+      "dg": "0",
       "pts": 40
     },
     {
-      "pos": 10,
+      "pos": 9,
       "equipo": "Central Español",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 10,
       "pe": 8,
-      "pp": 15,
+      "pp": 14,
       "gf": 32,
-      "gc": 44,
-      "dg": "-12",
+      "gc": 43,
+      "dg": "-11",
       "pts": 38
+    },
+    {
+      "pos": 10,
+      "equipo": "Juventud",
+      "es_penarol": false,
+      "pj": 32,
+      "pg": 9,
+      "pe": 10,
+      "pp": 13,
+      "gf": 35,
+      "gc": 41,
+      "dg": "-6",
+      "pts": 37
     },
     {
       "pos": 11,
@@ -563,13 +563,13 @@
       "pos": 14,
       "equipo": "Cerro Largo",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 8,
       "pe": 10,
-      "pp": 15,
+      "pp": 14,
       "gf": 30,
-      "gc": 38,
-      "dg": "-8",
+      "gc": 37,
+      "dg": "-7",
       "pts": 34
     },
     {
@@ -1122,19 +1122,6 @@
         },
         {
           "pos": 3,
-          "equipo": "Nacional",
-          "es_penarol": false,
-          "pj": 33,
-          "pg": 18,
-          "pe": 4,
-          "pp": 11,
-          "gf": 51,
-          "gc": 40,
-          "dg": "+11",
-          "pts": 58
-        },
-        {
-          "pos": 4,
           "equipo": "Montevideo City Torque",
           "es_penarol": false,
           "pj": 33,
@@ -1147,17 +1134,30 @@
           "pts": 57
         },
         {
-          "pos": 5,
+          "pos": 4,
           "equipo": "Racing",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 15,
           "pe": 11,
-          "pp": 7,
+          "pp": 6,
           "gf": 39,
-          "gc": 27,
-          "dg": "+12",
+          "gc": 25,
+          "dg": "+14",
           "pts": 56
+        },
+        {
+          "pos": 5,
+          "equipo": "Nacional",
+          "es_penarol": false,
+          "pj": 32,
+          "pg": 17,
+          "pe": 4,
+          "pp": 11,
+          "gf": 50,
+          "gc": 40,
+          "dg": "+10",
+          "pts": 55
         },
         {
           "pos": 6,
@@ -1189,40 +1189,40 @@
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 33,
-          "pg": 12,
+          "pj": 32,
+          "pg": 11,
           "pe": 7,
           "pp": 14,
-          "gf": 44,
+          "gf": 43,
           "gc": 43,
-          "dg": "+1",
-          "pts": 43
-        },
-        {
-          "pos": 9,
-          "equipo": "Juventud",
-          "es_penarol": false,
-          "pj": 33,
-          "pg": 10,
-          "pe": 10,
-          "pp": 13,
-          "gf": 37,
-          "gc": 41,
-          "dg": "-4",
+          "dg": "0",
           "pts": 40
         },
         {
-          "pos": 10,
+          "pos": 9,
           "equipo": "Central Español",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 10,
           "pe": 8,
-          "pp": 15,
+          "pp": 14,
           "gf": 32,
-          "gc": 44,
-          "dg": "-12",
+          "gc": 43,
+          "dg": "-11",
           "pts": 38
+        },
+        {
+          "pos": 10,
+          "equipo": "Juventud",
+          "es_penarol": false,
+          "pj": 32,
+          "pg": 9,
+          "pe": 10,
+          "pp": 13,
+          "gf": 35,
+          "gc": 41,
+          "dg": "-6",
+          "pts": 37
         },
         {
           "pos": 11,
@@ -1267,13 +1267,13 @@
           "pos": 14,
           "equipo": "Cerro Largo",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 8,
           "pe": 10,
-          "pp": 15,
+          "pp": 14,
           "gf": 30,
-          "gc": 38,
-          "dg": "-8",
+          "gc": 37,
+          "dg": "-7",
           "pts": 34
         },
         {
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 17.4,
-    "sensacion_c": 17.1,
-    "viento_kmh": 12.5,
+    "temperatura_c": 17.2,
+    "sensacion_c": 17.0,
+    "viento_kmh": 11.9,
     "humedad_pct": 84,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 20:45"
+    "actualizado": "23/10/2026 21:00"
   },
   "minuto_a_minuto": [
     {
@@ -1492,64 +1492,5 @@
       "equipo": "Peñarol"
     }
   ],
-  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html",
-  "estadisticas_en_vivo": {
-    "posesion": {
-      "penarol": 68,
-      "rival": 32
-    },
-    "tiros_totales": {
-      "penarol": 4,
-      "rival": 1
-    },
-    "tiros_al_arco": {
-      "penarol": 2,
-      "rival": 0
-    },
-    "corners": {
-      "penarol": 3,
-      "rival": 0
-    },
-    "precision_pases": {
-      "penarol": 88,
-      "rival": 64
-    },
-    "duelos_ganados": {
-      "penarol": 58,
-      "rival": 42
-    },
-    "faltas": {
-      "penarol": 2,
-      "rival": 5
-    },
-    "tarjetas_amarillas": {
-      "penarol": 0,
-      "rival": 1
-    }
-  },
-  "zonas_ataque": {
-    "banda_derecha": 42,
-    "centro_creativo": 34,
-    "banda_izquierda": 24
-  },
-  "transmisiones_youtube": [
-    {
-      "nombre": "Carve Deportiva 1010 AM",
-      "tipo": "Relatos Oficiales",
-      "url": "https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo",
-      "badge": "En Vivo"
-    },
-    {
-      "nombre": "Sport 890",
-      "tipo": "Cobertura Radial",
-      "url": "https://www.youtube.com/results?search_query=Sport+890+en+vivo",
-      "badge": "En Vivo"
-    },
-    {
-      "nombre": "Fútbol a lo Peñarol / Padre y Decano",
-      "tipo": "Relato Partidario Manya",
-      "url": "https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo",
-      "badge": "1891"
-    }
-  ]
+  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
 }
