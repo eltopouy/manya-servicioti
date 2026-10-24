@@ -1677,6 +1677,31 @@
         </div>
       `).join('');
     }
+
+    const prensaGrid = document.getElementById('prensa-nacional-grid');
+    if (prensaGrid && digest.periodistas_prensa) {
+      const colors = {
+        ovacion: '#ffd100',
+        tenfield: '#38bdf8',
+        canal12: '#ef4444',
+        canal4: '#f59e0b',
+        elobservador: '#10b981',
+        portalmvd: '#a855f7'
+      };
+      prensaGrid.innerHTML = Object.entries(digest.periodistas_prensa).map(([k, item]) => {
+        const c = colors[k] || '#ffd100';
+        return `
+          <div class="clave-item" style="border-left:3px solid ${c};background:#141419;padding:12px;border-radius:8px;">
+            <div style="font-size:11.5px;color:${c};font-weight:800;margin-bottom:4px;">
+              ${item.medio} • ${item.cronistas}
+            </div>
+            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
+              “${item.cita}”
+            </p>
+          </div>
+        `;
+      }).join('');
+    }
   }
 
 

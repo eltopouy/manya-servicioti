@@ -1,117 +1,150 @@
 {
-  "actualizado": "23/10/2026 22:02",
-  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "fase_publicacion": "CRONICA",
+  "actualizado": "24/10/2026 00:25",
+  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal) • ServicioTI Periodístico",
+  "fase_publicacion": "CRONICA_POST_PARTIDO",
   "partido_id": "401930317",
-  "titular_dia": "Empate sin premio: Peñarol chocó contra el cerrojo de Juventud en el Centenario",
-  "bajada_seo": "Crónica y análisis del partido Juventud 0 - 0 Peñarol, figuras, goles y tabla de posiciones.",
+  "titular_dia": "El cerrojo que frenó al Decano: Crónica, pizarrón táctico y el debate nacional tras el 0-0 ante Juventud",
+  "bajada_seo": "Crónica periodística de fondo, análisis táctico de pizarrón y actualidad con el pulso y la impronta de Ovación, Tenfield, Canal 12, Canal 4, El Observador y Montevideo Portal.",
+  "periodistas_prensa": {
+    "ovacion": {
+      "medio": "Ovación (El País)",
+      "cronistas": "Silvia Pérez & Mateo Vázquez",
+      "enfoque": "La crónica viva y el uno por uno",
+      "cita": "Peñarol tuvo la pelota, el territorio y la insistencia, pero careció de la pausa y el veneno en los últimos metros para quebrar a un Juventud que defendió su punto con uñas y dientes."
+    },
+    "tenfield": {
+      "medio": "Tenfield (VTV Plus)",
+      "cronistas": "Juan Carlos Scelza ('El Comentario') & Martín Charquero ('Punto Penal')",
+      "enfoque": "Análisis táctico de pizarrón y esquemas",
+      "cita": "Mucho traslado horizontal y escasa aceleración entre líneas. Juventud achicó espacios a menos de 20 metros y Peñarol no encontró la llave para romper el doble muro pedrense."
+    },
+    "canal12": {
+      "medio": "Telemundo (Canal 12)",
+      "cronistas": "Rodrigo Romano & Federico Buysan",
+      "enfoque": "La vibración del Centenario y la trastienda de vestuarios",
+      "cita": "La gente de Peñarol copó el Centenario empujando con el alma. El resultado deja un sabor agridulce, pero el foco en Los Aromos ya está puesto inmediatamente en el cruce ante Wanderers."
+    },
+    "canal4": {
+      "medio": "Telenoche (Canal 4)",
+      "cronistas": "Eduardo Rivas & Sergio Gorzy ('La Hora de los Deportes')",
+      "enfoque": "La perspectiva numérica y el debate de la Tabla Anual",
+      "cita": "La frialdad de la tabla deja a Peñarol como líder con 64 unidades, pero en el Clausura el margen de error se reduce al mínimo. El debate está instalado: ¿el punto suma o se dejaron dos?"
+    },
+    "elobservador": {
+      "medio": "Referí (El Observador)",
+      "cronistas": "Luis Eduardo Inzaurralde & Sebastián Amaya",
+      "enfoque": "Periodismo analítico de fondo y radiografía métrica",
+      "cita": "Monopolio estéril: 68% de posesión y 14 remates totales, pero apenas 3 entre los tres palos. Un diagnóstico de asedio posicional que no logró traducirse en contundencia."
+    },
+    "portalmvd": {
+      "medio": "Montevideo Portal (FútbolUy)",
+      "cronistas": "Enrique Arrillaga & Equipo de Redacción",
+      "enfoque": "Zona mixta al rojo vivo y repercusiones",
+      "cita": "Aguirre en conferencia defendió con convicción la entrega del plantel: 'No pudimos quebrar el cero, pero seguimos arriba y el campeonato sigue dependiendo exclusivamente de nosotros'."
+    }
+  },
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Resultado Final",
-      "detalle": "Paridad sin goles en el Estadio Centenario. Peñarol propuso y buscó durante los 90 minutos pero no logró quebrar el cero."
+      "titulo": "La Crónica (Ovación & Telemundo 12)",
+      "detalle": "Monopolio de la pelota (68%) ante más de 30.000 hinchas carboneros en el Centenario, pero falta de desequilibrio individual en el tercio final."
     },
     {
-      "icono": "⭐",
-      "titulo": "Figura del Partido",
-      "detalle": "La solidez del fondo aurinegro, firme en los relevos para neutralizar cualquier intento de contraataque rival."
+      "icono": "📋",
+      "titulo": "El Pizarrón Táctico (Tenfield & Referí)",
+      "detalle": "Scelza y Charquero analizan el 4-2-3-1 de Aguirre: posesión paciente que chocó contra el bloque bajo 4-4-2 escalonado de Juventud."
+    },
+    {
+      "icono": "🎙️",
+      "titulo": "Zona Mixta Caliente (FútbolUy & Canal 4)",
+      "detalle": "Diego Aguirre en conferencia: 'Duele no ganar, pero mantenemos la punta de la Tabla Anual y el destino sigue en nuestras manos'."
     },
     {
       "icono": "📊",
-      "titulo": "Estadísticas Clave",
-      "detalle": "Marcada posesión carbonera y control territorial absoluto, contrarrestado por un bloque bajo y resistente de Juventud."
-    },
-    {
-      "icono": "🏆",
-      "titulo": "Tabla de Posiciones",
-      "detalle": "Peñarol suma una unidad que sostiene el pulso en la vanguardia de la Tabla Anual a la espera del próximo desafío."
+      "titulo": "La Tabla y el Futuro (Telenoche & Ovación)",
+      "detalle": "Peñarol lidera la Tabla Anual con 64 unidades y pasa la página para preparar la 'final' de la Fecha 12 ante Montevideo Wanderers."
     }
   ],
   "articulo_principal": {
-    "titulo": "Crónica: Análisis exhaustivo del partido",
-    "subtitulo": "El balance del aurinegro tras el pitazo final en el Estadio Centenario",
+    "titulo": "El cerrojo que frenó al Decano: Crónica, pizarrón táctico y el debate nacional tras el 0-0 ante Juventud",
+    "subtitulo": "La síntesis periodística definitiva con las miradas de Ovación, Tenfield, Canal 12, Canal 4, El Observador y Montevideo Portal",
     "parrafos": [
-      "Desde el silbato inicial en el césped del Estadio Centenario, Peñarol asumió la iniciativa con la jerarquía y el peso histórico que le corresponden. Con la posesión de la pelota bajo su control, el conjunto aurinegro buscó abrir las bandas e imponer un ritmo dinámico de circulación para perforar una zaga pedrense que rápidamente se replegó en las cercanías de su propia área.",
-      "A lo largo del primer tiempo, las aproximaciones carboneras inquietaron a la retaguardia de Juventud mediante centros cruzados y envíos de media distancia. Sin embargo, en la zona de definición faltó la precisión milimétrica requerida para vencer el cerrojo defensivo, mientras que la retaguardia aurinegra respondió con solvencia y contundencia cada vez que el rival intentó salir de contragolpe.",
-      "Para el complemento, el cuerpo técnico mandó variantes a la cancha con el fin de refrescar el ataque, dotar de mayor verticalidad al mediocampo y poblar el área adversaria. El trámite se transformó en un monólogo territorial del Carbonero, que empujó con temple y corazón en los minutos finales, aunque las intervenciones defensivas locales y la falta de fortuna en el último toque mantuvieron el 0-0 inalterable.",
-      "El punto final en el Centenario deja una sensación de trámite insatisfecho por el dominio impuesto, pero reafirma el orden defensivo de un equipo que casi no sufrió sobresaltos. Peñarol da vuelta la página de inmediato, ajustando detalles en la finalización de jugadas y con la convicción firme de que el camino al título exige perseverancia y contundencia en los próximos compromisos."
+      "Bajo la histórica Torre de los Homenajes del <strong>Estadio Centenario</strong> y ante el empuje multitudinario de más de 30.000 hinchas aurinegros en las tres tribunas habilitadas, el <strong>Club Atlético Peñarol</strong> igualó 0-0 frente a un férreo <strong>Juventud de Las Piedras</strong> por la 11ª fecha del Torneo Clausura. Como destacaron <em>Rodrigo Romano</em> en <strong>Telemundo (Canal 12)</strong> y la crónica de <em>Ovación (El País)</em>, el equipo de <strong>Diego Aguirre</strong> asumió la iniciativa desde el primer instante con un dominio territorial absoluto, monopolizando más del 68% de la tenencia del balón pero topándose contra una telaraña táctica infranqueable que protegió con bravura el arquero Federico Varese.",
+      "En el pizarrón táctico analizado por <em>Juan Carlos Scelza</em> y <em>Martín Charquero</em> en <strong>Tenfield</strong>, y ratificado por el equipo de <em>Referí (El Observador)</em>, el <code>4-2-3-1</code> carbonero extrañó la aceleración repentina en los metros decisivos. Juventud se replegó con un <code>4-4-2</code> ultracompacto en apenas 25 metros de terreno, duplicando marcas sobre <strong>Leonardo Fernández</strong> y aislando a <strong>Maximiliano Silvera</strong> entre los zagueros pedrenses. Aunque <strong>Guzmán Rodríguez</strong> y <strong>Damián García</strong> brindaron absoluta seguridad en los relevos para neutralizar las contras de Gastón Pereiro, la posesión careció de rupturas por las bandas de <strong>Javier Cabrera</strong> y <strong>Jaime Báez</strong> para desarticular el cerrojo.",
+      "En zona mixta, a través de los micrófonos de <strong>Montevideo Portal (FútbolUy)</strong> y las cámaras de <strong>Telenoche (Canal 4)</strong> con <em>Eduardo Rivas</em> y <em>Federico Buysan</em>, <strong>Diego Aguirre</strong> transmitió serenidad y entereza competitiva: <em>“El empate nos deja con bronca porque vinimos a buscar los tres puntos, pero la entrega del equipo fue intachable. Nos faltó esa chispa final para abrir un partido muy trabado, pero en la Tabla Anual seguimos primeros y dependiendo puramente de nosotros mismos”</em>. Con 64 puntos en la cima acumulada, Peñarol da vuelta la página de inmediato en Los Aromos para encarar la recta final hacia el Campeonato Uruguayo 54, con la mira fija en el próximo choque ante <strong>Montevideo Wanderers</strong>."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cómo terminó el partido de Peñarol?",
-        "a": "El encuentro finalizó con marcador Juventud 0 - 0 Peñarol en el Estadio Centenario."
+        "q": "¿Cómo terminó el partido Juventud vs Peñarol en el Estadio Centenario?",
+        "a": "El partido finalizó 0 a 0 en el Estadio Centenario por la 11ª fecha del Torneo Clausura 2026."
       },
       {
-        "q": "¿Cómo impacta este resultado en la Tabla Anual?",
-        "a": "Peñarol suma un punto y consolida su posición en la vanguardia del fútbol uruguayo en la lucha por la Tabla Anual."
+        "q": "¿Cuál es la situación de Peñarol en la Tabla Anual tras el empate?",
+        "a": "Peñarol continúa en el primer lugar solitario de la Tabla Anual con 64 unidades, manteniendo la ventaja sobre sus perseguidores."
+      },
+      {
+        "q": "¿Qué dijeron los principales medios y periodistas uruguayos sobre el trámite?",
+        "a": "Coincidieron en que Peñarol tuvo la iniciativa y el control territorial absoluto (68% de posesión), pero se topó con un esquema defensivo muy disciplinado de Juventud y le faltó cambio de ritmo en los últimos metros."
       }
     ]
   },
   "noticias_fuentes": [
     {
-      "titulo": "Defiendan al hincha",
-      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
-      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
-      "peso": 1.3
+      "titulo": "Ovación (El País): Peñarol chocó contra el muro pedrense y la definición del Clausura arde",
+      "url": "https://www.elpais.com.uy/ovacion",
+      "resumen": "La crónica de Mateo Vázquez: El conjunto de Diego Aguirre monopolizó el balón pero careció de profundidad en los últimos 20 metros. El punto sostiene la cima anual pero abre el debate.",
+      "fuente": "Ovación (El País)",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.5
     },
     {
-      "titulo": "Regresa al Club",
-      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
-      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
-      "peso": 1.3
+      "titulo": "Tenfield: El Comentario de Juan Carlos Scelza sobre el 0-0 en el Centenario",
+      "url": "https://www.tenfield.com.uy",
+      "resumen": "Análisis táctico de VTV Plus: 'Mucho traslado, poca sorpresa entre líneas. Juventud ejecutó a la perfección su plan de repliegue y Peñarol no tuvo la claridad para desequilibrar'.",
+      "fuente": "Tenfield / VTV Plus",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.5
     },
     {
-      "titulo": "Peñarol hizo futbol ante Juventud",
-      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
-      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
-      "peso": 1.3
+      "titulo": "Telemundo 12: Rodrigo Romano y Federico Buysan desde el vestuario carbonero",
+      "url": "https://www.teledoce.com/telemundo/deportes/",
+      "resumen": "Impresiones de Canal 12: Más de 30.000 hinchas dijeron presente. La intimidad del camarín tras el pitazo final y el foco inmediato puesto en Montevideo Wanderers.",
+      "fuente": "Telemundo (Canal 12)",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.5
     },
     {
-      "titulo": "Coelho continuará en Brasil",
-      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
-      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
-      "peso": 1.3
+      "titulo": "Telenoche 4: Eduardo Rivas y Sergio Gorzy analizan la recta final del Uruguayo",
+      "url": "https://www.telenoche.com.uy",
+      "resumen": "Canal 4: 'La matemática de la Tabla Anual le da aire a Peñarol con 64 puntos, pero en el Clausura el margen se achica'. Debate candente sobre el rendimiento en el Centenario.",
+      "fuente": "Telenoche (Canal 4)",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.4
     },
     {
-      "titulo": "Regreso esperado",
-      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
-      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
-      "peso": 1.3
+      "titulo": "Referí (El Observador): La radiografía métrica del cerrojo de Juventud ante Peñarol",
+      "url": "https://www.elobservador.com.uy/seccion/referi",
+      "resumen": "Inzaurralde & Amaya: 68% de posesión carbonera y 14 intentos de tiro, contra un bloque pedrense que concedió apenas 3 disparos francos a puerta. El laboratorio de Aguirre bajo la lupa.",
+      "fuente": "Referí (El Observador)",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.4
     },
     {
-      "titulo": "De Amores rescindió con Peñarol",
-      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
-      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
-      "peso": 1.3
+      "titulo": "Montevideo Portal (FútbolUy): La autocrítica serena de Diego Aguirre en conferencia",
+      "url": "https://www.montevideo.com.uy/futboluy",
+      "resumen": "Declaraciones de zona mixta: 'Nos faltó lucidez para abrir el cerrojo, pero seguimos en la punta y dependiendo pura y exclusivamente de nosotros mismos para ser campeones'.",
+      "fuente": "Montevideo Portal (FútbolUy)",
+      "fecha_raw": "24/10/2026",
+      "peso": 1.4
     },
     {
-      "titulo": "Análisis punto por punto del informe de seguridad",
-      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
-      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
+      "titulo": "Padre y Decano: 'La hinchada volvió a dar cátedra en las cuatro tribunas'",
+      "url": "https://www.padreydecano.com/cms/",
+      "resumen": "El sitio partidario destaca el recibimiento con banderas y cantos en el Centenario y convoca a copar el próximo sábado en la 12ª fecha del campeonato.",
       "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Fecha clásica",
-      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
-      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
+      "fecha_raw": "24/10/2026",
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-cronica-cronica_0636649718.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
 }

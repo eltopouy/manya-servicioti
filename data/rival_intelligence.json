@@ -1,16 +1,16 @@
 {
-  "generado_el": "23/10/2026 23:56",
-  "rival_nombre": "Club Atlético Juventud de Las Piedras",
-  "rival_corto": "Juventud",
-  "rival_slug": "juventud",
-  "escudo_oficial": "assets/img/escudos/escudo_juventud.webp",
-  "escudo_auf_remoto": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/juventud.png",
+  "generado_el": "24/10/2026 00:00",
+  "rival_nombre": "Montevideo Wanderers Fútbol Club",
+  "rival_corto": "Wanderers",
+  "rival_slug": "wanderers",
+  "escudo_oficial": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+  "escudo_auf_remoto": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1926.png",
   "datos_institucionales_auf": {
-    "fundacion": "24 de diciembre de 1935",
-    "sede": "Las Piedras, Canelones, Uruguay",
-    "estadio_propio": "Estadio Municipal Parque Artigas (Las Piedras)",
+    "fundacion": "15 de agosto de 1902",
+    "sede": "Prado, Montevideo",
+    "estadio_propio": "Parque Alfredo Víctor Viera",
     "capacidad": 12000,
-    "web_oficial": "https://juventud.uy/",
+    "web_oficial": "https://mwfc.com.uy/",
     "redes": {
       "twitter": "https://x.com/JuventudUy",
       "instagram": "https://www.instagram.com/juventuddelaspiedras/"
@@ -18,7 +18,7 @@
   },
   "scouting_tactico": {
     "entrenador": "Christian 'Kily' González",
-    "esquema_base": "4-4-2 / 5-3-2 de repliegue y transición vertical",
+    "esquema_base": "4-4-2 / 5-3-2 de repliegue y transición",
     "propuesta_juego": "Juventud estructura su planteo en un bloque medio-bajo compacto, achicando espacios entre líneas para neutralizar la gestación interna del rival. En ofensiva apuestan fuertemente a las transiciones verticales por los costados y a la potencia del juego aéreo en tiros de esquina y faltas laterales.",
     "figuras_a_seguir": [
       {

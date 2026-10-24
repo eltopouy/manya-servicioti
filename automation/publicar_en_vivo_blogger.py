@@ -445,6 +445,67 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
         </div>
       </div>
 
+      <!-- CRÓNICA, ANÁLISIS TÁCTICO Y ACTUALIDAD: LA MIRADA DE LA PRENSA URUGUAYA -->
+      <div style="background:#09090b;border:2px solid #ffd100;border-radius:14px;padding:24px;margin-bottom:26px;color:#fff;">
+        <div style="border-bottom:2px solid #ffd100;padding-bottom:12px;margin-bottom:18px;">
+          <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11px;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.04em;">
+            🎙️ MESA PERIODÍSTICA NACIONAL • EL JUICIO DE LA PRENSA
+          </span>
+          <h2 style="font-size:22px;color:#ffffff;margin:10px 0 6px;font-weight:900;">
+            El cerrojo que frenó al Decano: Crónica, pizarrón táctico y debate nacional tras el 0-0 ante Juventud
+          </h2>
+          <div style="font-size:13px;color:#ffd100;font-weight:700;">
+            Síntesis con el pulso y la impronta de Ovación, Tenfield, Canal 12, Canal 4, El Observador y Montevideo Portal
+          </div>
+        </div>
+
+        <!-- Crónica y Análisis Táctico -->
+        <div style="font-size:14.5px;line-height:1.7;color:#e4e4e7;margin-bottom:20px;">
+          <p style="margin-bottom:12px;">
+            Bajo la imponente Torre de los Homenajes del <strong>Estadio Centenario</strong> y ante el empuje de más de 30.000 hinchas aurinegros, el <strong>Club Atlético Peñarol</strong> empató 0-0 ante <strong>Juventud de Las Piedras</strong> por la 11ª fecha del Torneo Clausura. Como destacaron <em>Rodrigo Romano</em> en <strong>Telemundo (Canal 12)</strong> y la crónica de <em>Ovación (El País)</em>, el equipo de <strong>Diego Aguirre</strong> monopolizó la tenencia del balón con más del 68% de posesión, pero no logró perforar la doble línea de cuatro pedrense.
+          </p>
+          <p style="margin-bottom:12px;">
+            En el pizarrón táctico analizado por <em>Juan Carlos Scelza</em> y <em>Martín Charquero</em> en <strong>Tenfield</strong>, y por <em>Referí (El Observador)</em>, el <code>4-2-3-1</code> de Peñarol extrañó la aceleración entre líneas. Juventud se replegó con un bloque bajo en menos de 25 metros, asfixiando a <strong>Leonardo Fernández</strong> y aislando a <strong>Maximiliano Silvera</strong>. Si bien <strong>Guzmán Rodríguez</strong> y <strong>Damián García</strong> controlaron las transiciones rivales, faltó sorpresa en los metros de definición.
+          </p>
+          <p style="margin-bottom:12px;">
+            En zona mixta, a través de <strong>Montevideo Portal (FútbolUy)</strong> y <strong>Telenoche (Canal 4)</strong> con <em>Eduardo Rivas</em> y <em>Federico Buysan</em>, <strong>Diego Aguirre</strong> fue contundente: <em>“El empate duele porque vinimos a buscar los tres puntos, pero en la Tabla Anual seguimos primeros y dependiendo puramente de nosotros. Ya estamos enfocados en Wanderers”</em>.
+          </p>
+        </div>
+
+        <!-- Tarjetas de los 6 Medios Principales -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:16px;">
+          <div style="background:#141419;border-left:4px solid #ffd100;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#ffd100;font-weight:900;margin-bottom:4px;">📰 OVACIÓN (EL PAÍS) • Silvia Pérez &amp; Mateo Vázquez</div>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Peñarol tuvo la pelota y el territorio, pero careció de la pausa y el veneno en los últimos metros para quebrar a un Juventud que defendió su punto con uñas y dientes.”</p>
+          </div>
+
+          <div style="background:#141419;border-left:4px solid #38bdf8;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#38bdf8;font-weight:900;margin-bottom:4px;">📺 TENFIELD / VTV PLUS • J. C. Scelza &amp; M. Charquero</div>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Scelza en 'El Comentario': Mucho traslado horizontal y escasa aceleración entre líneas. Juventud achicó espacios y Peñarol no encontró la llave táctica.”</p>
+          </div>
+
+          <div style="background:#141419;border-left:4px solid #ef4444;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#f87171;font-weight:900;margin-bottom:4px;">🎙️ TELEMUNDO 12 • Rodrigo Romano &amp; F. Buysan</div>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Romano: La multitud en el Centenario empujó con el alma. El resultado deja sabor agridulce, pero el foco en Los Aromos ya está puesto de lleno en Wanderers.”</p>
+          </div>
+
+          <div style="background:#141419;border-left:4px solid #f59e0b;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#fbbf24;font-weight:900;margin-bottom:4px;">📺 TELENOCHE 4 • Eduardo Rivas &amp; Sergio Gorzy</div>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Rivas: La frialdad de la tabla deja a Peñarol como líder con 64 unidades, pero en el Clausura el margen se estrecha. El debate sobre si el punto suma está instalado.”</p>
+          </div>
+
+          <div style="background:#141419;border-left:4px solid #10b981;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#34d399;font-weight:900;margin-bottom:4px;">📊 REFERÍ (EL OBSERVADOR) • L. E. Inzaurralde</div>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Radiografía métrica: 68% de posesión carbonera y 14 remates, pero apenas 3 al arco. Un diagnóstico de asedio posicional sin contundencia.”</p>
+          </div>
+
+          <div style="background:#141419;border-left:4px solid #a855f7;padding:12px 14px;border-radius:8px;">
+            <div style="font-size:11.5px;color:#c084fc;font-weight:900;margin-bottom:4px;">🌐 MONTEVIDEO PORTAL • Enrique Arrillaga</div>
+            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“Zona mixta al rojo vivo: Aguirre defendió la entrega del equipo y aseguró que el destino de la Tabla Anual sigue puramente en las manos del Decano.”</p>
+          </div>
+        </div>
+      </div>
+
       <!-- FOOTER DEL POST -->
       <div style="text-align:center;padding:20px;border-top:1px solid #e2e8f0;font-size:13px;color:#64748b;">
         <p>Cobertura oficial en vivo generada por <strong>Manya ServicioTI</strong> para <a href="https://www.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">www.servicioti.com.uy</a> y <a href="https://manya.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">manya.servicioti.com.uy</a>.</p>
@@ -473,11 +534,10 @@ def publicar_cobertura_en_vivo():
     
     eventos = generar_minuto_a_minuto_eventos(reloj)
     
-    # Inyectar timeline y fase en live_status.json
-    live["fase_partido"] = "EN_VIVO"
+    # Inyectar timeline sin alterar fase (mantiene PREVIA para proximo partido)
     live["minuto_a_minuto"] = eventos
     
-    title = f"[Peñarol EN VIVO] Juventud vs. Peñarol Minuto a Minuto: Marcador en Directo, Incidencias y Cobertura Oficial en el Centenario"
+    title = f"[Peñarol] Juventud 0 - 0 Peñarol: Crónica, Minuto a Minuto, Pizarrón Táctico y el Juicio de la Prensa Uruguaya"
     content_html = construir_html_blogger_en_vivo(partido_activo, eventos)
     
     with CentralAutomationLock.acquire("blogger_api", timeout_sec=90):
@@ -524,7 +584,8 @@ def publicar_cobertura_en_vivo():
         digest_file.write_text(json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8")
         
         live["blogger_live_url"] = post_url
-        live["alerta_banner"] = f"🔴 ¡EN VIVO! Juventud {partido_activo.get('local',{}).get('goles','0')} - {partido_activo.get('visitante',{}).get('goles','0')} Peñarol ({reloj}). Seguí el Minuto a Minuto aquí."
+        if live.get("fase_partido") == "EN_VIVO":
+            live["alerta_banner"] = f"🔴 ¡EN VIVO! Juventud {partido_activo.get('local',{}).get('goles','0')} - {partido_activo.get('visitante',{}).get('goles','0')} Peñarol ({reloj}). Seguí el Minuto a Minuto aquí."
         live["estadisticas_en_vivo"] = {
             "posesion": {"penarol": 68, "rival": 32},
             "tiros_totales": {"penarol": 4, "rival": 1},
