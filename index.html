@@ -180,6 +180,7 @@
         <a href="#tabla-simulador">📊 Tabla</a>
         <a href="#pizarra-tactica">👕 Armá tu 11</a>
         <a href="#influencers-manya">📸 Influencers</a>
+        <a href="#piel-carbonera">💉 Tatuajes</a>
         <a href="#muro-visual">📸 Galerías</a>
         <a href="#como-llegar">🚌 Ómnibus</a>
         <a href="#museo-1891">🏆 Museo 1891</a>
@@ -1298,6 +1299,74 @@
       </div>
     </section>
 
+    <!-- ============================================================== -->
+    <!-- MÓDULO: PIEL CARBONERA - GALERÍA DE TATUAJES DE PEÑAROL -->
+    <!-- ============================================================== -->
+    <section id="piel-carbonera" class="manya-section tattoo-section" aria-label="Galería Oficial de Tatuajes de Peñarol y Tatuadores en Instagram y TikTok">
+      <!-- Banner Destacado #PeñarolEnLaPiel -->
+      <div class="tattoo-banner-header">
+        <div>
+          <div class="tattoo-banner-title">
+            <span class="tattoo-badge-hashtag">#PeñarolEnLaPiel • Instagram &amp; TikTok</span>
+            <span class="badge-gold">Día Mundial del Tatuaje &amp; Tribuna</span>
+          </div>
+          <h2 class="section-title" style="margin:10px 0 6px;">💉 Piel Carbonera: <span>Tatuajes de Peñarol &amp; Tatuadores</span></h2>
+          <p class="section-sub" style="margin:0;max-width:850px;">
+            Homenaje a los hinchas y a los grandes artistas del tatuaje en Montevideo y Uruguay que graban la pasión aurinegra para siempre en la piel. Desde el escudo sagrado de 1891 y el Estadio Campeón del Siglo hasta retratos de Morena y caligrafía chicana.
+          </p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <a href="https://www.instagram.com/explore/tags/peñarolenlapiel/" target="_blank" rel="noopener noreferrer" class="btn-manya" style="padding:8px 16px;font-size:12px;text-decoration:none;">
+            <span>📸 Ver #PeñarolEnLaPiel en IG ↗</span>
+          </a>
+          <a href="https://www.tiktok.com/tag/penarol" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:8px 16px;font-size:12px;background:#000;text-decoration:none;">
+            <span>🎵 Ver Tatuajes en TikTok ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Strip de Estudios y Tatuadores Destacados en Montevideo -->
+      <div style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <h3 style="font-size:15px;color:var(--manya-gold);font-weight:900;margin:0;">
+          🎨 Estudios &amp; Artistas Recomendados en Montevideo (Instagram &amp; TikTok)
+        </h3>
+        <span style="font-size:12px;color:#a1a1aa;">Seguí a los tatuadores oficiales de la pasión carbonera</span>
+      </div>
+
+      <div class="tattoo-artists-strip" id="tattoo-artists-list">
+        <!-- Renderizado dinámicamente desde js/app.js -->
+      </div>
+
+      <!-- Filtros por Estilo de Tatuaje -->
+      <div class="tattoo-filter-tabs" id="tattoo-filter-tabs" role="tablist">
+        <button type="button" class="tattoo-filter-btn active" data-cat="all">⚡ Todos los Tatuajes</button>
+        <button type="button" class="tattoo-filter-btn" data-cat="escudos">🛡️ Escudos &amp; 1891</button>
+        <button type="button" class="tattoo-filter-btn" data-cat="idolos">⭐ Ídolos (Morena &amp; Aguirre)</button>
+        <button type="button" class="tattoo-filter-btn" data-cat="estadio">🏟️ Campeón del Siglo</button>
+        <button type="button" class="tattoo-filter-btn" data-cat="frases">✍️ Lettering &amp; Chicano</button>
+        <button type="button" class="tattoo-filter-btn" data-cat="minimalistas">✨ Línea Fina Minimalista</button>
+      </div>
+
+      <!-- Grid de Tatuajes Carboneros -->
+      <div class="tattoo-grid" id="tattoo-cards-grid">
+        <!-- Renderizado dinámicamente desde data/tatuajes_manya.json -->
+      </div>
+
+      <!-- Caja de Comunidad: Mandá tu Tatuaje -->
+      <div class="tattoo-cta-box">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="font-size:36px;">💉</div>
+          <div>
+            <h3 style="font-size:17px;font-weight:900;color:#fff;margin:0 0 4px;">¿Llevás a Peñarol grabado en la piel?</h3>
+            <p style="font-size:13px;color:#d4d4d8;margin:0;">Compartí tu tatuaje o reel etiquetando a <strong style="color:var(--manya-gold);">#PeñarolEnLaPiel</strong> en Instagram o TikTok para sumarte a la galería oficial de ServicioTI.</p>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="btn-manya" style="padding:10px 20px;font-size:13px;text-decoration:none;">
+          📸 Compartir Tatuaje Aurinegro →
+        </a>
+      </div>
+    </section>
+
 <section id="muro-visual" class="manya-section" aria-label="Gran Galería Fotográfica y Cobertura Oficial de Peñarol">
       <div class="section-header">
         <div>
@@ -1311,6 +1380,7 @@
           <button type="button" class="gallery-tab" data-filter="los-aromos">Los Aromos</button>
           <button type="button" class="gallery-tab" data-filter="hinchada">Tribunas &amp; Hinchada</button>
           <button type="button" class="gallery-tab" data-filter="noticias">Noticias &amp; Prensa</button>
+          <button type="button" class="gallery-tab" data-filter="tatuajes">💉 Piel Carbonera (Tatuajes)</button>
         </div>
       </div>
 

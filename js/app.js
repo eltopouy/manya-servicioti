@@ -1975,7 +1975,7 @@
   async function init() {
     setupLightbox();
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel, influencers] = await Promise.all([
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
@@ -1986,7 +1986,8 @@
       loadJsonSafe('data/historial_juventud.json'),
       loadJsonSafe('data/efemerides_hoy.json'),
       loadJsonSafe('data/rival_intelligence.json'),
-      loadJsonSafe('data/influencers_feed.json')
+      loadJsonSafe('data/influencers_feed.json'),
+      loadJsonSafe('data/tatuajes_manya.json')
     ]);
 
     if (escudosCatalog) {
@@ -2015,6 +2016,10 @@
     initSimulator();
     if (influencers && influencers.length) {
       renderInfluencersSection(influencers);
+    }
+    if (tattoos && tattoos.length) {
+      renderTattooGallery(tattoos);
+      setupTattooFilters(tattoos);
     }
 
     // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json
