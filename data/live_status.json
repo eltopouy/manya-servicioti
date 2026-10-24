@@ -1,7 +1,7 @@
 {
-  "actualizado": "23/10/2026 21:30",
-  "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 EN VIVO AHORA: Juventud 0 - 0 Peñarol (71')",
+  "actualizado": "23/10/2026 22:00",
+  "fase_partido": "FINALIZADO",
+  "alerta_banner": "🏁 FINAL: Juventud 0 - 0 Peñarol (Estadio Centenario)",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -27,13 +27,13 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "71'",
+    "minuto_reloj": "90'+6'",
     "tiempo_periodo": 2,
-    "completado": false,
-    "state": "in",
+    "completado": true,
+    "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
     "es_hoy": true,
-    "fase": "EN_VIVO",
+    "fase": "FINALIZADO",
     "detalles_avanzados": {
       "goles": [],
       "tarjetas": [],
@@ -47,6 +47,38 @@
     }
   },
   "proximo_partido": {
+    "event_id": "401931258",
+    "nombre": "Peñarol vs Montevideo Wanderers",
+    "fecha_iso": "2026-10-31T16:30:00-03:00",
+    "fecha_legible": "Sábado 31/10/2026 16:30 hs",
+    "torneo": "Torneo Clausura",
+    "estadio": "Estadio Saroldi",
+    "local": {
+      "id": "2683",
+      "nombre": "Peñarol",
+      "abreviatura": "PEN",
+      "logo": "",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
+      "goles": "-",
+      "es_penarol": true
+    },
+    "visitante": {
+      "id": "5501",
+      "nombre": "Montevideo Wanderers",
+      "abreviatura": "WAN",
+      "logo": "",
+      "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+      "goles": "-",
+      "es_penarol": false
+    },
+    "minuto_reloj": "0'",
+    "tiempo_periodo": 0,
+    "completado": false,
+    "state": "pre",
+    "tv": "VTV Plus / Disney+ Premium",
+    "es_hoy": false
+  },
+  "ultimo_partido": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
     "fecha_iso": "2026-10-23T20:00:00-03:00",
@@ -71,80 +103,14 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "71'",
-    "tiempo_periodo": 2,
-    "completado": false,
-    "state": "in",
-    "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": true
-  },
-  "ultimo_partido": {
-    "event_id": "401929259",
-    "nombre": "Liverpool vs Peñarol",
-    "fecha_iso": "2026-10-18T18:30:00-03:00",
-    "fecha_legible": "Domingo 18/10/2026 18:30 hs",
-    "torneo": "Campeonato Uruguayo • Clausura",
-    "estadio": "Parque Alfredo Víctor Viera",
-    "local": {
-      "id": "5492",
-      "nombre": "Liverpool",
-      "abreviatura": "LIV",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-      "escudo": "assets/img/escudos/escudo_liverpool.webp",
-      "goles": "1",
-      "es_penarol": false
-    },
-    "visitante": {
-      "id": "2683",
-      "nombre": "Peñarol",
-      "abreviatura": "PEN",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-      "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
-      "es_penarol": true
-    },
-    "minuto_reloj": "90'+3'",
+    "minuto_reloj": "90'+6'",
     "tiempo_periodo": 2,
     "completado": true,
     "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false
+    "es_hoy": true
   },
   "ultimos_resultados": [
-    {
-      "event_id": "401929259",
-      "nombre": "Liverpool vs Peñarol",
-      "fecha_iso": "2026-10-18T18:30:00-03:00",
-      "fecha_legible": "Domingo 18/10/2026 18:30 hs",
-      "torneo": "Campeonato Uruguayo • Clausura",
-      "estadio": "Parque Alfredo Víctor Viera",
-      "local": {
-        "id": "5492",
-        "nombre": "Liverpool",
-        "abreviatura": "LIV",
-        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
-        "escudo": "assets/img/escudos/escudo_liverpool.webp",
-        "goles": "1",
-        "es_penarol": false
-      },
-      "visitante": {
-        "id": "2683",
-        "nombre": "Peñarol",
-        "abreviatura": "PEN",
-        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-        "escudo": "assets/img/escudos/escudo_penarol.webp",
-        "goles": "0",
-        "es_penarol": true
-      },
-      "minuto_reloj": "90'+3'",
-      "tiempo_periodo": 2,
-      "completado": true,
-      "state": "post",
-      "tv": "VTV Plus / Disney+ Premium",
-      "es_hoy": false
-    }
-  ],
-  "proximos_partidos": [
     {
       "event_id": "401930317",
       "nombre": "Juventud vs Peñarol",
@@ -170,12 +136,46 @@
         "goles": "0",
         "es_penarol": true
       },
-      "minuto_reloj": "71'",
+      "minuto_reloj": "90'+6'",
       "tiempo_periodo": 2,
-      "completado": false,
-      "state": "in",
+      "completado": true,
+      "state": "post",
       "tv": "VTV Plus / Disney+ Premium",
       "es_hoy": true
+    }
+  ],
+  "proximos_partidos": [
+    {
+      "event_id": "401931258",
+      "nombre": "Peñarol vs Montevideo Wanderers",
+      "fecha_iso": "2026-10-31T16:30:00-03:00",
+      "fecha_legible": "Sábado 31/10/2026 16:30 hs",
+      "torneo": "Torneo Clausura",
+      "estadio": "Estadio Saroldi",
+      "local": {
+        "id": "2683",
+        "nombre": "Peñarol",
+        "abreviatura": "PEN",
+        "logo": "",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
+        "goles": "-",
+        "es_penarol": true
+      },
+      "visitante": {
+        "id": "5501",
+        "nombre": "Montevideo Wanderers",
+        "abreviatura": "WAN",
+        "logo": "",
+        "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+        "goles": "-",
+        "es_penarol": false
+      },
+      "minuto_reloj": "0'",
+      "tiempo_periodo": 0,
+      "completado": false,
+      "state": "pre",
+      "tv": "VTV Plus / Disney+ Premium",
+      "es_hoy": false
     }
   ],
   "torneo_activo_id": "clausura",
@@ -223,14 +223,14 @@
       "pos": 4,
       "equipo": "Peñarol",
       "es_penarol": true,
-      "pj": 11,
+      "pj": 12,
       "pg": 6,
-      "pe": 3,
+      "pe": 4,
       "pp": 2,
       "gf": 16,
       "gc": 8,
       "dg": "+8",
-      "pts": 20
+      "pts": 21
     },
     {
       "pos": 5,
@@ -247,6 +247,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Juventud",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 4,
+      "pe": 6,
+      "pp": 2,
+      "gf": 12,
+      "gc": 8,
+      "dg": "+4",
+      "pts": 18
+    },
+    {
+      "pos": 7,
       "equipo": "Cerro",
       "es_penarol": false,
       "pj": 11,
@@ -257,19 +270,6 @@
       "gc": 14,
       "dg": "-1",
       "pts": 18
-    },
-    {
-      "pos": 7,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 4,
-      "pe": 5,
-      "pp": 2,
-      "gf": 12,
-      "gc": 8,
-      "dg": "+4",
-      "pts": 17
     },
     {
       "pos": 8,
@@ -643,14 +643,14 @@
       "pos": 4,
       "equipo": "Peñarol",
       "es_penarol": true,
-      "pj": 11,
+      "pj": 12,
       "pg": 6,
-      "pe": 3,
+      "pe": 4,
       "pp": 2,
       "gf": 16,
       "gc": 8,
       "dg": "+8",
-      "pts": 20
+      "pts": 21
     },
     {
       "pos": 5,
@@ -667,6 +667,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Juventud",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 4,
+      "pe": 6,
+      "pp": 2,
+      "gf": 12,
+      "gc": 8,
+      "dg": "+4",
+      "pts": 18
+    },
+    {
+      "pos": 7,
       "equipo": "Cerro",
       "es_penarol": false,
       "pj": 11,
@@ -677,19 +690,6 @@
       "gc": 14,
       "dg": "-1",
       "pts": 18
-    },
-    {
-      "pos": 7,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 4,
-      "pe": 5,
-      "pp": 2,
-      "gf": 12,
-      "gc": 8,
-      "dg": "+4",
-      "pts": 17
     },
     {
       "pos": 8,
@@ -919,14 +919,14 @@
           "pos": 4,
           "equipo": "Peñarol",
           "es_penarol": true,
-          "pj": 11,
+          "pj": 12,
           "pg": 6,
-          "pe": 3,
+          "pe": 4,
           "pp": 2,
           "gf": 16,
           "gc": 8,
           "dg": "+8",
-          "pts": 20
+          "pts": 21
         },
         {
           "pos": 5,
@@ -943,6 +943,19 @@
         },
         {
           "pos": 6,
+          "equipo": "Juventud",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 4,
+          "pe": 6,
+          "pp": 2,
+          "gf": 12,
+          "gc": 8,
+          "dg": "+4",
+          "pts": 18
+        },
+        {
+          "pos": 7,
           "equipo": "Cerro",
           "es_penarol": false,
           "pj": 11,
@@ -953,19 +966,6 @@
           "gc": 14,
           "dg": "-1",
           "pts": 18
-        },
-        {
-          "pos": 7,
-          "equipo": "Juventud",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 4,
-          "pe": 5,
-          "pp": 2,
-          "gf": 12,
-          "gc": 8,
-          "dg": "+4",
-          "pts": 17
         },
         {
           "pos": 8,
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 17.4,
+    "temperatura_c": 17.2,
     "sensacion_c": 16.5,
-    "viento_kmh": 15.1,
+    "viento_kmh": 13.9,
     "humedad_pct": 81,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 21:30"
+    "actualizado": "23/10/2026 22:00"
   },
   "minuto_a_minuto": [
     {
