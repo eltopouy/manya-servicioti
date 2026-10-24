@@ -1542,7 +1542,7 @@
     if (zoomBtn) zoomBtn.onclick = openHeroLightbox;
 
     if (readMoreEl) {
-      readMoreEl.href = (digest && digest.blogger_post_url) ? digest.blogger_post_url : 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html';
+      readMoreEl.href = (digest && digest.blogger_post_url) ? digest.blogger_post_url : 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
       readMoreEl.target = '_blank';
       readMoreEl.rel = 'noopener noreferrer';
     }
@@ -2015,7 +2015,7 @@
     }
 
     if (digest) {
-      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html';
+      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
       document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
         a.href = bUrl;
         a.target = '_blank';

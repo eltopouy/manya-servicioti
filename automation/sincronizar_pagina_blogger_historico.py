@@ -50,7 +50,7 @@ def generar_contenido_html(digest: dict, live: dict, h2h_juv: dict) -> str:
     # Análisis actual
     titular_actual = digest.get("titular_dia", "Previa Oficial: Peñarol ante Juventud en el Estadio Centenario")
     bajada_actual = digest.get("bajada_seo", "")
-    post_url_actual = digest.get("blogger_post_url", "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html")
+    post_url_actual = digest.get("blogger_post_url", "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html")
     
     # Historiales 1891 BD
     historiales = [
