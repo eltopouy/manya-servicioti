@@ -1,5 +1,5 @@
 {
-  "actualizado": "24/10/2026 00:27",
+  "actualizado": "24/10/2026 00:51",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.8,
-    "sensacion_c": 14.9,
-    "viento_kmh": 8.1,
+    "temperatura_c": 15.0,
+    "sensacion_c": 14.8,
+    "viento_kmh": 10.2,
     "humedad_pct": 95,
     "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "24/10/2026 00:27"
+    "actualizado": "24/10/2026 00:51"
   },
   "minuto_a_minuto": [
     {
@@ -1519,5 +1519,64 @@
       "equipo": "Peñarol"
     }
   ],
-  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
+  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-juventud-0-0-penarol-cronica.html",
+  "estadisticas_en_vivo": {
+    "posesion": {
+      "penarol": 68,
+      "rival": 32
+    },
+    "tiros_totales": {
+      "penarol": 4,
+      "rival": 1
+    },
+    "tiros_al_arco": {
+      "penarol": 2,
+      "rival": 0
+    },
+    "corners": {
+      "penarol": 3,
+      "rival": 0
+    },
+    "precision_pases": {
+      "penarol": 88,
+      "rival": 64
+    },
+    "duelos_ganados": {
+      "penarol": 58,
+      "rival": 42
+    },
+    "faltas": {
+      "penarol": 2,
+      "rival": 5
+    },
+    "tarjetas_amarillas": {
+      "penarol": 0,
+      "rival": 1
+    }
+  },
+  "zonas_ataque": {
+    "banda_derecha": 42,
+    "centro_creativo": 34,
+    "banda_izquierda": 24
+  },
+  "transmisiones_youtube": [
+    {
+      "nombre": "Carve Deportiva 1010 AM",
+      "tipo": "Relatos Oficiales",
+      "url": "https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo",
+      "badge": "En Vivo"
+    },
+    {
+      "nombre": "Sport 890",
+      "tipo": "Cobertura Radial",
+      "url": "https://www.youtube.com/results?search_query=Sport+890+en+vivo",
+      "badge": "En Vivo"
+    },
+    {
+      "nombre": "Fútbol a lo Peñarol / Padre y Decano",
+      "tipo": "Relato Partidario Manya",
+      "url": "https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo",
+      "badge": "1891"
+    }
+  ]
 }

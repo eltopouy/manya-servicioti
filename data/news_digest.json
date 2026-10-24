@@ -1,10 +1,10 @@
 {
-  "actualizado": "24/10/2026 00:25",
-  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal) • ServicioTI Periodístico",
+  "actualizado": "24/10/2026 00:45",
+  "modelo_ia": "Google Gemini 3.8 Flash • Redacción Literaria & Pizarrón Táctico",
   "fase_publicacion": "CRONICA_POST_PARTIDO",
   "partido_id": "401930317",
-  "titular_dia": "El cerrojo que frenó al Decano: Crónica, pizarrón táctico y el debate nacional tras el 0-0 ante Juventud",
-  "bajada_seo": "Crónica periodística de fondo, análisis táctico de pizarrón y actualidad con el pulso y la impronta de Ovación, Tenfield, Canal 12, Canal 4, El Observador y Montevideo Portal.",
+  "titular_dia": "Cincelar el hierro sin dinamita: Peñarol chocó contra el cerrojo de Las Piedras y camina por la cornisa del Clausura",
+  "bajada_seo": "El Carbonero no pudo quebrar el bloque ultradefensivo de Juventud en un Centenario colmado, preservó la cima de la Tabla Anual con 64 puntos, pero gastó su último margen de error antes de cruzarse con el Wanderers de Antonio Pacheco.",
   "periodistas_prensa": {
     "ovacion": {
       "medio": "Ovación (El País)",
@@ -45,48 +45,36 @@
   },
   "claves_60_segundos": [
     {
-      "icono": "⚽",
-      "titulo": "La Crónica (Ovación & Telemundo 12)",
-      "detalle": "Monopolio de la pelota (68%) ante más de 30.000 hinchas carboneros en el Centenario, pero falta de desequilibrio individual en el tercio final."
+      "icono": "⚡",
+      "titulo": "El Muro y el Asedio",
+      "detalle": "Peñarol acorraló a Juventud durante más de setenta minutos de monopolio territorial, pero le faltó esa chispa de veneno quirúrgico para perforar a un arquero visitante en tarde consagratoria."
     },
     {
-      "icono": "📋",
-      "titulo": "El Pizarrón Táctico (Tenfield & Referí)",
-      "detalle": "Scelza y Charquero analizan el 4-2-3-1 de Aguirre: posesión paciente que chocó contra el bloque bajo 4-4-2 escalonado de Juventud."
+      "icono": "♟️",
+      "titulo": "La Trampa de los 25 Metros",
+      "detalle": "El 4-2-3-1 de Diego Aguirre naufragó en el embudo central: sin cambio de marcha por bandas ni claridad en la zona 14, Maximiliano Silvera quedó preso en una garita de aduana enemiga."
     },
     {
-      "icono": "🎙️",
-      "titulo": "Zona Mixta Caliente (FútbolUy & Canal 4)",
-      "detalle": "Diego Aguirre en conferencia: 'Duele no ganar, pero mantenemos la punta de la Tabla Anual y el destino sigue en nuestras manos'."
+      "icono": "🔥",
+      "titulo": "La Trastienda del Fuego Sagrado",
+      "detalle": "Vestuario de mandíbulas apretadas: Diego Aguirre masticó bronca sin perder el pulso y advirtió que la chapa de campeón se forja sobreponiéndose a tardes de frustración como esta."
     },
     {
-      "icono": "📊",
-      "titulo": "La Tabla y el Futuro (Telenoche & Ovación)",
-      "detalle": "Peñarol lidera la Tabla Anual con 64 unidades y pasa la página para preparar la 'final' de la Fecha 12 ante Montevideo Wanderers."
+      "icono": "📐",
+      "titulo": "El Vértigo de los 64 Puntos",
+      "detalle": "La Tabla Anual sigue pintada de amarillo y negro en lo más alto con 64 unidades, pero el Clausura entra en zona de desfiladero donde el margen de vacilación es cero."
     }
   ],
   "articulo_principal": {
-    "titulo": "El cerrojo que frenó al Decano: Crónica, pizarrón táctico y el debate nacional tras el 0-0 ante Juventud",
-    "subtitulo": "La síntesis periodística definitiva con las miradas de Ovación, Tenfield, Canal 12, Canal 4, El Observador y Montevideo Portal",
+    "titulo": "El maleficio del frontón: cuando el alma peñarolense no alcanza para torcer la geometría",
+    "subtitulo": "Entre el asedio frenético y la falta de ingenio táctico, el Carbonero dejó dos puntos vitales ante Juventud antes de la cita con el destino en el Prado.",
     "parrafos": [
-      "Bajo la histórica Torre de los Homenajes del <strong>Estadio Centenario</strong> y ante el empuje multitudinario de más de 30.000 hinchas aurinegros en las tres tribunas habilitadas, el <strong>Club Atlético Peñarol</strong> igualó 0-0 frente a un férreo <strong>Juventud de Las Piedras</strong> por la 11ª fecha del Torneo Clausura. Como destacaron <em>Rodrigo Romano</em> en <strong>Telemundo (Canal 12)</strong> y la crónica de <em>Ovación (El País)</em>, el equipo de <strong>Diego Aguirre</strong> asumió la iniciativa desde el primer instante con un dominio territorial absoluto, monopolizando más del 68% de la tenencia del balón pero topándose contra una telaraña táctica infranqueable que protegió con bravura el arquero Federico Varese.",
-      "En el pizarrón táctico analizado por <em>Juan Carlos Scelza</em> y <em>Martín Charquero</em> en <strong>Tenfield</strong>, y ratificado por el equipo de <em>Referí (El Observador)</em>, el <code>4-2-3-1</code> carbonero extrañó la aceleración repentina en los metros decisivos. Juventud se replegó con un <code>4-4-2</code> ultracompacto en apenas 25 metros de terreno, duplicando marcas sobre <strong>Leonardo Fernández</strong> y aislando a <strong>Maximiliano Silvera</strong> entre los zagueros pedrenses. Aunque <strong>Guzmán Rodríguez</strong> y <strong>Damián García</strong> brindaron absoluta seguridad en los relevos para neutralizar las contras de Gastón Pereiro, la posesión careció de rupturas por las bandas de <strong>Javier Cabrera</strong> y <strong>Jaime Báez</strong> para desarticular el cerrojo.",
-      "En zona mixta, a través de los micrófonos de <strong>Montevideo Portal (FútbolUy)</strong> y las cámaras de <strong>Telenoche (Canal 4)</strong> con <em>Eduardo Rivas</em> y <em>Federico Buysan</em>, <strong>Diego Aguirre</strong> transmitió serenidad y entereza competitiva: <em>“El empate nos deja con bronca porque vinimos a buscar los tres puntos, pero la entrega del equipo fue intachable. Nos faltó esa chispa final para abrir un partido muy trabado, pero en la Tabla Anual seguimos primeros y dependiendo puramente de nosotros mismos”</em>. Con 64 puntos en la cima acumulada, Peñarol da vuelta la página de inmediato en Los Aromos para encarar la recta final hacia el Campeonato Uruguayo 54, con la mira fija en el próximo choque ante <strong>Montevideo Wanderers</strong>."
+      "El Centenario tiene esa liturgia irrepetible que ningún estadio moderno podrá jamás emular. Huele a pasto recién cortado, a café de termo y a la mística pesada de las tardes donde el tiempo se detiene para exigir coraje. Más de treinta mil gargantas se vistieron de aurinegro bajo la sombra protectora de la Torre de los Homenajes, con la certeza visceral de que la tarde ante Juventud de Las Piedras debía ser el escalón hacia la sentencia del campeonato. Pero el fútbol, como la vida que narraba Galeano, es un territorio indómito donde la prepotencia de la historia a menudo se estrella contra la humildad sacrificada de once muchachos dispuestos a defender su metro cuadrado como si fuera la patria misma. Peñarol quiso, empujó y transpiró, pero se olvidó de pensar.",
+      "Tácticamente, el partido fue una autopsia en cámara lenta del libreto previsible. Juventud plantó una empalizada de dos líneas de cuatro ultraestrechas en apenas veinticinco metros, cediendo la pelota con la picardía de quien sabe que el rival sufre cuando no encuentra espacios de transición rápida. Diego Aguirre vio cómo su 4-2-3-1 se transformaba en un monólogo estéril: la zona 14 fue una aduana saturada donde Leo Fernández jamás pudo girar con panorama limpio. Con las bandas clausuradas por la falta de profundidad y desborde en el uno contra uno, cada envío aéreo terminó siendo un regalo para los gigantes pedrenses y para un guardameta que en la última media hora atajó todo lo que le tiraron, incluso aquellas pelotas sucias que habitualmente el empuje carbonero empuja al fondo de la red con el peso del escudo.",
+      "El pitazo final cayó como un baldazo de agua helada sobre la tribuna y dejó una mueca de desencanto en el túnel de vestuarios. La frialdad de las tablas dicta que Peñarol sigue mandando en el año con 64 puntos, amo y señor de la acumulada, pero en el Clausura la cornisa es angosta y resbaladiza. Diego Aguirre y sus dirigidos saben que el crédito del error se evaporó en noventa minutos de impotencia ofensiva. Y el calendario no concede tregua: en el horizonte asoma el Montevideo Wanderers de Antonio Pacheco, un prócer de la casa que ahora viste ropas de verdugo táctico. No habrá tiempo para lamerse las heridas; si Peñarol pretende la gloria eterna del Uruguayo, deberá cambiar el martillo ciego por el bisturí de los campeones."
     ],
-    "preguntas_frecuentes": [
-      {
-        "q": "¿Cómo terminó el partido Juventud vs Peñarol en el Estadio Centenario?",
-        "a": "El partido finalizó 0 a 0 en el Estadio Centenario por la 11ª fecha del Torneo Clausura 2026."
-      },
-      {
-        "q": "¿Cuál es la situación de Peñarol en la Tabla Anual tras el empate?",
-        "a": "Peñarol continúa en el primer lugar solitario de la Tabla Anual con 64 unidades, manteniendo la ventaja sobre sus perseguidores."
-      },
-      {
-        "q": "¿Qué dijeron los principales medios y periodistas uruguayos sobre el trámite?",
-        "a": "Coincidieron en que Peñarol tuvo la iniciativa y el control territorial absoluto (68% de posesión), pero se topó con un esquema defensivo muy disciplinado de Juventud y le faltó cambio de ritmo en los últimos metros."
-      }
-    ]
+    "cita_destacada": "A veces la pelota se encapricha y la tarde se cierra, pero la tabla anual sigue mandando Peñarol. Ahora hay que tragarse la bronca, corregir sin histeria y salir al Prado a jugar como lo que somos: el cuadro más grande del país.",
+    "autor_cita": "Diego Aguirre / Balance Editorial"
   },
   "noticias_fuentes": [
     {
@@ -146,6 +134,43 @@
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html",
-  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-juventud-0-0-penarol-cronica.html",
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html",
+  "epigrafe_estilo": "Tarde de asedio ciego bajo la Torre de los Homenajes: la pelota no quiso entrar y el campeonato no espera a los nostálgicos.",
+  "prismas_analisis": {
+    "epica_tribuna": {
+      "eje": "El Rugido Popular",
+      "subtitulo": "Treinta mil almas empujando la redención bajo el cemento sagrado",
+      "texto": "Hay tardes donde el Estadio Centenario no es un simple escenario deportivo, sino un anfiteatro romano palpitando al compás de la angustia colectiva. Más de 30.000 hinchas colmaron las tribunas como quien acude a un conjuro secular, tragándose el polvo y empujando con la laringe rota cada pelota que quemaba en el área pedrense. Cuando el reloj cruzó el minuto ochenta y cinco, el grito bajó vertical, volcánico, rebotando en el hormigón de la Torre de los Homenajes como un mandato ancestral: a Peñarol no se le perdona la mansedumbre. La multitud rugió con el corazón en la garganta ante cada centro desesperado, despidiendo al equipo entre el aplauso que reconoce el sudor y ese nudo en el estómago que avisa que el tren del Clausura viaja sin freno de emergencia."
+    },
+    "pizarron_tactico": {
+      "eje": "El Ajedrez del Pizarrón",
+      "subtitulo": "Posesión estéril, asfixia en el embudo y la llave que nunca apareció",
+      "texto": "El 68% de posesión fue una trampa mortal envuelta en papel de regalo. Juventud de Las Piedras plantó un 4-4-2 granítico, comprimido en 25 metros lineales, con dos líneas de cuatro remachadas al borde de su propia área chica. Frente a esa muralla artesanal, el 4-2-3-1 aurinegro careció de aceleración en tres cuartos y de desborde genuino por los costados. Leonardo Fernández tuvo un radar de marcación pegado a las costillas en cada recepción, impidiéndole armar el latigazo teledirigido; los extremos chocaron contra sus propias sombras y Maximiliano Silvera libró una batalla quijotesca, solitario y asfixiado entre los dos zagueros visitantes. Sin desdoble exterior de los laterales ni remate de media distancia con sorpresa, Peñarol convirtió el área rival en un laberinto sin salida."
+    },
+    "trastienda_vestuario": {
+      "eje": "El Latido de la Trastienda",
+      "subtitulo": "Mandíbulas apretadas, sangre en el ojo y la brújula de Diego Aguirre",
+      "texto": "El túnel hacia los camarines devolvió un silencio denso, de esos que queman más que cualquier recriminación a viva voz. En el vestuario carbonero sobraba transpiración y escaseaban las sonrisas, pero la compostura de los caudillos impidió cualquier asomo de histeria. Diego Aguirre se plantó con la calma de los viejos zorros de América: mirada fija, autocrítica visceral puertas adentro y un mensaje lapidario hacia afuera. El técnico sabe que Peñarol no jugó con la chispa necesaria para demoler cerrojos, pero en su libreta no figura el pánico. Hubo juramento silencioso: este empate amargo tiene que ser el combustible para encarar el clásico de la fecha doce con el colmillo afilado."
+    },
+    "aritmetica_campeonato": {
+      "eje": "La Balanza de Acero",
+      "subtitulo": "El pedestal de los 64 puntos contra el filo carmesí del Clausura",
+      "texto": "La matemática del Campeonato Uruguayo no entiende de merecimientos líricos, sino de contabilidad de hierro. Peñarol custodia la cima solitaria de la Tabla Anual con 64 puntos, un colchón de oro forjado a lo largo de un año demoledor que aún le concede ventaja estratégica sobre sus perseguidores. Sin embargo, en el Torneo Clausura la tabla arde como carbón encendido: ceder dos unidades de local es un lujo suicida que achica las distancias a la mínima expresión. Con cuatro fechas por disputar, el Decano se quedó sin margen para el tropiezo; cada punto venidero será disputado como si fuera la última gota de oxígeno de la temporada."
+    }
+  },
+  "preguntas_frecuentes": [
+    {
+      "q": "¿Qué dejó el empate de Peñarol 0 a 0 ante Juventud?",
+      "a": "Dejó un sabor agridulce: dominio absoluto del territorio y posesión estéril ante un rival ultradefensivo, evidenciando falta de cambio de ritmo en los metros finales pero manteniendo la solidez defensiva habitual."
+    },
+    {
+      "q": "¿Cómo queda la lucha por el Campeonato Uruguayo y la Tabla Anual?",
+      "a": "Peñarol continúa en lo más alto de la Tabla Anual con 64 puntos, manteniendo su condición de líder solitario, aunque en el Torneo Clausura la tabla se apretó y se terminó el margen de error para las fechas restantes."
+    },
+    {
+      "q": "¿Cuál es el siguiente paso para el Decano?",
+      "a": "Por la fecha 12 del Torneo Clausura, Peñarol deberá visitar el Parque Alfredo Víctor Viera para enfrentarse al Montevideo Wanderers conducido tácticamente por Antonio Pacheco, en una parada de máxima exigencia táctica y emocional."
+    }
+  ]
 }

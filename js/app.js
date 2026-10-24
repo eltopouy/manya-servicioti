@@ -1648,6 +1648,16 @@
       if (p3El) p3El.innerHTML = art.parrafos[2];
     }
 
+    const pullquoteEl = document.querySelector('.editorial-pullquote');
+    if (pullquoteEl && art.cita_destacada) {
+      pullquoteEl.innerHTML = `“${art.cita_destacada}” ${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
+    }
+
+    const pullquoteEl = document.querySelector('.editorial-pullquote');
+    if (pullquoteEl && art.cita_destacada) {
+      pullquoteEl.innerHTML = `“${art.cita_destacada}” ${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
+    }
+
     if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
       clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
         <div class="clave-item">
@@ -1679,28 +1689,50 @@
     }
 
     const prensaGrid = document.getElementById('prensa-nacional-grid');
-    if (prensaGrid && digest.periodistas_prensa) {
-      const colors = {
-        ovacion: '#ffd100',
-        tenfield: '#38bdf8',
-        canal12: '#ef4444',
-        canal4: '#f59e0b',
-        elobservador: '#10b981',
-        portalmvd: '#a855f7'
-      };
-      prensaGrid.innerHTML = Object.entries(digest.periodistas_prensa).map(([k, item]) => {
-        const c = colors[k] || '#ffd100';
-        return `
-          <div class="clave-item" style="border-left:3px solid ${c};background:#141419;padding:12px;border-radius:8px;">
-            <div style="font-size:11.5px;color:${c};font-weight:800;margin-bottom:4px;">
-              ${item.medio} • ${item.cronistas}
+    if (prensaGrid) {
+      if (digest.prismas_analisis) {
+        const prismasMeta = {
+          epica_tribuna: { icon: '🏟️', color: '#ffd100' },
+          pizarron_tactico: { icon: '♟️', color: '#38bdf8' },
+          trastienda_vestuario: { icon: '🔥', color: '#f87171' },
+          aritmetica_campeonato: { icon: '📐', color: '#34d399' }
+        };
+        prensaGrid.innerHTML = Object.entries(digest.prismas_analisis).map(([k, item]) => {
+          const meta = prismasMeta[k] || { icon: '⚡', color: '#ffd100' };
+          return `
+            <div class="clave-item" style="border-left:3px solid ${meta.color};background:#141419;padding:12px;border-radius:8px;">
+              <div style="font-size:11.5px;color:${meta.color};font-weight:800;margin-bottom:4px;">
+                ${meta.icon} ${item.eje ? item.eje.toUpperCase() : 'PRISMA'} • ${item.subtitulo || ''}
+              </div>
+              <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
+                “${item.texto}”
+              </p>
             </div>
-            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
-              “${item.cita}”
-            </p>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      } else if (digest.periodistas_prensa) {
+        const colors = {
+          ovacion: '#ffd100',
+          tenfield: '#38bdf8',
+          canal12: '#ef4444',
+          canal4: '#f59e0b',
+          elobservador: '#10b981',
+          portalmvd: '#a855f7'
+        };
+        prensaGrid.innerHTML = Object.entries(digest.periodistas_prensa).map(([k, item]) => {
+          const c = colors[k] || '#ffd100';
+          return `
+            <div class="clave-item" style="border-left:3px solid ${c};background:#141419;padding:12px;border-radius:8px;">
+              <div style="font-size:11.5px;color:${c};font-weight:800;margin-bottom:4px;">
+                ${item.medio} • ${item.cronistas}
+              </div>
+              <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
+                “${item.cita}”
+              </p>
+            </div>
+          `;
+        }).join('');
+      }
     }
   }
 

@@ -190,6 +190,44 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     </div>
   </div>
 
+  <!-- BALANCE EDITORIAL DE LA FECHA ANTERIOR (0-0 ANTE JUVENTUD) -->
+  <div style="background:#09090b;border:2px solid #ffd100;border-radius:14px;padding:24px;margin-bottom:24px;color:#fff;">
+    <div style="border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;">
+      <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11px;padding:3px 10px;border-radius:999px;text-transform:uppercase;">
+        ⚡ BALANCE EDITORIAL • DE DÓNDE VENIMOS
+      </span>
+      <h2 style="font-size:20px;color:#ffffff;margin:8px 0 4px;font-weight:900;">
+        El maleficio del frontón: balance tras el 0-0 ante Juventud de Las Piedras
+      </h2>
+      <div style="font-size:12.5px;color:#ffd100;">
+        68% de posesión, asfixia en el cerrojo de 25 metros y la cima de la Tabla Anual sostenida con 64 puntos
+      </div>
+    </div>
+    <div style="font-size:14px;line-height:1.65;color:#e4e4e7;margin-bottom:16px;">
+      <p style="margin-bottom:10px;">
+        El Centenario vivió una tarde de liturgia y gargantas encendidas con más de 30.000 aurinegros empujando bajo la Torre de los Homenajes. Sin embargo, el 4-2-3-1 de Diego Aguirre se estrelló contra una empalizada de dos líneas de cuatro ultraestrechas en apenas veinticinco metros. La zona 14 fue una aduana saturada y cada centro terminó en la resistencia pedrense.
+      </p>
+      <blockquote style="background:rgba(255,209,0,0.06);border-left:4px solid #ffd100;padding:10px 14px;margin:12px 0;font-style:italic;color:#ffd100;font-size:13.5px;">
+        “A veces la pelota se encapricha, pero en la Tabla Anual sigue mandando Peñarol. Hay que tragarse la bronca, corregir sin histeria y salir al Prado a jugar como el cuadro más grande del país.” — Diego Aguirre
+      </blockquote>
+    </div>
+    <!-- 4 Prismas resumidos -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <div style="background:#141419;border-left:3px solid #ffd100;padding:10px 12px;border-radius:6px;font-size:12px;color:#d4d4d8;">
+        <strong style="color:#ffd100;">🏟️ Rugido de Tribuna:</strong> 30.000 hinchas coparon el Centenario empujando hasta el último segundo.
+      </div>
+      <div style="background:#141419;border-left:3px solid #38bdf8;padding:10px 12px;border-radius:6px;font-size:12px;color:#d4d4d8;">
+        <strong style="color:#38bdf8;">♟️ Pizarrón Táctico:</strong> Cerrojo pedrense de 25 metros que anuló los giros de Leo Fernández.
+      </div>
+      <div style="background:#141419;border-left:3px solid #ef4444;padding:10px 12px;border-radius:6px;font-size:12px;color:#d4d4d8;">
+        <strong style="color:#f87171;">🔥 Trastienda:</strong> Autocrítica serena de Aguirre y conjuro de rebeldía para visitar el Viera.
+      </div>
+      <div style="background:#141419;border-left:3px solid #10b981;padding:10px 12px;border-radius:6px;font-size:12px;color:#d4d4d8;">
+        <strong style="color:#34d399;">📐 Matemática:</strong> 64 puntos en la Anual; margen de vacilación cero en el Clausura.
+      </div>
+    </div>
+  </div>
+
   <!-- HISTORIAL OFICIAL CERTIFICADO (1891 BD) -->
   <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px;">
     <div style="border-bottom:2px solid #ffd100;padding-bottom:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
