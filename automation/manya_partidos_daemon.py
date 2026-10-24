@@ -165,90 +165,47 @@ def ejecutar_ciclo_en_vivo(match_info: dict):
 
 
 def ejecutar_ciclo_cronica(match_info: dict, noticias_prensa: list):
-    """Genera la crónica definitiva post-partido y la publica en Blogger."""
+    """Genera la crónica definitiva post-partido y actualiza la entrada histórica en Blogger."""
     event_id = match_info.get("event_id", "")
     match_title = match_info.get("nombre", "Partido de Peñarol")
     loc = match_info.get("local", {})
     vis = match_info.get("visitante", {})
     marcador = f"{loc.get('nombre')} {loc.get('goles')} - {vis.get('goles')} {vis.get('nombre')}"
 
-    can_pub, motivo = ManyaBloggerCatalog.can_publish(post_type="CRONICA", match_id=event_id)
-    if not can_pub:
-        logger.info(f"[Crónica] {motivo}. Saltando redacción de crónica final.")
-        return
+    logger.info(f"[Crónica] 🏁 Ejecutando Crónica Narrativa y Cierre Histórico: {marcador}...")
 
-    logger.info(f"[Crónica] 🏁 Generando Crónica Definitiva: {marcador}...")
+    # 1. Generación de crónica literaria con Gemini 3.8 Flash (4 Prismas)
+    try:
+        from automation.generar_cronica_gemini_narrativa import generar_cronica_con_gemini, actualizar_digest_json
+        datos_narrativa = generar_cronica_con_gemini()
+        if datos_narrativa:
+            actualizar_digest_json(datos_narrativa)
+    except Exception as ex_gemini:
+        logger.warning(f"[Crónica] Aviso en generación de crónica Gemini: {ex_gemini}")
 
-    # Obtener detalles avanzados oficiales de ESPN
-    adv = ManyaMatchEngine.fetch_match_summary_details(event_id)
-    stats_raw = json.dumps(adv.get("estadisticas", {}), ensure_ascii=False)
+    # 2. Cierre y sellado histórico del post en Blogger (/2026/10/penarol-en-vivo-juventud-vs-penarol.html)
+    try:
+        from automation.cerrar_partido_historico_blogger import ejecutar_cierre_historico
+        ejecutar_cierre_historico()
+    except Exception as ex_cierre:
+        logger.warning(f"[Crónica] Aviso en cierre histórico de Blogger: {ex_cierre}")
 
-    prompt_cronica = f"""
-Actúa como el Jefe de Deportes y Cronista Oficial de Peñarol para 'Manya ServicioTI'.
-EL PARTIDO HA FINALIZADO: {marcador}.
-Estadio: {match_info.get('estadio')}.
-Estadísticas oficiales del encuentro:
-{stats_raw}
+    # 3. Sincronizar Página Central Permanente para el próximo partido (/p/penarol-proximo-partido-radiografia.html)
+    try:
+        from automation.sincronizar_pagina_proximo_partido import sincronizar_proximo_partido_blogger
+        sincronizar_proximo_partido_blogger()
+    except Exception as ex_prox:
+        logger.warning(f"[Crónica] Aviso sincronizando página central de próximo rival: {ex_prox}")
 
-Titulares Peñarol: {', '.join(adv.get('titulares_penarol', []))}
-Suplentes Peñarol: {', '.join(adv.get('suplentes_penarol', []))}
+    # 4. Sincronizar Archivo Histórico de Blogger
+    try:
+        from automation.sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+        sincronizar_pagina_blogger()
+    except Exception as ex_hist:
+        logger.warning(f"[Crónica] Aviso actualizando archivo histórico: {ex_hist}")
 
-REGLAS EDITORIALES OBLIGATORIAS:
-1. Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
-2. Tono: analítico, épico, deportivo y riguroso.
-3. Estructura del JSON requerida:
-{{
-  "titular_dia": "Titular contundente con el resultado y lo demostrado en cancha",
-  "bajada_seo": "Crónica y análisis del partido {marcador}, figuras, goles y tabla de posiciones.",
-  "claves_60_segundos": [
-    {{"icono": "⚽", "titulo": "Resultado Final", "detalle": "Desenlace y marcador final del encuentro..."}},
-    {{"icono": "⭐", "titulo": "Figura del Partido", "detalle": "El jugador más influyente en el trámite..."}},
-    {{"icono": "📊", "titulo": "Estadísticas Clave", "detalle": "Posesión, tiros al arco y solidez defensiva..."}},
-    {{"icono": "🏆", "titulo": "Tabla de Posiciones", "detalle": "Cómo queda Peñarol en el torneo y la Anual..."}}
-  ],
-  "articulo_principal": {{
-    "titulo": "Crónica: Análisis exhaustivo del partido",
-    "subtitulo": "El balance del aurinegro tras el pitazo final",
-    "parrafos": [
-      "Párrafo 1: El arranque del juego, intensidad y propuesta en el primer tiempo...",
-      "Párrafo 2: Los momentos determinantes, incidencias y resolución en las áreas...",
-      "Párrafo 3: Las intervenciones tácticas del cuerpo técnico y rendimiento individual...",
-      "Párrafo 4: Conclusiones hacia el próximo objetivo y el balance para la hinchada..."
-    ],
-    "preguntas_frecuentes": [
-      {{"q": "¿Cómo terminó el partido de Peñarol?", "a": "El encuentro finalizó con marcador {marcador}."}},
-      {{"q": "¿Cómo impacta este resultado en la Tabla Anual?", "a": "Peñarol consolida su posición en la vanguardia del fútbol uruguayo."}}
-    ]
-  }}
-}}
-"""
-
-    with CentralAutomationLock.acquire("gemini_web_profile", timeout_sec=120):
-        res_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt_cronica)
-
-    if res_json and "articulo_principal" in res_json:
-        doc_digest = {
-            "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
-            "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-            "fase_publicacion": "CRONICA",
-            "partido_id": event_id,
-            "titular_dia": res_json.get("titular_dia", f"Crónica: {marcador}"),
-            "bajada_seo": res_json.get("bajada_seo", ""),
-            "claves_60_segundos": res_json.get("claves_60_segundos", []),
-            "articulo_principal": res_json.get("articulo_principal", {}),
-            "noticias_fuentes": noticias_prensa[:8]
-        }
-        (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
-        logger.info("[Crónica] ✓ data/news_digest.json actualizado con la crónica final.")
-
-        # Publicar en Blogger
-        post_url = publish_manya_article_to_blogger(post_type="CRONICA", match_id=event_id)
-        try:
-            from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
-            sincronizar_pagina_blogger()
-        except Exception as ex_sync:
-            logger.warning(f"[Blogger Sync] Aviso actualizando archivo histórico: {ex_sync}")
-        git_commit_and_push(f"feat(cronica): publicar crónica oficial {marcador}")
+    git_commit_and_push(f"feat(cronica): cierre histórico {marcador} y puente al próximo partido")
+    return
 
 
 def ejecutar_orquestador(modo: str = "once"):

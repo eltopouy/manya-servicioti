@@ -519,6 +519,17 @@ def publicar_cobertura_en_vivo():
     digest_file = DATA_DIR / "news_digest.json"
     
     live = json.loads(live_file.read_text(encoding="utf-8")) if live_file.exists() else {}
+    fase = live.get("fase_partido", "SIN_PARTIDO_HOY")
+
+    # Si el partido ya finalizó o no hay partido en juego hoy, derivar al cierre histórico definitivo
+    if fase in ("FINALIZADO", "SIN_PARTIDO_HOY"):
+        logger.info("[Blogger Live] Partido en fase post-partido. Ejecutando cierre histórico...")
+        try:
+            from automation.cerrar_partido_historico_blogger import ejecutar_cierre_historico
+            ejecutar_cierre_historico()
+            return "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
+        except Exception as e_cierre:
+            logger.warning(f"[Blogger Live] Error en cierre histórico: {e_cierre}")
     digest = json.loads(digest_file.read_text(encoding="utf-8")) if digest_file.exists() else {}
     
     partido_activo = live.get("partido_activo", {})
