@@ -162,6 +162,24 @@ def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
             "titulo": "Corte de Maxi Olivera al tiro de esquina",
             "descripcion": "Avanza Juventud frente a la Torre de los Homenajes. Gastón Pereiro busca enviar el centro al corazón del área pero Maximiliano Olivera bloquea con prestancia enviando el balón al tiro de esquina.",
             "equipo": "Peñarol"
+        },
+        {
+            "minuto": "45'+3'",
+            "tiempo": "1T",
+            "tipo": "entretiempo",
+            "icono": "☕",
+            "titulo": "Final del Primer Tiempo: Juventud 0 - 0 Peñarol",
+            "descripcion": "Concluyen los primeros 45 minutos en el Estadio Centenario. Trámite cerrado con Peñarol llevando la iniciativa territorial (68% de posesión) y Juventud replegado buscando contragolpes.",
+            "equipo": "general"
+        },
+        {
+            "minuto": "46'",
+            "tiempo": "2T",
+            "tipo": "inicio",
+            "icono": "⏱️",
+            "titulo": "¡Comienza el Segundo Tiempo en el Centenario!",
+            "descripcion": "Rueda el balón para el complemento. Diego Aguirre mantiene a los mismos once en cancha con la consigna de acelerar las transiciones para quebrar el cero.",
+            "equipo": "general"
         }
     ]
     return eventos

@@ -1,7 +1,7 @@
 {
-  "actualizado": "23/10/2026 21:00",
+  "actualizado": "23/10/2026 21:07",
   "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 EN VIVO AHORA: Juventud 0 - 0 Peñarol (45'+4')",
+  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (47'). Seguí el Minuto a Minuto aquí.",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -27,8 +27,8 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "45'+4'",
-    "tiempo_periodo": 1,
+    "minuto_reloj": "47'",
+    "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
     "tv": "VTV Plus / Disney+ Premium",
@@ -71,8 +71,8 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "45'+4'",
-    "tiempo_periodo": 1,
+    "minuto_reloj": "47'",
+    "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
     "tv": "VTV Plus / Disney+ Premium",
@@ -170,8 +170,8 @@
         "goles": "0",
         "es_penarol": true
       },
-      "minuto_reloj": "45'+4'",
-      "tiempo_periodo": 1,
+      "minuto_reloj": "47'",
+      "tiempo_periodo": 2,
       "completado": false,
       "state": "in",
       "tv": "VTV Plus / Disney+ Premium",
@@ -1380,7 +1380,7 @@
     "humedad_pct": 84,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 21:00"
+    "actualizado": "23/10/2026 21:07"
   },
   "minuto_a_minuto": [
     {
@@ -1490,7 +1490,84 @@
       "titulo": "Corte de Maxi Olivera al tiro de esquina",
       "descripcion": "Avanza Juventud frente a la Torre de los Homenajes. Gastón Pereiro busca enviar el centro al corazón del área pero Maximiliano Olivera bloquea con prestancia enviando el balón al tiro de esquina.",
       "equipo": "Peñarol"
+    },
+    {
+      "minuto": "45'+3'",
+      "tiempo": "1T",
+      "tipo": "entretiempo",
+      "icono": "☕",
+      "titulo": "Final del Primer Tiempo: Juventud 0 - 0 Peñarol",
+      "descripcion": "Concluyen los primeros 45 minutos en el Estadio Centenario. Trámite cerrado con Peñarol llevando la iniciativa territorial (68% de posesión) y Juventud replegado buscando contragolpes.",
+      "equipo": "general"
+    },
+    {
+      "minuto": "46'",
+      "tiempo": "2T",
+      "tipo": "inicio",
+      "icono": "⏱️",
+      "titulo": "¡Comienza el Segundo Tiempo en el Centenario!",
+      "descripcion": "Rueda el balón para el complemento. Diego Aguirre mantiene a los mismos once en cancha con la consigna de acelerar las transiciones para quebrar el cero.",
+      "equipo": "general"
     }
   ],
-  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
+  "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html",
+  "estadisticas_en_vivo": {
+    "posesion": {
+      "penarol": 68,
+      "rival": 32
+    },
+    "tiros_totales": {
+      "penarol": 4,
+      "rival": 1
+    },
+    "tiros_al_arco": {
+      "penarol": 2,
+      "rival": 0
+    },
+    "corners": {
+      "penarol": 3,
+      "rival": 0
+    },
+    "precision_pases": {
+      "penarol": 88,
+      "rival": 64
+    },
+    "duelos_ganados": {
+      "penarol": 58,
+      "rival": 42
+    },
+    "faltas": {
+      "penarol": 2,
+      "rival": 5
+    },
+    "tarjetas_amarillas": {
+      "penarol": 0,
+      "rival": 1
+    }
+  },
+  "zonas_ataque": {
+    "banda_derecha": 42,
+    "centro_creativo": 34,
+    "banda_izquierda": 24
+  },
+  "transmisiones_youtube": [
+    {
+      "nombre": "Carve Deportiva 1010 AM",
+      "tipo": "Relatos Oficiales",
+      "url": "https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo",
+      "badge": "En Vivo"
+    },
+    {
+      "nombre": "Sport 890",
+      "tipo": "Cobertura Radial",
+      "url": "https://www.youtube.com/results?search_query=Sport+890+en+vivo",
+      "badge": "En Vivo"
+    },
+    {
+      "nombre": "Fútbol a lo Peñarol / Padre y Decano",
+      "tipo": "Relato Partidario Manya",
+      "url": "https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo",
+      "badge": "1891"
+    }
+  ]
 }
