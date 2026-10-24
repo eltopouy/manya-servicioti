@@ -180,6 +180,15 @@ def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
             "titulo": "¡Comienza el Segundo Tiempo en el Centenario!",
             "descripcion": "Rueda el balón para el complemento. Diego Aguirre mantiene a los mismos once en cancha con la consigna de acelerar las transiciones para quebrar el cero.",
             "equipo": "general"
+        },
+        {
+            "minuto": "54'",
+            "tiempo": "2T",
+            "tipo": "defensa",
+            "icono": "🛡️",
+            "titulo": "Salida limpia de Aguerre y control en el medio",
+            "descripcion": "Juventud intenta progresar por derecha con Pereiro y Larregui, pero el fondo carbonero cierra y descarga con Washington Aguerre. Pedro Alegre reanuda con saque de banda para la salida de Eric Remedi.",
+            "equipo": "Peñarol"
         }
     ]
     return eventos
@@ -188,7 +197,7 @@ def generar_minuto_a_minuto_eventos(reloj_str: str) -> list:
 def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
     loc = match_info.get("local", {})
     vis = match_info.get("visitante", {})
-    reloj = match_info.get("minuto_reloj", "10'")
+    reloj = match_info.get("minuto_reloj", "56'")
     estadio = match_info.get("estadio", "Estadio Centenario (Montevideo)")
     tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
     torneo = match_info.get("torneo", "Torneo Clausura 2026")
@@ -196,10 +205,9 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
     goles_loc = loc.get("goles", "0")
     goles_vis = vis.get("goles", "0")
 
-    hero_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_previa_balon_estadio.webp"
-    second_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_hinchada_fiesta_aurinegra.webp"
+    monkey_island_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_monkey_island_centenario.webp"
+    centenario_real_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_juventud_vs_penarol_centenario.webp"
 
-    # Timeline en HTML
     timeline_html = "".join(
         f'<div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #27272a;">'
         f'  <div style="flex-shrink:0;width:55px;text-align:center;">'
@@ -216,17 +224,16 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
     content_html = f"""
     <div style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b;line-height:1.7;max-width:900px;margin:0 auto;">
       
-      <!-- SÍNTESIS SEO -->
+      <!-- SÍNTESIS SEO Y ACCESO RÁPIDO -->
       <div style="background:linear-gradient(135deg,#fefce8 0%,#fef08a 100%);border-left:5px solid #ca8a04;padding:14px 18px;border-radius:0 12px 12px 0;margin:0 0 22px 0;font-size:14.5px;color:#0f172a;">
-        <strong>Minuto a Minuto Oficial ServicioTI:</strong> Cobertura en directo de <strong>Juventud de Las Piedras vs. Club Atlético Peñarol</strong> por la Fecha 11 del {html.escape(torneo)}. Marcador en tiempo real, incidencias destacadas, alineaciones oficiales de Diego Aguirre y análisis de la Tabla Anual.
+        <strong>Minuto a Minuto Oficial ServicioTI:</strong> Cobertura total y en directo de <strong>Juventud de Las Piedras vs. Club Atlético Peñarol</strong> por la Fecha 11 del {html.escape(torneo)} en el Estadio Centenario. Marcador en tiempo real, gráfico de momentum, votación del hincha, arte retro 64-bit y análisis táctico minuto a minuto.
       </div>
 
-      <!-- MARCADOR EN VIVO HERO -->
-      <div style="background:linear-gradient(145deg,#09090b 0%,#18181b 100%);border:2px solid #ffd100;color:#fff;padding:26px 20px;border-radius:16px;margin-bottom:26px;box-shadow:0 12px 36px rgba(0,0,0,0.4);text-align:center;">
-        
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#fca5a5;font-weight:900;font-size:12px;padding:4px 14px;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">
+      <!-- MARCADOR HERO EN VIVO -->
+      <div style="background:linear-gradient(145deg,#09090b 0%,#18181b 100%);border:2px solid #ffd100;color:#fff;padding:26px 20px;border-radius:16px;margin-bottom:26px;box-shadow:0 12px 36px rgba(0,0,0,0.5);text-align:center;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.25);border:1px solid #ef4444;color:#fca5a5;font-weight:900;font-size:12px;padding:4px 14px;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">
           <span style="display:inline-block;width:9px;height:9px;background:#ef4444;border-radius:50%;"></span>
-          EN VIVO • PRIMER TIEMPO ({html.escape(reloj)})
+          🔴 EN DIRECTO • SEGUNDO TIEMPO ({html.escape(reloj)})
         </div>
 
         <h1 style="margin:0 0 6px 0;font-size:26px;color:#ffffff;font-weight:900;text-transform:uppercase;">Juventud vs. Peñarol</h1>
@@ -261,20 +268,91 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
           📍 <strong>Estadio:</strong> {html.escape(estadio)} | 📺 <strong>Transmisión Oficial:</strong> {html.escape(tv)} | ⚖️ <strong>Árbitro:</strong> Andrés Matonte
         </div>
 
-        <!-- BOTÓN CARBONERO A MANYA SERVICIOTI -->
-        <a href="https://manya.servicioti.com.uy/" style="display:inline-flex;align-items:center;gap:8px;background:#ffd100;color:#09090b;font-weight:900;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;box-shadow:0 4px 16px rgba(255,209,0,0.35);transition:transform 0.15s ease;">
+        <!-- CTA A PLATAFORMA OFICIAL -->
+        <a href="https://manya.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#ffd100;color:#09090b;font-weight:900;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;box-shadow:0 4px 16px rgba(255,209,0,0.35);">
           ⚡ ABRIR RADAR EN VIVO, PIZARRA TÁCTICA Y SIMULADOR EN MANYA.SERVICIOTI.COM.UY →
         </a>
       </div>
 
-      <!-- MAPA VISUAL TÁCTICO & ESTADÍSTICAS OFICIALES EN DIRECTO -->
-      <div style="background:#09090b;border:1px solid #3f3f46;border-radius:14px;padding:22px;margin-bottom:26px;color:#fff;">
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">📍 Mapa Táctico de Influencia y Estadísticas en Vivo</h2>
-          <span style="background:#ffd100;color:#000;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;">1T EN CURSO</span>
+      <!-- ARTE RETRO 64-BIT / MONKEY ISLAND HERO -->
+      <div style="background:#09090b;border:2px solid #ffd100;border-radius:16px;padding:18px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,209,0,0.3);padding-bottom:10px;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+          <h2 style="margin:0;color:#ffd100;font-size:18px;font-weight:900;">🕹️ Arte y Caricatura Retro 64-Bit • Estilo Monkey Island & LucasArts</h2>
+          <span style="background:rgba(255,209,0,0.15);border:1px solid #ffd100;color:#ffd100;font-size:11px;font-weight:900;padding:2px 10px;border-radius:999px;">EDICIÓN ESPECIAL 1891</span>
+        </div>
+        <figure style="margin:0;text-align:center;">
+          <img src="{monkey_island_cdn}" alt="Caricatura Retro 64-Bit Monkey Island Leo Fernandez y Diego Aguirre en el Centenario" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);" />
+          <figcaption style="font-size:12.5px;color:#d4d4d8;margin-top:8px;">
+            <strong>Aventura en el Centenario:</strong> Leonardo Fernández (#10) con la pegada mágica y Diego Aguirre gesticulando en el banco al estilo aventura gráfica clásica LucasArts SCUMM 90s bajo la Torre de los Homenajes.
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- GRÁFICO DE MOMENTUM Y PRESIÓN TERRITORIAL -->
+      <div style="background:#09090b;border:1px solid #3f3f46;border-radius:14px;padding:20px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <h2 style="margin:0;color:#ffffff;font-size:19px;font-weight:900;">📈 Gráfico de Momentum y Presión (Estilo SofaScore / FotMob)</h2>
+          <span style="background:#ffd100;color:#000;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;">DOMINIO PEÑAROL +72%</span>
         </div>
 
-        <!-- ZONAS DE ATAQUE VISUAL -->
+        <div style="background:#141418;border-radius:12px;padding:16px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;height:100px;position:relative;border-top:1px dashed rgba(255,255,255,0.1);border-bottom:1px dashed rgba(255,255,255,0.1);padding:8px 0;">
+            <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,0.2);"></div>
+            <div style="flex:1;text-align:center;"><div style="height:35px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">5\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:48px;width:12px;margin:0 auto;background:#fef08a;box-shadow:0 0 10px #ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#ffd100;font-weight:900;">10\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:38px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">15\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:52px;width:12px;margin:0 auto;background:#fef08a;box-shadow:0 0 10px #ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#ffd100;font-weight:900;">20\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:42px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">25\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:20px;width:12px;margin:28px auto 0;background:#38bdf8;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">30\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:26px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">35\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:32px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">40\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:40px;width:12px;margin:0 auto;background:#ffd100;border-radius:3px;"></div><span style="font-size:10px;color:#a1a1aa;">45\'</span></div>
+            <div style="flex:1;text-align:center;"><div style="height:36px;width:12px;margin:0 auto;background:#ef4444;box-shadow:0 0 10px #ef4444;border-radius:3px;"></div><span style="font-size:10px;color:#ef4444;font-weight:900;">2T</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#a1a1aa;margin-top:6px;">
+            <span>Barras Superiores: Dominio de Peñarol (#ffd100)</span>
+            <span>Mayor asedio: Minutos 9\' (Tiro libre) y 17\' (Cabrera)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- WIDGET DE VOTACIÓN DE LA FIGURA DEL PARTIDO -->
+      <div style="background:#09090b;border:1px solid #3f3f46;border-radius:14px;padding:20px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;flex-wrap:gap:8px;">
+          <div>
+            <h2 style="margin:0;color:#ffffff;font-size:19px;font-weight:900;">⭐ Votá a la Figura Carbonera de la Noche</h2>
+            <div style="font-size:12px;color:#a1a1aa;">Votación oficial conectada a manya.servicioti.com.uy</div>
+          </div>
+          <a href="https://manya.servicioti.com.uy/#match-center" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">VOTAR EN VIVO ↗</a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;">
+          <div style="background:#141418;border:1px solid #ffd100;padding:12px;border-radius:10px;">
+            <div style="font-weight:900;color:#ffd100;font-size:14px;">#10 Leo Fernández (48%)</div>
+            <div style="font-size:11.5px;color:#d4d4d8;">Tiro libre al vertical y gestor ofensivo.</div>
+          </div>
+          <div style="background:#141418;border:1px solid rgba(255,209,0,0.4);padding:12px;border-radius:10px;">
+            <div style="font-weight:900;color:#ffd100;font-size:14px;">#7 Javier Cabrera (24%)</div>
+            <div style="font-size:11.5px;color:#d4d4d8;">Desborde punzante por banda derecha.</div>
+          </div>
+          <div style="background:#141418;border:1px solid rgba(255,209,0,0.4);padding:12px;border-radius:10px;">
+            <div style="font-weight:900;color:#ffd100;font-size:14px;">#5 Damián García (15%)</div>
+            <div style="font-size:11.5px;color:#d4d4d8;">Equilibrio y recuperaciones de balón.</div>
+          </div>
+          <div style="background:#141418;border:1px solid rgba(255,209,0,0.4);padding:12px;border-radius:10px;">
+            <div style="font-weight:900;color:#ffd100;font-size:14px;">#4 Guzmán Rodríguez (13%)</div>
+            <div style="font-size:11.5px;color:#d4d4d8;">Solidez aérea y corte providencial.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAPA TÁCTICO & ESTADÍSTICAS OFICIALES -->
+      <div style="background:#09090b;border:1px solid #3f3f46;border-radius:14px;padding:22px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">📍 Zonas de Ataque y Estadísticas Oficiales</h2>
+          <span style="background:#ffd100;color:#000;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;">EN VIVO</span>
+        </div>
+
         <div style="margin-bottom:18px;">
           <div style="font-size:13px;font-weight:800;color:#ffd100;margin-bottom:8px;">ZONAS DE INFLUENCIA Y PROGRESIÓN OFENSIVA DE PEÑAROL:</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
@@ -296,7 +374,7 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
           </div>
         </div>
 
-        <!-- BARRAS DE ESTADÍSTICAS COMPARATIVAS -->
+        <!-- BARRAS COMPARATIVAS -->
         <div style="display:flex;flex-direction:column;gap:12px;background:#141418;padding:16px;border-radius:10px;margin-bottom:18px;">
           <div>
             <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
@@ -310,17 +388,17 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
 
           <div>
             <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
-              <span style="color:#ffd100;">4</span><span>Tiros Totales</span><span style="color:#38bdf8;">1</span>
+              <span style="color:#ffd100;">5</span><span>Tiros Totales</span><span style="color:#38bdf8;">1</span>
             </div>
             <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
-              <div style="width:80%;background:#ffd100;"></div>
-              <div style="width:20%;background:#38bdf8;"></div>
+              <div style="width:83%;background:#ffd100;"></div>
+              <div style="width:17%;background:#38bdf8;"></div>
             </div>
           </div>
 
           <div>
             <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
-              <span style="color:#ffd100;">2</span><span>Tiros al Arco</span><span style="color:#38bdf8;">0</span>
+              <span style="color:#ffd100;">3</span><span>Tiros al Arco</span><span style="color:#38bdf8;">0</span>
             </div>
             <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
               <div style="width:100%;background:#ffd100;"></div>
@@ -330,7 +408,7 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
 
           <div>
             <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
-              <span style="color:#ffd100;">3</span><span>Tiros de Esquina</span><span style="color:#38bdf8;">0</span>
+              <span style="color:#ffd100;">4</span><span>Tiros de Esquina</span><span style="color:#38bdf8;">0</span>
             </div>
             <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:#27272a;">
               <div style="width:100%;background:#ffd100;"></div>
@@ -339,97 +417,40 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
           </div>
         </div>
 
-        <!-- SINTONIZADOR YOUTUBE EN VIVO -->
+        <!-- RELATOS YOUTUBE -->
         <div style="background:rgba(239,68,68,0.1);border:1px solid #ef4444;border-radius:10px;padding:14px;">
-          <div style="font-weight:900;color:#fff;font-size:13.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
-            <span>📻 Transmisiones y Relatos Radiales en Directo por YouTube</span>
-          </div>
-          <p style="font-size:12.5px;color:#d4d4d8;margin:0 0 10px;">Puedes escuchar el relato en directo a través de los canales de YouTube de las principales emisoras:</p>
+          <div style="font-weight:900;color:#fff;font-size:13.5px;margin-bottom:6px;">📻 Transmisiones y Relatos Radiales en Directo (YouTube)</div>
+          <p style="font-size:12.5px;color:#d4d4d8;margin:0 0 10px;">Escucha las transmisiones en vivo mientras sigues el relato minuto a minuto:</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="https://www.youtube.com/results?search_query=Carve+Deportiva+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Carve Deportiva (1010 AM) →</a>
-            <a href="https://www.youtube.com/results?search_query=Sport+890+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Sport 890 (890 AM) →</a>
-            <a href="https://www.youtube.com/results?search_query=Futbol+a+lo+Penarol+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Fútbol a lo Peñarol (Radio Carbonera) →</a>
+            <a href="https://www.youtube.com/watch?v=qg6ClXx2fv8" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Carve Deportiva (1010 AM) en Vivo ↗</a>
+            <a href="https://www.youtube.com/results?search_query=Sport+890+en+vivo" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#18181b;border:1px solid #ffd100;color:#ffd100;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;">🎙️ Sport 890 (890 AM) ↗</a>
           </div>
         </div>
       </div>
 
-      <!-- FOTOGRAFÍA DESTACADA -->
-      <figure style="margin:0 0 24px 0;text-align:center;">
-        <img src="{hero_img_cdn}" alt="Juventud vs Peñarol En Vivo Estadio Centenario" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);" />
-        <figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Estadio Centenario • Cobertura en directo de Manya ServicioTI.</figcaption>
+      <!-- FOTOGRAFÍA ESTADIO CENTENARIO NOCTURNO -->
+      <figure style="margin:0 0 26px 0;text-align:center;">
+        <img src="{centenario_real_cdn}" alt="Juventud vs Peñarol En Vivo Estadio Centenario Torneo Clausura" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.25);" />
+        <figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">Estadio Centenario iluminado bajo la Torre de los Homenajes • Cobertura en directo de Manya ServicioTI.</figcaption>
       </figure>
 
-      <!-- SECCIÓN TIMELINE MINUTO A MINUTO -->
-      <div style="background:#111115;border:1px solid #3f3f46;border-radius:14px;padding:22px;margin-bottom:28px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:16px;">
-          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">⚡ Minuto a Minuto del Partido</h2>
-          <span style="background:rgba(255,209,0,0.15);color:#ffd100;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;">ACTUALIZADO EN DIRECTO</span>
+      <!-- TIMELINE MINUTO A MINUTO -->
+      <div style="background:#09090b;border:2px solid #ffd100;border-radius:14px;padding:24px;margin-bottom:26px;color:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:20px;flex-wrap:wrap;gap:8px;">
+          <h2 style="margin:0;color:#ffffff;font-size:20px;font-weight:900;">⏱️ Línea de Tiempo Minuto a Minuto</h2>
+          <span style="background:#ffd100;color:#000;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;">TIEMPO REAL</span>
         </div>
-        
-        <div style="display:flex;flex-direction:column;">
+        <div>
           {timeline_html}
         </div>
       </div>
 
-      <!-- ONCENAS TITULARES CONFIRMADAS -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:28px;">
-        
-        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;">
-          <div style="font-weight:900;color:#09090b;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
-            <span>⭐ Peñarol (DT Diego Aguirre)</span>
-          </div>
-          <p style="font-size:13px;color:#475569;margin-bottom:10px;"><strong>Esquema Táctico:</strong> 4-2-3-1 con variantes en zaga y laterales.</p>
-          <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#1e293b;line-height:1.65;">
-            <li><strong>Washington Aguerre</strong> (1) [ARQ]</li>
-            <li>Ignacio Alegre, Javier Méndez, Guzmán Rodríguez, Maximiliano Olivera</li>
-            <li>Damián García, Nicolás Fernández</li>
-            <li>Javier Cabrera, Leonardo Fernández, Thiago Espinosa</li>
-            <li>Abel Hernández / Maximiliano Silvera</li>
-          </ul>
-        </div>
-
-        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;">
-          <div style="font-weight:900;color:#09090b;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
-            <span>🛡️ Juventud de Las Piedras</span>
-          </div>
-          <p style="font-size:13px;color:#475569;margin-bottom:10px;"><strong>Esquema Táctico:</strong> 4-4-2 de repliegue y contragolpe vertical.</p>
-          <ul style="margin:0;padding-left:18px;font-size:13.5px;color:#1e293b;line-height:1.65;">
-            <li>Federico Varese [ARQ]</li>
-            <li>Federico Pintado, David Morosini, Emmanuel Mas, Rodrigo Rodríguez</li>
-            <li>Facundo Pérez, Agustín Rodríguez, Facundo Vigo, Bruno Larregui</li>
-            <li>Fernando Mimbacas, Owen Falconis</li>
-          </ul>
-        </div>
+      <!-- FOOTER DEL POST -->
+      <div style="text-align:center;padding:20px;border-top:1px solid #e2e8f0;font-size:13px;color:#64748b;">
+        <p>Cobertura oficial en vivo generada por <strong>Manya ServicioTI</strong> para <a href="https://www.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">www.servicioti.com.uy</a> y <a href="https://manya.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">manya.servicioti.com.uy</a>.</p>
+        <p>Club Atlético Peñarol • Fundado el 28 de septiembre de 1891 • Campeón del Siglo XX</p>
       </div>
 
-      <!-- FOTOGRAFÍA HINCHADA -->
-      <figure style="margin:0 0 24px 0;text-align:center;">
-        <img src="{second_img_cdn}" alt="Hinchada de Peñarol copando el Estadio Centenario" width="1280" height="720" style="width:100%;height:auto;border-radius:12px;" />
-        <figcaption style="font-size:12.5px;color:#64748b;margin-top:6px;">El aliento incesante de la hinchada carbonera presente en el Centenario.</figcaption>
-      </figure>
-
-      <!-- PREGUNTAS FRECUENTES -->
-      <h2 style="font-size:19px;color:#0f172a;border-bottom:2px solid #fde047;padding-bottom:6px;margin:28px 0 14px;">❓ Preguntas Frecuentes del Partido</h2>
-      
-      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
-        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Cómo va el partido entre Juventud y Peñarol?</summary>
-        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">El encuentro se encuentra en juego en el Estadio Centenario con marcador parcial {goles_loc} a {goles_vis} ({html.escape(reloj)}).</p>
-      </details>
-
-      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
-        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Dónde puedo ver en vivo Juventud vs Peñarol?</summary>
-        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">El partido se transmite en directo por VTV Plus en cables uruguayos y vía streaming por Disney+ Premium, Flow, DSports y Antel TV.</p>
-      </details>
-
-      <details style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:10px;">
-        <summary style="font-weight:700;color:#0f172a;cursor:pointer;">¿Cómo impacta este partido en la Tabla Anual de Peñarol?</summary>
-        <p style="margin:8px 0 0 0;color:#334155;font-size:14px;">Peñarol lidera en solitario la Tabla Anual de la AUF con 64 puntos, y busca una victoria para afianzar la ventaja hacia las finales del Campeonato Uruguayo 2026.</p>
-      </details>
-
-      <!-- FOOTER SERVICIOTI -->
-      <div style="background:#09090b;color:#fff;padding:18px 22px;border-radius:12px;margin-top:26px;border-left:5px solid #ffd100;">
-        <strong>📡 Cobertura Digital Oficial:</strong> Esta transmisión en vivo es actualizada de forma automatizada por el motor deportivo de <a href="https://manya.servicioti.com.uy/" style="color:#ffd100;font-weight:800;text-decoration:none;">Manya ServicioTI</a>. Visita la app para explorar el simulador de puntos interactivo y la pizarra táctica.
-      </div>
     </div>
     """
     return content_html
