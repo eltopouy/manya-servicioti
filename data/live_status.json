@@ -1,5 +1,5 @@
 {
-  "actualizado": "24/10/2026 05:34",
+  "actualizado": "24/10/2026 12:15",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -325,6 +325,19 @@
     },
     {
       "pos": 12,
+      "equipo": "Albion FC",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 4,
+      "pe": 0,
+      "pp": 8,
+      "gf": 15,
+      "gc": 20,
+      "dg": "-5",
+      "pts": 12
+    },
+    {
+      "pos": 13,
       "equipo": "Danubio",
       "es_penarol": false,
       "pj": 11,
@@ -335,19 +348,6 @@
       "gc": 11,
       "dg": "-6",
       "pts": 10
-    },
-    {
-      "pos": 13,
-      "equipo": "Albion FC",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 3,
-      "pe": 0,
-      "pp": 8,
-      "gf": 12,
-      "gc": 19,
-      "dg": "-7",
-      "pts": 9
     },
     {
       "pos": 14,
@@ -379,13 +379,13 @@
       "pos": 16,
       "equipo": "Central Español Fútbol Club",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 1,
       "pe": 2,
-      "pp": 8,
-      "gf": 5,
-      "gc": 18,
-      "dg": "-13",
+      "pp": 9,
+      "gf": 6,
+      "gc": 21,
+      "dg": "-15",
       "pts": 5
     }
   ],
@@ -745,6 +745,19 @@
     },
     {
       "pos": 12,
+      "equipo": "Albion FC",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 4,
+      "pe": 0,
+      "pp": 8,
+      "gf": 15,
+      "gc": 20,
+      "dg": "-5",
+      "pts": 12
+    },
+    {
+      "pos": 13,
       "equipo": "Danubio",
       "es_penarol": false,
       "pj": 11,
@@ -755,19 +768,6 @@
       "gc": 11,
       "dg": "-6",
       "pts": 10
-    },
-    {
-      "pos": 13,
-      "equipo": "Albion FC",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 3,
-      "pe": 0,
-      "pp": 8,
-      "gf": 12,
-      "gc": 19,
-      "dg": "-7",
-      "pts": 9
     },
     {
       "pos": 14,
@@ -799,13 +799,13 @@
       "pos": 16,
       "equipo": "Central Español Fútbol Club",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 1,
       "pe": 2,
-      "pp": 8,
-      "gf": 5,
-      "gc": 18,
-      "dg": "-13",
+      "pp": 9,
+      "gf": 6,
+      "gc": 21,
+      "dg": "-15",
       "pts": 5
     }
   ],
@@ -1021,6 +1021,19 @@
         },
         {
           "pos": 12,
+          "equipo": "Albion FC",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 4,
+          "pe": 0,
+          "pp": 8,
+          "gf": 15,
+          "gc": 20,
+          "dg": "-5",
+          "pts": 12
+        },
+        {
+          "pos": 13,
           "equipo": "Danubio",
           "es_penarol": false,
           "pj": 11,
@@ -1031,19 +1044,6 @@
           "gc": 11,
           "dg": "-6",
           "pts": 10
-        },
-        {
-          "pos": 13,
-          "equipo": "Albion FC",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 3,
-          "pe": 0,
-          "pp": 8,
-          "gf": 12,
-          "gc": 19,
-          "dg": "-7",
-          "pts": 9
         },
         {
           "pos": 14,
@@ -1075,13 +1075,13 @@
           "pos": 16,
           "equipo": "Central Español Fútbol Club",
           "es_penarol": false,
-          "pj": 11,
+          "pj": 12,
           "pg": 1,
           "pe": 2,
-          "pp": 8,
-          "gf": 5,
-          "gc": 18,
-          "dg": "-13",
+          "pp": 9,
+          "gf": 6,
+          "gc": 21,
+          "dg": "-15",
           "pts": 5
         }
       ]
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 13.8,
-    "sensacion_c": 11.9,
-    "viento_kmh": 16.1,
-    "humedad_pct": 85,
+    "temperatura_c": 15.3,
+    "sensacion_c": 12.8,
+    "viento_kmh": 20.9,
+    "humedad_pct": 80,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "24/10/2026 05:34"
+    "actualizado": "24/10/2026 12:15"
   },
   "minuto_a_minuto": [
     {
