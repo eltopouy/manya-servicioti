@@ -1,7 +1,7 @@
 {
-  "actualizado": "23/10/2026 21:07",
+  "actualizado": "23/10/2026 21:19",
   "fase_partido": "EN_VIVO",
-  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (47'). Seguí el Minuto a Minuto aquí.",
+  "alerta_banner": "🔴 ¡EN VIVO! Juventud 0 - 0 Peñarol (59'). Seguí el Minuto a Minuto aquí.",
   "partido_activo": {
     "event_id": "401930317",
     "nombre": "Juventud vs Peñarol",
@@ -27,7 +27,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "47'",
+    "minuto_reloj": "59'",
     "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
@@ -71,7 +71,7 @@
       "goles": "0",
       "es_penarol": true
     },
-    "minuto_reloj": "47'",
+    "minuto_reloj": "59'",
     "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
@@ -170,7 +170,7 @@
         "goles": "0",
         "es_penarol": true
       },
-      "minuto_reloj": "47'",
+      "minuto_reloj": "59'",
       "tiempo_periodo": 2,
       "completado": false,
       "state": "in",
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 17.2,
-    "sensacion_c": 17.0,
-    "viento_kmh": 11.9,
-    "humedad_pct": 84,
-    "condicion": "Cielo despejado sobre Bañados de Carrasco",
+    "temperatura_c": 17.4,
+    "sensacion_c": 16.5,
+    "viento_kmh": 15.5,
+    "humedad_pct": 82,
+    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "23/10/2026 21:07"
+    "actualizado": "23/10/2026 21:19"
   },
   "minuto_a_minuto": [
     {
@@ -1508,6 +1508,15 @@
       "titulo": "¡Comienza el Segundo Tiempo en el Centenario!",
       "descripcion": "Rueda el balón para el complemento. Diego Aguirre mantiene a los mismos once en cancha con la consigna de acelerar las transiciones para quebrar el cero.",
       "equipo": "general"
+    },
+    {
+      "minuto": "54'",
+      "tiempo": "2T",
+      "tipo": "defensa",
+      "icono": "🛡️",
+      "titulo": "Salida limpia de Aguerre y control en el medio",
+      "descripcion": "Juventud intenta progresar por derecha con Pereiro y Larregui, pero el fondo carbonero cierra y descarga con Washington Aguerre. Pedro Alegre reanuda con saque de banda para la salida de Eric Remedi.",
+      "equipo": "Peñarol"
     }
   ],
   "blogger_live_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html",
