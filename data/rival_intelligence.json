@@ -1,128 +1,141 @@
 {
-  "generado_el": "24/10/2026 00:30",
-  "rival_nombre": "Montevideo Wanderers Fútbol Club",
-  "rival_corto": "Wanderers",
-  "rival_slug": "wanderers",
-  "escudo_oficial": "assets/img/escudos/escudo_montevideo_wanderers.webp",
-  "escudo_auf_remoto": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1926.png",
+  "generado_el": "24/10/2026 05:34",
+  "rival_nombre": "Club Atlético Juventud de Las Piedras",
+  "rival_corto": "Juventud",
+  "rival_slug": "juventud",
+  "escudo_oficial": "assets/img/escudos/escudo_juventud.webp",
+  "escudo_auf_remoto": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/juventud.png",
   "datos_institucionales_auf": {
-    "fundacion": "15 de agosto de 1902",
-    "sede": "Av. Agraciada 2871, Prado, Montevideo",
-    "estadio_propio": "Parque Alfredo Víctor Viera",
-    "capacidad": 10000,
-    "web_oficial": "https://mwfc.com.uy/",
+    "fundacion": "24 de diciembre de 1935",
+    "sede": "Las Piedras, Canelones, Uruguay",
+    "estadio_propio": "Estadio Municipal Parque Artigas (Las Piedras)",
+    "capacidad": 12000,
+    "web_oficial": "https://juventud.uy/",
     "redes": {
-      "twitter": "https://x.com/mwfc_oficial",
-      "instagram": "https://www.instagram.com/mwfc_oficial/"
+      "twitter": "https://x.com/JuventudUy",
+      "instagram": "https://www.instagram.com/juventuddelaspiedras/"
     }
   },
   "scouting_tactico": {
-    "entrenador": "Antonio Pacheco D'Agosti",
-    "esquema_base": "4-3-3 / 4-2-3-1 de posesión y transiciones rápidas",
-    "propuesta_juego": "El equipo de Antonio Pacheco propone un fútbol asociativo con salida limpia desde el fondo, rotación fluida en la zona de volantes y aceleración vertical por las bandas. No suele refugiarse en un bloque bajo extremo como Juventud, sino que busca disputar la posesión y lastimar en transiciones veloces cuando el rival deja espacios a espaldas de sus laterales.",
+    "entrenador": "Christian 'Kily' González",
+    "esquema_base": "4-4-2 / 5-3-2 de repliegue y transición vertical",
+    "propuesta_juego": "Juventud estructura su planteo en un bloque medio-bajo compacto, achicando espacios entre líneas para neutralizar la gestación interna del rival. En ofensiva apuestan fuertemente a las transiciones verticales por los costados y a la potencia del juego aéreo en tiros de esquina y faltas laterales.",
     "figuras_a_seguir": [
       {
-        "nombre": "Kevin Rolón",
-        "rol": "Extremo / Carrilero Zurdo",
-        "analisis": "Uno de los jugadores más veloces y desequilibrantes del torneo. Desborde constante en el 1x1, centros envenenados y gran capacidad para atacar el espacio."
+        "nombre": "Fernando Mimbacas",
+        "rol": "Centrodelantero",
+        "analisis": "Anotó en el último 2-2 en el Campeón del Siglo. Delantero batallador que no da pelotas por perdidas y busca la espalda de los zagueros."
       },
       {
-        "nombre": "Tabaré Viudez",
-        "rol": "Mediapunta / Extremo Creativo",
-        "analisis": "Jerarquía y pegada exquisita. Especialista en pelota quieta (tiros libres y córners) y pases entre líneas que rompen estructuras defensivas."
+        "nombre": "Renzo Rabino",
+        "rol": "Lateral / Carrilero Zurdo",
+        "analisis": "Anotó de tiro libre en el Apertura 2026. Tiene excelente pegada en pelota detenida y llegada constante al callejón zurdo."
       },
       {
-        "nombre": "Nicolás Royón",
-        "rol": "Centrodelantero de Área",
-        "analisis": "Goleador experimentado, oportunista para anticipar en el primer palo y potente en el juego aéreo dentro del área chica."
-      },
-      {
-        "nombre": "Bruno Veglio",
-        "rol": "Mediocampista Mixto",
-        "analisis": "El motor de la zona media bohemia: balance defensivo, quite oportuno y primer pase claro para iniciar los ataques."
+        "nombre": "Agustín Rodríguez",
+        "rol": "Pivote Central",
+        "analisis": "El termómetro en la mitad del campo: encargado de cortar circuitos y dar el primer pase vertical hacia las bandas."
       }
     ],
     "puntos_fuertes": [
-      "Circulación veloz de balón y desdoble por las bandas con Kevin Rolón.",
-      "Peligro constante en pelota detenida con la pegada de Tabaré Viudez.",
-      "Oficio y oportunismo ofensivo de Nicolás Royón en el área rival."
+      "Intensidad física y disciplina defensiva para cerrar líneas de pase.",
+      "Peligro constante en la pelota quieta con ejecutores precisos.",
+      "Efectividad en transiciones si Peñarol pierde el balón en salida."
     ],
     "vulnerabilidades_a_explotar": [
-      "Al adelantar líneas para proponer, dejan espacios a espaldas de sus laterales (zona ideal para Jaime Báez y Javier Cabrera).",
-      "Dificultades en el retroceso cuando son atacados en transiciones rápidas y con remates de media distancia de Leonardo Fernández.",
-      "Presión alta coordinada de Peñarol en la salida de Mauro Silveira puede forzar pérdidas en campo propio."
+      "Sufren el juego asociativo veloz y los cambios de ritmo entre líneas de Leonardo Fernández.",
+      "Espacios laterales a espaldas de sus carrileros cuando se proyectan (zona propicia para Jaime Báez y Javier Cabrera).",
+      "Desgaste físico en la última media hora en la cancha grande del Estadio Centenario."
     ]
   },
   "duelos_tacticos_1x1": [
     {
-      "id": "duelo_leo_veglio",
-      "titulo": "El Eje Creativo vs. El Tapón Bohemio",
-      "zona_campo": "Zona 14 / Tres Cuartos Aurinegro",
+      "id": "duelo_cerebro_contencion",
+      "titulo": "El Cerebro Aurinegro vs. El Tapón Pedrense",
+      "zona_campo": "Zona 14 / Tres Cuartos Central",
       "penarol": {
         "jugador": "Leonardo Fernández",
         "dorsal": "8",
         "rol": "Enganche / Generador de Juego",
-        "atributos_clave": "Visión de juego, cambio de frente, pegada de media distancia y tiro libre letal."
+        "atributos_clave": "Visión panorámica, pegada letal de tiro libre y pases filtrados milimétricos."
       },
       "rival": {
-        "jugador": "Bruno Veglio",
-        "dorsal": "16",
-        "rol": "Pivote Central de Wanderers",
-        "atributos_clave": "Corte escalonado, agresividad en la marca y ocupación racional de espacios."
+        "jugador": "Agustín Rodríguez",
+        "dorsal": "5",
+        "rol": "Pivote Defensivo de Juventud",
+        "atributos_clave": "Corte escalonado, anticipo en el suelo y marca asfixiante sobre el receptor."
       },
-      "clave_del_duelo": "A diferencia del cerrojo pedrense, Wanderers ofrece más metros para jugar. Si Leo encuentra tiempo y perfil para habilitar o rematar, desarticulará el sistema defensivo bohemio."
+      "clave_del_duelo": "Si Leo recibe perfilado y con 2 metros de luz, destrozará el cerrojo pedrense asistiendo a las bandas o rematando de media distancia. La misión de Rodríguez es no dejarlo girar nunca."
     },
     {
-      "id": "duelo_silvera_zagueros",
-      "titulo": "La Fiera de Presión vs. La Zaga Bohemia",
-      "zona_campo": "Área de Wanderers",
+      "id": "duelo_presion_zaga",
+      "titulo": "La Fiera de Presión vs. La Muralla del Fondo",
+      "zona_campo": "Punto Penal / Salida Defensiva de Juventud",
       "penarol": {
         "jugador": "Maximiliano Silvera",
         "dorsal": "11",
-        "rol": "Centrodelantero",
-        "atributos_clave": "Presión incansable, diagonales de ruptura, desgaste de centrales y definición rápida."
+        "rol": "Centrodelantero de Presión",
+        "atributos_clave": "Presión incansable, diagonales de ruptura, desgaste de zagueros y anticipación."
       },
       "rival": {
-        "jugador": "Zaga Central de Wanderers",
+        "jugador": "Zaga Central de Juventud",
         "dorsal": "2 / 3",
-        "rol": "Defensa Central",
-        "atributos_clave": "Buen juego aéreo pero lentitud en el mano a mano en velocidad a campo abierto."
+        "rol": "Defensa de Bloque Bajo",
+        "atributos_clave": "Fuerza física en balones divididos, despejes expeditivos y cierre del área chica."
       },
-      "clave_del_duelo": "Silvera forzará errores en la salida limpia que pregona Pacheco, generando segundas pelotas para las llegadas de Jaime Báez y Javier Cabrera."
+      "clave_del_duelo": "Silvera forzará el error pedrense con su presión asfixiante, arrastrando a los centrales hacia los costados para abrir los pasillos interiores a las diagonales de Jaime Báez."
     },
     {
-      "id": "duelo_zaga_royon",
-      "titulo": "La Muralla Aurinegra vs. El Oportunismo de Royón",
-      "zona_campo": "Área de Peñarol",
+      "id": "duelo_bandas_transicion",
+      "titulo": "Punzadas por Bandas vs. Despliegue de Carrileros",
+      "zona_campo": "Bandas / Pasillos Exteriores",
       "penarol": {
-        "jugador": "Guzmán Rodríguez & Washington Aguerre",
-        "dorsal": "4 / 1",
-        "rol": "Zaguero Central y Arquero",
-        "atributos_clave": "Anticipo aéreo, solvencia en balones divididos y voz de mando."
+        "jugador": "Jaime Báez & Javier Cabrera",
+        "dorsal": "7 / 23",
+        "rol": "Extremos Mirasoles",
+        "atributos_clave": "Desborde 1x1 en velocidad, cambio de ritmo y centros rasantes venenosos atrás."
       },
       "rival": {
-        "jugador": "Nicolás Royón",
-        "dorsal": "9",
-        "rol": "Centrodelantero Bohemio",
-        "atributos_clave": "Olfato goleador, juego de espaldas y cabezazo certero."
+        "jugador": "Renzo Rabino & Laterales",
+        "dorsal": "6 / 4",
+        "rol": "Carrileros de Juventud",
+        "atributos_clave": "Buena pegada y desdoble al ataque, pero tendencia a quedar desprotegidos al volver."
       },
-      "clave_del_duelo": "Guzmán Rodríguez viene de ganar todos los duelos aéreos ante Juventud; anular a Royón en los centros de Viudez y Rolón garantizará mantener el arco en cero."
+      "clave_del_duelo": "Rabino es la principal arma de salida pedrense; si Peñarol roba el balón en transición, encontrará una autopista a sus espaldas para lastimar mano a mano."
+    },
+    {
+      "id": "duelo_cerrojo_pelotaquieta",
+      "titulo": "El Cerrojo Mirasol vs. El Contragolpe & Pelota Parada",
+      "zona_campo": "Área Aurinegra / Balón Parado Defensivo",
+      "penarol": {
+        "jugador": "Washington Aguerre & Guzmán Rodríguez",
+        "dorsal": "1 / 4",
+        "rol": "Arco y Zaga Central Decana",
+        "atributos_clave": "Voz de mando, dominio aéreo absoluto, salida limpia y seguridad de manos."
+      },
+      "rival": {
+        "jugador": "Fernando Mimbacas",
+        "dorsal": "9",
+        "rol": "Goleador Oportunista de Juventud",
+        "atributos_clave": "Pivoteo para segundas pelotas, búsqueda de la espalda zaguera y definición rápida."
+      },
+      "clave_del_duelo": "Mimbacas ya anotó en el Campeón del Siglo en el último 2-2. Peñarol debe mantener la línea alta concentrada y evitar conceder tiros libres frontales o córners innecesarios."
     }
   ],
   "historial_certificacion_1891": {
-    "partidos_jugados": 218,
-    "ganados_penarol": 132,
-    "empatados": 54,
-    "perdidos_penarol": 32,
-    "goles_penarol": 438,
-    "goles_rival": 215,
-    "diferencia_goles": "+223",
-    "ventaja_victorias": "+100 partidos a favor del Decano",
-    "efectividad_pct": "73.4%"
+    "partidos_jugados": 33,
+    "ganados_penarol": 23,
+    "empatados": 7,
+    "perdidos_penarol": 3,
+    "goles_penarol": 67,
+    "goles_rival": 22,
+    "diferencia_goles": "+45",
+    "ventaja_victorias": "+20 partidos a favor del Decano",
+    "efectividad_pct": "76.7%"
   },
   "fuentes_consultadas": [
-    "AUF - Asociación Uruguaya de Fútbol (auf.org.uy)",
-    "1891 BD — Comisión de Historia y Patrimonio Histórico de Peñarol (1891.uy)",
-    "Ovación Digital y Tenfield.com.uy"
+    "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",
+    "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol (1891.uy)",
+    "Ovación Digital — Sección Fútbol y Peñarol (elpais.com.uy/ovacion)"
   ]
 }
