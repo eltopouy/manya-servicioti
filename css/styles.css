@@ -2869,3 +2869,81 @@ body {
   background: rgba(255, 209, 0, 0.08);
   transform: translateY(-2px);
 }
+
+
+/* ==========================================================================
+   COMPONENTES DE ÉLITE: MOMENTUM GRAPH & VOTACIÓN EN VIVO
+   ========================================================================== */
+.momentum-chart-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  height: 120px;
+  position: relative;
+  overflow-x: auto;
+  padding: 10px 4px;
+}
+
+.momentum-col {
+  flex: 1;
+  min-width: 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.momentum-col:hover {
+  transform: scale(1.08);
+}
+
+.momentum-bar {
+  width: 14px;
+  border-radius: 4px;
+  transition: height 0.4s ease, filter 0.2s ease;
+}
+
+.momentum-bar.pen {
+  background: linear-gradient(180deg, #ffd100 0%, #ca8a04 100%);
+  box-shadow: 0 0 10px rgba(255, 209, 0, 0.3);
+}
+
+.momentum-bar.pen.peak {
+  background: linear-gradient(180deg, #fef08a 0%, #ffd100 100%);
+  box-shadow: 0 0 16px rgba(255, 209, 0, 0.7);
+}
+
+.momentum-bar.riv {
+  background: linear-gradient(180deg, #0284c7 0%, #38bdf8 100%);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.momentum-bar.live-pulse {
+  background: #ef4444;
+  animation: pulseGlow 1.5s infinite;
+}
+
+.momentum-label {
+  position: absolute;
+  bottom: -2px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #71717a;
+}
+
+.vote-player-btn:hover {
+  border-color: var(--manya-gold) !important;
+  transform: translateY(-2px);
+  background: rgba(255, 209, 0, 0.08) !important;
+}
+
+.vote-player-btn.has-voted {
+  border-color: #ffd100 !important;
+  background: rgba(255, 209, 0, 0.15) !important;
+  box-shadow: 0 0 14px rgba(255, 209, 0, 0.25);
+}

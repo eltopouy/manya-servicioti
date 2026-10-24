@@ -1125,7 +1125,55 @@
           triviaState.maxStreak = 0;
           triviaState.answered = false;
           triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
-          renderTrivia();
+      
+  function initLiveVoting() {
+    const buttons = document.querySelectorAll('.vote-player-btn');
+    const countEl = document.getElementById('vote-total-count');
+    if (!buttons.length) return;
+
+    let voted = localStorage.getItem('manya_mvp_voted');
+    let counts = JSON.parse(localStorage.getItem('manya_mvp_counts') || '{"leo": 685, "cabrera": 342, "damian": 214, "guzman": 187}');
+
+    function updateUI() {
+      const total = Object.values(counts).reduce((a, b) => a + b, 0);
+      if (countEl) countEl.textContent = `${total.toLocaleString('es-UY')} Votos Emitidos`;
+      buttons.forEach(btn => {
+        const p = btn.getAttribute('data-player');
+        const pct = Math.round((counts[p] / total) * 100) || 0;
+        const pctEl = btn.querySelector('.vote-pct');
+        const barEl = btn.querySelector('.vote-bar');
+        if (pctEl) pctEl.textContent = `${pct}%`;
+        if (barEl) barEl.style.width = `${pct}%`;
+        if (voted === p) {
+          btn.classList.add('has-voted');
+          const voteTxt = btn.querySelector('span:nth-child(1)');
+          if (voteTxt && voteTxt.textContent === 'Votar') voteTxt.textContent = '✓ Tu Voto';
+        } else {
+          btn.classList.remove('has-voted');
+          const voteTxt = btn.querySelector('span:nth-child(1)');
+          if (voteTxt && voteTxt.textContent === '✓ Tu Voto') voteTxt.textContent = 'Votar';
+        }
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = btn.getAttribute('data-player');
+        if (voted === p) return;
+        if (voted && counts[voted] > 0) counts[voted]--;
+        counts[p] = (counts[p] || 0) + 1;
+        voted = p;
+        localStorage.setItem('manya_mvp_voted', voted);
+        localStorage.setItem('manya_mvp_counts', JSON.stringify(counts));
+        updateUI();
+      });
+    });
+
+    updateUI();
+  }
+
+    initLiveVoting();
+    renderTrivia();
         });
       }
       return;

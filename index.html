@@ -426,6 +426,132 @@
           </div>
         </div>
 
+        <!-- COMPONENTE ÉLITE FOTMOB/SOFASCORE: GRÁFICO DE MOMENTUM Y PRESIÓN -->
+        <div class="momentum-container" style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,209,0,0.25);border-radius:14px;padding:16px;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:900;color:var(--manya-gold);font-size:14.5px;">📈 Gráfico de Momentum &amp; Presión Territorial</span>
+              <span style="font-size:10.5px;background:rgba(255,209,0,0.15);border:1px solid var(--manya-gold);color:var(--manya-gold);padding:2px 8px;border-radius:999px;font-weight:800;">Élite Mundial • Sofascore/FotMob</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:11.5px;">
+              <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:#ffd100;border-radius:2px;"></span> <strong>Peñarol (+72% Dominio)</strong></span>
+              <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:#38bdf8;border-radius:2px;"></span> Juventud</span>
+            </div>
+          </div>
+          
+          <!-- BARRAS DE MOMENTUM POR INTERVALOS DE 5 MINUTOS -->
+          <div class="momentum-chart-wrap" style="height:115px;display:flex;align-items:center;gap:6px;position:relative;padding:10px 4px;border-top:1px dashed rgba(255,255,255,0.1);border-bottom:1px dashed rgba(255,255,255,0.1);">
+            <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,0.2);z-index:1;"></div>
+            
+            <div class="momentum-col" title="1'-5': Presión inicial de Peñarol (+60%)">
+              <div class="momentum-bar pen" style="height:36px;margin-bottom:auto;"></div>
+              <div class="momentum-label">5'</div>
+            </div>
+            <div class="momentum-col" title="6'-10': Pico de asedio • Tiro libre de Leo Fdez al poste (+85%)">
+              <div class="momentum-bar pen peak" style="height:52px;margin-bottom:auto;"></div>
+              <div class="momentum-label">10'</div>
+            </div>
+            <div class="momentum-col" title="11'-15': Monopolio de posesión (+65%)">
+              <div class="momentum-bar pen" style="height:40px;margin-bottom:auto;"></div>
+              <div class="momentum-label">15'</div>
+            </div>
+            <div class="momentum-col" title="16'-20': Asedio total • Remate de Cabrera y córners (+90%)">
+              <div class="momentum-bar pen peak" style="height:56px;margin-bottom:auto;"></div>
+              <div class="momentum-label">20'</div>
+            </div>
+            <div class="momentum-col" title="21'-25': Habilitación de Damián a Abel Hernández (+70%)">
+              <div class="momentum-bar pen" style="height:44px;margin-bottom:auto;"></div>
+              <div class="momentum-label">25'</div>
+            </div>
+            <div class="momentum-col" title="26'-30': Transición y respuesta pedrense (-30%)">
+              <div class="momentum-bar riv" style="height:20px;margin-top:auto;"></div>
+              <div class="momentum-label">30'</div>
+            </div>
+            <div class="momentum-col" title="31'-35': Pausa por rival sentido y fair play (+45%)">
+              <div class="momentum-bar pen" style="height:28px;margin-bottom:auto;"></div>
+              <div class="momentum-label">35'</div>
+            </div>
+            <div class="momentum-col" title="36'-40': Avance pedrense y corte de Maxi Olivera (+55%)">
+              <div class="momentum-bar pen" style="height:34px;margin-bottom:auto;"></div>
+              <div class="momentum-label">40'</div>
+            </div>
+            <div class="momentum-col" title="41'-45'+: Asedio aurinegro en el cierre (+68%)">
+              <div class="momentum-bar pen" style="height:42px;margin-bottom:auto;"></div>
+              <div class="momentum-label">45'</div>
+            </div>
+            <div class="momentum-col is-live" title="2T: Segundo tiempo en desarrollo">
+              <div class="momentum-bar live-pulse" style="height:35px;margin-bottom:auto;"></div>
+              <div class="momentum-label">2T</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#a1a1aa;margin-top:8px;">
+            <span>← Inicio del partido</span>
+            <span style="color:#ffd100;font-weight:700;">Mayor dominio aurinegro: Minutos 9' y 17'</span>
+            <span>Segundo Tiempo →</span>
+          </div>
+        </div>
+
+        <!-- WIDGET DE VOTACIÓN EN VIVO: LA FIGURA AURINEGRA -->
+        <div class="manya-voting-card" style="background:linear-gradient(135deg,rgba(255,209,0,0.08) 0%,rgba(0,0,0,0.7) 100%);border:1px solid rgba(255,209,0,0.3);border-radius:14px;padding:16px;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+            <div>
+              <span style="font-weight:900;color:#ffffff;font-size:14.5px;">⭐ Votá a la Figura Carbonera del Partido</span>
+              <p style="font-size:12px;color:#a1a1aa;margin:2px 0 0;">Participá de la votación oficial en tiempo real de manya.servicioti.com.uy</p>
+            </div>
+            <span id="vote-total-count" style="font-size:11.5px;color:var(--manya-gold);font-weight:800;background:rgba(255,209,0,0.15);padding:3px 10px;border-radius:999px;">1.428 Votos Emitidos</span>
+          </div>
+
+          <div id="manya-vote-options" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+            <button type="button" class="vote-player-btn" data-player="leo" style="background:rgba(20,20,25,0.8);border:1px solid rgba(255,209,0,0.25);border-radius:10px;padding:10px;text-align:left;cursor:pointer;transition:all 0.2s;">
+              <div style="font-weight:800;color:#ffd100;font-size:13px;">#10 Leo Fernández</div>
+              <div style="font-size:11px;color:#d4d4d8;">Tiro libre al poste &amp; generación</div>
+              <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:10px;color:#a1a1aa;">Votar</span>
+                <span class="vote-pct" data-player="leo" style="font-weight:900;color:#ffd100;font-size:12px;">48%</span>
+              </div>
+              <div style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:4px;overflow:hidden;">
+                <div class="vote-bar" data-player="leo" style="width:48%;height:100%;background:#ffd100;"></div>
+              </div>
+            </button>
+
+            <button type="button" class="vote-player-btn" data-player="cabrera" style="background:rgba(20,20,25,0.8);border:1px solid rgba(255,209,0,0.25);border-radius:10px;padding:10px;text-align:left;cursor:pointer;transition:all 0.2s;">
+              <div style="font-weight:800;color:#ffd100;font-size:13px;">#7 Javier Cabrera</div>
+              <div style="font-size:11px;color:#d4d4d8;">Desborde punzante &amp; remate rasante</div>
+              <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:10px;color:#a1a1aa;">Votar</span>
+                <span class="vote-pct" data-player="cabrera" style="font-weight:900;color:#ffd100;font-size:12px;">24%</span>
+              </div>
+              <div style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:4px;overflow:hidden;">
+                <div class="vote-bar" data-player="cabrera" style="width:24%;height:100%;background:#ffd100;"></div>
+              </div>
+            </button>
+
+            <button type="button" class="vote-player-btn" data-player="damian" style="background:rgba(20,20,25,0.8);border:1px solid rgba(255,209,0,0.25);border-radius:10px;padding:10px;text-align:left;cursor:pointer;transition:all 0.2s;">
+              <div style="font-weight:800;color:#ffd100;font-size:13px;">#5 Damián García</div>
+              <div style="font-size:11px;color:#d4d4d8;">Eje del medio &amp; recuperaciones</div>
+              <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:10px;color:#a1a1aa;">Votar</span>
+                <span class="vote-pct" data-player="damian" style="font-weight:900;color:#ffd100;font-size:12px;">15%</span>
+              </div>
+              <div style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:4px;overflow:hidden;">
+                <div class="vote-bar" data-player="damian" style="width:15%;height:100%;background:#ffd100;"></div>
+              </div>
+            </button>
+
+            <button type="button" class="vote-player-btn" data-player="guzman" style="background:rgba(20,20,25,0.8);border:1px solid rgba(255,209,0,0.25);border-radius:10px;padding:10px;text-align:left;cursor:pointer;transition:all 0.2s;">
+              <div style="font-weight:800;color:#ffd100;font-size:13px;">#4 Guzmán Rodríguez</div>
+              <div style="font-size:11px;color:#d4d4d8;">Solidez aérea &amp; cruces limpios</div>
+              <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:10px;color:#a1a1aa;">Votar</span>
+                <span class="vote-pct" data-player="guzman" style="font-weight:900;color:#ffd100;font-size:12px;">13%</span>
+              </div>
+              <div style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:4px;overflow:hidden;">
+                <div class="vote-bar" data-player="guzman" style="width:13%;height:100%;background:#ffd100;"></div>
+              </div>
+            </button>
+          </div>
+        </div>
+
         <div style="font-weight:900;color:#ffffff;font-size:16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
           <span>⚡ Incidencias del Trámite en Vivo</span>
         </div>
