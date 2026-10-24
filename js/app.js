@@ -392,12 +392,21 @@
     const clkTxt = document.getElementById('hero-live-clock-text');
     const bLiveUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html';
 
+    const heroBadge = document.getElementById('hero-match-badge');
+
     if (live.fase_partido === 'EN_VIVO') {
       if (cdGrid) cdGrid.style.display = 'none';
       if (liveScoreBox) liveScoreBox.style.display = 'flex';
       if (sHome) sHome.textContent = prox.local ? (prox.local.goles || '0') : '0';
       if (sAway) sAway.textContent = prox.visitante ? (prox.visitante.goles || '0') : '0';
-      if (clkTxt) clkTxt.textContent = `EN VIVO • 1T (${prox.minuto_reloj || "12'"})`;
+      if (clkTxt) clkTxt.textContent = `EN VIVO • (${prox.minuto_reloj || "1T"})`;
+
+      if (heroBadge) {
+        heroBadge.textContent = '🔴 EN VIVO • MINUTO A MINUTO EN DIRECTO';
+        heroBadge.style.background = '#ef4444';
+        heroBadge.style.color = '#ffffff';
+        heroBadge.style.borderColor = '#f87171';
+      }
 
       if (tDate) {
         tDate.textContent = `🔴 EN VIVO (${prox.minuto_reloj || '1T'}) • ${prox.torneo || 'Campeonato Uruguayo'}`;
@@ -414,22 +423,27 @@
     } else {
       if (cdGrid) cdGrid.style.display = 'grid';
       if (liveScoreBox) liveScoreBox.style.display = 'none';
-    }
 
-    if (live.fase_partido === 'FINALIZADO') {
-      if (tDate) {
-        tDate.textContent = `🏁 FINALIZADO • ${prox.torneo || 'Campeonato Uruguayo'}`;
-        tDate.style.color = '#ffd100';
+      if (heroBadge) {
+        heroBadge.textContent = `★ PRÓXIMO PARTIDO • ${prox.torneo || 'Torneo Clausura 2026'}`.toUpperCase();
+        heroBadge.style.background = '#ffd100';
+        heroBadge.style.color = '#09090b';
+        heroBadge.style.borderColor = '#eab308';
       }
-    } else {
-      if (tDate && prox.fecha_legible) {
-        tDate.textContent = `${prox.fecha_legible} • ${prox.torneo || 'Campeonato Uruguayo'}`;
+
+      if (tDate) {
+        const fStr = prox.fecha_legible || 'Sábado 31/10/2026 16:30 hs';
+        const tStr = prox.torneo || 'Torneo Clausura 2026';
+        tDate.textContent = `★ PRÓXIMO PARTIDO • ${fStr} • ${tStr}`;
         tDate.style.color = 'var(--manya-gold)';
       }
+
+      startCountdown(prox.fecha_iso);
     }
+
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
     if (tLast && ult.local && ult.visitante) {
-      tLast.textContent = `${ult.local.nombre} ${ult.local.goles} - ${ult.visitante.goles} ${ult.visitante.nombre}`;
+      tLast.textContent = `${ult.local.nombre} ${ult.local.goles} - ${ult.visitante.goles} ${ult.visitante.nombre} (${ult.torneo || 'Torneo Clausura'} • ${ult.estadio || 'Estadio Centenario'})`;
     }
 
     // Ticker interactivo de alerta de partido
@@ -457,9 +471,7 @@
       }
     }
 
-    if (live.fase_partido !== 'EN_VIVO' && live.fase_partido !== 'FINALIZADO') {
-      startCountdown(prox.fecha_iso);
-    }
+    // Cuenta regresiva gestionada en bloque hero
     renderLiveTimeline(live);
   }
 
@@ -1786,10 +1798,99 @@
     }
   }
 
+  function renderInfluencersSection(influencers) {
+    const grid = document.getElementById('influencers-grid');
+    if (!grid || !influencers || !influencers.length) return;
+
+    grid.innerHTML = influencers.map((inf, idx) => {
+      return `
+        <article class="ig-card influencer-card" data-inf-idx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:all 0.25s ease;">
+          <!-- Header de Cuenta / Influencer -->
+          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+              <div class="ig-avatar-ring" style="width:42px;height:42px;flex-shrink:0;">
+                <img src="${inf.avatar}" alt="Avatar ${inf.handle}" width="42" height="42" class="ig-avatar-img" style="border-radius:50%;object-fit:cover;" />
+              </div>
+              <div style="min-width:0;">
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <strong style="font-size:13.5px;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${inf.nombre}</strong>
+                  <span class="ig-verified-badge" title="Cuenta Verificada / Destacada" style="color:var(--manya-gold);font-size:12px;">✓</span>
+                </div>
+                <div style="font-size:12px;color:var(--manya-gold);font-weight:700;">${inf.handle}</div>
+              </div>
+            </div>
+            <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;font-weight:800;border-radius:999px;flex-shrink:0;text-decoration:none;">
+              Seguir ↗
+            </a>
+          </div>
+
+          <!-- Imagen del Partido Publicada -->
+          <div class="ig-img-wrap" style="cursor:pointer;position:relative;aspect-ratio:16/9;overflow:hidden;" title="Click para ampliar imagen en alta definición">
+            <img src="${inf.imagen_webp || inf.imagen_jpg}" alt="${inf.titulo} - ${inf.handle}" width="1280" height="720" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;" />
+            <span class="ig-badge-tag" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#ffd100;border:1px solid #ffd100;font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:800;">
+              ${inf.badge}
+            </span>
+            <span style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.75);color:#fff;font-size:11px;padding:3px 8px;border-radius:6px;">
+              🔍 Ampliar
+            </span>
+          </div>
+
+          <!-- Cuerpo: Stats, Titulo, Caption y Enlace a Instagram -->
+          <div class="ig-body" style="padding:14px 16px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
+            <div>
+              <div class="ig-meta" style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:8px;">
+                <span>⚽ ${inf.partido}</span>
+                <span style="color:#f87171;font-weight:800;">❤️ ${inf.likes_formato} • 💬 ${inf.comments}</span>
+              </div>
+              <h3 style="font-size:15px;font-weight:900;color:#ffffff;margin:0 0 8px;line-height:1.35;">
+                <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">${inf.titulo}</a>
+              </h3>
+              <p style="font-size:13px;color:#d4d4d8;line-height:1.5;margin:0 0 10px;">${inf.descripcion}</p>
+              <div style="font-size:11.5px;color:var(--manya-gold);font-weight:700;margin-bottom:12px;">${inf.hashtags}</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <button type="button" class="btn-outline-gold inf-zoom-btn" style="padding:5px 12px;font-size:11.5px;cursor:pointer;border-radius:6px;">
+                🔍 Ver en Grande
+              </button>
+              <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 14px;font-size:11.5px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
+                Ver en Instagram ↗
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    // Conectar lightbox a las cards de influencers
+    grid.querySelectorAll('.influencer-card').forEach(card => {
+      const idx = parseInt(card.getAttribute('data-inf-idx'), 10);
+      const item = influencers[idx];
+      const imgWrap = card.querySelector('.ig-img-wrap');
+      const zoomBtn = card.querySelector('.inf-zoom-btn');
+
+      const triggerLightbox = () => {
+        openLightbox({
+          titulo: `${item.titulo} — ${item.handle}`,
+          descripcion: `${item.descripcion}\n\n${item.hashtags}\nCuenta Oficial: ${item.nombre} (${item.handle})`,
+          cuenta: item.handle,
+          categoria: item.categoria,
+          likes: item.likes,
+          comments: item.comments,
+          url_post: item.url_instagram,
+          imagen_webp: item.imagen_webp,
+          imagen_jpg: item.imagen_jpg
+        });
+      };
+
+      if (imgWrap) imgWrap.addEventListener('click', triggerLightbox);
+      if (zoomBtn) zoomBtn.addEventListener('click', triggerLightbox);
+    });
+  }
+
   async function init() {
     setupLightbox();
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel] = await Promise.all([
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel, influencers] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
@@ -1799,7 +1900,8 @@
       loadJsonSafe('data/escudos_uruguay.json'),
       loadJsonSafe('data/historial_juventud.json'),
       loadJsonSafe('data/efemerides_hoy.json'),
-      loadJsonSafe('data/rival_intelligence.json')
+      loadJsonSafe('data/rival_intelligence.json'),
+      loadJsonSafe('data/influencers_feed.json')
     ]);
 
     if (escudosCatalog) {
@@ -1826,6 +1928,9 @@
     }
     initStandingsTabs();
     initSimulator();
+    if (influencers && influencers.length) {
+      renderInfluencersSection(influencers);
+    }
 
     // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json
     const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);

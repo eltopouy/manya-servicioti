@@ -791,30 +791,28 @@ class ManyaMatchEngine:
         if match_info and match_info.get("event_id"):
             summary_adv = cls.fetch_match_summary_details(match_info["event_id"])
 
-        # Si hoy terminó un partido (FINALIZADO), actualizar referencias
+        # Si hoy terminó un partido (FINALIZADO), el Match Center debe decir siempre PRÓXIMO PARTIDO
         proximo_partido_data = match_info or {}
         if fase == "FINALIZADO" and match_info:
             last_match = match_info
             next_upcoming = cls.get_next_upcoming_match(exclude_event_id=match_info.get("event_id"))
             if next_upcoming:
                 proximo_partido_data = next_upcoming
+            # Transición: el Match Center debe colocarse en PREVIA activa hacia el próximo partido
+            fase = "PREVIA"
 
         # Generar alerta banner interactiva blindada gramaticalmente
         if fase == "EN_VIVO":
             alerta_banner = f"🔴 EN VIVO AHORA: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info.get('minuto_reloj', '1T')})"
-        elif fase == "PREVIA":
-            hora_str, dia_str = cls.descomponer_horario_partido(match_info)
-            tv_channel = match_info.get("tv") or "VTV Plus / Disney+ Premium"
-            alerta_banner = f"⚡ ¡HOY JUEGA PEÑAROL! {match_info['nombre']} a las {hora_str} el {dia_str} en {match_info['estadio']}. Vivilo en vivo por {tv_channel}."
-        elif fase == "FINALIZADO":
-            alerta_banner = f"🏁 FINAL: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info['estadio']})"
         else:
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
-            alerta_banner = f"🟡⚫ Próximo partido: {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({proximo_partido_data.get('estadio', '')})"
+            tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
+            ultimo_res_txt = f" Último resultado oficial: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']}." if (last_match and last_match.get("local")) else ""
+            alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({proximo_partido_data.get('estadio', 'Estadio Saroldi')}).{ultimo_res_txt}"
 
-        # Si no juega hoy, partido_activo mantiene la referencia al próximo encuentro
-        partido_activo_data = dict(match_info) if match_info else {}
-        partido_activo_data["es_hoy"] = (fase in ("PREVIA", "EN_VIVO", "FINALIZADO"))
+        # El partido activo en el Match Center es siempre el próximo encuentro
+        partido_activo_data = dict(proximo_partido_data)
+        partido_activo_data["es_hoy"] = False
         partido_activo_data["fase"] = fase
         partido_activo_data["detalles_avanzados"] = summary_adv
 

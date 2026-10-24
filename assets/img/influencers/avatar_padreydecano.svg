@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="pydGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd100"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="60" cy="60" r="56"/>
+    </clipPath>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="#18181b" stroke="url(#pydGold)" stroke-width="4"/>
+  <g clip-path="url(#circleClip)">
+    <!-- Stripes -->
+    <rect x="10" y="0" width="12" height="120" fill="#ffd100"/>
+    <rect x="22" y="0" width="12" height="120" fill="#09090b"/>
+    <rect x="34" y="0" width="12" height="120" fill="#ffd100"/>
+    <rect x="46" y="0" width="12" height="120" fill="#09090b"/>
+    <rect x="58" y="0" width="12" height="120" fill="#ffd100"/>
+    <rect x="70" y="0" width="12" height="120" fill="#09090b"/>
+    <rect x="82" y="0" width="12" height="120" fill="#ffd100"/>
+    <rect x="94" y="0" width="12" height="120" fill="#09090b"/>
+    <!-- Central Badge -->
+    <rect x="20" y="32" width="80" height="56" rx="8" fill="#09090b" fill-opacity="0.92" stroke="#ffd100" stroke-width="2"/>
+    <text x="60" y="58" fill="#ffd100" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" text-anchor="middle" letter-spacing="1">PyD</text>
+    <text x="60" y="76" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="9" text-anchor="middle" letter-spacing="1.5">PADRE Y DECANO</text>
+  </g>
+</svg>

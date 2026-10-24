@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="legadoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd100"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="#121214" stroke="url(#legadoGrad)" stroke-width="4"/>
+  <!-- Locomotive / Crown silhouette in Gold -->
+  <path d="M 40 40 L 80 40 L 76 68 L 60 78 L 44 68 Z" fill="#ffd100" stroke="#000000" stroke-width="2"/>
+  <rect x="48" y="32" width="24" height="8" rx="2" fill="#ffd100"/>
+  <!-- 1891 text -->
+  <text x="60" y="58" fill="#09090b" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="13" text-anchor="middle" letter-spacing="1">1891</text>
+  <text x="60" y="96" fill="#ffd100" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="10.5" text-anchor="middle" letter-spacing="2">LEGADO</text>
+  <text x="60" y="106" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="7.5" text-anchor="middle" letter-spacing="1">PEÑAROL</text>
+</svg>

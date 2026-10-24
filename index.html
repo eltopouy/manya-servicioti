@@ -179,6 +179,7 @@
         <a href="#resumen-ia">⚡ El Diario</a>
         <a href="#tabla-simulador">📊 Tabla</a>
         <a href="#pizarra-tactica">👕 Armá tu 11</a>
+        <a href="#influencers-manya">📸 Influencers</a>
         <a href="#muro-visual">📸 Galerías</a>
         <a href="#como-llegar">🚌 Ómnibus</a>
         <a href="#museo-1891">🏆 Museo 1891</a>
@@ -199,55 +200,55 @@
 
     <!-- LIVE MATCH ALERT TICKER (Hidratado dinámicamente) -->
     <div id="manya-live-ticker" class="manya-live-ticker" style="display:none;margin-bottom:16px;background:#09090b;border:2px solid #ffd100;border-radius:10px;padding:12px 18px;color:#ffffff;font-weight:800;font-size:14.5px;box-shadow:0 4px 20px rgba(255,209,0,0.25);align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-      <div id="ticker-text">⚡ ¡HOY JUEGA PEÑAROL! Juventud vs Peñarol a las 20:00 hs el Viernes 23/10/2026 en Estadio Centenario. Vivilo en vivo por VTV Plus / Disney+ Premium.</div>
+      <div id="ticker-text">⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.</div>
       <a href="https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html" target="_blank" rel="noopener noreferrer" class="dynamic-blogger-link" style="color:var(--manya-gold);font-weight:800;border:1px solid var(--manya-gold);background:rgba(255,209,0,0.12);padding:6px 14px;border-radius:6px;font-size:12.5px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">⚡ Cobertura en Vivo en ServicioTI ↗</a>
     </div>
 
     <!-- PRIMERA PLANA: MATCH CENTER & MINUTO A MINUTO EN DIRECTO -->
     <section id="match-center" class="match-hero" aria-label="Centro de Partido en Vivo del Club Atlético Peñarol">
       <div class="match-hero-top">
-        <span class="badge-gold" style="background:#ef4444;color:#fff;border:1px solid #f87171;font-weight:900;letter-spacing:0.04em;">🔴 PRIMERA PLANA • MINUTO A MINUTO EN DIRECTO</span>
+        <span id="hero-match-badge" class="badge-gold" style="background:#ffd100;color:#09090b;border:1px solid #eab308;font-weight:900;letter-spacing:0.04em;">★ PRÓXIMO PARTIDO • TORNEO CLAUSURA 2026</span>
         <span id="hero-weather" class="badge-weather">🌡️ Campeón del Siglo: 18.5°C • Despejado en Ruta 102 (Viento 14 km/h)</span>
       </div>
 
       <div class="match-scoreboard">
         <div class="team-hero-side">
-          <div class="hero-crest-wrap is-rival" id="hero-home-crest-wrap">
-            <img id="hero-home-crest" src="assets/img/escudos/escudo_juventud.webp" alt="Escudo Oficial Juventud de Las Piedras" width="86" height="108" class="hero-crest-img" loading="eager" fetchpriority="high" />
+          <div class="hero-crest-wrap is-penarol" id="hero-home-crest-wrap">
+            <img id="hero-home-crest" src="assets/img/escudos/escudo_penarol.webp" alt="Escudo Oficial del Club Atlético Peñarol" width="86" height="108" class="hero-crest-img" loading="eager" fetchpriority="high" />
           </div>
-          <div id="hero-home-name" class="match-team-name">Juventud</div>
-          <div id="hero-home-tag" class="match-team-tag">Local • Torneo Oficial AUF</div>
+          <div id="hero-home-name" class="match-team-name is-penarol">Peñarol</div>
+          <div id="hero-home-tag" class="match-team-tag">El Decano • 1891</div>
         </div>
 
         <div class="match-vs-box">
-          <div class="countdown-grid" id="hero-countdown-grid" style="display:none;" aria-label="Cuenta regresiva próximo partido">
+          <div class="countdown-grid" id="hero-countdown-grid" style="display:grid;" aria-label="Cuenta regresiva próximo partido">
             <div class="cd-unit"><div id="cd-days" class="cd-num">00</div><div class="cd-lbl">Días</div></div>
             <div class="cd-unit"><div id="cd-hours" class="cd-num">00</div><div class="cd-lbl">Horas</div></div>
             <div class="cd-unit"><div id="cd-mins" class="cd-num">00</div><div class="cd-lbl">Min</div></div>
             <div class="cd-unit"><div id="cd-secs" class="cd-num">00</div><div class="cd-lbl">Seg</div></div>
           </div>
           <!-- Marcador en Vivo cuando el partido está en juego -->
-          <div id="hero-live-score-container" style="display:flex;flex-direction:column;align-items:center;margin-bottom:8px;">
+          <div id="hero-live-score-container" style="display:none;flex-direction:column;align-items:center;margin-bottom:8px;">
             <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.25);border:1px solid #ef4444;color:#fca5a5;padding:4px 12px;border-radius:999px;font-size:11.5px;font-weight:900;letter-spacing:0.06em;margin-bottom:8px;">
               <span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:50%;box-shadow:0 0 10px #ef4444;" class="live-pulse-dot"></span>
               <span id="hero-live-clock-text">EN VIVO • 1T</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;background:#000000;padding:6px 22px;border-radius:14px;border:1px solid rgba(255,209,0,0.4);box-shadow:0 0 20px rgba(255,209,0,0.15);">
-              <span id="hero-live-score-home" style="font-size:38px;font-weight:900;color:#ffffff;line-height:1;">0</span>
+              <span id="hero-live-score-home" style="font-size:38px;font-weight:900;color:#ffffff;line-height:1;">-</span>
               <span style="font-size:24px;font-weight:900;color:var(--manya-gold);">-</span>
-              <span id="hero-live-score-away" style="font-size:38px;font-weight:900;color:var(--manya-gold);line-height:1;">0</span>
+              <span id="hero-live-score-away" style="font-size:38px;font-weight:900;color:var(--manya-gold);line-height:1;">-</span>
             </div>
           </div>
-          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">Viernes 23/10/2026 20:00 hs • Clausura Fecha 11</div>
-          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Centenario (Montevideo)</div>
+          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">★ PRÓXIMO PARTIDO • Sábado 31/10/2026 16:30 hs • Torneo Clausura</div>
+          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Saroldi (Montevideo)</div>
         </div>
 
         <div class="team-hero-side">
-          <div class="hero-crest-wrap is-penarol" id="hero-away-crest-wrap">
-            <img id="hero-away-crest" src="assets/img/escudos/escudo_penarol.webp" alt="Escudo Oficial del Club Atlético Peñarol" width="86" height="108" class="hero-crest-img" loading="eager" />
+          <div class="hero-crest-wrap is-rival" id="hero-away-crest-wrap">
+            <img id="hero-away-crest" src="assets/img/escudos/escudo_montevideo_wanderers.webp" alt="Escudo Oficial de Montevideo Wanderers" width="86" height="108" class="hero-crest-img" loading="eager" />
           </div>
-          <div id="hero-away-name" class="match-team-name is-penarol">Peñarol</div>
-          <div id="hero-away-tag" class="match-team-tag">El Decano • 1891</div>
+          <div id="hero-away-name" class="match-team-name">Montevideo Wanderers</div>
+          <div id="hero-away-tag" class="match-team-tag">Visitante • Torneo Oficial AUF</div>
         </div>
       </div>
 
@@ -262,7 +263,7 @@
         </div>
         <div class="match-meta-item">
           <span>⚡ Último Resultado Oficial</span>
-          <strong id="hero-last-result">Liverpool 1 - 0 Peñarol</strong> (Torneo Clausura • Fecha 10).
+          <strong id="hero-last-result">Juventud 0 - 0 Peñarol</strong> (Torneo Clausura • Fecha 11 • Estadio Centenario).
         </div>
         <div class="match-meta-item" style="display:flex;align-items:center;justify-content:center;">
           <a href="https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Leer Previa Táctica y Puntajes 1x1 →</a>
@@ -1198,7 +1199,105 @@
     </section>
 
     <!-- MÓDULO 5: GRAN GALERÍA MULTIMEDIA Y ARCHIVO FOTOGRÁFICO DE PEÑAROL -->
-    <section id="muro-visual" class="manya-section" aria-label="Gran Galería Fotográfica y Cobertura Oficial de Peñarol">
+        <!-- MÓDULO 4.5: CUENTAS DE INFLUENCERS & FOTÓGRAFOS DE PEÑAROL -->
+    <section id="influencers-manya" class="manya-section" aria-label="Cuentas de Influencers y Fotógrafos de Peñarol">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">📸 Influencers &amp; Fotógrafos Aurinegros: <span>La Pasión en Cada Partido</span></h2>
+          <p class="section-sub">Seguí las mejores cuentas partidarias, fotógrafos profesionales y comunidades que retratan los partidos, las tribunas y la fiesta del Club Atlético Peñarol</p>
+        </div>
+        <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:6px 14px;font-size:12.5px;">
+          <span>Explorar en Instagram</span> ↗
+        </a>
+      </div>
+
+      <!-- Cuadrícula de Cuentas de Influencers y sus Fotos de Partidos -->
+      <div class="ig-grid" id="influencers-grid">
+        <!-- Renderizado dinámico desde data/influencers_feed.json -->
+        <article class="ig-card influencer-card" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="ig-avatar-ring" style="width:42px;height:42px;"><img src="assets/img/influencers/avatar_oficialcap.svg" alt="CAP Oficial" width="42" height="42" style="border-radius:50%;" /></div>
+              <div><strong style="font-size:13.5px;color:#fff;">Club Atlético Peñarol</strong><div style="font-size:12px;color:var(--manya-gold);font-weight:700;">@oficialcap</div></div>
+            </div>
+            <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;">Seguir ↗</a>
+          </div>
+          <div class="ig-img-wrap" style="aspect-ratio:16/9;position:relative;">
+            <img src="assets/ig/manya_juventud_vs_penarol_centenario.webp" alt="Juventud vs Peñarol Centenario" width="1280" height="720" loading="lazy" />
+            <span class="ig-badge-tag" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#ffd100;border:1px solid #ffd100;font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:800;">Oficial CAP • +750K Fans</span>
+          </div>
+          <div class="ig-body" style="padding:14px 16px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span>⚽ Juventud 0 - 0 Peñarol</span><span style="color:#f87171;font-weight:800;">❤️ 54.8K • 💬 1,620</span>
+              </div>
+              <h3 style="font-size:15px;font-weight:900;color:#fff;margin:0 0 8px;">Peñarol bajo la Torre de los Homenajes en el Estadio Centenario</h3>
+              <p style="font-size:13px;color:#d4d4d8;margin:0 0 10px;">Noche de fútbol en el mítico Centenario por el Torneo Clausura con una multitud aurinegra en las tres tribunas.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:11.5px;color:var(--manya-gold);">#Peñarol #Centenario</span>
+              <a href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 14px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;">Ver en Instagram ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-card influencer-card" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="ig-avatar-ring" style="width:42px;height:42px;"><img src="assets/img/influencers/avatar_padreydecano.svg" alt="Padre y Decano" width="42" height="42" style="border-radius:50%;" /></div>
+              <div><strong style="font-size:13.5px;color:#fff;">Padre y Decano</strong><div style="font-size:12px;color:var(--manya-gold);font-weight:700;">@padreydecanocom</div></div>
+            </div>
+            <a href="https://www.instagram.com/padreydecanocom/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;">Seguir ↗</a>
+          </div>
+          <div class="ig-img-wrap" style="aspect-ratio:16/9;position:relative;">
+            <img src="assets/ig/manya_hinchada_fiesta_aurinegra.webp" alt="Fiesta Aurinegra" width="1280" height="720" loading="lazy" />
+            <span class="ig-badge-tag" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#ffd100;border:1px solid #ffd100;font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:800;">Medio Partidario #1 • Tribunas</span>
+          </div>
+          <div class="ig-body" style="padding:14px 16px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span>⚽ Tribuna Ámsterdam</span><span style="color:#f87171;font-weight:800;">❤️ 48.2K • 💬 1,410</span>
+              </div>
+              <h3 style="font-size:15px;font-weight:900;color:#fff;margin:0 0 8px;">La fiesta inigualable de la hinchada de Peñarol en las cuatro tribunas</h3>
+              <p style="font-size:13px;color:#d4d4d8;margin:0 0 10px;">Humo amarillo y negro, miles de banderas y el grito ensordecedor que empuja al Decano hacia el título.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:11.5px;color:var(--manya-gold);">#PadreYDecano #LaHinchada</span>
+              <a href="https://www.instagram.com/padreydecanocom/" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 14px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;">Ver en Instagram ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="ig-card influencer-card" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="ig-avatar-ring" style="width:42px;height:42px;"><img src="assets/img/influencers/avatar_aromerosoca.svg" alt="Álvaro Romero Soca" width="42" height="42" style="border-radius:50%;" /></div>
+              <div><strong style="font-size:13.5px;color:#fff;">Álvaro Romero Soca</strong><div style="font-size:12px;color:var(--manya-gold);font-weight:700;">@aromerosoca</div></div>
+            </div>
+            <a href="https://www.instagram.com/aromerosoca/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;">Seguir ↗</a>
+          </div>
+          <div class="ig-img-wrap" style="aspect-ratio:16/9;position:relative;">
+            <img src="assets/ig/manya_festejo_gol_aurinegro_cds.webp" alt="Festejo de Gol CDS" width="1280" height="720" loading="lazy" />
+            <span class="ig-badge-tag" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#ffd100;border:1px solid #ffd100;font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:800;">Fotógrafo Profesional CAP</span>
+          </div>
+          <div class="ig-body" style="padding:14px 16px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span>⚽ Campeón del Siglo</span><span style="color:#f87171;font-weight:800;">❤️ 39.5K • 💬 980</span>
+              </div>
+              <h3 style="font-size:15px;font-weight:900;color:#fff;margin:0 0 8px;">El festejo de gol a ras de césped: pasión y garganta carbonera</h3>
+              <p style="font-size:13px;color:#d4d4d8;margin:0 0 10px;">Captura cinematográfica del momento exacto del desahogo aurinegro y el abrazo de cara a la tribuna.</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:11.5px;color:var(--manya-gold);">#ARomeroSoca #FotografíaCAP</span>
+              <a href="https://www.instagram.com/aromerosoca/" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 14px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;">Ver en Instagram ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+<section id="muro-visual" class="manya-section" aria-label="Gran Galería Fotográfica y Cobertura Oficial de Peñarol">
       <div class="section-header">
         <div>
           <h2 class="section-title">📸 Archivo Gráfico: <span>Galerías de Peñarol</span></h2>

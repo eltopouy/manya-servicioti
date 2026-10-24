@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="lensGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd100"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="#09090b" stroke="url(#lensGrad)" stroke-width="4"/>
+  <!-- Camera lens body -->
+  <circle cx="60" cy="60" r="42" fill="#18181b" stroke="#ffd100" stroke-width="2"/>
+  <circle cx="60" cy="60" r="32" fill="#09090b" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="60" cy="60" r="22" fill="#1e1b4b" stroke="#ffd100" stroke-width="1.5"/>
+  <!-- Aperture reflection -->
+  <path d="M 48 48 Q 60 42 72 48" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <text x="60" y="65" fill="#ffd100" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="14" text-anchor="middle" letter-spacing="1">ARS</text>
+  <text x="60" y="94" fill="#facc15" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="8" text-anchor="middle" letter-spacing="1.5">PHOTO • CAP</text>
+</svg>
