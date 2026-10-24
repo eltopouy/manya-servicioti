@@ -2947,3 +2947,59 @@ body {
   background: rgba(255, 209, 0, 0.15) !important;
   box-shadow: 0 0 14px rgba(255, 209, 0, 0.25);
 }
+
+/* ============================================================== */
+/* ESTRATEGIA TRIPARTITA: CAJÓN HISTÓRICO COLAPSABLE 1-CLICK */
+/* ============================================================== */
+.historico-drawer-container {
+  margin: 24px 0;
+  transition: all 0.3s ease;
+}
+
+.historico-drawer-toggle {
+  width: 100%;
+  background: linear-gradient(135deg, #18181d 0%, #09090b 100%);
+  border: 2px solid rgba(255, 209, 0, 0.5);
+  border-radius: 12px;
+  padding: 14px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  transition: all 0.25s ease;
+  text-align: left;
+}
+
+.historico-drawer-toggle:hover {
+  border-color: var(--manya-gold);
+  background: linear-gradient(135deg, #27272a 0%, #121216 100%);
+  box-shadow: 0 6px 20px rgba(255, 209, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.historico-drawer-toggle:active {
+  transform: translateY(0);
+}
+
+.historico-drawer-toggle[aria-expanded="true"] {
+  border-color: var(--manya-gold);
+  background: linear-gradient(135deg, #232328 0%, #0e0e12 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes fadeInDrawer {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#historico-drawer-content {
+  animation: fadeInDrawer 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}

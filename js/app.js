@@ -1653,11 +1653,6 @@
       pullquoteEl.innerHTML = `“${art.cita_destacada}” ${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
     }
 
-    const pullquoteEl = document.querySelector('.editorial-pullquote');
-    if (pullquoteEl && art.cita_destacada) {
-      pullquoteEl.innerHTML = `“${art.cita_destacada}” ${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
-    }
-
     if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
       clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
         <div class="clave-item">
@@ -1737,6 +1732,39 @@
   }
 
 
+
+
+  function initHistoricoDrawer() {
+    const toggleBtn = document.getElementById('btn-toggle-historico');
+    const content = document.getElementById('historico-drawer-content');
+    const label = document.getElementById('historico-toggle-label');
+    const icon = document.getElementById('historico-toggle-icon');
+
+    if (!toggleBtn || !content) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = content.style.display === 'none' || content.style.display === '';
+      if (isHidden) {
+        content.style.display = 'block';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        if (label) label.textContent = '📁 Ocultar Registro Histórico del Partido Anterior';
+        if (icon) {
+          icon.textContent = '▲';
+          icon.style.transform = 'rotate(180deg)';
+        }
+        toggleBtn.style.borderColor = 'var(--manya-gold)';
+      } else {
+        content.style.display = 'none';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        if (label) label.textContent = '📂 Ver Registro Completo, Minuto a Minuto y Estadísticas';
+        if (icon) {
+          icon.textContent = '▼';
+          icon.style.transform = 'rotate(0deg)';
+        }
+        toggleBtn.style.borderColor = 'rgba(255,209,0,0.5)';
+      }
+    });
+  }
 
   function renderRivalIntelligence(rival) {
     if (!rival) return;
@@ -1970,7 +1998,6 @@
       state.standingsTab = live.torneo_activo_id || 'clausura';
       renderMatchHero(live);
       renderLiveTimeline(live);
-      initStandingsTabs();
       renderStandings();
       setupLivePolling();
     }
@@ -1983,6 +2010,7 @@
     if (rivalIntel) {
       renderRivalIntelligence(rivalIntel);
     }
+    initHistoricoDrawer();
     initStandingsTabs();
     initSimulator();
     if (influencers && influencers.length) {
