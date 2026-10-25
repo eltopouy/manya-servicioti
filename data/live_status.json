@@ -1,5 +1,5 @@
 {
-  "actualizado": "25/10/2026 15:40",
+  "actualizado": "25/10/2026 19:14",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -301,13 +301,13 @@
       "pos": 10,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 4,
       "pe": 3,
-      "pp": 4,
+      "pp": 5,
       "gf": 14,
-      "gc": 13,
-      "dg": "+1",
+      "gc": 15,
+      "dg": "-1",
       "pts": 15
     },
     {
@@ -351,6 +351,19 @@
     },
     {
       "pos": 14,
+      "equipo": "Cerro Largo",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 1,
+      "pe": 6,
+      "pp": 5,
+      "gf": 9,
+      "gc": 14,
+      "dg": "-5",
+      "pts": 9
+    },
+    {
+      "pos": 15,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
       "pj": 12,
@@ -361,19 +374,6 @@
       "gc": 23,
       "dg": "-9",
       "pts": 9
-    },
-    {
-      "pos": 15,
-      "equipo": "Cerro Largo",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 0,
-      "pe": 6,
-      "pp": 5,
-      "gf": 7,
-      "gc": 14,
-      "dg": "-7",
-      "pts": 6
     },
     {
       "pos": 16,
@@ -721,13 +721,13 @@
       "pos": 10,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 4,
       "pe": 3,
-      "pp": 4,
+      "pp": 5,
       "gf": 14,
-      "gc": 13,
-      "dg": "+1",
+      "gc": 15,
+      "dg": "-1",
       "pts": 15
     },
     {
@@ -771,6 +771,19 @@
     },
     {
       "pos": 14,
+      "equipo": "Cerro Largo",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 1,
+      "pe": 6,
+      "pp": 5,
+      "gf": 9,
+      "gc": 14,
+      "dg": "-5",
+      "pts": 9
+    },
+    {
+      "pos": 15,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
       "pj": 12,
@@ -781,19 +794,6 @@
       "gc": 23,
       "dg": "-9",
       "pts": 9
-    },
-    {
-      "pos": 15,
-      "equipo": "Cerro Largo",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 0,
-      "pe": 6,
-      "pp": 5,
-      "gf": 7,
-      "gc": 14,
-      "dg": "-7",
-      "pts": 6
     },
     {
       "pos": 16,
@@ -997,13 +997,13 @@
           "pos": 10,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 11,
+          "pj": 12,
           "pg": 4,
           "pe": 3,
-          "pp": 4,
+          "pp": 5,
           "gf": 14,
-          "gc": 13,
-          "dg": "+1",
+          "gc": 15,
+          "dg": "-1",
           "pts": 15
         },
         {
@@ -1047,6 +1047,19 @@
         },
         {
           "pos": 14,
+          "equipo": "Cerro Largo",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 1,
+          "pe": 6,
+          "pp": 5,
+          "gf": 9,
+          "gc": 14,
+          "dg": "-5",
+          "pts": 9
+        },
+        {
+          "pos": 15,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
           "pj": 12,
@@ -1057,19 +1070,6 @@
           "gc": 23,
           "dg": "-9",
           "pts": 9
-        },
-        {
-          "pos": 15,
-          "equipo": "Cerro Largo",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 0,
-          "pe": 6,
-          "pp": 5,
-          "gf": 7,
-          "gc": 14,
-          "dg": "-7",
-          "pts": 6
         },
         {
           "pos": 16,
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 12.9,
-    "sensacion_c": 9.7,
-    "viento_kmh": 18.8,
+    "temperatura_c": 11.6,
+    "sensacion_c": 8.7,
+    "viento_kmh": 15.0,
     "humedad_pct": 75,
-    "condicion": "Garúa leve en el Campeón del Siglo",
+    "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "25/10/2026 15:40"
+    "actualizado": "25/10/2026 19:14"
   },
   "minuto_a_minuto": [
     {
