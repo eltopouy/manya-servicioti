@@ -1,5 +1,5 @@
 {
-  "actualizado": "24/10/2026 19:11",
+  "actualizado": "24/10/2026 23:49",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -221,6 +221,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Deportivo Maldonado",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 6,
+      "pe": 3,
+      "pp": 3,
+      "gf": 18,
+      "gc": 10,
+      "dg": "+8",
+      "pts": 21
+    },
+    {
+      "pos": 5,
       "equipo": "Peñarol",
       "es_penarol": true,
       "pj": 12,
@@ -231,19 +244,6 @@
       "gc": 8,
       "dg": "+8",
       "pts": 21
-    },
-    {
-      "pos": 5,
-      "equipo": "Deportivo Maldonado",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 5,
-      "pe": 3,
-      "pp": 3,
-      "gf": 16,
-      "gc": 9,
-      "dg": "+7",
-      "pts": 18
     },
     {
       "pos": 6,
@@ -340,13 +340,13 @@
       "pos": 13,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 2,
       "pe": 4,
-      "pp": 5,
-      "gf": 5,
-      "gc": 11,
-      "dg": "-6",
+      "pp": 6,
+      "gf": 6,
+      "gc": 13,
+      "dg": "-7",
       "pts": 10
     },
     {
@@ -641,6 +641,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Deportivo Maldonado",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 6,
+      "pe": 3,
+      "pp": 3,
+      "gf": 18,
+      "gc": 10,
+      "dg": "+8",
+      "pts": 21
+    },
+    {
+      "pos": 5,
       "equipo": "Peñarol",
       "es_penarol": true,
       "pj": 12,
@@ -651,19 +664,6 @@
       "gc": 8,
       "dg": "+8",
       "pts": 21
-    },
-    {
-      "pos": 5,
-      "equipo": "Deportivo Maldonado",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 5,
-      "pe": 3,
-      "pp": 3,
-      "gf": 16,
-      "gc": 9,
-      "dg": "+7",
-      "pts": 18
     },
     {
       "pos": 6,
@@ -760,13 +760,13 @@
       "pos": 13,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 2,
       "pe": 4,
-      "pp": 5,
-      "gf": 5,
-      "gc": 11,
-      "dg": "-6",
+      "pp": 6,
+      "gf": 6,
+      "gc": 13,
+      "dg": "-7",
       "pts": 10
     },
     {
@@ -917,6 +917,19 @@
         },
         {
           "pos": 4,
+          "equipo": "Deportivo Maldonado",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 6,
+          "pe": 3,
+          "pp": 3,
+          "gf": 18,
+          "gc": 10,
+          "dg": "+8",
+          "pts": 21
+        },
+        {
+          "pos": 5,
           "equipo": "Peñarol",
           "es_penarol": true,
           "pj": 12,
@@ -927,19 +940,6 @@
           "gc": 8,
           "dg": "+8",
           "pts": 21
-        },
-        {
-          "pos": 5,
-          "equipo": "Deportivo Maldonado",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 5,
-          "pe": 3,
-          "pp": 3,
-          "gf": 16,
-          "gc": 9,
-          "dg": "+7",
-          "pts": 18
         },
         {
           "pos": 6,
@@ -1036,13 +1036,13 @@
           "pos": 13,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 11,
+          "pj": 12,
           "pg": 2,
           "pe": 4,
-          "pp": 5,
-          "gf": 5,
-          "gc": 11,
-          "dg": "-6",
+          "pp": 6,
+          "gf": 6,
+          "gc": 13,
+          "dg": "-7",
           "pts": 10
         },
         {
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 13.0,
-    "sensacion_c": 10.2,
-    "viento_kmh": 20.8,
+    "temperatura_c": 12.5,
+    "sensacion_c": 9.8,
+    "viento_kmh": 18.7,
     "humedad_pct": 86,
-    "condicion": "Garúa leve en el Campeón del Siglo",
+    "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "24/10/2026 19:11"
+    "actualizado": "24/10/2026 23:49"
   },
   "minuto_a_minuto": [
     {
