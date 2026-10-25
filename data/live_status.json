@@ -1,5 +1,5 @@
 {
-  "actualizado": "25/10/2026 05:53",
+  "actualizado": "25/10/2026 12:25",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -247,6 +247,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Progreso",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 6,
+      "pe": 1,
+      "pp": 5,
+      "gf": 13,
+      "gc": 13,
+      "dg": "0",
+      "pts": 19
+    },
+    {
+      "pos": 7,
       "equipo": "Juventud",
       "es_penarol": false,
       "pj": 12,
@@ -259,7 +272,7 @@
       "pts": 18
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Cerro",
       "es_penarol": false,
       "pj": 11,
@@ -272,7 +285,7 @@
       "pts": 18
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Racing (Montevideo)",
       "es_penarol": false,
       "pj": 12,
@@ -282,19 +295,6 @@
       "gf": 15,
       "gc": 13,
       "dg": "+2",
-      "pts": 16
-    },
-    {
-      "pos": 9,
-      "equipo": "Progreso",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 5,
-      "pe": 1,
-      "pp": 5,
-      "gf": 12,
-      "gc": 13,
-      "dg": "-1",
       "pts": 16
     },
     {
@@ -314,13 +314,13 @@
       "pos": 11,
       "equipo": "Montevideo Wanderers",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 4,
       "pe": 3,
-      "pp": 4,
+      "pp": 5,
       "gf": 13,
-      "gc": 17,
-      "dg": "-4",
+      "gc": 18,
+      "dg": "-5",
       "pts": 15
     },
     {
@@ -407,13 +407,13 @@
       "pos": 2,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 17,
       "pe": 8,
-      "pp": 8,
+      "pp": 7,
       "gf": 52,
-      "gc": 31,
-      "dg": "+21",
+      "gc": 29,
+      "dg": "+23",
       "pts": 59
     },
     {
@@ -496,19 +496,6 @@
     },
     {
       "pos": 9,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 33,
-      "pg": 10,
-      "pe": 10,
-      "pp": 13,
-      "gf": 37,
-      "gc": 41,
-      "dg": "-4",
-      "pts": 40
-    },
-    {
-      "pos": 10,
       "equipo": "Central Español",
       "es_penarol": false,
       "pj": 33,
@@ -519,6 +506,19 @@
       "gc": 44,
       "dg": "-12",
       "pts": 38
+    },
+    {
+      "pos": 10,
+      "equipo": "Juventud",
+      "es_penarol": false,
+      "pj": 32,
+      "pg": 9,
+      "pe": 10,
+      "pp": 13,
+      "gf": 35,
+      "gc": 41,
+      "dg": "-6",
+      "pts": 37
     },
     {
       "pos": 11,
@@ -576,27 +576,27 @@
       "pos": 15,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 33,
+      "pj": 32,
       "pg": 6,
       "pe": 14,
-      "pp": 13,
+      "pp": 12,
       "gf": 27,
-      "gc": 41,
-      "dg": "-14",
+      "gc": 40,
+      "dg": "-13",
       "pts": 32
     },
     {
       "pos": 16,
       "equipo": "Progreso",
       "es_penarol": false,
-      "pj": 33,
-      "pg": 9,
+      "pj": 32,
+      "pg": 8,
       "pe": 5,
       "pp": 19,
-      "gf": 30,
+      "gf": 29,
       "gc": 47,
-      "dg": "-17",
-      "pts": 32
+      "dg": "-18",
+      "pts": 29
     }
   ],
   "tabla_clausura": [
@@ -667,6 +667,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Progreso",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 6,
+      "pe": 1,
+      "pp": 5,
+      "gf": 13,
+      "gc": 13,
+      "dg": "0",
+      "pts": 19
+    },
+    {
+      "pos": 7,
       "equipo": "Juventud",
       "es_penarol": false,
       "pj": 12,
@@ -679,7 +692,7 @@
       "pts": 18
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Cerro",
       "es_penarol": false,
       "pj": 11,
@@ -692,7 +705,7 @@
       "pts": 18
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Racing (Montevideo)",
       "es_penarol": false,
       "pj": 12,
@@ -702,19 +715,6 @@
       "gf": 15,
       "gc": 13,
       "dg": "+2",
-      "pts": 16
-    },
-    {
-      "pos": 9,
-      "equipo": "Progreso",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 5,
-      "pe": 1,
-      "pp": 5,
-      "gf": 12,
-      "gc": 13,
-      "dg": "-1",
       "pts": 16
     },
     {
@@ -734,13 +734,13 @@
       "pos": 11,
       "equipo": "Montevideo Wanderers",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 4,
       "pe": 3,
-      "pp": 4,
+      "pp": 5,
       "gf": 13,
-      "gc": 17,
-      "dg": "-4",
+      "gc": 18,
+      "dg": "-5",
       "pts": 15
     },
     {
@@ -943,6 +943,19 @@
         },
         {
           "pos": 6,
+          "equipo": "Progreso",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 6,
+          "pe": 1,
+          "pp": 5,
+          "gf": 13,
+          "gc": 13,
+          "dg": "0",
+          "pts": 19
+        },
+        {
+          "pos": 7,
           "equipo": "Juventud",
           "es_penarol": false,
           "pj": 12,
@@ -955,7 +968,7 @@
           "pts": 18
         },
         {
-          "pos": 7,
+          "pos": 8,
           "equipo": "Cerro",
           "es_penarol": false,
           "pj": 11,
@@ -968,7 +981,7 @@
           "pts": 18
         },
         {
-          "pos": 8,
+          "pos": 9,
           "equipo": "Racing (Montevideo)",
           "es_penarol": false,
           "pj": 12,
@@ -978,19 +991,6 @@
           "gf": 15,
           "gc": 13,
           "dg": "+2",
-          "pts": 16
-        },
-        {
-          "pos": 9,
-          "equipo": "Progreso",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 5,
-          "pe": 1,
-          "pp": 5,
-          "gf": 12,
-          "gc": 13,
-          "dg": "-1",
           "pts": 16
         },
         {
@@ -1010,13 +1010,13 @@
           "pos": 11,
           "equipo": "Montevideo Wanderers",
           "es_penarol": false,
-          "pj": 11,
+          "pj": 12,
           "pg": 4,
           "pe": 3,
-          "pp": 4,
+          "pp": 5,
           "gf": 13,
-          "gc": 17,
-          "dg": "-4",
+          "gc": 18,
+          "dg": "-5",
           "pts": 15
         },
         {
@@ -1111,13 +1111,13 @@
           "pos": 2,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 17,
           "pe": 8,
-          "pp": 8,
+          "pp": 7,
           "gf": 52,
-          "gc": 31,
-          "dg": "+21",
+          "gc": 29,
+          "dg": "+23",
           "pts": 59
         },
         {
@@ -1200,19 +1200,6 @@
         },
         {
           "pos": 9,
-          "equipo": "Juventud",
-          "es_penarol": false,
-          "pj": 33,
-          "pg": 10,
-          "pe": 10,
-          "pp": 13,
-          "gf": 37,
-          "gc": 41,
-          "dg": "-4",
-          "pts": 40
-        },
-        {
-          "pos": 10,
           "equipo": "Central Español",
           "es_penarol": false,
           "pj": 33,
@@ -1223,6 +1210,19 @@
           "gc": 44,
           "dg": "-12",
           "pts": 38
+        },
+        {
+          "pos": 10,
+          "equipo": "Juventud",
+          "es_penarol": false,
+          "pj": 32,
+          "pg": 9,
+          "pe": 10,
+          "pp": 13,
+          "gf": 35,
+          "gc": 41,
+          "dg": "-6",
+          "pts": 37
         },
         {
           "pos": 11,
@@ -1280,27 +1280,27 @@
           "pos": 15,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 33,
+          "pj": 32,
           "pg": 6,
           "pe": 14,
-          "pp": 13,
+          "pp": 12,
           "gf": 27,
-          "gc": 41,
-          "dg": "-14",
+          "gc": 40,
+          "dg": "-13",
           "pts": 32
         },
         {
           "pos": 16,
           "equipo": "Progreso",
           "es_penarol": false,
-          "pj": 33,
-          "pg": 9,
+          "pj": 32,
+          "pg": 8,
           "pe": 5,
           "pp": 19,
-          "gf": 30,
+          "gf": 29,
           "gc": 47,
-          "dg": "-17",
-          "pts": 32
+          "dg": "-18",
+          "pts": 29
         }
       ]
     },
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 11.2,
-    "sensacion_c": 8.3,
-    "viento_kmh": 19.0,
-    "humedad_pct": 88,
-    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
+    "temperatura_c": 13.7,
+    "sensacion_c": 10.6,
+    "viento_kmh": 19.4,
+    "humedad_pct": 67,
+    "condicion": "Garúa leve en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "25/10/2026 05:53"
+    "actualizado": "25/10/2026 12:25"
   },
   "minuto_a_minuto": [
     {
