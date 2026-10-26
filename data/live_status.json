@@ -1,5 +1,5 @@
 {
-  "actualizado": "25/10/2026 19:14",
+  "actualizado": "25/10/2026 23:47",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -182,6 +182,19 @@
   "tabla_posiciones": [
     {
       "pos": 1,
+      "equipo": "Liverpool",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 8,
+      "pe": 3,
+      "pp": 1,
+      "gf": 20,
+      "gc": 8,
+      "dg": "+12",
+      "pts": 27
+    },
+    {
+      "pos": 2,
       "equipo": "Montevideo City Torque",
       "es_penarol": false,
       "pj": 12,
@@ -194,29 +207,16 @@
       "pts": 25
     },
     {
-      "pos": 2,
-      "equipo": "Liverpool",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 7,
-      "pe": 3,
-      "pp": 1,
-      "gf": 19,
-      "gc": 8,
-      "dg": "+11",
-      "pts": 24
-    },
-    {
       "pos": 3,
       "equipo": "Nacional",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 7,
       "pe": 2,
-      "pp": 2,
+      "pp": 3,
       "gf": 17,
-      "gc": 11,
-      "dg": "+6",
+      "gc": 12,
+      "dg": "+5",
       "pts": 23
     },
     {
@@ -602,6 +602,19 @@
   "tabla_clausura": [
     {
       "pos": 1,
+      "equipo": "Liverpool",
+      "es_penarol": false,
+      "pj": 12,
+      "pg": 8,
+      "pe": 3,
+      "pp": 1,
+      "gf": 20,
+      "gc": 8,
+      "dg": "+12",
+      "pts": 27
+    },
+    {
+      "pos": 2,
       "equipo": "Montevideo City Torque",
       "es_penarol": false,
       "pj": 12,
@@ -614,29 +627,16 @@
       "pts": 25
     },
     {
-      "pos": 2,
-      "equipo": "Liverpool",
-      "es_penarol": false,
-      "pj": 11,
-      "pg": 7,
-      "pe": 3,
-      "pp": 1,
-      "gf": 19,
-      "gc": 8,
-      "dg": "+11",
-      "pts": 24
-    },
-    {
       "pos": 3,
       "equipo": "Nacional",
       "es_penarol": false,
-      "pj": 11,
+      "pj": 12,
       "pg": 7,
       "pe": 2,
-      "pp": 2,
+      "pp": 3,
       "gf": 17,
-      "gc": 11,
-      "dg": "+6",
+      "gc": 12,
+      "dg": "+5",
       "pts": 23
     },
     {
@@ -878,6 +878,19 @@
       "datos": [
         {
           "pos": 1,
+          "equipo": "Liverpool",
+          "es_penarol": false,
+          "pj": 12,
+          "pg": 8,
+          "pe": 3,
+          "pp": 1,
+          "gf": 20,
+          "gc": 8,
+          "dg": "+12",
+          "pts": 27
+        },
+        {
+          "pos": 2,
           "equipo": "Montevideo City Torque",
           "es_penarol": false,
           "pj": 12,
@@ -890,29 +903,16 @@
           "pts": 25
         },
         {
-          "pos": 2,
-          "equipo": "Liverpool",
-          "es_penarol": false,
-          "pj": 11,
-          "pg": 7,
-          "pe": 3,
-          "pp": 1,
-          "gf": 19,
-          "gc": 8,
-          "dg": "+11",
-          "pts": 24
-        },
-        {
           "pos": 3,
           "equipo": "Nacional",
           "es_penarol": false,
-          "pj": 11,
+          "pj": 12,
           "pg": 7,
           "pe": 2,
-          "pp": 2,
+          "pp": 3,
           "gf": 17,
-          "gc": 11,
-          "dg": "+6",
+          "gc": 12,
+          "dg": "+5",
           "pts": 23
         },
         {
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 11.6,
-    "sensacion_c": 8.7,
-    "viento_kmh": 15.0,
-    "humedad_pct": 75,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "temperatura_c": 10.9,
+    "sensacion_c": 9.1,
+    "viento_kmh": 7.6,
+    "humedad_pct": 80,
+    "condicion": "Parcialmente nublado en Ruta 102",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "25/10/2026 19:14"
+    "actualizado": "25/10/2026 23:47"
   },
   "minuto_a_minuto": [
     {
