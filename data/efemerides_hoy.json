@@ -5,93 +5,101 @@
   "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2006-10-28",
-      "ano": "2006",
-      "rival": "Cerrito",
-      "goles_penarol": 1,
+      "fecha": "2025-10-29",
+      "ano": "2025",
+      "rival": "Plaza Colonia",
+      "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Cerrito",
-      "torneo": "Torneo Apertura",
-      "estadio": "Atilio Paiva Olivera de Rivera",
-      "goles_detalle": "Maximiliano Bajter (P) 14'"
+      "resultado": "Peñarol 2 - 0 Plaza Colonia",
+      "torneo": "Copa AUF Uruguay",
+      "estadio": "Centenario",
+      "goles_detalle": "Guillermo Reyes (Pl e/c) 62' en contra y Eric Remedi (Pe) 84'"
     },
     {
-      "fecha": "1995-10-28",
-      "ano": "1995",
+      "fecha": "2023-10-29",
+      "ano": "2023",
       "rival": "Sud América",
       "goles_penarol": 3,
-      "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Sud América",
+      "goles_rival": 0,
+      "resultado": "Peñarol 3 - 0 Sud América",
+      "torneo": "Copa AUF Uruguay",
+      "estadio": "Parque Artigas de Paysandú",
+      "goles_detalle": "Carlos Sánchez (P) 44', Brian Mansilla (P) 46' y Kevin Méndez (P) 60'"
+    },
+    {
+      "fecha": "2016-10-29",
+      "ano": "2016",
+      "rival": "Sud América",
+      "goles_penarol": 4,
+      "goles_rival": 1,
+      "resultado": "Peñarol 4 - 1 Sud América",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Parque Federico Omar Saroldi",
+      "goles_detalle": "Gonzalo Camargo (S) 16', Junior Arias (P) 45+1', Nicolás Albarracín (P) 65', Diego Rossi (P) 74' y Nicolás Dibble (P) 86'"
+    },
+    {
+      "fecha": "2000-10-29",
+      "ano": "2000",
+      "rival": "Juventud de Las Piedras",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Juventud de Las Piedras",
       "torneo": "Torneo Clausura",
       "estadio": "Centenario",
-      "goles_detalle": "Luis Romero (P) 19', Cristian Alfaro (S) 45', Antonio Pacheco (P) 51', Pablo Javier Bengoechea (P) 59' y Josemir Lujambio (S) 66'"
+      "goles_detalle": "Guillermo Giacomazzi (P) 26', Carlos Bueno (P) 36' y Carlos Soca (J) 86'"
     },
     {
-      "fecha": "1990-10-28",
-      "ano": "1990",
-      "rival": "River Plate",
-      "goles_penarol": 3,
-      "goles_rival": 0,
-      "resultado": "Peñarol 3 - 0 River Plate",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Obdulio Trasante (P) 40', Adolfo Barán (P) 61' y Víctor López (P) 83'"
-    },
-    {
-      "fecha": "1987-10-28",
-      "ano": "1987",
-      "rival": "América de Cali (Col)",
+      "fecha": "1988-10-29",
+      "ano": "1988",
+      "rival": "Defensor",
       "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 América de Cali (Col)",
-      "torneo": "Copa Libertadores de América",
-      "estadio": "Centenario",
-      "goles_detalle": "Diego Aguirre 58' y Jorge Villar 86'"
+      "goles_rival": 0,
+      "resultado": "Peñarol 2 - 0 Defensor",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Luis Franzini",
+      "goles_detalle": "Carlos Aguilera (P) 39' y Daniel Vidal (P) 65'"
     },
     {
-      "fecha": "1982-10-28",
-      "ano": "1982",
-      "rival": "River Plate (Arg)",
-      "goles_penarol": 4,
-      "goles_rival": 2,
-      "resultado": "Peñarol 4 - 2 River Plate (Arg)",
-      "torneo": "Copa Libertadores de América",
-      "estadio": "Antonio Vespucio Liberti (Monumental) de Buenos Aires",
-      "goles_detalle": "Walter Olivera (P) 11', Raúl de la Cruz Chaparro (R) 14', Fernando Morena (P) 28' de penal, Ernesto Vargas (P) 58', Enrique Nieto (R) 76' y Fernando Morena (P) 81'"
-    },
-    {
-      "fecha": "1978-10-28",
-      "ano": "1978",
-      "rival": "Bella Vista",
-      "goles_penarol": 4,
-      "goles_rival": 1,
-      "resultado": "Peñarol 4 - 1 Bella Vista",
-      "torneo": "Torneo Liga Mayor",
-      "estadio": "Centenario",
-      "goles_detalle": "Rubén Paz 23' y 54' y Venancio Ramos 57' y 88'"
-    },
-    {
-      "fecha": "1972-10-28",
-      "ano": "1972",
+      "fecha": "1960-10-29",
+      "ano": "1960",
       "rival": "Cerro",
-      "goles_penarol": 5,
-      "goles_rival": 0,
-      "resultado": "Peñarol 5 - 0 Cerro",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Luis Alberto Tróccoli",
-      "goles_detalle": "Alberto Martínez 2', Lorenzo Unánue 5', Nilo Acuña 23', Ruben Corbo 48' y William Noble 54'"
-    },
-    {
-      "fecha": "1967-10-28",
-      "ano": "1967",
-      "rival": "Rampla Juniors",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Rampla Juniors",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Cerro",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Juan Joya 36' y Alberto Spencer 78'"
+      "goles_detalle": "Carlos Borges 12', Carlos Linazza 17' de penal y Alberto Spencer 84'"
+    },
+    {
+      "fecha": "1950-10-29",
+      "ano": "1950",
+      "rival": "Rampla Juniors",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Rampla Juniors",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Juan Eduardo Hohberg 16' y 75' y Óscar Míguez 38' de penal"
+    },
+    {
+      "fecha": "1938-10-29",
+      "ano": "1938",
+      "rival": "Sud América",
+      "goles_penarol": 6,
+      "goles_rival": 1,
+      "resultado": "Peñarol 6 - 1 Sud América",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Adelaido Camaití (P) 4', Pedro Lago (P) 6', Álvaro Gestido (P) 14', Severino Varela (P) 16', Luis Mata (P) 37', Severino Varela (P) 44' y Pan (S) 55'"
     }
   ],
-  "cumpleanos_glorias": []
+  "cumpleanos_glorias": [
+    {
+      "nombre": "Darío Silva",
+      "fecha_nacimiento": "1972-11-02T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    }
+  ]
 }
