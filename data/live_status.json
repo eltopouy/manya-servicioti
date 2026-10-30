@@ -1,5 +1,5 @@
 {
-  "actualizado": "30/10/2026 00:59",
+  "actualizado": "30/10/2026 07:46",
   "fase_partido": "SIN_PARTIDO_HOY",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi). Último resultado oficial: Juventud 0 - 0 Peñarol.",
   "partido_activo": {
@@ -1374,13 +1374,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 13.6,
-    "sensacion_c": 11.9,
-    "viento_kmh": 13.6,
-    "humedad_pct": 86,
-    "condicion": "Cielo despejado sobre Bañados de Carrasco",
+    "temperatura_c": 15.0,
+    "sensacion_c": 13.7,
+    "viento_kmh": 13.5,
+    "humedad_pct": 83,
+    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "30/10/2026 00:59"
+    "actualizado": "30/10/2026 07:46"
   },
   "minuto_a_minuto": [
     {
