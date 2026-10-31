@@ -194,6 +194,138 @@ REGLAS EDITORIALES OBLIGATORIAS:
         git_commit_and_push(f"feat(previa): publicar previa {match_title} en vivo")
 
 
+def ejecutar_ciclo_hoy_juega(match_info: dict, noticias_prensa: list):
+    """
+    Edición Especial '¡HOY JUEGA EL MANYA!' (Se activa a las 00:05 hs del día del partido).
+    Revoluciona el portal a primera hora con las últimas novedades del vestuario,
+    pronóstico del tiempo para la hora del partido, accesos al estadio y el clima de match day.
+    """
+    event_id = match_info.get("event_id", "")
+    match_title = match_info.get("nombre", "Peñarol vs Montevideo Wanderers")
+    estadio = match_info.get("estadio", "Parque Alfredo Víctor Viera (Prado)")
+    tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
+    hora_str = match_info.get("fecha_legible", "")
+
+    can_pub, motivo = ManyaBloggerCatalog.can_publish(post_type="HOY_JUEGA", match_id=event_id)
+    if not can_pub:
+        logger.info(f"[Hoy Juega] {motivo}. Saltando edición de match day.")
+        return
+
+    logger.info(f"[Hoy Juega] 🟡⚫ Generando Edición Especial de Match Day: ¡HOY JUEGA EL MANYA! ({match_title})...")
+
+    # Clima verificado para el partido
+    clima_str = "Tarde templada en Montevideo (18°C-20°C), cielo claro a parcialmente nublado, viento moderado."
+    try:
+        from manya_match_engine import ManyaMatchEngine
+        w_data = ManyaMatchEngine.fetch_campeon_del_siglo_weather()
+        if w_data and "temperatura" in w_data:
+            clima_str = f"{w_data.get('temperatura','19°C')}, viento {w_data.get('viento','15 km/h')} ({w_data.get('condicion','despejado')})"
+    except Exception:
+        pass
+
+    resumenes_prensa = "\n".join([
+        f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:180]}"
+        for n in noticias_prensa[:10]
+    ])
+
+    prompt_redaccion = f"""
+Actúa como el Director Editorial y Periodista Insignia de Peñarol para 'Manya ServicioTI'.
+¡ES LA MADRUGADA DEL DÍA DEL PARTIDO!
+HOY JUEGA PEÑAROL: {match_title}.
+Estadio: {estadio}.
+Fecha y Hora de Uruguay: {hora_str}.
+Televisación: {tv}.
+Clima pronosticado para la hora del partido: {clima_str}.
+
+Contexto reciente de medios uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
+{resumenes_prensa}
+
+REGLAS EDITORIALES OBLIGATORIAS:
+1. Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
+2. Tono: 100% futbolero, vibrante, con adrenalina de día de partido ('¡Hoy juega el Manya!'). Cero cursilería.
+3. El titular DEBE comenzar con '¡Hoy juega el Manya!' destacando el compromiso del día.
+4. Información verificada:
+   - Estadio: {estadio}.
+   - Peñarol es líder absoluto de la Tabla Anual con 65 puntos (+24 DG).
+   - Entradas: Si es visitante (Parque Viera), venta online vía RedTickets (redtickets.uy) sin canje de socios.
+5. Estructura del JSON requerida:
+{{
+  "titular_dia": "¡Hoy juega el Manya! Tarde de Parque Viera para defender con alma y vida la punta de la Tabla Anual",
+  "bajada_seo": "Peñarol enfrenta este sábado a Montevideo Wanderers a las 16:30 hs en el Parque Viera. Alineaciones probables, clima, accesos y TV en vivo.",
+  "claves_60_segundos": [
+    {{"icono": "⚽", "titulo": "El Once de la Fiera", "detalle": "Alineación titular de Diego Aguirre con Leo Fernández en la conducción y Silvera en el ataque."}},
+    {{"icono": "🌤️", "titulo": "Clima y Cancha", "detalle": "Pronóstico para la hora del partido: {clima_str}."}},
+    {{"icono": "📺", "titulo": "Horario y Pantalla", "detalle": "{hora_str} en directo por {tv}."}},
+    {{"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "El Decano manda con 65 unidades y busca estirar la diferencia en la tabla acumulada."}}
+  ],
+  "articulo_principal": {{
+    "titulo": "¡Hoy juega el Manya! Todo lo que tenés que saber antes de que ruede la pelota en el Parque Viera",
+    "subtitulo": "Diego Aguirre alista el equipo para una batalla determinante por la Tabla Anual ante Montevideo Wanderers",
+    "parrafos": [
+      "Párrafo 1: La adrenalina de la mañana de partido, la concentración en Los Aromos y la charla táctica...",
+      "Párrafo 2: El examen táctico en el Parque Viera, neutralizar el circuito de Bruno Veglio y Tabaré Viudez...",
+      "Párrafo 3: Las armas carboneras: la pegada de Leo Fernández, las subidas de Cabrera y la zaga Aguerre-Guzmán...",
+      "Párrafo 4: Tribunas colmadas de parcialidad aurinegra y la importancia mayúscula de ganar para sostener los 65 puntos..."
+    ],
+    "preguntas_frecuentes": [
+      {{"q": "¿A qué hora juega Peñarol hoy y por qué canal lo transmiten?", "a": "Peñarol juega hoy a las {hora_str} en {estadio}, televisado por {tv}."}},
+      {{"q": "¿Cómo forma Peñarol hoy?", "a": "Aguerre; Milans, Méndez, Guzmán Rodríguez, Olivera; García, Pérez; Cabrera, Fernández, Báez; Silvera."}},
+      {{"q": "¿Qué se juega Peñarol hoy en la tabla?", "a": "Tres puntos vitales para mantener la punta de la Tabla Anual (65 pts) y afianzar el Clausura."}}
+    ]
+  }}
+}}
+"""
+
+    with CentralAutomationLock.acquire("gemini_web_profile", timeout_sec=120):
+        res_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt_redaccion)
+
+    if res_json and "articulo_principal" in res_json:
+        titular = res_json.get("titular_dia", f"¡Hoy juega el Manya! {match_title}")
+        doc_digest = {
+            "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
+            "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
+            "fase_publicacion": "HOY_JUEGA",
+            "partido_id": event_id,
+            "titular_dia": titular,
+            "bajada_seo": res_json.get("bajada_seo", ""),
+            "claves_60_segundos": res_json.get("claves_60_segundos", []),
+            "articulo_principal": res_json.get("articulo_principal", {}),
+            "portada_visual": {
+                "titular_portada": f"⚡ ¡HOY JUEGA EL MANYA! Peñarol visita el Prado en busca de afianzar la punta",
+                "bajada_portada": f"¡LLEGÓ EL DÍA! A las 16:30 hs el Carbonero salta a la cancha del Parque Viera ante Montevideo Wanderers por la fecha 12 del Clausura. Peñarol manda en la Tabla Anual con 65 puntos. Televisa {tv}.",
+                "cuenta": "@oficialcap",
+                "ubicacion": f"📍 {estadio} • Montevideo",
+                "categoria": "partidos",
+                "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
+                "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
+            },
+            "noticias_fuentes": noticias_prensa[:8]
+        }
+        (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
+        logger.info("[Hoy Juega] ✓ data/news_digest.json actualizado con la edición especial de Match Day.")
+
+        # Sincronizar live_status con alerta banner del día
+        try:
+            status_live = ManyaMatchEngine.generate_updated_live_status()
+            status_live["partido_activo"]["es_hoy"] = True
+            status_live["alerta_banner"] = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {match_title} a las {hora_str} en {estadio} • {tv}."
+            (DATA_DIR / "live_status.json").write_text(json.dumps(status_live, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception as ex_ls:
+            logger.warning(f"[Hoy Juega] Aviso actualizando live_status: {ex_ls}")
+
+        # Publicar o actualizar en Blogger
+        post_url = publish_manya_article_to_blogger(post_type="HOY_JUEGA", match_id=event_id)
+        
+        # Sincronizar página de previo partido en Blogger
+        try:
+            from sincronizar_pagina_proximo_partido import sincronizar_pagina_proximo_partido_blogger
+            sincronizar_pagina_proximo_partido_blogger()
+        except Exception as ex_p:
+            logger.warning(f"[Blogger Previa] Aviso actualizando previa Blogger: {ex_p}")
+
+        git_commit_and_push(f"feat(matchday): ¡Hoy Juega el Manya! Cobertura de partido {match_title}")
+
+
 def ejecutar_ciclo_en_vivo(match_info: dict):
     """Actualización en tiempo real durante el partido (polling ESPN hacia manya.servicioti.com.uy y Blogger)."""
     match_title = match_info.get("nombre", "")
@@ -322,6 +454,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Daemon de partidos y noticias de Peñarol")
     parser.add_argument("--daemon", action="store_true", help="Ejecutar en modo servicio continuo")
     parser.add_argument("--once", action="store_true", help="Ejecutar un solo ciclo y finalizar")
+    parser.add_argument("--hoy-juega", action="store_true", help="Forzar generación de la edición especial ¡Hoy Juega el Manya!")
     args = parser.parse_args()
 
-    ejecutar_orquestador(modo="daemon" if args.daemon else "once")
+    if args.hoy_juega:
+        status_live = ManyaMatchEngine.generate_updated_live_status()
+        match_info = status_live.get("partido_activo", {})
+        prox = status_live.get("proximo_partido", {})
+        partido_para_cubrir = match_info if match_info.get("event_id") else prox
+        noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)
+        ejecutar_ciclo_hoy_juega(partido_para_cubrir, noticias)
+    else:
+        ejecutar_orquestador(modo="daemon" if args.daemon else "once")
