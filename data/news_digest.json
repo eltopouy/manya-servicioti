@@ -1,15 +1,20 @@
 {
-  "actualizado": "30/10/2026 22:00",
+  "actualizado": "31/10/2026 11:00",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "HOY_JUEGA",
   "partido_id": "401931258",
-  "titular_dia": "¡Hoy juega el Manya! Peñarol recibe a Wanderers en el Parque Saroldi por la punta de la Anual",
-  "bajada_seo": "Peñarol oficia como local ante Montevideo Wanderers este sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi por la fecha 12 del Torneo Clausura. Encuentro a puertas cerradas para el público aurinegro por sanción. Transmisión en directo por VTV Plus y Disney+ Premium.",
+  "titular_dia": "¡Hoy juega el Manya! Peñarol recibe a Wanderers en el Parque Saroldi por la Fecha 13 del Clausura",
+  "bajada_seo": "Peñarol oficia como local ante Montevideo Wanderers este sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi por la Fecha 13 del Torneo Clausura. Encuentro a puertas cerradas para el público aurinegro por sanción. Transmisión en directo por VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
       "icono": "📍",
-      "titulo": "Escenario y Horario Confirmado",
-      "detalle": "Sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). Transmisión oficial por VTV Plus y Disney+ Premium."
+      "titulo": "Escenario y Horario Confirmado (Fecha 13)",
+      "detalle": "Sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). Torneo Clausura 2026 • Fecha 13. Televisan VTV Plus y Disney+ Premium."
+    },
+    {
+      "icono": "⚖️",
+      "titulo": "Equipo Arbitral AUF Designado",
+      "detalle": "Leodán González como árbitro central, secundado por Carlos Barreiro y Mathías Muníz en líneas, con Diego Dunajec y Nicolás Tarán a cargo del VAR."
     },
     {
       "icono": "🎟️",
@@ -18,117 +23,98 @@
     },
     {
       "icono": "🏆",
-      "titulo": "Líder de la Tabla Anual (65 pts)",
-      "detalle": "El Decano lidera en solitario con 65 puntos (+24 DG) y busca estirar la ventaja en la recta final hacia el Campeonato Uruguayo 2026."
+      "titulo": "Liderazgo en la Tabla Anual (65 pts)",
+      "detalle": "El Carbonero defiende la punta en solitario con 65 puntos (+24 DG), buscando ampliar distancia sobre Deportivo Maldonado (62) y Nacional en la recta final."
     },
     {
       "icono": "⚔️",
       "titulo": "Rival: El Wanderers de Mathías Corujo",
-      "detalle": "El conjunto bohemio, conducido por Mathías 'Chiche' Corujo, presenta a Fabricio Formiliano en la zaga y la velocidad del 'Rayo' Jonathan Urretaviscaya en ofensiva."
+      "detalle": "El equipo bohemio, conducido por Mathías 'Chiche' Corujo, cuenta con el liderazgo de Fabricio Formiliano en la zaga y la velocidad punzante de Jonathan Urretaviscaya."
     }
   ],
   "articulo_principal": {
-    "titulo": "Examen de jerarquía en el Prado: Peñarol visita a Montevideo Wanderers para consolidar la cima de la Tabla Anual",
-    "subtitulo": "Diego Aguirre define el once titular con Leonardo Fernández en la conducción ofensiva y Maximiliano Silvera en el área rival",
+    "titulo": "Duelo crucial en el Prado: Peñarol recibe a Montevideo Wanderers por la Fecha 13 para defender la punta de la Tabla Anual",
+    "subtitulo": "Diego Aguirre define el once titular en el Parque Saroldi con el regreso de Eduardo Darias y la conducción de Leonardo Fernández",
     "parrafos": [
-      "La concentración aurinegra en Los Aromos entra en su etapa culminante. Peñarol afina los últimos detalles técnicos y tácticos de cara a la visita de este sábado a las 16:30 hs frente a Montevideo Wanderers en el Parque Alfredo Víctor Viera, en el marco de la fecha 12 del Torneo Clausura 2026. Con la punta de la Tabla Anual bajo su dominio absoluto con 65 unidades, el equipo de Diego Aguirre sabe que no hay lugar para la especulación en un reducto históricamente exigente.",
-      "En el pizarrón táctico, el conjunto bohemio comandado por Antonio Pacheco propone un fútbol de asociación prolija, salida limpia desde el fondo y tenencia paciente. El gran objetivo carbonero radica en quebrar esos circuitos desde el primer pase: la dupla de contención formada por Damián García y Rodrigo Pérez tendrá la tarea de presionar alto para recuperar en campo adversario y activar con rapidez el desequilibrio de Javier Cabrera y Jaime Báez por los costados.",
-      "La pegada y la lucidez de Leonardo Fernández volverán a ser los factores determinantes para abrir cerrojos. En un campo de dimensiones medidas como el Viera, la pelota quieta y los remates de media distancia adquieren un valor estratégico superlativo. Arriba, Maximiliano Silvera librará una batalla física constante contra los zagueros bohemios para fijar marcas y liberar espacios a la llegada de la segunda línea.",
-      "Para el pueblo aurinegro que acompañará masivamente al Decano en el Prado, las localidades para la parcialidad visitante se comercializan exclusivamente de forma online a través de RedTickets (redtickets.uy) para la Tribuna Jorge Barrios. Con el arbitraje listo y la hinchada expectante, Peñarol saldrá al campo con la convicción inquebrantable de imponer su jerarquía y asegurar tres puntos fundamentales."
+      "La concentración aurinegra en Los Aromos entra en su etapa decisiva. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la Fecha 13 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio con 65 unidades, el equipo de Diego Aguirre sabe que no hay margen para la especulación en un cierre de temporada al rojo vivo.",
+      "El cotejo se traslada al Parque Saroldi debido a que Peñarol cumple allí su último encuentro de sanción disciplinaria sobre el Estadio Campeón del Siglo. Por esta razón reglamentaria, el Decano oficia como local a puertas cerradas para su propia parcialidad, mientras que los aficionados de Montevideo Wanderers cuentan con venta de localidades habilitada exclusivamente a través de la plataforma Tickantel ($500 socios y $600 generales).",
+      "En lo futbolístico, Diego Aguirre implementa variantes estratégicas tras el empate sin goles ante Juventud. La principal novedad radica en el regreso de Eduardo Darias a la medular tras purgar su suspensión, conformando el triángulo combativo junto a Damián García para darle equilibrio al equipo y liberar a Leonardo Fernández en la gestación ofensiva, asistiendo a Javier Cabrera, Jaime Báez y Maximiliano Silvera en el frente de ataque.",
+      "En la vereda de enfrente, el Montevideo Wanderers que conduce técnicamente Mathías 'Chiche' Corujo (asistido por Nicolás Amodio) llega con la imperiosa necesidad de sumar para cortar su racha adversa y consolidar la permanencia. Los bohemios apoyan su andamiaje en la experiencia y juego aéreo de Fabricio 'Tito' Formiliano en defensa, el despliegue de Gonzalo Freitas en la recuperación y la velocidad letal de Jonathan Urretaviscaya para lastimar de contragolpe junto a Mateo Levato.",
+      "El arbitraje estará a cargo de Leodán González como juez principal, asistido desde las bandas por Carlos Barreiro y Mathías Muníz, mientras que Diego Dunajec y Nicolás Tarán operarán el sistema VAR. Para todo el pueblo carbonero, el trascendental compromiso podrá seguirse en vivo y en directo a través de las pantallas de VTV Plus y Disney+ Premium."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cuándo y a qué hora juega Peñarol frente a Montevideo Wanderers y dónde verlo?",
-        "a": "Peñarol juega este sábado 31 de octubre de 2026 a las 16:30 hs en el Parque Alfredo Víctor Viera (Prado). El partido será televisado en directo a través de VTV Plus y la plataforma Disney+ Premium."
+        "q": "¿A qué hora y en qué escenario juega Peñarol hoy por la Fecha 13?",
+        "a": "Peñarol juega este sábado 31 de octubre de 2026 a las 16:30 hs en el Parque Federico Omar Saroldi (Prado) por la Fecha 13 del Torneo Clausura. Televisan en directo VTV Plus y Disney+ Premium."
       },
       {
-        "q": "¿Cómo se adquieren las entradas para la hinchada de Peñarol?",
-        "a": "La venta para la parcialidad aurinegra se realiza de manera 100% online mediante RedTickets (redtickets.uy) para la Tribuna Jorge Barrios (cabecera visitante). Al ser Peñarol visitante, no rige canje de socios ni venta en boleterías del Centenario."
+        "q": "¿Por qué Peñarol juega a puertas cerradas y cómo se compran las entradas?",
+        "a": "Peñarol oficia como local sin público propio debido a la sanción de la Comisión Disciplinaria de la AUF que pesa sobre el Campeón del Siglo. La venta de entradas es exclusiva para hinchas de Montevideo Wanderers a través de Tickantel ($500 socios / $600 generales)."
       },
       {
-        "q": "¿Cómo marcha Peñarol en la Tabla Anual y el Campeonato Uruguayo?",
-        "a": "Peñarol es líder solitario de la Tabla Anual con 65 puntos (+24 de diferencia de goles), sosteniendo una ventaja de dos unidades sobre su escolta Nacional a falta de cuatro jornadas para el cierre del certamen."
+        "q": "¿Quiénes integran la terna arbitral y el VAR del partido?",
+        "a": "El árbitro central es Leodán González, asistido por Carlos Barreiro y Mathías Muníz. En la cabina de VAR estarán Diego Dunajec y Nicolás Tarán."
+      },
+      {
+        "q": "¿Cómo está Peñarol en la Tabla Anual del Campeonato Uruguayo?",
+        "a": "Peñarol lidera la Tabla Anual con 65 puntos (+24 de saldo de goles), manteniendo la punta del certamen en la recta final hacia el Campeonato Uruguayo 2026."
       }
     ]
   },
   "noticias_fuentes": [
     {
-      "titulo": "Defiendan al hincha",
-      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
-      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
+      "titulo": "Peñarol se juega una final en el Saroldi: el equipo que probó Aguirre para la Fecha 13",
+      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-vs-wanderers-fecha-13-clausura-saroldi",
+      "resumen": "Diego Aguirre probó el once para enfrentar a Wanderers en el Parque Saroldi por la Fecha 13 del Torneo Clausura. Eduardo Darias retorna a la titularidad en el mediocampo junto a Damián García y Leo Fernández. El Decano busca sumar de a tres para asegurar la Tabla Anual.",
+      "fuente": "El País / Ovación",
+      "fecha_raw": "Sat, 31 Oct 2026 10:15:00 -0300",
+      "peso": 1.5
+    },
+    {
+      "titulo": "Clausura Fecha 13: Peñarol recibe a Wanderers a puertas cerradas en el Parque Saroldi",
+      "url": "https://www.futbol.com.uy/Deportes/Penarol-vs-Wanderers-por-la-Fecha-13-del-Clausura-en-el-Parque-Saroldi",
+      "resumen": "Detalles completos de la Fecha 13: el choque entre carboneros y bohemios en el Prado. Arbitraje de Leodán González con Diego Dunajec en el VAR. Operativa de entradas exclusiva para la visita vía Tickantel.",
+      "fuente": "Montevideo Portal (FútbolUy)",
+      "fecha_raw": "Sat, 31 Oct 2026 09:30:00 -0300",
+      "peso": 1.4
+    },
+    {
+      "titulo": "Concentración en Los Aromos: El Decano afina el plan para la Fecha 13",
+      "url": "https://www.padreydecano.com/cms/noticias/previa-wanderers-fecha-13-clausura-2026/",
+      "resumen": "Peñarol culminó su preparación en el Complejo Washington Cataldi para medirse ante Wanderers. Aguirre apelará a la intensidad física y velocidad por afuera para cortar la sequía de gol y defender la punta de la Anual.",
       "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
+      "fecha_raw": "Fri, 30 Oct 2026 21:00:00 -0300",
+      "peso": 1.4
+    },
+    {
+      "titulo": "Designaciones de la Fecha 13: Leodán González arbitrará Peñarol vs Wanderers",
+      "url": "https://www.tenfield.com.uy/auf-designaciones-arbitrales-fecha-13-clausura-2026/",
+      "resumen": "El Colegio de Árbitros de la AUF confirmó a Leodán González como juez central del encuentro entre Peñarol y Montevideo Wanderers en el Saroldi, asistido por Carlos Barreiro y Mathías Muníz, con Diego Dunajec en el VAR.",
+      "fuente": "Tenfield / VTV Plus",
+      "fecha_raw": "Thu, 29 Oct 2026 18:20:00 -0300",
       "peso": 1.3
     },
     {
-      "titulo": "Regresa al Club",
-      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
-      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Peñarol hizo futbol ante Juventud",
-      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
-      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Coelho continuará en Brasil",
-      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
-      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Regreso esperado",
-      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
-      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "De Amores rescindió con Peñarol",
-      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
-      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Análisis punto por punto del informe de seguridad",
-      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
-      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Fecha clásica",
-      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
-      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
+      "titulo": "Wanderers llega urgido al Saroldi con Mathías Corujo al mando",
+      "url": "https://www.elobservador.com.uy/nota/wanderers-de-corujo-visita-a-penarol-por-la-fecha-13",
+      "resumen": "El equipo bohemio dirigido por Mathías Corujo se mide ante el líder Peñarol en el Parque Saroldi. Con Fabricio Formiliano y Jonathan Urretaviscaya desde el inicio, buscan dar el golpe para escapar del fondo de la tabla.",
+      "fuente": "El Observador",
+      "fecha_raw": "Fri, 30 Oct 2026 15:45:00 -0300",
       "peso": 1.3
     }
   ],
   "portada_visual": {
-    "titular_portada": "⚡ PREVIA OFICIAL: Peñarol visita a Montevideo Wanderers en el Prado • Torneo Clausura (Fecha 12)",
-    "bajada_portada": "¡CONCENTRACIÓN EN LOS AROMOS! Todo listo para la visita al Prado de este sábado a las 16:30 hs. Diego Aguirre define el 11 titular con Leo Fernández en la conducción y Maxi Silvera en el ataque. Peñarol lidera la Tabla Anual con 65 puntos y sale a defender la punta sin especular. Entradas para hinchas aurinegros a través de RedTickets (redtickets.uy) para la Tribuna Jorge Barrios del Parque Viera (sin canje de socios al ser visitantes).",
+    "titular_portada": "⚡ PREVIA OFICIAL: Peñarol vs Montevideo Wanderers en el Parque Saroldi • Torneo Clausura (Fecha 13)",
+    "bajada_portada": "¡TODO LISTO EN LOS AROMOS! Peñarol recibe a Montevideo Wanderers este sábado a las 16:30 hs en el Parque Federico Omar Saroldi por la Fecha 13 del Torneo Clausura. El Decano lidera la Tabla Anual con 65 puntos y sale a defender la punta con el retorno de Eduardo Darias y Leo Fernández en la conducción. Partido a puertas cerradas para la hinchada aurinegra por sanción AUF. Venta digital para hinchas de Wanderers a través de Tickantel ($500 socios / $600 generales). Transmisión oficial en vivo por VTV Plus y Disney+ Premium.",
     "cuenta": "@oficialcap",
-    "ubicacion": "📍 Parque Alfredo Víctor Viera (Prado) • Montevideo",
+    "ubicacion": "📍 Parque Federico Omar Saroldi (Prado) • Montevideo",
     "categoria": "partidos",
     "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
     "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
   },
   "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html",
   "editorial_cronica": [
-    "La concentración aurinegra en Los Aromos entra en su etapa culminante. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la fecha 12 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio absoluto con 65 unidades, el equipo conducido por Diego Aguirre saldrá a buscar los tres puntos sin especular.",
+    "La concentración aurinegra en Los Aromos entra en su etapa culminante. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la Fecha 13 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio absoluto con 65 unidades, el equipo conducido por Diego Aguirre saldrá a buscar los tres puntos sin especular.",
     "El escenario de la contienda será el Parque Federico Omar Saroldi debido a la sanción que rige sobre el Estadio Campeón del Siglo y la indisponibilidad de otros recintos. Por dicha disposición reglamentaria, Peñarol oficia como local a puertas cerradas para su parcialidad, mientras que la parcialidad de Wanderers cuenta con localidades a través de la plataforma Tickantel.",
     "En el pizarrón táctico del rival, Montevideo Wanderers es dirigido técnicamente por Mathías 'Chiche' Corujo (asistido por Nicolás Amodio). Los bohemios presentan un bloque dinámico y ordenado, cimentado en la jerarquía defensiva de Fabricio 'Tito' Formiliano, el despliegue de Gonzalo Freitas en la medular y el desequilibrio veloz de Jonathan Urretaviscaya junto al argentino Mateo Levato en ataque.",
     "La pegada y visión panorámica de Leonardo Fernández volverán a ser los factores determinantes para abrir el cerrojo bohemio. En un campo ágil como el Saroldi, la circulación veloz con Javier Cabrera y Jaime Báez y la presión asfixiante de Maximiliano Silvera sobre la salida de Formiliano marcarán el pulso de la contienda. El Decano se prepara para una verdadera final en el Prado."

@@ -55,7 +55,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     
     fecha_legible = prox.get("fecha_legible") or "Sábado 31/10/2026 16:30 hs"
     estadio = prox.get("estadio") or "Parque Federico Omar Saroldi (Prado)"
-    torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 12)"
+    torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 13)"
     tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
     
     duelos_html = ""
@@ -291,7 +291,7 @@ def sincronizar_proximo_partido_blogger():
     post_banner_redirect = f"""
     <div style="background:#09090b;border:2px solid #ffd100;border-radius:12px;padding:18px 22px;margin-bottom:24px;color:#ffffff;box-shadow:0 8px 24px rgba(255,209,0,0.25);">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-        <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 12 CLAUSURA</span>
+        <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 13 CLAUSURA</span>
         <span style="font-size:12px;color:#ffd100;">Sábado 31/10 16:30 hs • Parque Saroldi</span>
       </div>
       <h3 style="font-size:20px;color:#ffffff;margin:0 0 8px;font-weight:900;">
@@ -307,7 +307,7 @@ def sincronizar_proximo_partido_blogger():
     """
     
     post_updated_html = post_banner_redirect + html_content
-    post_updated_title = "[Peñarol] Radiografía Táctica & Previa Oficial: Peñarol vs Montevideo Wanderers • Torneo Clausura (Fecha 12)"
+    post_updated_title = "[Peñarol] Radiografía Táctica & Previa Oficial: Peñarol vs Montevideo Wanderers • Torneo Clausura (Fecha 13)"
     
     try:
         logger.info(f"[Blogger Post Update] Actualizando post existente ID: {EXISTING_POST_ID}...")

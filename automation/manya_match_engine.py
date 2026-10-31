@@ -83,7 +83,7 @@ VERIFIED_FIXTURE_2026 = [
         "nombre": "Peñarol vs Cerro Largo",
         "fecha_iso": "2026-11-01T18:00:00-03:00",
         "fecha_legible": "Domingo 01/11/2026 18:00 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 12)",
+        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
         "estadio": "Estadio Campeón del Siglo (Montevideo)",
         "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
         "visitante": {"nombre": "Cerro Largo", "abreviatura": "CRL", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_cerro_largo.webp"},
@@ -264,7 +264,7 @@ class ManyaMatchEngine:
         check_str = (ev.get("name", "") + " " + home_team.get("nombre", "") + " " + away_team.get("nombre", "")).lower()
         if "wanderers" in check_str:
             venue_name = "Parque Federico Omar Saroldi (Prado)"
-            season_name = "Torneo Clausura 2026 • Fecha 12"
+            season_name = "Torneo Clausura 2026 • Fecha 13"
             tv_str = "VTV Plus / Disney+ Premium"
         elif "juventud" in check_str:
             venue_name = "Estadio Centenario"
@@ -889,7 +889,7 @@ class ManyaMatchEngine:
                 "nombre": "Torneo Clausura 2026",
                 "nombre_corto": "Torneo Clausura",
                 "icono": "⚽",
-                "badge": "En Disputa • Fecha 12",
+                "badge": "En Disputa • Fecha 13",
                 "es_proximo": True,
                 "datos": tabla_clausura
             },

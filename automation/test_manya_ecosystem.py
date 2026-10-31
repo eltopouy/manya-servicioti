@@ -158,6 +158,26 @@ class ManyaEcosystemTester:
                 errors.append("index.html menciona erróneamente a Antonio Pacheco como DT de Wanderers")
             if "Tickantel" not in txt:
                 errors.append("index.html no menciona 'Tickantel' para la venta oficial de entradas de Wanderers")
+            if "Fecha 13" not in txt:
+                errors.append("index.html no menciona la 'Fecha 13' del Torneo Clausura")
+            if "Fecha 12" in txt:
+                errors.append("index.html aún menciona erróneamente 'Fecha 12'")
+
+        live_file = DATA_DIR / "live_status.json"
+        if live_file.exists():
+            txt_live = live_file.read_text(encoding="utf-8")
+            if "Fecha 13" not in txt_live:
+                errors.append("data/live_status.json no menciona la 'Fecha 13'")
+            if "Fecha 12" in txt_live:
+                errors.append("data/live_status.json aún menciona 'Fecha 12'")
+
+        digest_file = DATA_DIR / "news_digest.json"
+        if digest_file.exists():
+            txt_digest = digest_file.read_text(encoding="utf-8")
+            if "Fecha 13" not in txt_digest:
+                errors.append("data/news_digest.json no menciona la 'Fecha 13'")
+            if "Fecha 12" in txt_digest:
+                errors.append("data/news_digest.json contiene menciones viejas a 'Fecha 12'")
 
         rival_file = DATA_DIR / "rival_intelligence.json"
         if rival_file.exists():

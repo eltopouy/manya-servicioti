@@ -530,7 +530,7 @@
     const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
       ? state.live.tablas_campeonatos
       : [
-          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 12', es_proximo: true },
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 13', es_proximo: true },
           { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 65p', es_proximo: false },
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
@@ -713,8 +713,8 @@
     if (!container) return;
     const proxMatch = state.live && state.live.proximo_partido ? state.live.proximo_partido : null;
     const match1Label = proxMatch
-      ? `Fecha 12: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Federico Omar Saroldi'})`
-      : 'Fecha 12: Peñarol vs Montevideo Wanderers (Parque Saroldi)';
+      ? `Fecha 13: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Federico Omar Saroldi'})`
+      : 'Fecha 13: Peñarol vs Montevideo Wanderers (Parque Saroldi)';
     const fechas = [
       { id: 1, label: match1Label },
       { id: 2, label: 'Fecha 13: Peñarol vs Defensor Sporting (Campeón del Siglo)' },
