@@ -39,7 +39,7 @@
     "preguntas_frecuentes": [
       {
         "q": "¿A qué hora juega Peñarol hoy y dónde verlo?",
-        "a": "Peñarol juega a las Sábado 31/10/2026 16:30 hs en Estadio Saroldi, televisado por VTV Plus / Disney+ Premium."
+        "a": "Peñarol juega a las Sábado 31/10/2026 16:30 hs en Parque Alfredo Víctor Viera (Prado), televisado por VTV Plus / Disney+ Premium."
       },
       {
         "q": "¿Cómo formaría Peñarol?",
@@ -116,5 +116,15 @@
       "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
       "peso": 1.3
     }
-  ]
+  ],
+  "portada_visual": {
+    "titular_portada": "⚡ PREVIA OFICIAL: Peñarol visita a Montevideo Wanderers en el Prado • Torneo Clausura (Fecha 12)",
+    "bajada_portada": "¡CONCENTRACIÓN EN LOS AROMOS! Todo listo para la visita al Prado de este sábado a las 16:30 hs. Diego Aguirre define el 11 titular con Leo Fernández en la conducción y Maxi Silvera en el ataque. Peñarol lidera la Tabla Anual con 65 puntos y sale a defender la punta sin especular. Entradas para hinchas aurinegros a través de RedTickets (redtickets.uy) para la Tribuna Jorge Barrios del Parque Viera (sin canje de socios al ser visitantes).",
+    "cuenta": "@oficialcap",
+    "ubicacion": "📍 Parque Alfredo Víctor Viera (Prado) • Montevideo",
+    "categoria": "partidos",
+    "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
+    "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
+  },
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 }

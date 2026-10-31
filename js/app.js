@@ -535,9 +535,9 @@
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
 
-    // Por defecto en la carga: asignar el torneo del próximo partido a jugar
+    // Por defecto en la carga: asignar siempre la Tabla Anual Oficial (donde Peñarol lidera)
     if (!state.standingsTab || !tabs.some(t => t.id === state.standingsTab)) {
-      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'clausura';
+      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'anual';
     }
 
     container.innerHTML = tabs.map(t => {
@@ -611,13 +611,17 @@
 
     if (subInfoEl) {
       if (activeTourn.id === 'clausura') {
-        subInfoEl.textContent = 'Torneo Clausura Oficial AUF. Tabla del torneo actual correspondiente al cruce de hoy ante Juventud.';
+        const proxMatch = state.live.proximo_partido || {};
+        const rivalNom = (proxMatch.local && !proxMatch.local.es_penarol)
+          ? proxMatch.local.nombre
+          : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Montevideo Wanderers');
+        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto de 15 Fechas):</strong> Tabla del segundo semestre. Próximo cruce de Peñarol: visita ante <strong>${rivalNom}</strong> en el Prado.`;
       } else if (activeTourn.id === 'anual') {
-        subInfoEl.textContent = 'Tabla Anual Oficial AUF Acumulada (Apertura + Intermedio + Clausura). Peñarol es líder en solitario con 64 puntos.';
+        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada de Apertura, Intermedio y Clausura. Define el Campeón Uruguayo con ventaja deportiva. <strong style="color:var(--manya-gold);">Peñarol es líder en solitario con 65 puntos (+24 DG).</strong>`;
       } else if (activeTourn.id === 'libertadores') {
-        subInfoEl.textContent = 'Copa CONMEBOL Libertadores. Tabla de posiciones del grupo de Peñarol con datos oficiales de Conmebol.';
+        subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla de posiciones oficial de Conmebol.`;
       } else {
-        subInfoEl.textContent = `Clasificación oficial actualizada de ${activeTourn.nombre}.`;
+        subInfoEl.innerHTML = `Clasificación oficial actualizada de ${activeTourn.nombre}.`;
       }
     }
 
@@ -2009,7 +2013,7 @@
 
     if (live) {
       state.live = live;
-      state.standingsTab = live.torneo_activo_id || 'clausura';
+      state.standingsTab = live.torneo_activo_id || 'anual';
       renderMatchHero(live);
       renderLiveTimeline(live);
       renderStandings();

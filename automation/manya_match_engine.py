@@ -262,13 +262,16 @@ class ManyaMatchEngine:
         # Sobreescrituras oficiales confirmadas por el club (@oficialcap / AUF)
         # Juventud fija su localía en el Estadio Centenario para recibir a Peñarol
         check_str = (ev.get("name", "") + " " + home_team.get("nombre", "") + " " + away_team.get("nombre", "")).lower()
-        if "juventud" in check_str:
+        if "wanderers" in check_str:
+            venue_name = "Parque Alfredo Víctor Viera (Prado)"
+            season_name = "Torneo Clausura 2026 • Fecha 12"
+            tv_str = "VTV Plus / Disney+ Premium"
+        elif "juventud" in check_str:
             venue_name = "Estadio Centenario"
             ev_dt = datetime(2026, 10, 23, 20, 0, tzinfo=UY_TZ)
             fecha_legible = "Viernes 23/10/2026 20:00 hs"
             season_name = "Torneo Clausura 2026"
-            tv_str = "VTV Plus / Disney+ Premium"
-
+            tv_str = "VTV Plus / Disney+ Premium" 
         return {
             "event_id": str(ev.get("id", "")),
             "nombre": nombre_display,
@@ -856,44 +859,36 @@ class ManyaMatchEngine:
         libertadores_info = cls.fetch_libertadores_standings()
         torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
 
-        # Determinar dinámicamente cuál es el campeonato del próximo partido
-        if "clausura" in torneo_prox:
-            torneo_defecto_id = "clausura"
-        elif "libertadores" in torneo_prox:
-            torneo_defecto_id = "libertadores"
-        elif "anual" in torneo_prox:
-            torneo_defecto_id = "anual"
-        elif "apertura" in torneo_prox:
-            torneo_defecto_id = "apertura"
-        else:
-            torneo_defecto_id = "clausura"
+        # La tabla activa por defecto SIEMPRE debe ser la Tabla Anual Acumulada Oficial (AUF)
+        # donde Peñarol lidera en solitario y se define la ventaja deportiva del Campeonato Uruguayo.
+        torneo_defecto_id = "anual"
 
         tablas_campeonatos = [
-            {
-                "id": "clausura",
-                "nombre": "Torneo Clausura 2026",
-                "nombre_corto": "Torneo Clausura",
-                "icono": "⚽",
-                "badge": "Próximo Partido • Fecha 12" if torneo_defecto_id == "clausura" else "Torneo Corto",
-                "es_proximo": (torneo_defecto_id == "clausura"),
-                "datos": tabla_clausura
-            },
             {
                 "id": "anual",
                 "nombre": "Tabla Anual Acumulada Oficial (AUF)",
                 "nombre_corto": "Tabla Anual",
                 "icono": "🏆",
-                "badge": "Líder Solitario • 64 pts",
-                "es_proximo": (torneo_defecto_id == "anual"),
+                "badge": "Líder Solitario • 65 pts",
+                "es_proximo": True,
                 "datos": tabla_anual
+            },
+            {
+                "id": "clausura",
+                "nombre": "Torneo Clausura 2026",
+                "nombre_corto": "Torneo Clausura",
+                "icono": "⚽",
+                "badge": "Torneo Corto • Fecha 12",
+                "es_proximo": False,
+                "datos": tabla_clausura
             },
             {
                 "id": "libertadores",
                 "nombre": libertadores_info.get("nombre", "Copa CONMEBOL Libertadores"),
                 "nombre_corto": "Copa Libertadores",
                 "icono": "🌎",
-                "badge": "Conmebol Internacional" if torneo_defecto_id != "libertadores" else "Próximo Partido",
-                "es_proximo": (torneo_defecto_id == "libertadores"),
+                "badge": "Conmebol Internacional",
+                "es_proximo": False,
                 "datos": libertadores_info.get("datos", [])
             }
         ]
