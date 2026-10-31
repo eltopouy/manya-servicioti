@@ -118,3 +118,25 @@ C:\Users\Andrés\.gemini\antigravity\scratch\manya_servicioti\
 2. **Despliegue a Producción:**
    - Los cambios confirmados se envían a la rama `main` de GitHub.
    - GitHub Actions construye y despliega automáticamente el sitio en `https://manya.servicioti.com.uy/`.
+
+
+---
+
+## 6. Ciclo de Vida Editorial Tripartito y Automatización "Hoy Juega el Manya" (00:05 hs)
+
+El portal y el sistema de publicación en Blogger operan bajo una máquina de estados estricta en base al calendario oficial y horario de Uruguay (`America/Montevideo` / UTC-3):
+
+1. **La Previa / Víspera (Días anteriores hasta las 23:59 hs):**
+   - Enfoque analítico y de vestuario: scouting táctico del rival, historial frente a frente (1891 BD), 4 duelos clave 1x1, venta de entradas y tabla acumulada.
+   - En el Match Center se exhibe `PRÓXIMO PARTIDO`, la cuenta regresiva y la fecha precisa.
+
+2. **Edición Especial Match Day: "¡HOY JUEGA EL MANYA!" (Disparo exacto a las 00:05 hs):**
+   - **Disparador:** Tarea programada en Windows `Manya_Madrugada_0005_Hoy_Juega` (`programar_tarea_hoy_juega.ps1`) con parámetros de resiliencia (`-StartWhenAvailable`, `-WakeToRun`) a las `00:05` AM de cada día de partido.
+   - **Contenido Generado:** Titular enérgico de match day (*"¡Hoy juega el Manya! Tarde de Parque Viera / CDS..."*), pronóstico meteorológico para la hora del partido (Open-Meteo), alineación probable matutina, televisación oficial y accesos.
+   - **Frontend & Blogger:** Se actualiza el hero post estilo Instagram con el badge dorado `¡LLEGÓ EL DÍA!`, se activa `RIVAL DE HOY` en la tabla y se actualiza el post correspondiente en Blogger.
+
+3. **En Vivo (Minuto a Minuto durante los 90 minutos):**
+   - Polling cada 3 minutos en `fase == 'EN_VIVO'` con actualización de goles, incidencias y marcador.
+
+4. **Post-Partido / Archivo Histórico (Ventana de 48 horas):**
+   - La crónica final, estadísticas y balance se mantienen en primer plano durante 48 horas antes de pasar al cajón histórico replegable.
