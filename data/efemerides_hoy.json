@@ -1,96 +1,96 @@
 {
-  "fecha_consulta": "30/10/2026",
-  "dia_mes": "30 de Octubre",
+  "fecha_consulta": "31/10/2026",
+  "dia_mes": "31 de Octubre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 9,
+  "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2024-10-30",
-      "ano": "2024",
-      "rival": "Botafogo (Bra)",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Botafogo (Bra)",
-      "torneo": "Copa Libertadores de América",
-      "estadio": "Centenario",
-      "goles_detalle": "Jaime Báez (P) 31', Jaime Báez (P) 66', Thiago Almada (B) 88' y Facundo Batista (P) 89'"
-    },
-    {
-      "fecha": "1994-10-30",
-      "ano": "1994",
-      "rival": "Central Español",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Central Español",
-      "torneo": "Torneo Clausura",
-      "estadio": "Centenario",
-      "goles_detalle": "Juan Quefán (C) 3', Pablo Javier Bengoechea (P) 26' de penal, José Enrique De los Santos (P) 42' y Oscar Aguirregaray (P) 46'"
-    },
-    {
-      "fecha": "1985-10-30",
-      "ano": "1985",
-      "rival": "Nacional",
-      "goles_penarol": 1,
-      "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Nacional",
-      "torneo": "Torneo Copa de Oro de los Grandes",
-      "estadio": "Centenario",
-      "goles_detalle": "Julio César Jiménez 54'"
-    },
-    {
-      "fecha": "1965-10-30",
-      "ano": "1965",
-      "rival": "Danubio",
-      "goles_penarol": 4,
-      "goles_rival": 2,
-      "resultado": "Peñarol 4 - 2 Danubio",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Omar Caetano 33', Pedro Rocha 67' de penal, Juan Joya 70' y Alberto Spencer 77'"
-    },
-    {
-      "fecha": "1955-10-30",
-      "ano": "1955",
-      "rival": "Sud América",
-      "goles_penarol": 5,
-      "goles_rival": 1,
-      "resultado": "Peñarol 5 - 1 Sud América",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "José María Milán (3) 22', 49' y 72', Óscar Míguez 47' y Carlos Borges 55'"
-    },
-    {
-      "fecha": "1949-10-30",
-      "ano": "1949",
+      "fecha": "1993-10-31",
+      "ano": "1993",
       "rival": "Liverpool",
       "goles_penarol": 2,
       "goles_rival": 0,
       "resultado": "Peñarol 2 - 0 Liverpool",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Alcides Ghiggia 10' y Óscar Míguez 17'"
+      "goles_detalle": "Diego Dorta (P) 4' y Darío Silva (P) 75'"
     },
     {
-      "fecha": "1943-10-30",
-      "ano": "1943",
-      "rival": "Sportivo Miramar",
-      "goles_penarol": 4,
+      "fecha": "1990-10-31",
+      "ano": "1990",
+      "rival": "Central Español",
+      "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 4 - 1 Sportivo Miramar",
+      "resultado": "Peñarol 2 - 1 Central Español",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Guido Baztarrica (P), Ángel Laferrara (P), Ángel Laferrara (P) y Lorenzo Pino (P)"
+      "goles_detalle": "César Silvera (P) 5' y Adrian Paz (P) 75'"
     },
     {
-      "fecha": "1927-10-30",
-      "ano": "1927",
+      "fecha": "1987-10-31",
+      "ano": "1987",
+      "rival": "América de Cali (Col)",
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 América de Cali (Col)",
+      "torneo": "Copa Libertadores de América",
+      "estadio": "Nacional de Santiago de Chile",
+      "goles_detalle": "Diego Aguirre 120'"
+    },
+    {
+      "fecha": "1976-10-31",
+      "ano": "1976",
+      "rival": "Rentistas",
+      "goles_penarol": 4,
+      "goles_rival": 1,
+      "resultado": "Peñarol 4 - 1 Rentistas",
+      "torneo": "Torneo Liga Mayor",
+      "estadio": "Centenario",
+      "goles_detalle": "Norberto Galilea (2) 27' y 65', Laddy Nitder Pizzani 72' y Carlos Simaldone 87'"
+    },
+    {
+      "fecha": "1974-10-31",
+      "ano": "1974",
       "rival": "Liverpool",
       "goles_penarol": 4,
       "goles_rival": 0,
       "resultado": "Peñarol 4 - 0 Liverpool",
       "torneo": "Campeonato Uruguayo",
-      "estadio": "Los Pocitos",
-      "goles_detalle": "Pablo Terevinto (P), Pablo Terevinto (P), Pablo Terevinto (P) y Jose Piendibene (P)"
+      "estadio": "Centenario",
+      "goles_detalle": "Julio César Jiménez 16', Fernando Morena 42' y 72' de penal y Alberto Santelli 58'"
+    },
+    {
+      "fecha": "1954-10-31",
+      "ano": "1954",
+      "rival": "Cerro",
+      "goles_penarol": 3,
+      "goles_rival": 0,
+      "resultado": "Peñarol 3 - 0 Cerro",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Américo Galván 11', Carlos Borges 29' y Juan Eduardo Hohberg 31'"
+    },
+    {
+      "fecha": "1953-10-31",
+      "ano": "1953",
+      "rival": "Montevideo Wanderers",
+      "goles_penarol": 4,
+      "goles_rival": 2,
+      "resultado": "Peñarol 4 - 2 Montevideo Wanderers",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Juan Eduardo Hohberg 3' y Óscar Míguez (3) 10', 40' y 80'"
+    },
+    {
+      "fecha": "1937-10-31",
+      "ano": "1937",
+      "rival": "Central F.C.",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Central F.C.",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Parque Palermo",
+      "goles_detalle": "V. Sarni (C) 13', Horacio Tellechea (P) 32' y Luis Mata (P) 34'"
     }
   ],
   "cumpleanos_glorias": [
