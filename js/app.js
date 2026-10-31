@@ -390,7 +390,7 @@
     const sHome = document.getElementById('hero-live-score-home');
     const sAway = document.getElementById('hero-live-score-away');
     const clkTxt = document.getElementById('hero-live-clock-text');
-    const bLiveUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html';
+    const bLiveUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
 
     const heroBadge = document.getElementById('hero-match-badge');
 
@@ -489,7 +489,7 @@
     }
 
     card.style.display = 'block';
-    const bUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html';
+    const bUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
     const btnCard = document.getElementById('btn-live-blogger-card');
     if (btnCard) btnCard.href = bUrl;
 
@@ -531,13 +531,13 @@
       ? state.live.tablas_campeonatos
       : [
           { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 12', es_proximo: true },
-          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 64p', es_proximo: false },
+          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 65p', es_proximo: false },
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
 
     // Por defecto en la carga: asignar siempre la Tabla Anual Oficial (donde Peñarol lidera)
     if (!state.standingsTab || !tabs.some(t => t.id === state.standingsTab)) {
-      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'anual';
+      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'clausura';
     }
 
     container.innerHTML = tabs.map(t => {
@@ -615,13 +615,30 @@
         const rivalNom = (proxMatch.local && !proxMatch.local.es_penarol)
           ? proxMatch.local.nombre
           : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Montevideo Wanderers');
-        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto de 15 Fechas):</strong> Tabla del segundo semestre. Próximo cruce de Peñarol: visita ante <strong>${rivalNom}</strong> en el Prado.`;
+        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>${rivalNom}</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (65 pts) →</button>`;
       } else if (activeTourn.id === 'anual') {
-        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada de Apertura, Intermedio y Clausura. Define el Campeón Uruguayo con ventaja deportiva. <strong style="color:var(--manya-gold);">Peñarol es líder en solitario con 65 puntos (+24 DG).</strong>`;
+        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada oficial. Define el Campeón Uruguayo 2026. <strong style="color:var(--manya-gold);">Peñarol es líder solitario con 65 puntos (+24 DG).</strong> <button type="button" id="btn-quick-switch-clausura" style="background:#27272a;color:#ffd100;font-weight:900;border:1px solid #ffd100;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">⚽ Ver Torneo Clausura (Próximo Partido) →</button>`;
       } else if (activeTourn.id === 'libertadores') {
         subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla de posiciones oficial de Conmebol.`;
       } else {
         subInfoEl.innerHTML = `Clasificación oficial actualizada de ${activeTourn.nombre}.`;
+      }
+
+      const btnToAnual = document.getElementById('btn-quick-switch-anual');
+      if (btnToAnual) {
+        btnToAnual.addEventListener('click', () => {
+          state.standingsTab = 'anual';
+          renderStandingsTabs();
+          renderStandings();
+        });
+      }
+      const btnToClausura = document.getElementById('btn-quick-switch-clausura');
+      if (btnToClausura) {
+        btnToClausura.addEventListener('click', () => {
+          state.standingsTab = 'clausura';
+          renderStandingsTabs();
+          renderStandings();
+        });
       }
     }
 
@@ -1384,7 +1401,7 @@
     }
     if (metaEl) {
       if (is1891) {
-        metaEl.textContent = `1891 BD (Comisión de Historia) • ${item.estadio || 'Estadio Centenario'} • ${item.fecha || '2026'}`;
+        metaEl.textContent = `1891 BD (Comisión de Historia) • ${item.estadio || 'Escenario Oficial'} • ${item.fecha || '2026'}`;
       } else {
         metaEl.textContent = `${item.cuenta} • ❤️ ${item.likes ? item.likes.toLocaleString() : '25.000'} • 💬 ${item.comments || 350}`;
       }
@@ -1885,7 +1902,7 @@
             </div>
             <div class="efemeride-score">${m.resultado}</div>
             <div class="efemeride-meta">
-              <div>🏟️ ${m.estadio || 'Estadio Centenario'}</div>
+              <div>🏟️ ${m.estadio || 'Escenario Oficial'}</div>
               ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${m.goles_detalle}</div>` : ''}
             </div>
           </article>
@@ -2015,7 +2032,7 @@
 
     if (live) {
       state.live = live;
-      state.standingsTab = live.torneo_activo_id || 'anual';
+      state.standingsTab = live.torneo_activo_id || 'clausura';
       renderMatchHero(live);
       renderLiveTimeline(live);
       renderStandings();
@@ -2111,7 +2128,9 @@
     renderTrivia();
 
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        reg.update();
+      }).catch(() => {});
     }
   }
 

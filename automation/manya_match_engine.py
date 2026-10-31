@@ -859,28 +859,28 @@ class ManyaMatchEngine:
         libertadores_info = cls.fetch_libertadores_standings()
         torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
 
-        # La tabla activa por defecto SIEMPRE debe ser la Tabla Anual Acumulada Oficial (AUF)
-        # donde Peñarol lidera en solitario y se define la ventaja deportiva del Campeonato Uruguayo.
-        torneo_defecto_id = "anual"
+        # La tabla activa por defecto en la carga inicial es la del campeonato en disputa del próximo partido:
+        # Torneo Clausura 2026 (con selector y botón rápido para alternar a la Tabla Anual Oficial)
+        torneo_defecto_id = "clausura"
 
         tablas_campeonatos = [
+            {
+                "id": "clausura",
+                "nombre": "Torneo Clausura 2026",
+                "nombre_corto": "Torneo Clausura",
+                "icono": "⚽",
+                "badge": "En Disputa • Fecha 12",
+                "es_proximo": True,
+                "datos": tabla_clausura
+            },
             {
                 "id": "anual",
                 "nombre": "Tabla Anual Acumulada Oficial (AUF)",
                 "nombre_corto": "Tabla Anual",
                 "icono": "🏆",
                 "badge": "Líder Solitario • 65 pts",
-                "es_proximo": True,
-                "datos": tabla_anual
-            },
-            {
-                "id": "clausura",
-                "nombre": "Torneo Clausura 2026",
-                "nombre_corto": "Torneo Clausura",
-                "icono": "⚽",
-                "badge": "Torneo Corto • Fecha 12",
                 "es_proximo": False,
-                "datos": tabla_clausura
+                "datos": tabla_anual
             },
             {
                 "id": "libertadores",
@@ -909,7 +909,9 @@ class ManyaMatchEngine:
                 pass
 
         minuto_a_minuto = existing_doc.get("minuto_a_minuto", [])
-        blogger_live_url = existing_doc.get("blogger_live_url", "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html")
+        blogger_live_url = existing_doc.get("blogger_live_url", "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html")
+        if "juventud" in blogger_live_url.lower():
+            blogger_live_url = "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 
         doc_live = {
             "actualizado": now_uy.strftime("%d/%m/%Y %H:%M"),
