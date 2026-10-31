@@ -6,7 +6,7 @@
   "horas_desde_ultimo_partido": 177.1,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Parque Alfredo Víctor Viera (Prado)) • VTV Plus / Disney+ Premium.",
+  "alerta_banner": "🟡⚫ ¡HOY JUEGA PEÑAROL! Peñarol vs Montevideo Wanderers a las Sábado 31/10/2026 16:30 hs en Parque Alfredo Víctor Viera (Prado) • VTV Plus / Disney+.",
   "partido_activo": {
     "event_id": "401931258",
     "nombre": "Peñarol vs Montevideo Wanderers",
@@ -37,7 +37,7 @@
     "completado": false,
     "state": "pre",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false,
+    "es_hoy": true,
     "fase": "PREVIA",
     "detalles_avanzados": {
       "goles": [],

@@ -1,0 +1,103 @@
+{
+  "fecha_auditoria": "31/10/2026 07:48:47",
+  "timestamp": "2026-10-31T07:48:47.511885-03:00",
+  "score_salud": 100.0,
+  "total_pruebas": 7,
+  "pruebas_exitosas": 7,
+  "pruebas_fallidas": 0,
+  "estado_general": "OPTIMO",
+  "detalle_pruebas": [
+    {
+      "test": "Zona Horaria UY_TZ (UTC-3)",
+      "status": "PASS",
+      "passed": true,
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-10-31 07:48:44",
+      "details": {
+        "now_uy": "2026-10-31 07:48:44.004744-03:00",
+        "offset_hours": -3.0
+      },
+      "timestamp": "2026-10-31T07:48:44.004796-03:00"
+    },
+    {
+      "test": "Coherencia Temporal 'es_hoy'",
+      "status": "PASS",
+      "passed": true,
+      "message": "delta_days: 0, es_hoy: True (partido: 31/10/2026)",
+      "details": {
+        "delta_days": 0,
+        "es_hoy": true
+      },
+      "timestamp": "2026-10-31T07:48:44.006334-03:00"
+    },
+    {
+      "test": "Integridad de Puntos (Tabla Anual 65 pts)",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los archivos sincronizados en 65 puntos oficiales AUF",
+      "details": {
+        "errors": []
+      },
+      "timestamp": "2026-10-31T07:48:44.010908-03:00"
+    },
+    {
+      "test": "Verificación de Rival y Escenario",
+      "status": "PASS",
+      "passed": true,
+      "message": "Rival Montevideo Wanderers, Parque Viera y RedTickets verificados",
+      "details": {
+        "errors": []
+      },
+      "timestamp": "2026-10-31T07:48:44.013501-03:00"
+    },
+    {
+      "test": "Integridad de Datasets JSON",
+      "status": "PASS",
+      "passed": true,
+      "message": "11 archivos JSON validados con éxito",
+      "details": {
+        "missing": [],
+        "corrupted": []
+      },
+      "timestamp": "2026-10-31T07:48:44.019491-03:00"
+    },
+    {
+      "test": "Salud de Locks y Anti-Colisión",
+      "status": "PASS",
+      "passed": true,
+      "message": "Sistema de locks limpio y sin bloqueos huérfanos",
+      "details": {
+        "abandoned": []
+      },
+      "timestamp": "2026-10-31T07:48:44.019768-03:00"
+    },
+    {
+      "test": "Accesibilidad de Endpoints Oficiales",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
+      "details": {
+        "Portal Oficial Manya": {
+          "status": 200,
+          "url": "https://manya.servicioti.com.uy/"
+        },
+        "Blogger Previa Permanente": {
+          "status": 200,
+          "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
+        },
+        "Blogger Previa Post": {
+          "status": 200,
+          "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
+        },
+        "Blogger Archivo Histórico": {
+          "status": 200,
+          "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
+        },
+        "Blogger Post Concluido": {
+          "status": 200,
+          "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
+        }
+      },
+      "timestamp": "2026-10-31T07:48:47.511724-03:00"
+    }
+  ]
+}
