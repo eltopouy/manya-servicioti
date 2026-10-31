@@ -1,0 +1,6 @@
+2026-10-31 07:48:43,897 - [ManyaSelfHealing] - INFO - === INICIANDO VIGILANTE DE AUTO-CURACIÓN Y MEJORA CONTINUA ===
+2026-10-31 07:48:43,904 - [ManyaSelfHealing] - INFO - [Auto-Healing] ✓ Auto-corregido index.html: actualizadas referencias a 65 puntos.
+2026-10-31 07:48:43,916 - [ManyaSelfHealing] - INFO - [Auto-Healing] ✓ Auto-ajuste: Activado 'es_hoy=True' y alerta de partido para hoy.
+2026-10-31 07:48:43,919 - [ManyaSelfHealing] - INFO - [Auto-Healing] ✓ Auto-ajuste: Activado titular '¡Hoy juega el Manya!' para día de partido.
+2026-10-31 07:48:49,605 - [ManyaSelfHealing] - WARNING - [Auto-Healing] Aviso en git push: Command '['git', 'push', 'origin', 'main']' returned non-zero exit status 1.
+2026-10-31 07:48:49,606 - [ManyaSelfHealing] - INFO - === AUTO-CURACIÓN FINALIZADA. SCORE FINAL: 100.0% ===

@@ -99,5 +99,10 @@
       },
       "timestamp": "2026-10-31T07:48:47.511724-03:00"
     }
+  ],
+  "reparaciones_aplicadas": [
+    "Auto-corregido index.html: actualizadas referencias a 65 puntos.",
+    "Auto-ajuste: Activado 'es_hoy=True' y alerta de partido para hoy.",
+    "Auto-ajuste: Activado titular '¡Hoy juega el Manya!' para día de partido."
   ]
 }
