@@ -3,28 +3,28 @@
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "HOY_JUEGA",
   "partido_id": "401931258",
-  "titular_dia": "¡Hoy juega el Manya! Peñarol vs Montevideo Wanderers defiende la punta de la Tabla Anual en el Prado",
-  "bajada_seo": "Peñarol visita a Montevideo Wanderers este sábado 31 de octubre a las 16:30 hs en el Parque Alfredo Víctor Viera por la fecha 12 del Torneo Clausura. Transmisión en directo por VTV Plus y Disney+ Premium.",
+  "titular_dia": "¡Hoy juega el Manya! Peñarol recibe a Wanderers en el Parque Saroldi por la punta de la Anual",
+  "bajada_seo": "Peñarol oficia como local ante Montevideo Wanderers este sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi por la fecha 12 del Torneo Clausura. Encuentro a puertas cerradas para el público aurinegro por sanción. Transmisión en directo por VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
-      "icono": "⚽",
-      "titulo": "El Pizarrón de Aguirre",
-      "detalle": "Esquema 4-2-3-1 con intensidad en las bandas y presión inmediata sobre la gestación bohemia de Bruno Veglio y Tabaré Viudez."
+      "icono": "📍",
+      "titulo": "Escenario y Horario Confirmado",
+      "detalle": "Sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). Transmisión oficial por VTV Plus y Disney+ Premium."
     },
     {
-      "icono": "🔥",
-      "titulo": "La Zurda de Leo Fernández",
-      "detalle": "El número 8 comanda los hilos del ataque: visión quirúrgica, cambios de frente y la pelota quieta como arma letal."
+      "icono": "🎟️",
+      "titulo": "Operativa de Entradas y Puertas Cerradas",
+      "detalle": "Peñarol oficia de local a puertas cerradas para su parcialidad por sanción al Campeón del Siglo. Venta exclusiva para hinchas de Wanderers por Tickantel ($500 socios / $600 generales)."
     },
     {
-      "icono": "📺",
-      "titulo": "Escenario y Televisación",
-      "detalle": "Sábado 31 de octubre a las 16:30 hs en el Parque Alfredo Víctor Viera (Prado). Transmisión oficial por VTV Plus y Disney+ Premium."
+      "icono": "🏆",
+      "titulo": "Líder de la Tabla Anual (65 pts)",
+      "detalle": "El Decano lidera en solitario con 65 puntos (+24 DG) y busca estirar la ventaja en la recta final hacia el Campeonato Uruguayo 2026."
     },
     {
-      "icono": "📊",
-      "titulo": "Custodia de la Anual",
-      "detalle": "Peñarol lidera la Tabla Anual en solitario con 65 puntos (+24 DG) y busca sumar de a tres para dar otro paso gigante hacia el Campeonato Uruguayo."
+      "icono": "⚔️",
+      "titulo": "Rival: El Wanderers de Mathías Corujo",
+      "detalle": "El conjunto bohemio, conducido por Mathías 'Chiche' Corujo, presenta a Fabricio Formiliano en la zaga y la velocidad del 'Rayo' Jonathan Urretaviscaya en ofensiva."
     }
   ],
   "articulo_principal": {
@@ -126,5 +126,29 @@
     "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
     "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
   },
-  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html",
+  "editorial_cronica": [
+    "La concentración aurinegra en Los Aromos entra en su etapa culminante. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la fecha 12 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio absoluto con 65 unidades, el equipo conducido por Diego Aguirre saldrá a buscar los tres puntos sin especular.",
+    "El escenario de la contienda será el Parque Federico Omar Saroldi debido a la sanción que rige sobre el Estadio Campeón del Siglo y la indisponibilidad de otros recintos. Por dicha disposición reglamentaria, Peñarol oficia como local a puertas cerradas para su parcialidad, mientras que la parcialidad de Wanderers cuenta con localidades a través de la plataforma Tickantel.",
+    "En el pizarrón táctico del rival, Montevideo Wanderers es dirigido técnicamente por Mathías 'Chiche' Corujo (asistido por Nicolás Amodio). Los bohemios presentan un bloque dinámico y ordenado, cimentado en la jerarquía defensiva de Fabricio 'Tito' Formiliano, el despliegue de Gonzalo Freitas en la medular y el desequilibrio veloz de Jonathan Urretaviscaya junto al argentino Mateo Levato en ataque.",
+    "La pegada y visión panorámica de Leonardo Fernández volverán a ser los factores determinantes para abrir el cerrojo bohemio. En un campo ágil como el Saroldi, la circulación veloz con Javier Cabrera y Jaime Báez y la presión asfixiante de Maximiliano Silvera sobre la salida de Formiliano marcarán el pulso de la contienda. El Decano se prepara para una verdadera final en el Prado."
+  ],
+  "preguntas_frecuentes": [
+    {
+      "q": "¿A qué hora y dónde juega Peñarol hoy?",
+      "a": "Peñarol juega este sábado 31 de octubre de 2026 a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). El partido será televisado en directo a través de VTV Plus y la plataforma Disney+ Premium."
+    },
+    {
+      "q": "¿Cómo es la venta de entradas para Peñarol vs Wanderers?",
+      "a": "Peñarol oficia como local a puertas cerradas para la parcialidad aurinegra debido a la sanción sobre el Campeón del Siglo. Solamente se habilitó venta digital para hinchas de Montevideo Wanderers a través de Tickantel ($500 socios / $600 generales). La hinchada aurinegra podrá seguir el partido en vivo por VTV Plus y Disney+ Premium."
+    },
+    {
+      "q": "¿Quién es el director técnico de Montevideo Wanderers?",
+      "a": "El director técnico de Montevideo Wanderers es Mathías 'Chiche' Corujo, quien asumió para liderar la temporada 2026 acompañado por Nicolás Amodio como ayudante técnico."
+    },
+    {
+      "q": "¿Cómo está Peñarol en la tabla de posiciones?",
+      "a": "Peñarol lidera en solitario la Tabla Anual Acumulada Oficial con 65 puntos y un saldo de +24 goles de diferencia, manteniendo la cima del Campeonato Uruguayo."
+    }
+  ]
 }

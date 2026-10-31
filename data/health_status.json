@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "31/10/2026 08:25:25",
-  "timestamp": "2026-10-31T08:25:25.365138-03:00",
+  "fecha_auditoria": "31/10/2026 11:03:58",
+  "timestamp": "2026-10-31T11:03:58.077893-03:00",
   "score_salud": 100.0,
   "total_pruebas": 8,
   "pruebas_exitosas": 8,
@@ -11,12 +11,12 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-10-31 08:25:22",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-10-31 11:03:56",
       "details": {
-        "now_uy": "2026-10-31 08:25:22.637626-03:00",
+        "now_uy": "2026-10-31 11:03:56.076398-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-10-31T08:25:22.637662-03:00"
+      "timestamp": "2026-10-31T11:03:56.076449-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 0,
         "es_hoy": true
       },
-      "timestamp": "2026-10-31T08:25:22.639024-03:00"
+      "timestamp": "2026-10-31T11:03:56.078014-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 65 pts)",
@@ -37,17 +37,17 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-10-31T08:25:22.642256-03:00"
+      "timestamp": "2026-10-31T11:03:56.082197-03:00"
     },
     {
-      "test": "Verificación de Rival y Escenario",
+      "test": "Verificación de Rival, DT y Escenario",
       "status": "PASS",
       "passed": true,
-      "message": "Rival Montevideo Wanderers, Parque Viera y RedTickets verificados",
+      "message": "Rival Montevideo Wanderers, DT Mathías Corujo, Parque Saroldi y Tickantel verificados",
       "details": {
         "errors": []
       },
-      "timestamp": "2026-10-31T08:25:22.643751-03:00"
+      "timestamp": "2026-10-31T11:03:56.083828-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-10-31T08:25:22.647460-03:00"
+      "timestamp": "2026-10-31T11:03:56.088350-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,7 +68,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-10-31T08:25:22.647634-03:00"
+      "timestamp": "2026-10-31T11:03:56.088525-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -97,7 +97,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-10-31T08:25:25.359988-03:00"
+      "timestamp": "2026-10-31T11:03:58.075160-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-10-31T08:25:25.364541-03:00"
+      "timestamp": "2026-10-31T11:03:58.077602-03:00"
     }
   ]
 }

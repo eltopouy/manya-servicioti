@@ -54,7 +54,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     penarol_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_penarol.webp"
     
     fecha_legible = prox.get("fecha_legible") or "Sábado 31/10/2026 16:30 hs"
-    estadio = prox.get("estadio") or "Parque Alfredo Víctor Viera (Prado)"
+    estadio = prox.get("estadio") or "Parque Federico Omar Saroldi (Prado)"
     torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 12)"
     tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
     
@@ -114,7 +114,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
         👕 Pizarra Táctica: Armá tu 11 vs Wanderers
       </a>
       <a href="https://horarios.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="border:1px solid rgba(255,255,255,0.3);color:#e4e4e7;font-weight:700;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;">
-        🚌 Ómnibus al Parque Viera (Prado) en Vivo
+        🚌 Ómnibus al Parque Saroldi (Prado) en Vivo
       </a>
     </div>
   </div>
@@ -140,7 +140,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
       </a>
     </div>
     <p style="font-size:14px;color:#475569;margin:0;">
-      El equipo de Diego Aguirre llega al Parque Viera con el objetivo supremo de sumar tres puntos que pueden resultar determinantes para asegurar la ventaja deportiva en la definición del Campeonato Uruguayo.
+      El equipo de Diego Aguirre salta al campo del Parque Federico Omar Saroldi oficiando como local a puertas cerradas para su público por sanción al CDS, con el objetivo supremo de sumar tres puntos vitales para mantener la punta de la Tabla Anual.
     </p>
   </div>
 
@@ -149,15 +149,15 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     <div style="border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:18px;">
       <span style="background:#ffd100;color:#09090b;font-size:11px;font-weight:900;padding:2px 8px;border-radius:4px;text-transform:uppercase;">SCOUTING TÁCTICO PROFESIONAL</span>
       <h2 style="font-size:22px;color:#ffffff;margin:8px 0 4px;font-weight:900;">
-        🔍 Radiografía Táctica: {rival_nombre} (DT Antonio Pacheco)
+        🔍 Radiografía Táctica: {rival_nombre} (DT Mathías Corujo)
       </h2>
       <div style="font-size:13px;color:#a1a1aa;">
-        DT: <strong>{scout.get('entrenador', 'Antonio Pacheco')}</strong> • Esquema: <strong>{scout.get('esquema_base', '4-2-3-1 de posesión y circulación')}</strong> • Sede: {inst.get('sede', 'Prado')}
+        DT: <strong>{scout.get('entrenador', 'Mathías Corujo')}</strong> • Esquema: <strong>{scout.get('esquema_base', '4-2-3-1 de posesión y circulación')}</strong> • Sede: {inst.get('sede', 'Prado')}
       </div>
     </div>
 
     <div style="font-size:14px;color:#d4d4d8;line-height:1.65;margin-bottom:20px;">
-      {scout.get('propuesta_juego', 'Montevideo Wanderers, conducido tácticamente por Antonio Pacheco, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca en el área rival.')}
+      {scout.get("propuesta_juego", "Montevideo Wanderers, conducido tácticamente por Mathías 'Chiche' Corujo, presenta un equipo ordenado y dinámico, respaldado por la experiencia de Fabricio Formiliano en el fondo, Gonzalo Freitas en el medio y la velocidad de Jonathan Urretaviscaya en ataque junto a Mateo Levato.")}
     </div>
 
     <!-- FORTALEZAS Y VULNERABILIDADES -->
@@ -292,13 +292,13 @@ def sincronizar_proximo_partido_blogger():
     <div style="background:#09090b;border:2px solid #ffd100;border-radius:12px;padding:18px 22px;margin-bottom:24px;color:#ffffff;box-shadow:0 8px 24px rgba(255,209,0,0.25);">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
         <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 12 CLAUSURA</span>
-        <span style="font-size:12px;color:#ffd100;">Sábado 31/10 16:30 hs • Parque Viera</span>
+        <span style="font-size:12px;color:#ffd100;">Sábado 31/10 16:30 hs • Parque Saroldi</span>
       </div>
       <h3 style="font-size:20px;color:#ffffff;margin:0 0 8px;font-weight:900;">
-        Peñarol visita al Montevideo Wanderers de Antonio Pacheco en el Prado
+        Peñarol vs Montevideo Wanderers (DT Mathías Corujo) en el Parque Saroldi
       </h3>
       <p style="font-size:14px;color:#d4d4d8;line-height:1.6;margin:0 0 14px;">
-        El Carbonero lidera la Tabla Anual con 65 unidades y viaja al Parque Viera para medirse ante el conjunto bohemio. Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
+        El Carbonero lidera la Tabla Anual con 65 unidades y recibe al conjunto bohemio en el Parque Saroldi (a puertas cerradas para Peñarol por sanción AUF, con entradas para Wanderers vía Tickantel). Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
       </p>
       <a href="{page_url}" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;">
         👉 Ver Radiografía Táctica Completa en ServicioTI ↗

@@ -145,29 +145,31 @@ class ManyaEcosystemTester:
         self.record_result("Integridad de Puntos (Tabla Anual 65 pts)", passed, msg, {"errors": errors})
 
     def test_rival_and_venue_verification(self):
-        """Verifica que el rival activo sea Montevideo Wanderers y el escenario sea Parque Viera con RedTickets."""
+        """Verifica que el rival activo sea Montevideo Wanderers, DT Mathías Corujo, escenario Parque Saroldi y venta Tickantel."""
         errors = []
         html_file = BASE_DIR / "index.html"
         if html_file.exists():
             txt = html_file.read_text(encoding="utf-8")
-            if "Estadio Saroldi" in txt:
-                errors.append("index.html contiene mención a 'Estadio Saroldi'")
-            if "Parque Alfredo Víctor Viera" not in txt:
-                errors.append("index.html no contiene 'Parque Alfredo Víctor Viera'")
-            if "RedTickets" not in txt:
-                errors.append("index.html no menciona 'RedTickets'")
+            if "Parque Federico Omar Saroldi" not in txt and "Parque Saroldi" not in txt:
+                errors.append("index.html no contiene el escenario oficial 'Parque Federico Omar Saroldi'")
+            if "Mathías Corujo" not in txt and "Mathías 'Chiche' Corujo" not in txt:
+                errors.append("index.html no menciona al DT oficial de Wanderers Mathías Corujo")
+            if "Antonio Pacheco" in txt:
+                errors.append("index.html menciona erróneamente a Antonio Pacheco como DT de Wanderers")
+            if "Tickantel" not in txt:
+                errors.append("index.html no menciona 'Tickantel' para la venta oficial de entradas de Wanderers")
 
-        digest_file = DATA_DIR / "news_digest.json"
-        if digest_file.exists():
-            txt = digest_file.read_text(encoding="utf-8")
-            if "Saroldi" in txt:
-                errors.append("data/news_digest.json menciona 'Saroldi'")
-            if "Wanderers" not in txt:
-                errors.append("data/news_digest.json no menciona 'Wanderers'")
+        rival_file = DATA_DIR / "rival_intelligence.json"
+        if rival_file.exists():
+            txt = rival_file.read_text(encoding="utf-8")
+            if "Mathías Corujo" not in txt:
+                errors.append("data/rival_intelligence.json no tiene a Mathías Corujo como entrenador")
+            if "Antonio Pacheco" in txt:
+                errors.append("data/rival_intelligence.json menciona a Antonio Pacheco")
 
         passed = len(errors) == 0
-        msg = "Rival Montevideo Wanderers, Parque Viera y RedTickets verificados" if passed else f"Errores de escenario/rival: {'; '.join(errors)}"
-        self.record_result("Verificación de Rival y Escenario", passed, msg, {"errors": errors})
+        msg = "Rival Montevideo Wanderers, DT Mathías Corujo, Parque Saroldi y Tickantel verificados" if passed else f"Errores de escenario/rival/DT: {'; '.join(errors)}"
+        self.record_result("Verificación de Rival, DT y Escenario", passed, msg, {"errors": errors})
 
     def test_data_files_schema(self):
         """Verifica que los archivos JSON requeridos existan, tengan sintaxis válida y no estén vacíos."""

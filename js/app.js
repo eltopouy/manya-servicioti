@@ -713,8 +713,8 @@
     if (!container) return;
     const proxMatch = state.live && state.live.proximo_partido ? state.live.proximo_partido : null;
     const match1Label = proxMatch
-      ? `Fecha 12: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Alfredo Víctor Viera'})`
-      : 'Fecha 12: Peñarol vs Montevideo Wanderers (Parque Viera)';
+      ? `Fecha 12: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Federico Omar Saroldi'})`
+      : 'Fecha 12: Peñarol vs Montevideo Wanderers (Parque Saroldi)';
     const fechas = [
       { id: 1, label: match1Label },
       { id: 2, label: 'Fecha 13: Peñarol vs Defensor Sporting (Campeón del Siglo)' },

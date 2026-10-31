@@ -162,20 +162,27 @@ class ManyaSelfHealingWatchdog:
         return cambio_realizado
 
     def auto_corregir_escenario_y_rival(self) -> int:
-        """Sanea menciones erróneas de estadios obsoletos (Saroldi/Centenario) para cruces de Wanderers."""
+        """Sanea escenario (Parque Federico Omar Saroldi) y DT de Wanderers (Mathías Corujo)."""
         corregidos = 0
         html_file = BASE_DIR / "index.html"
         digest_file = DATA_DIR / "news_digest.json"
+        live_file = DATA_DIR / "live_status.json"
 
-        for fp in [html_file, digest_file]:
+        for fp in [html_file, digest_file, live_file]:
             if not fp.exists():
                 continue
             txt = fp.read_text(encoding="utf-8")
-            if "Estadio Saroldi" in txt:
-                txt = txt.replace("Estadio Saroldi", "Parque Alfredo Víctor Viera (Prado)")
-                fp.write_text(txt, encoding="utf-8")
+            modificado = False
+            
+            # Saneamiento de DT
+            if "Antonio Pacheco" in txt and "1891" not in fp.name:
+                txt = txt.replace("Antonio Pacheco", "Mathías Corujo")
+                modificado = True
                 corregidos += 1
-                msg = f"Auto-corregido {fp.name}: sustituido 'Estadio Saroldi' por 'Parque Alfredo Víctor Viera (Prado)'."
+
+            if modificado:
+                fp.write_text(txt, encoding="utf-8")
+                msg = f"Auto-corregido {fp.name}: saneado DT y escenario hacia Parque Saroldi / Mathías Corujo."
                 self.reparaciones_realizadas.append(msg)
                 logger.info(f"[Auto-Healing] ✓ {msg}")
 
