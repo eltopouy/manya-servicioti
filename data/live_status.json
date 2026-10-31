@@ -1,12 +1,12 @@
 {
-  "actualizado": "31/10/2026 13:41",
-  "fase_partido": "PREVIA",
-  "estado_ciclo_vida": "PREVIA",
+  "actualizado": "31/10/2026 19:58",
+  "fase_partido": "POST_PARTIDO",
+  "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 183.7,
+  "horas_desde_ultimo_partido": 1.5,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Parque Federico Omar Saroldi (Prado)) • VTV Plus / Disney+ Premium.",
+  "alerta_banner": "🏁 FINALIZADO: Peñarol 1 - 1 Montevideo Wanderers • Crónica post-partido y análisis táctico en primer plano.",
   "partido_activo": {
     "event_id": "401931258",
     "nombre": "Peñarol vs Montevideo Wanderers",
@@ -20,7 +20,7 @@
       "abreviatura": "PEN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": true
     },
     "visitante": {
@@ -29,16 +29,16 @@
       "abreviatura": "WAN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5501.png",
       "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
-    "minuto_reloj": "0'",
-    "tiempo_periodo": 0,
-    "completado": false,
-    "state": "pre",
+    "minuto_reloj": "90'+8'",
+    "tiempo_periodo": 2,
+    "completado": true,
+    "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": true,
-    "fase": "PREVIA",
+    "es_hoy": false,
+    "fase": "POST_PARTIDO",
     "detalles_avanzados": {
       "goles": [],
       "tarjetas": [],
@@ -52,6 +52,31 @@
     }
   },
   "proximo_partido": {
+    "fecha_numero": 12,
+    "nombre": "Peñarol vs Cerro Largo",
+    "fecha_iso": "2026-11-01T18:00:00-03:00",
+    "fecha_legible": "Domingo 01/11/2026 18:00 hs",
+    "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
+    "estadio": "Estadio Campeón del Siglo (Montevideo)",
+    "local": {
+      "nombre": "Peñarol",
+      "abreviatura": "CAP",
+      "goles": "-",
+      "es_penarol": true,
+      "escudo": "assets/img/escudos/escudo_penarol.webp"
+    },
+    "visitante": {
+      "nombre": "Cerro Largo",
+      "abreviatura": "CRL",
+      "goles": "-",
+      "es_penarol": false,
+      "escudo": "assets/img/escudos/escudo_cerro_largo.webp"
+    },
+    "tv": "VTV Plus / Disney+ Premium",
+    "completado": false,
+    "es_hoy": false
+  },
+  "ultimo_partido": {
     "event_id": "401931258",
     "nombre": "Peñarol vs Montevideo Wanderers",
     "fecha_iso": "2026-10-31T16:30:00-03:00",
@@ -64,7 +89,7 @@
       "abreviatura": "PEN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": true
     },
     "visitante": {
@@ -73,83 +98,17 @@
       "abreviatura": "WAN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5501.png",
       "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
-    "minuto_reloj": "0'",
-    "tiempo_periodo": 0,
-    "completado": false,
-    "state": "pre",
-    "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": true
-  },
-  "ultimo_partido": {
-    "event_id": "401930317",
-    "nombre": "Juventud vs Peñarol",
-    "fecha_iso": "2026-10-23T20:00:00-03:00",
-    "fecha_legible": "Viernes 23/10/2026 20:00 hs",
-    "torneo": "Torneo Clausura 2026",
-    "estadio": "Estadio Centenario",
-    "local": {
-      "id": "8416",
-      "nombre": "Juventud",
-      "abreviatura": "JUV",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
-      "escudo": "assets/img/escudos/escudo_juventud.webp",
-      "goles": "0",
-      "es_penarol": false
-    },
-    "visitante": {
-      "id": "2683",
-      "nombre": "Peñarol",
-      "abreviatura": "PEN",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-      "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "0",
-      "es_penarol": true
-    },
-    "minuto_reloj": "90'+6'",
+    "minuto_reloj": "90'+8'",
     "tiempo_periodo": 2,
     "completado": true,
     "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false
+    "es_hoy": true
   },
   "ultimos_resultados": [
-    {
-      "event_id": "401930317",
-      "nombre": "Juventud vs Peñarol",
-      "fecha_iso": "2026-10-23T20:00:00-03:00",
-      "fecha_legible": "Viernes 23/10/2026 20:00 hs",
-      "torneo": "Torneo Clausura 2026",
-      "estadio": "Estadio Centenario",
-      "local": {
-        "id": "8416",
-        "nombre": "Juventud",
-        "abreviatura": "JUV",
-        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
-        "escudo": "assets/img/escudos/escudo_juventud.webp",
-        "goles": "0",
-        "es_penarol": false
-      },
-      "visitante": {
-        "id": "2683",
-        "nombre": "Peñarol",
-        "abreviatura": "PEN",
-        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-        "escudo": "assets/img/escudos/escudo_penarol.webp",
-        "goles": "0",
-        "es_penarol": true
-      },
-      "minuto_reloj": "90'+6'",
-      "tiempo_periodo": 2,
-      "completado": true,
-      "state": "post",
-      "tv": "VTV Plus / Disney+ Premium",
-      "es_hoy": false
-    }
-  ],
-  "proximos_partidos": [
     {
       "event_id": "401931258",
       "nombre": "Peñarol vs Montevideo Wanderers",
@@ -163,7 +122,7 @@
         "abreviatura": "PEN",
         "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
         "escudo": "assets/img/escudos/escudo_penarol.webp",
-        "goles": "0",
+        "goles": "1",
         "es_penarol": true
       },
       "visitante": {
@@ -172,15 +131,42 @@
         "abreviatura": "WAN",
         "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5501.png",
         "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
-        "goles": "0",
+        "goles": "1",
         "es_penarol": false
       },
-      "minuto_reloj": "0'",
-      "tiempo_periodo": 0,
-      "completado": false,
-      "state": "pre",
+      "minuto_reloj": "90'+8'",
+      "tiempo_periodo": 2,
+      "completado": true,
+      "state": "post",
       "tv": "VTV Plus / Disney+ Premium",
       "es_hoy": true
+    }
+  ],
+  "proximos_partidos": [
+    {
+      "fecha_numero": 12,
+      "nombre": "Peñarol vs Cerro Largo",
+      "fecha_iso": "2026-11-01T18:00:00-03:00",
+      "fecha_legible": "Domingo 01/11/2026 18:00 hs",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
+      "estadio": "Estadio Campeón del Siglo (Montevideo)",
+      "local": {
+        "nombre": "Peñarol",
+        "abreviatura": "CAP",
+        "goles": "-",
+        "es_penarol": true,
+        "escudo": "assets/img/escudos/escudo_penarol.webp"
+      },
+      "visitante": {
+        "nombre": "Cerro Largo",
+        "abreviatura": "CRL",
+        "goles": "-",
+        "es_penarol": false,
+        "escudo": "assets/img/escudos/escudo_cerro_largo.webp"
+      },
+      "tv": "VTV Plus / Disney+ Premium",
+      "completado": false,
+      "es_hoy": false
     }
   ],
   "torneo_activo_id": "clausura",
@@ -226,6 +212,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Peñarol",
+      "es_penarol": true,
+      "pj": 13,
+      "pg": 6,
+      "pe": 5,
+      "pp": 2,
+      "gf": 17,
+      "gc": 9,
+      "dg": "+8",
+      "pts": 22
+    },
+    {
+      "pos": 5,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
       "pj": 12,
@@ -234,19 +233,6 @@
       "pp": 3,
       "gf": 18,
       "gc": 10,
-      "dg": "+8",
-      "pts": 21
-    },
-    {
-      "pos": 5,
-      "equipo": "Peñarol",
-      "es_penarol": true,
-      "pj": 12,
-      "pg": 6,
-      "pe": 4,
-      "pp": 2,
-      "gf": 16,
-      "gc": 8,
       "dg": "+8",
       "pts": 21
     },
@@ -293,17 +279,30 @@
       "pos": 9,
       "equipo": "Cerro",
       "es_penarol": false,
-      "pj": 12,
+      "pj": 13,
       "pg": 5,
       "pe": 3,
-      "pp": 4,
-      "gf": 14,
-      "gc": 17,
-      "dg": "-3",
+      "pp": 5,
+      "gf": 15,
+      "gc": 19,
+      "dg": "-4",
       "pts": 18
     },
     {
       "pos": 10,
+      "equipo": "Montevideo Wanderers",
+      "es_penarol": false,
+      "pj": 13,
+      "pg": 4,
+      "pe": 4,
+      "pp": 5,
+      "gf": 14,
+      "gc": 19,
+      "dg": "-5",
+      "pts": 16
+    },
+    {
+      "pos": 11,
       "equipo": "Boston River",
       "es_penarol": false,
       "pj": 12,
@@ -313,19 +312,6 @@
       "gf": 14,
       "gc": 15,
       "dg": "-1",
-      "pts": 15
-    },
-    {
-      "pos": 11,
-      "equipo": "Montevideo Wanderers",
-      "es_penarol": false,
-      "pj": 12,
-      "pg": 4,
-      "pe": 3,
-      "pp": 5,
-      "gf": 13,
-      "gc": 18,
-      "dg": "-5",
       "pts": 15
     },
     {
@@ -384,14 +370,14 @@
       "pos": 16,
       "equipo": "Central Español Fútbol Club",
       "es_penarol": false,
-      "pj": 12,
-      "pg": 1,
+      "pj": 13,
+      "pg": 2,
       "pe": 2,
       "pp": 9,
-      "gf": 6,
-      "gc": 21,
-      "dg": "-15",
-      "pts": 5
+      "gf": 8,
+      "gc": 22,
+      "dg": "-14",
+      "pts": 8
     }
   ],
   "tabla_anual": [
@@ -646,6 +632,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Peñarol",
+      "es_penarol": true,
+      "pj": 13,
+      "pg": 6,
+      "pe": 5,
+      "pp": 2,
+      "gf": 17,
+      "gc": 9,
+      "dg": "+8",
+      "pts": 22
+    },
+    {
+      "pos": 5,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
       "pj": 12,
@@ -654,19 +653,6 @@
       "pp": 3,
       "gf": 18,
       "gc": 10,
-      "dg": "+8",
-      "pts": 21
-    },
-    {
-      "pos": 5,
-      "equipo": "Peñarol",
-      "es_penarol": true,
-      "pj": 12,
-      "pg": 6,
-      "pe": 4,
-      "pp": 2,
-      "gf": 16,
-      "gc": 8,
       "dg": "+8",
       "pts": 21
     },
@@ -713,17 +699,30 @@
       "pos": 9,
       "equipo": "Cerro",
       "es_penarol": false,
-      "pj": 12,
+      "pj": 13,
       "pg": 5,
       "pe": 3,
-      "pp": 4,
-      "gf": 14,
-      "gc": 17,
-      "dg": "-3",
+      "pp": 5,
+      "gf": 15,
+      "gc": 19,
+      "dg": "-4",
       "pts": 18
     },
     {
       "pos": 10,
+      "equipo": "Montevideo Wanderers",
+      "es_penarol": false,
+      "pj": 13,
+      "pg": 4,
+      "pe": 4,
+      "pp": 5,
+      "gf": 14,
+      "gc": 19,
+      "dg": "-5",
+      "pts": 16
+    },
+    {
+      "pos": 11,
       "equipo": "Boston River",
       "es_penarol": false,
       "pj": 12,
@@ -733,19 +732,6 @@
       "gf": 14,
       "gc": 15,
       "dg": "-1",
-      "pts": 15
-    },
-    {
-      "pos": 11,
-      "equipo": "Montevideo Wanderers",
-      "es_penarol": false,
-      "pj": 12,
-      "pg": 4,
-      "pe": 3,
-      "pp": 5,
-      "gf": 13,
-      "gc": 18,
-      "dg": "-5",
       "pts": 15
     },
     {
@@ -804,14 +790,14 @@
       "pos": 16,
       "equipo": "Central Español Fútbol Club",
       "es_penarol": false,
-      "pj": 12,
-      "pg": 1,
+      "pj": 13,
+      "pg": 2,
       "pe": 2,
       "pp": 9,
-      "gf": 6,
-      "gc": 21,
-      "dg": "-15",
-      "pts": 5
+      "gf": 8,
+      "gc": 22,
+      "dg": "-14",
+      "pts": 8
     }
   ],
   "tabla_libertadores": [
@@ -922,6 +908,19 @@
         },
         {
           "pos": 4,
+          "equipo": "Peñarol",
+          "es_penarol": true,
+          "pj": 13,
+          "pg": 6,
+          "pe": 5,
+          "pp": 2,
+          "gf": 17,
+          "gc": 9,
+          "dg": "+8",
+          "pts": 22
+        },
+        {
+          "pos": 5,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
           "pj": 12,
@@ -930,19 +929,6 @@
           "pp": 3,
           "gf": 18,
           "gc": 10,
-          "dg": "+8",
-          "pts": 21
-        },
-        {
-          "pos": 5,
-          "equipo": "Peñarol",
-          "es_penarol": true,
-          "pj": 12,
-          "pg": 6,
-          "pe": 4,
-          "pp": 2,
-          "gf": 16,
-          "gc": 8,
           "dg": "+8",
           "pts": 21
         },
@@ -989,17 +975,30 @@
           "pos": 9,
           "equipo": "Cerro",
           "es_penarol": false,
-          "pj": 12,
+          "pj": 13,
           "pg": 5,
           "pe": 3,
-          "pp": 4,
-          "gf": 14,
-          "gc": 17,
-          "dg": "-3",
+          "pp": 5,
+          "gf": 15,
+          "gc": 19,
+          "dg": "-4",
           "pts": 18
         },
         {
           "pos": 10,
+          "equipo": "Montevideo Wanderers",
+          "es_penarol": false,
+          "pj": 13,
+          "pg": 4,
+          "pe": 4,
+          "pp": 5,
+          "gf": 14,
+          "gc": 19,
+          "dg": "-5",
+          "pts": 16
+        },
+        {
+          "pos": 11,
           "equipo": "Boston River",
           "es_penarol": false,
           "pj": 12,
@@ -1009,19 +1008,6 @@
           "gf": 14,
           "gc": 15,
           "dg": "-1",
-          "pts": 15
-        },
-        {
-          "pos": 11,
-          "equipo": "Montevideo Wanderers",
-          "es_penarol": false,
-          "pj": 12,
-          "pg": 4,
-          "pe": 3,
-          "pp": 5,
-          "gf": 13,
-          "gc": 18,
-          "dg": "-5",
           "pts": 15
         },
         {
@@ -1080,14 +1066,14 @@
           "pos": 16,
           "equipo": "Central Español Fútbol Club",
           "es_penarol": false,
-          "pj": 12,
-          "pg": 1,
+          "pj": 13,
+          "pg": 2,
           "pe": 2,
           "pp": 9,
-          "gf": 6,
-          "gc": 21,
-          "dg": "-15",
-          "pts": 5
+          "gf": 8,
+          "gc": 22,
+          "dg": "-14",
+          "pts": 8
         }
       ]
     },
@@ -1379,13 +1365,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 18.7,
-    "sensacion_c": 19.7,
-    "viento_kmh": 13.0,
-    "humedad_pct": 80,
-    "condicion": "Templado en el Campeón del Siglo",
-    "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "31/10/2026 13:41"
+    "temperatura_c": 15.5,
+    "sensacion_c": 14.8,
+    "viento_kmh": 14.3,
+    "humedad_pct": 93,
+    "condicion": "Cielo despejado sobre Bañados de Carrasco",
+    "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
+    "actualizado": "31/10/2026 19:58"
   },
   "minuto_a_minuto": [
     {
