@@ -241,6 +241,39 @@ class ManyaEcosystemTester:
         msg = "Todos los endpoints responden HTTP 200 OK" if passed else f"Endpoints con error: {failed_urls}"
         self.record_result("Accesibilidad de Endpoints Oficiales", passed, msg, results_map)
 
+    def test_pwa_network_first_and_standings_selector(self):
+        """Verifica que Service Worker use Network-First, la tabla por defecto sea Clausura y no haya datos viejos en el match center."""
+        errors = []
+        sw_file = BASE_DIR / "sw.js"
+        if sw_file.exists():
+            txt = sw_file.read_text(encoding="utf-8")
+            if "v7.0-network-first" not in txt:
+                errors.append("sw.js no tiene la versión v7.0-network-first")
+            if "caches.match(event.request).then(cached => cached || fetch(event.request))" in txt:
+                errors.append("sw.js aún tiene fetch cache-first")
+        else:
+            errors.append("sw.js no existe")
+
+        live_file = DATA_DIR / "live_status.json"
+        if live_file.exists():
+            data = json.loads(live_file.read_text(encoding="utf-8"))
+            if data.get("torneo_activo_id") != "clausura":
+                errors.append(f"live_status.json torneo_activo_id es '{data.get('torneo_activo_id')}', se esperaba 'clausura'")
+        else:
+            errors.append("live_status.json no existe")
+
+        html_file = BASE_DIR / "index.html"
+        if html_file.exists():
+            txt = html_file.read_text(encoding="utf-8")
+            if "Pitazo inicial en el Estadio Centenario" in txt:
+                errors.append("index.html contiene relato viejo del Centenario en el match center")
+            if "manya_app_ver" not in txt:
+                errors.append("index.html no tiene el script auto-invalidador de caché PWA")
+
+        passed = len(errors) == 0
+        msg = "PWA Network-First, selector de tablas en Clausura y saneamiento de caché verificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
+        self.record_result("PWA Network-First y Selector Clausura/Anual", passed, msg, {"errors": errors})
+
     def run_all_tests(self) -> Dict[str, Any]:
         """Ejecuta toda la batería de pruebas y devuelve el resumen consolidado."""
         self.results = []
@@ -254,6 +287,7 @@ class ManyaEcosystemTester:
         self.test_data_files_schema()
         self.test_concurrency_locks_health()
         self.test_external_endpoints_reachability()
+        self.test_pwa_network_first_and_standings_selector()
 
         total = self.passed_count + self.failed_count
         score = round((self.passed_count / total * 100), 1) if total > 0 else 0.0
