@@ -1,21 +1,21 @@
 [
   {
-    "id": "oficialcap_centenario_partido",
+    "id": "oficialcap_previa_wanderers",
     "handle": "@oficialcap",
     "nombre": "Club Atlético Peñarol (Oficial)",
     "badge": "Cuenta Oficial • +750K Fans",
     "avatar": "assets/img/influencers/avatar_oficialcap.svg",
     "url_instagram": "https://www.instagram.com/oficialcap/",
-    "titulo": "Peñarol bajo la Torre de los Homenajes en el Estadio Centenario",
-    "descripcion": "Noche de fútbol en el mítico Centenario por el Torneo Clausura. El Carbonero dejó todo en la cancha bajo una multitud aurinegra en las tres tribunas habilitadas.",
-    "imagen_webp": "assets/ig/manya_juventud_vs_penarol_centenario.webp",
-    "imagen_jpg": "assets/ig/manya_juventud_vs_penarol_centenario.jpg",
-    "partido": "Juventud 0 - 0 Peñarol • Torneo Clausura",
+    "titulo": "El Decano concentrado en Los Aromos para la visita al Prado",
+    "descripcion": "Último ensayo táctico en el Complejo Washington Cataldi. Diego Aguirre definió el once titular y la lista de convocados para enfrentar a Montevideo Wanderers en la Fecha 12 del Torneo Clausura.",
+    "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
+    "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg",
+    "partido": "Wanderers vs Peñarol • Fecha 12 Clausura",
     "categoria": "partidos",
-    "likes": 54800,
-    "comments": 1620,
-    "likes_formato": "54.8K",
-    "hashtags": "#Peñarol #VamosCarbonero #TorneoClausura #Centenario #LaVidaPorPeñarol"
+    "likes": 58200,
+    "comments": 1450,
+    "likes_formato": "58.2K",
+    "hashtags": "#Peñarol #VamosCarbonero #TorneoClausura #LosAromos #LaVidaPorPeñarol"
   },
   {
     "id": "padreydecanocom_fiesta_tribunas",

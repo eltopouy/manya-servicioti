@@ -442,8 +442,8 @@
     }
 
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
-    if (tLast && ult.local && ult.visitante) {
-      tLast.textContent = `${ult.local.nombre} ${ult.local.goles} - ${ult.visitante.goles} ${ult.visitante.nombre} (${ult.torneo || 'Torneo Clausura'} • ${ult.estadio || 'Estadio Centenario'})`;
+    if (tLast) {
+      tLast.textContent = 'Peñarol 64 pts (Líder Solitario Anual • +34 DG)';
     }
 
     // Ticker interactivo de alerta de partido
@@ -1975,7 +1975,7 @@
   async function init() {
     setupLightbox();
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hJuventud, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
       loadJsonSafe('data/live_status.json'),
       loadJsonSafe('data/news_digest.json'),
       loadJsonSafe('data/instagram_feed.json'),
@@ -1983,7 +1983,7 @@
       loadJsonSafe('data/squad_2026.json'),
       loadJsonSafe('data/history_1891.json'),
       loadJsonSafe('data/escudos_uruguay.json'),
-      loadJsonSafe('data/historial_juventud.json'),
+      loadJsonSafe('data/historial_wanderers.json'),
       loadJsonSafe('data/efemerides_hoy.json'),
       loadJsonSafe('data/rival_intelligence.json'),
       loadJsonSafe('data/influencers_feed.json'),
@@ -2002,8 +2002,8 @@
       renderStandings();
       setupLivePolling();
     }
-    if (h2hJuventud) {
-      renderHeadToHead(h2hJuventud);
+    if (h2hWanderers) {
+      renderHeadToHead(h2hWanderers);
     }
     if (efemeridesHoy) {
       renderEfemerides(efemeridesHoy);

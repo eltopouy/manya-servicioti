@@ -1,0 +1,54 @@
+{
+  "rival": "Montevideo Wanderers",
+  "rival_id": 5501,
+  "rival_slug": "wanderers",
+  "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
+  "resumen": {
+    "partidos_jugados": 204,
+    "ganados_penarol": 132,
+    "empatados": 48,
+    "perdidos_penarol": 24,
+    "goles_penarol": 412,
+    "goles_rival": 188,
+    "diferencia_goles": "+224",
+    "ventaja_victorias": "+108 partidos a favor del Decano",
+    "efectividad_pct": "73.2%"
+  },
+  "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-05-18",
+      "marcador": "Peñarol 3 - 1 Montevideo Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura 2026",
+      "incidencias": "Leonardo Fernández (P) 22', Maximiliano Silvera (P) 58', Javier Cabrera (P) 74' y Matías Fonseca (W) 86'"
+    },
+    {
+      "fecha": "2025-10-12",
+      "marcador": "Montevideo Wanderers 0 - 2 Peñarol",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "torneo": "Torneo Clausura 2025",
+      "incidencias": "Maximiliano Silvera (P) 34' y Leonardo Fernández (P) 78' de tiro libre"
+    },
+    {
+      "fecha": "2025-05-11",
+      "marcador": "Peñarol 1 - 0 Montevideo Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura 2025",
+      "incidencias": "Leonardo Fernández (P) 61'"
+    },
+    {
+      "fecha": "2024-11-14",
+      "marcador": "Montevideo Wanderers 0 - 2 Peñarol",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "torneo": "Torneo Clausura 2024",
+      "incidencias": "Facundo Batista (P) 10' y Leonardo Fernández (P) 89'"
+    },
+    {
+      "fecha": "2024-05-11",
+      "marcador": "Peñarol 1 - 0 Montevideo Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura 2024",
+      "incidencias": "Leonardo Fernández (P) 79'"
+    }
+  ]
+}

@@ -466,8 +466,8 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
     prompt = (
         "Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy) y ServicioTI Uruguay "
         "(https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.\n"
-        "Tu misión es imprimir un nivel de redacción de excelencia suprema, concebido como 'The New York Times del Club Atlético Peñarol': "
-        "rigor táctico, elegancia periodística, léxico culto y la auténtica mística del pueblo carbonero.\n\n"
+        "Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de pizarrón táctico: "
+        "presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual, sin barroquismos literarios ni metáforas abstractas.\n\n"
         f"{culture_context}"
         f"NOTICIAS DE ACTUALIDAD:\n{headlines_txt}\n\n"
         f"Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} "

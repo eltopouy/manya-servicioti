@@ -807,8 +807,8 @@ class ManyaMatchEngine:
         else:
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
             tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
-            ultimo_res_txt = f" Último resultado oficial: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']}." if (last_match and last_match.get("local")) else ""
-            alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({proximo_partido_data.get('estadio', 'Estadio Saroldi')}).{ultimo_res_txt}"
+            estadio_nom = proximo_partido_data.get('estadio') or 'Parque Alfredo Víctor Viera (Prado)'
+            alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
 
         # El partido activo en el Match Center es siempre el próximo encuentro
         partido_activo_data = dict(proximo_partido_data)
@@ -837,7 +837,7 @@ class ManyaMatchEngine:
                 "nombre": "Torneo Clausura 2026",
                 "nombre_corto": "Torneo Clausura",
                 "icono": "⚽",
-                "badge": "Próximo Partido • Fecha 11" if torneo_defecto_id == "clausura" else "Torneo Corto",
+                "badge": "Próximo Partido • Fecha 12" if torneo_defecto_id == "clausura" else "Torneo Corto",
                 "es_proximo": (torneo_defecto_id == "clausura"),
                 "datos": tabla_clausura
             },
