@@ -1,5 +1,5 @@
 {
-  "generado_el": "31/10/2026 10:55",
+  "generado_el": "31/10/2026 13:41",
   "rival_nombre": "Montevideo Wanderers Fútbol Club",
   "rival_corto": "Wanderers",
   "rival_slug": "wanderers",
@@ -9,66 +9,52 @@
     "fundacion": "15 de agosto de 1902",
     "sede": "Prado, Montevideo, Uruguay",
     "estadio_propio": "Parque Alfredo Víctor Viera (Prado)",
-    "estadio_fijado_partido": "Parque Federico Omar Saroldi (Prado)",
     "capacidad": 15000,
     "web_oficial": "https://mwfc.com.uy/",
     "redes": {}
   },
   "scouting_tactico": {
-    "entrenador": "Mathías Corujo",
-    "ayudante_tecnico": "Nicolás Amodio",
-    "esquema_base": "4-3-3 / 4-2-3-1 de intensidad, transiciones rápidas y desborde por bandas",
-    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por Mathías 'Chiche' Corujo con la asistencia técnica de Nicolás Amodio, presenta una propuesta de intensidad física, disciplina táctica y transiciones veloces. Apoyado en la experiencia de figuras con pasado aurinegro como Fabricio Formiliano en la zaga, Gonzalo Freitas en la contención y Jonathan Urretaviscaya en la ofensiva, el equipo bohemio busca repliegue compacto en campo medio para salir disparado a espaldas de los laterales contrarios, combinando la velocidad del 'Rayo' con el juego físico y aéreo de Mateo Levato.",
+    "entrenador": "Antonio Pacheco",
+    "esquema_base": "4-2-3-1 de posesión y transiciones veloces",
+    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por un ídolo aurinegro como Antonio Pacheco, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival.",
     "figuras_a_seguir": [
       {
-        "nombre": "Jonathan Urretaviscaya",
-        "rol": "Extremo / Delantero",
-        "analisis": "El 'Rayo' es la principal carta de desequilibrio individual: velocidad demoledora en transiciones, 1x1 temible y pegada quirúrgica de tiro libre."
+        "nombre": "Tabaré Viudez",
+        "rol": "Mediapunta / Extremo",
+        "analisis": "Talento individual, pausa y pegada refinada de tiro libre y media distancia. Exige marca escalonada."
       },
       {
-        "nombre": "Fabricio Formiliano",
-        "rol": "Zaguero Central / Capitán",
-        "analisis": "Líder de la última línea bohemia (ex-capitán y campeón con Peñarol). Sobriedad en la marca, anticipación terrestre y enorme poderío aéreo en las dos áreas."
+        "nombre": "Bruno Veglio",
+        "rol": "Volante Mixto / Eje",
+        "analisis": "El termómetro del mediocampo bohemio: distribución con criterio, visión panorámica y llegada sorpresiva al área."
       },
       {
-        "nombre": "Gonzalo Freitas",
-        "rol": "Volante Central Tapón",
-        "analisis": "El termómetro de corte en la medular. Mediocampista físico, fuerte en el juego aéreo y en la recuperación de balones divididos."
-      },
-      {
-        "nombre": "Mateo Levato",
+        "nombre": "Matías Fonseca",
         "rol": "Centrodelantero",
-        "analisis": "Atacante de área argentino. Potente juego de espaldas a los centrales, arrastra marcas y es una constante amenaza en centros al corazón del área."
-      },
-      {
-        "nombre": "Nahuel Furtado",
-        "rol": "Lateral Derecho",
-        "analisis": "Defensor con gran despliegue atlético y proyección continúa para asociarse por el andarivel derecho con Urretaviscaya."
+        "analisis": "Goleador móvil que busca diagonales constantes a las espaldas de los centrales y define de primera intención."
       },
       {
         "nombre": "Mauro Silveira",
         "rol": "Arquero",
-        "analisis": "Seguridad bajo los tres palos, reflejos rápidos y precisión en los envíos largos para activar los contragolpes bohemios."
+        "analisis": "Seguridad bajo los tres palos, reflejos felinos en disparos a quemarropa y excelente pegada para el inicio del juego."
       }
     ],
     "puntos_fuertes": [
-      "Jerarquía y oficio de futbolistas consagrados en el medio uruguayo (Formiliano, Urretaviscaya, Freitas).",
-      "Peligro letal de contragolpe con Jonathan Urretaviscaya atacando espacios abiertos.",
-      "Fortaleza en el juego aéreo y pelotas quietas con Formiliano, Freitas y Levato.",
-      "Disciplina y agresividad en la recuperación impulsadas por Mathías Corujo."
+      "Fluidez en la circulación media y velocidad asociativa.",
+      "Conocimiento táctico profundo del cuerpo técnico liderado por Antonio Pacheco.",
+      "Peligro constante en balones detenidos y remates de media distancia de Viudez."
     ],
     "vulnerabilidades_a_explotar": [
-      "Espacios a las espaldas de Nahuel Furtado cuando se proyecta al ataque, ideales para las diagonales de Jaime Báez.",
-      "Si Leo Fernández recibe con espacio detrás de Freitas, desarmará el cerrojo bohemio con pases filtrados.",
-      "Dificultades defensivas si Peñarol asfixia la salida de Formiliano con la presión alta de Maximiliano Silvera.",
-      "Cancha rápida del Parque Saroldi: favorece el ritmo vertiginoso de toque y rotación que impone el Decano."
+      "Sufren el repliegue defensivo si Peñarol recupera alto con Damián García y presiona la salida.",
+      "Espacios a espaldas de los laterales bohemios cuando se suman al circuito ofensivo.",
+      "Desventaja física en el juego aéreo ante la potencia de Guzmán Rodríguez y Maximiliano Silvera."
     ]
   },
   "duelos_tacticos_1x1": [
     {
-      "id": "duelo_motores_saroldi",
-      "titulo": "La Creatividad de Leo vs. El Cerrojo de Freitas",
-      "zona_campo": "Zona 14 / Eje Central del Saroldi",
+      "id": "duelo_conductores",
+      "titulo": "El Duelo de Motores: Generación vs. Circulación",
+      "zona_campo": "Zona 14 / Mediocampo Central",
       "penarol": {
         "jugador": "Leonardo Fernández",
         "dorsal": "8",
@@ -76,66 +62,82 @@
         "atributos_clave": "Visión panorámica, pegada quirúrgica de balón parado y latigazo teledirigido."
       },
       "rival": {
-        "jugador": "Gonzalo Freitas",
-        "dorsal": "5",
-        "rol": "Volante Central de Wanderers",
-        "atributos_clave": "Fuerza en la marca, despliegue físico y corte de circuitos ofensivos."
+        "jugador": "Bruno Veglio",
+        "dorsal": "10",
+        "rol": "Eje y Gestor de Wanderers",
+        "atributos_clave": "Buen pie, distribución rápida y manejo de los ritmos del partido."
       },
-      "clave_del_duelo": "Si Leo Fernández logra zafarse del acoso físico de Freitas y gira con libertad, Peñarol tendrá supremacía total en tres cuartos de cancha."
+      "clave_del_duelo": "El equipo que logre imponer el ritmo de su cerebro dominará el desarrollo. Si Leo Fernández tiene libertad para girar, romperá la zaga bohemia con pases filtrados."
     },
     {
-      "id": "duelo_goleador_formiliano",
-      "titulo": "La Presión de Silvera vs. El Oficio de 'Tito' Formiliano",
+      "id": "duelo_goleador_zaga",
+      "titulo": "La Fiera del Gol vs. La Zaga Bohemia",
       "zona_campo": "Área de Wanderers",
       "penarol": {
         "jugador": "Maximiliano Silvera",
         "dorsal": "11",
         "rol": "Centrodelantero de Presión",
-        "atributos_clave": "Presión asfixiante, diagonales continuas y gran despliegue físico."
+        "atributos_clave": "Presión asfixiante sobre la salida rival, diagonales y olfato goleador."
       },
       "rival": {
-        "jugador": "Fabricio Formiliano",
-        "dorsal": "2",
-        "rol": "Zaguero Central y Capitán Bohemio",
-        "atributos_clave": "Anticipo, templanza, jerarquía y solidez en los balones aéreos."
+        "jugador": "Emiliano García & Zaga Bohemia",
+        "dorsal": "2 / 3",
+        "rol": "Defensa Central de Wanderers",
+        "atributos_clave": "Oficio, anticipo terrestre y cobertura de espacios reducidos."
       },
-      "clave_del_duelo": "Duelo de gladiadores: Silvera buscará forzar el error de la zaga bohemia, mientras Formiliano apelará a su experiencia para ordenar la última línea."
+      "clave_del_duelo": "Silvera deberá presionar la salida de los centrales de Pacheco para provocar errores no forzados en salida corta."
     },
     {
-      "id": "duelo_banda_urretaviscaya",
-      "titulo": "El Cierre de Maxi Olivera vs. La Velocidad del 'Rayo' Urreta",
-      "zona_campo": "Banda Izquierda Aurinegra",
+      "id": "duelo_bandas_viera",
+      "titulo": "Desborde por Fuera vs. Cobertura de Laterales",
+      "zona_campo": "Bandas / Cancha del Parque Viera",
       "penarol": {
-        "jugador": "Maximiliano Olivera & Jaime Báez",
-        "dorsal": "15 / 23",
-        "rol": "Lateral Izquierdo y Extremo Aurinegro",
-        "atributos_clave": "Oficio defensivo, cobertura de espaldas y transición rápida."
+        "jugador": "Javier Cabrera & Jaime Báez",
+        "dorsal": "7 / 23",
+        "rol": "Extremos Aurinegros",
+        "atributos_clave": "Cambio de marcha en 1x1, profundidad y centros rasantes venenosos atrás."
       },
       "rival": {
-        "jugador": "Jonathan Urretaviscaya",
-        "dorsal": "7",
-        "rol": "Extremo Derecho de Wanderers",
-        "atributos_clave": "Aceleración fulminante, regate en el 1x1 y centros venenosos."
+        "jugador": "Laterales de Wanderers",
+        "dorsal": "4 / 6",
+        "rol": "Laterales con proyección",
+        "atributos_clave": "Vocación ofensiva, pero espacios abiertos a sus espaldas en transición rápida."
       },
-      "clave_del_duelo": "Frenar la chispa de Urretaviscaya en salida rápida será vital para que Peñarol no sufra transiciones punzantes del equipo de Corujo."
+      "clave_del_duelo": "La cancha rápida favorece las transiciones veloces de Cabrera y Báez para desarticular la última línea bohemia."
     },
     {
-      "id": "duelo_aereo_saroldi",
-      "titulo": "La Muralla de Guzmán Rodríguez vs. La Potencia de Mateo Levato",
+      "id": "duelo_cerrojo_decano",
+      "titulo": "La Muralla Decana vs. La Movilidad de Fonseca",
       "zona_campo": "Área Aurinegra",
       "penarol": {
         "jugador": "Guzmán Rodríguez & Washington Aguerre",
         "dorsal": "4 / 1",
         "rol": "Zaguero Central y Arquero Decano",
-        "atributos_clave": "Fuerza aérea dominante, anticipación impecable y solidez bajo palos."
+        "atributos_clave": "Fuerza aérea, anticipación impecable y solidez bajo los tres palos."
       },
       "rival": {
-        "jugador": "Mateo Levato",
-        "dorsal": "9",
-        "rol": "Centrodelantero de Wanderers",
-        "atributos_clave": "Juego de espaldas, presencia física en el área y remate de primera."
+        "jugador": "Matías Fonseca / Nicolás Royón",
+        "dorsal": "9 / 18",
+        "rol": "Delanteros de Wanderers",
+        "atributos_clave": "Movilidad constante, desmarques de apoyo y remate instantáneo."
       },
-      "clave_del_duelo": "Guzmán Rodríguez deberá imponer su jerarquía aérea en cada centro al área y no permitir que Levato descargue limpio con los volantes."
+      "clave_del_duelo": "Neutralizar los centros hacia el corazón del área y cortar los circuitos con Viudez antes de que el balón llegue al área."
     }
+  ],
+  "historial_certificacion_1891": {
+    "partidos_jugados": 396,
+    "ganados_penarol": 207,
+    "empatados": 113,
+    "perdidos_penarol": 76,
+    "goles_penarol": 701,
+    "goles_rival": 394,
+    "ventaja_victorias": "+131 partidos a favor del Decano",
+    "diferencia_goles": "+307",
+    "efectividad_pct": "61.8%"
+  },
+  "fuentes_consultadas": [
+    "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",
+    "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol (1891.uy)",
+    "Ovación Digital — Sección Fútbol y Peñarol (elpais.com.uy/ovacion)"
   ]
 }
