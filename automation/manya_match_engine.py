@@ -791,30 +791,67 @@ class ManyaMatchEngine:
         if match_info and match_info.get("event_id"):
             summary_adv = cls.fetch_match_summary_details(match_info["event_id"])
 
-        # Si hoy terminó un partido (FINALIZADO), el Match Center debe decir siempre PRÓXIMO PARTIDO
+        # Cálculo exacto de la ventana post-partido (Regla de las 48 Horas de Manya ServicioTI)
+        horas_desde_ultimo_partido = 999.0
+        if last_match and last_match.get("fecha_iso"):
+            try:
+                inicio_dt = datetime.fromisoformat(last_match["fecha_iso"].replace("Z", "+00:00")).astimezone(UY_TZ)
+                fin_dt = inicio_dt + timedelta(hours=2)
+                horas_desde_ultimo_partido = max(0.0, (now_uy - fin_dt).total_seconds() / 3600.0)
+            except Exception:
+                pass
+
+        # Determinar próximo partido asegurado
         proximo_partido_data = match_info or {}
-        if fase == "FINALIZADO" and match_info:
+        if (fase == "FINALIZADO" or not proximo_partido_data or proximo_partido_data.get("completado")) and match_info:
             last_match = match_info
             next_upcoming = cls.get_next_upcoming_match(exclude_event_id=match_info.get("event_id"))
             if next_upcoming:
                 proximo_partido_data = next_upcoming
-            # Transición: el Match Center debe colocarse en PREVIA activa hacia el próximo partido
-            fase = "PREVIA"
 
-        # Generar alerta banner interactiva blindada gramaticalmente
+        # Máquina de estados del ciclo de vida de partidos (Regla de Andrés / ServicioTI):
+        # 1. EN_VIVO: partido en desarrollo.
+        # 2. POST_PARTIDO (0 a 48 hs): el partido que terminó se mantiene en primer plano.
+        # 3. PREVIA (> 48 hs o próximo a disputarse): el partido anterior pasa a segundo plano (cajón colapsable)
+        #    y el primer plano absoluto se enfoca en el próximo rival (scouting, 1891 BD y previa).
         if fase == "EN_VIVO":
+            estado_ciclo_vida = "EN_VIVO"
+            partido_activo_data = dict(match_info)
+            partido_activo_data["es_hoy"] = True
+            partido_activo_data["fase"] = "EN_VIVO"
+            partido_activo_data["detalles_avanzados"] = summary_adv
             alerta_banner = f"🔴 EN VIVO AHORA: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info.get('minuto_reloj', '1T')})"
+        elif horas_desde_ultimo_partido <= 48.0 and last_match:
+            fase = "POST_PARTIDO"
+            estado_ciclo_vida = "POST_48H"
+            partido_activo_data = dict(last_match)
+            partido_activo_data["es_hoy"] = False
+            partido_activo_data["fase"] = "POST_PARTIDO"
+            partido_activo_data["detalles_avanzados"] = summary_adv
+            alerta_banner = f"🏁 FINALIZADO: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']} • Crónica post-partido y análisis táctico en primer plano."
         else:
+            fase = "PREVIA"
+            estado_ciclo_vida = "PREVIA"
+            partido_activo_data = dict(proximo_partido_data)
+            partido_activo_data["es_hoy"] = False
+            partido_activo_data["fase"] = "PREVIA"
+            partido_activo_data["detalles_avanzados"] = summary_adv
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
             tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
             estadio_nom = proximo_partido_data.get('estadio') or 'Parque Alfredo Víctor Viera (Prado)'
             alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
 
-        # El partido activo en el Match Center es siempre el próximo encuentro
-        partido_activo_data = dict(proximo_partido_data)
-        partido_activo_data["es_hoy"] = False
-        partido_activo_data["fase"] = fase
-        partido_activo_data["detalles_avanzados"] = summary_adv
+        # Identificar el rival activo para la sincronización de inteligencia y 1891 BD
+        loc_act = partido_activo_data.get("local", {})
+        vis_act = partido_activo_data.get("visitante", {})
+        rival_activo_nombre = loc_act.get("nombre") if not loc_act.get("es_penarol") else vis_act.get("nombre")
+
+        try:
+            from manya_rival_intelligence import resolver_meta_rival
+            meta_rival = resolver_meta_rival(rival_activo_nombre or "wanderers")
+            rival_activo_slug = meta_rival.get("slug", "wanderers")
+        except Exception:
+            rival_activo_slug = "wanderers"
 
         libertadores_info = cls.fetch_libertadores_standings()
         torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
@@ -882,6 +919,11 @@ class ManyaMatchEngine:
         doc_live = {
             "actualizado": now_uy.strftime("%d/%m/%Y %H:%M"),
             "fase_partido": fase,
+            "estado_ciclo_vida": estado_ciclo_vida,
+            "ventana_post_partido_horas": 48,
+            "horas_desde_ultimo_partido": round(horas_desde_ultimo_partido, 1),
+            "rival_activo_slug": rival_activo_slug,
+            "historial_file": "data/historial_activo.json",
             "alerta_banner": alerta_banner,
             "partido_activo": partido_activo_data,
             "proximo_partido": proximo_partido_data,

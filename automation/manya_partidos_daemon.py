@@ -227,11 +227,14 @@ def ejecutar_orquestador(modo: str = "once"):
             except Exception as ex_1891:
                 logger.warning(f"[1891 BD] Aviso actualizando efemérides: {ex_1891}")
 
-            # 1c. Sincronizar scouting táctico del rival (AUF + 1891 + Ovación)
+            # 1c. Sincronizar scouting táctico del rival y balance 1891 BD dinámico
             try:
                 from manya_rival_intelligence import generar_informe_rival
-                rival_equipo = match_info.get("visitante", {}) if match_info.get("local", {}).get("es_penarol") else match_info.get("local", {})
-                generar_informe_rival(rival_equipo.get("nombre", "juventud"))
+                rival_slug = status_live.get("rival_activo_slug")
+                if not rival_slug:
+                    rival_equipo = match_info.get("visitante", {}) if match_info.get("local", {}).get("es_penarol") else match_info.get("local", {})
+                    rival_slug = rival_equipo.get("nombre", "wanderers")
+                generar_informe_rival(rival_slug)
             except Exception as ex_scout:
                 logger.warning(f"[Scout] Aviso generando scouting del rival: {ex_scout}")
 
@@ -245,12 +248,12 @@ def ejecutar_orquestador(modo: str = "once"):
             # 2. Recolectar prensa deportiva exhaustiva
             noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)
 
-            # 3. Acciones según fase del partido
+            # 3. Acciones según fase del partido y ventana de 48 horas
             if fase == "PREVIA":
                 ejecutar_ciclo_previa(match_info, noticias)
             elif fase == "EN_VIVO":
                 ejecutar_ciclo_en_vivo(match_info)
-            elif fase == "FINALIZADO":
+            elif fase in ("FINALIZADO", "POST_PARTIDO"):
                 ejecutar_ciclo_cronica(match_info, noticias)
             else:
                 logger.info("[Orquestador] No hay partido en curso en este momento. Sistema en vigilia.")

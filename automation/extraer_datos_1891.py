@@ -229,6 +229,15 @@ def procesar_fotografias_partidos_1891():
     galleries_file.write_text(json.dumps(galeria_items, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"✓ data/galleries.json actualizado con {len(galeria_items)} fotografías históricas y de partidos.")
 
+def extraer_historial_rival_activo(rival_query: str = "wanderers"):
+    """Extrae el balance histórico oficial frente al rival activo desde 1891 BD y actualiza data/historial_activo.json."""
+    try:
+        from manya_rival_intelligence import obtener_o_generar_historial_1891
+        return obtener_o_generar_historial_1891(rival_query)
+    except Exception as ex:
+        print(f"[1891 Error] No se pudo extraer historial activo: {ex}")
+        return {}
+
 def extraer_historial_juventud():
     """Obtiene el balance histórico oficial frente a Juventud de Las Piedras (rival de la Fecha 11)."""
     print("\n=== EXTRAYENDO HISTORIAL FRENTE A JUVENTUD (1891 BD) ===")

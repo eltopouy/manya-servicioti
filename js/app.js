@@ -1848,6 +1848,19 @@
     if (elPP) elPP.textContent = res.perdidos_penarol;
     if (elGF) elGF.textContent = `${res.goles_penarol} - ${res.goles_rival}`;
     if (elEff) elEff.textContent = res.efectividad_pct;
+
+    const elTitle = document.querySelector('.match-h2h-title span');
+    if (elTitle && (h2h.rival || h2h.rival_oficial)) {
+      elTitle.textContent = `📜 Historial Oficial Verificado: Peñarol vs ${h2h.rival_oficial || h2h.rival}`;
+    }
+    const elPill = document.querySelector('.match-h2h-pill');
+    if (elPill && res.ventaja_victorias) {
+      elPill.textContent = `★ ${res.ventaja_victorias}`;
+    }
+    const elBox = document.getElementById('match-h2h-box');
+    if (elBox && (h2h.rival || h2h.rival_oficial)) {
+      elBox.setAttribute('aria-label', `Historial Oficial Frente a Frente contra ${h2h.rival || 'Rival'}`);
+    }
   }
 
   function renderEfemerides(efem) {
@@ -1983,7 +1996,7 @@
       loadJsonSafe('data/squad_2026.json'),
       loadJsonSafe('data/history_1891.json'),
       loadJsonSafe('data/escudos_uruguay.json'),
-      loadJsonSafe('data/historial_wanderers.json'),
+      loadJsonSafe('data/historial_activo.json'),
       loadJsonSafe('data/efemerides_hoy.json'),
       loadJsonSafe('data/rival_intelligence.json'),
       loadJsonSafe('data/influencers_feed.json'),
