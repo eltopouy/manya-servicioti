@@ -684,24 +684,34 @@
         tagExtra = `<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">${tagLabel}</span>`;
       }
 
+      const ptsClass = r.es_penarol ? 'pts-pill is-leader' : 'pts-pill';
       return `
         <tr class="${rowClass}">
-          <td>${i + 1}</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <img src="${crest}" alt="${r.equipo}" width="20" height="20" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.src='assets/img/escudos/escudo_auf.webp'" />
-              <span style="white-space:nowrap;">${r.equipo}${tagExtra}</span>
+          <td class="col-pos">${i + 1}</td>
+          <td class="col-team">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.src='assets/img/escudos/escudo_auf.webp'" />
+              <span class="team-name-label">${r.equipo}</span>${tagExtra}
             </div>
           </td>
-          <td>${r.pj_calc}</td>
-          <td>${r.pg}</td>
-          <td>${r.pe}</td>
-          <td>${r.pp}</td>
-          <td>${r.dg}</td>
-          <td><strong>${r.pts_calc}</strong></td>
+          <td class="col-stat col-pj">${r.pj_calc}</td>
+          <td class="col-stat col-pg">${r.pg}</td>
+          <td class="col-stat col-pe">${r.pe}</td>
+          <td class="col-stat col-pp">${r.pp}</td>
+          <td class="col-stat col-dg">${r.dg}</td>
+          <td class="col-pts"><span class="${ptsClass}">${r.pts_calc}</span></td>
         </tr>
       `;
     }).join('');
+
+    const btnToggle = document.getElementById('btn-toggle-cols');
+    const tableEl = document.querySelector('.manya-table');
+    if (btnToggle && tableEl) {
+      btnToggle.onclick = () => {
+        const isExpanded = tableEl.classList.toggle('show-all-cols');
+        btnToggle.innerHTML = isExpanded ? '<span>◀ Vista Compacta (PJ/DG/PTS)</span>' : '<span>👁️ Ver Detalle (PG/PE/PP)</span>';
+      };
+    }
   }
 
   function initStandingsTabs() {

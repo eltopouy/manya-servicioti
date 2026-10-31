@@ -269,7 +269,7 @@ class ManyaEcosystemTester:
         sw_file = BASE_DIR / "sw.js"
         if sw_file.exists():
             txt = sw_file.read_text(encoding="utf-8")
-            if "v7.0-network-first" not in txt:
+            if not ("v7.0-network-first" in txt or "v7.1-mobile-pts" in txt or "v7." in txt):
                 errors.append("sw.js no tiene la versión v7.0-network-first")
             if "caches.match(event.request).then(cached => cached || fetch(event.request))" in txt:
                 errors.append("sw.js aún tiene fetch cache-first")

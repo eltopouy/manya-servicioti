@@ -35,7 +35,7 @@
     <!-- Auto Cache-Buster & PWA Invalidator v7.0 -->
   <script>
     (function() {
-      var APP_VER = '7.0';
+      var APP_VER = '7.1';
       try {
         if (localStorage.getItem('manya_app_ver') !== APP_VER) {
           localStorage.setItem('manya_app_ver', APP_VER);
@@ -57,7 +57,7 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=7.0" />
+  <link rel="stylesheet" href="css/styles.css?v=7.1" />
 
   <!-- Grafo Schema.org @graph (SportsTeam + SportsEvent + WebApplication + FAQPage) -->
   <script type="application/ld+json">
@@ -796,29 +796,106 @@
           <div id="standings-sub-info" style="font-size:12.5px;color:#e4e4e7;margin:0 0 12px;padding:10px 14px;background:rgba(255,209,0,0.08);border:1px solid rgba(255,209,0,0.3);border-radius:8px;line-height:1.45;">
             <strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>Montevideo Wanderers</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (65 pts) →</button>
           </div>
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+            <button type="button" id="btn-toggle-cols" class="btn-toggle-cols" title="Alternar visualización de victorias, empates y derrotas en pantallas pequeñas">
+              <span>👁️ Ver Detalle (PG/PE/PP)</span>
+            </button>
+          </div>
           <div class="manya-table-wrap">
             <table class="manya-table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Equipo</th>
-                  <th>PJ</th>
-                  <th>PG</th>
-                  <th>PE</th>
-                  <th>PP</th>
-                  <th>DG</th>
-                  <th>PTS</th>
+                  <th class="col-pos">#</th>
+                  <th class="col-team">Equipo</th>
+                  <th class="col-stat col-pj">PJ</th>
+                  <th class="col-stat col-pg">PG</th>
+                  <th class="col-stat col-pe">PE</th>
+                  <th class="col-stat col-pp">PP</th>
+                  <th class="col-stat col-dg">DG</th>
+                  <th class="col-pts">PTS</th>
                 </tr>
               </thead>
               <tbody id="standings-tbody">
-                <tr class="row-penarol"><td>1</td><td>★ Peñarol</td><td>34</td><td>19</td><td>8</td><td>7</td><td>+24</td><td><strong>65</strong></td></tr>
-                <tr><td>2</td><td>Deportivo Maldonado</td><td>34</td><td>18</td><td>8</td><td>8</td><td>+22</td><td><strong>62</strong></td></tr>
-                <tr><td>3</td><td>Montevideo City Torque</td><td>34</td><td>18</td><td>6</td><td>10</td><td>+17</td><td><strong>60</strong></td></tr>
-                <tr><td>4</td><td>Nacional</td><td>34</td><td>18</td><td>5</td><td>11</td><td>+11</td><td><strong>59</strong></td></tr>
-                <tr><td>5</td><td>Racing</td><td>34</td><td>15</td><td>12</td><td>7</td><td>+12</td><td><strong>57</strong></td></tr>
-                <tr><td>6</td><td>Liverpool</td><td>34</td><td>15</td><td>11</td><td>8</td><td>+14</td><td><strong>56</strong></td></tr>
-                <tr><td>7</td><td>Montevideo Wanderers</td><td>34</td><td>14</td><td>9</td><td>11</td><td>-1</td><td><strong>51</strong></td></tr>
-                <tr><td>8</td><td>Defensor Sporting</td><td>34</td><td>13</td><td>11</td><td>10</td><td>+11</td><td><strong>50</strong></td></tr>
+                <tr class="row-penarol">
+                  <td class="col-pos">1</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_penarol.webp" alt="Peñarol" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Peñarol</span><span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">19</td>
+                  <td class="col-stat col-pe">8</td>
+                  <td class="col-stat col-pp">7</td>
+                  <td class="col-stat col-dg">+24</td>
+                  <td class="col-pts"><span class="pts-pill is-leader">65</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">2</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_deportivo_maldonado.webp" alt="Deportivo Maldonado" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Deportivo Maldonado</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">18</td>
+                  <td class="col-stat col-pe">8</td>
+                  <td class="col-stat col-pp">8</td>
+                  <td class="col-stat col-dg">+22</td>
+                  <td class="col-pts"><span class="pts-pill">62</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">3</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_montevideo_city_torque.webp" alt="Montevideo City Torque" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Montevideo City Torque</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">18</td>
+                  <td class="col-stat col-pe">6</td>
+                  <td class="col-stat col-pp">10</td>
+                  <td class="col-stat col-dg">+17</td>
+                  <td class="col-pts"><span class="pts-pill">60</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">4</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_nacional.webp" alt="Nacional" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Nacional</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">18</td>
+                  <td class="col-stat col-pe">5</td>
+                  <td class="col-stat col-pp">11</td>
+                  <td class="col-stat col-dg">+11</td>
+                  <td class="col-pts"><span class="pts-pill">59</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">5</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_racing.webp" alt="Racing" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Racing</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">15</td>
+                  <td class="col-stat col-pe">12</td>
+                  <td class="col-stat col-pp">7</td>
+                  <td class="col-stat col-dg">+12</td>
+                  <td class="col-pts"><span class="pts-pill">57</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">6</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_liverpool.webp" alt="Liverpool" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Liverpool</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">15</td>
+                  <td class="col-stat col-pe">11</td>
+                  <td class="col-stat col-pp">8</td>
+                  <td class="col-stat col-dg">+14</td>
+                  <td class="col-pts"><span class="pts-pill">56</span></td>
+                </tr>
+                <tr class="row-rival-proximo">
+                  <td class="col-pos">7</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_montevideo_wanderers.webp" alt="Montevideo Wanderers" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Montevideo Wanderers</span><span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">RIVAL DE HOY</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">14</td>
+                  <td class="col-stat col-pe">9</td>
+                  <td class="col-stat col-pp">11</td>
+                  <td class="col-stat col-dg">-1</td>
+                  <td class="col-pts"><span class="pts-pill">51</span></td>
+                </tr>
+                <tr>
+                  <td class="col-pos">8</td>
+                  <td class="col-team"><div style="display:flex;align-items:center;gap:6px;"><img src="assets/img/escudos/escudo_defensor_sporting.webp" alt="Defensor Sporting" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" /><span class="team-name-label">Defensor Sporting</span></div></td>
+                  <td class="col-stat col-pj">34</td>
+                  <td class="col-stat col-pg">13</td>
+                  <td class="col-stat col-pe">11</td>
+                  <td class="col-stat col-pp">10</td>
+                  <td class="col-stat col-dg">+11</td>
+                  <td class="col-pts"><span class="pts-pill">50</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1282,6 +1359,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js?v=7.0" defer></script>
+  <script src="js/app.js?v=7.1" defer></script>
 </body>
 </html>
