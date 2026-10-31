@@ -99,5 +99,8 @@
       },
       "timestamp": "2026-10-31T08:21:14.413496-03:00"
     }
+  ],
+  "reparaciones_aplicadas": [
+    "Auto-ajuste: Activado 'es_hoy=True' y alerta de partido para hoy."
   ]
 }
