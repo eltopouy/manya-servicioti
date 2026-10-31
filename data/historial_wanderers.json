@@ -1,54 +1,56 @@
 {
-  "rival": "Montevideo Wanderers",
-  "rival_id": 5501,
+  "rival": "Wanderers",
+  "rival_oficial": "Montevideo Wanderers Fútbol Club",
+  "rival_id": 321,
   "rival_slug": "wanderers",
+  "escudo_rival": "assets/img/escudos/escudo_montevideo_wanderers.webp",
   "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
   "resumen": {
-    "partidos_jugados": 204,
-    "ganados_penarol": 132,
-    "empatados": 48,
-    "perdidos_penarol": 24,
-    "goles_penarol": 412,
-    "goles_rival": 188,
-    "diferencia_goles": "+224",
-    "ventaja_victorias": "+108 partidos a favor del Decano",
-    "efectividad_pct": "73.2%"
+    "partidos_jugados": 396,
+    "ganados_penarol": 207,
+    "empatados": 113,
+    "perdidos_penarol": 76,
+    "goles_penarol": 701,
+    "goles_rival": 394,
+    "diferencia_goles": "+307",
+    "ventaja_victorias": "+131 partidos a favor del Decano",
+    "efectividad_pct": "61.8%"
   },
   "ultimos_enfrentamientos": [
     {
-      "fecha": "2026-05-18",
-      "marcador": "Peñarol 3 - 1 Montevideo Wanderers",
-      "estadio": "Campeón del Siglo",
-      "torneo": "Torneo Apertura 2026",
-      "incidencias": "Leonardo Fernández (P) 22', Maximiliano Silvera (P) 58', Javier Cabrera (P) 74' y Matías Fonseca (W) 86'"
+      "fecha": "2026-08-05",
+      "marcador": "Peñarol 5 - 1 Wanderers",
+      "estadio": "Centenario",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Thiago Espinosa (P) 15', Luciano Cosentino (W) 19', Matías Arezo (P) 23', Abel Hernández (P) 31', Leonel Jaime (P) 45+1' y Eric Remedi (P) 88'"
     },
     {
-      "fecha": "2025-10-12",
-      "marcador": "Montevideo Wanderers 0 - 2 Peñarol",
+      "fecha": "2026-04-26",
+      "marcador": "Peñarol 0 - 1 Wanderers",
+      "estadio": "Centenario",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Facundo Labandeira (W) 57'"
+    },
+    {
+      "fecha": "2025-10-19",
+      "marcador": "Peñarol 3 - 0 Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Maximiliano Olivera (P) 45', Matías Arezo (P) 46' y Maximiliano Silvera (P) 60'"
+    },
+    {
+      "fecha": "2025-06-22",
+      "marcador": "Peñarol 2 - 0 Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Ignacio Sosa (P) 45' y Maximiliano Silvera (P) 46'"
+    },
+    {
+      "fecha": "2025-04-19",
+      "marcador": "Peñarol 2 - 1 Wanderers",
       "estadio": "Parque Alfredo Víctor Viera",
-      "torneo": "Torneo Clausura 2025",
-      "incidencias": "Maximiliano Silvera (P) 34' y Leonardo Fernández (P) 78' de tiro libre"
-    },
-    {
-      "fecha": "2025-05-11",
-      "marcador": "Peñarol 1 - 0 Montevideo Wanderers",
-      "estadio": "Campeón del Siglo",
-      "torneo": "Torneo Apertura 2025",
-      "incidencias": "Leonardo Fernández (P) 61'"
-    },
-    {
-      "fecha": "2024-11-14",
-      "marcador": "Montevideo Wanderers 0 - 2 Peñarol",
-      "estadio": "Parque Alfredo Víctor Viera",
-      "torneo": "Torneo Clausura 2024",
-      "incidencias": "Facundo Batista (P) 10' y Leonardo Fernández (P) 89'"
-    },
-    {
-      "fecha": "2024-05-11",
-      "marcador": "Peñarol 1 - 0 Montevideo Wanderers",
-      "estadio": "Campeón del Siglo",
-      "torneo": "Torneo Apertura 2024",
-      "incidencias": "Leonardo Fernández (P) 79'"
+      "torneo": "Torneo Apertura",
+      "incidencias": "Bruno Veglio (W) 18', Maximiliano Silvera (P) 31' y Héctor Villalba (P) 84'"
     }
   ]
 }

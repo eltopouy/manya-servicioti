@@ -1,14 +1,19 @@
 {
-  "actualizado": "30/10/2026 21:00",
+  "actualizado": "30/10/2026 21:30",
   "fase_partido": "PREVIA",
-  "alerta_banner": "⚡ ¡MAÑANA JUEGA PEÑAROL! Peñarol visita a Montevideo Wanderers en el Prado este Sábado 31/10 a las 16:30 hs (Fecha 12 Torneo Clausura) • VTV Plus / Disney+ Premium.",
+  "estado_ciclo_vida": "PREVIA",
+  "ventana_post_partido_horas": 48,
+  "horas_desde_ultimo_partido": 167.5,
+  "rival_activo_slug": "wanderers",
+  "historial_file": "data/historial_activo.json",
+  "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Peñarol vs Montevideo Wanderers el Sábado 31/10/2026 a las 16:30 hs (Estadio Saroldi) • VTV Plus / Disney+ Premium.",
   "partido_activo": {
     "event_id": "401931258",
     "nombre": "Peñarol vs Montevideo Wanderers",
     "fecha_iso": "2026-10-31T16:30:00-03:00",
     "fecha_legible": "Sábado 31/10/2026 16:30 hs",
-    "torneo": "Torneo Clausura 2026",
-    "estadio": "Parque Alfredo Víctor Viera (Prado)",
+    "torneo": "Torneo Clausura",
+    "estadio": "Estadio Saroldi",
     "local": {
       "id": "2683",
       "nombre": "Peñarol",
@@ -51,8 +56,8 @@
     "nombre": "Peñarol vs Montevideo Wanderers",
     "fecha_iso": "2026-10-31T16:30:00-03:00",
     "fecha_legible": "Sábado 31/10/2026 16:30 hs",
-    "torneo": "Torneo Clausura 2026",
-    "estadio": "Parque Alfredo Víctor Viera (Prado)",
+    "torneo": "Torneo Clausura",
+    "estadio": "Estadio Saroldi",
     "local": {
       "id": "2683",
       "nombre": "Peñarol",
@@ -1374,13 +1379,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.6,
-    "sensacion_c": 14.7,
-    "viento_kmh": 8.3,
+    "temperatura_c": 13.7,
+    "sensacion_c": 13.5,
+    "viento_kmh": 8.9,
     "humedad_pct": 98,
     "condicion": "Parcialmente nublado en Ruta 102",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "30/10/2026 21:00"
+    "actualizado": "30/10/2026 21:30"
   },
   "minuto_a_minuto": [
     {

@@ -1,20 +1,17 @@
 {
-  "generado_el": "30/10/2026 21:00",
+  "generado_el": "30/10/2026 21:30",
   "rival_nombre": "Montevideo Wanderers Fútbol Club",
   "rival_corto": "Wanderers",
   "rival_slug": "wanderers",
   "escudo_oficial": "assets/img/escudos/escudo_montevideo_wanderers.webp",
-  "escudo_auf_remoto": "https://www.auf.org.uy/imagenes/img_contenido/club_club/a/1926.png",
+  "escudo_auf_remoto": "",
   "datos_institucionales_auf": {
     "fundacion": "15 de agosto de 1902",
     "sede": "Prado, Montevideo, Uruguay",
     "estadio_propio": "Parque Alfredo Víctor Viera (Prado)",
     "capacidad": 15000,
     "web_oficial": "https://mwfc.com.uy/",
-    "redes": {
-      "twitter": "https://x.com/mwfc_oficial",
-      "instagram": "https://www.instagram.com/mwfc_oficial/"
-    }
+    "redes": {}
   },
   "scouting_tactico": {
     "entrenador": "Antonio Pacheco",
@@ -24,7 +21,7 @@
       {
         "nombre": "Tabaré Viudez",
         "rol": "Mediapunta / Extremo",
-        "analisis": "Talento individual inagotable, pausa y pegada refinada de tiro libre y media distancia. Exige marca escalonada."
+        "analisis": "Talento individual, pausa y pegada refinada de tiro libre y media distancia. Exige marca escalonada."
       },
       {
         "nombre": "Bruno Veglio",
@@ -128,15 +125,15 @@
     }
   ],
   "historial_certificacion_1891": {
-    "partidos_jugados": 204,
-    "ganados_penarol": 132,
-    "empatados": 48,
-    "perdidos_penarol": 24,
-    "goles_penarol": 412,
-    "goles_rival": 188,
-    "ventaja_victorias": "+108 partidos a favor del Decano",
-    "diferencia_goles": "+224 goles de diferencia",
-    "efectividad_pct": "73.2%"
+    "partidos_jugados": 396,
+    "ganados_penarol": 207,
+    "empatados": 113,
+    "perdidos_penarol": 76,
+    "goles_penarol": 701,
+    "goles_rival": 394,
+    "ventaja_victorias": "+131 partidos a favor del Decano",
+    "diferencia_goles": "+307",
+    "efectividad_pct": "61.8%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",

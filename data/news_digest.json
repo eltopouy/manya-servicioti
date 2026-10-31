@@ -1,161 +1,121 @@
 {
-  "actualizado": "30/10/2026 21:00",
-  "modelo_ia": "Cobertura Especial Los Aromos & Pizarrón Táctico",
-  "fase_publicacion": "PREVIA_PARTIDO",
+  "actualizado": "30/10/2026 21:31",
+  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
+  "fase_publicacion": "PREVIA",
   "partido_id": "401931258",
-  "titular_dia": "Con el cuchillo entre los dientes en el Prado: Peñarol visita a Wanderers en una final clave por la Anual",
-  "bajada_seo": "Diego Aguirre perfila el once titular en Los Aromos para medirse al bohemio de Tony Pacheco. El Carbonero lidera la Anual con 64 puntos y sale a ganar sin especular.",
-  "portada_visual": {
-    "titular_portada": "⚡ PREVIA OFICIAL: Peñarol visita a Montevideo Wanderers en el Prado • Torneo Clausura 2026 (Fecha 12)",
-    "bajada_portada": "¡CONCENTRACIÓN EN LOS AROMOS! Todo listo para la visita al Prado de este sábado a las 16:30 hs. Diego Aguirre define el 11 titular con Leo Fernández en la conducción y Maxi Silvera en el ataque. Entradas visitantes agotadas en TickAntel.",
-    "cuenta": "@oficialcap",
-    "ubicacion": "📍 Parque Alfredo Víctor Viera (Prado) • Montevideo",
-    "categoria": "partidos",
-    "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
-    "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
-  },
-  "periodistas_prensa": {
-    "ovacion": {
-      "medio": "Ovación (El País)",
-      "cronistas": "Silvia Pérez & Mateo Vázquez",
-      "enfoque": "Previa y Concentración",
-      "cita": "Aguirre pondrá toda la carne en el asador en el Viera. Peñarol sabe que una victoria en el Prado lo deja con un pie y medio en la definición del Uruguayo."
-    },
-    "tenfield": {
-      "medio": "Tenfield (VTV Plus)",
-      "cronistas": "Juan Carlos Scelza & Martín Charquero",
-      "enfoque": "Pizarrón Táctico",
-      "cita": "El duelo táctico de la fecha: la posesión paciente del Wanderers de Pacheco contra la intensidad vertical y la pegada de Leo Fernández en el equipo de Aguirre."
-    },
-    "canal12": {
-      "medio": "Telemundo (Canal 12)",
-      "cronistas": "Rodrigo Romano & Federico Buysan",
-      "enfoque": "Expectativa Popular",
-      "cita": "Se agotaron las entradas visitantes en TickAntel. La marea aurinegra copará el Prado en una tarde determinante para el futuro del Torneo Clausura."
-    },
-    "canal4": {
-      "medio": "Telenoche (Canal 4)",
-      "cronistas": "Eduardo Rivas",
-      "enfoque": "Cálculo de Tabla",
-      "cita": "La tabla no miente: Peñarol tiene 64 unidades y depende pura y exclusivamente de su propia jerarquía para coronar el año."
-    },
-    "elobservador": {
-      "medio": "Referí (El Observador)",
-      "cronistas": "Luis Eduardo Inzaurralde",
-      "enfoque": "Pelota Quieta & Transición",
-      "cita": "Peñarol ajustó la mira en pelota quieta y transición rápida durante la semana en Los Aromos. No habrá lugar para relajos en el Prado."
-    },
-    "portalmvd": {
-      "medio": "Montevideo Portal (FútbolUy)",
-      "cronistas": "Enrique Arrillaga",
-      "enfoque": "Declaraciones Previas",
-      "cita": "Tony Pacheco elogió al plantel carbonero en la previa, pero advirtió que su Wanderers saldrá a jugarle de igual a igual en su casa."
-    }
-  },
+  "titular_dia": "¡Hoy juega el Manya! Tarde de Prado, mística y obligación de sumar de a tres ante Wanderers",
+  "bajada_seo": "Peñarol visita a Montevideo Wanderers en el Parque Federico Omar Saroldi este sábado 31 de octubre a las 16:30 horas. Conocé las probables alineaciones, el análisis táctico de Diego Aguirre y los detalles de la transmisión en vivo por VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
-      "icono": "⚡",
-      "titulo": "Presión en la Salida",
-      "detalle": "Aguirre ordenó asfixiar el primer pase bohemio con Damián García y Rodrigo Pérez para cortar la gestación de Tabaré Viudez y Bruno Veglio."
+      "icono": "⚽",
+      "titulo": "Clave Táctica",
+      "detalle": "Diego Aguirre buscará imprimir máxima intensidad desde el pitazo inicial, apostando por la velocidad por las bandas y una presión alta e incesante para quebrar el orden defensivo bohemio en un campo de dimensiones reducidas."
     },
     {
-      "icono": "🎯",
-      "titulo": "La Zurda de Leo Fernández",
-      "detalle": "El 8 aurinegro será el eje de maniobra: pelotas paradas venenosas al área chica y cambios de frente para la velocidad de Javier Cabrera y Jaime Báez."
+      "icono": "🔥",
+      "titulo": "La Figura a Seguir",
+      "detalle": "El desequilibrio de la pegada y la visión en tres cuartos de cancha serán el termómetro de Peñarol para habilitar la referencia goleadora y destrabar el partido con remates de media distancia y pelota quieta."
     },
     {
-      "icono": "🛡️",
-      "titulo": "Firmeza en el Fondo",
-      "detalle": "Washington Aguerre y Guzmán Rodríguez comandan la zaga decana para neutralizar las diagonales y el anticipo de Matías Fonseca."
+      "icono": "📺",
+      "titulo": "Transmisión y Horario",
+      "detalle": "El encuentro correspondiente al fútbol uruguayo comienza puntualmente a las 16:30 hs (hora de Uruguay) con televisación exclusiva por VTV Plus y transmisión vía streaming a través de Disney+ Premium."
     },
     {
-      "icono": "🏆",
-      "titulo": "La Cima de la Anual",
-      "detalle": "Peñarol manda con 64 unidades en la acumulada (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y afirma la ventaja deportiva."
+      "icono": "📊",
+      "titulo": "Puntos en Juego",
+      "detalle": "Ganar en el Saroldi es una necesidad imperiosa para consolidar el liderazgo en la Tabla Anual y mantenerse firme en la lucha por el título, sin margen de error en el tramo decisivo."
     }
   ],
   "articulo_principal": {
-    "titulo": "Punteros de fierro: Peñarol se planta en el Viera para adueñarse de la Anual ante el Wanderers de Pacheco",
-    "subtitulo": "Aguirre no se guarda nada en Los Aromos: presión alta para ahogar el juego bohemio, Leo Fernández como bandera y Maxi Silvera como referencia de área.",
+    "titulo": "Peñarol y una parada de máxima exigencia en el Prado: a ratificar la jerarquía frente al Bohemio",
+    "subtitulo": "El equipo de Diego Aguirre pisa el Saroldi con el objetivo de adueñarse de los noventa minutos, imponer peso ofensivo y regalarle un triunfo vital a la hinchada carbonera.",
     "parrafos": [
-      "Se acabaron las especulaciones y los cálculos de calculadora. Peñarol desembarca en el Prado para jugar una verdadera final de campeonato ante el Montevideo Wanderers que dirige Antonio Pacheco. No hay margen para la duda: el Decano manda en la Tabla Anual con 64 puntos, pero con la recta final del Clausura al rojo vivo, cada pelota dividida vale un año de trabajo. En Los Aromos, Diego Aguirre ajustó tuercas durante toda la semana: velocidad en la circulación, agresividad inmediata en la presión tras pérdida y determinación absoluta para liquidar el trámite en las áreas.",
-      "Técnica y tácticamente, el partido promete chispa y ritmo alto. El Wanderers de Pacheco no es un equipo que se meta atrás a colgarse del travesaño; pregona salida limpia desde el fondo con Silveira, posesión paciente y la jerarquía técnica de Tabaré Viudez y Bruno Veglio en tres cuartos de cancha para abastecer a Matías Fonseca. Ahí radica el plan de Aguirre: asfixiar el primer pase bohemio con Damián García y Rodrigo Pérez como perros de presa, recuperar en campo rival y activar de inmediato la zurda teledirigida de Leo Fernández para abastecer las diagonales de Javier Cabrera y Jaime Báez, liberando a Maxi Silvera para que rompa a los centrales rivales en el área chica.",
-      "La visita al Parque Alfredo Víctor Viera es una parada brava de aquellas que forjan la chapa de campeón. La hinchada aurinegra agotó en cuestión de horas las localidades destinadas a la parcialidad visitante en TickAntel, asegurando un recibimiento imponente en las tribunas del Prado. El mensaje de Aguirre al plantel antes de concentrar fue rotundo: concentración máxima en la pelota quieta defensiva para no conceder tiros libres a Viudez, intensidad durante los noventa minutos y personalidad de equipo grande para llevarse los tres puntos a casa."
+      "El ambiente en la concentración aurinegra de Los Aromos fue de absoluta concentración y compromiso colectivo durante la semana. Tras ajustar detalles tácticos en los últimos ensayos de fútbol y con la mentalidad ganadora que inculca permanentemente la 'Fiera' Aguirre, el Decano llega preparado para afrontar un duelo que históricamente exige templanza y precisión.",
+      "Montevideo Wanderers representa un escollo tradicionalmente complejo cuando oficia de local en el Prado. El conjunto bohemio intentará cortar los circuitos de gestación de Peñarol, cerrando filas por dentro y apostando a transiciones rápidas; ante ello, el Carbonero deberá exhibir paciencia en la circulación y una contundente eficacia para aprovechar cada grieta defensiva del adversario.",
+      "En cuanto al once titular, el cuerpo técnico plantea un esquema dinámico y equilibrado, priorizando futbolistas con gran despliegue físico y capacidad para lastimar en el mano a mano exterior. Con el mediocampo afirmado y una última línea sobria y atenta a los contragolpes, Peñarol buscará que sus hombres más punzantes marquen la diferencia en el área rival desde el amanecer del compromiso.",
+      "La expectativa entre el pueblo carbonero es total: cada punto en esta instancia pesa como una final en el camino hacia la gloria. Sumar una victoria en el Saroldi no solo significa un salto anímico crucial, sino también ratificar con autoridad la cima de la Tabla Anual, recordando que la camiseta aurinegra demanda protagonismo y entrega inclaudicable en cada rincón del país."
     ],
-    "cita_destacada": "En el Prado no se especula: se sale a ganar con el corazón caliente y la cabeza fría para cuidar la punta del campeonato.",
-    "autor_cita": "Diego Aguirre / Conferencia en Los Aromos"
-  },
-  "prismas_analisis": {
-    "epica_tribuna": {
-      "eje": "Tribunas del Prado",
-      "subtitulo": "Marea Aurinegra",
-      "texto": "Entradas visitantes agotadas en TickAntel y copamiento aurinegro asegurado en el Prado. La hinchada de Peñarol se moviliza en masa hacia el Viera con la convicción de que estos tres puntos valen medio Campeonato Uruguayo."
-    },
-    "pizarron_tactico": {
-      "eje": "Duelo Táctico",
-      "subtitulo": "4-2-3-1 vs 4-2-3-1",
-      "texto": "Peñarol apuesta a la presión asfixiante sobre la salida de Veglio para que Leo Fernández maneje los hilos con panorama limpio y lastime con la pegada de media distancia y centros venenosos."
-    },
-    "trastienda_vestuario": {
-      "eje": "Vestuario y Concentración",
-      "subtitulo": "Once Confirmado",
-      "texto": "Semana de concentración cerrada y repaso intensivo de pelota quieta. Aguirre no se guarda nada: el once va con Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
-    },
-    "aritmetica_campeonato": {
-      "eje": "Tabla Anual",
-      "subtitulo": "Líderes con 64 Puntos",
-      "texto": "Peñarol lidera la Anual con 64 puntos (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del título."
-    }
+    "preguntas_frecuentes": [
+      {
+        "q": "¿A qué hora juega Peñarol hoy y dónde verlo?",
+        "a": "Peñarol juega este sábado 31 de octubre a las 16:30 hs en el Estadio Saroldi, con televisación en vivo de VTV Plus y cobertura online a través de Disney+ Premium."
+      },
+      {
+        "q": "¿Cómo formaría Peñarol ante Montevideo Wanderers?",
+        "a": "Diego Aguirre perfila un esquema ofensivo con los futbolistas en mejor rodaje físico, buscando tenencia, presión constante en bloque alto y contundencia en los últimos metros."
+      },
+      {
+        "q": "¿Qué se juega Peñarol en este partido?",
+        "a": "Puntos vitales para la punta de la Tabla Anual y la definición del Clausura, donde mantener el paso ganador es indispensable para alcanzar los objetivos de la temporada."
+      }
+    ]
   },
   "noticias_fuentes": [
     {
-      "titulo": "Ovación: Aguirre define el equipo en Los Aromos con Leo Fernández como eje de ataque",
-      "url": "https://www.elpais.com.uy/ovacion",
-      "resumen": "El técnico aurinegro ultimó los detalles tácticos para visitar a Wanderers en el Viera. Damián García y Rodrigo Pérez formarán el doble cinco.",
-      "fuente": "Ovación (El País)",
-      "fecha_raw": "30/10/2026",
-      "peso": 1.5
-    },
-    {
-      "titulo": "Tenfield: El duelo de estilos en el Prado: la posesión de Pacheco vs la intensidad de Aguirre",
-      "url": "https://www.tenfield.com.uy",
-      "resumen": "Análisis táctico de VTV: Wanderers buscará adueñarse de la pelota con Viudez y Veglio, mientras Peñarol apuesta a la verticalidad y pegada.",
-      "fuente": "Tenfield / VTV Plus",
-      "fecha_raw": "30/10/2026",
-      "peso": 1.5
-    },
-    {
-      "titulo": "Padre y Decano: Entradas visitantes agotadas para el partido ante Wanderers en el Viera",
-      "url": "https://www.padreydecano.com",
-      "resumen": "Los hinchas de Peñarol agotaron las localidades en TickAntel y preparan un imponente recibimiento en el Prado.",
+      "titulo": "Defiendan al hincha",
+      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
+      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
       "fuente": "Padre y Decano",
-      "fecha_raw": "30/10/2026",
+      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
       "peso": 1.3
     },
     {
-      "titulo": "FútbolUy: La Tabla Anual al rojo vivo en la Fecha 12 del Torneo Clausura",
-      "url": "https://www.montevideo.com.uy/deportes",
-      "resumen": "Peñarol llega como líder con 64 unidades (+34) defendiendo la cima en una fecha clave para la consagración.",
-      "fuente": "Montevideo Portal",
-      "fecha_raw": "30/10/2026",
-      "peso": 1.2
+      "titulo": "Regresa al Club",
+      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
+      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
+      "peso": 1.3
     },
     {
-      "titulo": "Referí: La importancia del juego aéreo y la pelota quieta en el Parque Viera",
-      "url": "https://www.elobservador.com.uy/referi",
-      "resumen": "Guzmán Rodríguez y Maximiliano Silvera serán vitales para contrarrestar el juego aéreo bohemio y aprovechar córners a favor.",
-      "fuente": "Referí (El Observador)",
-      "fecha_raw": "29/10/2026",
-      "peso": 1.2
+      "titulo": "Peñarol hizo futbol ante Juventud",
+      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
+      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
+      "peso": 1.3
     },
     {
-      "titulo": "Carve Deportiva 1010 AM: Transmisión en directo del choque Wanderers vs Peñarol",
-      "url": "https://carvedeportiva.uy",
-      "resumen": "Todo el equipo de Carve listo para una cobertura completa desde el Parque Viera a partir de las 14:00 hs.",
-      "fuente": "Carve Deportiva 1010 AM",
-      "fecha_raw": "30/10/2026",
-      "peso": 1.1
+      "titulo": "Coelho continuará en Brasil",
+      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
+      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Regreso esperado",
+      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
+      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "De Amores rescindió con Peñarol",
+      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
+      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Análisis punto por punto del informe de seguridad",
+      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
+      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Fecha clásica",
+      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
+      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
+      "peso": 1.3
     }
   ],
-  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-penarol-y-una.html"
 }

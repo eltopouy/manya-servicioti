@@ -1,0 +1,56 @@
+{
+  "rival": "Wanderers",
+  "rival_oficial": "Montevideo Wanderers Fútbol Club",
+  "rival_id": 321,
+  "rival_slug": "wanderers",
+  "escudo_rival": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+  "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
+  "resumen": {
+    "partidos_jugados": 396,
+    "ganados_penarol": 207,
+    "empatados": 113,
+    "perdidos_penarol": 76,
+    "goles_penarol": 701,
+    "goles_rival": 394,
+    "diferencia_goles": "+307",
+    "ventaja_victorias": "+131 partidos a favor del Decano",
+    "efectividad_pct": "61.8%"
+  },
+  "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-08-05",
+      "marcador": "Peñarol 5 - 1 Wanderers",
+      "estadio": "Centenario",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Thiago Espinosa (P) 15', Luciano Cosentino (W) 19', Matías Arezo (P) 23', Abel Hernández (P) 31', Leonel Jaime (P) 45+1' y Eric Remedi (P) 88'"
+    },
+    {
+      "fecha": "2026-04-26",
+      "marcador": "Peñarol 0 - 1 Wanderers",
+      "estadio": "Centenario",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Facundo Labandeira (W) 57'"
+    },
+    {
+      "fecha": "2025-10-19",
+      "marcador": "Peñarol 3 - 0 Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Maximiliano Olivera (P) 45', Matías Arezo (P) 46' y Maximiliano Silvera (P) 60'"
+    },
+    {
+      "fecha": "2025-06-22",
+      "marcador": "Peñarol 2 - 0 Wanderers",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Ignacio Sosa (P) 45' y Maximiliano Silvera (P) 46'"
+    },
+    {
+      "fecha": "2025-04-19",
+      "marcador": "Peñarol 2 - 1 Wanderers",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Bruno Veglio (W) 18', Maximiliano Silvera (P) 31' y Héctor Villalba (P) 84'"
+    }
+  ]
+}
