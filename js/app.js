@@ -443,7 +443,7 @@
 
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
     if (tLast) {
-      tLast.textContent = 'Peñarol 64 pts (Líder Solitario Anual • +34 DG)';
+      tLast.textContent = 'Peñarol 65 pts (Líder Solitario Anual • +24 DG)';
     }
 
     // Ticker interactivo de alerta de partido
@@ -530,7 +530,7 @@
     const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
       ? state.live.tablas_campeonatos
       : [
-          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: 'Hoy Juega', es_proximo: true },
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 12', es_proximo: true },
           { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 64p', es_proximo: false },
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
@@ -662,7 +662,9 @@
       if (r.es_penarol) {
         tagExtra = '<span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span>';
       } else if (isRivalNext) {
-        tagExtra = '<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">RIVAL DE HOY</span>';
+        const esHoy = state.live && state.live.partido_activo && state.live.partido_activo.es_hoy === true;
+        const tagLabel = esHoy ? 'RIVAL DE HOY' : 'PRÓXIMO RIVAL';
+        tagExtra = `<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">${tagLabel}</span>`;
       }
 
       return `
@@ -694,12 +696,12 @@
     if (!container) return;
     const proxMatch = state.live && state.live.proximo_partido ? state.live.proximo_partido : null;
     const match1Label = proxMatch
-      ? `Fecha 11: ${proxMatch.nombre || 'Juventud vs Peñarol'} (${proxMatch.estadio || 'Estadio Centenario'})`
-      : 'Fecha 11: Juventud vs Peñarol (Estadio Centenario)';
+      ? `Fecha 12: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Alfredo Víctor Viera'})`
+      : 'Fecha 12: Peñarol vs Montevideo Wanderers (Parque Viera)';
     const fechas = [
       { id: 1, label: match1Label },
-      { id: 2, label: 'Fecha 12: Peñarol vs Cerro Largo (Campeón del Siglo)' },
-      { id: 3, label: 'Fecha 13: Danubio vs Peñarol (Jardines del Hipódromo)' }
+      { id: 2, label: 'Fecha 13: Peñarol vs Defensor Sporting (Campeón del Siglo)' },
+      { id: 3, label: 'Fecha 14: Danubio vs Peñarol (Jardines del Hipódromo)' }
     ];
     const picks = { 1: 0, 2: 0, 3: 0 };
 

@@ -64,28 +64,68 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     """Genera la cobertura de Previa Oficial si aún no se ha publicado hoy."""
     event_id = match_info.get("event_id", "")
     match_title = match_info.get("nombre", "Liverpool vs Peñarol")
-    estadio = match_info.get("estadio", "Estadio de Primera División")
-    tv = match_info.get("tv", "VTV Plus / Disney+")
+    estadio = match_info.get("estadio", "Parque Alfredo Víctor Viera (Prado)")
+    tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
     hora_str = match_info.get("fecha_legible", "")
+    fecha_iso = match_info.get("fecha_iso", "")
+    es_hoy = match_info.get("es_hoy", False)
+
+    now_uy = datetime.now(UY_TZ)
+    delta_days = 1
+    if fecha_iso:
+        try:
+            m_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+            delta_days = (m_dt.date() - now_uy.date()).days
+        except Exception:
+            delta_days = 0 if es_hoy else 1
+    else:
+        delta_days = 0 if es_hoy else 1
+
+    if delta_days == 0:
+        temporal_label = "HOY JUEGA PEÑAROL (DÍA DEL PARTIDO)"
+        temporal_instructions = (
+            "El partido se juega HOY en horario uruguayo. El titular y el contenido deben reflejar que es el DÍA DEL PARTIDO "
+            "('¡Hoy juega el Manya!', 'Día de partido en el Prado', etc.)."
+        )
+        dia_partido_texto = "hoy"
+    elif delta_days == 1:
+        temporal_label = "MAÑANA JUEGA PEÑAROL (LA VÍSPERA / PREVIA)"
+        temporal_instructions = (
+            "CRÍTICO - CONTROL DE FECHA: En Uruguay aún NO es el día del partido. El partido es MAÑANA. "
+            "ESTÁ ESTRICTAMENTE PROHIBIDO decir 'Hoy juega el Manya' o 'hoy juega'. "
+            "El titular DEBE hablar de la previa o de la víspera: "
+            "('La Previa Aurinegra', 'Peñarol afina detalles antes de visitar el Prado', 'La víspera en Los Aromos', etc.)."
+        )
+        dia_partido_texto = "mañana"
+    else:
+        temporal_label = f"PRÓXIMO COMPROMISO (Faltan {delta_days} días)"
+        temporal_instructions = (
+            f"CRÍTICO - CONTROL DE FECHA: Faltan {delta_days} días para el encuentro. "
+            "NO uses 'hoy juega' ni 'mañana juega'. Habla del próximo rival en el horizonte carbonero."
+        )
+        dia_partido_texto = f"el próximo {hora_str}"
 
     can_pub, motivo = ManyaBloggerCatalog.can_publish(post_type="PREVIA", match_id=event_id)
     if not can_pub:
         logger.info(f"[Previa] {motivo}. Saltando redacción de previa.")
         return
 
-    logger.info(f"[Previa] ⚡ Generando La Previa Oficial: {match_title} ({hora_str})...")
+    logger.info(f"[Previa] ⚡ Generando La Previa Oficial: {match_title} ({hora_str}) [Estado: {temporal_label}]...")
 
     # Síntesis de noticias para el redactor
-    resumenes_prensa = "\n".join([
+    resumenes_prensa = "
+".join([
         f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:180]}"
         for n in noticias_prensa[:10]
     ])
 
     prompt_redaccion = f"""
 Actúa como el Jefe de Redacción y Periodista Experto de Peñarol para 'Manya ServicioTI'.
-HOY JUEGA PEÑAROL: {match_title}.
+ESTADO TEMPORAL: {temporal_label}.
+{temporal_instructions}
+Partido: {match_title}.
 Estadio: {estadio}.
-Fecha y Hora: {hora_str}.
+Fecha y Hora de Uruguay: {hora_str}.
 Televisación: {tv}.
 
 Contexto reciente de periódicos uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
@@ -93,30 +133,31 @@ Contexto reciente de periódicos uruguayos (Ovación, Referí, Tenfield, Padre y
 
 REGLAS EDITORIALES OBLIGATORIAS:
 1. Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
-2. Tono: apasionado, respetuoso pero 100% aurinegro y profesional.
-3. Estructura del JSON requerida:
+2. Tono: apasionado, respetuoso pero 100% aurinegro y profesional. Cero romanticismo lírico.
+3. Respeto estricto del estado temporal: si el partido es mañana ({hora_str}), PROHIBIDO decir 'hoy juega'.
+4. Estructura del JSON requerida:
 {{
   "titular_dia": "Frase contundente sobre la previa del partido",
-  "bajada_seo": "Resumen periodístico SEO con Peñarol, rival, estadio y cómo verlo.",
+  "bajada_seo": "Resumen periodístico SEO con Peñarol, rival, estadio ({estadio}) y cómo verlo.",
   "claves_60_segundos": [
-    {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Detalle del planteo de Diego Aguirre..."}},
-    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Leonardo Fernández / Maximiliano Silvera / atacantes..."}},
-    {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay y canales VTV Plus / Disney+..."}},
-    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en el Clausura y la Tabla Anual..."}}
+    {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Detalle del planteo de Diego Aguirre"}},
+    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Leonardo Fernández"}},
+    {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay ({hora_str}) y televisación ({tv})"}},
+    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 65 pts)"}}
   ],
   "articulo_principal": {{
-    "titulo": "Título extenso de la previa",
+    "titulo": "Título periodístico de análisis de la previa",
     "subtitulo": "Subtítulo periodístico",
     "parrafos": [
       "Párrafo 1: El clima previo en Los Aromos y la concentración aurinegra...",
-      "Párrafo 2: El rival de turno, su momento y cómo contrarrestar su juego...",
+      "Párrafo 2: El rival de turno ({match_title}), su momento y cómo contrarrestar su juego en {estadio}...",
       "Párrafo 3: El once probable de Peñarol, retornos y variantes tácticas...",
       "Párrafo 4: La expectativa de los hinchas y el peso de sumar de a tres en la Tabla Anual..."
     ],
     "preguntas_frecuentes": [
-      {{"q": "¿A qué hora juega Peñarol hoy y dónde verlo?", "a": "Peñarol juega a las {hora_str} en {estadio}, televisado por {tv}."}},
-      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo con los futbolistas en mejor rodaje físico."}},
-      {{"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para la punta de la Tabla Anual y la definición del Clausura."}}
+      {{"q": "¿A qué hora juega Peñarol y dónde verlo?", "a": "Peñarol juega {dia_partido_texto} a las {hora_str} en {estadio}, televisado por {tv}."}},
+      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1."}},
+      {{"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."}}
     ]
   }}
 }}
@@ -126,12 +167,16 @@ REGLAS EDITORIALES OBLIGATORIAS:
         res_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt_redaccion)
 
     if res_json and "articulo_principal" in res_json:
+        titular = res_json.get("titular_dia", f"La Previa: {match_title}")
+        if delta_days != 0 and "hoy juega" in titular.lower():
+            titular = titular.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
+
         doc_digest = {
             "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
             "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
             "fase_publicacion": "PREVIA",
             "partido_id": event_id,
-            "titular_dia": res_json.get("titular_dia", f"La Previa: {match_title}"),
+            "titular_dia": titular,
             "bajada_seo": res_json.get("bajada_seo", ""),
             "claves_60_segundos": res_json.get("claves_60_segundos", []),
             "articulo_principal": res_json.get("articulo_principal", {}),
@@ -139,7 +184,6 @@ REGLAS EDITORIALES OBLIGATORIAS:
         }
         (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
         logger.info("[Previa] ✓ data/news_digest.json actualizado con la previa oficial.")
-
         # Publicar en Blogger
         post_url = publish_manya_article_to_blogger(post_type="PREVIA", match_id=event_id)
         try:

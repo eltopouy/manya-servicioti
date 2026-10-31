@@ -128,11 +128,11 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
   <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;border-bottom:2px solid #ffd100;padding-bottom:8px;">
       <h2 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">⚡ Situación en la Tabla Anual y Definición del Torneo</h2>
-      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">Líder Solitario • 64 pts</span>
+      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">Líder Solitario • 65 pts</span>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;background:#09090b;color:#fff;padding:14px 20px;border-radius:10px;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
       <div>
-        <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 64 unidades</strong>
+        <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 65 unidades</strong>
         <div style="font-size:12px;color:#a1a1aa;">Ventaja de 2 puntos sobre el escolta con 4 fechas restantes • Saldo de goles: +34</div>
       </div>
       <a href="https://manya.servicioti.com.uy/#tabla-simulador" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">
@@ -298,7 +298,7 @@ def sincronizar_proximo_partido_blogger():
         Peñarol visita al Montevideo Wanderers de Antonio Pacheco en el Prado
       </h3>
       <p style="font-size:14px;color:#d4d4d8;line-height:1.6;margin:0 0 14px;">
-        El Carbonero lidera la Tabla Anual con 64 unidades y viaja al Parque Viera para medirse ante el conjunto bohemio. Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
+        El Carbonero lidera la Tabla Anual con 65 unidades y viaja al Parque Viera para medirse ante el conjunto bohemio. Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
       </p>
       <a href="{page_url}" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;">
         👉 Ver Radiografía Táctica Completa en ServicioTI ↗

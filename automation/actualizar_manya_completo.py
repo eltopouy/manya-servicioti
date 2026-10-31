@@ -441,10 +441,35 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
     2) El "Resumen Aurinegro en 60 Segundos" (4 claves del día).
     3) El Artículo Principal de Análisis Táctico SEO/GEO con más de 600 palabras.
     Inyecta el glosario de apodos, jerga y cultura de `data/manya_culture.json`.
+    Garantiza control temporal estricto en horario de Uruguay (UY_TZ).
     """
-    headlines_txt = "\n".join(f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:140]}" for n in news_list[:8])
+    headlines_txt = "
+".join(f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:140]}" for n in news_list[:8])
     prox = live_data.get("proximo_partido", {})
     ult = live_data.get("ultimo_partido", {})
+    now_uy = datetime.now(UY_TZ)
+
+    # Evaluación temporal precisa
+    fecha_iso = prox.get("fecha_iso", "")
+    delta_days = 1
+    if fecha_iso:
+        try:
+            m_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+            delta_days = (m_dt.date() - now_uy.date()).days
+        except Exception:
+            delta_days = 0 if prox.get("es_hoy") else 1
+    else:
+        delta_days = 0 if prox.get("es_hoy") else 1
+
+    if delta_days == 0:
+        temporal_rule = "EL PARTIDO SE JUEGA HOY. El titular y el contenido deben reflejar que es día de partido ('¡Hoy juega el Manya!', etc.)."
+    elif delta_days == 1:
+        temporal_rule = "CRÍTICO - EL PARTIDO ES MAÑANA, NO HOY. PROHIBIDO terminantemente decir 'Hoy juega el Manya' o 'hoy'. Habla de la víspera, la concentración en Los Aromos o la previa de mañana."
+    else:
+        temporal_rule = f"CRÍTICO - Faltan {delta_days} días para el encuentro. NO digas 'hoy juega' ni 'mañana juega'. Enfoque en la preparación y el calendario."
+
+    es_visita = not prox.get("local", {}).get("es_penarol", True)
+    estadio_prox = prox.get("estadio", "Estadio Campeón del Siglo")
 
     # Cargar cultura y apodos si existen
     culture_context = ""
@@ -453,134 +478,181 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
         try:
             with open(culture_file, "r", encoding="utf-8") as cf:
                 cdata = json.load(cf)
-                nicknames = cdata.get("apodos_plantel_actual_2026", {})
-                nick_txt = ", ".join(f"{k} ('{v.get('apodo','')}')" for k, v in list(nicknames.items())[:8])
-                culture_context = (
-                    f"GUÍA CULTURAL Y APODOS DEL PLANTEL: {nick_txt}.\n"
-                    f"TRIBUNAS DEL CDS: Frank Henderson, José Pedro Damiani, Washington Cataldi, Cr. Gastón Güelfi.\n"
-                    f"SIMBOLOGÍA: Escudo con 9 franjas (5 negras, 4 oro #FFC20E) y 11 estrellas en doble arco. Fundación: 28/09/1891 (CURCC).\n"
-                )
+            nicknames = cdata.get("apodos_plantel_actual_2026", {})
+            nick_txt = ", ".join(f"{k} ('{v.get('apodo','')}')" for k, v in list(nicknames.items())[:8])
+            culture_context = (
+                f"GUÍA CULTURAL Y APODOS DEL PLANTEL: {nick_txt}.
+"
+                f"SIMBOLOGÍA: Escudo con 9 franjas (5 negras, 4 oro #FFC20E) y 11 estrellas en doble arco. Fundación 28 de setiembre de 1891 (CURCC/Peñarol), Decano del fútbol uruguayo.
+"
+            )
         except Exception:
             pass
 
     prompt = (
-        "Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy) y ServicioTI Uruguay "
-        "(https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.\n"
-        "Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de pizarrón táctico: "
-        "presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual, sin barroquismos literarios ni metáforas abstractas.\n\n"
+        "Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy), la plataforma periodística oficial del ecosistema ServicioTI "
+        "(https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.
+"
+        "Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de vestuario. Cero cursilería, romanticismo lírico o metáforas exageradas. Escribe sobre fútbol puro: "
+        "presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual (Peñarol lidera con 65 puntos).
+
+"
+        f"CONTROL TEMPORAL EN URUGUAY: {temporal_rule}
+
+"
         f"{culture_context}"
-        f"NOTICIAS DE ACTUALIDAD:\n{headlines_txt}\n\n"
+        f"NOTICIAS DE ACTUALIDAD:
+{headlines_txt}
+
+"
         f"Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} "
-        f"({prox.get('fecha_legible','')}) en {prox.get('estadio','Estadio Campeón del Siglo')}.\n"
+        f"({prox.get('fecha_legible','')}) en {estadio_prox}.
+"
         f"Último resultado: {ult.get('local',{}).get('nombre','')} {ult.get('local',{}).get('goles','')} - "
-        f"{ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.\n\n"
-        "REGLAS EDITORIALES INQUEBRANTABLES:\n"
-        "1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.\n"
-        "2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi', Javier Cabrera 'El Cangrejo', Jaime Báez 'La Chinita', etc.\n"
-        "3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').\n"
-        "4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato de 1891 y la grandeza del Decano.\n\n"
-        "Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:\n"
-        "{\n"
-        '  "portada_visual": {\n'
-        '    "titular_portada": "Titular impactante de portada para la tarjeta visual superior (máx 90 car)",\n'
-        '    "bajada_portada": "Párrafo breve y vibrante que acompaña la foto principal estilo Instagram (180-240 car)",\n'
-        '    "cuenta": "@oficialcap",\n'
-        '    "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",\n'
-        '    "categoria": "partidos"\n'
-        '  },\n'
-        '  "titular_dia": "Titular periodístico potente y atractivo sobre el presente de Peñarol (máx 95 caracteres)",\n'
-        '  "bajada_seo": "Síntesis SEO de entre 135 y 155 caracteres en UTF-8 puro sobre la actualidad de Peñarol",\n'
-        '  "claves_60_segundos": [\n'
-        '    {"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Resumen de 25-35 palabras del equipo y táctica"},\n'
-        '    {"icono": "📊", "titulo": "Tabla Anual y Campeonato", "detalle": "Resumen de 25-35 palabras del momento estadístico"},\n'
-        '    {"icono": "🎟️", "titulo": "Entradas y Campeón del Siglo", "detalle": "Resumen de 25-35 palabras sobre el estadio y la hinchada"},\n'
-        '    {"icono": "🔥", "titulo": "Figuras y Rendimiento", "detalle": "Resumen de 25-35 palabras sobre los puntos altos del plantel"}\n'
-        '  ],\n'
-        '  "articulo_principal": {\n'
-        '    "titulo": "Título SEO del artículo de análisis táctico y actualidad de Peñarol",\n'
-        '    "subtitulo": "Subtítulo periodístico",\n'
-        '    "parrafos": ["Párrafo 1 profundo (90+ palabras)", "Párrafo 2 táctico (90+ palabras)", "Párrafo 3 estadístico e histórico (90+ palabras)", "Párrafo 4 de cierre para el hincha (80+ palabras)"],\n'
-        '    "preguntas_frecuentes": [\n'
-        '      {"q": "¿Cuándo juega Peñarol su próximo partido y dónde verlo en vivo?", "a": "Respuesta clara y completa"},\n'
-        '      {"q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?", "a": "Respuesta clara y completa"},\n'
-        '      {"q": "¿Cómo canjear o comprar entradas para el Estadio Campeón del Siglo?", "a": "Respuesta clara y completa"}\n'
-        '    ]\n'
-        '  }\n'
-        "}"
+        f"{ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.
+
+"
+        "REGLAS EDITORIALES INQUEBRANTABLES:
+"
+        "1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.
+"
+        "2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi'.
+"
+        "3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').
+"
+        "4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato.
+"
+        "5. Entradas: Si Peñarol es visitante (ej. en el Parque Viera), las entradas son por RedTickets (redtickets.uy) y NO rige canje de socios.
+"
+        "Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:
+"
+        "{
+"
+        '  "portada_visual": {
+'
+        '    "titular_portada": "Titular impactante de portada para la tarjeta visual superior (máx 90 car)",
+'
+        '    "bajada_portada": "Párrafo breve y vibrante que acompaña la foto principal estilo Instagram (180-220 car, incluye datos de partido y entradas)",
+'
+        '    "cuenta": "@oficialcap",
+'
+        f'    "ubicacion": "📍 {estadio_prox} • Montevideo",
+'
+        '    "categoria": "partidos"
+'
+        '  },
+'
+        '  "titular_dia": "Titular periodístico potente y atractivo sobre el presente de Peñarol (máx 95 car)",
+'
+        '  "bajada_seo": "Síntesis SEO de entre 135 y 155 caracteres en UTF-8 puro sobre la actualidad de Peñarol, rival, escenario y transmisión.",
+'
+        '  "claves_60_segundos": [
+'
+        '    {"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Resumen de 25-35 palabras sobre el trabajo táctico de Aguirre."},
+'
+        '    {"icono": "📊", "titulo": "Tabla Anual Oficial", "detalle": "Peñarol lidera con 65 puntos y defiende la punta de la acumulada."},
+'
+        '    {"icono": "🎟️", "titulo": "Operativo de Entradas", "detalle": "Detalle verificado de venta según condición de local o visitante."},
+'
+        '    {"icono": "🔥", "titulo": "Figuras y Rendimiento", "detalle": "Momento de Leo Fernández y el bloque de ataque aurinegro."}
+'
+        '  ],
+'
+        '  "articulo_principal": {
+'
+        '    "titulo": "Título SEO del artículo de análisis táctico y actualidad de Peñarol",
+'
+        '    "subtitulo": "Subtítulo periodístico riguroso y analítico",
+'
+        '    "parrafos": [
+'
+        '      "Párrafo 1 (110-140 palabras): Situación de Peñarol en la Tabla Anual (65 puntos) y enfoque competitivo.",
+'
+        '      "Párrafo 2 (110-140 palabras): Análisis táctico detallado del esquema de Aguirre (4-2-3-1), presión y circuitos.",
+'
+        '      "Párrafo 3 (110-140 palabras): Fortaleza defensiva, zaga central y rendimiento en las áreas.",
+'
+        '      "Párrafo 4 (110-140 palabras): Expectativa de la hinchada, escenario del próximo cruce y cómo seguirlo."
+'
+        '    ],
+'
+        '    "preguntas_frecuentes": [
+'
+        '      {"q": "¿Cuándo y a qué hora juega Peñarol su próximo partido y por qué canal se transmite?", "a": "Respuesta con fecha precisa, hora uruguaya, estadio y canales VTV Plus / Disney+."},
+'
+        '      {"q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?", "a": "Peñarol encabeza la Tabla Anual en solitario con 65 puntos."},
+'
+        '      {"q": "¿Cómo adquirir las entradas para el partido?", "a": "Detalle exacto según fijación del encuentro."}
+'
+        '    ]
+'
+        '  }
+'
+        "}
+"
     )
 
-    ai_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt=prompt, esperar_json=True)
-    if not ai_json or "titular_dia" not in ai_json:
+    ai_json = None
+    try:
+        from manya_gemini_web_engine import ManyaGeminiWebEngine, CentralAutomationLock
+        with CentralAutomationLock.acquire("gemini_web_profile", timeout_sec=120):
+            ai_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt)
+    except Exception as e:
+        logger.warning(f"[Editorial Digest] Aviso al conectar con Gemini Web: {e}")
+
+    # Fallback seguro verificado
+    if not ai_json or "articulo_principal" not in ai_json:
+        tit_fallback = f"La Previa Aurinegra: Peñarol afina detalles antes de visitar a {prox.get('visitante',{}).get('nombre','Wanderers')}" if delta_days != 0 else f"¡Hoy juega el Manya! Peñarol enfrenta a {prox.get('visitante',{}).get('nombre','Wanderers')}"
         ai_json = {
             "portada_visual": {
-                "titular_portada": "Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre entre Los Aromos y la Catedral",
-                "bajada_portada": "Bajo las órdenes de Diego 'La Fiera' Aguirre y con Leo Fernández como eje creativo, el Carbonero intensifica los trabajos tácticos en Los Aromos para afianzar la punta en el Campeón del Siglo.",
+                "titular_portada": f"⚡ PREVIA OFICIAL: Peñarol ante {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')} • {prox.get('torneo','Torneo Clausura')}",
+                "bajada_portada": f"¡Todo listo en Los Aromos! Diego Aguirre define el 11 para el compromiso de {prox.get('fecha_legible','este fin de semana')} en {estadio_prox}. Peñarol manda en la Tabla Anual con 65 puntos.",
                 "cuenta": "@oficialcap",
-                "ubicacion": "📍 Complejo Washington Cataldi (Los Aromos) • Montevideo",
-                "categoria": "partidos"
+                "ubicacion": f"📍 {estadio_prox} • Montevideo",
+                "categoria": "partidos",
+                "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
+                "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
             },
-            "titular_dia": "Peñarol afina el once en Los Aromos para defender la cima de la Tabla Anual en el Campeón del Siglo",
-            "bajada_seo": "Actualidad del Club Atlético Peñarol en vivo: entrenamientos en Los Aromos, Tabla Anual, venta de entradas en el Campeón del Siglo y noticias al instante.",
+            "titular_dia": tit_fallback,
+            "bajada_seo": f"Peñarol se mide ante {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')} este {prox.get('fecha_legible','sábado')} en {estadio_prox}. Análisis táctico y actualidad.",
             "claves_60_segundos": [
-                {
-                    "icono": "⚽",
-                    "titulo": "Laboratorio en Los Aromos",
-                    "detalle": "Diego 'La Fiera' Aguirre ajusta la presión alta y la pelota quieta con 'El Zurdo de Oro' Leo Fernández como eje conductor pensando en sumar de a tres."
-                },
-                {
-                    "icono": "📊",
-                    "titulo": "Fortaleza en la Tabla Anual",
-                    "detalle": "El Carbonero sostiene un rendimiento superlativo como local en el Campeón del Siglo, liderando las métricas de goles a favor y valla menos vencida."
-                },
-                {
-                    "icono": "🎟️",
-                    "titulo": "Operativo Campeón del Siglo",
-                    "detalle": "Canje y venta de entradas habilitados vía TickAntel y TuApp para las tribunas Cataldi, Damiani, Güelfi y Henderson."
-                },
-                {
-                    "icono": "🔥",
-                    "titulo": "ADN Copero y Jerarquía",
-                    "detalle": "La seguridad de 'Washi' Aguerre bajo los tres palos y el empuje de Javier Méndez consolidan la solidez del Decano en cada línea."
-                }
+                {"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Semana de alta exigencia táctica en Los Aromos con énfasis en la presión sobre la salida rival."},
+                {"icono": "📊", "titulo": "Fortaleza en la Tabla Anual", "detalle": "El Carbonero sostiene el liderato absoluto de la Anual con 65 unidades (+24 DG)."},
+                {"icono": "🎟️", "titulo": "Operativo de Entradas", "detalle": "Venta online por RedTickets para la hinchada aurinegra (sin canje al ser visitantes)."},
+                {"icono": "🔥", "titulo": "ADN y Pegada", "detalle": "La seguridad de Washi Aguerre bajo los palos y la zurda quirúrgica de Leo Fernández."}
             ],
             "articulo_principal": {
-                "titulo": "Análisis Aurinegro: El presente táctico de Peñarol, la fortaleza del Campeón del Siglo y la lucha por la Tabla Anual",
-                "subtitulo": "Cómo funciona el bloque ofensivo de Diego Aguirre y las claves del próximo compromiso oficial del Carbonero",
+                "titulo": f"Examen de jerarquía: Peñarol afina su maquinaria para enfrentar a {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')}",
+                "subtitulo": f"El equipo de Diego Aguirre llega enfocado en sumar de a tres en {estadio_prox} para sostener la ventaja en la Anual",
                 "parrafos": [
-                    "El Club Atlético Peñarol atraviesa una etapa determinante de la temporada donde cada punto en la Tabla Anual vale oro para asegurar la ventaja deportiva en la definición del Campeonato Uruguayo. En el Complejo Deportivo Washington Cataldi (Los Aromos), el cuerpo técnico encabezado por Diego 'La Fiera' Aguirre ha consolidado una identidad de juego directa, intensa en la recuperación tras pérdida y letal en las transiciones rápidas por las bandas con Javier Cabrera y Jaime Báez.",
-                    "Desde el punto de vista táctico, el esquema 4-2-3-1 le permite al equipo aurinegro combinar solidez en el doble cinco con una libertad creativa total en tres cuartos de cancha para Leonardo Fernández. La pegada de media distancia y la precisión milimétrica en los tiros libres y córners del 'Zurdo de Oro' siguen siendo armas decisivas para destrabar defensas cerradas cuando los rivales se repliegan en bloque bajo en el Estadio Campeón del Siglo.",
-                    "A nivel defensivo, la coordinación de la zaga central comandada por Guzmán Rodríguez y Javier 'El Caudillo' Méndez, respaldados por la solvencia de Washington Aguerre en el arco, han convertido a la Catedral Aurinegra de la Ruta 102 en un reducto casi inexpugnable. Además, el empuje incondicional de más de 40.000 hinchas en las tribunas Cataldi, Damiani, Güelfi y Henderson genera un factor anímico diferencial desde el primer minuto de juego.",
-                    "En Manya ServicioTI actualizamos minuto a minuto las formaciones confirmadas, el estado sanitario del plantel, la tabla acumulada y el servicio especial de transporte de CUTCSA y COPSA hacia el estadio para que vivas cada partido del Glorioso Peñarol con el rigor analítico de un medio de referencia internacional."
+                    "El Club Atlético Peñarol atraviesa una etapa determinante de la temporada donde cada punto es decisivo para la Tabla Anual, donde lidera con 65 unidades.",
+                    "Desde el punto de vista táctico, el esquema 4-2-3-1 le permite al equipo aurinegro combinar solidez en el retroceso con desequilibrio por las bandas y la pegada magistral de Leonardo Fernández.",
+                    "A nivel defensivo, la coordinación de la zaga central comandada por Guzmán Rodríguez y Javier Méndez otorga la solidez necesaria para sostener el cero.",
+                    "En Manya ServicioTI actualizamos minuto a minuto las novedades oficiales, formaciones confirmadas y el balance frente a frente."
                 ],
                 "preguntas_frecuentes": [
-                    {
-                        "q": "¿Cuándo juega Peñarol su próximo partido y por qué canal se transmite?",
-                        "a": "Puedes consultar la cuenta regresiva exacta, fecha, hora y estadio en el Match Center superior de manya.servicioti.com.uy. Los partidos oficiales por el Campeonato Uruguayo se transmiten en vivo por VTV Plus y Disney+."
-                    },
-                    {
-                        "q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?",
-                        "a": "Peñarol defiende con determinación la cima de la tabla acumulada, manteniendo la condición de invicto en el Estadio Campeón del Siglo."
-                    },
-                    {
-                        "q": "¿Cómo canjear o comprar entradas para el Estadio Campeón del Siglo?",
-                        "a": "Los socios, palquistas y butaquistas realizan su canje a través de TuApp y TickAntel, mientras que las entradas generales se adquieren en TickAntel web y redes de cobranza habilitadas."
-                    }
+                    {"q": "¿Cuándo juega Peñarol su próximo partido y por qué canal se transmite?", "a": f"Peñarol juega el {prox.get('fecha_legible','próximo fin de semana')} en {estadio_prox}, televisado por VTV Plus y Disney+."},
+                    {"q": "¿Cómo está Peñarol en la Tabla Anual?", "a": "Peñarol defiende en solitario la cima con 65 puntos, manteniendo ventaja directa sobre Nacional."},
+                    {"q": "¿Cómo adquirir las entradas?", "a": "A través de RedTickets de forma online para parcialidad aurinegra."}
                 ]
             }
         }
+
+    # Sanitización de seguridad contra desfase temporal
+    tit_final = ai_json.get("titular_dia", "La Previa de Peñarol")
+    if delta_days != 0 and "hoy juega" in tit_final.lower():
+        tit_final = tit_final.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
 
     return {
         "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
         "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
         "portada_visual": ai_json.get("portada_visual", {}),
-        "titular_dia": ai_json["titular_dia"],
-        "bajada_seo": ai_json["bajada_seo"],
-        "claves_60_segundos": ai_json["claves_60_segundos"],
-        "articulo_principal": ai_json["articulo_principal"],
+        "titular_dia": tit_final,
+        "bajada_seo": ai_json.get("bajada_seo", ""),
+        "claves_60_segundos": ai_json.get("claves_60_segundos", []),
+        "articulo_principal": ai_json.get("articulo_principal", {}),
         "noticias_fuentes": news_list
     }
-
-
 def build_squad_and_history_datasets():
     """Genera los datasets completos del Plantel (`squad_2026.json`) e Historia/Museo (`history_1891.json`)."""
     squad = {
