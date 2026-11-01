@@ -58,6 +58,12 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 13)"
     tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
     
+    # Encabezado adaptativo según fase
+    is_post = live_data.get("fase_partido") == "POST_PARTIDO" or live_data.get("estado_ciclo_vida") == "POST_48H"
+    
+    badge_fase = "🏁 RESULTADO FINAL • POST-PARTIDO" if is_post else "★ PÁGINA CENTRAL PERMANENTE • PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA"
+    titulo_header = "Peñarol 1 - 1 Montevideo Wanderers" if is_post else "Montevideo Wanderers vs. Peñarol"
+    sub_header = f"🏁 FINALIZADO (90+5') • Goles: L. M. Angulo 90' (CAP) / F. Labandeira 72' (WAN) • {estadio}" if is_post else f"{torneo} • {fecha_legible}<br>🏟️ {estadio} • 📺 Transmisión en vivo por {tv}"
     duelos_html = ""
     for d in duelos:
         duelos_html += f"""
@@ -87,7 +93,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
   <div style="background:linear-gradient(135deg,#09090b 0%,#18181b 100%);color:#ffffff;padding:26px 22px;border-radius:14px;border:2px solid #ffd100;box-shadow:0 10px 30px rgba(0,0,0,0.35);margin-bottom:24px;">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,209,0,0.3);padding-bottom:14px;margin-bottom:18px;">
       <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:4px 12px;border-radius:999px;letter-spacing:0.04em;">
-        ★ PÁGINA CENTRAL PERMANENTE • PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA
+        {badge_fase}
       </span>
       <span style="font-size:12px;color:#ffd100;font-weight:700;">Actualizado: {now_uy} hs</span>
     </div>
@@ -95,13 +101,10 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     <!-- TARJETA DEL PRÓXIMO PARTIDO -->
     <div style="text-align:center;margin-bottom:20px;">
       <h1 style="color:#ffffff;font-size:clamp(22px,3.8vw,32px);font-weight:900;margin:0 0 10px;line-height:1.25;">
-        Montevideo Wanderers vs. Peñarol
+        {titulo_header}
       </h1>
       <div style="font-size:15px;color:#ffd100;font-weight:800;margin-bottom:6px;">
-        {torneo} • {fecha_legible}
-      </div>
-      <div style="font-size:13.5px;color:#a1a1aa;">
-        🏟️ {estadio} • 📺 Transmisión en vivo por {tv}
+        {sub_header}
       </div>
     </div>
 
@@ -128,11 +131,11 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
   <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;border-bottom:2px solid #ffd100;padding-bottom:8px;">
       <h2 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">⚡ Situación en la Tabla Anual y Definición del Torneo</h2>
-      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">Líder Solitario • 65 pts</span>
+      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">Líder Solitario • 66 pts</span>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;background:#09090b;color:#fff;padding:14px 20px;border-radius:10px;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
       <div>
-        <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 65 unidades</strong>
+        <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 66 unidades</strong>
         <div style="font-size:12px;color:#a1a1aa;">Ventaja de 2 puntos sobre el escolta con 4 fechas restantes • Saldo de goles: +34</div>
       </div>
       <a href="https://manya.servicioti.com.uy/#tabla-simulador" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">

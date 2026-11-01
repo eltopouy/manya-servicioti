@@ -2,7 +2,7 @@
 Suite Integral de Pruebas Automatizadas y Auditoría de Salud del Ecosistema Manya ServicioTI.
 Valida todas las dimensiones críticas del sistema:
 1. Temporalidad y Control de Zona Horaria (UY_TZ = America/Montevideo / UTC-3).
-2. Consistencia de Datos y Puntos (Tabla Anual 65 pts, Torneo Clausura Fecha 12).
+2. Consistencia de Datos y Puntos (Tabla Anual 66 pts, Torneo Clausura Fecha 12).
 3. Verificación de Rival, Estadio y Entradas (Montevideo Wanderers, Parque Viera, RedTickets).
 4. Integridad de los 20 Datasets JSON en `data/`.
 5. Salud de Locks y Anti-Colisión (`~/.manya_locks/`).
@@ -110,7 +110,7 @@ class ManyaEcosystemTester:
             self.record_result("Coherencia Temporal 'es_hoy'", False, "No existe data/live_status.json")
 
     def test_points_and_standings_integrity(self):
-        """Verifica que la Tabla Anual indique 65 puntos y no persistan referencias a 64 pts."""
+        """Verifica que la Tabla Anual indique 66 puntos y no persistan referencias a 64 pts."""
         errors = []
         # 1. En live_status.json
         live_file = DATA_DIR / "live_status.json"
@@ -118,6 +118,8 @@ class ManyaEcosystemTester:
             txt = live_file.read_text(encoding="utf-8")
             if "64 puntos" in txt or "64 pts" in txt or "64 unidades" in txt:
                 errors.append("data/live_status.json contiene menciones a 64 pts")
+            if "66" not in txt:
+                errors.append("data/live_status.json no refleja los 66 puntos de la Tabla Anual")
         
         # 2. En news_digest.json
         digest_file = DATA_DIR / "news_digest.json"
@@ -125,6 +127,8 @@ class ManyaEcosystemTester:
             txt = digest_file.read_text(encoding="utf-8")
             if "64 puntos" in txt or "64 pts" in txt or "64 unidades" in txt:
                 errors.append("data/news_digest.json contiene menciones a 64 pts")
+            if "66 puntos" not in txt and "66 unidades" not in txt:
+                errors.append("data/news_digest.json no menciona los 66 puntos de Peñarol")
 
         # 3. En index.html
         html_file = BASE_DIR / "index.html"
@@ -132,6 +136,8 @@ class ManyaEcosystemTester:
             txt = html_file.read_text(encoding="utf-8")
             if "64 puntos" in txt or "64 unidades" in txt:
                 errors.append("index.html contiene menciones a 64 unidades/puntos")
+            if "66" not in txt:
+                errors.append("index.html no refleja los 66 puntos de la Tabla Anual")
 
         # 4. En js/app.js
         app_js = BASE_DIR / "js" / "app.js"
@@ -141,8 +147,8 @@ class ManyaEcosystemTester:
                 errors.append("js/app.js contiene menciones a 64 puntos")
 
         passed = len(errors) == 0
-        msg = "Todos los archivos sincronizados en 65 puntos oficiales AUF" if passed else f"Inconsistencias encontradas: {'; '.join(errors)}"
-        self.record_result("Integridad de Puntos (Tabla Anual 65 pts)", passed, msg, {"errors": errors})
+        msg = "Todos los archivos sincronizados en 66 puntos oficiales AUF" if passed else f"Inconsistencias encontradas: {'; '.join(errors)}"
+        self.record_result("Integridad de Puntos (Tabla Anual 66 pts)", passed, msg, {"errors": errors})
 
     def test_rival_and_venue_verification(self):
         """Verifica que el rival activo sea Montevideo Wanderers, DT Mathías Corujo, escenario Parque Saroldi y venta Tickantel."""
@@ -269,8 +275,8 @@ class ManyaEcosystemTester:
         sw_file = BASE_DIR / "sw.js"
         if sw_file.exists():
             txt = sw_file.read_text(encoding="utf-8")
-            if not ("v7.0-network-first" in txt or "v7.1-mobile-pts" in txt or "v7." in txt):
-                errors.append("sw.js no tiene la versión v7.0-network-first")
+            if not ("v7.0-network-first" in txt or "v7.1-mobile-pts" in txt or "v7." in txt or "v8." in txt):
+                errors.append("sw.js no tiene la versión v8.x / v7.x network-first")
             if "caches.match(event.request).then(cached => cached || fetch(event.request))" in txt:
                 errors.append("sw.js aún tiene fetch cache-first")
         else:

@@ -35,7 +35,7 @@
     <!-- Auto Cache-Buster & PWA Invalidator v7.0 -->
   <script>
     (function() {
-      var APP_VER = '7.1';
+      var APP_VER = '8.0';
       try {
         if (localStorage.getItem('manya_app_ver') !== APP_VER) {
           localStorage.setItem('manya_app_ver', APP_VER);
@@ -57,7 +57,7 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=7.1" />
+  <link rel="stylesheet" href="css/styles.css?v=8.0" />
 
   <!-- Grafo Schema.org @graph (SportsTeam + SportsEvent + WebApplication + FAQPage) -->
   <script type="application/ld+json">
@@ -226,14 +226,14 @@
 
     <!-- LIVE MATCH ALERT TICKER (Hidratado dinámicamente) -->
     <div id="manya-live-ticker" class="manya-live-ticker" style="display:none;margin-bottom:16px;background:#09090b;border:2px solid #ffd100;border-radius:10px;padding:12px 18px;color:#ffffff;font-weight:800;font-size:14.5px;box-shadow:0 4px 20px rgba(255,209,0,0.25);align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-      <div id="ticker-text">🟡⚫ ¡HOY JUEGA PEÑAROL! Peñarol recibe a Montevideo Wanderers en el Parque Saroldi a las 16:30 hs (Fecha 13 Torneo Clausura) • VTV Plus / Disney+ Premium.</div>
+      <div id="ticker-text">🏁 FINALIZADO: Peñarol 1 - 1 Montevideo Wanderers • Agónico gol de Luis Miguel Angulo a los 90' en el Saroldi. Peñarol líder solitario de la Tabla Anual con 66 puntos.</div>
       <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="dynamic-blogger-link" style="color:var(--manya-gold);font-weight:800;border:1px solid var(--manya-gold);background:rgba(255,209,0,0.12);padding:6px 14px;border-radius:6px;font-size:12.5px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">⚡ Próximo Partido & Radiografía en ServicioTI ↗</a>
     </div>
 
     <!-- PRIMERA PLANA: MATCH CENTER & MINUTO A MINUTO EN DIRECTO -->
     <section id="match-center" class="match-hero" aria-label="Centro de Partido en Vivo del Club Atlético Peñarol">
       <div class="match-hero-top">
-        <span id="hero-match-badge" class="badge-gold" style="background:#ffd100;color:#09090b;border:1px solid #eab308;font-weight:900;letter-spacing:0.04em;">★ PRÓXIMO PARTIDO • TORNEO CLAUSURA 2026</span>
+        <span id="hero-match-badge" class="badge-gold" style="background:#10b981;color:#ffffff;border:1px solid #059669;font-weight:900;letter-spacing:0.04em;">🏁 RESULTADO FINAL • TORNEO CLAUSURA (FECHA 13)</span>
         <span id="hero-weather" class="badge-weather">🌡️ Campeón del Siglo: 18.5°C • Despejado en Ruta 102 (Viento 14 km/h)</span>
       </div>
 
@@ -247,25 +247,27 @@
         </div>
 
         <div class="match-vs-box">
-          <div class="countdown-grid" id="hero-countdown-grid" style="display:grid;" aria-label="Cuenta regresiva próximo partido">
+          <div class="countdown-grid" id="hero-countdown-grid" style="display:none;" aria-label="Cuenta regresiva próximo partido">
             <div class="cd-unit"><div id="cd-days" class="cd-num">00</div><div class="cd-lbl">Días</div></div>
             <div class="cd-unit"><div id="cd-hours" class="cd-num">00</div><div class="cd-lbl">Horas</div></div>
             <div class="cd-unit"><div id="cd-mins" class="cd-num">00</div><div class="cd-lbl">Min</div></div>
             <div class="cd-unit"><div id="cd-secs" class="cd-num">00</div><div class="cd-lbl">Seg</div></div>
           </div>
-          <!-- Marcador en Vivo cuando el partido está en juego -->
-          <div id="hero-live-score-container" style="display:none;flex-direction:column;align-items:center;margin-bottom:8px;">
-            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.25);border:1px solid #ef4444;color:#fca5a5;padding:4px 12px;border-radius:999px;font-size:11.5px;font-weight:900;letter-spacing:0.06em;margin-bottom:8px;">
-              <span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:50%;box-shadow:0 0 10px #ef4444;" class="live-pulse-dot"></span>
-              <span id="hero-live-clock-text">EN VIVO • 1T</span>
+          <!-- Marcador Final Post-Partido (48 Horas) -->
+          <div id="hero-live-score-container" style="display:flex;flex-direction:column;align-items:center;margin-bottom:8px;">
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.2);border:1px solid #10b981;color:#6ee7b7;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:0.06em;margin-bottom:8px;">
+              <span>🏁 FINALIZADO (90+5') • PARQUE SAROLDI</span>
             </div>
-            <div style="display:flex;align-items:center;gap:16px;background:#000000;padding:6px 22px;border-radius:14px;border:1px solid rgba(255,209,0,0.4);box-shadow:0 0 20px rgba(255,209,0,0.15);">
-              <span id="hero-live-score-home" style="font-size:38px;font-weight:900;color:#ffffff;line-height:1;">-</span>
-              <span style="font-size:24px;font-weight:900;color:var(--manya-gold);">-</span>
-              <span id="hero-live-score-away" style="font-size:38px;font-weight:900;color:var(--manya-gold);line-height:1;">-</span>
+            <div style="display:flex;align-items:center;gap:16px;background:#000000;padding:8px 26px;border-radius:14px;border:2px solid #ffd100;box-shadow:0 0 25px rgba(255,209,0,0.25);">
+              <span id="hero-live-score-home" style="font-size:44px;font-weight:900;color:#ffffff;line-height:1;">1</span>
+              <span style="font-size:26px;font-weight:900;color:var(--manya-gold);">-</span>
+              <span id="hero-live-score-away" style="font-size:44px;font-weight:900;color:var(--manya-gold);line-height:1;">1</span>
+            </div>
+            <div style="font-size:11.5px;color:#d4d4d8;margin-top:6px;text-align:center;">
+              ⚽ <strong>Peñarol:</strong> L. M. Angulo (90') | <strong>Wanderers:</strong> F. Labandeira (72')
             </div>
           </div>
-          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">★ PRÓXIMO PARTIDO • Sábado 31/10/2026 16:30 hs • Torneo Clausura</div>
+          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:#34d399;">🏁 RESULTADO FINAL • Sábado 31/10/2026 • Torneo Clausura Fecha 13</div>
           <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Parque Federico Omar Saroldi (Prado) • Montevideo (Local Peñarol)</div>
         </div>
 
@@ -289,7 +291,7 @@
         </div>
         <div class="match-meta-item">
           <span>🏆 Tabla Anual Acumulada Oficial</span>
-          <strong id="hero-last-result">Peñarol 65 pts (Líder Solitario)</strong> • Saldo +24 DG (34 PJ).
+          <strong id="hero-last-result">Peñarol 66 pts (Líder Solitario)</strong> • Saldo +24 DG (35 PJ).
         </div>
         <div class="match-meta-item" style="display:flex;align-items:center;justify-content:center;">
           <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Radiografía Táctica & Próximo Rival (Wanderers) →</a>
@@ -678,7 +680,7 @@
           
           <div class="editorial-body">
             <p class="editorial-paragraph drop-cap" id="editorial-p1">
-              Se acabaron las especulaciones y los cálculos de calculadora. Peñarol salta al campo en el Prado para jugar una verdadera final de campeonato ante el Montevideo Wanderers que dirige Mathías Corujo. No hay margen para la duda: el Decano manda en la Tabla Anual con 65 puntos, pero con la recta final del Clausura al rojo vivo, cada pelota dividida vale un año de trabajo. En Los Aromos, Diego Aguirre ajustó tuercas durante toda la semana: velocidad en la circulación, agresividad inmediata en la presión tras pérdida y determinación absoluta para liquidar el trámite en las áreas.
+              Se acabaron las especulaciones y los cálculos de calculadora. Peñarol salta al campo en el Prado para jugar una verdadera final de campeonato ante el Montevideo Wanderers que dirige Mathías Corujo. No hay margen para la duda: el Decano manda en la Tabla Anual con 66 puntos, pero con la recta final del Clausura al rojo vivo, cada pelota dividida vale un año de trabajo. En Los Aromos, Diego Aguirre ajustó tuercas durante toda la semana: velocidad en la circulación, agresividad inmediata en la presión tras pérdida y determinación absoluta para liquidar el trámite en las áreas.
             </p>
             <p class="editorial-paragraph" id="editorial-p2">
               Técnica y tácticamente, el partido promete chispa y ritmo alto. El Wanderers de Mathías Corujo es un conjunto ordenado y aguerrido, con la jerarquía defensiva de Fabricio Formiliano, la contención áspera de Gonzalo Freitas en la medular y la velocidad punzante del 'Rayo' Jonathan Urretaviscaya junto al argentino Mateo Levato en ataque. Ahí radica el plan de Aguirre: imponer supremacía en la posesión, asfixiar la salida bohemia con la presión alta de Silvera sobre Formiliano y activar de inmediato la zurda teledirigida de Leo Fernández para abrir los caminos por las bandas con Cabrera y Báez.
@@ -720,7 +722,7 @@
 
                 <div class="clave-item" style="border-left:3px solid #10b981;background:#141419;padding:12px;border-radius:8px;">
                   <div style="font-size:11.5px;color:#34d399;font-weight:800;margin-bottom:4px;">📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual</div>
-                  <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“Peñarol lidera la Anual con 65 puntos (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del título.”</p>
+                  <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“Peñarol lidera la Anual con 66 puntos (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del título.”</p>
                 </div>
               </div>
             </div>
@@ -753,7 +755,7 @@
             </div>
             <div class="clave-item">
               <div class="clave-item-title">🏆 La Cima de la Anual</div>
-              <p class="clave-item-desc">Peñarol manda con 65 unidades en la acumulada (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y afirma la ventaja deportiva.</p>
+              <p class="clave-item-desc">Peñarol manda con 66 unidades en la acumulada (+34 de saldo). Ganar en el Prado mantiene a raya a los perseguidores y afirma la ventaja deportiva.</p>
             </div>
           </div>
 
@@ -794,7 +796,7 @@
           </div>
           <!-- BANNER EXPLICATIVO INFORMATIVO CON ACCESO RÁPIDO A TABLA ANUAL -->
           <div id="standings-sub-info" style="font-size:12.5px;color:#e4e4e7;margin:0 0 12px;padding:10px 14px;background:rgba(255,209,0,0.08);border:1px solid rgba(255,209,0,0.3);border-radius:8px;line-height:1.45;">
-            <strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>Montevideo Wanderers</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (65 pts) →</button>
+            <strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>Montevideo Wanderers</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (66 pts) →</button>
           </div>
           <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
             <button type="button" id="btn-toggle-cols" class="btn-toggle-cols" title="Alternar visualización de victorias, empates y derrotas en pantallas pequeñas">
@@ -824,7 +826,7 @@
                   <td class="col-stat col-pe">8</td>
                   <td class="col-stat col-pp">7</td>
                   <td class="col-stat col-dg">+24</td>
-                  <td class="col-pts"><span class="pts-pill is-leader">65</span></td>
+                  <td class="col-pts"><span class="pts-pill is-leader">66</span></td>
                 </tr>
                 <tr>
                   <td class="col-pos">2</td>
@@ -1359,6 +1361,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js?v=7.1" defer></script>
+  <script src="js/app.js?v=8.0" defer></script>
 </body>
 </html>

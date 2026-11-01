@@ -420,6 +420,33 @@
         a.style.fontWeight = '900';
         a.href = bLiveUrl;
       });
+    } else if (live.fase_partido === 'POST_PARTIDO' || live.estado_ciclo_vida === 'POST_48H') {
+      if (cdGrid) cdGrid.style.display = 'none';
+      if (liveScoreBox) liveScoreBox.style.display = 'flex';
+      const act = live.partido_activo || prox;
+      if (sHome) sHome.textContent = act.local ? (act.local.goles || '1') : '1';
+      if (sAway) sAway.textContent = act.visitante ? (act.visitante.goles || '1') : '1';
+      if (clkTxt) clkTxt.textContent = '🏁 FINALIZADO (90+5') • PARQUE SAROLDI';
+
+      if (heroBadge) {
+        heroBadge.textContent = '🏁 RESULTADO FINAL • TORNEO CLAUSURA (FECHA 13)';
+        heroBadge.style.background = '#10b981';
+        heroBadge.style.color = '#ffffff';
+        heroBadge.style.borderColor = '#059669';
+      }
+
+      if (tDate) {
+        tDate.textContent = `🏁 FINALIZADO • Sábado 31/10/2026 • Peñarol 1 - 1 Montevideo Wanderers`;
+        tDate.style.color = '#34d399';
+      }
+
+      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
+        a.textContent = '📖 CRÓNICA COMPLETA DEL 1-1 & VESTUARIO EN SERVICIOTI →';
+        a.style.background = '#ffd100';
+        a.style.color = '#09090b';
+        a.style.fontWeight = '900';
+        a.href = bLiveUrl;
+      });
     } else {
       if (cdGrid) cdGrid.style.display = 'grid';
       if (liveScoreBox) liveScoreBox.style.display = 'none';
@@ -443,7 +470,7 @@
 
     if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
     if (tLast) {
-      tLast.textContent = 'Peñarol 65 pts (Líder Solitario Anual • +24 DG)';
+      tLast.textContent = 'Peñarol 66 pts (Líder Solitario Anual • +24 DG)';
     }
 
     // Ticker interactivo de alerta de partido
@@ -615,9 +642,9 @@
         const rivalNom = (proxMatch.local && !proxMatch.local.es_penarol)
           ? proxMatch.local.nombre
           : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Montevideo Wanderers');
-        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>${rivalNom}</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (65 pts) →</button>`;
+        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>${rivalNom}</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (66 pts) →</button>`;
       } else if (activeTourn.id === 'anual') {
-        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada oficial. Define el Campeón Uruguayo 2026. <strong style="color:var(--manya-gold);">Peñarol es líder solitario con 65 puntos (+24 DG).</strong> <button type="button" id="btn-quick-switch-clausura" style="background:#27272a;color:#ffd100;font-weight:900;border:1px solid #ffd100;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">⚽ Ver Torneo Clausura (Próximo Partido) →</button>`;
+        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada oficial. Define el Campeón Uruguayo 2026. <strong style="color:var(--manya-gold);">Peñarol es líder solitario con 66 puntos (+24 DG).</strong> <button type="button" id="btn-quick-switch-clausura" style="background:#27272a;color:#ffd100;font-weight:900;border:1px solid #ffd100;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">⚽ Ver Torneo Clausura (Próximo Partido) →</button>`;
       } else if (activeTourn.id === 'libertadores') {
         subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla de posiciones oficial de Conmebol.`;
       } else {

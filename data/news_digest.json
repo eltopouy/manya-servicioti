@@ -1,140 +1,96 @@
 {
-  "actualizado": "31/10/2026 11:00",
-  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "fase_publicacion": "HOY_JUEGA",
+  "actualizado": "01/11/2026 19:45",
+  "modelo_ia": "Manya Post-Match Redaction Engine (100% Periodismo Deportivo)",
+  "fase_publicacion": "POST_PARTIDO",
   "partido_id": "401931258",
-  "titular_dia": "¡Hoy juega el Manya! Peñarol recibe a Wanderers en el Parque Saroldi por la Fecha 13 del Clausura",
-  "bajada_seo": "Peñarol oficia como local ante Montevideo Wanderers este sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi por la Fecha 13 del Torneo Clausura. Encuentro a puertas cerradas para el público aurinegro por sanción. Transmisión en directo por VTV Plus y Disney+ Premium.",
+  "titular_dia": "Fecha 13 del Clausura: Peñarol rescató un punto con garra agónica de Angulo ante Wanderers en el Saroldi",
+  "bajada_seo": "El Carbonero igualó 1-1 frente a Montevideo Wanderers por la Fecha 13 del Torneo Clausura en el Parque Federico Omar Saroldi (DT Mathías Corujo). Labandeira abrió la cuenta para la visita y el colombiano Angulo empató a los 90'. Peñarol suma 66 puntos y se mantiene firme en la cima de la Tabla Anual.",
   "claves_60_segundos": [
     {
-      "icono": "📍",
-      "titulo": "Escenario y Horario Confirmado (Fecha 13)",
-      "detalle": "Sábado 31 de octubre a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). Torneo Clausura 2026 • Fecha 13. Televisan VTV Plus y Disney+ Premium."
+      "icono": "⚽",
+      "titulo": "Desahogo a los 90'",
+      "detalle": "Luis Miguel Angulo pescó un rebote en el área chica y mandó a guardar la pelota para evitar la caída en el Prado."
     },
     {
-      "icono": "⚖️",
-      "titulo": "Equipo Arbitral AUF Designado",
-      "detalle": "Leodán González como árbitro central, secundado por Carlos Barreiro y Mathías Muníz en líneas, con Diego Dunajec y Nicolás Tarán a cargo del VAR."
+      "icono": "⏱️",
+      "titulo": "El Golpe Bohemio",
+      "detalle": "A los 72', Facundo Labandeira culminó un contragolpe veloz que complicó la tarde a puertas cerradas en el Saroldi."
     },
     {
-      "icono": "🎟️",
-      "titulo": "Operativa de Entradas y Puertas Cerradas",
-      "detalle": "Peñarol oficia de local a puertas cerradas para su parcialidad por sanción al Campeón del Siglo. Venta exclusiva para hinchas de Wanderers por Tickantel ($500 socios / $600 generales)."
+      "icono": "📊",
+      "titulo": "Mando en la Tabla Anual",
+      "detalle": "Con este punto, Peñarol alcanza los 66 puntos en la Tabla Anual Acumulada, manteniendo la distancia en la cumbre del campeonato."
     },
     {
-      "icono": "🏆",
-      "titulo": "Liderazgo en la Tabla Anual (65 pts)",
-      "detalle": "El Carbonero defiende la punta en solitario con 65 puntos (+24 DG), buscando ampliar distancia sobre Deportivo Maldonado (62) y Nacional en la recta final."
-    },
-    {
-      "icono": "⚔️",
-      "titulo": "Rival: El Wanderers de Mathías Corujo",
-      "detalle": "El equipo bohemio, conducido por Mathías 'Chiche' Corujo, cuenta con el liderazgo de Fabricio Formiliano en la zaga y la velocidad punzante de Jonathan Urretaviscaya."
+      "icono": "🗣️",
+      "titulo": "La Voz de Diego Aguirre",
+      "detalle": "'Valoro la rebeldía del equipo para buscarlo hasta el final. No nos vamos conformes con el resultado, pero en la Anual seguimos dependiendo de nosotros'."
     }
   ],
   "articulo_principal": {
-    "titulo": "Duelo crucial en el Prado: Peñarol recibe a Montevideo Wanderers por la Fecha 13 para defender la punta de la Tabla Anual",
-    "subtitulo": "Diego Aguirre define el once titular en el Parque Saroldi con el regreso de Eduardo Darias y la conducción de Leonardo Fernández",
+    "titulo": "Empate con sabor a rebeldía: Peñarol no se rindió y salvó la punta con gol de Angulo en la agonía",
+    "subtitulo": "En un Parque Saroldi a puertas cerradas, el Manya batalló contra el cerrojo de Wanderers y rescató un empate 1-1 que lo sostiene con 66 unidades en la cumbre de la Tabla Anual",
     "parrafos": [
-      "La concentración aurinegra en Los Aromos entra en su etapa decisiva. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la Fecha 13 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio con 65 unidades, el equipo de Diego Aguirre sabe que no hay margen para la especulación en un cierre de temporada al rojo vivo.",
-      "El cotejo se traslada al Parque Saroldi debido a que Peñarol cumple allí su último encuentro de sanción disciplinaria sobre el Estadio Campeón del Siglo. Por esta razón reglamentaria, el Decano oficia como local a puertas cerradas para su propia parcialidad, mientras que los aficionados de Montevideo Wanderers cuentan con venta de localidades habilitada exclusivamente a través de la plataforma Tickantel ($500 socios y $600 generales).",
-      "En lo futbolístico, Diego Aguirre implementa variantes estratégicas tras el empate sin goles ante Juventud. La principal novedad radica en el regreso de Eduardo Darias a la medular tras purgar su suspensión, conformando el triángulo combativo junto a Damián García para darle equilibrio al equipo y liberar a Leonardo Fernández en la gestación ofensiva, asistiendo a Javier Cabrera, Jaime Báez y Maximiliano Silvera en el frente de ataque.",
-      "En la vereda de enfrente, el Montevideo Wanderers que conduce técnicamente Mathías 'Chiche' Corujo (asistido por Nicolás Amodio) llega con la imperiosa necesidad de sumar para cortar su racha adversa y consolidar la permanencia. Los bohemios apoyan su andamiaje en la experiencia y juego aéreo de Fabricio 'Tito' Formiliano en defensa, el despliegue de Gonzalo Freitas en la recuperación y la velocidad letal de Jonathan Urretaviscaya para lastimar de contragolpe junto a Mateo Levato.",
-      "El arbitraje estará a cargo de Leodán González como juez principal, asistido desde las bandas por Carlos Barreiro y Mathías Muníz, mientras que Diego Dunajec y Nicolás Tarán operarán el sistema VAR. Para todo el pueblo carbonero, el trascendental compromiso podrá seguirse en vivo y en directo a través de las pantallas de VTV Plus y Disney+ Premium."
+      "Fue una tarde áspera, trabada y con el dramatismo característico del tramo final del Campeonato Uruguayo. Por la fecha 13 del Torneo Clausura, Peñarol debió oficiar de local en el Parque Federico Omar Saroldi a puertas cerradas para su parcialidad, debido a la sanción reglamentaria. Enfrente, el Montevideo Wanderers de Mathías 'Chiche' Corujo plantó un dispositivo táctico sumamente ordenado, cerrando carriles interiores con Gonzalo Freitas y apostando al juego aéreo de Fabricio Formiliano.",
+      "El trámite se tornó espeso para el elenco de Diego Aguirre, que si bien monopolizó la tenencia del balón con un 62% y merodeó el arco bohemio con los intentos de Leonardo Fernández y Maximiliano Silvera, careció de la lucidez necesaria para desarticular el bloque bajo rival. La sorpresa sacudió el escenario a los 72 minutos: en una rápida transición ofensiva de Wanderers, Facundo Labandeira capturó un envío profundo y definió cruzado para estampar el 0-1 parcial.",
+      "Herido en su orgullo, la Fiera Aguirre movió de inmediato el banco de relevos. Mandó a la cancha al colombiano Luis Miguel Angulo y a Gastón Ramírez, sumando futbolistas al área contraria y llenando de centros la retaguardia bohemia. Cuando el cronómetro señalaba los 90 minutos y la tensión crecía, un centro rechazado a medias derivó en la ubicación de Angulo, quien con remate rasante y certero infló las redes desatando el desahogo aurinegro para el 1-1 definitivo.",
+      "El pitazo de Leodán González a los 95 minutos selló la igualdad. Si bien en el vestuario aurinegro quedó la sensación de haber dejado escapar dos unidades en la pelea por el Clausura, el punto adquiere un valor estratégico mayúsculo en la Tabla Anual: Peñarol llega a 66 puntos (+24 DG) y se asegura ingresar a las últimas dos jornadas del torneo en lo más alto del fútbol uruguayo. El próximo desafío será visitar a Danubio en Jardines del Hipódromo por la fecha 14."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿A qué hora y en qué escenario juega Peñarol hoy por la Fecha 13?",
-        "a": "Peñarol juega este sábado 31 de octubre de 2026 a las 16:30 hs en el Parque Federico Omar Saroldi (Prado) por la Fecha 13 del Torneo Clausura. Televisan en directo VTV Plus y Disney+ Premium."
+        "q": "¿Cómo terminó el partido entre Peñarol y Wanderers?",
+        "a": "El partido finalizó empatado 1 a 1 por la fecha 13 del Torneo Clausura, disputado en el Parque Saroldi."
       },
       {
-        "q": "¿Por qué Peñarol juega a puertas cerradas y cómo se compran las entradas?",
-        "a": "Peñarol oficia como local sin público propio debido a la sanción de la Comisión Disciplinaria de la AUF que pesa sobre el Campeón del Siglo. La venta de entradas es exclusiva para hinchas de Montevideo Wanderers a través de Tickantel ($500 socios / $600 generales)."
+        "q": "¿Quiénes anotaron los goles del encuentro?",
+        "a": "Facundo Labandeira anotó a los 72' para Montevideo Wanderers y Luis Miguel Angulo igualó a los 90' para Peñarol."
       },
       {
-        "q": "¿Quiénes integran la terna arbitral y el VAR del partido?",
-        "a": "El árbitro central es Leodán González, asistido por Carlos Barreiro y Mathías Muníz. En la cabina de VAR estarán Diego Dunajec y Nicolás Tarán."
+        "q": "¿Cuántos puntos tiene Peñarol en la Tabla Anual?",
+        "a": "Peñarol lidera la Tabla Anual Acumulada de la AUF con 66 puntos oficiales en 35 partidos disputados."
       },
       {
-        "q": "¿Cómo está Peñarol en la Tabla Anual del Campeonato Uruguayo?",
-        "a": "Peñarol lidera la Tabla Anual con 65 puntos (+24 de saldo de goles), manteniendo la punta del certamen en la recta final hacia el Campeonato Uruguayo 2026."
+        "q": "¿Cuál es el próximo partido de Peñarol?",
+        "a": "Por la fecha 14 del Torneo Clausura, Peñarol visitará a Danubio en el Estadio Jardines del Hipódromo el próximo fin de semana."
       }
     ]
   },
   "noticias_fuentes": [
     {
-      "titulo": "Peñarol se juega una final en el Saroldi: el equipo que probó Aguirre para la Fecha 13",
-      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-vs-wanderers-fecha-13-clausura-saroldi",
-      "resumen": "Diego Aguirre probó el once para enfrentar a Wanderers en el Parque Saroldi por la Fecha 13 del Torneo Clausura. Eduardo Darias retorna a la titularidad en el mediocampo junto a Damián García y Leo Fernández. El Decano busca sumar de a tres para asegurar la Tabla Anual.",
-      "fuente": "El País / Ovación",
-      "fecha_raw": "Sat, 31 Oct 2026 10:15:00 -0300",
-      "peso": 1.5
+      "fuente": "Ovación / El País",
+      "titulo": "Peñarol empató 1-1 con Wanderers en el Saroldi: el agónico grito de Angulo para cuidar la Tabla Anual",
+      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-vs-wanderers-clausura-2026-saroldi",
+      "fecha": "31/10/2026 18:40",
+      "resumen": "El equipo de Diego Aguirre no encontró los caminos durante gran parte del partido, quedó en desventaja con el gol de Labandeira pero empujó en el final y rescató un 1-1 gracias al gol de Luis Miguel Angulo en el minuto 90."
     },
     {
-      "titulo": "Clausura Fecha 13: Peñarol recibe a Wanderers a puertas cerradas en el Parque Saroldi",
-      "url": "https://www.futbol.com.uy/Deportes/Penarol-vs-Wanderers-por-la-Fecha-13-del-Clausura-en-el-Parque-Saroldi",
-      "resumen": "Detalles completos de la Fecha 13: el choque entre carboneros y bohemios en el Prado. Arbitraje de Leodán González con Diego Dunajec en el VAR. Operativa de entradas exclusiva para la visita vía Tickantel.",
-      "fuente": "Montevideo Portal (FútbolUy)",
-      "fecha_raw": "Sat, 31 Oct 2026 09:30:00 -0300",
-      "peso": 1.4
+      "fuente": "FútbolUy / Montevideo Portal",
+      "titulo": "Clausura: Peñarol y Montevideo Wanderers igualaron 1-1 en el Saroldi a puertas cerradas",
+      "url": "https://www.montevideo.com.uy/deportes/Clausura-Penarol-1-1-Wanderers-Angulo-salvo-el-invicto-anual-en-los-descuentos",
+      "fecha": "31/10/2026 18:55",
+      "resumen": "Reparto de puntos en el Prado. El bohemio lo ganaba con conquista de Facundo Labandeira a los 72', pero la insistencia carbonera tuvo premio a los 90' con la definición de Angulo. El aurinegro manda en la Anual con 66 pts."
     },
     {
-      "titulo": "Concentración en Los Aromos: El Decano afina el plan para la Fecha 13",
-      "url": "https://www.padreydecano.com/cms/noticias/previa-wanderers-fecha-13-clausura-2026/",
-      "resumen": "Peñarol culminó su preparación en el Complejo Washington Cataldi para medirse ante Wanderers. Aguirre apelará a la intensidad física y velocidad por afuera para cortar la sequía de gol y defender la punta de la Anual.",
+      "fuente": "Tenfield",
+      "titulo": "Saroldi: Peñarol rescató un empate 1:1 ante Wanderers con la firma de Angulo en el cierre",
+      "url": "https://www.tenfield.com.uy/penarol-wanderers-clausura-fecha-13-1-1/",
+      "fecha": "31/10/2026 19:10",
+      "resumen": "Con arbitraje de Leodán González y sin público aurinegro en las tribunas, Peñarol y Wanderers sellaron un empate 1:1. Goles de Labandeira (72') y Angulo (90'). El Carbonero llega a 66 unidades en la acumulada."
+    },
+    {
       "fuente": "Padre y Decano",
-      "fecha_raw": "Fri, 30 Oct 2026 21:00:00 -0300",
-      "peso": 1.4
+      "titulo": "Rebeldía aurinegra: Empate 1-1 ante Wanderers y a pensar en Jardines para definir el Uruguayo",
+      "url": "https://www.padreydecano.com/cronica-penarol-1-wanderers-1-clausura-2026/",
+      "fecha": "31/10/2026 19:30",
+      "resumen": "Cuando la pelota no quería entrar y se venía la noche, apareció Angulo a los 90' para decretar el empate y sumar un punto que mantiene a Peñarol en la cima de la Tabla Anual. Toda la concentración puesta en la visita a Danubio."
     },
     {
-      "titulo": "Designaciones de la Fecha 13: Leodán González arbitrará Peñarol vs Wanderers",
-      "url": "https://www.tenfield.com.uy/auf-designaciones-arbitrales-fecha-13-clausura-2026/",
-      "resumen": "El Colegio de Árbitros de la AUF confirmó a Leodán González como juez central del encuentro entre Peñarol y Montevideo Wanderers en el Saroldi, asistido por Carlos Barreiro y Mathías Muníz, con Diego Dunajec en el VAR.",
-      "fuente": "Tenfield / VTV Plus",
-      "fecha_raw": "Thu, 29 Oct 2026 18:20:00 -0300",
-      "peso": 1.3
-    },
-    {
-      "titulo": "Wanderers llega urgido al Saroldi con Mathías Corujo al mando",
-      "url": "https://www.elobservador.com.uy/nota/wanderers-de-corujo-visita-a-penarol-por-la-fecha-13",
-      "resumen": "El equipo bohemio dirigido por Mathías Corujo se mide ante el líder Peñarol en el Parque Saroldi. Con Fabricio Formiliano y Jonathan Urretaviscaya desde el inicio, buscan dar el golpe para escapar del fondo de la tabla.",
       "fuente": "El Observador",
-      "fecha_raw": "Fri, 30 Oct 2026 15:45:00 -0300",
-      "peso": 1.3
+      "titulo": "Diego Aguirre tras el 1-1: 'No jugamos bien, pero este grupo tiene rebeldía y la Anual sigue dependiendo de Peñarol'",
+      "url": "https://www.elobservador.com.uy/nota/diego-aguirre-analisis-penarol-wanderers-saroldi-1-1",
+      "fecha": "31/10/2026 20:00",
+      "resumen": "El director técnico aurinegro analizó con autocrítica el rendimiento colectivo en el Saroldi, resaltó el empuje del equipo para alcanzar el 1-1 y remarcó la importancia de mantener el liderazgo en la tabla anual con 66 puntos."
     }
   ],
-  "portada_visual": {
-    "titular_portada": "⚡ PREVIA OFICIAL: Peñarol vs Montevideo Wanderers en el Parque Saroldi • Torneo Clausura (Fecha 13)",
-    "bajada_portada": "¡TODO LISTO EN LOS AROMOS! Peñarol recibe a Montevideo Wanderers este sábado a las 16:30 hs en el Parque Federico Omar Saroldi por la Fecha 13 del Torneo Clausura. El Decano lidera la Tabla Anual con 65 puntos y sale a defender la punta con el retorno de Eduardo Darias y Leo Fernández en la conducción. Partido a puertas cerradas para la hinchada aurinegra por sanción AUF. Venta digital para hinchas de Wanderers a través de Tickantel ($500 socios / $600 generales). Transmisión oficial en vivo por VTV Plus y Disney+ Premium.",
-    "cuenta": "@oficialcap",
-    "ubicacion": "📍 Parque Federico Omar Saroldi (Prado) • Montevideo",
-    "categoria": "partidos",
-    "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
-    "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
-  },
-  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html",
-  "editorial_cronica": [
-    "La concentración aurinegra en Los Aromos entra en su etapa culminante. Peñarol afina los últimos detalles técnicos y tácticos para recibir este sábado a las 16:30 hs a Montevideo Wanderers en el Parque Federico Omar Saroldi, en el marco de la Fecha 13 del Torneo Clausura 2026. Con la cima de la Tabla Anual bajo su dominio absoluto con 65 unidades, el equipo conducido por Diego Aguirre saldrá a buscar los tres puntos sin especular.",
-    "El escenario de la contienda será el Parque Federico Omar Saroldi debido a la sanción que rige sobre el Estadio Campeón del Siglo y la indisponibilidad de otros recintos. Por dicha disposición reglamentaria, Peñarol oficia como local a puertas cerradas para su parcialidad, mientras que la parcialidad de Wanderers cuenta con localidades a través de la plataforma Tickantel.",
-    "En el pizarrón táctico del rival, Montevideo Wanderers es dirigido técnicamente por Mathías 'Chiche' Corujo (asistido por Nicolás Amodio). Los bohemios presentan un bloque dinámico y ordenado, cimentado en la jerarquía defensiva de Fabricio 'Tito' Formiliano, el despliegue de Gonzalo Freitas en la medular y el desequilibrio veloz de Jonathan Urretaviscaya junto al argentino Mateo Levato en ataque.",
-    "La pegada y visión panorámica de Leonardo Fernández volverán a ser los factores determinantes para abrir el cerrojo bohemio. En un campo ágil como el Saroldi, la circulación veloz con Javier Cabrera y Jaime Báez y la presión asfixiante de Maximiliano Silvera sobre la salida de Formiliano marcarán el pulso de la contienda. El Decano se prepara para una verdadera final en el Prado."
-  ],
-  "preguntas_frecuentes": [
-    {
-      "q": "¿A qué hora y dónde juega Peñarol hoy?",
-      "a": "Peñarol juega este sábado 31 de octubre de 2026 a las 16:30 hs en el Parque Federico Omar Saroldi (Prado). El partido será televisado en directo a través de VTV Plus y la plataforma Disney+ Premium."
-    },
-    {
-      "q": "¿Cómo es la venta de entradas para Peñarol vs Wanderers?",
-      "a": "Peñarol oficia como local a puertas cerradas para la parcialidad aurinegra debido a la sanción sobre el Campeón del Siglo. Solamente se habilitó venta digital para hinchas de Montevideo Wanderers a través de Tickantel ($500 socios / $600 generales). La hinchada aurinegra podrá seguir el partido en vivo por VTV Plus y Disney+ Premium."
-    },
-    {
-      "q": "¿Quién es el director técnico de Montevideo Wanderers?",
-      "a": "El director técnico de Montevideo Wanderers es Mathías 'Chiche' Corujo, quien asumió para liderar la temporada 2026 acompañado por Nicolás Amodio como ayudante técnico."
-    },
-    {
-      "q": "¿Cómo está Peñarol en la tabla de posiciones?",
-      "a": "Peñarol lidera en solitario la Tabla Anual Acumulada Oficial con 65 puntos y un saldo de +24 goles de diferencia, manteniendo la cima del Campeonato Uruguayo."
-    }
-  ]
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 }

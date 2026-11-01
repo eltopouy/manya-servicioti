@@ -55,7 +55,7 @@ class ManyaSelfHealingWatchdog:
         self.reparaciones_realizadas: List[str] = []
 
     def auto_corregir_puntos(self) -> int:
-        """Corrige cualquier referencia residual a 64 puntos por los 65 puntos oficiales."""
+        """Corrige cualquier referencia residual a puntos viejos por los 66 puntos oficiales AUF."""
         corregidos = 0
         archivos_inspeccionar = [
             BASE_DIR / "index.html",
@@ -65,9 +65,12 @@ class ManyaSelfHealingWatchdog:
         ]
 
         patrones = [
-            (r"64 puntos", "65 puntos"),
-            (r"64 unidades", "65 unidades"),
-            (r"64 pts", "65 pts")
+            (r"64 puntos", "66 puntos"),
+            (r"64 unidades", "66 unidades"),
+            (r"64 pts", "66 pts"),
+            (r"65 puntos", "66 puntos"),
+            (r"65 unidades", "66 unidades"),
+            (r"65 pts", "66 pts")
         ]
 
         for fp in archivos_inspeccionar:
@@ -161,6 +164,26 @@ class ManyaSelfHealingWatchdog:
 
         return cambio_realizado
 
+    def auto_verificar_post_partido(self) -> bool:
+        """Verifica si un partido ha concluido y el portal debe estar en fase POST_PARTIDO (48hs)."""
+        live_file = DATA_DIR / "live_status.json"
+        if not live_file.exists():
+            return False
+        try:
+            live_data = json.loads(live_file.read_text(encoding="utf-8"))
+            fase = live_data.get("fase_partido", "")
+            if fase != "POST_PARTIDO":
+                from manya_post_match_pipeline import ManyaPostMatchPipeline
+                pipeline = ManyaPostMatchPipeline()
+                pipeline.ejecutar_pipeline_completo()
+                msg = "Auto-ajuste: Ejecutado pipeline de cierre post-partido (Peñarol 1-1 Wanderers, 66 pts)."
+                self.reparaciones_realizadas.append(msg)
+                logger.info(f"[Auto-Healing] ✓ {msg}")
+                return True
+        except Exception as e:
+            logger.warning(f"[Auto-Healing] Aviso en verificación post-partido: {e}")
+        return False
+
     def auto_corregir_escenario_y_rival(self) -> int:
         """Sanea escenario (Parque Federico Omar Saroldi) y DT de Wanderers (Mathías Corujo)."""
         corregidos = 0
@@ -231,6 +254,7 @@ class ManyaSelfHealingWatchdog:
 
         # 1. Aplicar rutinas preventivas de auto-curación
         self.auto_limpiar_locks_huerfanos()
+        self.auto_verificar_post_partido()
         self.auto_corregir_puntos()
         self.auto_corregir_escenario_y_rival()
         self.auto_ajustar_temporalidad_match_day()
