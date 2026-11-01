@@ -1,5 +1,5 @@
 {
-  "generado_el": "01/11/2026 14:31",
+  "generado_el": "01/11/2026 19:48",
   "rival_nombre": "Montevideo Wanderers Fútbol Club",
   "rival_corto": "Wanderers",
   "rival_slug": "wanderers",
@@ -14,9 +14,9 @@
     "redes": {}
   },
   "scouting_tactico": {
-    "entrenador": "Antonio Pacheco",
+    "entrenador": "Mathías Corujo",
     "esquema_base": "4-2-3-1 de posesión y transiciones veloces",
-    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por un ídolo aurinegro como Antonio Pacheco, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival.",
+    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por Mathías Corujo, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival.",
     "figuras_a_seguir": [
       {
         "nombre": "Tabaré Viudez",
@@ -41,7 +41,7 @@
     ],
     "puntos_fuertes": [
       "Fluidez en la circulación media y velocidad asociativa.",
-      "Conocimiento táctico profundo del cuerpo técnico liderado por Antonio Pacheco.",
+      "Orden táctico y solidez defensiva bajo la conducción de Mathías Corujo.",
       "Peligro constante en balones detenidos y remates de media distancia de Viudez."
     ],
     "vulnerabilidades_a_explotar": [

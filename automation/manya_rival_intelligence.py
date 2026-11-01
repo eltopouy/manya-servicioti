@@ -49,7 +49,7 @@ RIVALES_1891_MAP = {
         "sede": "Prado, Montevideo, Uruguay",
         "capacidad": 15000,
         "web": "https://mwfc.com.uy/",
-        "dt": "Antonio Pacheco",
+        "dt": "Mathías Corujo",
         "esquema": "4-2-3-1 de posesión y transiciones veloces"
     },
     "juventud": {
@@ -416,10 +416,10 @@ def generar_informe_rival(rival_query: str = "wanderers") -> dict:
     # 2. Configurar perfil táctico y duelos 1x1 según rival
     if "wanderers" in rival_slug:
         scouting = {
-            "entrenador": "Antonio Pacheco",
+            "entrenador": "Mathías Corujo",
             "esquema_base": "4-2-3-1 de posesión y transiciones veloces",
             "propuesta_juego": (
-                "Montevideo Wanderers, conducido tácticamente por un ídolo aurinegro como Antonio Pacheco, "
+                "Montevideo Wanderers, conducido tácticamente por Mathías Corujo, "
                 "pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente "
                 "para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio "
                 "en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival."
@@ -448,7 +448,7 @@ def generar_informe_rival(rival_query: str = "wanderers") -> dict:
             ],
             "puntos_fuertes": [
                 "Fluidez en la circulación media y velocidad asociativa.",
-                "Conocimiento táctico profundo del cuerpo técnico liderado por Antonio Pacheco.",
+                "Orden táctico y solidez defensiva bajo la conducción de Mathías Corujo.",
                 "Peligro constante en balones detenidos y remates de media distancia de Viudez."
             ],
             "vulnerabilidades_a_explotar": [

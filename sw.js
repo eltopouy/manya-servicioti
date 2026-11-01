@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v7.1-mobile-pts';
+const CACHE_NAME = 'manya-servicioti-v8.0-post-wanderers-1-1';
 const CORE_ASSETS = [
   '/',
   '/index.html',

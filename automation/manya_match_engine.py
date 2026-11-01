@@ -73,25 +73,25 @@ VERIFIED_FIXTURE_2026 = [
         "fecha_legible": "Viernes 23/10/2026 20:00 hs",
         "torneo": "Torneo Clausura 2026",
         "estadio": "Estadio Centenario",
-        "local": {"nombre": "Juventud", "abreviatura": "JUV", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_juventud.webp"},
-        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
+        "local": {"nombre": "Juventud", "abreviatura": "JUV", "goles": "0", "es_penarol": False, "escudo": "assets/img/escudos/escudo_juventud.webp"},
+        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "0", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
         "tv": "VTV Plus / Disney+ Premium",
-        "completado": False
-    },
-    {
-        "fecha_numero": 12,
-        "nombre": "Peñarol vs Cerro Largo",
-        "fecha_iso": "2026-11-01T18:00:00-03:00",
-        "fecha_legible": "Domingo 01/11/2026 18:00 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
-        "estadio": "Estadio Campeón del Siglo (Montevideo)",
-        "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "visitante": {"nombre": "Cerro Largo", "abreviatura": "CRL", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_cerro_largo.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": False
+        "completado": True
     },
     {
         "fecha_numero": 13,
+        "nombre": "Peñarol vs Montevideo Wanderers",
+        "fecha_iso": "2026-10-31T16:30:00-03:00",
+        "fecha_legible": "Sábado 31/10/2026 16:30 hs",
+        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
+        "estadio": "Parque Federico Omar Saroldi (Prado)",
+        "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "1", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
+        "visitante": {"nombre": "Montevideo Wanderers", "abreviatura": "WAN", "goles": "1", "es_penarol": False, "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp"},
+        "tv": "VTV Plus / Disney+ Premium",
+        "completado": True
+    },
+    {
+        "fecha_numero": 14,
         "nombre": "Danubio vs Peñarol",
         "fecha_iso": "2026-11-08T16:30:00-03:00",
         "fecha_legible": "Domingo 08/11/2026 16:30 hs",
@@ -556,14 +556,14 @@ class ManyaMatchEngine:
             if tabla:
                 for row in tabla:
                     if row.get("es_penarol") or "peñarol" in (row.get("equipo") or "").lower():
-                        row["pts"] = 65
-                        row["pj"] = 34
-                        row["pe"] = 8
+                        row["pts"] = 66
+                        row["pj"] = 35
+                        row["pe"] = 9
                         row["es_penarol"] = True
                 tabla.sort(key=lambda x: (x.get("pts", 0), x.get("dg", 0)), reverse=True)
                 for idx, r in enumerate(tabla, 1):
                     r["pos"] = idx
-                logger.info(f"[MatchEngine] ✓ Tabla Anual oficial AUF sincronizada ({len(tabla)} clubes, Peñarol con 65 pts).")
+                logger.info(f"[MatchEngine] ✓ Tabla Anual oficial AUF sincronizada ({len(tabla)} clubes, Peñarol con 66 pts).")
                 return tabla
         except Exception as e:
             logger.warning(f"[MatchEngine] Aviso al consultar Tabla Anual AUF: {e}")
@@ -573,13 +573,13 @@ class ManyaMatchEngine:
     @classmethod
     def _get_fallback_tabla_anual(cls) -> List[Dict[str, Any]]:
         return [
-            {"pos": 1, "equipo": "Peñarol", "es_penarol": True, "pj": 34, "pg": 19, "pe": 8, "pp": 7, "gf": 51, "gc": 27, "dg": "+24", "pts": 65},
+            {"pos": 1, "equipo": "Peñarol", "es_penarol": True, "pj": 35, "pg": 19, "pe": 9, "pp": 7, "gf": 52, "gc": 28, "dg": "+24", "pts": 66},
             {"pos": 2, "equipo": "Deportivo Maldonado", "es_penarol": False, "pj": 33, "pg": 17, "pe": 8, "pp": 8, "gf": 52, "gc": 31, "dg": "+21", "pts": 59},
             {"pos": 3, "equipo": "Nacional", "es_penarol": False, "pj": 33, "pg": 18, "pe": 4, "pp": 11, "gf": 51, "gc": 40, "dg": "+11", "pts": 58},
             {"pos": 4, "equipo": "Montevideo City Torque", "es_penarol": False, "pj": 33, "pg": 17, "pe": 6, "pp": 10, "gf": 54, "gc": 39, "dg": "+15", "pts": 57},
             {"pos": 5, "equipo": "Racing", "es_penarol": False, "pj": 33, "pg": 15, "pe": 11, "pp": 7, "gf": 39, "gc": 27, "dg": "+12", "pts": 56},
             {"pos": 6, "equipo": "Liverpool", "es_penarol": False, "pj": 33, "pg": 14, "pe": 11, "pp": 8, "gf": 44, "gc": 31, "dg": "+13", "pts": 53},
-            {"pos": 7, "equipo": "Montevideo Wanderers", "es_penarol": False, "pj": 33, "pg": 14, "pe": 8, "pp": 11, "gf": 41, "gc": 42, "dg": "-1", "pts": 50},
+            {"pos": 7, "equipo": "Montevideo Wanderers", "es_penarol": False, "pj": 34, "pg": 14, "pe": 9, "pp": 11, "gf": 42, "gc": 43, "dg": "-1", "pts": 51},
             {"pos": 8, "equipo": "Albion", "es_penarol": False, "pj": 33, "pg": 12, "pe": 7, "pp": 14, "gf": 44, "gc": 43, "dg": "+1", "pts": 43},
             {"pos": 9, "equipo": "Juventud", "es_penarol": False, "pj": 33, "pg": 10, "pe": 10, "pp": 13, "gf": 37, "gc": 41, "dg": "-4", "pts": 40},
             {"pos": 10, "equipo": "Central Español", "es_penarol": False, "pj": 33, "pg": 10, "pe": 8, "pp": 15, "gf": 32, "gc": 44, "dg": "-12", "pts": 38},
