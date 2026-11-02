@@ -1,33 +1,33 @@
 {
-  "fecha_auditoria": "01/11/2026 20:18:04",
-  "timestamp": "2026-11-01T20:18:04.870794-03:00",
-  "score_salud": 100.0,
+  "fecha_auditoria": "02/11/2026 00:56:13",
+  "timestamp": "2026-11-02T00:56:13.141171-03:00",
+  "score_salud": 87.5,
   "total_pruebas": 8,
-  "pruebas_exitosas": 8,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 7,
+  "pruebas_fallidas": 1,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-01 20:18:03",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-02 00:56:09",
       "details": {
-        "now_uy": "2026-11-01 20:18:03.820703-03:00",
+        "now_uy": "2026-11-02 00:56:09.840254-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-01T20:18:03.820750-03:00"
+      "timestamp": "2026-11-02T00:56:09.840302-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 7, es_hoy: False (partido: 08/11/2026)",
+      "message": "delta_days: 6, es_hoy: False (partido: 08/11/2026)",
       "details": {
-        "delta_days": 7,
+        "delta_days": 6,
         "es_hoy": false
       },
-      "timestamp": "2026-11-01T20:18:03.821319-03:00"
+      "timestamp": "2026-11-02T00:56:09.840826-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-01T20:18:03.823481-03:00"
+      "timestamp": "2026-11-02T00:56:09.842984-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-01T20:18:03.824540-03:00"
+      "timestamp": "2026-11-02T00:56:09.843995-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-01T20:18:03.825872-03:00"
+      "timestamp": "2026-11-02T00:56:09.845350-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,36 +68,36 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-01T20:18:03.826007-03:00"
+      "timestamp": "2026-11-02T00:56:09.845479-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-01T20:18:04.869178-03:00"
+      "timestamp": "2026-11-02T00:56:13.139702-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-01T20:18:04.870576-03:00"
+      "timestamp": "2026-11-02T00:56:13.140962-03:00"
     }
   ]
 }
