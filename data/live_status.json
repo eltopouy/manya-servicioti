@@ -1,9 +1,9 @@
 {
-  "actualizado": "02/11/2026 00:56",
+  "actualizado": "02/11/2026 08:58",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 30.4,
+  "horas_desde_ultimo_partido": 38.5,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Peñarol 1 - 1 Montevideo Wanderers • Crónica post-partido y análisis táctico en primer plano.",
@@ -386,6 +386,19 @@
     },
     {
       "pos": 2,
+      "equipo": "Montevideo City Torque",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 19,
+      "pe": 6,
+      "pp": 10,
+      "gf": 59,
+      "gc": 41,
+      "dg": "+18",
+      "pts": 63
+    },
+    {
+      "pos": 3,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
       "pj": 34,
@@ -396,19 +409,6 @@
       "gc": 32,
       "dg": "+22",
       "pts": 62
-    },
-    {
-      "pos": 3,
-      "equipo": "Montevideo City Torque",
-      "es_penarol": false,
-      "pj": 34,
-      "pg": 18,
-      "pe": 6,
-      "pp": 10,
-      "gf": 57,
-      "gc": 40,
-      "dg": "+17",
-      "pts": 60
     },
     {
       "pos": 4,
@@ -544,13 +544,13 @@
       "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 10,
       "pe": 7,
-      "pp": 17,
-      "gf": 33,
-      "gc": 45,
-      "dg": "-12",
+      "pp": 18,
+      "gf": 34,
+      "gc": 47,
+      "dg": "-13",
       "pts": 37
     },
     {
@@ -1090,6 +1090,19 @@
         },
         {
           "pos": 2,
+          "equipo": "Montevideo City Torque",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 19,
+          "pe": 6,
+          "pp": 10,
+          "gf": 59,
+          "gc": 41,
+          "dg": "+18",
+          "pts": 63
+        },
+        {
+          "pos": 3,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
           "pj": 34,
@@ -1100,19 +1113,6 @@
           "gc": 32,
           "dg": "+22",
           "pts": 62
-        },
-        {
-          "pos": 3,
-          "equipo": "Montevideo City Torque",
-          "es_penarol": false,
-          "pj": 34,
-          "pg": 18,
-          "pe": 6,
-          "pp": 10,
-          "gf": 57,
-          "gc": 40,
-          "dg": "+17",
-          "pts": 60
         },
         {
           "pos": 4,
@@ -1248,13 +1248,13 @@
           "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 10,
           "pe": 7,
-          "pp": 17,
-          "gf": 33,
-          "gc": 45,
-          "dg": "-12",
+          "pp": 18,
+          "gf": 34,
+          "gc": 47,
+          "dg": "-13",
           "pts": 37
         },
         {
@@ -1355,13 +1355,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 16.0,
-    "sensacion_c": 17.2,
-    "viento_kmh": 5.2,
-    "humedad_pct": 98,
+    "temperatura_c": 19.4,
+    "sensacion_c": 21.5,
+    "viento_kmh": 4.1,
+    "humedad_pct": 88,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "02/11/2026 00:56"
+    "actualizado": "02/11/2026 08:58"
   },
   "minuto_a_minuto": [
     {
