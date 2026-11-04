@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "04/11/2026 01:29:18",
-  "timestamp": "2026-11-04T01:29:18.972904-03:00",
+  "fecha_auditoria": "04/11/2026 12:55:54",
+  "timestamp": "2026-11-04T12:55:54.572291-03:00",
   "score_salud": 87.5,
   "total_pruebas": 8,
   "pruebas_exitosas": 7,
@@ -11,12 +11,12 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-04 01:29:16",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-04 12:55:52",
       "details": {
-        "now_uy": "2026-11-04 01:29:16.753846-03:00",
+        "now_uy": "2026-11-04 12:55:52.129889-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-04T01:29:16.753880-03:00"
+      "timestamp": "2026-11-04T12:55:52.129925-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 4,
         "es_hoy": false
       },
-      "timestamp": "2026-11-04T01:29:16.754479-03:00"
+      "timestamp": "2026-11-04T12:55:52.130497-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-04T01:29:16.756850-03:00"
+      "timestamp": "2026-11-04T12:55:52.132754-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-04T01:29:16.757916-03:00"
+      "timestamp": "2026-11-04T12:55:52.133815-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-04T01:29:16.759233-03:00"
+      "timestamp": "2026-11-04T12:55:52.135166-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,13 +68,13 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-04T01:29:16.759345-03:00"
+      "timestamp": "2026-11-04T12:55:52.135289-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
       "status": "FAIL",
       "passed": false,
-      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
+      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -89,15 +89,15 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-04T01:29:18.971160-03:00"
+      "timestamp": "2026-11-04T12:55:54.570616-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-04T01:29:18.972689-03:00"
+      "timestamp": "2026-11-04T12:55:54.572104-03:00"
     }
   ]
 }
