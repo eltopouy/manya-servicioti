@@ -1,102 +1,109 @@
 {
-  "fecha_consulta": "03/11/2026",
-  "dia_mes": "3 de Noviembre",
+  "fecha_consulta": "04/11/2026",
+  "dia_mes": "4 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 8,
+  "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2024-11-03",
-      "ano": "2024",
+      "fecha": "2021-11-04",
+      "ano": "2021",
+      "rival": "Cerrito",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Cerrito",
+      "torneo": "Torneo Clausura",
+      "estadio": "Luis Franzini",
+      "goles_detalle": "Maximiliano Silvera (C) 2', Rubén Bentancourt (P) 14', Rubén Bentancourt (P) 18' y Rubén Bentancourt (P) 45'"
+    },
+    {
+      "fecha": "2018-11-04",
+      "ano": "2018",
+      "rival": "Defensor Sporting",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Defensor Sporting",
+      "torneo": "Torneo Clausura",
+      "estadio": "Luis Franzini",
+      "goles_detalle": "Martin Correa (D) 19', Lucas Viatri (P) 82' y Ignacio Lores (P) 90+1'"
+    },
+    {
+      "fecha": "2012-11-04",
+      "ano": "2012",
+      "rival": "Defensor Sporting",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Defensor Sporting",
+      "torneo": "Torneo Apertura",
+      "estadio": "Centenario",
+      "goles_detalle": "Damián Macaluso (P) 43', Aureliano Torres (P) 74' y Federico Puppo (D) 90+1'"
+    },
+    {
+      "fecha": "1990-11-04",
+      "ano": "1990",
+      "rival": "Huracán Buceo",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Huracán Buceo",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Adolfo Barán (P) 30', Adrian Paz (P) 72' y Víctor López (P) 85'"
+    },
+    {
+      "fecha": "1989-11-04",
+      "ano": "1989",
       "rival": "River Plate",
-      "goles_penarol": 1,
+      "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 River Plate",
-      "torneo": "Torneo Clausura",
+      "resultado": "Peñarol 2 - 0 River Plate",
+      "torneo": "Campeonato Uruguayo",
       "estadio": "Parque Federico Omar Saroldi",
-      "goles_detalle": "Maximiliano Silvera (P) 67'"
+      "goles_detalle": "Pablo Correa (P) 12' y Gabriel Cedrés (P) 72'"
     },
     {
-      "fecha": "2002-11-03",
-      "ano": "2002",
-      "rival": "Villa Española",
+      "fecha": "1984-11-04",
+      "ano": "1984",
+      "rival": "Cerro",
       "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Villa Española",
-      "torneo": "Torneo Clausura",
-      "estadio": "Centenario",
-      "goles_detalle": "Robert Cañete (V) 11', Fabián Canobbio (P) 35', Fabián Estoyanoff (P) 61' y Fabián Estoyanoff (P) 64'"
-    },
-    {
-      "fecha": "1985-11-03",
-      "ano": "1985",
-      "rival": "Montevideo Wanderers",
-      "goles_penarol": 1,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Montevideo Wanderers",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Parque Alfredo Víctor Viera",
-      "goles_detalle": "Antonio Alzamendi 78'"
-    },
-    {
-      "fecha": "1974-11-03",
-      "ano": "1974",
-      "rival": "Danubio",
-      "goles_penarol": 3,
-      "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Danubio",
-      "torneo": "Campeonato Uruguayo",
+      "resultado": "Peñarol 3 - 0 Cerro",
+      "torneo": "Torneo 60mo. Aniversario de Colombes",
       "estadio": "Centenario",
-      "goles_detalle": "Alberto Santelli 43', Fernando Morena 64' y Daniel Quevedo 80'"
+      "goles_detalle": "Daniel Rodríguez 58', Fernando Morena 65' y José Luis Zalazar 79' de penal"
     },
     {
-      "fecha": "1951-11-03",
-      "ano": "1951",
-      "rival": "Colo Colo (Chi)",
-      "goles_penarol": 1,
-      "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Colo Colo (Chi)",
-      "torneo": "Amistoso (internacional)",
-      "estadio": "Centenario",
-      "goles_detalle": "Julio César Abbadie 89'"
-    },
-    {
-      "fecha": "1940-11-03",
-      "ano": "1940",
-      "rival": "Central F.C.",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Central F.C.",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Yaguno (C) 30', Arturo Naón (P) 36' y Severino Varela (P) 45'"
-    },
-    {
-      "fecha": "1929-11-03",
-      "ano": "1929",
-      "rival": "Capurro",
+      "fecha": "1979-11-04",
+      "ano": "1979",
+      "rival": "Rentistas",
       "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Capurro",
-      "torneo": "Torneo Especial (eliminatorio)",
-      "estadio": "Los Pocitos",
-      "goles_detalle": "Arturo Suffiotti (P) y Arturo Hohl (P)"
+      "resultado": "Peñarol 2 - 0 Rentistas",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Ildo Maneiro 71' de penal y Washington Olivera 83' de penal"
     },
     {
-      "fecha": "1912-11-03",
-      "ano": "1912",
-      "rival": "Universal",
-      "goles_penarol": 4,
+      "fecha": "1976-11-04",
+      "ano": "1976",
+      "rival": "Defensor",
+      "goles_penarol": 1,
       "goles_rival": 0,
-      "resultado": "Peñarol 4 - 0 Universal",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Belvedere",
-      "goles_detalle": "F. Varela (P), F. Varela (P), Arístides Pittamiglio (P) y Carlos Scarone (P)"
+      "resultado": "Peñarol 1 - 0 Defensor",
+      "torneo": "Torneo Liga Mayor",
+      "estadio": "Centenario",
+      "goles_detalle": "Norberto Galilea 4'"
     }
   ],
   "cumpleanos_glorias": [
     {
       "nombre": "Segundo Villadóniga",
       "fecha_nacimiento": "1915-11-06T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Omar Caetano",
+      "fecha_nacimiento": "1939-11-08T00:00:00.000Z",
       "partidos": null,
       "goles": null,
       "titulos": 0
