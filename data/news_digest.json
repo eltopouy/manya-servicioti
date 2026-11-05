@@ -4,7 +4,7 @@
   "fase_publicacion": "PREVIA",
   "partido_id": "",
   "titular_dia": "La cuenta regresiva carbonera apunta al Franzini: Peñarol ajusta las piezas con la mira en Defensor",
-  "bajada_seo": "A 11 días del choque clave, Peñarol intensifica los trabajos en Los Aromos para visitar a Defensor Sporting en el Estadio Luis Franzini. Enterate del horario, cómo ver el partido en vivo por VTV Plus y Disney+ Premium, y la actualidad del plantel aurinegro.",
+  "bajada_seo": "Torneo Clausura (Fecha 14): Peñarol intensifica los trabajos en Los Aromos para visitar a Defensor Sporting en el Estadio Luis Franzini (Domingo 15 de noviembre, 20:00 hs). Peñarol lidera la Tabla Anual con 66 puntos oficiales AUF.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
@@ -25,6 +25,11 @@
       "icono": "📊",
       "titulo": "Puntos en Juego",
       "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 65 pts)"
+    },
+    {
+      "icono": "📊",
+      "titulo": "Cima de la Tabla Anual",
+      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
     }
   ],
   "articulo_principal": {

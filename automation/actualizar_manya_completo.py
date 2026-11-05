@@ -443,8 +443,7 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
     Inyecta el glosario de apodos, jerga y cultura de `data/manya_culture.json`.
     Garantiza control temporal estricto en horario de Uruguay (UY_TZ).
     """
-    headlines_txt = "
-".join(f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:140]}" for n in news_list[:8])
+    headlines_txt = "\n".join(f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:140]}" for n in news_list[:8])
     prox = live_data.get("proximo_partido", {})
     ult = live_data.get("ultimo_partido", {})
     now_uy = datetime.now(UY_TZ)
@@ -481,116 +480,65 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
             nicknames = cdata.get("apodos_plantel_actual_2026", {})
             nick_txt = ", ".join(f"{k} ('{v.get('apodo','')}')" for k, v in list(nicknames.items())[:8])
             culture_context = (
-                f"GUÍA CULTURAL Y APODOS DEL PLANTEL: {nick_txt}.
-"
-                f"SIMBOLOGÍA: Escudo con 9 franjas (5 negras, 4 oro #FFC20E) y 11 estrellas en doble arco. Fundación 28 de setiembre de 1891 (CURCC/Peñarol), Decano del fútbol uruguayo.
-"
+                f"GUÍA CULTURAL Y APODOS DEL PLANTEL: {nick_txt}.\n"
+                f"SIMBOLOGÍA: Escudo con 9 franjas (5 negras, 4 oro #FFC20E) y 11 estrellas en doble arco. Fundación 28 de setiembre de 1891 (CURCC/Peñarol), Decano del fútbol uruguayo.\n"
             )
         except Exception:
             pass
 
-    prompt = (
-        "Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy), la plataforma periodística oficial del ecosistema ServicioTI "
-        "(https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.
-"
-        "Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de vestuario. Cero cursilería, romanticismo lírico o metáforas exageradas. Escribe sobre fútbol puro: "
-        "presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual (Peñarol lidera con 65 puntos).
+    prompt = f"""Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy), la plataforma periodística oficial del ecosistema ServicioTI (https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.
+Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de vestuario. Cero cursilería, romanticismo lírico o metáforas exageradas. Escribe sobre fútbol puro: presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual (Peñarol lidera con 66 puntos).
 
-"
-        f"CONTROL TEMPORAL EN URUGUAY: {temporal_rule}
+CONTROL TEMPORAL EN URUGUAY: {temporal_rule}
 
-"
-        f"{culture_context}"
-        f"NOTICIAS DE ACTUALIDAD:
+{culture_context}
+NOTICIAS DE ACTUALIDAD:
 {headlines_txt}
 
-"
-        f"Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} "
-        f"({prox.get('fecha_legible','')}) en {estadio_prox}.
-"
-        f"Último resultado: {ult.get('local',{}).get('nombre','')} {ult.get('local',{}).get('goles','')} - "
-        f"{ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.
+Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} ({prox.get('fecha_legible','')}) en {estadio_prox}.
+Último resultado: {ult.get('local',{}).get('nombre','')} {ult.get('local',{}).get('goles','')} - {ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.
 
-"
-        "REGLAS EDITORIALES INQUEBRANTABLES:
-"
-        "1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.
-"
-        "2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi'.
-"
-        "3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').
-"
-        "4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato.
-"
-        "5. Entradas: Si Peñarol es visitante (ej. en el Parque Viera), las entradas son por RedTickets (redtickets.uy) y NO rige canje de socios.
-"
-        "Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:
-"
-        "{
-"
-        '  "portada_visual": {
-'
-        '    "titular_portada": "Titular impactante de portada para la tarjeta visual superior (máx 90 car)",
-'
-        '    "bajada_portada": "Párrafo breve y vibrante que acompaña la foto principal estilo Instagram (180-220 car, incluye datos de partido y entradas)",
-'
-        '    "cuenta": "@oficialcap",
-'
-        f'    "ubicacion": "📍 {estadio_prox} • Montevideo",
-'
-        '    "categoria": "partidos"
-'
-        '  },
-'
-        '  "titular_dia": "Titular periodístico potente y atractivo sobre el presente de Peñarol (máx 95 car)",
-'
-        '  "bajada_seo": "Síntesis SEO de entre 135 y 155 caracteres en UTF-8 puro sobre la actualidad de Peñarol, rival, escenario y transmisión.",
-'
-        '  "claves_60_segundos": [
-'
-        '    {"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Resumen de 25-35 palabras sobre el trabajo táctico de Aguirre."},
-'
-        '    {"icono": "📊", "titulo": "Tabla Anual Oficial", "detalle": "Peñarol lidera con 65 puntos y defiende la punta de la acumulada."},
-'
-        '    {"icono": "🎟️", "titulo": "Operativo de Entradas", "detalle": "Detalle verificado de venta según condición de local o visitante."},
-'
-        '    {"icono": "🔥", "titulo": "Figuras y Rendimiento", "detalle": "Momento de Leo Fernández y el bloque de ataque aurinegro."}
-'
-        '  ],
-'
-        '  "articulo_principal": {
-'
-        '    "titulo": "Título SEO del artículo de análisis táctico y actualidad de Peñarol",
-'
-        '    "subtitulo": "Subtítulo periodístico riguroso y analítico",
-'
-        '    "parrafos": [
-'
-        '      "Párrafo 1 (110-140 palabras): Situación de Peñarol en la Tabla Anual (65 puntos) y enfoque competitivo.",
-'
-        '      "Párrafo 2 (110-140 palabras): Análisis táctico detallado del esquema de Aguirre (4-2-3-1), presión y circuitos.",
-'
-        '      "Párrafo 3 (110-140 palabras): Fortaleza defensiva, zaga central y rendimiento en las áreas.",
-'
-        '      "Párrafo 4 (110-140 palabras): Expectativa de la hinchada, escenario del próximo cruce y cómo seguirlo."
-'
-        '    ],
-'
-        '    "preguntas_frecuentes": [
-'
-        '      {"q": "¿Cuándo y a qué hora juega Peñarol su próximo partido y por qué canal se transmite?", "a": "Respuesta con fecha precisa, hora uruguaya, estadio y canales VTV Plus / Disney+."},
-'
-        '      {"q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?", "a": "Peñarol encabeza la Tabla Anual en solitario con 65 puntos."},
-'
-        '      {"q": "¿Cómo adquirir las entradas para el partido?", "a": "Detalle exacto según fijación del encuentro."}
-'
-        '    ]
-'
-        '  }
-'
-        "}
-"
-    )
+REGLAS EDITORIALES INQUEBRANTABLES:
+1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.
+2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi'.
+3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').
+4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato.
+5. Entradas: Si Peñarol es visitante, las entradas son por RedTickets (redtickets.uy) y NO rige canje de socios.
+
+Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:
+{{
+  "portada_visual": {{
+    "titular_portada": "Titular impactante de portada para la tarjeta visual superior (máx 90 car)",
+    "bajada_portada": "Párrafo breve y vibrante que acompaña la foto principal estilo Instagram (180-220 car, incluye datos de partido y entradas)",
+    "cuenta": "@oficialcap",
+    "ubicacion": "📍 {estadio_prox} • Montevideo",
+    "categoria": "partidos"
+  }},
+  "titular_dia": "Titular periodístico potente y atractivo sobre el presente de Peñarol (máx 95 car)",
+  "bajada_seo": "Síntesis SEO de entre 135 y 155 caracteres en UTF-8 puro sobre la actualidad de Peñarol, rival, escenario y transmisión.",
+  "claves_60_segundos": [
+    {{"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Resumen de 25-35 palabras sobre el trabajo táctico de Aguirre."}},
+    {{"icono": "📊", "titulo": "Tabla Anual Oficial", "detalle": "Peñarol lidera con 66 puntos y defiende la punta de la acumulada."}},
+    {{"icono": "🎟️", "titulo": "Operativo de Entradas", "detalle": "Detalle verificado de venta según condición de local o visitante."}},
+    {{"icono": "🔥", "titulo": "Figuras y Rendimiento", "detalle": "Momento de Leo Fernández y el bloque de ataque aurinegro."}}
+  ],
+  "articulo_principal": {{
+    "titulo": "Título SEO del artículo de análisis táctico y actualidad de Peñarol",
+    "subtitulo": "Subtítulo periodístico riguroso y analítico",
+    "parrafos": [
+      "Párrafo 1 (110-140 palabras): Situación de Peñarol en la Tabla Anual (66 puntos) y enfoque competitivo.",
+      "Párrafo 2 (110-140 palabras): Análisis táctico detallado del esquema de Aguirre (4-2-3-1), presión y circuitos.",
+      "Párrafo 3 (110-140 palabras): Fortaleza defensiva, zaga central y rendimiento en las áreas.",
+      "Párrafo 4 (110-140 palabras): Expectativa de la hinchada, escenario del próximo cruce y cómo seguirlo."
+    ],
+    "preguntas_frecuentes": [
+      {{"q": "¿Cuándo y a qué hora juega Peñarol su próximo partido y por qué canal se transmite?", "a": "Respuesta con fecha precisa, hora uruguaya, estadio y canales VTV Plus / Disney+."}},
+      {{"q": "¿Cómo está Peñarol en la Tabla Anual y el Campeonato Uruguayo?", "a": "Peñarol encabeza la Tabla Anual en solitario con 66 puntos."}},
+      {{"q": "¿Cómo adquirir las entradas para el partido?", "a": "Detalle exacto según fijación del encuentro."}}
+    ]
+  }}
+}}
+"""
 
     ai_json = None
     try:

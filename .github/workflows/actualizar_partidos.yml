@@ -2,8 +2,8 @@ name: Sincronización Automática de Partidos y Match Center Manya
 
 on:
   schedule:
-    # Ejecuta automáticamente cada 4 horas todos los días
-    - cron: '0 */4 * * *'
+    # Ejecuta automáticamente cada 2 horas todos los días
+    - cron: '0 */2 * * *'
   workflow_dispatch: # Permite ejecución manual con un click desde GitHub
 
 permissions:
@@ -30,20 +30,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Actualizar Match Center, Historial y Efemérides 1891 BD
+      - name: Actualizar Match Center, Historial, Efemérides y Auto-Curación
         run: |
           python automation/manya_match_engine.py
           python automation/extraer_datos_1891.py
           python automation/manya_rival_intelligence.py
           python automation/manya_self_healing_watchdog.py
           python automation/test_manya_ecosystem.py
-          python automation/sincronizar_pagina_blogger_historico.py
 
       - name: Verificar Cambios y Commit a Main
         run: |
           git config user.name "Manya Bot [GitHub Action]"
           git config user.email "bot@manya.servicioti.com.uy"
-          git add data/ assets/ index.html
+          git add data/ assets/ index.html js/ sw.js automation/
           if git diff --staged --quiet; then
             echo "Sin cambios en el estado de partidos y efemérides. Todo al día."
           else

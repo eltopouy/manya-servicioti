@@ -71,6 +71,9 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     es_hoy = match_info.get("es_hoy", False)
 
     now_uy = datetime.now(UY_TZ)
+    torneo_nom = match_info.get("torneo", "Torneo Clausura 2026 (Fecha 14)")
+    fecha_num = match_info.get("fecha_numero", 14)
+    fecha_tag = f"Fecha {fecha_num}"
     delta_days = 1
     if fecha_iso:
         try:
@@ -113,8 +116,7 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     logger.info(f"[Previa] ⚡ Generando La Previa Oficial: {match_title} ({hora_str}) [Estado: {temporal_label}]...")
 
     # Síntesis de noticias para el redactor
-    resumenes_prensa = "
-".join([
+    resumenes_prensa = "\n".join([
         f"- [{n['fuente']}] {n['titulo']}: {n['resumen'][:180]}"
         for n in noticias_prensa[:10]
     ])
@@ -143,7 +145,7 @@ REGLAS EDITORIALES OBLIGATORIAS:
     {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Detalle del planteo de Diego Aguirre"}},
     {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Leonardo Fernández"}},
     {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay ({hora_str}) y televisación ({tv})"}},
-    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 65 pts)"}}
+    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 66 puntos oficiales AUF)"}}
   ],
   "articulo_principal": {{
     "titulo": "Título periodístico de análisis de la previa",
@@ -171,14 +173,29 @@ REGLAS EDITORIALES OBLIGATORIAS:
         if delta_days != 0 and "hoy juega" in titular.lower():
             titular = titular.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
 
+        bajada = res_json.get("bajada_seo", "")
+        if fecha_tag not in bajada and fecha_tag not in titular:
+            bajada = f"Torneo Clausura ({fecha_tag}): {bajada}"
+        if "66 puntos" not in bajada and "66 unidades" not in bajada:
+            bajada = f"{bajada} Peñarol lidera la Tabla Anual con 66 puntos oficiales."
+
+        claves = res_json.get("claves_60_segundos", [])
+        has_66 = any("66" in c.get("detalle", "") or "66" in c.get("titulo", "") for c in claves)
+        if not has_66:
+            claves.append({
+                "icono": "📊",
+                "titulo": "Cima de la Tabla Anual",
+                "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
+            })
+
         doc_digest = {
             "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
             "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
             "fase_publicacion": "PREVIA",
             "partido_id": event_id,
             "titular_dia": titular,
-            "bajada_seo": res_json.get("bajada_seo", ""),
-            "claves_60_segundos": res_json.get("claves_60_segundos", []),
+            "bajada_seo": bajada,
+            "claves_60_segundos": claves,
             "articulo_principal": res_json.get("articulo_principal", {}),
             "noticias_fuentes": noticias_prensa[:8]
         }
@@ -246,7 +263,7 @@ REGLAS EDITORIALES OBLIGATORIAS:
 3. El titular DEBE comenzar con '¡Hoy juega el Manya!' destacando el compromiso del día.
 4. Información verificada:
    - Estadio: {estadio}.
-   - Peñarol es líder absoluto de la Tabla Anual con 65 puntos (+24 DG).
+   - Peñarol es líder absoluto de la Tabla Anual con 66 puntos oficiales AUF (+24 DG).
    - Entradas: Si es visitante (Parque Viera), venta online vía RedTickets (redtickets.uy) sin canje de socios.
 5. Estructura del JSON requerida:
 {{
@@ -256,7 +273,7 @@ REGLAS EDITORIALES OBLIGATORIAS:
     {{"icono": "⚽", "titulo": "El Once de la Fiera", "detalle": "Alineación titular de Diego Aguirre con Leo Fernández en la conducción y Silvera en el ataque."}},
     {{"icono": "🌤️", "titulo": "Clima y Cancha", "detalle": "Pronóstico para la hora del partido: {clima_str}."}},
     {{"icono": "📺", "titulo": "Horario y Pantalla", "detalle": "{hora_str} en directo por {tv}."}},
-    {{"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "El Decano manda con 65 unidades y busca estirar la diferencia en la tabla acumulada."}}
+    {{"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "El Decano manda con 66 unidades y busca estirar la diferencia en la tabla acumulada."}}
   ],
   "articulo_principal": {{
     "titulo": "¡Hoy juega el Manya! Todo lo que tenés que saber antes de que ruede la pelota en el Parque Viera",
@@ -265,12 +282,12 @@ REGLAS EDITORIALES OBLIGATORIAS:
       "Párrafo 1: La adrenalina de la mañana de partido, la concentración en Los Aromos y la charla táctica...",
       "Párrafo 2: El examen táctico en el Parque Viera, neutralizar el circuito de Bruno Veglio y Tabaré Viudez...",
       "Párrafo 3: Las armas carboneras: la pegada de Leo Fernández, las subidas de Cabrera y la zaga Aguerre-Guzmán...",
-      "Párrafo 4: Tribunas colmadas de parcialidad aurinegra y la importancia mayúscula de ganar para sostener los 65 puntos..."
+      "Párrafo 4: Tribunas colmadas de parcialidad aurinegra y la importancia mayúscula de ganar para sostener los 66 puntos..."
     ],
     "preguntas_frecuentes": [
       {{"q": "¿A qué hora juega Peñarol hoy y por qué canal lo transmiten?", "a": "Peñarol juega hoy a las {hora_str} en {estadio}, televisado por {tv}."}},
       {{"q": "¿Cómo forma Peñarol hoy?", "a": "Aguerre; Milans, Méndez, Guzmán Rodríguez, Olivera; García, Pérez; Cabrera, Fernández, Báez; Silvera."}},
-      {{"q": "¿Qué se juega Peñarol hoy en la tabla?", "a": "Tres puntos vitales para mantener la punta de la Tabla Anual (65 pts) y afianzar el Clausura."}}
+      {{"q": "¿Qué se juega Peñarol hoy en la tabla?", "a": "Tres puntos vitales para mantener la punta de la Tabla Anual (66 puntos) y afianzar el Clausura."}}
     ]
   }}
 }}
@@ -292,7 +309,7 @@ REGLAS EDITORIALES OBLIGATORIAS:
             "articulo_principal": res_json.get("articulo_principal", {}),
             "portada_visual": {
                 "titular_portada": f"⚡ ¡HOY JUEGA EL MANYA! Peñarol visita el Prado en busca de afianzar la punta",
-                "bajada_portada": f"¡LLEGÓ EL DÍA! A las 16:30 hs el Carbonero salta a la cancha del Parque Viera ante Montevideo Wanderers por la fecha 12 del Clausura. Peñarol manda en la Tabla Anual con 65 puntos. Televisa {tv}.",
+                "bajada_portada": f"¡LLEGÓ EL DÍA! A las 16:30 hs el Carbonero salta a la cancha del Parque Viera ante Montevideo Wanderers por la Fecha 14 del Clausura. Peñarol manda en la Tabla Anual con 66 puntos. Televisa {tv}.",
                 "cuenta": "@oficialcap",
                 "ubicacion": f"📍 {estadio} • Montevideo",
                 "categoria": "partidos",
