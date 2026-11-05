@@ -1722,6 +1722,16 @@
       `).join('');
     }
 
+    const prismasGrid = document.getElementById('prensa-nacional-grid');
+    if (prismasGrid && digest.prismas_periodisticos && digest.prismas_periodisticos.length) {
+      prismasGrid.innerHTML = digest.prismas_periodisticos.map(p => `
+        <div class="clave-item" style="border-left:3px solid ${p.color || '#ffd100'};background:#141419;padding:12px;border-radius:8px;">
+          <div style="font-size:11.5px;color:${p.color || 'var(--manya-gold)'};font-weight:800;margin-bottom:4px;">${p.prisma}</div>
+          <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“${p.texto}”</p>
+        </div>
+      `).join('');
+    }
+
     if (newsBox && digest.noticias_fuentes && digest.noticias_fuentes.length) {
       newsBox.innerHTML = digest.noticias_fuentes.slice(0, 7).map(n => `
         <div class="clave-item" style="border-left-color:#71717a;">

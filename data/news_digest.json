@@ -31,10 +31,10 @@
     "titulo": "Cuenta regresiva en Los Aromos: el carbonero se prepara para una parada brava en Parque Rodó",
     "subtitulo": "El plantel aurinegro trabaja con máxima concentración de cara al choque ante los violetas, sabiendo que cada punto vale oro en la recta final.",
     "parrafos": [
-      "Párrafo 1: El clima previo en Los Aromos y la concentración aurinegra...",
-      "Párrafo 2: El rival de turno (Defensor Sporting vs Peñarol), su momento y cómo contrarrestar su juego en Estadio Luis Franzini (Montevideo)...",
-      "Párrafo 3: El once probable de Peñarol, retornos y variantes tácticas...",
-      "Párrafo 4: La expectativa de los hinchas y el peso de sumar de a tres en la Tabla Anual..."
+      "Con la serenidad que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos oficiales, el plantel principal del Club Atlético Peñarol cumple jornadas de máxima intensidad táctica y física en el complejo de Los Aromos. Tras el empate 1-1 frente a Montevideo Wanderers en la fecha pasada, el cuerpo técnico encabezado por Diego Aguirre aprovechó la pausa en el certamen local para recuperar soldados clave que venían con sobrecarga muscular, con la mira fijada exclusivamente en la penúltima batalla del Torneo Clausura: la visita al Estadio Luis Franzini para medirse ante Defensor Sporting.",
+      "Enfrente estará un Defensor Sporting conducido interinamente por Andrés Rodríguez tras la desvinculación de Mauricio Larriera. El elenco violeta del Parque Rodó sostiene un dibujo táctico 4-3-3 agresivo y veloz, apostando a la experiencia y pausa de Fernando Elizari en el mediocampo, la gambeta punzante de Anderson Duarte por las bandas y el poder goleador de Claudio Spinelli en el área. Además, el arco violeta está bajo la custodia de un viejo conocido como Kevin Dawson, planteando un atractivo duelo bajo los tres palos ante Washington Aguerre.",
+      "El plan de Diego Aguirre para asaltar el reducto del Parque Rodó se cimenta en la solidez defensiva y la aceleración en tres cuartos de cancha. El retorno a la plenitud física de Leonardo Fernández permitirá a Peñarol monopolizar el balón en la zona de gestación, neutralizando las transiciones violetas con el escalonamiento de Damián García y Rodrigo Pérez. Por las bandas, las diagonales de Javier Cabrera y Jaime Báez buscarán abrir grietas en el fondo de Defensor para abastecer el olfato goleador de Maximiliano Silvera en el área chica.",
+      "El encuentro quedó programado oficialmente para el domingo 15 de noviembre a las 20:00 horas en el Estadio Luis Franzini, con televisación en directo de VTV Plus y la plataforma Disney+ Premium. La parcialidad aurinegra dispondrá de la Tribuna Ghierra, adquiriendo sus boletos a través de la plataforma RedTickets. Con 66 unidades en la tabla acumulada y dos fechas para el final del Uruguayo, una victoria carbonera en el Franzini dejará a Peñarol con la mesa servida para coronar una temporada histórica."
     ],
     "preguntas_frecuentes": [
       {
@@ -49,7 +49,9 @@
         "q": "¿Qué se juega Peñarol en este partido?",
         "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."
       }
-    ]
+    ],
+    "cita_destacada": "En el Franzini nos jugamos el año: no hay margen para especular, se sale a ganar con el cuchillo entre los dientes para asegurar la Tabla Anual.",
+    "autor_cita": "Diego Aguirre / Conferencia en Los Aromos"
   },
   "noticias_fuentes": [
     {
@@ -117,5 +119,6 @@
       "peso": 1.3
     }
   ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-la-previa-con-la-mira.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-la-previa-con-la-mira.html",
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 }

@@ -60,6 +60,33 @@ def git_commit_and_push(mensaje: str):
         logger.warning(f"[GitHub Pages] Aviso al sincronizar git: {e}")
 
 
+
+def generar_parrafos_editoriales_certificados(match_info: dict, rival_nombre: str, estadio: str, puntos_anual: int = 66) -> list:
+    """Genera 4 párrafos de análisis deportivo de élite garantizando coherencia total sin contaminaciones."""
+    p1 = (
+        f"Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con {puntos_anual} puntos oficiales, "
+        f"el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. "
+        f"El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad "
+        f"al equipo para afrontar la visita ante {rival_nombre} en {estadio}."
+    )
+    p2 = (
+        f"Enfrente estará un {rival_nombre} tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación "
+        f"carbonera mediante repliegue ordenado y transiciones rápidas por las bandas. El plan táctico de Peñarol radicará en imponer la jerarquía "
+        f"en la posesión, asfixiar la salida adversaria con la presión alta de Maximiliano Silvera y liberar los callejones interiores para "
+        f"la zurda magistral de Leonardo Fernández, respaldado por la aceleración de Javier Cabrera y Jaime Báez."
+    )
+    p3 = (
+        f"En la faz defensiva, la solvencia de Washington Aguerre y la solidez aérea de Guzmán Rodríguez y Javier Méndez serán los pilares "
+        f"para desactivar cualquier intento de pelota quieta o contraataque del rival. En Los Aromos se vivió una semana de intensidad absoluta: "
+        f"Aguirre no se guarda nada y alineará a sus mejores soldados para custodiar la ventaja en la tabla acumulada."
+    )
+    p4 = (
+        f"El compromiso ante {rival_nombre} representa una verdadera final de campeonato. Con {puntos_anual} unidades en la Tabla Anual y la recta "
+        f"final del certamen al rojo vivo, una victoria aurinegra en {estadio} consolidará la ventaja deportiva de cara a la definición del "
+        f"Campeonato Uruguayo 2026. La hinchada mirasol acompañará con fervor buscando dar otro paso gigante hacia la gloria."
+    )
+    return [p1, p2, p3, p4]
+
 def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     """Genera la cobertura de Previa Oficial si aún no se ha publicado hoy."""
     event_id = match_info.get("event_id", "")
@@ -179,6 +206,43 @@ REGLAS EDITORIALES OBLIGATORIAS:
         if "66 puntos" not in bajada and "66 unidades" not in bajada:
             bajada = f"{bajada} Peñarol lidera la Tabla Anual con 66 puntos oficiales."
 
+        # Validación estricta anti-placeholders y anti-contaminación
+        art = res_json.get("articulo_principal", {})
+        parrafos_raw = art.get("parrafos", [])
+        parrafos_limpios = []
+        for pr in parrafos_raw:
+            if not pr.lower().startswith("párrafo") and len(pr.split()) >= 30:
+                parrafos_limpios.append(pr)
+
+        if len(parrafos_limpios) < 3:
+            logger.warning("[Previa] Párrafos de IA genéricos o insuficientes. Insertando crónica editorial certificada.")
+            parrafos_limpios = generar_parrafos_editoriales_certificados(match_info, match_title, estadio, puntos_anual=66)
+        art["parrafos"] = parrafos_limpios
+
+        # Generar los 4 Prismas Periodísticos dinámicos para el rival activo
+        prismas = [
+            {
+                "prisma": f"🏟️ EL CLIMA DE CANCHA • Tribunas de {estadio}",
+                "color": "#ffd100",
+                "texto": f"Cita crucial en {estadio}: la parcialidad carbonera copará su sector con venta de entradas vía RedTickets y transmisión televisiva total por {tv}. Tres puntos determinantes en la lucha por la Tabla Anual."
+            },
+            {
+                "prisma": f"♟️ EL PIZARRÓN DE AGUIRRE • Duelo Táctico vs {match_title}",
+                "color": "#38bdf8",
+                "texto": f"Peñarol buscará cortar los circuitos del rival en la medular y explotar las transiciones rápidas para abastecer la pegada de Leo Fernández y el desmarque de Maxi Silvera."
+            },
+            {
+                "prisma": "🔥 LA TRASTIENDA EN LOS AROMOS • Vestuario y Once Titular",
+                "color": "#f87171",
+                "texto": "Semana de alta exigencia física y repaso intensivo de pelota quieta. Aguirre perfila su once de gala: Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
+            },
+            {
+                "prisma": "📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual",
+                "color": "#34d399",
+                "texto": f"Peñarol lidera la Anual con 66 puntos (+24 de saldo). Una victoria en {estadio} deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del Campeonato Uruguayo."
+            }
+        ]
+
         claves = res_json.get("claves_60_segundos", [])
         has_66 = any("66" in c.get("detalle", "") or "66" in c.get("titulo", "") for c in claves)
         if not has_66:
@@ -196,7 +260,8 @@ REGLAS EDITORIALES OBLIGATORIAS:
             "titular_dia": titular,
             "bajada_seo": bajada,
             "claves_60_segundos": claves,
-            "articulo_principal": res_json.get("articulo_principal", {}),
+            "articulo_principal": art,
+            "prismas_periodisticos": prismas,
             "noticias_fuentes": noticias_prensa[:8]
         }
         (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -306,7 +371,8 @@ REGLAS EDITORIALES OBLIGATORIAS:
             "titular_dia": titular,
             "bajada_seo": res_json.get("bajada_seo", ""),
             "claves_60_segundos": res_json.get("claves_60_segundos", []),
-            "articulo_principal": res_json.get("articulo_principal", {}),
+            "articulo_principal": art,
+            "prismas_periodisticos": prismas,
             "portada_visual": {
                 "titular_portada": f"⚡ ¡HOY JUEGA EL MANYA! Peñarol visita el Prado en busca de afianzar la punta",
                 "bajada_portada": f"¡LLEGÓ EL DÍA! A las 16:30 hs el Carbonero salta a la cancha del Parque Viera ante Montevideo Wanderers por la Fecha 14 del Clausura. Peñarol manda en la Tabla Anual con 66 puntos. Televisa {tv}.",

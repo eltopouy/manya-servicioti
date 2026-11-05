@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v8.1-previa-defensor-franzini';
+const CACHE_NAME = 'manya-servicioti-v8.2-coherencia-editorial-defensor';
 const CORE_ASSETS = [
   '/',
   '/index.html',

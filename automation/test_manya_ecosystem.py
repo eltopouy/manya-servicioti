@@ -333,6 +333,19 @@ class ManyaEcosystemTester:
         msg = "PWA Network-First, selector de tablas en Clausura y saneamiento de caché verificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
         self.record_result("PWA Network-First y Selector Clausura/Anual", passed, msg, {"errors": errors})
 
+
+    def test_editorial_coherence_and_anti_contamination(self):
+        """Verifica que el cuerpo editorial de El Diario de Peñarol no tenga contaminación con rivales pasados ni placeholders."""
+        try:
+            from test_editorial_coherence import auditar_coherencia_editorial
+            passed, errors = auditar_coherencia_editorial()
+        except Exception as ex:
+            passed = False
+            errors = [f"Excepción en test_editorial_coherence: {ex}"]
+
+        msg = "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)" if passed else f"Inconsistencias editoriales: {'; '.join(errors)}"
+        self.record_result("Coherencia Editorial y Anti-Contaminación", passed, msg, {"errors": errors})
+
     def run_all_tests(self) -> Dict[str, Any]:
         """Ejecuta toda la batería de pruebas y devuelve el resumen consolidado."""
         self.results = []
@@ -347,6 +360,7 @@ class ManyaEcosystemTester:
         self.test_concurrency_locks_health()
         self.test_external_endpoints_reachability()
         self.test_pwa_network_first_and_standings_selector()
+        self.test_editorial_coherence_and_anti_contamination()
 
         total = self.passed_count + self.failed_count
         score = round((self.passed_count / total * 100), 1) if total > 0 else 0.0
