@@ -288,6 +288,78 @@ class ManyaSelfHealingWatchdog:
         except Exception as e:
             logger.warning(f"[Auto-Healing] Aviso en git push: {e}")
 
+    def auto_sincronizar_duelos_y_scouting(self) -> int:
+        """Sincroniza los duelos 1x1 y el scouting en index.html a partir de rival_intelligence.json."""
+        rival_file = DATA_DIR / "rival_intelligence.json"
+        html_file = BASE_DIR / "index.html"
+        if not rival_file.exists() or not html_file.exists():
+            return 0
+
+        try:
+            intel = json.loads(rival_file.read_text(encoding="utf-8"))
+            duelos = intel.get("duelos_tacticos_1x1", [])
+            rival_nombre = intel.get("rival_nombre", "Rival")
+            if not duelos:
+                return 0
+
+            html = html_file.read_text(encoding="utf-8")
+            
+            # Si el primer duelo ya coincide, no hacer nada
+            primer_duelo_titulo = duelos[0].get("titulo", "")
+            if primer_duelo_titulo and primer_duelo_titulo in html:
+                return 0
+
+            cards = []
+            for d in duelos:
+                pen = d.get("penarol", {})
+                riv = d.get("rival", {})
+                cards.append(f'''          <div class="duel-item">
+            <div class="duel-title-bar">
+              <span class="duel-zone">{d.get("zona_campo", "")}</span>
+              <span class="duel-headline">{d.get("titulo", "")}</span>
+            </div>
+            <div class="duel-sides-wrap">
+              <div class="duel-side is-penarol">
+                <div class="duel-player-header">
+                  <span class="duel-num">{pen.get("dorsal", "★")}</span>
+                  <div>
+                    <strong class="duel-player-name">{pen.get("jugador", "")}</strong>
+                    <div class="duel-player-role">{pen.get("rol", "")}</div>
+                  </div>
+                </div>
+                <p class="duel-player-desc">{pen.get("atributos_clave", "")}</p>
+              </div>
+              <div class="duel-vs-divider">VS</div>
+              <div class="duel-side is-rival">
+                <div class="duel-player-header">
+                  <span class="duel-num rival">{riv.get("dorsal", "R")}</span>
+                  <div>
+                    <strong class="duel-player-name">{riv.get("jugador", "")}</strong>
+                    <div class="duel-player-role">{riv.get("rol", "")}</div>
+                  </div>
+                </div>
+                <p class="duel-player-desc">{riv.get("atributos_clave", "")}</p>
+              </div>
+            </div>
+            <div class="duel-verdict">
+              <strong>Clave del Duelo:</strong> {d.get("clave_del_duelo", "")}
+            </div>
+          </div>''')
+
+            nuevo_html_duelos = '<div class="duelos-grid" id="duelos-tacticos-container">\n' + '\n\n'.join(cards) + '\n        </div>'
+            
+            pat = r'<div class="duelos-grid"[^>]*id="duelos-tacticos-container"[^>]*>[\s\S]*?</div>\s*</div>'
+            if re.search(pat, html):
+                html = re.sub(pat, nuevo_html_duelos + '\n      </div>', html, count=1)
+                html_file.write_text(html, encoding="utf-8")
+                msg = f"Auto-sincronizados {len(duelos)} duelos tácticos 1x1 en index.html vs {rival_nombre}."
+                self.reparaciones_realizadas.append(msg)
+                logger.info(f"[Auto-Healing] ✓ {msg}")
+                return 1
+        except Exception as e:
+            logger.warning(f"[Auto-Healing] Error sincronizando duelos tácticos: {e}")
+        return 0
+
     def ejecutar_diagnostico_y_autocuracion(self) -> Dict[str, Any]:
         """Flujo completo de auto-reparación y certificación."""
         logger.info("=== INICIANDO VIGILANTE DE AUTO-CURACIÓN Y MEJORA CONTINUA ===")
@@ -298,6 +370,7 @@ class ManyaSelfHealingWatchdog:
         self.auto_verificar_post_partido()
         self.auto_corregir_puntos()
         self.auto_corregir_escenario_y_rival()
+        self.auto_sincronizar_duelos_y_scouting()
         self.auto_ajustar_temporalidad_match_day()
 
         # 2. Correr la batería de pruebas
