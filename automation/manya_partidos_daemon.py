@@ -63,11 +63,12 @@ def git_commit_and_push(mensaje: str):
 
 def generar_parrafos_editoriales_certificados(match_info: dict, rival_nombre: str, estadio: str, puntos_anual: int = 66) -> list:
     """Genera 4 párrafos de análisis deportivo de élite garantizando coherencia total sin contaminaciones."""
+    fecha_num = match_info.get("fecha_numero", 14)
     p1 = (
         f"Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con {puntos_anual} puntos oficiales, "
         f"el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. "
         f"El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad "
-        f"al equipo para afrontar la visita ante {rival_nombre} en {estadio} por la Fecha {match_info.get('fecha_numero', 14)} del Torneo Clausura."
+        f"al equipo para afrontar la visita ante {rival_nombre} en {estadio} por la Fecha {fecha_num} del Torneo Clausura."
     )
     p2 = (
         f"Enfrente estará un {rival_nombre} tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación "
@@ -87,11 +88,112 @@ def generar_parrafos_editoriales_certificados(match_info: dict, rival_nombre: st
     )
     return [p1, p2, p3, p4]
 
+
+def sanear_y_validar_parrafos_editoriales(
+    parrafos_raw: list,
+    match_info: dict,
+    rival_nombre: str,
+    estadio: str,
+    puntos_anual: int = 66
+) -> list:
+    """
+    Sanea, audita y valida los párrafos editoriales garantizando:
+    1. Cero disclaimers ('como modelo de lenguaje', 'no puedo predecir', etc.).
+    2. Cero mención a rivales desactualizados (nada de Wanderers/Saroldi si rival es Defensor).
+    3. Cero placeholders de plantilla ('Párrafo 1:', etc.).
+    4. Presencia explícita y obligatoria de 'Fecha X' y '66 puntos'.
+    5. Mención obligatoria al rival y al estadio.
+    Si cualquier validación falla, sustituye automáticamente por los párrafos certificados.
+    """
+    import re
+    fecha_num = match_info.get("fecha_numero", 14)
+    fecha_tag = f"Fecha {fecha_num}"
+    puntos_str = str(puntos_anual)
+
+    frases_disclaimer = [
+        "como modelo de lenguaje",
+        "como modelo de ia",
+        "como modelo de inteligencia artificial",
+        "como una inteligencia artificial",
+        "como una ia",
+        "as a language model",
+        "as an ai",
+        "no puedo predecir",
+        "no puedo pronosticar",
+        "no puedo adivinar",
+        "no tengo acceso a información en tiempo real",
+        "no tengo acceso a datos en tiempo real",
+        "no tengo información en tiempo real",
+        "soy solo un modelo",
+        "soy un modelo de lenguaje",
+        "soy una inteligencia artificial",
+        "no puedo generar este contenido",
+        "no puedo generar"
+    ]
+
+    texto_unido = " ".join(parrafos_raw).lower() if isinstance(parrafos_raw, list) else ""
+
+    if any(disc in texto_unido for disc in frases_disclaimer):
+        logger.warning("[Editorial Coherence] Disclaimer de modelo de lenguaje detectado en párrafos de IA. Sustituyendo por párrafos certificados.")
+        return generar_parrafos_editoriales_certificados(match_info, rival_nombre, estadio, puntos_anual)
+
+    # Comprobación de contaminación de rival
+    rival_es_defensor = "defensor" in rival_nombre.lower() or "defensor" in match_info.get("nombre", "").lower()
+    if rival_es_defensor:
+        for term in ["wanderers", "saroldi", "bohemio", "mathías corujo"]:
+            if term in texto_unido:
+                ocurrencias = [m.start() for m in re.finditer(re.escape(term), texto_unido)]
+                es_valido = False
+                for idx in ocurrencias:
+                    ctx = texto_unido[max(0, idx - 40):min(len(texto_unido), idx + 60)]
+                    if "fecha pasada" in ctx or "partido anterior" in ctx or "empate 1-1" in ctx:
+                        es_valido = True
+                        break
+                if not es_valido:
+                    logger.warning(f"[Editorial Coherence] Término prohibido '{term}' detectado en párrafos de IA. Sustituyendo por párrafos certificados.")
+                    return generar_parrafos_editoriales_certificados(match_info, rival_nombre, estadio, puntos_anual)
+
+    parrafos_limpios = []
+    for pr in (parrafos_raw or []):
+        if not isinstance(pr, str):
+            continue
+        pr_clean = re.sub(r"^p[aá]rrafo\s*\d+\s*:\s*", "", pr, flags=re.IGNORECASE).strip()
+        if len(pr_clean.split()) >= 25:
+            parrafos_limpios.append(pr_clean)
+
+    if len(parrafos_limpios) < 3:
+        logger.warning("[Editorial Coherence] Menos de 3 párrafos válidos. Sustituyendo por párrafos certificados.")
+        return generar_parrafos_editoriales_certificados(match_info, rival_nombre, estadio, puntos_anual)
+
+    # Asegurar presencia inquebrantable de 'Fecha 14' y '66 puntos'
+    texto_limpio_unido = " ".join(parrafos_limpios)
+
+    if fecha_tag.lower() not in texto_limpio_unido.lower():
+        p1 = parrafos_limpios[0]
+        if not p1.endswith("."):
+            p1 += "."
+        parrafos_limpios[0] = f"{p1} Este compromiso corresponde a la {fecha_tag} del Torneo Clausura."
+
+    if puntos_str not in texto_limpio_unido:
+        p1 = parrafos_limpios[0]
+        if not p1.endswith("."):
+            p1 += "."
+        parrafos_limpios[0] = f"{p1} Peñarol llega a esta cita como líder solitario de la Tabla Anual con {puntos_anual} puntos oficiales."
+
+    # Asegurar mención al rival y al estadio
+    texto_final = " ".join(parrafos_limpios).lower()
+    if rival_nombre.lower() not in texto_final or estadio.lower() not in texto_final:
+        logger.warning("[Editorial Coherence] Falta mención a rival o estadio en párrafos generados. Sustituyendo por certificados.")
+        return generar_parrafos_editoriales_certificados(match_info, rival_nombre, estadio, puntos_anual)
+
+    return parrafos_limpios
+
+
 def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     """Genera la cobertura de Previa Oficial si aún no se ha publicado hoy."""
     event_id = match_info.get("event_id", "")
-    match_title = match_info.get("nombre", "Liverpool vs Peñarol")
-    estadio = match_info.get("estadio", "Parque Alfredo Víctor Viera (Prado)")
+    match_title = match_info.get("nombre", "Defensor Sporting vs Peñarol")
+    estadio = match_info.get("estadio", "Estadio Luis Franzini (Montevideo)")
     tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
     hora_str = match_info.get("fecha_legible", "")
     fecha_iso = match_info.get("fecha_iso", "")
@@ -115,7 +217,7 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
         temporal_label = "HOY JUEGA PEÑAROL (DÍA DEL PARTIDO)"
         temporal_instructions = (
             "El partido se juega HOY en horario uruguayo. El titular y el contenido deben reflejar que es el DÍA DEL PARTIDO "
-            "('¡Hoy juega el Manya!', 'Día de partido en el Prado', etc.)."
+            "('¡Hoy juega el Manya!', 'Día de partido en el Franzini', etc.)."
         )
         dia_partido_texto = "hoy"
     elif delta_days == 1:
@@ -124,7 +226,7 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
             "CRÍTICO - CONTROL DE FECHA: En Uruguay aún NO es el día del partido. El partido es MAÑANA. "
             "ESTÁ ESTRICTAMENTE PROHIBIDO decir 'Hoy juega el Manya' o 'hoy juega'. "
             "El titular DEBE hablar de la previa o de la víspera: "
-            "('La Previa Aurinegra', 'Peñarol afina detalles antes de visitar el Prado', 'La víspera en Los Aromos', etc.)."
+            "('La Previa Aurinegra', 'Peñarol afina detalles antes de visitar el Franzini', 'La víspera en Los Aromos', etc.)."
         )
         dia_partido_texto = "mañana"
     else:
@@ -149,44 +251,52 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
     ])
 
     prompt_redaccion = f"""
-Actúa como el Jefe de Redacción y Periodista Experto de Peñarol para 'Manya ServicioTI'.
+Actúa como el Jefe de Redacción y Periodista Deportivo Especializado del Club Atlético Peñarol para 'Manya ServicioTI'.
+Tu estilo es analítico, profesional, 100% futbolero uruguayo, riguroso y con autoridad de vestuario.
+
+MISIÓN EDITORIAL:
+Elaborar la crónica periodística de análisis previo y estado de situación del plantel en Los Aromos de cara al próximo compromiso oficial.
 ESTADO TEMPORAL: {temporal_label}.
 {temporal_instructions}
-Partido: {match_title}.
+Partido Oficial: {match_title}.
 Estadio: {estadio}.
 Fecha y Hora de Uruguay: {hora_str}.
 Televisación: {tv}.
+Torneo: Torneo Clausura 2026 ({fecha_tag}).
+Puntaje Oficial: Peñarol es líder absoluto de la Tabla Anual con 66 puntos oficiales AUF (+24 DG).
 
-Contexto reciente de periódicos uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
+Contexto periodístico confirmado de medios uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
 {resumenes_prensa}
 
-REGLAS EDITORIALES OBLIGATORIAS:
-1. Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
-2. Tono: apasionado, respetuoso pero 100% aurinegro y profesional. Cero romanticismo lírico.
-3. Respeto estricto del estado temporal: si el partido es mañana ({hora_str}), PROHIBIDO decir 'hoy juega'.
-4. Estructura del JSON requerida:
+IMPORTANTE - GARANTÍA DE FORMATO Y CONTENIDO (ANTI-DISCLAIMER):
+- Esto NO es una predicción del futuro ni pronósticos de apuestas. Es un análisis periodístico estándar de hechos ya verificados (entrenamientos en Los Aromos, aspectos tácticos de Diego Aguirre, puntos en juego).
+- PROHIBICIÓN ABSOLUTA: Está terminantemente prohibido incluir disclaimers o frases como 'Como modelo de lenguaje...', 'Como modelo de inteligencia artificial...', 'No puedo predecir...', 'Como IA...'. Escribe directamente el JSON solicitado sin notas previas ni posteriores.
+- REQUISITO OBLIGATORIO: El Párrafo 1 del artículo principal DEBE incluir expresamente '{fecha_tag}' y los '66 puntos' de Peñarol en la Tabla Anual.
+- Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
+
+Estructura del JSON requerida:
 {{
-  "titular_dia": "Frase contundente sobre la previa del partido",
-  "bajada_seo": "Resumen periodístico SEO con Peñarol, rival, estadio ({estadio}) y cómo verlo.",
+  "titular_dia": "Frase contundente sobre la previa del partido en {estadio}",
+  "bajada_seo": "Resumen periodístico SEO con Peñarol, rival ({match_title}), estadio ({estadio}), {fecha_tag}, 66 puntos y TV.",
   "claves_60_segundos": [
-    {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Detalle del planteo de Diego Aguirre"}},
-    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Rendimiento esperado de Leonardo Fernández"}},
+    {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Planteo táctico 4-2-3-1 de Diego Aguirre y presión alta"}},
+    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Leonardo Fernández y su pegada magistral"}},
     {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay ({hora_str}) y televisación ({tv})"}},
-    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 66 puntos oficiales AUF)"}}
+    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Peñarol manda en la Tabla Anual con 66 puntos oficiales AUF"}}
   ],
   "articulo_principal": {{
     "titulo": "Título periodístico de análisis de la previa",
-    "subtitulo": "Subtítulo periodístico",
+    "subtitulo": "Subtítulo periodístico sobre el momento de Peñarol y el planteo ante {match_title}",
     "parrafos": [
-      "Párrafo 1: El clima previo en Los Aromos y la concentración aurinegra...",
-      "Párrafo 2: El rival de turno ({match_title}), su momento y cómo contrarrestar su juego en {estadio}...",
-      "Párrafo 3: El once probable de Peñarol, retornos y variantes tácticas...",
-      "Párrafo 4: La expectativa de los hinchas y el peso de sumar de a tres en la Tabla Anual..."
+      "Párrafo 1: El clima de trabajo en Los Aromos bajo el mando de Diego Aguirre, mencionando expresamente la {fecha_tag} y los 66 puntos en la Tabla Anual...",
+      "Párrafo 2: El análisis del rival ({match_title}), su propuesta en {estadio} y cómo vulnerar su bloque defensivo...",
+      "Párrafo 3: El once probable aurinegro, la solidez de Washington Aguerre y la zaga central Guzmán Rodríguez - Méndez...",
+      "Párrafo 4: La expectativa de la parcialidad carbonera y la trascendencia de una victoria en {estadio} para la Tabla Anual..."
     ],
     "preguntas_frecuentes": [
       {{"q": "¿A qué hora juega Peñarol y dónde verlo?", "a": "Peñarol juega {dia_partido_texto} a las {hora_str} en {estadio}, televisado por {tv}."}},
-      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1."}},
-      {{"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."}}
+      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1 con Leo Fernández como eje."}},
+      {{"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para custodiar la cima de la Tabla Anual (66 puntos) y la definición del Clausura."}}
     ]
   }}
 }}
@@ -195,85 +305,106 @@ REGLAS EDITORIALES OBLIGATORIAS:
     with CentralAutomationLock.acquire("gemini_web_profile", timeout_sec=120):
         res_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt_redaccion)
 
-    if res_json and "articulo_principal" in res_json:
-        titular = res_json.get("titular_dia", f"La Previa: {match_title}")
-        if delta_days != 0 and "hoy juega" in titular.lower():
-            titular = titular.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
-
-        bajada = res_json.get("bajada_seo", "")
-        if fecha_tag not in bajada and fecha_tag not in titular:
-            bajada = f"Torneo Clausura ({fecha_tag}): {bajada}"
-        if "66 puntos" not in bajada and "66 unidades" not in bajada:
-            bajada = f"{bajada} Peñarol lidera la Tabla Anual con 66 puntos oficiales."
-
-        # Validación estricta anti-placeholders y anti-contaminación
-        art = res_json.get("articulo_principal", {})
-        parrafos_raw = art.get("parrafos", [])
-        parrafos_limpios = []
-        for pr in parrafos_raw:
-            if not pr.lower().startswith("párrafo") and len(pr.split()) >= 30:
-                parrafos_limpios.append(pr)
-
-        if len(parrafos_limpios) < 3:
-            logger.warning("[Previa] Párrafos de IA genéricos o insuficientes. Insertando crónica editorial certificada.")
-            parrafos_limpios = generar_parrafos_editoriales_certificados(match_info, match_title, estadio, puntos_anual=66)
-        art["parrafos"] = parrafos_limpios
-
-        # Generar los 4 Prismas Periodísticos dinámicos para el rival activo
-        prismas = [
-            {
-                "prisma": f"🏟️ EL CLIMA DE CANCHA • Tribunas de {estadio}",
-                "color": "#ffd100",
-                "texto": f"Cita crucial en {estadio}: la parcialidad carbonera copará su sector con venta de entradas vía RedTickets y transmisión televisiva total por {tv}. Tres puntos determinantes en la lucha por la Tabla Anual."
-            },
-            {
-                "prisma": f"♟️ EL PIZARRÓN DE AGUIRRE • Duelo Táctico vs {match_title}",
-                "color": "#38bdf8",
-                "texto": f"Peñarol buscará cortar los circuitos del rival en la medular y explotar las transiciones rápidas para abastecer la pegada de Leo Fernández y el desmarque de Maxi Silvera."
-            },
-            {
-                "prisma": "🔥 LA TRASTIENDA EN LOS AROMOS • Vestuario y Once Titular",
-                "color": "#f87171",
-                "texto": "Semana de alta exigencia física y repaso intensivo de pelota quieta. Aguirre perfila su once de gala: Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
-            },
-            {
-                "prisma": "📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual",
-                "color": "#34d399",
-                "texto": f"Peñarol lidera la Anual con 66 puntos (+24 de saldo). Una victoria en {estadio} deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del Campeonato Uruguayo."
+    if not res_json or "articulo_principal" not in res_json:
+        logger.warning("[Previa] res_json vacío o con disclaimer. Activando crónica editorial certificada de emergencia.")
+        parrafos_certificados = generar_parrafos_editoriales_certificados(match_info, match_title, estadio, puntos_anual=66)
+        res_json = {
+            "titular_dia": f"La Previa Aurinegra: Peñarol alista artillería para visitar a {match_title} en {estadio}",
+            "bajada_seo": f"Torneo Clausura ({fecha_tag}): Peñarol se prepara para enfrentar a {match_title} en {estadio}. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
+            "claves_60_segundos": [
+                {"icono": "⚽", "titulo": "Enfoque Táctico", "detalle": f"Diego Aguirre ajusta la presión alta y circuitos ofensivos para el duelo en {estadio}."},
+                {"icono": "🔥", "titulo": "Figura Clave", "detalle": "Leonardo Fernández y su zurda magistral para desequilibrar en ataque y pelota quieta."},
+                {"icono": "📺", "titulo": "Transmisión y Horario", "detalle": f"{hora_str} en vivo por {tv}."},
+                {"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Peñarol lidera la Tabla Anual con 66 puntos oficiales AUF."}
+            ],
+            "articulo_principal": {
+                "titulo": f"Concentración total en Los Aromos: Peñarol alista artillería para la batalla en {estadio}",
+                "subtitulo": f"Diego Aguirre calibra el once titular para defender la punta de la Tabla Anual ante {match_title}",
+                "parrafos": parrafos_certificados,
+                "preguntas_frecuentes": [
+                    {"q": f"¿A qué hora juega Peñarol y dónde verlo?", "a": f"Peñarol juega {dia_partido_texto} a las {hora_str} en {estadio}, televisado por {tv}."},
+                    {"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1 con Leonardo Fernández en la conducción."},
+                    {"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para custodiar la cima de la Tabla Anual (66 puntos) y la definición del Clausura."}
+                ]
             }
-        ]
-
-        claves = res_json.get("claves_60_segundos", [])
-        has_66 = any("66" in c.get("detalle", "") or "66" in c.get("titulo", "") for c in claves)
-        if not has_66:
-            claves.append({
-                "icono": "📊",
-                "titulo": "Cima de la Tabla Anual",
-                "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
-            })
-
-        doc_digest = {
-            "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
-            "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-            "fase_publicacion": "PREVIA",
-            "partido_id": event_id,
-            "titular_dia": titular,
-            "bajada_seo": bajada,
-            "claves_60_segundos": claves,
-            "articulo_principal": art,
-            "prismas_periodisticos": prismas,
-            "noticias_fuentes": noticias_prensa[:8]
         }
-        (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
-        logger.info("[Previa] ✓ data/news_digest.json actualizado con la previa oficial.")
-        # Publicar en Blogger
-        post_url = publish_manya_article_to_blogger(post_type="PREVIA", match_id=event_id)
-        try:
-            from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
-            sincronizar_pagina_blogger()
-        except Exception as ex_sync:
-            logger.warning(f"[Blogger Sync] Aviso actualizando archivo histórico: {ex_sync}")
-        git_commit_and_push(f"feat(previa): publicar previa {match_title} en vivo")
+
+    titular = res_json.get("titular_dia", f"La Previa: {match_title}")
+    if delta_days != 0 and "hoy juega" in titular.lower():
+        titular = titular.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
+
+    bajada = res_json.get("bajada_seo", "")
+    if fecha_tag not in bajada and fecha_tag not in titular:
+        bajada = f"Torneo Clausura ({fecha_tag}): {bajada}"
+    if "66 puntos" not in bajada and "66 unidades" not in bajada:
+        bajada = f"{bajada} Peñarol lidera la Tabla Anual con 66 puntos oficiales."
+
+    # Saneamiento y certificación rigurosa de párrafos
+    art = res_json.get("articulo_principal", {})
+    parrafos_raw = art.get("parrafos", [])
+    art["parrafos"] = sanear_y_validar_parrafos_editoriales(
+        parrafos_raw=parrafos_raw,
+        match_info=match_info,
+        rival_nombre=match_title,
+        estadio=estadio,
+        puntos_anual=66
+    )
+
+    # Generar los 4 Prismas Periodísticos dinámicos para el rival activo
+    prismas = [
+        {
+            "prisma": f"🏟️ EL CLIMA DE CANCHA • Tribunas de {estadio}",
+            "color": "#ffd100",
+            "texto": f"Cita crucial en {estadio}: la parcialidad carbonera copará su sector con venta de entradas vía RedTickets y transmisión televisiva total por {tv}. Tres puntos determinantes en la lucha por la Tabla Anual."
+        },
+        {
+            "prisma": f"♟️ EL PIZARRÓN DE AGUIRRE • Duelo Táctico vs {match_title}",
+            "color": "#38bdf8",
+            "texto": f"Peñarol buscará cortar los circuitos del rival en la medular y explotar las transiciones rápidas para abastecer la pegada de Leo Fernández y el desmarque de Maxi Silvera."
+        },
+        {
+            "prisma": "🔥 LA TRASTIENDA EN LOS AROMOS • Vestuario y Once Titular",
+            "color": "#f87171",
+            "texto": "Semana de alta exigencia física y repaso intensivo de pelota quieta. Aguirre perfila su once de gala: Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
+        },
+        {
+            "prisma": "📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual",
+            "color": "#34d399",
+            "texto": f"Peñarol lidera la Anual con 66 puntos (+24 de saldo). Una victoria en {estadio} deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del Campeonato Uruguayo."
+        }
+    ]
+
+    claves = res_json.get("claves_60_segundos", [])
+    has_66 = any("66" in c.get("detalle", "") or "66" in c.get("titulo", "") for c in claves)
+    if not has_66:
+        claves.append({
+            "icono": "📊",
+            "titulo": "Cima de la Tabla Anual",
+            "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
+        })
+
+    doc_digest = {
+        "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
+        "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
+        "fase_publicacion": "PREVIA",
+        "partido_id": event_id,
+        "titular_dia": titular,
+        "bajada_seo": bajada,
+        "claves_60_segundos": claves,
+        "articulo_principal": art,
+        "prismas_periodisticos": prismas,
+        "noticias_fuentes": noticias_prensa[:8]
+    }
+    (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
+    logger.info("[Previa] ✓ data/news_digest.json actualizado con la previa oficial.")
+    # Publicar en Blogger
+    post_url = publish_manya_article_to_blogger(post_type="PREVIA", match_id=event_id)
+    try:
+        from sincronizar_pagina_blogger_historico import sincronizar_pagina_blogger
+        sincronizar_pagina_blogger()
+    except Exception as ex_sync:
+        logger.warning(f"[Blogger Sync] Aviso actualizando archivo histórico: {ex_sync}")
+    git_commit_and_push(f"feat(previa): publicar previa {match_title} en vivo")
 
 
 def ejecutar_ciclo_hoy_juega(match_info: dict, noticias_prensa: list):
@@ -283,10 +414,12 @@ def ejecutar_ciclo_hoy_juega(match_info: dict, noticias_prensa: list):
     pronóstico del tiempo para la hora del partido, accesos al estadio y el clima de match day.
     """
     event_id = match_info.get("event_id", "")
-    match_title = match_info.get("nombre", "Peñarol vs Montevideo Wanderers")
-    estadio = match_info.get("estadio", "Parque Alfredo Víctor Viera (Prado)")
+    match_title = match_info.get("nombre", "Defensor Sporting vs Peñarol")
+    estadio = match_info.get("estadio", "Estadio Luis Franzini (Montevideo)")
     tv = match_info.get("tv", "VTV Plus / Disney+ Premium")
     hora_str = match_info.get("fecha_legible", "")
+    fecha_num = match_info.get("fecha_numero", 14)
+    fecha_tag = f"Fecha {fecha_num}"
 
     can_pub, motivo = ManyaBloggerCatalog.can_publish(post_type="HOY_JUEGA", match_id=event_id)
     if not can_pub:
@@ -312,41 +445,44 @@ def ejecutar_ciclo_hoy_juega(match_info: dict, noticias_prensa: list):
 
     prompt_redaccion = f"""
 Actúa como el Director Editorial y Periodista Insignia de Peñarol para 'Manya ServicioTI'.
-¡ES LA MADRUGADA DEL DÍA DEL PARTIDO!
+Tu estilo es vibrante, directo, 100% futbolero uruguayo, con toda la adrenalina de día de partido ('¡Hoy juega el Manya!').
+
+MISIÓN EDITORIAL:
+¡ES LA MADRUGADA DEL DÍA DEL PARTIDO! Redactar la edición especial de Match Day para toda la hinchada carbonera.
 HOY JUEGA PEÑAROL: {match_title}.
 Estadio: {estadio}.
 Fecha y Hora de Uruguay: {hora_str}.
 Televisación: {tv}.
 Clima pronosticado para la hora del partido: {clima_str}.
+Torneo: Torneo Clausura 2026 ({fecha_tag}).
+Puntaje Oficial: Peñarol es líder absoluto de la Tabla Anual con 66 puntos oficiales AUF (+24 DG).
 
 Contexto reciente de medios uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
 {resumenes_prensa}
 
-REGLAS EDITORIALES OBLIGATORIAS:
-1. Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
-2. Tono: 100% futbolero, vibrante, con adrenalina de día de partido ('¡Hoy juega el Manya!'). Cero cursilería.
-3. El titular DEBE comenzar con '¡Hoy juega el Manya!' destacando el compromiso del día.
-4. Información verificada:
-   - Estadio: {estadio}.
-   - Peñarol es líder absoluto de la Tabla Anual con 66 puntos oficiales AUF (+24 DG).
-   - Entradas: Si es visitante (Parque Viera), venta online vía RedTickets (redtickets.uy) sin canje de socios.
-5. Estructura del JSON requerida:
+IMPORTANTE - GARANTÍA DE FORMATO Y CONTENIDO (ANTI-DISCLAIMER):
+- Esto NO es una predicción del futuro. Es la crónica de previa de día de partido basada en hechos confirmados (alineaciones probables, accesos, clima y TV).
+- PROHIBICIÓN ABSOLUTA: Está terminantemente prohibido incluir disclaimers como 'Como modelo de lenguaje...', 'No puedo predecir...', 'Como IA...'.
+- REQUISITO OBLIGATORIO: El titular DEBE comenzar con '¡Hoy juega el Manya!'. El Párrafo 1 del artículo DEBE mencionar '{fecha_tag}' y los '66 puntos' en la Tabla Anual.
+- Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
+
+Estructura del JSON requerida:
 {{
-  "titular_dia": "¡Hoy juega el Manya! Tarde de Parque Viera para defender con alma y vida la punta de la Tabla Anual",
-  "bajada_seo": "Peñarol enfrenta este sábado a Montevideo Wanderers a las 16:30 hs en el Parque Viera. Alineaciones probables, clima, accesos y TV en vivo.",
+  "titular_dia": "¡Hoy juega el Manya! Tarde de fútbol en {estadio} para defender la punta de la Tabla Anual ante {match_title}",
+  "bajada_seo": "Peñarol enfrenta este {hora_str} a {match_title} en {estadio}. Alineaciones probables, clima ({clima_str}), accesos y TV en vivo por {tv}.",
   "claves_60_segundos": [
-    {{"icono": "⚽", "titulo": "El Once de la Fiera", "detalle": "Alineación titular de Diego Aguirre con Leo Fernández en la conducción y Silvera en el ataque."}},
+    {{"icono": "⚽", "titulo": "El Once de la Fiera", "detalle": "Alineación titular de Diego Aguirre con Leo Fernández en la conducción y Maxi Silvera en el ataque."}},
     {{"icono": "🌤️", "titulo": "Clima y Cancha", "detalle": "Pronóstico para la hora del partido: {clima_str}."}},
     {{"icono": "📺", "titulo": "Horario y Pantalla", "detalle": "{hora_str} en directo por {tv}."}},
-    {{"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "El Decano manda con 66 unidades y busca estirar la diferencia en la tabla acumulada."}}
+    {{"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "El Decano manda con 66 unidades oficiales y busca afianzar la acumulada."}}
   ],
   "articulo_principal": {{
-    "titulo": "¡Hoy juega el Manya! Todo lo que tenés que saber antes de que ruede la pelota en el Parque Viera",
-    "subtitulo": "Diego Aguirre alista el equipo para una batalla determinante por la Tabla Anual ante Montevideo Wanderers",
+    "titulo": "¡Hoy juega el Manya! Todo lo que tenés que saber antes de que ruede la pelota en {estadio}",
+    "subtitulo": "Diego Aguirre alista el equipo para una batalla determinante por la {fecha_tag} ante {match_title}",
     "parrafos": [
-      "Párrafo 1: La adrenalina de la mañana de partido, la concentración en Los Aromos y la charla táctica...",
-      "Párrafo 2: El examen táctico en el Parque Viera, neutralizar el circuito de Bruno Veglio y Tabaré Viudez...",
-      "Párrafo 3: Las armas carboneras: la pegada de Leo Fernández, las subidas de Cabrera y la zaga Aguerre-Guzmán...",
+      "Párrafo 1: La adrenalina de la mañana de partido, la concentración en Los Aromos, la {fecha_tag} y los 66 puntos en la Tabla Anual...",
+      "Párrafo 2: El examen táctico en {estadio} ante {match_title}, neutralizar los circuitos rivales y golpear primero...",
+      "Párrafo 3: Las armas carboneras: la pegada de Leo Fernández, las transiciones rápidas y la zaga Aguerre-Guzmán Rodríguez...",
       "Párrafo 4: Tribunas colmadas de parcialidad aurinegra y la importancia mayúscula de ganar para sostener los 66 puntos..."
     ],
     "preguntas_frecuentes": [
@@ -361,52 +497,107 @@ REGLAS EDITORIALES OBLIGATORIAS:
     with CentralAutomationLock.acquire("gemini_web_profile", timeout_sec=120):
         res_json = ManyaGeminiWebEngine.generar_texto_gflash_38(prompt_redaccion)
 
-    if res_json and "articulo_principal" in res_json:
-        titular = res_json.get("titular_dia", f"¡Hoy juega el Manya! {match_title}")
-        doc_digest = {
-            "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
-            "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-            "fase_publicacion": "HOY_JUEGA",
-            "partido_id": event_id,
-            "titular_dia": titular,
-            "bajada_seo": res_json.get("bajada_seo", ""),
-            "claves_60_segundos": res_json.get("claves_60_segundos", []),
-            "articulo_principal": art,
-            "prismas_periodisticos": prismas,
-            "portada_visual": {
-                "titular_portada": f"⚡ ¡HOY JUEGA EL MANYA! Peñarol visita el Prado en busca de afianzar la punta",
-                "bajada_portada": f"¡LLEGÓ EL DÍA! A las 16:30 hs el Carbonero salta a la cancha del Parque Viera ante Montevideo Wanderers por la Fecha 14 del Clausura. Peñarol manda en la Tabla Anual con 66 puntos. Televisa {tv}.",
-                "cuenta": "@oficialcap",
-                "ubicacion": f"📍 {estadio} • Montevideo",
-                "categoria": "partidos",
-                "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
-                "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
-            },
-            "noticias_fuentes": noticias_prensa[:8]
+    if not res_json or "articulo_principal" not in res_json:
+        logger.warning("[Hoy Juega] res_json vacío o con disclaimer. Activando crónica editorial certificada de emergencia.")
+        parrafos_certificados = generar_parrafos_editoriales_certificados(match_info, match_title, estadio, puntos_anual=66)
+        res_json = {
+            "titular_dia": f"¡Hoy juega el Manya! Batalla decisiva en {estadio} ante {match_title}",
+            "bajada_seo": f"Llegó el día: Peñarol visita a {match_title} este {hora_str} en {estadio} por la {fecha_tag}. El Decano lidera la Tabla Anual con 66 puntos oficiales.",
+            "claves_60_segundos": [
+                {"icono": "⚽", "titulo": "El Once de la Fiera", "detalle": "Esquema 4-2-3-1 con Leonardo Fernández en la creación y Maxi Silvera como referencia de área."},
+                {"icono": "🌤️", "titulo": "Clima y Cancha", "detalle": f"Pronóstico: {clima_str}."},
+                {"icono": "📺", "titulo": "Horario y Pantalla", "detalle": f"{hora_str} en directo por {tv}."},
+                {"icono": "📊", "titulo": "Mandato en la Anual", "detalle": "Peñarol manda en la Tabla Anual con 66 unidades oficiales AUF."}
+            ],
+            "articulo_principal": {
+                "titulo": f"¡Hoy juega el Manya! Todo listo en {estadio} para defender la punta de la Tabla Anual",
+                "subtitulo": f"Diego Aguirre y el plantel aurinegro van por tres puntos clave ante {match_title}",
+                "parrafos": parrafos_certificados,
+                "preguntas_frecuentes": [
+                    {"q": "¿A qué hora juega Peñarol hoy y por qué canal lo transmiten?", "a": f"Peñarol juega hoy a las {hora_str} en {estadio}, televisado por {tv}."},
+                    {"q": "¿Cómo forma Peñarol hoy?", "a": "Aguerre; Milans, Méndez, Guzmán Rodríguez, Olivera; García, Pérez; Cabrera, Fernández, Báez; Silvera."},
+                    {"q": "¿Qué se juega Peñarol hoy en la tabla?", "a": "Tres puntos vitales para mantener la punta de la Tabla Anual (66 puntos) y afianzar el Clausura."}
+                ]
+            }
         }
-        (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
-        logger.info("[Hoy Juega] ✓ data/news_digest.json actualizado con la edición especial de Match Day.")
 
-        # Sincronizar live_status con alerta banner del día
-        try:
-            status_live = ManyaMatchEngine.generate_updated_live_status()
-            status_live["partido_activo"]["es_hoy"] = True
-            status_live["alerta_banner"] = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {match_title} a las {hora_str} en {estadio} • {tv}."
-            (DATA_DIR / "live_status.json").write_text(json.dumps(status_live, ensure_ascii=False, indent=2), encoding="utf-8")
-        except Exception as ex_ls:
-            logger.warning(f"[Hoy Juega] Aviso actualizando live_status: {ex_ls}")
+    titular = res_json.get("titular_dia", f"¡Hoy juega el Manya! {match_title}")
+    art = res_json.get("articulo_principal", {})
+    art["parrafos"] = sanear_y_validar_parrafos_editoriales(
+        parrafos_raw=art.get("parrafos", []),
+        match_info=match_info,
+        rival_nombre=match_title,
+        estadio=estadio,
+        puntos_anual=66
+    )
 
-        # Publicar o actualizar en Blogger
-        post_url = publish_manya_article_to_blogger(post_type="HOY_JUEGA", match_id=event_id)
-        
-        # Sincronizar página de previo partido en Blogger
-        try:
-            from sincronizar_pagina_proximo_partido import sincronizar_pagina_proximo_partido_blogger
-            sincronizar_pagina_proximo_partido_blogger()
-        except Exception as ex_p:
-            logger.warning(f"[Blogger Previa] Aviso actualizando previa Blogger: {ex_p}")
+    prismas = [
+        {
+            "prisma": f"🏟️ EL CLIMA DE CANCHA • Tribunas de {estadio}",
+            "color": "#ffd100",
+            "texto": f"Cita crucial en {estadio}: la parcialidad carbonera copará su sector con venta de entradas vía RedTickets y transmisión televisiva total por {tv}. Tres puntos determinantes en la lucha por la Tabla Anual."
+        },
+        {
+            "prisma": f"♟️ EL PIZARRÓN DE AGUIRRE • Duelo Táctico vs {match_title}",
+            "color": "#38bdf8",
+            "texto": f"Peñarol buscará cortar los circuitos del rival en la medular y explotar las transiciones rápidas para abastecer la pegada de Leo Fernández y el desmarque de Maxi Silvera."
+        },
+        {
+            "prisma": "🔥 LA TRASTIENDA EN LOS AROMOS • Vestuario y Once Titular",
+            "color": "#f87171",
+            "texto": "Concentración máxima de match day. Aguirre confirmó a sus mejores hombres: Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
+        },
+        {
+            "prisma": "📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual",
+            "color": "#34d399",
+            "texto": f"Peñarol lidera la Anual con 66 puntos (+24 de saldo). Una victoria en {estadio} consolida el mandato absoluto aurinegro."
+        }
+    ]
 
-        git_commit_and_push(f"feat(matchday): ¡Hoy Juega el Manya! Cobertura de partido {match_title}")
+    doc_digest = {
+        "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
+        "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
+        "fase_publicacion": "HOY_JUEGA",
+        "partido_id": event_id,
+        "titular_dia": titular,
+        "bajada_seo": res_json.get("bajada_seo", ""),
+        "claves_60_segundos": res_json.get("claves_60_segundos", []),
+        "articulo_principal": art,
+        "prismas_periodisticos": prismas,
+        "portada_visual": {
+            "titular_portada": f"⚡ ¡HOY JUEGA EL MANYA! Peñarol visita {estadio} en busca de afianzar la punta",
+            "bajada_portada": f"¡LLEGÓ EL DÍA! A las {hora_str} el Carbonero salta a la cancha de {estadio} ante {match_title} por la {fecha_tag} del Clausura. Peñarol manda en la Tabla Anual con 66 puntos. Televisa {tv}.",
+            "cuenta": "@oficialcap",
+            "ubicacion": f"📍 {estadio} • Montevideo",
+            "categoria": "partidos",
+            "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
+            "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
+        },
+        "noticias_fuentes": noticias_prensa[:8]
+    }
+    (DATA_DIR / "news_digest.json").write_text(json.dumps(doc_digest, ensure_ascii=False, indent=2), encoding="utf-8")
+    logger.info("[Hoy Juega] ✓ data/news_digest.json actualizado con la edición especial de Match Day.")
+
+    # Sincronizar live_status con alerta banner del día
+    try:
+        status_live = ManyaMatchEngine.generate_updated_live_status()
+        status_live["partido_activo"]["es_hoy"] = True
+        status_live["alerta_banner"] = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {match_title} a las {hora_str} en {estadio} • {tv}."
+        (DATA_DIR / "live_status.json").write_text(json.dumps(status_live, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as ex_ls:
+        logger.warning(f"[Hoy Juega] Aviso actualizando live_status: {ex_ls}")
+
+    # Publicar o actualizar en Blogger
+    post_url = publish_manya_article_to_blogger(post_type="HOY_JUEGA", match_id=event_id)
+    
+    # Sincronizar página de previo partido en Blogger
+    try:
+        from sincronizar_pagina_proximo_partido import sincronizar_pagina_proximo_partido_blogger
+        sincronizar_pagina_proximo_partido_blogger()
+    except Exception as ex_p:
+        logger.warning(f"[Blogger Previa] Aviso actualizando previa Blogger: {ex_p}")
+
+    git_commit_and_push(f"feat(matchday): ¡Hoy Juega el Manya! Cobertura de partido {match_title}")
 
 
 def ejecutar_ciclo_en_vivo(match_info: dict):

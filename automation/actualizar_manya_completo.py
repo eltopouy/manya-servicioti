@@ -486,7 +486,7 @@ def build_editorial_digest_with_gflash38(live_data: Dict[str, Any], news_list: L
         except Exception:
             pass
 
-    prompt = f"""Eres el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy), la plataforma periodística oficial del ecosistema ServicioTI (https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.
+    prompt = f"""Actúa como el Director Editorial y Jefe de Redacción de Manya ServicioTI (https://manya.servicioti.com.uy), la plataforma periodística oficial del ecosistema ServicioTI (https://www.servicioti.com.uy), fundado por Andrés Franchi Ugartemendía.
 Tu misión es imprimir periodismo deportivo de alto impacto, 100% futbolero, incisivo y con rigor de vestuario. Cero cursilería, romanticismo lírico o metáforas exageradas. Escribe sobre fútbol puro: presión alta, pelotas paradas, transiciones, vestuario al rojo vivo y la lucha decisiva por la Tabla Anual (Peñarol lidera con 66 puntos).
 
 CONTROL TEMPORAL EN URUGUAY: {temporal_rule}
@@ -498,8 +498,9 @@ NOTICIAS DE ACTUALIDAD:
 Próximo partido: {prox.get('local',{}).get('nombre','Peñarol')} vs {prox.get('visitante',{}).get('nombre','Rival')} ({prox.get('fecha_legible','')}) en {estadio_prox}.
 Último resultado: {ult.get('local',{}).get('nombre','')} {ult.get('local',{}).get('goles','')} - {ult.get('visitante',{}).get('goles','')} {ult.get('visitante',{}).get('nombre','')}.
 
-REGLAS EDITORIALES INQUEBRANTABLES:
-1. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.
+REGLAS EDITORIALES INQUEBRANTABLES (ANTI-DISCLAIMER):
+1. PROHIBICIÓN ABSOLUTA: Prohibido incluir disclaimers como 'Como modelo de lenguaje...', 'No puedo predecir...', 'Como IA...'. Escribe directamente el JSON solicitado.
+2. PROHIBIDO mencionar 'IA', 'Gemini', 'inteligencia artificial', 'Imagen 3' o herramientas automatizadas.
 2. Usa los apodos legítimos: Diego Aguirre 'La Fiera', Leo Fernández 'El Zurdo de Oro', Washington Aguerre 'Washi'.
 3. El crédito de autoría es 'Andrés Franchi Ugartemendía' (sin 'Prof.').
 4. Enfoque hacia los rivales: respeto deportivo y sobriedad periodística, defendiendo siempre el Decanato.
@@ -548,13 +549,24 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:
     except Exception as e:
         logger.warning(f"[Editorial Digest] Aviso al conectar con Gemini Web: {e}")
 
-    # Fallback seguro verificado
+    # Fallback seguro verificado y dinámico
+    rival_activo_nombre = prox.get('visitante', {}).get('nombre', 'Defensor Sporting') if prox.get('local', {}).get('es_penarol') else prox.get('local', {}).get('nombre', 'Defensor Sporting')
     if not ai_json or "articulo_principal" not in ai_json:
-        tit_fallback = f"La Previa Aurinegra: Peñarol afina detalles antes de visitar a {prox.get('visitante',{}).get('nombre','Wanderers')}" if delta_days != 0 else f"¡Hoy juega el Manya! Peñarol enfrenta a {prox.get('visitante',{}).get('nombre','Wanderers')}"
+        tit_fallback = f"La Previa Aurinegra: Peñarol afina detalles antes de visitar a {rival_activo_nombre}" if delta_days != 0 else f"¡Hoy juega el Manya! Peñarol enfrenta a {rival_activo_nombre}"
+        try:
+            from manya_partidos_daemon import generar_parrafos_editoriales_certificados
+            parrafos_fb = generar_parrafos_editoriales_certificados(prox, rival_activo_nombre, estadio_prox, puntos_anual=66)
+        except Exception:
+            parrafos_fb = [
+                f"El Club Atlético Peñarol cumple una semana de concentración total en Los Aromos con la mira puesta en la {fecha_tag} del Torneo Clausura, liderando la Tabla Anual con 66 puntos oficiales.",
+                f"Diego Aguirre calibra el esquema táctico 4-2-3-1 para plantarse con autoridad en {estadio_prox} ante {rival_activo_nombre}, buscando adueñarse de la medular y explotar la velocidad por bandas.",
+                "En la faz defensiva, la solvencia de Washington Aguerre y la zaga central comandada por Guzmán Rodríguez y Javier Méndez otorgan las garantías necesarias para custodiar el arco aurinegro.",
+                f"El plantel aurinegro es consciente del peso de cada unidad en disputa; un triunfo en {estadio_prox} consolidará la ventaja deportiva hacia la definición del Campeonato Uruguayo."
+            ]
         ai_json = {
             "portada_visual": {
-                "titular_portada": f"⚡ PREVIA OFICIAL: Peñarol ante {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')} • {prox.get('torneo','Torneo Clausura')}",
-                "bajada_portada": f"¡Todo listo en Los Aromos! Diego Aguirre define el 11 para el compromiso de {prox.get('fecha_legible','este fin de semana')} en {estadio_prox}. Peñarol manda en la Tabla Anual con 65 puntos.",
+                "titular_portada": f"⚡ PREVIA OFICIAL: Peñarol ante {rival_activo_nombre} • {prox.get('torneo','Torneo Clausura')}",
+                "bajada_portada": f"¡Todo listo en Los Aromos! Diego Aguirre define el 11 para el compromiso de {prox.get('fecha_legible','este fin de semana')} en {estadio_prox}. Peñarol manda en la Tabla Anual con 66 puntos.",
                 "cuenta": "@oficialcap",
                 "ubicacion": f"📍 {estadio_prox} • Montevideo",
                 "categoria": "partidos",
@@ -562,29 +574,39 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido con esta estructura exacta:
                 "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg"
             },
             "titular_dia": tit_fallback,
-            "bajada_seo": f"Peñarol se mide ante {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')} este {prox.get('fecha_legible','sábado')} en {estadio_prox}. Análisis táctico y actualidad.",
+            "bajada_seo": f"Peñarol se mide ante {rival_activo_nombre} este {prox.get('fecha_legible','fin de semana')} en {estadio_prox}. Análisis táctico y actualidad. Peñarol lidera con 66 puntos.",
             "claves_60_segundos": [
                 {"icono": "⚽", "titulo": "Actualidad en Los Aromos", "detalle": "Semana de alta exigencia táctica en Los Aromos con énfasis en la presión sobre la salida rival."},
-                {"icono": "📊", "titulo": "Fortaleza en la Tabla Anual", "detalle": "El Carbonero sostiene el liderato absoluto de la Anual con 65 unidades (+24 DG)."},
+                {"icono": "📊", "titulo": "Fortaleza en la Tabla Anual", "detalle": "El Carbonero sostiene el liderato absoluto de la Anual con 66 unidades (+24 DG)."},
                 {"icono": "🎟️", "titulo": "Operativo de Entradas", "detalle": "Venta online por RedTickets para la hinchada aurinegra (sin canje al ser visitantes)."},
                 {"icono": "🔥", "titulo": "ADN y Pegada", "detalle": "La seguridad de Washi Aguerre bajo los palos y la zurda quirúrgica de Leo Fernández."}
             ],
             "articulo_principal": {
-                "titulo": f"Examen de jerarquía: Peñarol afina su maquinaria para enfrentar a {prox.get('visitante',{}).get('nombre','Montevideo Wanderers')}",
+                "titulo": f"Examen de jerarquía: Peñarol afina su maquinaria para enfrentar a {rival_activo_nombre}",
                 "subtitulo": f"El equipo de Diego Aguirre llega enfocado en sumar de a tres en {estadio_prox} para sostener la ventaja en la Anual",
-                "parrafos": [
-                    "El Club Atlético Peñarol atraviesa una etapa determinante de la temporada donde cada punto es decisivo para la Tabla Anual, donde lidera con 65 unidades.",
-                    "Desde el punto de vista táctico, el esquema 4-2-3-1 le permite al equipo aurinegro combinar solidez en el retroceso con desequilibrio por las bandas y la pegada magistral de Leonardo Fernández.",
-                    "A nivel defensivo, la coordinación de la zaga central comandada por Guzmán Rodríguez y Javier Méndez otorga la solidez necesaria para sostener el cero.",
-                    "En Manya ServicioTI actualizamos minuto a minuto las novedades oficiales, formaciones confirmadas y el balance frente a frente."
-                ],
+                "parrafos": parrafos_fb,
                 "preguntas_frecuentes": [
                     {"q": "¿Cuándo juega Peñarol su próximo partido y por qué canal se transmite?", "a": f"Peñarol juega el {prox.get('fecha_legible','próximo fin de semana')} en {estadio_prox}, televisado por VTV Plus y Disney+."},
-                    {"q": "¿Cómo está Peñarol en la Tabla Anual?", "a": "Peñarol defiende en solitario la cima con 65 puntos, manteniendo ventaja directa sobre Nacional."},
+                    {"q": "¿Cómo está Peñarol en la Tabla Anual?", "a": "Peñarol defiende en solitario la cima con 66 puntos oficiales AUF, manteniendo ventaja directa sobre Nacional."},
                     {"q": "¿Cómo adquirir las entradas?", "a": "A través de RedTickets de forma online para parcialidad aurinegra."}
                 ]
             }
         }
+    else:
+        # Sanear párrafos de ai_json si provienen de IA
+        try:
+            from manya_partidos_daemon import sanear_y_validar_parrafos_editoriales
+            art_temp = ai_json.get("articulo_principal", {})
+            art_temp["parrafos"] = sanear_y_validar_parrafos_editoriales(
+                parrafos_raw=art_temp.get("parrafos", []),
+                match_info=prox,
+                rival_nombre=rival_activo_nombre,
+                estadio=estadio_prox,
+                puntos_anual=66
+            )
+            ai_json["articulo_principal"] = art_temp
+        except Exception:
+            pass
 
     # Sanitización de seguridad contra desfase temporal
     tit_final = ai_json.get("titular_dia", "La Previa de Peñarol")
