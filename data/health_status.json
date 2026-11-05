@@ -3,9 +3,9 @@
   "timestamp": "2026-11-05T09:07:40.279137-03:00",
   "score_salud": 100.0,
   "total_pruebas": 10,
-  "pruebas_exitosas": 10,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 8,
+  "pruebas_fallidas": 2,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
@@ -72,16 +72,16 @@
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
@@ -89,7 +89,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
@@ -111,11 +111,13 @@
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
-      "status": "PASS",
-      "passed": true,
-      "message": "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Inconsistencias editoriales: news_digest.json: No menciona la Fecha 14 del Torneo Clausura",
       "details": {
-        "errors": []
+        "errors": [
+          "news_digest.json: No menciona la Fecha 14 del Torneo Clausura"
+        ]
       },
       "timestamp": "2026-11-05T09:07:40.269933-03:00"
     },
