@@ -129,5 +129,8 @@
       },
       "timestamp": "2026-11-05T08:00:08.448180-03:00"
     }
+  ],
+  "reparaciones_aplicadas": [
+    "Auto-corregido live_status.json: actualizadas referencias a 65 puntos."
   ]
 }
