@@ -4,7 +4,7 @@
 **URL Pública:** [manya.servicioti.com.uy](https://manya.servicioti.com.uy/)  
 **Blogger CDN:** [www.servicioti.com.uy](https://www.servicioti.com.uy/)  
 **Autor:** Andrés Franchi Ugartemendía (ServicioTI / eltopouy)  
-**Versión:** 3.1 (Pizarra Táctica Bidireccional de Alta Precisión & Suite de 10 Pruebas Certificadas)  
+**Versión:** 3.2 (Laboratorio Táctico 1x1 Auto-Sincronizado & Auditoría Editorial Integral del DOM)  
 **Fecha de Actualización:** 4 de Noviembre de 2026  
 
 ---
@@ -192,3 +192,22 @@ El módulo de pizarra táctica (`#pizarra-tactica`) permite al hincha armar, per
 4. **Exportación e Intercambio Social:**
    - **Descarga PNG 1080x1350:** Canvas en formato estándar 4:5 para Instagram Stories / Feed y WhatsApp, con dorsales, roles, DT Diego Aguirre, banco de suplentes y estética Oro y Carbón.
    - **Compartir Nativo (Web Share API / Portapapeles):** Genera texto enriquecido con la formación, 11 titulares ordenados por puesto, banco de relevos y enlace directo a la sección.
+
+
+---
+
+## 8. Estrategia de Actualización Continua del Ecosistema (Scouting y Duelos 1x1)
+
+Para evitar desfasajes entre el archivo de datos (`data/rival_intelligence.json`) y el HTML estático de la plataforma (`index.html`), se implementó una estrategia en tres capas:
+
+1. **Generación Dinámica de Inteligencia Deportiva (`manya_rival_intelligence.py`):**
+   - Resuelve el rival activo desde `live_status.json` y consulta la base de datos oficial 1891 BD.
+   - Genera los 4 duelos 1x1 específicos del próximo rival con zonas de campo, dorsales, fortalezas y claves del duelo.
+
+2. **Auto-Sincronización en el Guardián (`manya_self_healing_watchdog.py`):**
+   - Incorpora el método `auto_sincronizar_duelos_y_scouting()`.
+   - Si detecta que las tarjetas de `#duelos-tacticos-container` en `index.html` no corresponden al rival activo en `rival_intelligence.json`, genera y reemplaza automáticamente el bloque HTML de duelos.
+
+3. **Auditoría Integral del DOM (`test_editorial_coherence.py`):**
+   - Evalúa no solo el artículo editorial principal, sino también `#duelos-1x1-box`, `#rival-scout-box` y `#standings-sub-info`.
+   - Prohíbe taxativamente la presencia de futbolistas, entrenadores o estadios del rival anterior en los bloques tácticos de la fecha activa.
