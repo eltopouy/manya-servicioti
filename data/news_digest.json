@@ -1,58 +1,53 @@
 {
-  "actualizado": "05/11/2026 01:15",
+  "actualizado": "05/11/2026 01:45",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
   "partido_id": "",
-  "titular_dia": "Con la mira en el Franzini: Peñarol ajusta las piezas en Los Aromos a diez días del duelo ante Defensor Sporting",
-  "bajada_seo": "Torneo Clausura (Fecha 14): A diez días del choque por el campeonato uruguayo, Peñarol intensifica los trabajos en Los Aromos para visitar a Defensor Sporting en el Estadio Luis Franzini. Enterate de los detalles tácticos, la actualidad aurinegra y cómo ver el partido en vivo por VTV Plus y Disney+ Premium. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
+  "titular_dia": "La mira puesta en Parque Rodó: el Campeón del Siglo afina los motores a diez días de la visita a Defensor",
+  "bajada_seo": "Torneo Clausura (Fecha 14): Análisis previo de Manya ServicioTI sobre el duelo entre Defensor Sporting y Peñarol en el Estadio Luis Franzini (Montevideo). Horario, formaciones y cómo ver el partido en vivo por VTV Plus y Disney+ Premium. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Clave Táctica",
-      "detalle": "Diego Aguirre ajusta el funcionamiento colectivo y la solidez defensiva en Los Aromos para contrarrestar la intensidad violeta."
+      "detalle": "Detalle del planteo de Diego Aguirre"
     },
     {
       "icono": "🔥",
       "titulo": "La Figura a Seguir",
-      "detalle": "El desequilibrio y la conducción de Leonardo Fernández en ofensiva para romper el cerrojo rival en el medio."
+      "detalle": "Rendimiento esperado de Leonardo Fernández"
     },
     {
       "icono": "📺",
       "titulo": "Transmisión y Horario",
-      "detalle": "Domingo 15/11/2026 a las 20:00 hs de Uruguay. Televisación en directo por VTV Plus y Disney+ Premium."
+      "detalle": "Hora oficial de Uruguay (Domingo 15/11/2026 20:00 hs) y televisación (VTV Plus / Disney+ Premium)"
     },
     {
       "icono": "📊",
       "titulo": "Puntos en Juego",
-      "detalle": "Un duelo trascendental para sumar de a tres y afianzar las pretensiones de Peñarol en lo más alto de la Tabla Anual."
-    },
-    {
-      "icono": "📊",
-      "titulo": "Cima de la Tabla Anual",
-      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
+      "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 66 puntos oficiales AUF)"
     }
   ],
   "articulo_principal": {
-    "titulo": "Trabajo silencioso y mentalidad ganadora en Los Aromos",
-    "subtitulo": "El plantel carbonero entra en la recta final de preparación con la mira puesta en el reducto de Parque Rodó.",
+    "titulo": "Con el objetivo entre ceja y ceja: Peñarol trabaja en Los Aromos con la mira en el Franzini",
+    "subtitulo": "A diez días del choque ante Defensor Sporting, el plantel principal ajusta detalles tácticos y físicos para llegar en óptimas condiciones al exigente compromiso en condición de visitante.",
     "parrafos": [
-      "El clima en Los Aromos respira concentración absoluta. A diez días de un compromiso de máxima exigencia, el cuerpo técnico encabezado por Diego Aguirre diagrama cada detalle táctico y físico con el rigor que exige la camiseta aurinegra, sabiendo que cada punto en esta instancia del torneo vale oro puro en la aspiración de conquistar los objetivos de la temporada.",
-      "En el horizonte asoma Defensor Sporting, un rival tradicional que siempre propone partidos complejos en su reducto del Estadio Luis Franzini (Montevideo). El cuerpo técnico analiza con lupa las virtudes del violeta, enfatizando en la necesidad de copar el mediocampo, neutralizar sus circuitos de juego por las bandas y mantener la concentración defensiva durante los noventa minutos para no pasar sobresaltos.",
-      "Con un plantel que combina jerarquía, experiencia y la frescura de las incorporaciones recientes, el mirasol ultima variantes tácticas y busca afinar la puntería en los metros finales. Los trabajos de fútbol formal en Los Aromos sirven para ensayar sociedades ofensivas y consolidar el bloque que saldrá a buscar los tres puntos desde el primer minuto en condición de visitante.",
-      "La expectativa de la parcialidad carbonera crece con el correr de los días, consciente de que el equipo necesita plasmar su jerarquía en cancha ajena para seguir mandando en la tabla. El grupo mantiene la ambición intacta y el foco absoluto en regalarle una alegría a su gente, ratificando el temperamento y la mística que caracterizan a la institución."
+      "Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos oficiales, el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad al equipo para afrontar la visita ante Defensor Sporting vs Peñarol en Estadio Luis Franzini (Montevideo) por la Fecha 14 del Torneo Clausura.",
+      "Enfrente estará un Defensor Sporting vs Peñarol tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación carbonera mediante repliegue ordenado y transiciones rápidas por las bandas. El plan táctico de Peñarol radicará en imponer la jerarquía en la posesión, asfixiar la salida adversaria con la presión alta de Maximiliano Silvera y liberar los callejones interiores para la zurda magistral de Leonardo Fernández, respaldado por la aceleración de Javier Cabrera y Jaime Báez.",
+      "En la faz defensiva, la solvencia de Washington Aguerre y la solidez aérea de Guzmán Rodríguez y Javier Méndez serán los pilares para desactivar cualquier intento de pelota quieta o contraataque del rival. En Los Aromos se vivió una semana de intensidad absoluta: Aguirre no se guarda nada y alineará a sus mejores soldados para custodiar la ventaja en la tabla acumulada.",
+      "El compromiso ante Defensor Sporting vs Peñarol representa una verdadera final de campeonato. Con 66 unidades en la Tabla Anual y la recta final del certamen al rojo vivo, una victoria aurinegra en Estadio Luis Franzini (Montevideo) consolidará la ventaja deportiva de cara a la definición del Campeonato Uruguayo 2026. La hinchada mirasol acompañará con fervor buscando dar otro paso gigante hacia la gloria."
     ],
     "preguntas_frecuentes": [
       {
         "q": "¿A qué hora juega Peñarol y dónde verlo?",
-        "a": "Peñarol juega el próximo Domingo 15/11/2026 20:00 hs en el Estadio Luis Franzini (Montevideo), televisado en vivo por VTV Plus y Disney+ Premium."
+        "a": "Peñarol juega el próximo Domingo 15/11/2026 20:00 hs a las Domingo 15/11/2026 20:00 hs en Estadio Luis Franzini (Montevideo), televisado por VTV Plus / Disney+ Premium."
       },
       {
         "q": "¿Cómo formaría Peñarol?",
-        "a": "Diego Aguirre perfila un esquema táctico equilibrado y ofensivo, evaluando las variantes ideales según la evolución física de sus futbolistas."
+        "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1."
       },
       {
         "q": "¿Qué se juega Peñarol en este partido?",
-        "a": "Unidades de oro puro para custodiar la cima de la Tabla Anual y consolidar el rendimiento colectivo de cara a la recta final del campeonato."
+        "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."
       }
     ]
   },
