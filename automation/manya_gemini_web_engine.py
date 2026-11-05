@@ -331,11 +331,43 @@ class ManyaGeminiWebEngine:
             )
 
     @classmethod
+    def contiene_disclaimer_o_rechazo(cls, obj: Any) -> bool:
+        """Verifica si el texto o estructura JSON contiene frases de disclaimers de IA o rechazos de modelo."""
+        if not obj:
+            return False
+        disclaimer_markers = [
+            "como modelo de lenguaje",
+            "como modelo de ia",
+            "como modelo de inteligencia artificial",
+            "como una inteligencia artificial",
+            "como una ia",
+            "as a language model",
+            "as an ai",
+            "no puedo predecir",
+            "no puedo pronosticar",
+            "no puedo adivinar",
+            "no tengo acceso a información en tiempo real",
+            "no tengo acceso a datos en tiempo real",
+            "no tengo información en tiempo real",
+            "soy solo un modelo",
+            "soy un modelo de lenguaje",
+            "soy una inteligencia artificial",
+            "no puedo generar este contenido",
+            "no puedo generar"
+        ]
+        try:
+            texto = json.dumps(obj, ensure_ascii=False).lower() if isinstance(obj, (dict, list)) else str(obj).lower()
+        except Exception:
+            texto = str(obj).lower()
+        return any(dm in texto for dm in disclaimer_markers)
+
+    @classmethod
     def generar_texto_gflash_38(cls, prompt: str, esperar_json: bool = True) -> Dict[str, Any]:
         """
         Genera contenido editorial de Peñarol priorizando:
         1. Gemini Web (Playwright `~/.gemini_automation_profile` con GFlash 3.8).
         2. Cascada API Google GenAI: `gemini-3.8-flash` -> `gemini-3.5-flash` -> `gemini-3-flash-preview` -> `gemini-2.5-flash`.
+        Garantiza CERO disclaimers de modelo de lenguaje y CERO meta-comentarios.
         """
         # Intento 1: Usar GeminiWebTextService existente en seo_blogger_automation
         try:
@@ -343,10 +375,17 @@ class ManyaGeminiWebEngine:
             from services.gemini_web_text_service import GeminiWebTextService
             logger.info("[Redactor GFlash 3.8] Ejecutando redacción en Gemini Web...")
             if esperar_json:
-                return GeminiWebTextService.generar_json(prompt=prompt, headless=True, timeout_seconds=65)
+                res_web = GeminiWebTextService.generar_json(prompt=prompt, headless=True, timeout_seconds=65)
+                if res_web and not cls.contiene_disclaimer_o_rechazo(res_web):
+                    return res_web
+                elif res_web:
+                    logger.warning("[Redactor GFlash 3.8] Gemini Web devolvió texto con disclaimer de modelo de lenguaje. Descartando y activando API...")
             else:
                 txt = GeminiWebTextService.generar_texto(prompt=prompt, headless=True, timeout_seconds=65)
-                return {"text": txt}
+                if txt and not cls.contiene_disclaimer_o_rechazo(txt):
+                    return {"text": txt}
+                elif txt:
+                    logger.warning("[Redactor GFlash 3.8] Gemini Web devolvió disclaimer de modelo de lenguaje. Descartando y activando API...")
         except Exception as e_web:
             logger.warning(f"[Redactor GFlash 3.8] Aviso en Gemini Web ({e_web}). Activando cascada API gemini-3.8-flash...")
 
@@ -363,10 +402,16 @@ class ManyaGeminiWebEngine:
                     )
                     resp = client.models.generate_content(model=model_name, contents=prompt, config=cfg)
                     if resp and resp.text:
+                        if cls.contiene_disclaimer_o_rechazo(resp.text):
+                            logger.warning(f"[Redactor GFlash 3.8] Modelo {model_name} devolvió disclaimer. Descartando...")
+                            continue
                         logger.info(f"[Redactor GFlash 3.8] ✓ Respuesta generada con modelo '{model_name}'.")
                         if esperar_json:
                             clean = re.sub(r"^```(?:json)?|```$", "", resp.text.strip(), flags=re.M).strip()
-                            return json.loads(clean)
+                            res_api = json.loads(clean)
+                            if not cls.contiene_disclaimer_o_rechazo(res_api):
+                                return res_api
+                            continue
                         return {"text": resp.text}
                 except Exception as e_api:
                     logger.warning(f"[Redactor GFlash 3.8] Modelo {model_name} no disponible ({str(e_api)[:80]}), probando siguiente...")
