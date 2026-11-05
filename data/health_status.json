@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "05/11/2026 01:00:08",
-  "timestamp": "2026-11-05T01:00:08.432727-03:00",
-  "score_salud": 100.0,
+  "fecha_auditoria": "05/11/2026 01:30:08",
+  "timestamp": "2026-11-05T01:30:08.320090-03:00",
+  "score_salud": 90.0,
   "total_pruebas": 10,
-  "pruebas_exitosas": 10,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 9,
+  "pruebas_fallidas": 1,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 01:00:02",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 01:30:06",
       "details": {
-        "now_uy": "2026-11-05 01:00:02.983195-03:00",
+        "now_uy": "2026-11-05 01:30:06.469372-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-05T01:00:02.983240-03:00"
+      "timestamp": "2026-11-05T01:30:06.469403-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 10,
         "es_hoy": false
       },
-      "timestamp": "2026-11-05T01:00:02.984549-03:00"
+      "timestamp": "2026-11-05T01:30:06.470236-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T01:00:02.988190-03:00"
+      "timestamp": "2026-11-05T01:30:06.473068-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T01:00:02.992385-03:00"
+      "timestamp": "2026-11-05T01:30:06.476912-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-05T01:00:02.996838-03:00"
+      "timestamp": "2026-11-05T01:30:06.481374-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,7 +68,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-05T01:00:02.997141-03:00"
+      "timestamp": "2026-11-05T01:30:06.481624-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -97,7 +97,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-05T01:00:08.404083-03:00"
+      "timestamp": "2026-11-05T01:30:08.303422-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,17 +107,20 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T01:00:08.409509-03:00"
+      "timestamp": "2026-11-05T01:30:08.306111-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
-      "status": "PASS",
-      "passed": true,
-      "message": "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Inconsistencias editoriales: news_digest.json: No menciona los 66 puntos de Peñarol en la Tabla Anual; news_digest.json: No menciona la Fecha 14 del Torneo Clausura",
       "details": {
-        "errors": []
+        "errors": [
+          "news_digest.json: No menciona los 66 puntos de Peñarol en la Tabla Anual",
+          "news_digest.json: No menciona la Fecha 14 del Torneo Clausura"
+        ]
       },
-      "timestamp": "2026-11-05T01:00:08.423755-03:00"
+      "timestamp": "2026-11-05T01:30:08.313893-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -127,10 +130,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T01:00:08.432506-03:00"
+      "timestamp": "2026-11-05T01:30:08.319873-03:00"
     }
-  ],
-  "reparaciones_aplicadas": [
-    "Auto-corregido live_status.json: actualizadas referencias a 65 puntos."
   ]
 }
