@@ -1,96 +1,121 @@
 {
-  "actualizado": "04/11/2026 21:34",
-  "modelo_ia": "Manya Sports Press Engine (100% Periodismo Deportivo Uruguayo)",
+  "actualizado": "04/11/2026 22:06",
+  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
-  "partido_id": "401931268",
-  "titular_dia": "Peñarol afina la artillería en Los Aromos para la batalla en el Franzini ante Defensor Sporting",
-  "bajada_seo": "El Carbonero prepara la visita al Estadio Luis Franzini por la Fecha 14 del Torneo Clausura (Domingo 15 de noviembre, 20:00 hs). Diego Aguirre aprovecha el receso para recuperar soldados clave en Los Aromos. Peñarol lidera la Tabla Anual con 66 puntos.",
+  "partido_id": "",
+  "titular_dia": "La cuenta regresiva carbonera apunta al Franzini: Peñarol ajusta las piezas con la mira en Defensor",
+  "bajada_seo": "A 11 días del choque clave, Peñarol intensifica los trabajos en Los Aromos para visitar a Defensor Sporting en el Estadio Luis Franzini. Enterate del horario, cómo ver el partido en vivo por VTV Plus y Disney+ Premium, y la actualidad del plantel aurinegro.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Receso Táctico en Los Aromos",
-      "detalle": "Diego Aguirre intensifica trabajos físicos y circuitos con pelota aprovechando la pausa en el fixture para llegar al 100% al Franzini."
+      "titulo": "Clave Táctica",
+      "detalle": "Detalle del planteo de Diego Aguirre"
     },
     {
-      "icono": "🏟️",
-      "titulo": "Cita en el Parque Rodó",
-      "detalle": "El próximo domingo 15 de noviembre a las 20:00 hs, el Decano visita a Defensor Sporting en el Franzini por la Fecha 14."
-    },
-    {
-      "icono": "📊",
-      "titulo": "Cima de la Tabla Anual",
-      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG), manteniendo la vanguardia a falta de dos etapas para el cierre."
+      "icono": "🔥",
+      "titulo": "La Figura a Seguir",
+      "detalle": "Rendimiento esperado de Leonardo Fernández"
     },
     {
       "icono": "📺",
-      "titulo": "Pantalla y Entradas",
-      "detalle": "Televisación en directo por VTV Plus y Disney+ Premium. Canje y venta para parcialidad aurinegra en Tribuna Ghierra vía RedTickets."
+      "titulo": "Transmisión y Horario",
+      "detalle": "Hora oficial de Uruguay (Domingo 15/11/2026 20:00 hs) y televisación (VTV Plus / Disney+ Premium)"
+    },
+    {
+      "icono": "📊",
+      "titulo": "Puntos en Juego",
+      "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 65 pts)"
     }
   ],
   "articulo_principal": {
-    "titulo": "La antesala de una final: Peñarol alista sus armas en Los Aromos antes de visitar a Defensor en el Franzini",
-    "subtitulo": "Diego Aguirre aprovecha la pausa del Torneo Clausura para recuperar piezas fundamentales y afinar la estrategia para la penúltima fecha por la Tabla Anual",
+    "titulo": "Con la mira en el Parque Rodó: la interna aurinegra a once días del duelo ante el violeta",
+    "subtitulo": "El plantel de Diego Aguirre trabaja con intensidad en Los Aromos, afinando detalles físicos y futbolísticos de cara a una visita de máxima exigencia por el campeonato.",
     "parrafos": [
-      "Con la tranquilidad que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos, el plantel principal del Club Atlético Peñarol cumple una semana de alta exigencia física y táctica en el complejo de Los Aromos. Tras el empate 1-1 frente a Montevideo Wanderers en el Parque Saroldi, el cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en corregir desacoples en la gestación ofensiva y dotar de mayor verticalidad al equipo de cara a la penúltima fecha del Torneo Clausura.",
-      "El receso del certamen local, motivado por eventos de agenda nacional y operativa de seguridad en Montevideo, llegó como un bálsamo para la sanidad aurinegra. Jugadores que venían acumulando sobrecargas musculares, como Leonardo Fernández y Javier Méndez, pudieron realizar labores diferenciadas y de recuperación regenerativa, asegurando que el once titular arribe en plenitud física para la exigente visita al Estadio Luis Franzini.",
-      "Enfrente estará Defensor Sporting, conducido interinamente por Andrés Rodríguez tras la salida de Mauricio Larriera. El elenco violeta, tradicionalmente incómodo en su reducto del Parque Rodó, apuesta a la intensidad de sus canteranos en el mediocampo y a la capacidad goleadora del argentino Claudio Spinelli, respaldado por la gambeta punzante de Anderson Duarte.",
-      "El compromiso quedó fijado oficialmente por la Mesa Ejecutiva de la AUF para el domingo 15 de noviembre a las 20:00 horas, con transmisión de VTV Plus y Disney+ Premium. La parcialidad aurinegra dispondrá de la Tribuna Ghierra, en un duelo que puede resultar decisivo: una victoria dejará a Peñarol a tiro de asegurar la Tabla Anual en la última fecha del Clausura."
+      "Párrafo 1: El clima previo en Los Aromos y la concentración aurinegra...",
+      "Párrafo 2: El rival de turno (Defensor Sporting vs Peñarol), su momento y cómo contrarrestar su juego en Estadio Luis Franzini (Montevideo)...",
+      "Párrafo 3: El once probable de Peñarol, retornos y variantes tácticas...",
+      "Párrafo 4: La expectativa de los hinchas y el peso de sumar de a tres en la Tabla Anual..."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cuándo juega Peñarol su próximo partido?",
-        "a": "Peñarol visitará a Defensor Sporting el domingo 15 de noviembre de 2026 a las 20:00 hs en el Estadio Luis Franzini por la Fecha 14 del Torneo Clausura."
+        "q": "¿A qué hora juega Peñarol y dónde verlo?",
+        "a": "Peñarol juega el próximo Domingo 15/11/2026 20:00 hs a las Domingo 15/11/2026 20:00 hs en Estadio Luis Franzini (Montevideo), televisado por VTV Plus / Disney+ Premium."
       },
       {
-        "q": "¿Cuántos puntos tiene Peñarol en la Tabla Anual?",
-        "a": "Peñarol es el líder solitario de la Tabla Anual Acumulada con 66 puntos oficiales en 35 partidos disputados (+24 de saldo de goles)."
+        "q": "¿Cómo formaría Peñarol?",
+        "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1."
       },
       {
-        "q": "¿Por qué canal televisan Defensor Sporting vs Peñarol?",
-        "a": "El partido será televisado en vivo y en directo por VTV Plus y la plataforma de streaming Disney+ Premium."
-      },
-      {
-        "q": "¿Quién es el director técnico de Defensor Sporting?",
-        "a": "El equipo de Parque Rodó es dirigido técnicamente por Andrés Rodríguez, acompañado por Rodrigo Gómez como asistente."
+        "q": "¿Qué se juega Peñarol en este partido?",
+        "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."
       }
     ]
   },
   "noticias_fuentes": [
     {
-      "fuente": "Ovación / El País",
-      "titulo": "Peñarol no frena en Los Aromos: Aguirre recupera piezas clave con la mira puesta en el Franzini",
-      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-entrenamientos-los-aromos-defensor-franzini-clausura-2026",
-      "fecha": "04/11/2026 15:30",
-      "resumen": "Aprovechando la pausa en el Torneo Clausura fijada para el 15 de noviembre, Diego Aguirre intensifica los trabajos tácticos en Los Aromos. Peñarol es líder solitario de la Tabla Anual con 66 unidades."
-    },
-    {
-      "fuente": "Tenfield",
-      "titulo": "Clausura: La Mesa Ejecutiva confirmó días y horarios de la Fecha 14 con Defensor-Peñarol en el Franzini",
-      "url": "https://www.tenfield.com.uy/clausura-fecha-14-fijacion-oficial-defensor-penarol-franzini/",
-      "fecha": "04/11/2026 17:15",
-      "resumen": "Defensor Sporting recibirá a Peñarol el domingo 15 de noviembre a las 20:00 hs en el Estadio Luis Franzini por la Fecha 14 del Clausura. El Carbonero comanda la acumulada con 66 puntos."
-    },
-    {
-      "fuente": "FútbolUy / Montevideo Portal",
-      "titulo": "Peñarol: La puesta a punto de Leo Fernández y el plan de Diego Aguirre para la recta final del Uruguayo",
-      "url": "https://www.montevideo.com.uy/deportes/Penarol-Aguirre-ajusta-el-equipo-pensando-en-Defensor-Sporting-por-la-Fecha-14",
-      "fecha": "04/11/2026 18:00",
-      "resumen": "El volante zurdo completó la sesión con normalidad. En Peñarol saben que los tres puntos en el Franzini son vitales para custodiar la cima de la Tabla Anual (66 pts) ante el acecho de sus perseguidores."
-    },
-    {
+      "titulo": "Defiendan al hincha",
+      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
+      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
       "fuente": "Padre y Decano",
-      "titulo": "Semana de trabajo en Los Aromos: El Decano se prepara para la penúltima batalla del Clausura",
-      "url": "https://www.padreydecano.com/previa-defensor-penarol-fecha-14-clausura-2026/",
-      "fecha": "04/11/2026 19:20",
-      "resumen": "Foco total en el Parque Rodó. Peñarol visitará a Defensor el domingo 15/11 a las 20:00 hs. Entradas para la parcialidad carbonera se expenderán en la Tribuna Ghierra vía RedTickets."
+      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
+      "peso": 1.3
     },
     {
-      "fuente": "El Observador",
-      "titulo": "Defensor Sporting prepara el duelo ante Peñarol: el planteo de Andrés Rodríguez para frenar al líder de la Anual",
-      "url": "https://www.elobservador.com.uy/nota/defensor-sporting-andres-rodriguez-plan-contra-penarol-franzini",
-      "fecha": "04/11/2026 20:10",
-      "resumen": "El entrenador violeta afina la alineación en Pichincha con Spinelli y Duarte en ataque. En el Franzini buscarán dar el golpe ante un Peñarol que llega mandando en la Anual con 66 puntos."
+      "titulo": "Regresa al Club",
+      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
+      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Peñarol hizo futbol ante Juventud",
+      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
+      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Coelho continuará en Brasil",
+      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
+      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Regreso esperado",
+      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
+      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "De Amores rescindió con Peñarol",
+      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
+      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Análisis punto por punto del informe de seguridad",
+      "url": "https://www.padreydecano.com/cms/noticias/la-defensa-de-penarol-ante-la-auf-y-el-mi/",
+      "resumen": "Desde la tarde del domingo, desde tiendas del tradicional rival y utilizando el aparato mediático que tiene a su disposición, se ha intentado instalar que las infracciones al reglamento cometidas por su hinchada tienen una similitud con aquellas que se pudieron dar en la Tribuna ...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Thu, 10 Jul 2025 14:04:55 +0000",
+      "peso": 1.3
+    },
+    {
+      "titulo": "Fecha clásica",
+      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
+      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
+      "fuente": "Padre y Decano",
+      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
+      "peso": 1.3
     }
   ],
-  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-la-previa-con-la-mira.html"
 }
