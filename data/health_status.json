@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "05/11/2026 19:00:05",
-  "timestamp": "2026-11-05T19:00:05.751770-03:00",
+  "fecha_auditoria": "05/11/2026 19:30:06",
+  "timestamp": "2026-11-05T19:30:06.214033-03:00",
   "score_salud": 100.0,
   "total_pruebas": 10,
   "pruebas_exitosas": 10,
@@ -11,12 +11,12 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 19:00:02",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 19:30:02",
       "details": {
-        "now_uy": "2026-11-05 19:00:02.375547-03:00",
+        "now_uy": "2026-11-05 19:30:02.276917-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-05T19:00:02.375595-03:00"
+      "timestamp": "2026-11-05T19:30:02.276961-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 10,
         "es_hoy": false
       },
-      "timestamp": "2026-11-05T19:00:02.377097-03:00"
+      "timestamp": "2026-11-05T19:30:02.278569-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T19:00:02.381469-03:00"
+      "timestamp": "2026-11-05T19:30:02.283256-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T19:00:02.385268-03:00"
+      "timestamp": "2026-11-05T19:30:02.287456-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-05T19:00:02.390162-03:00"
+      "timestamp": "2026-11-05T19:30:02.292996-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,7 +68,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-05T19:00:02.390450-03:00"
+      "timestamp": "2026-11-05T19:30:02.293280-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -97,7 +97,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-05T19:00:05.713769-03:00"
+      "timestamp": "2026-11-05T19:30:06.180661-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v8.5",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T19:00:05.723854-03:00"
+      "timestamp": "2026-11-05T19:30:06.185260-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -117,7 +117,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T19:00:05.742943-03:00"
+      "timestamp": "2026-11-05T19:30:06.204545-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -127,7 +127,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T19:00:05.751506-03:00"
+      "timestamp": "2026-11-05T19:30:06.213773-03:00"
     }
   ],
   "reparaciones_aplicadas": []
