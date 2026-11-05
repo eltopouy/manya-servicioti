@@ -4,7 +4,7 @@
 **URL Pública:** [manya.servicioti.com.uy](https://manya.servicioti.com.uy/)  
 **Blogger CDN:** [www.servicioti.com.uy](https://www.servicioti.com.uy/)  
 **Autor:** Andrés Franchi Ugartemendía (ServicioTI / eltopouy)  
-**Versión:** 3.0 (Arquitectura Híbrida 24/7 de Alta Resiliencia & Auto-Curación Continua)  
+**Versión:** 3.1 (Pizarra Táctica Bidireccional de Alta Precisión & Suite de 10 Pruebas Certificadas)  
 **Fecha de Actualización:** 4 de Noviembre de 2026  
 
 ---
@@ -143,7 +143,9 @@ C:\Users\Andrés\.gemini\antigravity\scratch\manya_servicioti\
 │   ├── manya_rival_intelligence.py# Scouting táctico y cliente 1891 BD MCP
 │   ├── manya_partidos_daemon.py   # Orquestador y vigilante continuo de partidos y prensa
 │   ├── manya_self_healing_watchdog.py # Guardián de auto-reparación y auto-mejora
-│   ├── test_manya_ecosystem.py    # Suite integral de pruebas automatizadas (100% OK)
+│   ├── test_manya_ecosystem.py    # Suite integral de pruebas automatizadas (10/10 PASS - 100% ÓPTIMO)
+│   ├── test_editorial_coherence.py # Auditoría anti-contaminación entre rivales y coherencia de prensa
+│   ├── test_tactical_board.py     # Suite de certificación exhaustiva de la pizarra táctica interactiva
 │   ├── sincronizar_pagina_proximo_partido.py # Sincronizador de previa en Blogger
 │   ├── sincronizar_pagina_blogger_historico.py # Archivo histórico en Blogger
 │   └── registrar_tareas_programadas_resilientes.ps1 # Instalador de tareas en Windows
@@ -155,14 +157,38 @@ C:\Users\Andrés\.gemini\antigravity\scratch\manya_servicioti\
 
 ---
 
-## 6. Suite de Pruebas y Certificación de Calidad
+## 6. Suite de Pruebas y Certificación de Calidad (10/10 Aprobadas)
 
-Para cada despliegue, la suite [`test_manya_ecosystem.py`](file:///C:/Users/Andr%C3%A9s/.gemini/antigravity/scratch/manya_servicioti/automation/test_manya_ecosystem.py) evalúa 8 dimensiones críticas con resultado **100% ÓPTIMO**:
-1. Zona Horaria UY_TZ (`America/Montevideo` / UTC-3).
-2. Coherencia Temporal (`es_hoy`).
-3. Integridad de Puntos (Tabla Anual 66 pts).
-4. Verificación de Rival, DT y Escenario Activo.
-5. Integridad de Esquemas JSON (11 datasets validados).
-6. Salud de Locks y Anti-Colisión (`~/.manya_locks/`).
-7. Accesibilidad HTTP 200 de los 5 Endpoints Oficiales (Portal y Blogger).
-8. PWA Network-First, selector de tablas Clausura/Anual y versión de caché.
+Para cada despliegue, la suite [`test_manya_ecosystem.py`](file:///C:/Users/Andr%C3%A9s/.gemini/antigravity/scratch/manya_servicioti/automation/test_manya_ecosystem.py) evalúa 10 dimensiones críticas con resultado **100% ÓPTIMO**:
+1. **Zona Horaria UY_TZ:** Control de zona horaria oficial `America/Montevideo` (UTC-3).
+2. **Coherencia Temporal (`es_hoy`):** Validación cruzada de la fecha del próximo partido vs la fecha actual.
+3. **Integridad de Puntos (Tabla Anual 66 pts):** Sincronización inalterable en todos los datasets y componentes.
+4. **Verificación de Rival, DT y Escenario Activo:** Control de Defensor Sporting, Andrés Rodríguez, Franzini y Fecha 14.
+5. **Integridad de Esquemas JSON:** Validación estructural y no vacía de los 11 datasets en `data/`.
+6. **Salud de Locks y Anti-Colisión:** Prevención de colisiones concurrentes en `~/.manya_locks/`.
+7. **Accesibilidad HTTP 200 de Endpoints:** Verificación de portal principal, Blogger en vivo y página histórica.
+8. **PWA Network-First y Selector de Tablas:** Garantía de datos frescos por red y saneamiento de caché PWA v8.3.
+9. **Coherencia Editorial y Anti-Contaminación:** Auditoría con [`test_editorial_coherence.py`](file:///C:/Users/Andr%C3%A9s/.gemini/antigravity/scratch/manya_servicioti/automation/test_editorial_coherence.py) que prohíbe menciones cruzadas a rivales pasados (Wanderers, Saroldi, etc.) en la edición activa.
+10. **Pizarra Táctica Interactiva:** Auditoría con [`test_tactical_board.py`](file:///C:/Users/Andr%C3%A9s/.gemini/antigravity/scratch/manya_servicioti/automation/test_tactical_board.py) que valida el plantel de 21 jugadores, las 3 formaciones (`4-2-3-1`, `4-3-3`, `4-4-2`), la simulación de sustituciones e intercambios, el renderizado Canvas 1080x1350 y la responsividad móvil.
+
+---
+
+## 7. Módulo de Pizarra Táctica Interactiva ("Armá tu 11 Titular")
+
+El módulo de pizarra táctica (`#pizarra-tactica`) permite al hincha armar, personalizar, intercambiar posiciones y exportar en alta resolución la alineación ideal del Club Atlético Peñarol para cada partido:
+
+### 7.1. Características y Mejoras Implementadas
+1. **Sustituciones Bidireccionales sin Fricción:**
+   - Si el usuario toca un titular en la cancha y luego un suplente: el suplente ingresa al campo y el titular pasa al banco.
+   - Si el usuario toca un suplente primero y luego un titular: se efectúa la sustitución de inmediato sin sobreescribir al delantero por defecto.
+   - Si el usuario toca dos titulares en cancha: intercambian sus ubicaciones tácticas de forma inmediata (por ejemplo, cambiar de banda a los extremos).
+   - Banner de guía dinámico (`#tactical-guidance-banner`) que informa en tiempo real qué jugador está seleccionado y cuál es el siguiente paso.
+2. **Esquemas Tácticos Alineados al Plantel:**
+   - `4-2-3-1 (Aguirre)`: Esquema base con doble 5 (García de contención, Darias mixto), Leo Fernández de enganche libre, extremos abiertos (Cabrera y Báez) y Silvera de punta.
+   - `4-3-3 Ofensivo`: García como pivote único, Darias interior derecho, Leo Fernández interior creativo con llegada, extremos punzantes y centrodelantero.
+   - `4-4-2 Clásico`: Doble contención, carrileros por fuera, Leo Fernández como segunda punta / mediapunta libre y Silvera en el área.
+3. **Cancha Reglamentaria Detallada:**
+   - Líneas de corte de césped, círculo central, punto medio, áreas grandes y chicas, medialunas y arcos de córner en CSS y Canvas.
+4. **Exportación e Intercambio Social:**
+   - **Descarga PNG 1080x1350:** Canvas en formato estándar 4:5 para Instagram Stories / Feed y WhatsApp, con dorsales, roles, DT Diego Aguirre, banco de suplentes y estética Oro y Carbón.
+   - **Compartir Nativo (Web Share API / Portapapeles):** Genera texto enriquecido con la formación, 11 titulares ordenados por puesto, banco de relevos y enlace directo a la sección.
