@@ -920,27 +920,24 @@
           <h2 class="section-title">👕 Pizarra Táctica: <span>Armá tu 11 vs Defensor Sporting</span></h2>
           <p class="section-sub">Armá tu alineación ideal para jugar en el Estadio Luis Franzini en la Fecha 14 del Torneo Clausura (Domingo 15/11 20:00 hs)</p>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
           <button type="button" class="sim-btn active" data-formation="4-2-3-1">4-2-3-1 (Aguirre)</button>
           <button type="button" class="sim-btn" data-formation="4-3-3">4-3-3 Ofensivo</button>
           <button type="button" class="sim-btn" data-formation="4-4-2">4-4-2 Clásico</button>
+          <button type="button" id="reset-lineup-btn" class="sim-btn" style="padding:7px 12px;font-size:12.5px;color:var(--manya-gold);" title="Restablecer el 11 titular oficial de Diego Aguirre">↺ Restablecer 11</button>
           <button type="button" id="export-lineup-btn" class="btn-manya" style="padding:7px 14px;font-size:12.5px;">📥 Descargar mi 11 (PNG)</button>
           <button type="button" id="share-lineup-btn" class="btn-outline-gold" style="padding:7px 14px;font-size:12.5px;">📤 Compartir 11</button>
         </div>
       </div>
 
       <div class="dual-grid">
-        <div id="tactical-pitch" class="pitch-board" aria-label="Cancha táctica de Peñarol">
-          <div class="pitch-mid-line"></div>
-          <div class="pitch-center-circle"></div>
-        </div>
+        <div id="tactical-pitch" class="pitch-board" aria-label="Cancha táctica de Peñarol"></div>
 
         <div class="card-panel">
           <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🔄 Banco de Relevos &amp; Variantes (DT: Diego Aguirre)</h3>
-          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">
-            1° Toca un jugador en la cancha para seleccionarlo (borde dorado).<br />
-            2° Toca un jugador del banco aquí abajo para realizar el cambio táctico:
-          </p>
+          <div id="tactical-guidance-banner" class="tactical-hint-banner">
+            💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.
+          </div>
           <div id="tactical-bench" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;"></div>
 
           <div style="background:rgba(255,209,0,0.08);border:1px solid var(--manya-border);border-radius:10px;padding:14px;font-size:13px;">

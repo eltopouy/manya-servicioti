@@ -19,8 +19,11 @@
     escudosCatalog: null,
     formation: '4-2-3-1',
     selectedSlotIndex: null,
+    selectedBenchIndex: null,
     lineup: [],
     bench: [],
+    initialLineup: [],
+    initialBench: [],
     simPointsDelta: 0,
     standingsTab: 'clausura',
     triviaIndex: 0,
@@ -48,10 +51,10 @@
       { x: 38, y: 74, role: 'DFC' },
       { x: 18, y: 70, role: 'LI' },
       { x: 50, y: 56, role: 'MCD' },
-      { x: 70, y: 44, role: 'MC' },
-      { x: 30, y: 44, role: 'MC' },
-      { x: 78, y: 22, role: 'ED' },
-      { x: 22, y: 22, role: 'EI' },
+      { x: 68, y: 44, role: 'MC' },
+      { x: 80, y: 22, role: 'ED' },
+      { x: 32, y: 44, role: 'MCO' },
+      { x: 20, y: 22, role: 'EI' },
       { x: 50, y: 14, role: 'DC' }
     ],
     '4-4-2': [
@@ -60,12 +63,12 @@
       { x: 62, y: 74, role: 'DFC' },
       { x: 38, y: 74, role: 'DFC' },
       { x: 18, y: 70, role: 'LI' },
-      { x: 82, y: 46, role: 'MD' },
-      { x: 60, y: 50, role: 'MC' },
-      { x: 40, y: 50, role: 'MC' },
-      { x: 18, y: 46, role: 'MI' },
-      { x: 62, y: 18, role: 'DC' },
-      { x: 38, y: 18, role: 'DC' }
+      { x: 38, y: 52, role: 'MCD' },
+      { x: 62, y: 52, role: 'MC' },
+      { x: 82, y: 42, role: 'MD' },
+      { x: 38, y: 20, role: 'SD' },
+      { x: 18, y: 42, role: 'MI' },
+      { x: 62, y: 16, role: 'DC' }
     ]
   };
 
@@ -813,55 +816,162 @@
     }
   }
 
+  function showTacticalToast(message, isSuccess = true) {
+    const banner = document.getElementById('tactical-guidance-banner');
+    if (banner) {
+      banner.classList.add('active-action');
+      banner.innerHTML = `<span style="font-size:16px;">${isSuccess ? '✅' : 'ℹ️'}</span> <strong>${message}</strong>`;
+      setTimeout(() => {
+        if (state.selectedSlotIndex === null && state.selectedBenchIndex === null && banner) {
+          banner.classList.remove('active-action');
+          banner.innerHTML = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
+        }
+      }, 3500);
+    }
+  }
+
+  function resetTacticalLineup() {
+    if (!state.initialLineup || !state.initialLineup.length) return;
+    state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
+    state.bench = JSON.parse(JSON.stringify(state.initialBench));
+    state.selectedSlotIndex = null;
+    state.selectedBenchIndex = null;
+    renderTacticalBoard();
+    showTacticalToast('↺ 11 inicial oficial de Diego Aguirre restablecido con éxito.');
+  }
+
   function renderTacticalBoard() {
     const pitch = document.getElementById('tactical-pitch');
     const benchBox = document.getElementById('tactical-bench');
+    const banner = document.getElementById('tactical-guidance-banner');
     if (!pitch || !state.lineup.length) return;
 
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
+
+    // Cancha reglamentaria completa con marcas oficiales
+    const pitchMarkings = `
+      <div class="pitch-corner-tl"></div>
+      <div class="pitch-corner-tr"></div>
+      <div class="pitch-corner-bl"></div>
+      <div class="pitch-corner-br"></div>
+      <div class="pitch-area-top"></div>
+      <div class="pitch-goal-top"></div>
+      <div class="pitch-arc-top"></div>
+      <div class="pitch-mid-line"></div>
+      <div class="pitch-center-circle"></div>
+      <div class="pitch-center-spot"></div>
+      <div class="pitch-area-bottom"></div>
+      <div class="pitch-goal-bottom"></div>
+      <div class="pitch-arc-bottom"></div>
+    `;
+
     const playersHtml = state.lineup.slice(0, 11).map((p, idx) => {
-      const c = coords[idx] || { x: 50, y: 50 };
+      const c = coords[idx] || { x: 50, y: 50, role: p.posicion };
       const isSel = state.selectedSlotIndex === idx;
+      const lastName = p.nombre.split(' ').slice(-1)[0];
+      const roleBadge = c.role || p.posicion;
       return `
-        <div class="pitch-player" data-slot="${idx}" style="left:${c.x}%;top:${c.y}%;">
-          <div class="player-token" style="${isSel ? 'border-color:#ffd100;box-shadow:0 0 18px #ffd100;' : ''}">${p.numero}</div>
-          <div class="player-label">${p.nombre.split(' ').slice(-1)[0]} (${c.role})</div>
+        <div class="pitch-player ${isSel ? 'selected' : ''}" data-slot="${idx}" style="left:${c.x}%;top:${c.y}%;" title="#${p.numero} ${p.nombre} (${roleBadge})">
+          <div class="player-token">${p.numero}</div>
+          <div class="player-label">${lastName} (${roleBadge})</div>
         </div>
       `;
     }).join('');
 
-    pitch.innerHTML = `
-      <div class="pitch-mid-line"></div>
-      <div class="pitch-center-circle"></div>
-      ${playersHtml}
-    `;
+    pitch.innerHTML = pitchMarkings + playersHtml;
 
+    // Escuchador de clics en futbolistas titulares
     pitch.querySelectorAll('.pitch-player').forEach(el => {
       el.addEventListener('click', () => {
         const idx = parseInt(el.getAttribute('data-slot'), 10);
-        state.selectedSlotIndex = (state.selectedSlotIndex === idx) ? null : idx;
-        renderTacticalBoard();
+
+        if (state.selectedBenchIndex !== null) {
+          // Sustitución directa: Suplente seleccionado entra por este titular
+          const benchPlayer = state.bench[state.selectedBenchIndex];
+          const starterPlayer = state.lineup[idx];
+          state.lineup[idx] = benchPlayer;
+          state.bench[state.selectedBenchIndex] = starterPlayer;
+          state.selectedSlotIndex = null;
+          state.selectedBenchIndex = null;
+          renderTacticalBoard();
+          showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
+        } else if (state.selectedSlotIndex === idx) {
+          // Deseleccionar al mismo titular
+          state.selectedSlotIndex = null;
+          renderTacticalBoard();
+        } else if (state.selectedSlotIndex !== null) {
+          // Intercambio táctico entre dos titulares en la cancha
+          const p1 = state.lineup[state.selectedSlotIndex];
+          const p2 = state.lineup[idx];
+          state.lineup[state.selectedSlotIndex] = p2;
+          state.lineup[idx] = p1;
+          state.selectedSlotIndex = null;
+          renderTacticalBoard();
+          showTacticalToast(`↔ Intercambio en cancha: #${p1.numero} ${p1.nombre.split(' ').slice(-1)[0]} por #${p2.numero} ${p2.nombre.split(' ').slice(-1)[0]}`);
+        } else {
+          // Seleccionar titular para sustituir o mover
+          state.selectedSlotIndex = idx;
+          state.selectedBenchIndex = null;
+          renderTacticalBoard();
+        }
       });
     });
 
+    // Renderizar banco de suplentes
     if (benchBox) {
-      benchBox.innerHTML = state.bench.map((b, bIdx) => `
-        <button type="button" class="sim-btn" style="padding:7px 12px;" data-bidx="${bIdx}">
-          #${b.numero} ${b.nombre} (${b.posicion})
-        </button>
-      `).join('');
+      benchBox.innerHTML = state.bench.map((b, bIdx) => {
+        const isBenchSel = state.selectedBenchIndex === bIdx;
+        return `
+          <button type="button" class="bench-btn ${isBenchSel ? 'selected' : ''}" data-bidx="${bIdx}" title="Sustituir con #${b.numero} ${b.nombre}">
+            <strong style="color:var(--manya-gold);">#${b.numero}</strong> ${b.nombre} <span style="opacity:0.75;font-size:11px;">(${b.posicion})</span>
+          </button>
+        `;
+      }).join('');
 
       benchBox.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
           const bIdx = parseInt(btn.getAttribute('data-bidx'), 10);
-          const targetSlot = state.selectedSlotIndex !== null ? state.selectedSlotIndex : 10;
-          const temp = state.lineup[targetSlot];
-          state.lineup[targetSlot] = state.bench[bIdx];
-          state.bench[bIdx] = temp;
-          state.selectedSlotIndex = null;
-          renderTacticalBoard();
+
+          if (state.selectedSlotIndex !== null) {
+            // Sustitución directa: Titular seleccionado sale y entra este suplente
+            const benchPlayer = state.bench[bIdx];
+            const starterPlayer = state.lineup[state.selectedSlotIndex];
+            state.lineup[state.selectedSlotIndex] = benchPlayer;
+            state.bench[bIdx] = starterPlayer;
+            state.selectedSlotIndex = null;
+            state.selectedBenchIndex = null;
+            renderTacticalBoard();
+            showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
+          } else if (state.selectedBenchIndex === bIdx) {
+            // Deseleccionar suplente
+            state.selectedBenchIndex = null;
+            renderTacticalBoard();
+          } else {
+            // Seleccionar suplente y esperar toque en titular
+            state.selectedBenchIndex = bIdx;
+            state.selectedSlotIndex = null;
+            renderTacticalBoard();
+          }
         });
       });
+    }
+
+    // Actualizar banner de guía dinámica
+    if (banner) {
+      if (state.selectedSlotIndex !== null) {
+        const selStarter = state.lineup[state.selectedSlotIndex];
+        const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
+        const role = coords[state.selectedSlotIndex]?.role || selStarter.posicion;
+        banner.classList.add('active-action');
+        banner.innerHTML = `🟡 <strong>Titular seleccionado: #${selStarter.numero} ${selStarter.nombre} (${role})</strong>. Tocá un suplente abajo para cambiarlo, u otro titular en la cancha para rotar posiciones.`;
+      } else if (state.selectedBenchIndex !== null) {
+        const selBench = state.bench[state.selectedBenchIndex];
+        banner.classList.add('active-action');
+        banner.innerHTML = `🟢 <strong>Suplente seleccionado: #${selBench.numero} ${selBench.nombre} (${selBench.posicion})</strong>. Tocá al jugador en la cancha que querés sustituir.`;
+      } else {
+        banner.classList.remove('active-action');
+        banner.innerHTML = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
+      }
     }
   }
 
@@ -871,23 +981,27 @@
     canvas.height = 1350;
     const ctx = canvas.getContext('2d');
 
-    // Fondo Oro y Carbón
+    // Fondo Oro y Carbón Elegante
     ctx.fillStyle = '#09090b';
     ctx.fillRect(0, 0, 1080, 1350);
     ctx.fillStyle = '#ffd100';
-    ctx.fillRect(0, 0, 1080, 18);
+    ctx.fillRect(0, 0, 1080, 16);
 
     ctx.fillStyle = '#ffd100';
-    ctx.font = '900 44px Inter, sans-serif';
+    ctx.font = '900 42px Inter, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('★ MI 11 TITULAR DEL GLORIOSO PEÑAROL ★', 540, 85);
+    ctx.fillText('★ CLUB ATLÉTICO PEÑAROL • 11 TITULAR ★', 540, 80);
 
-    ctx.fillStyle = '#e4e4e7';
-    ctx.font = '700 24px Inter, sans-serif';
-    ctx.fillText(`Esquema Táctico: ${state.formation} • manya.servicioti.com.uy`, 540, 130);
+    ctx.fillStyle = '#f4f4f5';
+    ctx.font = '700 22px Inter, sans-serif';
+    ctx.fillText(`Torneo Clausura Fecha 14 vs Defensor Sporting • Franzini`, 540, 118);
+
+    ctx.fillStyle = '#ffd100';
+    ctx.font = '800 20px Inter, sans-serif';
+    ctx.fillText(`Esquema Táctico: ${state.formation} • DT: Diego Aguirre`, 540, 150);
 
     // Cancha reglamentaria completa
-    const px0 = 90, py0 = 170, pw = 900, ph = 1020;
+    const px0 = 80, py0 = 175, pw = 920, ph = 980;
     const midY = py0 + ph / 2;
     const midX = px0 + pw / 2;
 
@@ -895,15 +1009,15 @@
     ctx.fillStyle = '#14532d';
     ctx.fillRect(px0, py0, pw, ph);
 
-    // Franjas de corte de césped sutiles
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+    // Franjas de corte de césped
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.035)';
     const stripH = ph / 8;
     for (let i = 0; i < 8; i += 2) {
       ctx.fillRect(px0, py0 + i * stripH, pw, stripH);
     }
 
     // Líneas perimetrales y de medio campo
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
     ctx.lineWidth = 4;
     ctx.strokeRect(px0, py0, pw, ph);
 
@@ -966,14 +1080,14 @@
     // Dibujar futbolistas con dorsales y etiquetas legibles
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
     state.lineup.slice(0, 11).forEach((p, idx) => {
-      const c = coords[idx] || { x: 50, y: 50 };
+      const c = coords[idx] || { x: 50, y: 50, role: p.posicion };
       const px = px0 + (c.x / 100) * pw;
       const py = py0 + (c.y / 100) * ph;
 
       // Sombra
       ctx.beginPath();
       ctx.arc(px, py + 4, 34, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
       ctx.fill();
 
       // Ficha Oro y Carbón
@@ -992,13 +1106,14 @@
 
       // Nombre y Rol
       const lastName = p.nombre.split(' ').slice(-1)[0];
-      const nameTxt = `${lastName} (${c.role})`;
-      ctx.font = '800 20px Inter, sans-serif';
+      const roleStr = c.role || p.posicion;
+      const nameTxt = `${lastName} (${roleStr})`;
+      ctx.font = '800 19px Inter, sans-serif';
       const textMetrics = ctx.measureText(nameTxt);
       const textW = textMetrics.width + 16;
-      ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
+      ctx.fillStyle = 'rgba(9, 9, 11, 0.92)';
       ctx.fillRect(px - textW / 2, py + 42, textW, 26);
-      ctx.strokeStyle = 'rgba(255, 209, 0, 0.6)';
+      ctx.strokeStyle = 'rgba(255, 209, 0, 0.7)';
       ctx.lineWidth = 1.5;
       ctx.strokeRect(px - textW / 2, py + 42, textW, 26);
 
@@ -1006,14 +1121,48 @@
       ctx.fillText(nameTxt, px, py + 61);
     });
 
-    ctx.fillStyle = '#ffd100';
-    ctx.font = '800 24px Inter, sans-serif';
-    ctx.fillText('Creado en https://manya.servicioti.com.uy • ServicioTI Uruguay', 540, 1280);
+    // Franja inferior con banco de relevos
+    ctx.fillStyle = 'rgba(17, 17, 21, 0.95)';
+    ctx.fillRect(80, 1175, 920, 80);
+    ctx.strokeStyle = 'rgba(255, 209, 0, 0.35)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(80, 1175, 920, 80);
 
-    const link = document.createElement('a');
-    link.download = `mi-11-penarol-${state.formation}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    ctx.fillStyle = '#ffd100';
+    ctx.font = '800 17px Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('BANCO DE RELEVOS:', 100, 1205);
+
+    const benchNames = state.bench.slice(0, 8).map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]}`).join('  •  ');
+    ctx.fillStyle = '#e4e4e7';
+    ctx.font = '600 16px Inter, sans-serif';
+    ctx.fillText(benchNames, 100, 1235);
+
+    ctx.fillStyle = '#ffd100';
+    ctx.font = '800 20px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Creado en https://manya.servicioti.com.uy • Pasión Aurinegra ServicioTI', 540, 1315);
+
+    if (canvas.toBlob) {
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `mi-11-penarol-${state.formation}.png`;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        showTacticalToast('📥 ¡Tu 11 titular se ha descargado con éxito!');
+      }, 'image/png');
+    } else {
+      const link = document.createElement('a');
+      link.download = `mi-11-penarol-${state.formation}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showTacticalToast('📥 ¡Tu 11 titular se ha descargado con éxito!');
+    }
   }
 
   let triviaAudioEnabled = true;
@@ -2117,8 +2266,10 @@
 
     if (squad && squad.jugadores) {
       state.squad = squad;
-      state.lineup = squad.jugadores.filter(p => p.titular).slice(0, 11);
-      state.bench = squad.jugadores.filter(p => !p.titular);
+      state.initialLineup = JSON.parse(JSON.stringify(squad.jugadores.filter(p => p.titular).slice(0, 11)));
+      state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
+      state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
+      state.bench = JSON.parse(JSON.stringify(state.initialBench));
       renderTacticalBoard();
     }
 
@@ -2127,9 +2278,14 @@
         document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         state.formation = btn.getAttribute('data-formation');
+        state.selectedSlotIndex = null;
+        state.selectedBenchIndex = null;
         renderTacticalBoard();
       });
     });
+
+    const resetBtn = document.getElementById('reset-lineup-btn');
+    if (resetBtn) resetBtn.addEventListener('click', resetTacticalLineup);
 
     const expBtn = document.getElementById('export-lineup-btn');
     if (expBtn) expBtn.addEventListener('click', exportLineupPNG);
@@ -2137,9 +2293,21 @@
     const shareLineupBtn = document.getElementById('share-lineup-btn');
     if (shareLineupBtn) {
       shareLineupBtn.addEventListener('click', async () => {
-        const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation}) armado en manya.servicioti.com.uy:\n` +
-          state.lineup.slice(0, 11).map((p, i) => `#${p.numero} ${p.nombre}`).join('\n') +
-          '\n\n¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !';
+        const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
+        const titularesStr = state.lineup.slice(0, 11).map((p, i) => {
+          const role = coords[i]?.role || p.posicion;
+          return `${i + 1}. #${p.numero} ${p.nombre} (${role})`;
+        }).join('\n');
+
+        const relevosStr = state.bench.map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]} (${b.posicion})`).join(', ');
+
+        const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\n` +
+          `DT: Diego Aguirre • vs Defensor Sporting (Estadio Luis Franzini)\n\n` +
+          `11 TITULAR:\n` +
+          `${titularesStr}\n\n` +
+          `Banco de relevos:\n${relevosStr}\n\n` +
+          `¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !`;
+
         if (navigator.share) {
           try {
             await navigator.share({
@@ -2147,17 +2315,32 @@
               text: text,
               url: 'https://manya.servicioti.com.uy/#pizarra-tactica'
             });
+            showTacticalToast('📤 ¡Alineación compartida con éxito!');
+            return;
           } catch (e) {
-            if (e.name !== 'AbortError') {
-              navigator.clipboard?.writeText(text);
-              alert('¡11 Titular copiado al portapapeles!');
-            }
+            if (e.name === 'AbortError') return;
           }
-        } else {
-          navigator.clipboard?.writeText(text);
+        }
+
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
           const orig = shareLineupBtn.textContent;
           shareLineupBtn.textContent = '✅ ¡Copiado!';
-          setTimeout(() => { shareLineupBtn.textContent = orig; }, 2000);
+          showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
+          setTimeout(() => { shareLineupBtn.textContent = orig; }, 2500);
+        } catch (err) {
+          showTacticalToast('⚠️ No se pudo copiar la alineación', false);
         }
       });
     }
