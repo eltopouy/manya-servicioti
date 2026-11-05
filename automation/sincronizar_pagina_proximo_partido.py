@@ -3,7 +3,7 @@ MOTOR DE SINCRONIZACIÓN AUTOMÁTICA DE PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA
 ======================================================================================
 1. Publica y actualiza la Página Estática Permanente en Blogger (/p/penarol-proximo-partido-radiografia.html).
 2. Actualiza el post existente (/2026/10/penarol-en-vivo-la-previa-radiografia.html) con la previa 100% futbolera
-   del nuevo rival (Montevideo Wanderers), enlazando a la Página Permanente.
+   del nuevo rival activo (Defensor Sporting / cualquier rival según live_status.json).
 """
 
 import json
@@ -49,21 +49,48 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     duelos = rival_data.get("duelos_tacticos_1x1") or []
     hist = rival_data.get("historial_certificacion_1891") or {}
     
-    rival_nombre = "Montevideo Wanderers"
-    rival_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_montevideo_wanderers.webp"
+    # Detección dinámica del rival
+    rival_nombre = rival_data.get("rival_nombre")
+    if not rival_nombre:
+        if prox.get("local", {}).get("es_penarol"):
+            rival_nombre = prox.get("visitante", {}).get("nombre", "Defensor Sporting")
+        else:
+            rival_nombre = prox.get("local", {}).get("nombre", "Defensor Sporting")
+
+    escudo_rel = prox.get("local", {}).get("escudo") if not prox.get("local", {}).get("es_penarol") else prox.get("visitante", {}).get("escudo")
+    if escudo_rel:
+        rival_escudo = f"https://manya.servicioti.com.uy/{escudo_rel.lstrip('/')}"
+    else:
+        rival_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_defensor_sporting.webp"
     penarol_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_penarol.webp"
     
-    fecha_legible = prox.get("fecha_legible") or "Sábado 31/10/2026 16:30 hs"
-    estadio = prox.get("estadio") or "Parque Federico Omar Saroldi (Prado)"
-    torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 13)"
+    fecha_legible = prox.get("fecha_legible") or "Domingo 15/11/2026 20:00 hs"
+    estadio = prox.get("estadio") or "Estadio Luis Franzini (Montevideo)"
+    torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 14)"
     tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
+    dt_entrenador = scout.get("entrenador") or "Andrés Rodríguez"
+    esquema_base = scout.get("esquema_base") or "4-3-3 de intensidad y transiciones rápidas"
+    sede_club = inst.get("sede") or "Parque Rodó, Montevideo"
     
     # Encabezado adaptativo según fase
     is_post = live_data.get("fase_partido") == "POST_PARTIDO" or live_data.get("estado_ciclo_vida") == "POST_48H"
     
-    badge_fase = "🏁 RESULTADO FINAL • POST-PARTIDO" if is_post else "★ PÁGINA CENTRAL PERMANENTE • PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA"
-    titulo_header = "Peñarol 1 - 1 Montevideo Wanderers" if is_post else "Montevideo Wanderers vs. Peñarol"
-    sub_header = f"🏁 FINALIZADO (90+5') • Goles: L. M. Angulo 90' (CAP) / F. Labandeira 72' (WAN) • {estadio}" if is_post else f"{torneo} • {fecha_legible}<br>🏟️ {estadio} • 📺 Transmisión en vivo por {tv}"
+    ult = live_data.get("ultimo_partido") or {}
+    if is_post:
+        badge_fase = "🏁 RESULTADO FINAL • POST-PARTIDO"
+        loc_nom = ult.get("local", {}).get("nombre", "Peñarol")
+        loc_goles = ult.get("local", {}).get("goles", "1")
+        vis_nom = ult.get("visitante", {}).get("nombre", "Montevideo Wanderers")
+        vis_goles = ult.get("visitante", {}).get("goles", "1")
+        titulo_header = f"{loc_nom} {loc_goles} - {vis_goles} {vis_nom}"
+        sub_header = f"🏁 FINALIZADO • Goles: L. M. Angulo 90' (CAP) / F. Labandeira 72' (WAN) • {estadio}"
+    else:
+        badge_fase = "★ PÁGINA CENTRAL PERMANENTE • PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA"
+        loc_nom = prox.get("local", {}).get("nombre", "Defensor Sporting")
+        vis_nom = prox.get("visitante", {}).get("nombre", "Peñarol")
+        titulo_header = f"{loc_nom} vs. {vis_nom}"
+        sub_header = f"{torneo} • {fecha_legible}<br>🏟️ {estadio} • 📺 Transmisión en vivo por {tv}"
+
     duelos_html = ""
     for d in duelos:
         duelos_html += f"""
@@ -71,7 +98,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
           <div style="font-size:11.5px;color:#ffd100;font-weight:900;text-transform:uppercase;margin-bottom:4px;">⚔️ {d.get('titulo', '')} • {d.get('zona_campo', '')}</div>
           <div style="display:flex;justify-content:space-between;gap:12px;margin:8px 0;flex-wrap:wrap;font-size:13.5px;">
             <div style="flex:1;min-width:200px;"><strong style="color:#ffd100;">🟡⚫ Peñarol:</strong> {d.get('penarol', {}).get('jugador', '')} ({d.get('penarol', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('penarol', {}).get('atributos_clave', '')}</span></div>
-            <div style="flex:1;min-width:200px;"><strong style="color:#38bdf8;">⚪⚫ Rival:</strong> {d.get('rival', {}).get('jugador', '')} ({d.get('rival', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('rival', {}).get('atributos_clave', '')}</span></div>
+            <div style="flex:1;min-width:200px;"><strong style="color:#a855f7;">🟣⚪ Rival:</strong> {d.get('rival', {}).get('jugador', '')} ({d.get('rival', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('rival', {}).get('atributos_clave', '')}</span></div>
           </div>
           <div style="font-size:12.5px;color:#d4d4d8;background:rgba(0,0,0,0.3);padding:8px;border-radius:6px;margin-top:6px;"><strong>Clave del Duelo:</strong> {d.get('clave_del_duelo', '')}</div>
         </div>
@@ -114,10 +141,10 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
         ⚡ Ir a manya.servicioti.com.uy (Match Center en Vivo) ↗
       </a>
       <a href="https://manya.servicioti.com.uy/#pizarra-tactica" target="_blank" rel="noopener noreferrer" style="border:1px solid #ffd100;color:#ffd100;font-weight:800;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;">
-        👕 Pizarra Táctica: Armá tu 11 vs Wanderers
+        👕 Pizarra Táctica: Armá tu 11 vs {rival_nombre}
       </a>
       <a href="https://horarios.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="border:1px solid rgba(255,255,255,0.3);color:#e4e4e7;font-weight:700;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;">
-        🚌 Ómnibus al Parque Saroldi (Prado) en Vivo
+        🚌 Ómnibus al Estadio Franzini (Parque Rodó) en Vivo
       </a>
     </div>
   </div>
@@ -136,31 +163,31 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     <div style="display:flex;align-items:center;justify-content:space-between;background:#09090b;color:#fff;padding:14px 20px;border-radius:10px;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
       <div>
         <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 66 unidades</strong>
-        <div style="font-size:12px;color:#a1a1aa;">Ventaja de 2 puntos sobre el escolta con 4 fechas restantes • Saldo de goles: +34</div>
+        <div style="font-size:12px;color:#a1a1aa;">Vanguardia de la acumulada oficial AUF (+24 DG) • 35 partidos jugados</div>
       </div>
       <a href="https://manya.servicioti.com.uy/#tabla-simulador" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">
         📊 Simular Tabla Anual en Vivo ↗
       </a>
     </div>
     <p style="font-size:14px;color:#475569;margin:0;">
-      El equipo de Diego Aguirre salta al campo del Parque Federico Omar Saroldi oficiando como local a puertas cerradas para su público por sanción al CDS, con el objetivo supremo de sumar tres puntos vitales para mantener la punta de la Tabla Anual.
+      El equipo de Diego Aguirre llega a la penúltima fecha del Torneo Clausura visitando el Estadio Luis Franzini en el Parque Rodó para medirse ante Defensor Sporting. Peñarol busca afianzar su liderazgo absoluto en la Tabla Anual con 66 puntos.
     </p>
   </div>
 
-  <!-- RADIOGRAFÍA TÁCTICA DEL RIVAL: MONTEVIDEO WANDERERS -->
+  <!-- RADIOGRAFÍA TÁCTICA DEL RIVAL -->
   <div style="background:#09090b;color:#ffffff;border:1px solid rgba(255,209,0,0.35);border-radius:14px;padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
     <div style="border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:18px;">
       <span style="background:#ffd100;color:#09090b;font-size:11px;font-weight:900;padding:2px 8px;border-radius:4px;text-transform:uppercase;">SCOUTING TÁCTICO PROFESIONAL</span>
       <h2 style="font-size:22px;color:#ffffff;margin:8px 0 4px;font-weight:900;">
-        🔍 Radiografía Táctica: {rival_nombre} (DT Mathías Corujo)
+        🔍 Radiografía Táctica: {rival_nombre} (DT {dt_entrenador})
       </h2>
       <div style="font-size:13px;color:#a1a1aa;">
-        DT: <strong>{scout.get('entrenador', 'Mathías Corujo')}</strong> • Esquema: <strong>{scout.get('esquema_base', '4-2-3-1 de posesión y circulación')}</strong> • Sede: {inst.get('sede', 'Prado')}
+        DT: <strong>{dt_entrenador}</strong> • Esquema: <strong>{esquema_base}</strong> • Sede: {sede_club}
       </div>
     </div>
 
     <div style="font-size:14px;color:#d4d4d8;line-height:1.65;margin-bottom:20px;">
-      {scout.get("propuesta_juego", "Montevideo Wanderers, conducido tácticamente por Mathías 'Chiche' Corujo, presenta un equipo ordenado y dinámico, respaldado por la experiencia de Fabricio Formiliano en el fondo, Gonzalo Freitas en el medio y la velocidad de Jonathan Urretaviscaya en ataque junto a Mateo Levato.")}
+      {scout.get("propuesta_juego", "Defensor Sporting presenta un equipo agresivo en la presión media y rápida transición por bandas, respaldado por la experiencia de Elizari en la distribución y el poderío ofensivo de Spinelli y Duarte.")}
     </div>
 
     <!-- FORTALEZAS Y VULNERABILIDADES -->
@@ -168,53 +195,53 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
       <div style="background:#141419;border:1px solid rgba(255,255,255,0.06);border-top:3px solid #10b981;border-radius:8px;padding:14px;">
         <strong style="color:#10b981;font-size:14px;display:block;margin-bottom:8px;">✓ Puntos Fuertes a Neutralizar</strong>
         <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">
-          {"".join(f'<li style="margin-bottom:4px;">{pt}</li>' for pt in scout.get('puntos_fuertes', ['Circulación media fluida', 'Peligro en pelota quieta de Viudez']))}
+          {"".join(f'<li style="margin-bottom:4px;">{pt}</li>' for pt in scout.get('puntos_fuertes', ['Juego aéreo ofensivo con Spinelli', 'Dinámica de juveniles en mediocampo', 'Intensidad en el Franzini']))}
         </ul>
       </div>
 
       <div style="background:#141419;border:1px solid rgba(255,255,255,0.06);border-top:3px solid #ef4444;border-radius:8px;padding:14px;">
-        <strong style="color:#ef4444;font-size:14px;display:block;margin-bottom:8px;">⚠️ Dónde Dañar a Wanderers</strong>
+        <strong style="color:#ef4444;font-size:14px;display:block;margin-bottom:8px;">⚠️ Dónde Dañar a Defensor</strong>
         <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">
-          {"".join(f'<li style="margin-bottom:4px;">{vul}</li>' for vul in scout.get('vulnerabilidades_a_explotar', ['Presión alta de Peñarol sobre la salida bohemia', 'Espaldas de los laterales en transición rápida']))}
+          {"".join(f'<li style="margin-bottom:4px;">{vul}</li>' for vul in scout.get('vulnerabilidades_a_explotar', ['Espalda de los laterales en repliegue', 'Desacople entre volantes centrales y la zaga', 'Pegada exterior de Leo Fernández']))}
         </ul>
       </div>
     </div>
 
     <!-- FIGURAS A SEGUIR -->
-    <h3 style="font-size:16px;color:#ffd100;margin:0 0 12px;font-weight:900;">🎯 Figuras a Seguir de Montevideo Wanderers</h3>
+    <h3 style="font-size:16px;color:#ffd100;margin:0 0 12px;font-weight:900;">🎯 Figuras a Seguir de {rival_nombre}</h3>
     {figuras_html}
 
     <!-- DUELOS TÁCTICOS 1X1 -->
-    <h3 style="font-size:16px;color:#ffd100;margin:20px 0 12px;font-weight:900;">⚔️ Duelos Tácticos 1x1 Clave en el Prado</h3>
+    <h3 style="font-size:16px;color:#ffd100;margin:20px 0 12px;font-weight:900;">⚔️ Duelos Tácticos 1x1 Clave en el Franzini</h3>
     {duelos_html}
   </div>
 
   <!-- CERTIFICACIÓN HISTÓRICA 1891 BD -->
   <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid #ffd100;padding-bottom:8px;flex-wrap:wrap;gap:8px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid #ffd100;padding-bottom:8px;flex-wrap:gap:8px;">
       <h3 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">📜 Historial Oficial Verificado (1891 BD)</h3>
-      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 8px;border-radius:4px;font-weight:800;">+108 Victorias Mirasoles</span>
+      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 8px;border-radius:4px;font-weight:800;">{hist.get('ventaja_victorias', '+141 Victorias Mirasoles')}</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;text-align:center;margin-bottom:14px;">
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('partidos_jugados', '204')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('partidos_jugados', '337')}</div>
         <div style="font-size:11.5px;color:#64748b;">Partidos Disputados</div>
       </div>
       <div style="background:#fefce8;padding:12px;border-radius:8px;border:1px solid #fde047;">
-        <div style="font-size:24px;font-weight:900;color:#ca8a04;">{hist.get('ganados_penarol', '132')}</div>
+        <div style="font-size:24px;font-weight:900;color:#ca8a04;">{hist.get('ganados_penarol', '199')}</div>
         <div style="font-size:11.5px;color:#854d0e;">Triunfos de Peñarol</div>
       </div>
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('empatados', '48')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('empatados', '80')}</div>
         <div style="font-size:11.5px;color:#64748b;">Empates</div>
       </div>
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('efectividad_pct', '73.2%')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('efectividad_pct', '67.0%')}</div>
         <div style="font-size:11.5px;color:#64748b;">Efectividad Aurinegra</div>
       </div>
     </div>
     <div style="font-size:13.5px;color:#475569;text-align:center;">
-      Marcada supremacía histórica para el Decano: <strong>{hist.get('ventaja_victorias', '+108 partidos a favor del Decano')}</strong> con {hist.get('diferencia_goles', '+224')} goles de diferencia.
+      Marcada supremacía histórica para el Decano: <strong>{hist.get('ventaja_victorias', '+141 partidos a favor del Decano')}</strong> con {hist.get('diferencia_goles', '+330')} goles de diferencia oficial.
     </div>
   </div>
 
@@ -291,17 +318,25 @@ def sincronizar_proximo_partido_blogger():
     # -------------------------------------------------------------
     # 2. Actualizar el Post Existente (penarol-en-vivo-la-previa-radiografia.html)
     # -------------------------------------------------------------
+    prox = live.get("proximo_partido") or {}
+    scout = rival.get("scouting_tactico") or {}
+    rival_nom = rival.get("rival_nombre", "Defensor Sporting")
+    dt_nom = scout.get("entrenador", "Andrés Rodríguez")
+    estadio_nom = prox.get("estadio", "Estadio Luis Franzini")
+    fecha_leg = prox.get("fecha_legible", "Domingo 15/11 20:00 hs")
+    torneo_nom = prox.get("torneo", "Torneo Clausura 2026 (Fecha 14)")
+
     post_banner_redirect = f"""
     <div style="background:#09090b;border:2px solid #ffd100;border-radius:12px;padding:18px 22px;margin-bottom:24px;color:#ffffff;box-shadow:0 8px 24px rgba(255,209,0,0.25);">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-        <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 13 CLAUSURA</span>
-        <span style="font-size:12px;color:#ffd100;">Sábado 31/10 16:30 hs • Parque Saroldi</span>
+        <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 14 CLAUSURA</span>
+        <span style="font-size:12px;color:#ffd100;">{fecha_leg} • {estadio_nom}</span>
       </div>
       <h3 style="font-size:20px;color:#ffffff;margin:0 0 8px;font-weight:900;">
-        Peñarol vs Montevideo Wanderers (DT Mathías Corujo) en el Parque Saroldi
+        Defensor Sporting (DT {dt_nom}) vs. Peñarol en el Franzini
       </h3>
       <p style="font-size:14px;color:#d4d4d8;line-height:1.6;margin:0 0 14px;">
-        El Carbonero lidera la Tabla Anual con 65 unidades y recibe al conjunto bohemio en el Parque Saroldi (a puertas cerradas para Peñarol por sanción AUF, con entradas para Wanderers vía Tickantel). Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
+        El Carbonero lidera en solitario la Tabla Anual con 66 unidades y visita al conjunto violeta en el Parque Rodó (Tribuna Ghierra para la parcialidad mirasol vía RedTickets). Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
       </p>
       <a href="{page_url}" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;">
         👉 Ver Radiografía Táctica Completa en ServicioTI ↗
@@ -310,7 +345,7 @@ def sincronizar_proximo_partido_blogger():
     """
     
     post_updated_html = post_banner_redirect + html_content
-    post_updated_title = "[Peñarol] Radiografía Táctica & Previa Oficial: Peñarol vs Montevideo Wanderers • Torneo Clausura (Fecha 13)"
+    post_updated_title = f"[Peñarol] Radiografía Táctica & Previa Oficial: Defensor Sporting vs Peñarol • {torneo_nom}"
     
     try:
         logger.info(f"[Blogger Post Update] Actualizando post existente ID: {EXISTING_POST_ID}...")
@@ -320,10 +355,10 @@ def sincronizar_proximo_partido_blogger():
             body={
                 "title": post_updated_title,
                 "content": post_updated_html,
-                "labels": ["Peñarol", "Previa", "Radiografía Táctica", "Montevideo Wanderers", "Torneo Clausura", "ServicioTI"]
+                "labels": ["Peñarol", "Previa", "Radiografía Táctica", "Defensor Sporting", "Torneo Clausura", "ServicioTI"]
             }
         ).execute()
-        logger.info(f"[Blogger Post Update] ✓ Post existente {EXISTING_POST_ID} actualizado exitosamente con el próximo rival Wanderers.")
+        logger.info(f"[Blogger Post Update] ✓ Post existente {EXISTING_POST_ID} actualizado exitosamente con el próximo rival Defensor Sporting.")
     except Exception as e:
         logger.warning(f"[Blogger Post Update] Aviso al actualizar post existente: {e}")
 

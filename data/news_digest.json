@@ -1,95 +1,96 @@
 {
-  "actualizado": "04/11/2026 18:41",
-  "modelo_ia": "Manya Post-Match Redaction Engine (100% Periodismo Deportivo)",
-  "fase_publicacion": "POST_PARTIDO",
-  "partido_id": "401931258",
-  "titular_dia": "Fecha 13 del Clausura: Peñarol rescató un punto con garra agónica de Angulo ante Wanderers en el Saroldi",
-  "bajada_seo": "El Carbonero igualó 1-1 frente a Montevideo Wanderers por la Fecha 13 del Torneo Clausura en el Parque Federico Omar Saroldi (DT Mathías Corujo). Labandeira abrió la cuenta para la visita y el colombiano Angulo empató a los 90'. Peñarol suma 66 puntos y se mantiene firme en la cima de la Tabla Anual.",
+  "actualizado": "04/11/2026 21:34",
+  "modelo_ia": "Manya Sports Press Engine (100% Periodismo Deportivo Uruguayo)",
+  "fase_publicacion": "PREVIA",
+  "partido_id": "401931268",
+  "titular_dia": "Peñarol afina la artillería en Los Aromos para la batalla en el Franzini ante Defensor Sporting",
+  "bajada_seo": "El Carbonero prepara la visita al Estadio Luis Franzini por la Fecha 14 del Torneo Clausura (Domingo 15 de noviembre, 20:00 hs). Diego Aguirre aprovecha el receso para recuperar soldados clave en Los Aromos. Peñarol lidera la Tabla Anual con 66 puntos.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
-      "titulo": "Desahogo a los 90'",
-      "detalle": "Luis Miguel Angulo pescó un rebote en el área chica y mandó a guardar la pelota para evitar la caída en el Prado."
+      "titulo": "Receso Táctico en Los Aromos",
+      "detalle": "Diego Aguirre intensifica trabajos físicos y circuitos con pelota aprovechando la pausa en el fixture para llegar al 100% al Franzini."
     },
     {
-      "icono": "⏱️",
-      "titulo": "El Golpe Bohemio",
-      "detalle": "A los 72', Facundo Labandeira culminó un contragolpe veloz que complicó la tarde a puertas cerradas en el Saroldi."
+      "icono": "🏟️",
+      "titulo": "Cita en el Parque Rodó",
+      "detalle": "El próximo domingo 15 de noviembre a las 20:00 hs, el Decano visita a Defensor Sporting en el Franzini por la Fecha 14."
     },
     {
       "icono": "📊",
-      "titulo": "Mando en la Tabla Anual",
-      "detalle": "Con este punto, Peñarol alcanza los 66 puntos en la Tabla Anual Acumulada, manteniendo la distancia en la cumbre del campeonato."
+      "titulo": "Cima de la Tabla Anual",
+      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG), manteniendo la vanguardia a falta de dos etapas para el cierre."
     },
     {
-      "icono": "🗣️",
-      "titulo": "La Voz de Diego Aguirre",
-      "detalle": "'Valoro la rebeldía del equipo para buscarlo hasta el final. No nos vamos conformes con el resultado, pero en la Anual seguimos dependiendo de nosotros'."
+      "icono": "📺",
+      "titulo": "Pantalla y Entradas",
+      "detalle": "Televisación en directo por VTV Plus y Disney+ Premium. Canje y venta para parcialidad aurinegra en Tribuna Ghierra vía RedTickets."
     }
   ],
   "articulo_principal": {
-    "titulo": "Empate con sabor a rebeldía: Peñarol no se rindió y salvó la punta con gol de Angulo en la agonía",
-    "subtitulo": "En un Parque Saroldi a puertas cerradas, el Manya batalló contra el cerrojo de Wanderers y rescató un empate 1-1 que lo sostiene con 66 unidades en la cumbre de la Tabla Anual",
+    "titulo": "La antesala de una final: Peñarol alista sus armas en Los Aromos antes de visitar a Defensor en el Franzini",
+    "subtitulo": "Diego Aguirre aprovecha la pausa del Torneo Clausura para recuperar piezas fundamentales y afinar la estrategia para la penúltima fecha por la Tabla Anual",
     "parrafos": [
-      "Fue una tarde áspera, trabada y con el dramatismo característico del tramo final del Campeonato Uruguayo. Por la fecha 13 del Torneo Clausura, Peñarol debió oficiar de local en el Parque Federico Omar Saroldi a puertas cerradas para su parcialidad, debido a la sanción reglamentaria. Enfrente, el Montevideo Wanderers de Mathías 'Chiche' Corujo plantó un dispositivo táctico sumamente ordenado, cerrando carriles interiores con Gonzalo Freitas y apostando al juego aéreo de Fabricio Formiliano.",
-      "El trámite se tornó espeso para el elenco de Diego Aguirre, que si bien monopolizó la tenencia del balón con un 62% y merodeó el arco bohemio con los intentos de Leonardo Fernández y Maximiliano Silvera, careció de la lucidez necesaria para desarticular el bloque bajo rival. La sorpresa sacudió el escenario a los 72 minutos: en una rápida transición ofensiva de Wanderers, Facundo Labandeira capturó un envío profundo y definió cruzado para estampar el 0-1 parcial.",
-      "Herido en su orgullo, la Fiera Aguirre movió de inmediato el banco de relevos. Mandó a la cancha al colombiano Luis Miguel Angulo y a Gastón Ramírez, sumando futbolistas al área contraria y llenando de centros la retaguardia bohemia. Cuando el cronómetro señalaba los 90 minutos y la tensión crecía, un centro rechazado a medias derivó en la ubicación de Angulo, quien con remate rasante y certero infló las redes desatando el desahogo aurinegro para el 1-1 definitivo.",
-      "El pitazo de Leodán González a los 95 minutos selló la igualdad. Si bien en el vestuario aurinegro quedó la sensación de haber dejado escapar dos unidades en la pelea por el Clausura, el punto adquiere un valor estratégico mayúsculo en la Tabla Anual: Peñarol llega a 66 puntos (+24 DG) y se asegura ingresar a las últimas dos jornadas del torneo en lo más alto del fútbol uruguayo. El próximo desafío será visitar a Danubio en Jardines del Hipódromo por la fecha 14."
+      "Con la tranquilidad que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos, el plantel principal del Club Atlético Peñarol cumple una semana de alta exigencia física y táctica en el complejo de Los Aromos. Tras el empate 1-1 frente a Montevideo Wanderers en el Parque Saroldi, el cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en corregir desacoples en la gestación ofensiva y dotar de mayor verticalidad al equipo de cara a la penúltima fecha del Torneo Clausura.",
+      "El receso del certamen local, motivado por eventos de agenda nacional y operativa de seguridad en Montevideo, llegó como un bálsamo para la sanidad aurinegra. Jugadores que venían acumulando sobrecargas musculares, como Leonardo Fernández y Javier Méndez, pudieron realizar labores diferenciadas y de recuperación regenerativa, asegurando que el once titular arribe en plenitud física para la exigente visita al Estadio Luis Franzini.",
+      "Enfrente estará Defensor Sporting, conducido interinamente por Andrés Rodríguez tras la salida de Mauricio Larriera. El elenco violeta, tradicionalmente incómodo en su reducto del Parque Rodó, apuesta a la intensidad de sus canteranos en el mediocampo y a la capacidad goleadora del argentino Claudio Spinelli, respaldado por la gambeta punzante de Anderson Duarte.",
+      "El compromiso quedó fijado oficialmente por la Mesa Ejecutiva de la AUF para el domingo 15 de noviembre a las 20:00 horas, con transmisión de VTV Plus y Disney+ Premium. La parcialidad aurinegra dispondrá de la Tribuna Ghierra, en un duelo que puede resultar decisivo: una victoria dejará a Peñarol a tiro de asegurar la Tabla Anual en la última fecha del Clausura."
     ],
     "preguntas_frecuentes": [
       {
-        "q": "¿Cómo terminó el partido entre Peñarol y Wanderers?",
-        "a": "El partido finalizó empatado 1 a 1 por la fecha 13 del Torneo Clausura, disputado en el Parque Saroldi."
-      },
-      {
-        "q": "¿Quiénes anotaron los goles del encuentro?",
-        "a": "Facundo Labandeira anotó a los 72' para Montevideo Wanderers y Luis Miguel Angulo igualó a los 90' para Peñarol."
+        "q": "¿Cuándo juega Peñarol su próximo partido?",
+        "a": "Peñarol visitará a Defensor Sporting el domingo 15 de noviembre de 2026 a las 20:00 hs en el Estadio Luis Franzini por la Fecha 14 del Torneo Clausura."
       },
       {
         "q": "¿Cuántos puntos tiene Peñarol en la Tabla Anual?",
-        "a": "Peñarol lidera la Tabla Anual Acumulada de la AUF con 66 puntos oficiales en 35 partidos disputados."
+        "a": "Peñarol es el líder solitario de la Tabla Anual Acumulada con 66 puntos oficiales en 35 partidos disputados (+24 de saldo de goles)."
       },
       {
-        "q": "¿Cuál es el próximo partido de Peñarol?",
-        "a": "Por la fecha 14 del Torneo Clausura, Peñarol visitará a Danubio en el Estadio Jardines del Hipódromo el próximo fin de semana."
+        "q": "¿Por qué canal televisan Defensor Sporting vs Peñarol?",
+        "a": "El partido será televisado en vivo y en directo por VTV Plus y la plataforma de streaming Disney+ Premium."
+      },
+      {
+        "q": "¿Quién es el director técnico de Defensor Sporting?",
+        "a": "El equipo de Parque Rodó es dirigido técnicamente por Andrés Rodríguez, acompañado por Rodrigo Gómez como asistente."
       }
     ]
   },
   "noticias_fuentes": [
     {
       "fuente": "Ovación / El País",
-      "titulo": "Peñarol empató 1-1 con Wanderers en el Saroldi: el agónico grito de Angulo para cuidar la Tabla Anual",
-      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-vs-wanderers-clausura-2026-saroldi",
-      "fecha": "31/10/2026 18:40",
-      "resumen": "El equipo de Diego Aguirre no encontró los caminos durante gran parte del partido, quedó en desventaja con el gol de Labandeira pero empujó en el final y rescató un 1-1 gracias al gol de Luis Miguel Angulo en el minuto 90."
-    },
-    {
-      "fuente": "FútbolUy / Montevideo Portal",
-      "titulo": "Clausura: Peñarol y Montevideo Wanderers igualaron 1-1 en el Saroldi a puertas cerradas",
-      "url": "https://www.montevideo.com.uy/deportes/Clausura-Penarol-1-1-Wanderers-Angulo-salvo-el-invicto-anual-en-los-descuentos",
-      "fecha": "31/10/2026 18:55",
-      "resumen": "Reparto de puntos en el Prado. El bohemio lo ganaba con conquista de Facundo Labandeira a los 72', pero la insistencia carbonera tuvo premio a los 90' con la definición de Angulo. El aurinegro manda en la Anual con 66 pts."
+      "titulo": "Peñarol no frena en Los Aromos: Aguirre recupera piezas clave con la mira puesta en el Franzini",
+      "url": "https://www.elpais.com.uy/ovacion/futbol/penarol-entrenamientos-los-aromos-defensor-franzini-clausura-2026",
+      "fecha": "04/11/2026 15:30",
+      "resumen": "Aprovechando la pausa en el Torneo Clausura fijada para el 15 de noviembre, Diego Aguirre intensifica los trabajos tácticos en Los Aromos. Peñarol es líder solitario de la Tabla Anual con 66 unidades."
     },
     {
       "fuente": "Tenfield",
-      "titulo": "Saroldi: Peñarol rescató un empate 1:1 ante Wanderers con la firma de Angulo en el cierre",
-      "url": "https://www.tenfield.com.uy/penarol-wanderers-clausura-fecha-13-1-1/",
-      "fecha": "31/10/2026 19:10",
-      "resumen": "Con arbitraje de Leodán González y sin público aurinegro en las tribunas, Peñarol y Wanderers sellaron un empate 1:1. Goles de Labandeira (72') y Angulo (90'). El Carbonero llega a 66 unidades en la acumulada."
+      "titulo": "Clausura: La Mesa Ejecutiva confirmó días y horarios de la Fecha 14 con Defensor-Peñarol en el Franzini",
+      "url": "https://www.tenfield.com.uy/clausura-fecha-14-fijacion-oficial-defensor-penarol-franzini/",
+      "fecha": "04/11/2026 17:15",
+      "resumen": "Defensor Sporting recibirá a Peñarol el domingo 15 de noviembre a las 20:00 hs en el Estadio Luis Franzini por la Fecha 14 del Clausura. El Carbonero comanda la acumulada con 66 puntos."
+    },
+    {
+      "fuente": "FútbolUy / Montevideo Portal",
+      "titulo": "Peñarol: La puesta a punto de Leo Fernández y el plan de Diego Aguirre para la recta final del Uruguayo",
+      "url": "https://www.montevideo.com.uy/deportes/Penarol-Aguirre-ajusta-el-equipo-pensando-en-Defensor-Sporting-por-la-Fecha-14",
+      "fecha": "04/11/2026 18:00",
+      "resumen": "El volante zurdo completó la sesión con normalidad. En Peñarol saben que los tres puntos en el Franzini son vitales para custodiar la cima de la Tabla Anual (66 pts) ante el acecho de sus perseguidores."
     },
     {
       "fuente": "Padre y Decano",
-      "titulo": "Rebeldía aurinegra: Empate 1-1 ante Wanderers y a pensar en Jardines para definir el Uruguayo",
-      "url": "https://www.padreydecano.com/cronica-penarol-1-wanderers-1-clausura-2026/",
-      "fecha": "31/10/2026 19:30",
-      "resumen": "Cuando la pelota no quería entrar y se venía la noche, apareció Angulo a los 90' para decretar el empate y sumar un punto que mantiene a Peñarol en la cima de la Tabla Anual. Toda la concentración puesta en la visita a Danubio."
+      "titulo": "Semana de trabajo en Los Aromos: El Decano se prepara para la penúltima batalla del Clausura",
+      "url": "https://www.padreydecano.com/previa-defensor-penarol-fecha-14-clausura-2026/",
+      "fecha": "04/11/2026 19:20",
+      "resumen": "Foco total en el Parque Rodó. Peñarol visitará a Defensor el domingo 15/11 a las 20:00 hs. Entradas para la parcialidad carbonera se expenderán en la Tribuna Ghierra vía RedTickets."
     },
     {
       "fuente": "El Observador",
-      "titulo": "Diego Aguirre tras el 1-1: 'No jugamos bien, pero este grupo tiene rebeldía y la Anual sigue dependiendo de Peñarol'",
-      "url": "https://www.elobservador.com.uy/nota/diego-aguirre-analisis-penarol-wanderers-saroldi-1-1",
-      "fecha": "31/10/2026 20:00",
-      "resumen": "El director técnico aurinegro analizó con autocrítica el rendimiento colectivo en el Saroldi, resaltó el empuje del equipo para alcanzar el 1-1 y remarcó la importancia de mantener el liderazgo en la tabla anual con 66 puntos."
+      "titulo": "Defensor Sporting prepara el duelo ante Peñarol: el planteo de Andrés Rodríguez para frenar al líder de la Anual",
+      "url": "https://www.elobservador.com.uy/nota/defensor-sporting-andres-rodriguez-plan-contra-penarol-franzini",
+      "fecha": "04/11/2026 20:10",
+      "resumen": "El entrenador violeta afina la alineación en Pichincha con Spinelli y Duarte en ataque. En el Franzini buscarán dar el golpe ante un Peñarol que llega mandando en la Anual con 66 puntos."
     }
-  ]
+  ],
+  "blogger_previa_page_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 }

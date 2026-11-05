@@ -147,7 +147,7 @@ RIVALES_1891_MAP = {
         "sede": "Parque Rodó, Montevideo, Uruguay",
         "capacidad": 16000,
         "web": "https://defensorsporting.com.uy/",
-        "dt": "Álvaro Navarro",
+        "dt": "Andrés Rodríguez",
         "esquema": "4-3-3 juvenil de posesión y dinámica"
     },
     "boston": {
@@ -531,6 +531,123 @@ def generar_informe_rival(rival_query: str = "wanderers") -> dict:
                 "clave_del_duelo": "Neutralizar los centros hacia el corazón del área y cortar los circuitos con Viudez antes de que el balón llegue al área."
             }
         ]
+    elif "defensor" in rival_slug:
+        scouting = {
+            "entrenador": "Andrés Rodríguez",
+            "esquema_base": "4-3-3 de dinámica, presión media y transiciones veloces",
+            "propuesta_juego": (
+                "Defensor Sporting, conducido técnicamente por Andrés Rodríguez, plantea una estructura "
+                "de corte tradicional violeta: dinámica e intensidad física de sus volantes formados en las formativas, "
+                "presión alta en el Estadio Luis Franzini y ataques directos buscando a Claudio Spinelli en el área "
+                "y el desequilibrio de Anderson Duarte y Joaquín Valiente por las bandas."
+            ),
+            "figuras_a_seguir": [
+                {
+                    "nombre": "Claudio Spinelli",
+                    "rol": "Centrodelantero",
+                    "analisis": "Goleador argentino con gran movilidad en el frente de ataque, diagonales al espacio y remate de primera."
+                },
+                {
+                    "nombre": "Anderson Duarte",
+                    "rol": "Extremo / Delantero",
+                    "analisis": "Campeón del Mundo Sub-20: aceleración explosiva, potente remate de media distancia y atrevimiento en el 1x1."
+                },
+                {
+                    "nombre": "Fernando Elizari",
+                    "rol": "Volante Ofensivo / Eje",
+                    "analisis": "El cerebro creativo del equipo: manejo de ritmos, visión de pase filtrado y especialista en pelota quieta."
+                },
+                {
+                    "nombre": "Kevin Dawson",
+                    "rol": "Arquero",
+                    "analisis": "Experimentado portero con reflejos intactos, liderazgo bajo los tres palos y buen juego aéreo defensivo."
+                }
+            ],
+            "puntos_fuertes": [
+                "Intensidad física y despliegue incansable en la mitad de la cancha.",
+                "Peligro constante en balones detenidos ejecutados por Fernando Elizari.",
+                "Velocidad en contragolpe por las bandas con Duarte y Valiente."
+            ],
+            "vulnerabilidades_a_explotar": [
+                "Desatenciones en los retrocesos defensivos cuando sus laterales se proyectan al ataque.",
+                "Dificultades para contener el juego aéreo ante la potencia física de Guzmán Rodríguez y Maximiliano Silvera.",
+                "Espacios en la zona 14 si Peñarol rota la pelota con Leonardo Fernández con rapidez."
+            ]
+        }
+        duelos_1x1 = [
+            {
+                "id": "duelo_conductores_franzini",
+                "titulo": "El Duelo de Generadores: Leo Fernández vs. Fernando Elizari",
+                "zona_campo": "Zona 14 / Mediocampo del Franzini",
+                "penarol": {
+                    "jugador": "Leonardo Fernández",
+                    "dorsal": "10",
+                    "rol": "Enganche / Conductor Aurinegro",
+                    "atributos_clave": "Visión panorámica, pegada magistral de tiro libre y habilitaciones quirúrgicas."
+                },
+                "rival": {
+                    "jugador": "Fernando Elizari",
+                    "dorsal": "10",
+                    "rol": "Enganche de Defensor Sporting",
+                    "atributos_clave": "Pausa, precisión en pases entre líneas y buena pegada de media distancia."
+                },
+                "clave_del_duelo": "El equipo cuyo enganche logre liberarse de la marca rival y administrar los tiempos del balón impondrá condiciones tácticas en el Parque Rodó."
+            },
+            {
+                "id": "duelo_goleador_zaga_violeta",
+                "titulo": "Presión del Tanque: Maxi Silvera vs. Zaga Central Violeta",
+                "zona_campo": "Área de Defensor Sporting",
+                "penarol": {
+                    "jugador": "Maximiliano Silvera",
+                    "dorsal": "11",
+                    "rol": "Centrodelantero de Peñarol",
+                    "atributos_clave": "Presión constante, juego de espaldas y definición en el área chica."
+                },
+                "rival": {
+                    "jugador": "Zaga Central de Defensor",
+                    "dorsal": "2 / 3",
+                    "rol": "Defensa Central Violeta",
+                    "atributos_clave": "Fuerza física y anticipo terrestre, pero con problemas en retrocesos largos."
+                },
+                "clave_del_duelo": "Silvera forzará el error en la salida baja de Defensor; si gana la segunda pelota, Peñarol quedará mano a mano con Dawson."
+            },
+            {
+                "id": "duelo_bandas_franzini",
+                "titulo": "Velocidad Pura: Javier Cabrera vs. Banda Violeta",
+                "zona_campo": "Banda Derecha del Franzini",
+                "penarol": {
+                    "jugador": "Javier Cabrera",
+                    "dorsal": "7",
+                    "rol": "Extremo Derecho Aurinegro",
+                    "atributos_clave": "Aceleración, cambio de ritmo y centros venenosos al corazón del área."
+                },
+                "rival": {
+                    "jugador": "Lateral Izquierdo de Defensor",
+                    "dorsal": "3 / 6",
+                    "rol": "Marcador de Punta",
+                    "atributos_clave": "Marca férrea pero vulnerable al mano a mano cuando queda desprotegido."
+                },
+                "clave_del_duelo": "Cabrera deberá buscar el desborde y la línea de fondo para abastecer a los atacantes carboneros en velocidad."
+            },
+            {
+                "id": "duelo_cerrojo_franzini",
+                "titulo": "La Muralla Decana vs. La Peligrosidad de Claudio Spinelli",
+                "zona_campo": "Área Aurinegra",
+                "penarol": {
+                    "jugador": "Guzmán Rodríguez & Washington Aguerre",
+                    "dorsal": "20 / 1",
+                    "rol": "Zaguero Central y Arquero de Peñarol",
+                    "atributos_clave": "Seguridad en el juego aéreo, anticipo implacable y voz de mando."
+                },
+                "rival": {
+                    "jugador": "Claudio Spinelli",
+                    "dorsal": "9",
+                    "rol": "Centrodelantero de Defensor Sporting",
+                    "atributos_clave": "Olfato goleador, diagonales al área y cabezazo certero."
+                },
+                "clave_del_duelo": "Evitar que Spinelli gire con comodidad en tres cuartos de cancha y despejar los centros cruzados desde las bandas."
+            }
+        ]
     elif "cerro_largo" in rival_slug:
         scouting = {
             "entrenador": meta.get("dt", "Danielo Núñez"),
@@ -609,7 +726,18 @@ def generar_informe_rival(rival_query: str = "wanderers") -> dict:
 
 
 if __name__ == "__main__":
-    inf = generar_informe_rival("wanderers")
+    target_rival = None
+    if len(sys.argv) > 1:
+        target_rival = sys.argv[1]
+    else:
+        live_file = DATA_DIR / "live_status.json"
+        if live_file.exists():
+            try:
+                live_data = json.loads(live_file.read_text(encoding="utf-8"))
+                target_rival = live_data.get("rival_activo_slug")
+            except Exception:
+                pass
+    inf = generar_informe_rival(target_rival or "defensor")
     print(f"\n[OK] Scouting generado para {inf['rival_nombre']}:")
     print(f" - DT: {inf['scouting_tactico']['entrenador']}")
     print(f" - Esquema: {inf['scouting_tactico']['esquema_base']}")

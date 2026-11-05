@@ -1,139 +1,139 @@
 {
-  "generado_el": "04/11/2026 18:41",
-  "rival_nombre": "Montevideo Wanderers Fútbol Club",
-  "rival_corto": "Wanderers",
-  "rival_slug": "wanderers",
-  "escudo_oficial": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+  "generado_el": "04/11/2026 21:28",
+  "rival_nombre": "Defensor Sporting Club",
+  "rival_corto": "Defensor Sporting",
+  "rival_slug": "defensor_sporting",
+  "escudo_oficial": "assets/img/escudos/escudo_defensor_sporting.webp",
   "escudo_auf_remoto": "",
   "datos_institucionales_auf": {
-    "fundacion": "15 de agosto de 1902",
-    "sede": "Prado, Montevideo, Uruguay",
-    "estadio_propio": "Parque Alfredo Víctor Viera (Prado)",
-    "capacidad": 15000,
-    "web_oficial": "https://mwfc.com.uy/",
+    "fundacion": "15 de marzo de 1913",
+    "sede": "Parque Rodó, Montevideo, Uruguay",
+    "estadio_propio": "Estadio Luis Franzini (Parque Rodó)",
+    "capacidad": 16000,
+    "web_oficial": "https://defensorsporting.com.uy/",
     "redes": {}
   },
   "scouting_tactico": {
-    "entrenador": "Mathías Corujo",
-    "esquema_base": "4-2-3-1 de posesión y transiciones veloces",
-    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por Mathías Corujo, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival.",
+    "entrenador": "Andrés Rodríguez",
+    "esquema_base": "4-3-3 de dinámica, presión media y transiciones veloces",
+    "propuesta_juego": "Defensor Sporting, conducido técnicamente por Andrés Rodríguez, plantea una estructura de corte tradicional violeta: dinámica e intensidad física de sus volantes formados en las formativas, presión alta en el Estadio Luis Franzini y ataques directos buscando a Claudio Spinelli en el área y el desequilibrio de Anderson Duarte y Joaquín Valiente por las bandas.",
     "figuras_a_seguir": [
       {
-        "nombre": "Tabaré Viudez",
-        "rol": "Mediapunta / Extremo",
-        "analisis": "Talento individual, pausa y pegada refinada de tiro libre y media distancia. Exige marca escalonada."
-      },
-      {
-        "nombre": "Bruno Veglio",
-        "rol": "Volante Mixto / Eje",
-        "analisis": "El termómetro del mediocampo bohemio: distribución con criterio, visión panorámica y llegada sorpresiva al área."
-      },
-      {
-        "nombre": "Matías Fonseca",
+        "nombre": "Claudio Spinelli",
         "rol": "Centrodelantero",
-        "analisis": "Goleador móvil que busca diagonales constantes a las espaldas de los centrales y define de primera intención."
+        "analisis": "Goleador argentino con gran movilidad en el frente de ataque, diagonales al espacio y remate de primera."
       },
       {
-        "nombre": "Mauro Silveira",
+        "nombre": "Anderson Duarte",
+        "rol": "Extremo / Delantero",
+        "analisis": "Campeón del Mundo Sub-20: aceleración explosiva, potente remate de media distancia y atrevimiento en el 1x1."
+      },
+      {
+        "nombre": "Fernando Elizari",
+        "rol": "Volante Ofensivo / Eje",
+        "analisis": "El cerebro creativo del equipo: manejo de ritmos, visión de pase filtrado y especialista en pelota quieta."
+      },
+      {
+        "nombre": "Kevin Dawson",
         "rol": "Arquero",
-        "analisis": "Seguridad bajo los tres palos, reflejos felinos en disparos a quemarropa y excelente pegada para el inicio del juego."
+        "analisis": "Experimentado portero con reflejos intactos, liderazgo bajo los tres palos y buen juego aéreo defensivo."
       }
     ],
     "puntos_fuertes": [
-      "Fluidez en la circulación media y velocidad asociativa.",
-      "Orden táctico y solidez defensiva bajo la conducción de Mathías Corujo.",
-      "Peligro constante en balones detenidos y remates de media distancia de Viudez."
+      "Intensidad física y despliegue incansable en la mitad de la cancha.",
+      "Peligro constante en balones detenidos ejecutados por Fernando Elizari.",
+      "Velocidad en contragolpe por las bandas con Duarte y Valiente."
     ],
     "vulnerabilidades_a_explotar": [
-      "Sufren el repliegue defensivo si Peñarol recupera alto con Damián García y presiona la salida.",
-      "Espacios a espaldas de los laterales bohemios cuando se suman al circuito ofensivo.",
-      "Desventaja física en el juego aéreo ante la potencia de Guzmán Rodríguez y Maximiliano Silvera."
+      "Desatenciones en los retrocesos defensivos cuando sus laterales se proyectan al ataque.",
+      "Dificultades para contener el juego aéreo ante la potencia física de Guzmán Rodríguez y Maximiliano Silvera.",
+      "Espacios en la zona 14 si Peñarol rota la pelota con Leonardo Fernández con rapidez."
     ]
   },
   "duelos_tacticos_1x1": [
     {
-      "id": "duelo_conductores",
-      "titulo": "El Duelo de Motores: Generación vs. Circulación",
-      "zona_campo": "Zona 14 / Mediocampo Central",
+      "id": "duelo_conductores_franzini",
+      "titulo": "El Duelo de Generadores: Leo Fernández vs. Fernando Elizari",
+      "zona_campo": "Zona 14 / Mediocampo del Franzini",
       "penarol": {
         "jugador": "Leonardo Fernández",
-        "dorsal": "8",
+        "dorsal": "10",
         "rol": "Enganche / Conductor Aurinegro",
-        "atributos_clave": "Visión panorámica, pegada quirúrgica de balón parado y latigazo teledirigido."
+        "atributos_clave": "Visión panorámica, pegada magistral de tiro libre y habilitaciones quirúrgicas."
       },
       "rival": {
-        "jugador": "Bruno Veglio",
+        "jugador": "Fernando Elizari",
         "dorsal": "10",
-        "rol": "Eje y Gestor de Wanderers",
-        "atributos_clave": "Buen pie, distribución rápida y manejo de los ritmos del partido."
+        "rol": "Enganche de Defensor Sporting",
+        "atributos_clave": "Pausa, precisión en pases entre líneas y buena pegada de media distancia."
       },
-      "clave_del_duelo": "El equipo que logre imponer el ritmo de su cerebro dominará el desarrollo. Si Leo Fernández tiene libertad para girar, romperá la zaga bohemia con pases filtrados."
+      "clave_del_duelo": "El equipo cuyo enganche logre liberarse de la marca rival y administrar los tiempos del balón impondrá condiciones tácticas en el Parque Rodó."
     },
     {
-      "id": "duelo_goleador_zaga",
-      "titulo": "La Fiera del Gol vs. La Zaga Bohemia",
-      "zona_campo": "Área de Wanderers",
+      "id": "duelo_goleador_zaga_violeta",
+      "titulo": "Presión del Tanque: Maxi Silvera vs. Zaga Central Violeta",
+      "zona_campo": "Área de Defensor Sporting",
       "penarol": {
         "jugador": "Maximiliano Silvera",
         "dorsal": "11",
-        "rol": "Centrodelantero de Presión",
-        "atributos_clave": "Presión asfixiante sobre la salida rival, diagonales y olfato goleador."
+        "rol": "Centrodelantero de Peñarol",
+        "atributos_clave": "Presión constante, juego de espaldas y definición en el área chica."
       },
       "rival": {
-        "jugador": "Emiliano García & Zaga Bohemia",
+        "jugador": "Zaga Central de Defensor",
         "dorsal": "2 / 3",
-        "rol": "Defensa Central de Wanderers",
-        "atributos_clave": "Oficio, anticipo terrestre y cobertura de espacios reducidos."
+        "rol": "Defensa Central Violeta",
+        "atributos_clave": "Fuerza física y anticipo terrestre, pero con problemas en retrocesos largos."
       },
-      "clave_del_duelo": "Silvera deberá presionar la salida de los centrales de Pacheco para provocar errores no forzados en salida corta."
+      "clave_del_duelo": "Silvera forzará el error en la salida baja de Defensor; si gana la segunda pelota, Peñarol quedará mano a mano con Dawson."
     },
     {
-      "id": "duelo_bandas_viera",
-      "titulo": "Desborde por Fuera vs. Cobertura de Laterales",
-      "zona_campo": "Bandas / Cancha del Parque Viera",
+      "id": "duelo_bandas_franzini",
+      "titulo": "Velocidad Pura: Javier Cabrera vs. Banda Violeta",
+      "zona_campo": "Banda Derecha del Franzini",
       "penarol": {
-        "jugador": "Javier Cabrera & Jaime Báez",
-        "dorsal": "7 / 23",
-        "rol": "Extremos Aurinegros",
-        "atributos_clave": "Cambio de marcha en 1x1, profundidad y centros rasantes venenosos atrás."
+        "jugador": "Javier Cabrera",
+        "dorsal": "7",
+        "rol": "Extremo Derecho Aurinegro",
+        "atributos_clave": "Aceleración, cambio de ritmo y centros venenosos al corazón del área."
       },
       "rival": {
-        "jugador": "Laterales de Wanderers",
-        "dorsal": "4 / 6",
-        "rol": "Laterales con proyección",
-        "atributos_clave": "Vocación ofensiva, pero espacios abiertos a sus espaldas en transición rápida."
+        "jugador": "Lateral Izquierdo de Defensor",
+        "dorsal": "3 / 6",
+        "rol": "Marcador de Punta",
+        "atributos_clave": "Marca férrea pero vulnerable al mano a mano cuando queda desprotegido."
       },
-      "clave_del_duelo": "La cancha rápida favorece las transiciones veloces de Cabrera y Báez para desarticular la última línea bohemia."
+      "clave_del_duelo": "Cabrera deberá buscar el desborde y la línea de fondo para abastecer a los atacantes carboneros en velocidad."
     },
     {
-      "id": "duelo_cerrojo_decano",
-      "titulo": "La Muralla Decana vs. La Movilidad de Fonseca",
+      "id": "duelo_cerrojo_franzini",
+      "titulo": "La Muralla Decana vs. La Peligrosidad de Claudio Spinelli",
       "zona_campo": "Área Aurinegra",
       "penarol": {
         "jugador": "Guzmán Rodríguez & Washington Aguerre",
-        "dorsal": "4 / 1",
-        "rol": "Zaguero Central y Arquero Decano",
-        "atributos_clave": "Fuerza aérea, anticipación impecable y solidez bajo los tres palos."
+        "dorsal": "20 / 1",
+        "rol": "Zaguero Central y Arquero de Peñarol",
+        "atributos_clave": "Seguridad en el juego aéreo, anticipo implacable y voz de mando."
       },
       "rival": {
-        "jugador": "Matías Fonseca / Nicolás Royón",
-        "dorsal": "9 / 18",
-        "rol": "Delanteros de Wanderers",
-        "atributos_clave": "Movilidad constante, desmarques de apoyo y remate instantáneo."
+        "jugador": "Claudio Spinelli",
+        "dorsal": "9",
+        "rol": "Centrodelantero de Defensor Sporting",
+        "atributos_clave": "Olfato goleador, diagonales al área y cabezazo certero."
       },
-      "clave_del_duelo": "Neutralizar los centros hacia el corazón del área y cortar los circuitos con Viudez antes de que el balón llegue al área."
+      "clave_del_duelo": "Evitar que Spinelli gire con comodidad en tres cuartos de cancha y despejar los centros cruzados desde las bandas."
     }
   ],
   "historial_certificacion_1891": {
-    "partidos_jugados": 396,
-    "ganados_penarol": 207,
-    "empatados": 113,
-    "perdidos_penarol": 76,
-    "goles_penarol": 701,
-    "goles_rival": 394,
-    "ventaja_victorias": "+131 partidos a favor del Decano",
-    "diferencia_goles": "+307",
-    "efectividad_pct": "61.8%"
+    "partidos_jugados": 337,
+    "ganados_penarol": 199,
+    "empatados": 80,
+    "perdidos_penarol": 58,
+    "goles_penarol": 691,
+    "goles_rival": 361,
+    "ventaja_victorias": "+141 partidos a favor del Decano",
+    "diferencia_goles": "+330",
+    "efectividad_pct": "67.0%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",

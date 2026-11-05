@@ -92,12 +92,12 @@ VERIFIED_FIXTURE_2026 = [
     },
     {
         "fecha_numero": 14,
-        "nombre": "Danubio vs Peñarol",
-        "fecha_iso": "2026-11-08T16:30:00-03:00",
-        "fecha_legible": "Domingo 08/11/2026 16:30 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
-        "estadio": "Estadio Jardines del Hipódromo (Montevideo)",
-        "local": {"nombre": "Danubio", "abreviatura": "DAN", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_danubio.webp"},
+        "nombre": "Defensor Sporting vs Peñarol",
+        "fecha_iso": "2026-11-15T20:00:00-03:00",
+        "fecha_legible": "Domingo 15/11/2026 20:00 hs",
+        "torneo": "Torneo Clausura 2026 • Fecha 14",
+        "estadio": "Estadio Luis Franzini (Montevideo)",
+        "local": {"nombre": "Defensor Sporting", "abreviatura": "DEF", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_defensor_sporting.webp"},
         "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
         "tv": "VTV Plus / Disney+ Premium",
         "completado": False
@@ -262,7 +262,11 @@ class ManyaMatchEngine:
         # Sobreescrituras oficiales confirmadas por el club (@oficialcap / AUF)
         # Juventud fija su localía en el Estadio Centenario para recibir a Peñarol
         check_str = (ev.get("name", "") + " " + home_team.get("nombre", "") + " " + away_team.get("nombre", "")).lower()
-        if "wanderers" in check_str:
+        if "defensor" in check_str:
+            venue_name = "Estadio Luis Franzini (Montevideo)"
+            season_name = "Torneo Clausura 2026 • Fecha 14"
+            tv_str = "VTV Plus / Disney+ Premium"
+        elif "wanderers" in check_str:
             venue_name = "Parque Federico Omar Saroldi (Prado)"
             season_name = "Torneo Clausura 2026 • Fecha 13"
             tv_str = "VTV Plus / Disney+ Premium"

@@ -165,47 +165,88 @@ class ManyaSelfHealingWatchdog:
         return cambio_realizado
 
     def auto_verificar_post_partido(self) -> bool:
-        """Verifica si un partido ha concluido y el portal debe estar en fase POST_PARTIDO (48hs)."""
+        """
+        Verifica el ciclo post-partido (Regla de las 48 Horas):
+        - Si el último partido terminó hace menos de 48 hs y el portal no está en POST_PARTIDO, activa post-partido.
+        - Si ya pasaron más de 48 hs del último encuentro, el portal DEBE estar en PREVIA proyectando el próximo rival.
+        """
         live_file = DATA_DIR / "live_status.json"
         if not live_file.exists():
             return False
         try:
             live_data = json.loads(live_file.read_text(encoding="utf-8"))
-            fase = live_data.get("fase_partido", "")
-            if fase != "POST_PARTIDO":
-                from manya_post_match_pipeline import ManyaPostMatchPipeline
-                pipeline = ManyaPostMatchPipeline()
-                pipeline.ejecutar_pipeline_completo()
-                msg = "Auto-ajuste: Ejecutado pipeline de cierre post-partido (Peñarol 1-1 Wanderers, 66 pts)."
-                self.reparaciones_realizadas.append(msg)
-                logger.info(f"[Auto-Healing] ✓ {msg}")
-                return True
+            ult = live_data.get("ultimo_partido", {})
+            fecha_iso = ult.get("fecha_iso", "")
+            now_uy = datetime.now(UY_TZ)
+            horas_desde = 999.0
+            if fecha_iso:
+                try:
+                    f_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+                    horas_desde = max(0.0, (now_uy - (f_dt + timedelta(hours=2))).total_seconds() / 3600.0)
+                except Exception:
+                    pass
+
+            fase_actual = live_data.get("fase_partido", "")
+            if horas_desde <= 48.0:
+                if fase_actual != "POST_PARTIDO":
+                    from manya_post_match_pipeline import ManyaPostMatchPipeline
+                    pipeline = ManyaPostMatchPipeline()
+                    pipeline.ejecutar_pipeline_completo()
+                    msg = "Auto-ajuste: Activada fase POST_PARTIDO dentro de la ventana de 48 horas."
+                    self.reparaciones_realizadas.append(msg)
+                    logger.info(f"[Auto-Healing] ✓ {msg}")
+                    return True
+            else:
+                if fase_actual == "POST_PARTIDO":
+                    from manya_match_engine import ManyaMatchEngine
+                    ManyaMatchEngine.generate_updated_live_status()
+                    msg = f"Auto-ajuste: Expiraron las 48 hs post-partido ({round(horas_desde,1)} hs transcurridas). Transición automática a PREVIA del próximo partido."
+                    self.reparaciones_realizadas.append(msg)
+                    logger.info(f"[Auto-Healing] ✓ {msg}")
+                    return True
         except Exception as e:
             logger.warning(f"[Auto-Healing] Aviso en verificación post-partido: {e}")
         return False
 
     def auto_corregir_escenario_y_rival(self) -> int:
-        """Sanea escenario (Parque Federico Omar Saroldi) y DT de Wanderers (Mathías Corujo)."""
+        """Sanea escenario y DT de acuerdo al rival activo en live_status.json."""
         corregidos = 0
         html_file = BASE_DIR / "index.html"
         digest_file = DATA_DIR / "news_digest.json"
         live_file = DATA_DIR / "live_status.json"
+        rival_file = DATA_DIR / "rival_intelligence.json"
 
-        for fp in [html_file, digest_file, live_file]:
+        # Leer rival activo
+        rival_activo = "defensor"
+        if live_file.exists():
+            try:
+                live_data = json.loads(live_file.read_text(encoding="utf-8"))
+                prox = live_data.get("proximo_partido", {})
+                nombre = prox.get("nombre", "").lower()
+                if "defensor" in nombre:
+                    rival_activo = "defensor"
+                elif "wanderers" in nombre:
+                    rival_activo = "wanderers"
+            except Exception:
+                pass
+
+        dt_correcto = "Andrés Rodríguez" if rival_activo == "defensor" else "Mathías Corujo"
+
+        for fp in [html_file, digest_file, live_file, rival_file]:
             if not fp.exists():
                 continue
             txt = fp.read_text(encoding="utf-8")
             modificado = False
             
-            # Saneamiento de DT
+            # Saneamiento de DT erróneo
             if "Antonio Pacheco" in txt and "1891" not in fp.name:
-                txt = txt.replace("Antonio Pacheco", "Mathías Corujo")
+                txt = txt.replace("Antonio Pacheco", dt_correcto)
                 modificado = True
                 corregidos += 1
 
             if modificado:
                 fp.write_text(txt, encoding="utf-8")
-                msg = f"Auto-corregido {fp.name}: saneado DT y escenario hacia Parque Saroldi / Mathías Corujo."
+                msg = f"Auto-corregido {fp.name}: saneado DT hacia {dt_correcto}."
                 self.reparaciones_realizadas.append(msg)
                 logger.info(f"[Auto-Healing] ✓ {msg}")
 

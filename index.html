@@ -226,64 +226,61 @@
 
     <!-- LIVE MATCH ALERT TICKER (Hidratado dinámicamente) -->
     <div id="manya-live-ticker" class="manya-live-ticker" style="display:none;margin-bottom:16px;background:#09090b;border:2px solid #ffd100;border-radius:10px;padding:12px 18px;color:#ffffff;font-weight:800;font-size:14.5px;box-shadow:0 4px 20px rgba(255,209,0,0.25);align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-      <div id="ticker-text">🏁 FINALIZADO: Peñarol 1 - 1 Montevideo Wanderers • Agónico gol de Luis Miguel Angulo a los 90' en el Saroldi. Peñarol líder solitario de la Tabla Anual con 66 puntos.</div>
+      <div id="ticker-text">🟡⚫ PRÓXIMA BATALLA: Defensor Sporting vs Peñarol • Domingo 15/11 a las 20:00 hs en el Estadio Luis Franzini por la Fecha 14 del Torneo Clausura. Peñarol líder solitario de la Tabla Anual con 66 puntos.</div>
       <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="dynamic-blogger-link" style="color:var(--manya-gold);font-weight:800;border:1px solid var(--manya-gold);background:rgba(255,209,0,0.12);padding:6px 14px;border-radius:6px;font-size:12.5px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">⚡ Próximo Partido & Radiografía en ServicioTI ↗</a>
     </div>
 
     <!-- PRIMERA PLANA: MATCH CENTER & MINUTO A MINUTO EN DIRECTO -->
     <section id="match-center" class="match-hero" aria-label="Centro de Partido en Vivo del Club Atlético Peñarol">
       <div class="match-hero-top">
-        <span id="hero-match-badge" class="badge-gold" style="background:#10b981;color:#ffffff;border:1px solid #059669;font-weight:900;letter-spacing:0.04em;">🏁 RESULTADO FINAL • TORNEO CLAUSURA (FECHA 13)</span>
+        <span id="hero-match-badge" class="badge-gold" style="background:#ffd100;color:#09090b;border:1px solid #eab308;font-weight:900;letter-spacing:0.04em;">★ PRÓXIMO PARTIDO • TORNEO CLAUSURA (FECHA 14)</span>
         <span id="hero-weather" class="badge-weather">🌡️ Campeón del Siglo: 18.5°C • Despejado en Ruta 102 (Viento 14 km/h)</span>
       </div>
 
       <div class="match-scoreboard">
         <div class="team-hero-side">
-          <div class="hero-crest-wrap is-penarol" id="hero-home-crest-wrap">
-            <img id="hero-home-crest" src="assets/img/escudos/escudo_penarol.webp" alt="Escudo Oficial del Club Atlético Peñarol" width="86" height="108" class="hero-crest-img" loading="eager" fetchpriority="high" />
+          <div class="hero-crest-wrap is-rival" id="hero-home-crest-wrap">
+            <img id="hero-home-crest" src="assets/img/escudos/escudo_defensor_sporting.webp" alt="Escudo Oficial de Defensor Sporting" width="86" height="108" class="hero-crest-img" loading="eager" fetchpriority="high" />
           </div>
-          <div id="hero-home-name" class="match-team-name is-penarol">Peñarol</div>
-          <div id="hero-home-tag" class="match-team-tag">El Decano • 1891</div>
+          <div id="hero-home-name" class="match-team-name">Defensor Sporting</div>
+          <div id="hero-home-tag" class="match-team-tag">Local • Torneo Oficial AUF</div>
         </div>
 
         <div class="match-vs-box">
-          <div class="countdown-grid" id="hero-countdown-grid" style="display:none;" aria-label="Cuenta regresiva próximo partido">
-            <div class="cd-unit"><div id="cd-days" class="cd-num">00</div><div class="cd-lbl">Días</div></div>
-            <div class="cd-unit"><div id="cd-hours" class="cd-num">00</div><div class="cd-lbl">Horas</div></div>
-            <div class="cd-unit"><div id="cd-mins" class="cd-num">00</div><div class="cd-lbl">Min</div></div>
+          <div class="countdown-grid" id="hero-countdown-grid" style="display:grid;" aria-label="Cuenta regresiva próximo partido">
+            <div class="cd-unit"><div id="cd-days" class="cd-num">10</div><div class="cd-lbl">Días</div></div>
+            <div class="cd-unit"><div id="cd-hours" class="cd-num">22</div><div class="cd-lbl">Horas</div></div>
+            <div class="cd-unit"><div id="cd-mins" class="cd-num">15</div><div class="cd-lbl">Min</div></div>
             <div class="cd-unit"><div id="cd-secs" class="cd-num">00</div><div class="cd-lbl">Seg</div></div>
           </div>
-          <!-- Marcador Final Post-Partido (48 Horas) -->
-          <div id="hero-live-score-container" style="display:flex;flex-direction:column;align-items:center;margin-bottom:8px;">
+          <!-- Marcador Final Post-Partido (Oculto en fase PREVIA) -->
+          <div id="hero-live-score-container" style="display:none;flex-direction:column;align-items:center;margin-bottom:8px;">
             <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.2);border:1px solid #10b981;color:#6ee7b7;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:0.06em;margin-bottom:8px;">
-              <span>🏁 FINALIZADO (90+5') • PARQUE SAROLDI</span>
+              <span>🏁 FINALIZADO</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;background:#000000;padding:8px 26px;border-radius:14px;border:2px solid #ffd100;box-shadow:0 0 25px rgba(255,209,0,0.25);">
-              <span id="hero-live-score-home" style="font-size:44px;font-weight:900;color:#ffffff;line-height:1;">1</span>
+              <span id="hero-live-score-home" style="font-size:44px;font-weight:900;color:#ffffff;line-height:1;">-</span>
               <span style="font-size:26px;font-weight:900;color:var(--manya-gold);">-</span>
-              <span id="hero-live-score-away" style="font-size:44px;font-weight:900;color:var(--manya-gold);line-height:1;">1</span>
-            </div>
-            <div style="font-size:11.5px;color:#d4d4d8;margin-top:6px;text-align:center;">
-              ⚽ <strong>Peñarol:</strong> L. M. Angulo (90') | <strong>Wanderers:</strong> F. Labandeira (72')
+              <span id="hero-live-score-away" style="font-size:44px;font-weight:900;color:var(--manya-gold);line-height:1;">-</span>
             </div>
           </div>
-          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:#34d399;">🏁 RESULTADO FINAL • Sábado 31/10/2026 • Torneo Clausura Fecha 13</div>
-          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Parque Federico Omar Saroldi (Prado) • Montevideo (Local Peñarol)</div>
+          <div id="hero-match-date" style="font-size:13px;font-weight:800;color:var(--manya-gold);">★ PRÓXIMO PARTIDO • Domingo 15/11/2026 20:00 hs • Torneo Clausura Fecha 14</div>
+          <div id="hero-match-venue" style="font-size:12px;color:var(--text-secondary);">Estadio Luis Franzini (Parque Rodó, Montevideo)</div>
         </div>
 
         <div class="team-hero-side">
-          <div class="hero-crest-wrap is-rival" id="hero-away-crest-wrap">
-            <img id="hero-away-crest" src="assets/img/escudos/escudo_montevideo_wanderers.webp" alt="Escudo Oficial de Montevideo Wanderers" width="86" height="108" class="hero-crest-img" loading="eager" />
+          <div class="hero-crest-wrap is-penarol" id="hero-away-crest-wrap">
+            <img id="hero-away-crest" src="assets/img/escudos/escudo_penarol.webp" alt="Escudo Oficial del Club Atlético Peñarol" width="86" height="108" class="hero-crest-img" loading="eager" />
           </div>
-          <div id="hero-away-name" class="match-team-name">Montevideo Wanderers</div>
-          <div id="hero-away-tag" class="match-team-tag">Visitante • Torneo Oficial AUF</div>
+          <div id="hero-away-name" class="match-team-name is-penarol">Peñarol</div>
+          <div id="hero-away-tag" class="match-team-tag">El Decano • 1891</div>
         </div>
       </div>
 
       <div class="match-meta-bar">
         <div class="match-meta-item">
-          <span>🎟️ Entradas &amp; Localía (Parque Saroldi)</span>
-          Peñarol oficia como local a puertas cerradas para su parcialidad por sanción al CDS. Venta exclusiva para hinchas de Montevideo Wanderers vía <strong>Tickantel</strong> ($500 socios / $600 generales).
+          <span>🎟️ Entradas &amp; Localía (Franzini)</span>
+          Defensor Sporting vs Peñarol en el Estadio Luis Franzini. Parcialidad de Peñarol dispondrá de la Tribuna Ghierra vía <strong>RedTickets</strong>.
         </div>
         <div class="match-meta-item">
           <span>📺 Transmisión Confirmada</span>
@@ -294,7 +291,7 @@
           <strong id="hero-last-result">Peñarol 66 pts (Líder Solitario)</strong> • Saldo +24 DG (35 PJ).
         </div>
         <div class="match-meta-item" style="display:flex;align-items:center;justify-content:center;">
-          <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Radiografía Táctica & Próximo Rival (Wanderers) →</a>
+          <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" style="width:100%;">📖 Radiografía Táctica & Próximo Rival (Defensor Sporting) →</a>
         </div>
       </div>
 
@@ -304,7 +301,7 @@
       <div class="rival-scout-card" id="rival-scout-box" aria-label="Informe Táctico y Scouting del Rival" style="margin-top:20px;">
         <div class="rival-scout-header">
           <div class="rival-scout-title">
-            <span id="scout-rival-title">🧭 Radiografía Táctica del Próximo Rival: Montevideo Wanderers (DT Mathías Corujo)</span>
+            <span id="scout-rival-title">🧭 Radiografía Táctica del Próximo Rival: Defensor Sporting Club (DT Andrés Rodríguez)</span>
           </div>
           <div class="rival-scout-badges">
             <span class="badge-gold">AUF Oficial</span>
@@ -318,11 +315,11 @@
           <div class="rival-col-card">
             <div class="rival-card-sub">🏛️ Ficha Institucional AUF &amp; DT</div>
             <ul class="rival-meta-list">
-              <li><strong>Entrenador:</strong> <span id="scout-dt">Mathías "Chiche" Corujo (Ayudante: Nicolás Amodio)</span></li>
-              <li><strong>Esquema Base:</strong> <span id="scout-esquema">4-3-3 / 4-2-3-1 de repliegue ordenado y transición rápida</span></li>
-              <li><strong>Estadio Propio:</strong> <span id="scout-estadio">Parque Alfredo Víctor Viera (Prado) • Partido en Parque Saroldi</span></li>
-              <li><strong>Fundación:</strong> <span id="scout-fundacion">15 de agosto de 1902</span></li>
-              <li><strong>Web Oficial:</strong> <a href="https://mwfc.com.uy/" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);text-decoration:underline;">mwfc.com.uy ↗</a></li>
+              <li><strong>Entrenador:</strong> <span id="scout-dt">Andrés Rodríguez (Ayudante: Rodrigo Gómez)</span></li>
+              <li><strong>Esquema Base:</strong> <span id="scout-esquema">4-3-3 de intensidad, presión media y transiciones rápidas</span></li>
+              <li><strong>Estadio Propio:</strong> <span id="scout-estadio">Estadio Luis Franzini (Parque Rodó, Montevideo)</span></li>
+              <li><strong>Fundación:</strong> <span id="scout-fundacion">15 de marzo de 1913</span></li>
+              <li><strong>Web Oficial:</strong> <a href="https://defensorsporting.com.uy/" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);text-decoration:underline;">defensorsporting.com.uy ↗</a></li>
             </ul>
           </div>
 
@@ -330,12 +327,12 @@
           <div class="rival-col-card">
             <div class="rival-card-sub">⚡ Propuesta &amp; Fortalezas</div>
             <p id="scout-propuesta" style="font-size:12.5px;color:#d4d4d8;line-height:1.45;margin-bottom:8px;">
-              Montevideo Wanderers, conducido tácticamente por Mathías 'Chiche' Corujo, presenta una estructura combativa y disciplinada. Apuestan a la solvencia aérea de Fabricio Formiliano en el fondo, la contención física de Gonzalo Freitas en la medular y el desequilibrio veloz de Jonathan Urretaviscaya por las bandas junto a Mateo Levato en el área.
+              Defensor Sporting, conducido técnicamente por Andrés Rodríguez tras la salida de Mauricio Larriera, plantea un juego vertical con dinámica de juveniles en el mediocampo, la pausa lúcida de Fernando Elizari y la pegada del goleador argentino Claudio Spinelli respaldado por Anderson Duarte.
             </p>
             <div class="scout-pill-group">
-              <span class="scout-pill strong">✓ Jerarquía y liderazgo de Formiliano en la zaga</span>
-              <span class="scout-pill strong">✓ Velocidad letal en contragolpe con Jonathan Urretaviscaya</span>
-              <span class="scout-pill strong">✓ Poderío aéreo y segunda pelota con Freitas y Levato</span>
+              <span class="scout-pill strong">✓ Intensidad y presión asfixiante en el Franzini</span>
+              <span class="scout-pill strong">✓ Potencia aérea y oportunismo de Claudio Spinelli</span>
+              <span class="scout-pill strong">✓ Desequilibrio y gambeta veloz de Anderson Duarte</span>
             </div>
           </div>
 
@@ -343,10 +340,10 @@
           <div class="rival-col-card">
             <div class="rival-card-sub">🎯 Figuras a Seguir &amp; Dónde Dañar</div>
             <div id="scout-figuras" style="font-size:12px;color:#e4e4e7;margin-bottom:8px;">
-              <div>• <strong>Jonathan Urretaviscaya (EXT):</strong> El 'Rayo': aceleración pura, 1x1 punzante y pelota quieta.</div>
-              <div>• <strong>Fabricio Formiliano (ZAG):</strong> Capitán bohemio, anticipo terrestre y juego aéreo.</div>
-              <div>• <strong>Gonzalo Freitas (MC):</strong> Marca áspera, corte en la medular y presencia física.</div>
-              <div>• <strong>Mateo Levato (DC):</strong> Centrodelantero argentino, pivoteo y remate de área.</div>
+              <div>• <strong>Claudio Spinelli (DC):</strong> Goleador argentino, potencia física, juego aéreo y desmarque.</div>
+              <div>• <strong>Fernando Elizari (ENG):</strong> Enganche talentoso, pausa, visión entre líneas y pegada.</div>
+              <div>• <strong>Anderson Duarte (EXT):</strong> Campeón del Mundo Sub-20, aceleración y desborde punzante.</div>
+              <div>• <strong>Kevin Dawson (ARQ):</strong> Ex golero aurinegro, reflejos y seguridad bajo los tres palos.</div>
             </div>
             <div class="scout-pill-group">
               <span class="scout-pill weak">⚠️ Espacios a espaldas de laterales si Peñarol rota rápido</span>
@@ -361,7 +358,7 @@
       <div class="duelos-1x1-card" id="duelos-1x1-box" aria-label="Duelos Tácticos Clave 1x1" style="margin-top:20px;">
         <div class="duelos-1x1-header">
           <div class="duelos-1x1-title">
-            <span>⚔️ Duelos Tácticos 1x1: Las Batallas Clave en el Saroldi • Peñarol vs Montevideo Wanderers</span>
+            <span>⚔️ Duelos Tácticos 1x1: Las Batallas Clave en el Franzini • Defensor Sporting vs Peñarol</span>
           </div>
           <span class="badge-gold">Laboratorio Táctico Manya</span>
         </div>
@@ -509,41 +506,41 @@
       <div class="match-h2h-bar" id="match-h2h-box" aria-label="Historial Oficial Frente a Frente contra Wanderers" style="margin-top:20px;">
         <div class="match-h2h-header">
           <div class="match-h2h-title">
-            <span>📜 Historial Oficial Verificado: Peñarol vs Montevideo Wanderers</span>
+            <span>📜 Historial Oficial Verificado: Peñarol vs Defensor Sporting</span>
           </div>
           <span class="match-h2h-source">Fuente Oficial: <strong>1891 BD</strong> (Comisión de Historia y Patrimonio)</span>
         </div>
 
         <div class="match-h2h-stats">
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num" id="h2h-pj">396</div>
+            <div class="match-h2h-stat-num" id="h2h-pj">337</div>
             <div class="match-h2h-stat-lbl">Partidos Jugados</div>
           </div>
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num gold" id="h2h-pg">207</div>
+            <div class="match-h2h-stat-num gold" id="h2h-pg">199</div>
             <div class="match-h2h-stat-lbl">Ganados Peñarol</div>
           </div>
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num" id="h2h-pe">113</div>
+            <div class="match-h2h-stat-num" id="h2h-pe">80</div>
             <div class="match-h2h-stat-lbl">Empates</div>
           </div>
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num" id="h2h-pp">76</div>
+            <div class="match-h2h-stat-num" id="h2h-pp">58</div>
             <div class="match-h2h-stat-lbl">Derrotas</div>
           </div>
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num gold" id="h2h-gf">701 - 394</div>
+            <div class="match-h2h-stat-num gold" id="h2h-gf">691 - 361</div>
             <div class="match-h2h-stat-lbl">Goles (Dif: +307)</div>
           </div>
           <div class="match-h2h-stat">
-            <div class="match-h2h-stat-num gold" id="h2h-eff">61.8%</div>
+            <div class="match-h2h-stat-num gold" id="h2h-eff">67.0%</div>
             <div class="match-h2h-stat-lbl">Efectividad Aurinegra</div>
           </div>
         </div>
 
         <div class="match-h2h-recent">
-          <span class="match-h2h-pill">★ +131 partidos a favor del Decano</span>
-          <span><strong>Supremacía histórica aurinegra:</strong> Peñarol lidera el historial con 207 triunfos frente a 76 de Wanderers y +307 goles de diferencia en todas las competencias oficiales.</span>
+          <span class="match-h2h-pill">★ +141 partidos a favor del Decano</span>
+          <span><strong>Supremacía histórica aurinegra:</strong> Peñarol lidera el historial con 199 triunfos frente a 58 de Defensor Sporting y +330 goles de diferencia en todas las competencias oficiales.</span>
           <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="dynamic-blogger-link" style="color:var(--manya-gold);text-decoration:underline;margin-left:auto;font-size:11.5px;font-weight:700;">Ver Radiografía Completa en ServicioTI ↗</a>
         </div>
       </div>
@@ -557,7 +554,7 @@
             📂 ARCHIVO HISTÓRICO OFICIAL
           </span>
           <span style="color:#d4d4d8;font-size:13.5px;">
-            Último partido concluido: <strong>Juventud 0 - 0 Peñarol</strong>. Tras la ventana de 48 hs, el portal enfoca el 100% de la cobertura en el choque ante <strong>Montevideo Wanderers</strong>.
+            Último partido concluido: <strong>Peñarol 1 - 1 Montevideo Wanderers</strong>. Tras la ventana de 48 hs, el portal enfoca el 100% de la cobertura en el choque ante <strong>Defensor Sporting</strong> (Fecha 14).
           </span>
         </div>
         <a href="https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html" target="_blank" rel="noopener noreferrer" class="btn-manya" style="font-size:12px;padding:6px 14px;text-decoration:none;">
@@ -587,7 +584,7 @@
                 <span class="ig-dot-separator">•</span>
                 <span id="hero-post-time" class="ig-post-time">Hace 1 h</span>
               </div>
-              <div id="hero-post-location" class="ig-post-location">📍 Parque Federico Omar Saroldi (Prado) • Montevideo</div>
+              <div id="hero-post-location" class="ig-post-location">📍 Estadio Luis Franzini (Parque Rodó) • Montevideo</div>
             </div>
           </div>
           <a id="hero-post-external-link" href="https://www.instagram.com/oficialcap/" target="_blank" rel="noopener noreferrer" class="ig-header-link" title="Abrir publicación original en Instagram">
@@ -624,16 +621,16 @@
         <!-- Pie de publicación: Titular, crónica y enlaces -->
         <div class="ig-post-caption-box">
           <h2 id="hero-post-headline" class="ig-post-headline">
-            ⚡ PREVIA OFICIAL: Peñarol recibe a Montevideo Wanderers en el Parque Saroldi • Torneo Clausura (Fecha 13)
+            ⚡ PREVIA OFICIAL: Peñarol visita a Defensor Sporting en el Franzini • Torneo Clausura (Fecha 14)
           </h2>
           <p id="hero-post-text" class="ig-post-text">
             <strong>🔜 ¡CONCENTRACIÓN EN LOS AROMOS!</strong><br>
-            🆚 <strong>Montevideo Wanderers</strong><br>
-            🏟️ <strong>Parque Federico Omar Saroldi (Prado)</strong><br>
-            🏆 <strong>Torneo Clausura 2026 • Fecha 13</strong><br>
-            🗓️ <strong>Sábado 31 de octubre</strong><br>
-            🕟 <strong>16:30 horas</strong> • 📺 <strong>VTV Plus / Disney+ Premium</strong><br><br>
-            Todo listo en Los Aromos: Diego Aguirre definió el once titular con Leo Fernández en la conducción y Maxi Silvera en el ataque. Peñarol oficia como local en el Parque Saroldi a puertas cerradas para la parcialidad aurinegra por sanción al CDS. Hinchas de Wanderers adquieren sus entradas en Tickantel ($500 socios / $600 generales). Transmisión en vivo por VTV Plus y Disney+ Premium.
+            🆚 <strong>Defensor Sporting</strong><br>
+            🏟️ <strong>Estadio Luis Franzini (Parque Rodó)</strong><br>
+            🏆 <strong>Torneo Clausura 2026 • Fecha 14</strong><br>
+            🗓️ <strong>Domingo 15 de noviembre</strong><br>
+            🕗 <strong>20:00 horas</strong> • 📺 <strong>VTV Plus / Disney+ Premium</strong><br><br>
+            Peñarol afina la estrategia en Los Aromos para la penúltima batalla del Clausura. Diego Aguirre recupera piezas clave durante la pausa para visitar al conjunto violeta en el Parque Rodó. Parcialidad aurinegra dispondrá de la Tribuna Ghierra vía RedTickets. El Carbonero comanda la Tabla Anual con 66 puntos.
           </p>
           <div class="ig-post-footer-actions">
             <a href="https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html" target="_blank" rel="noopener noreferrer" class="btn-manya dynamic-blogger-link" id="hero-post-read-more">
@@ -672,7 +669,7 @@
         <article class="editorial-lead-article">
           <div class="editorial-kicker">ANÁLISIS TÁCTICO &amp; ACTUALIDAD</div>
           <h3 id="editorial-headline" class="editorial-lead-headline">
-            Con el cuchillo entre los dientes en el Prado: Peñarol visita a Wanderers en una final clave por la Anual
+            Concentración total en Los Aromos: Peñarol alista la artillería para la batalla en el Franzini ante Defensor Sporting
           </h3>
           <div class="editorial-byline">
             Por <span class="author-name">Andrés Franchi Ugartemendía</span> • ServicioTI Uruguay
@@ -920,8 +917,8 @@
     <section id="pizarra-tactica" class="manya-section" aria-label="Pizarra Táctica Interactiva del Club Atlético Peñarol">
       <div class="section-header">
         <div>
-          <h2 class="section-title">👕 Pizarra Táctica: <span>Armá tu 11 vs Montevideo Wanderers</span></h2>
-          <p class="section-sub">Armá tu alineación ideal para jugar en el Parque Saroldi en la Fecha 13 del Torneo Clausura (Sábado 31/10 16:30 hs)</p>
+          <h2 class="section-title">👕 Pizarra Táctica: <span>Armá tu 11 vs Defensor Sporting</span></h2>
+          <p class="section-sub">Armá tu alineación ideal para jugar en el Estadio Luis Franzini en la Fecha 14 del Torneo Clausura (Domingo 15/11 20:00 hs)</p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <button type="button" class="sim-btn active" data-formation="4-2-3-1">4-2-3-1 (Aguirre)</button>
@@ -1204,15 +1201,15 @@
 
         <div class="card-panel" style="border-color:rgba(255,209,0,0.4);background:rgba(255,209,0,0.03);">
           <div style="display:inline-block;background:var(--manya-gold);color:#000;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;">
-            Próxima Visita • Prado
+            Próxima Visita • Parque Rodó
           </div>
-          <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Cómo Llegar al Parque Saroldi / Prado (vs Wanderers)</h3>
+          <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Cómo Llegar al Estadio Luis Franzini / Parque Rodó (vs Defensor Sporting)</h3>
           <p style="font-size:13.5px;color:#d4d4d8;margin-bottom:12px;">
-            Líneas de ómnibus hacia Av. Agraciada, Av. Millán, Av. Buschental y Lucas Obes para la Fecha 13:
+            Líneas de ómnibus hacia Bvar. Artigas, 21 de Setiembre, Sarmiento y Av. Julio Herrera y Reissig para la Fecha 14:
           </p>
           <ul style="font-size:13.5px;color:#e4e4e7;padding-left:18px;margin-bottom:14px;">
-            <li><strong>Líneas por Agraciada / Buschental:</strong> 181, 183, 149, 151, 522, 538, G.</li>
-            <li><strong>Líneas por Av. Millán / Reyes:</strong> 148, 147, 526, 582, D5 (bajada a pasos del Parque Saroldi y Av. 19 de Abril).</li>
+            <li><strong>Líneas por Bvar. Artigas / 21 de Setiembre:</strong> 117, 121, 174, 192, 300, 405, 582 (bajada a pasos del Franzini).</li>
+            <li><strong>Líneas por Bvar. España / Parque Rodó:</strong> 104, 128, 145, 149, 181, 183, 300.</li>
           </ul>
           <a href="https://horarios.servicioti.com.uy/" class="btn-outline-gold" style="font-size:12.5px;">Consultar Horarios en Vivo en Horarios ServicioTI →</a>
         </div>

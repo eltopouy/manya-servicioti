@@ -151,50 +151,81 @@ class ManyaEcosystemTester:
         self.record_result("Integridad de Puntos (Tabla Anual 66 pts)", passed, msg, {"errors": errors})
 
     def test_rival_and_venue_verification(self):
-        """Verifica que el rival activo sea Montevideo Wanderers, DT Mathías Corujo, escenario Parque Saroldi y venta Tickantel."""
+        """Verifica que el rival activo, DT, escenario y venta de entradas correspondan a la etapa en disputa."""
         errors = []
+        live_file = DATA_DIR / "live_status.json"
+        rival_nombre = "Defensor Sporting"
+        estadio_esperado = "Franzini"
+        dt_esperado = "Andrés Rodríguez"
+        fecha_str = "Fecha 14"
+        ticket_str = "RedTickets"
+
+        if live_file.exists():
+            try:
+                live_data = json.loads(live_file.read_text(encoding="utf-8"))
+                prox = live_data.get("proximo_partido", {})
+                f_num = prox.get("fecha_numero", 14)
+                fecha_str = f"Fecha {f_num}"
+                
+                loc_nom = prox.get("local", {}).get("nombre", "")
+                vis_nom = prox.get("visitante", {}).get("nombre", "")
+                r_nom = vis_nom if prox.get("local", {}).get("es_penarol") else loc_nom
+                if "defensor" in r_nom.lower():
+                    rival_nombre = "Defensor Sporting"
+                    estadio_esperado = "Franzini"
+                    dt_esperado = "Andrés Rodríguez"
+                    ticket_str = "RedTickets"
+                elif "wanderers" in r_nom.lower():
+                    rival_nombre = "Montevideo Wanderers"
+                    estadio_esperado = "Saroldi"
+                    dt_esperado = "Mathías Corujo"
+                    ticket_str = "Tickantel"
+            except Exception as e:
+                errors.append(f"Error leyendo live_status: {e}")
+
+        # 1. En index.html
         html_file = BASE_DIR / "index.html"
         if html_file.exists():
             txt = html_file.read_text(encoding="utf-8")
-            if "Parque Federico Omar Saroldi" not in txt and "Parque Saroldi" not in txt:
-                errors.append("index.html no contiene el escenario oficial 'Parque Federico Omar Saroldi'")
-            if "Mathías Corujo" not in txt and "Mathías 'Chiche' Corujo" not in txt:
-                errors.append("index.html no menciona al DT oficial de Wanderers Mathías Corujo")
+            if rival_nombre not in txt:
+                errors.append(f"index.html no contiene mención al rival activo '{rival_nombre}'")
+            if estadio_esperado not in txt:
+                errors.append(f"index.html no contiene el escenario oficial esperado '{estadio_esperado}'")
+            if dt_esperado not in txt:
+                errors.append(f"index.html no menciona al DT oficial '{dt_esperado}'")
             if "Antonio Pacheco" in txt:
-                errors.append("index.html menciona erróneamente a Antonio Pacheco como DT de Wanderers")
-            if "Tickantel" not in txt:
-                errors.append("index.html no menciona 'Tickantel' para la venta oficial de entradas de Wanderers")
-            if "Fecha 13" not in txt:
-                errors.append("index.html no menciona la 'Fecha 13' del Torneo Clausura")
-            if "Fecha 12" in txt:
-                errors.append("index.html aún menciona erróneamente 'Fecha 12'")
+                errors.append("index.html menciona erróneamente a Antonio Pacheco como DT")
+            if fecha_str not in txt:
+                errors.append(f"index.html no menciona la '{fecha_str}' del Torneo Clausura")
 
-        live_file = DATA_DIR / "live_status.json"
+        # 2. En live_status.json
         if live_file.exists():
             txt_live = live_file.read_text(encoding="utf-8")
-            if "Fecha 13" not in txt_live:
-                errors.append("data/live_status.json no menciona la 'Fecha 13'")
-            if "Fecha 12" in txt_live:
-                errors.append("data/live_status.json aún menciona 'Fecha 12'")
+            if fecha_str not in txt_live:
+                errors.append(f"data/live_status.json no menciona la '{fecha_str}'")
+            if rival_nombre not in txt_live:
+                errors.append(f"data/live_status.json no contiene '{rival_nombre}'")
 
+        # 3. En news_digest.json
         digest_file = DATA_DIR / "news_digest.json"
         if digest_file.exists():
             txt_digest = digest_file.read_text(encoding="utf-8")
-            if "Fecha 13" not in txt_digest:
-                errors.append("data/news_digest.json no menciona la 'Fecha 13'")
-            if "Fecha 12" in txt_digest:
-                errors.append("data/news_digest.json contiene menciones viejas a 'Fecha 12'")
+            if fecha_str not in txt_digest:
+                errors.append(f"data/news_digest.json no menciona la '{fecha_str}'")
+            if rival_nombre not in txt_digest:
+                errors.append(f"data/news_digest.json no menciona al rival '{rival_nombre}'")
 
+        # 4. En rival_intelligence.json
         rival_file = DATA_DIR / "rival_intelligence.json"
         if rival_file.exists():
             txt = rival_file.read_text(encoding="utf-8")
-            if "Mathías Corujo" not in txt:
-                errors.append("data/rival_intelligence.json no tiene a Mathías Corujo como entrenador")
+            if dt_esperado not in txt:
+                errors.append(f"data/rival_intelligence.json no tiene a {dt_esperado} como entrenador")
             if "Antonio Pacheco" in txt:
                 errors.append("data/rival_intelligence.json menciona a Antonio Pacheco")
 
         passed = len(errors) == 0
-        msg = "Rival Montevideo Wanderers, DT Mathías Corujo, Parque Saroldi y Tickantel verificados" if passed else f"Errores de escenario/rival/DT: {'; '.join(errors)}"
+        msg = f"Rival {rival_nombre}, DT {dt_esperado}, {estadio_esperado} y {fecha_str} verificados" if passed else f"Errores de escenario/rival/DT: {'; '.join(errors)}"
         self.record_result("Verificación de Rival, DT y Escenario", passed, msg, {"errors": errors})
 
     def test_data_files_schema(self):
