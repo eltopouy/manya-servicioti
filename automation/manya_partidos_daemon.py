@@ -51,6 +51,7 @@ from blogger_manya_publisher import publish_manya_article_to_blogger
 def git_commit_and_push(mensaje: str):
     """Sincroniza los cambios hacia GitHub Pages."""
     try:
+        subprocess.run(["git", "pull", "--no-rebase", "-s", "ort", "-X", "ours", "origin", "main"], cwd=str(BASE_DIR), check=False)
         subprocess.run(["git", "add", "data/", "assets/", "index.html"], cwd=str(BASE_DIR), check=False)
         res = subprocess.run(["git", "commit", "-m", mensaje], cwd=str(BASE_DIR), capture_output=True, text=True)
         if "nothing to commit" not in res.stdout and "nothing to commit" not in res.stderr:

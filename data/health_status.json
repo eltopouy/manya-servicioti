@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "05/11/2026 09:07:40",
-  "timestamp": "2026-11-05T09:07:40.279137-03:00",
+  "fecha_auditoria": "05/11/2026 09:11:14",
+  "timestamp": "2026-11-05T09:11:14.777295-03:00",
   "score_salud": 100.0,
   "total_pruebas": 10,
-  "pruebas_exitosas": 8,
-  "pruebas_fallidas": 2,
-  "estado_general": "ALERTA",
+  "pruebas_exitosas": 10,
+  "pruebas_fallidas": 0,
+  "estado_general": "OPTIMO",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 09:07:36",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 09:11:12",
       "details": {
-        "now_uy": "2026-11-05 09:07:36.614278-03:00",
+        "now_uy": "2026-11-05 09:11:12.085020-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-05T09:07:36.614340-03:00"
+      "timestamp": "2026-11-05T09:11:12.085074-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 10,
         "es_hoy": false
       },
-      "timestamp": "2026-11-05T09:07:36.615625-03:00"
+      "timestamp": "2026-11-05T09:11:12.086384-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T09:07:36.619541-03:00"
+      "timestamp": "2026-11-05T09:11:12.089709-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T09:07:36.623088-03:00"
+      "timestamp": "2026-11-05T09:11:12.092489-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-05T09:07:36.628660-03:00"
+      "timestamp": "2026-11-05T09:11:12.097416-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,20 +68,20 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-05T09:07:36.628911-03:00"
+      "timestamp": "2026-11-05T09:11:12.097659-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)']",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
@@ -89,7 +89,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
@@ -97,7 +97,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-05T09:07:40.260266-03:00"
+      "timestamp": "2026-11-05T09:11:14.757283-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,19 +107,17 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T09:07:40.263013-03:00"
+      "timestamp": "2026-11-05T09:11:14.760252-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Inconsistencias editoriales: news_digest.json: No menciona la Fecha 14 del Torneo Clausura",
+      "status": "PASS",
+      "passed": true,
+      "message": "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)",
       "details": {
-        "errors": [
-          "news_digest.json: No menciona la Fecha 14 del Torneo Clausura"
-        ]
+        "errors": []
       },
-      "timestamp": "2026-11-05T09:07:40.269933-03:00"
+      "timestamp": "2026-11-05T09:11:14.767740-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -129,7 +127,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T09:07:40.278945-03:00"
+      "timestamp": "2026-11-05T09:11:14.777020-03:00"
     }
   ]
 }
