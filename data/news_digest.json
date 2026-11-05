@@ -1,35 +1,35 @@
 {
-  "actualizado": "05/11/2026 11:16",
+  "actualizado": "05/11/2026 11:46",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
   "partido_id": "",
-  "titular_dia": "Enfoque total en Los Aromos: Peñarol afina la artillería para una visita de alto voltaje al Estadio Luis Franzini",
-  "bajada_seo": "Peñarol prepara su duelo ante Defensor Sporting en el Estadio Luis Franzini por la Fecha 14 del Clausura. Con 66 puntos en la Tabla Anual, el Carbonero busca dar el golpe definitivo rumbo al título. Transmite VTV Plus y Disney+ Premium.",
+  "titular_dia": "Peñarol afina la artillería en Los Aromos con la mira puesta en el Parque Rodó ante Defensor Sporting",
+  "bajada_seo": "Peñarol prepara su visita al Estadio Luis Franzini frente a Defensor Sporting por la Fecha 14 del Torneo Clausura. El Carbonero lidera la Tabla Anual con 66 puntos y el cotejo será televisado en vivo por VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Clave Táctica",
-      "detalle": "Diego Aguirre ratifica el 4-2-3-1 con intensidad en la presión alta y transiciones punzantes por las bandas."
+      "detalle": "Esquema 4-2-3-1 de Diego Aguirre enfocado en la presión tras pérdida y transiciones verticales rápidas."
     },
     {
       "icono": "🔥",
       "titulo": "La Figura a Seguir",
-      "detalle": "Leonardo Fernández, dueño de las pelotas quietas y el ritmo ofensivo del decano uruguayo."
+      "detalle": "Leonardo Fernández y su excelsa pegada a balón parado para abrir defensas cerradas."
     },
     {
       "icono": "📺",
       "titulo": "Transmisión y Horario",
-      "detalle": "Domingo 15/11/2026 a las 20:00 hs en vivo por VTV Plus y Disney+ Premium."
+      "detalle": "Domingo 15/11/2026 20:00 hs en vivo por VTV Plus y plataforma Disney+ Premium."
     },
     {
       "icono": "📊",
       "titulo": "Puntos en Juego",
-      "detalle": "Liderazgo absoluto: Peñarol manda en la Tabla Anual con 66 puntos oficiales AUF y +24 de saldo."
+      "detalle": "Manya en la cima: el Decano manda en solitario en la Tabla Anual con 66 puntos oficiales AUF."
     }
   ],
   "articulo_principal": {
-    "titulo": "Semana de alta exigencia táctica en Los Aromos: Aguirre ajusta detalles para asaltar el Parque Rodó",
-    "subtitulo": "El líder de la Tabla Anual encara el sprint final del Clausura con la mira calibrada en el duelo ante Defensor Sporting",
+    "titulo": "Foco en el Franzini: Peñarol trabaja sin tregua para blindar la cima del Campeonato Uruguayo",
+    "subtitulo": "Con diez días de intensa preparación en Los Aromos, Diego Aguirre ajusta las piezas del once aurinegro para dar un golpe clave ante el violeta.",
     "parrafos": [
       "Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos oficiales, el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad al equipo para afrontar la visita ante Defensor Sporting vs Peñarol en Estadio Luis Franzini (Montevideo) por la Fecha 14 del Torneo Clausura.",
       "Enfrente estará un Defensor Sporting vs Peñarol tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación carbonera mediante repliegue ordenado y transiciones rápidas por las bandas. El plan táctico de Peñarol radicará en imponer la jerarquía en la posesión, asfixiar la salida adversaria con la presión alta de Maximiliano Silvera y liberar los callejones interiores para la zurda magistral de Leonardo Fernández, respaldado por la aceleración de Javier Cabrera y Jaime Báez.",
@@ -43,11 +43,11 @@
       },
       {
         "q": "¿Cómo formaría Peñarol?",
-        "a": "Diego Aguirre perfila un esquema 4-2-3-1 con Washington Aguerre en el arco; Guzmán Rodríguez y Javier Méndez en la zaga; y Leonardo Fernández como enlace ofensivo."
+        "a": "Diego Aguirre perfila su clásico 4-2-3-1 con Washington Aguerre en el arco; zaga Méndez-Rodríguez, doble contención de corte y Leo Fernández como eje de creación ofensiva."
       },
       {
         "q": "¿Qué se juega Peñarol en este partido?",
-        "a": "El Carbonero se juega la custodia de la cima de la Tabla Anual, donde lidera con 66 puntos oficiales AUF, además de puntos determinantes en la definición del Torneo Clausura."
+        "a": "El Carbonero se juega puntos vitales para asegurar la Tabla Anual, donde lidera con 66 puntos, y sellar su pasaje directo a la definición por el título del Campeonato Uruguayo."
       }
     ]
   },
