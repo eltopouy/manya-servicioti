@@ -110,44 +110,50 @@ class ManyaEcosystemTester:
             self.record_result("Coherencia Temporal 'es_hoy'", False, "No existe data/live_status.json")
 
     def test_points_and_standings_integrity(self):
-        """Verifica que la Tabla Anual indique 66 puntos y no persistan referencias a 64 pts."""
+        """Verifica que la Tabla Anual indique 66 puntos y no persistan referencias a 64 o 65 pts."""
         errors = []
+        puntos_obsoletos = ["64 puntos", "64 pts", "64 unidades", "65 puntos", "65 pts", "65 unidades", "Líder 65p"]
+
         # 1. En live_status.json
         live_file = DATA_DIR / "live_status.json"
         if live_file.exists():
-            txt = live_file.read_text(encoding="utf-8")
-            if "64 puntos" in txt or "64 pts" in txt or "64 unidades" in txt:
-                errors.append("data/live_status.json contiene menciones a 64 pts")
-            if "66" not in txt:
+            txt_live = live_file.read_text(encoding="utf-8")
+            for ob in puntos_obsoletos:
+                if ob in txt_live:
+                    errors.append(f"data/live_status.json contiene '{ob}'")
+            if "66" not in txt_live:
                 errors.append("data/live_status.json no refleja los 66 puntos de la Tabla Anual")
         
         # 2. En news_digest.json
         digest_file = DATA_DIR / "news_digest.json"
         if digest_file.exists():
-            txt = digest_file.read_text(encoding="utf-8")
-            if "64 puntos" in txt or "64 pts" in txt or "64 unidades" in txt:
-                errors.append("data/news_digest.json contiene menciones a 64 pts")
-            if "66 puntos" not in txt and "66 unidades" not in txt:
+            txt_digest = digest_file.read_text(encoding="utf-8")
+            for ob in puntos_obsoletos:
+                if ob in txt_digest:
+                    errors.append(f"data/news_digest.json contiene '{ob}'")
+            if "66 puntos" not in txt_digest and "66 unidades" not in txt_digest:
                 errors.append("data/news_digest.json no menciona los 66 puntos de Peñarol")
 
         # 3. En index.html
         html_file = BASE_DIR / "index.html"
         if html_file.exists():
-            txt = html_file.read_text(encoding="utf-8")
-            if "64 puntos" in txt or "64 unidades" in txt:
-                errors.append("index.html contiene menciones a 64 unidades/puntos")
-            if "66" not in txt:
+            txt_html = html_file.read_text(encoding="utf-8")
+            for ob in puntos_obsoletos:
+                if ob in txt_html:
+                    errors.append(f"index.html contiene '{ob}'")
+            if "66" not in txt_html:
                 errors.append("index.html no refleja los 66 puntos de la Tabla Anual")
 
         # 4. En js/app.js
         app_js = BASE_DIR / "js" / "app.js"
         if app_js.exists():
-            txt = app_js.read_text(encoding="utf-8")
-            if "64 puntos" in txt or "64 pts" in txt:
-                errors.append("js/app.js contiene menciones a 64 puntos")
+            txt_js = app_js.read_text(encoding="utf-8")
+            for ob in puntos_obsoletos:
+                if ob in txt_js:
+                    errors.append(f"js/app.js contiene '{ob}'")
 
         passed = len(errors) == 0
-        msg = "Todos los archivos sincronizados en 66 puntos oficiales AUF" if passed else f"Inconsistencias encontradas: {'; '.join(errors)}"
+        msg = "Todos los archivos sincronizados en 66 puntos oficiales AUF (sin rastros de 64 o 65 pts)" if passed else f"Inconsistencias encontradas: {'; '.join(errors)}"
         self.record_result("Integridad de Puntos (Tabla Anual 66 pts)", passed, msg, {"errors": errors})
 
     def test_rival_and_venue_verification(self):
@@ -328,10 +334,23 @@ class ManyaEcosystemTester:
                 errors.append("index.html contiene relato viejo del Centenario en el match center")
             if "manya_app_ver" not in txt:
                 errors.append("index.html no tiene el script auto-invalidador de caché PWA")
+            if "APP_VER = '8.5'" not in txt:
+                errors.append("index.html no tiene APP_VER unificada en 8.5")
+            if "styles.css?v=8.5" not in txt:
+                errors.append("index.html no enlaza css/styles.css?v=8.5")
+            if "app.js?v=8.5" not in txt:
+                errors.append("index.html no enlaza js/app.js?v=8.5")
+
+        if sw_file.exists():
+            sw_txt = sw_file.read_text(encoding="utf-8")
+            if "v8.5" not in sw_txt:
+                errors.append("sw.js CACHE_NAME no está alineado con v8.5")
+            if "influencers_feed.json" not in sw_txt:
+                errors.append("sw.js CORE_ASSETS no incluye influencers_feed.json")
 
         passed = len(errors) == 0
-        msg = "PWA Network-First, selector de tablas en Clausura y saneamiento de caché verificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
-        self.record_result("PWA Network-First y Selector Clausura/Anual", passed, msg, {"errors": errors})
+        msg = "PWA Network-First, versiones v8.5 en armonía completa y selector Clausura/Anual certificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
+        self.record_result("PWA Network-First y Armonía de Versiones v8.5", passed, msg, {"errors": errors})
 
 
     def test_editorial_coherence_and_anti_contamination(self):

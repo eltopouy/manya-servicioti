@@ -865,7 +865,7 @@ class ManyaMatchEngine:
             partido_activo_data["detalles_avanzados"] = summary_adv
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
             tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
-            estadio_nom = proximo_partido_data.get('estadio') or 'Parque Federico Omar Saroldi (Prado)'
+            estadio_nom = proximo_partido_data.get('estadio') or 'Estadio Luis Franzini (Montevideo)'
             alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
 
         # Identificar el rival activo para la sincronización de inteligencia y 1891 BD
@@ -875,10 +875,10 @@ class ManyaMatchEngine:
 
         try:
             from manya_rival_intelligence import resolver_meta_rival
-            meta_rival = resolver_meta_rival(rival_activo_nombre or "wanderers")
+            meta_rival = resolver_meta_rival(rival_activo_nombre or "defensor_sporting")
             rival_activo_slug = meta_rival.get("slug", "wanderers")
         except Exception:
-            rival_activo_slug = "wanderers"
+            rival_activo_slug = "defensor_sporting"
 
         libertadores_info = cls.fetch_libertadores_standings()
         torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
@@ -893,7 +893,7 @@ class ManyaMatchEngine:
                 "nombre": "Torneo Clausura 2026",
                 "nombre_corto": "Torneo Clausura",
                 "icono": "⚽",
-                "badge": "En Disputa • Fecha 13",
+                "badge": "En Disputa • Fecha 14",
                 "es_proximo": True,
                 "datos": tabla_clausura
             },
@@ -902,7 +902,7 @@ class ManyaMatchEngine:
                 "nombre": "Tabla Anual Acumulada Oficial (AUF)",
                 "nombre_corto": "Tabla Anual",
                 "icono": "🏆",
-                "badge": "Líder Solitario • 65 pts",
+                "badge": "Líder Solitario • 66 pts",
                 "es_proximo": False,
                 "datos": tabla_anual
             },

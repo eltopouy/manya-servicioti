@@ -4,7 +4,7 @@ Supervisa la salud de todo el ecosistema y, al detectar fallos, desincronizacion
 aplica reparaciones automáticas de inmediato y vuelve a compilar/desplegar.
 
 Capacidades de Auto-Reparación:
-1. `auto_corregir_puntos()`: Sanea y unifica los 65 puntos oficiales de la Tabla Anual.
+1. `auto_corregir_puntos()`: Sanea y unifica los 66 puntos oficiales de la Tabla Anual.
 2. `auto_ajustar_temporalidad_match_day()`: Sincroniza 'es_hoy' y la edición '¡Hoy juega el Manya!' según el reloj de Uruguay (UY_TZ).
 3. `auto_corregir_escenario_y_rival()`: Erradica cualquier mención desactualizada de estadios (Saroldi/Centenario) o rivales viejos.
 4. `auto_limpiar_locks_huerfanos()`: Elimina locks trabados de más de 15 minutos para evitar bloqueos del sistema.
@@ -88,7 +88,7 @@ class ManyaSelfHealingWatchdog:
 
             if modificado:
                 fp.write_text(txt, encoding="utf-8")
-                msg = f"Auto-corregido {fp.name}: actualizadas referencias a 65 puntos."
+                msg = f"Auto-corregido {fp.name}: actualizadas referencias a 66 puntos."
                 self.reparaciones_realizadas.append(msg)
                 logger.info(f"[Auto-Healing] ✓ {msg}")
 
@@ -121,7 +121,7 @@ class ManyaSelfHealingWatchdog:
             if not live_data.get("partido_activo", {}).get("es_hoy"):
                 live_data["partido_activo"]["es_hoy"] = True
                 live_data["fase_partido"] = "PREVIA"
-                live_data["alerta_banner"] = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {prox.get('nombre')} a las {prox.get('fecha_legible','16:30 hs')} en {prox.get('estadio','Parque Viera')} • VTV Plus / Disney+."
+                live_data["alerta_banner"] = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {prox.get('nombre')} a las {prox.get('fecha_legible','16:30 hs')} en {prox.get('estadio','Estadio Luis Franzini')} • VTV Plus / Disney+."
                 live_file.write_text(json.dumps(live_data, ensure_ascii=False, indent=2), encoding="utf-8")
                 msg = "Auto-ajuste: Activado 'es_hoy=True' y alerta de partido para hoy."
                 self.reparaciones_realizadas.append(msg)
@@ -133,7 +133,7 @@ class ManyaSelfHealingWatchdog:
                 digest_data = json.loads(digest_file.read_text(encoding="utf-8"))
                 tit = digest_data.get("titular_dia", "")
                 if "hoy juega" not in tit.lower():
-                    digest_data["titular_dia"] = f"¡Hoy juega el Manya! {prox.get('nombre','Peñarol')} defiende la punta de la Tabla Anual en el Prado"
+                    digest_data["titular_dia"] = f"¡Hoy juega el Manya! {prox.get('nombre','Peñarol')} defiende la punta de la Tabla Anual en el Franzini"
                     digest_data["fase_publicacion"] = "HOY_JUEGA"
                     digest_file.write_text(json.dumps(digest_data, ensure_ascii=False, indent=2), encoding="utf-8")
                     msg = "Auto-ajuste: Activado titular '¡Hoy juega el Manya!' para día de partido."
@@ -155,7 +155,7 @@ class ManyaSelfHealingWatchdog:
                 digest_data = json.loads(digest_file.read_text(encoding="utf-8"))
                 tit = digest_data.get("titular_dia", "")
                 if "hoy juega" in tit.lower():
-                    digest_data["titular_dia"] = f"La Previa Aurinegra: Peñarol afina detalles antes de enfrentar a {prox.get('visitante',{}).get('nombre','Wanderers')}"
+                    digest_data["titular_dia"] = f"La Previa Aurinegra: Peñarol afina detalles antes de enfrentar a {rival_activo_nombre}"
                     digest_file.write_text(json.dumps(digest_data, ensure_ascii=False, indent=2), encoding="utf-8")
                     msg = "Auto-ajuste: Saneado titular para no decir 'hoy juega' antes de fecha."
                     self.reparaciones_realizadas.append(msg)

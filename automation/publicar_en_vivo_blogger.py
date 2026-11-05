@@ -471,7 +471,7 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
             “A veces la pelota se encapricha y la tarde se cierra, pero en la Tabla Anual sigue mandando Peñarol. Ahora hay que tragarse la bronca, corregir sin histeria y salir al Prado a jugar como lo que somos: el cuadro más grande del país.” — Diego Aguirre / Balance Editorial
           </blockquote>
           <p style="margin-bottom:14px;">
-            El pitazo final cayó como un baldazo de agua helada sobre la tribuna y dejó una mueca de desencanto en el túnel de vestuarios. La frialdad de las tablas dicta que Peñarol sigue mandando en el año con 64 puntos, amo y señor de la acumulada, pero en el Clausura la cornisa es angosta y resbaladiza. Diego Aguirre y sus dirigidos saben que el crédito del error se evaporó en noventa minutos de impotencia ofensiva. Y el calendario no concede tregua: en el horizonte asoma el Montevideo Wanderers de Antonio Pacheco, un prócer de la casa que ahora viste ropas de verdugo táctico. No habrá tiempo para lamerse las heridas; si Peñarol pretende la gloria eterna del Uruguayo, deberá cambiar el martillo ciego por el bisturí de los campeones.
+            El pitazo final cayó como un baldazo de agua helada sobre la tribuna y dejó una mueca de desencanto en el túnel de vestuarios. La frialdad de las tablas dicta que Peñarol sigue mandando en el año con 66 puntos, amo y señor de la acumulada, pero en el Clausura la cornisa es angosta y resbaladiza. Diego Aguirre y sus dirigidos saben que el crédito del error se evaporó en noventa minutos de impotencia ofensiva. Y el calendario no concede tregua: en el horizonte asoma el Montevideo Wanderers de Antonio Pacheco, un prócer de la casa que ahora viste ropas de verdugo táctico. No habrá tiempo para lamerse las heridas; si Peñarol pretende la gloria eterna del Uruguayo, deberá cambiar el martillo ciego por el bisturí de los campeones.
           </p>
         </div>
 
@@ -494,7 +494,7 @@ def construir_html_blogger_en_vivo(match_info: dict, eventos: list) -> str:
 
           <div style="background:#141419;border-left:4px solid #10b981;padding:12px 14px;border-radius:8px;">
             <div style="font-size:11.5px;color:#34d399;font-weight:900;margin-bottom:4px;">📐 LA BALANZA DE ACERO • La Matemática del Título</div>
-            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Peñarol custodia la cima solitaria de la Anual con 64 puntos, un blindaje de oro. Pero en el Clausura la cornisa quema como brasas: ceder dos unidades achica el margen a cero.”</p>
+            <p style="font-size:12.5px;color:#d4d4d8;margin:0;line-height:1.45;">“Peñarol custodia la cima solitaria de la Anual con 66 puntos, un blindaje de oro. Pero en el Clausura la cornisa quema como brasas: ceder dos unidades achica el margen a cero.”</p>
           </div>
         </div>
       </div>

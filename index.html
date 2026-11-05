@@ -32,17 +32,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet" />
-    <!-- Auto Cache-Buster & PWA Invalidator v7.0 -->
+    <!-- Auto Cache-Buster & PWA Invalidator v8.5 -->
   <script>
     (function() {
-      var APP_VER = '8.0';
+      var APP_VER = '8.5';
       try {
         if (localStorage.getItem('manya_app_ver') !== APP_VER) {
           localStorage.setItem('manya_app_ver', APP_VER);
           if ('caches' in window) {
             caches.keys().then(function(keys) {
               keys.forEach(function(k) {
-                if (!k.includes('v8.4')) {
+                if (!k.includes('v8.5')) {
                   caches.delete(k);
                 }
               });
@@ -57,7 +57,7 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=8.4" />
+  <link rel="stylesheet" href="css/styles.css?v=8.5" />
 
   <!-- Grafo Schema.org @graph (SportsTeam + SportsEvent + WebApplication + FAQPage) -->
   <script type="application/ld+json">
@@ -787,7 +787,7 @@
             </div>
             <div class="standings-toggle-pills" id="standings-tabs-container">
               <button type="button" class="standings-pill active" data-tab="clausura"><span>⚽ Torneo Clausura</span><span class="pill-badge" style="background:#ffd100;color:#09090b;font-weight:900;">En Disputa</span></button>
-              <button type="button" class="standings-pill" data-tab="anual"><span>🏆 Tabla Anual</span><span class="pill-badge">Líder 65p</span></button>
+              <button type="button" class="standings-pill" data-tab="anual"><span>🏆 Tabla Anual</span><span class="pill-badge">Líder 66p</span></button>
               <button type="button" class="standings-pill" data-tab="libertadores"><span>🌎 Copa Libertadores</span><span class="pill-badge">Conmebol</span></button>
             </div>
           </div>
@@ -979,7 +979,7 @@
           <div class="ig-body" style="padding:14px 16px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
             <div>
               <div style="font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px;">
-                <span>⚽ Peñarol vs Wanderers • Fecha 13</span><span style="color:#f87171;font-weight:800;">❤️ 58.2K • 💬 1,450</span>
+                <span>⚽ Enfoque Fecha 14 • Defensor Sporting</span><span style="color:#f87171;font-weight:800;">❤️ 58.2K • 💬 1,450</span>
               </div>
               <h3 style="font-size:15px;font-weight:900;color:#fff;margin:0 0 8px;">El Decano alista artillería en Los Aromos para la batalla en el Franzini</h3>
               <p style="font-size:13px;color:#d4d4d8;margin:0 0 10px;">Jornadas de máxima concentración en el Complejo Washington Cataldi. Diego Aguirre ajusta el bloque táctico y variantes de ataque para enfrentar a Defensor Sporting por la Fecha 14.</p>
@@ -1355,6 +1355,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js?v=8.0" defer></script>
+  <script src="js/app.js?v=8.5" defer></script>
 </body>
 </html>

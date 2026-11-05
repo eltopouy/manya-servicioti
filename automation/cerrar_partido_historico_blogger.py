@@ -102,7 +102,7 @@ def construir_html_historico(
     t_tribuna = prismas.get("epica_tribuna", {}).get("texto", "Más de 30.000 hinchas coparon el Centenario empujando con la laringe rota hasta el último segundo de adición.")
     t_tactica = prismas.get("pizarron_tactico", {}).get("texto", "68% de posesión pero asfixia en el cerrojo pedrense de 25 metros. La zona 14 fue una aduana saturada.")
     t_trastienda = prismas.get("trastienda_vestuario", {}).get("texto", "Silencio denso en camarines, autocrítica de hierro de Aguirre y juramento silencioso para visitar el Viera.")
-    t_campeonato = prismas.get("aritmetica_campeonato", {}).get("texto", "Peñarol sigue en la cima solitaria de la Anual con 64 puntos; en el Clausura el margen de error es cero.")
+    t_campeonato = prismas.get("aritmetica_campeonato", {}).get("texto", "Peñarol sigue en la cima solitaria de la Anual con 66 puntos; en el Clausura el margen de error es cero.")
 
     # Duelos clave para el próximo cruce
     duelos_html = ""
@@ -128,7 +128,7 @@ def construir_html_historico(
       <span style="color:#a1a1aa;font-size:12px;">Archivado: {now_str} hs</span>
     </div>
     <p style="margin:6px 0 0;font-size:13px;color:#d4d4d8;line-height:1.5;">
-      Este encuentro correspondiente a la Fecha 11 del Torneo Clausura ha finalizado. Peñarol sostiene el <strong>primer puesto en solitario de la Tabla Anual con 64 puntos</strong>. Consulta a continuación el balance definitivo, las estadísticas oficiales y <strong>lo próximo que vendrá ante Montevideo Wanderers</strong>.
+      Este encuentro correspondiente a la Fecha 11 del Torneo Clausura ha finalizado. Peñarol sostiene el <strong>primer puesto en solitario de la Tabla Anual con 66 puntos</strong>. Consulta a continuación el balance definitivo, las estadísticas oficiales y <strong>lo próximo que vendrá ante el siguiente rival del Torneo Clausura</strong>.
     </p>
   </div>
 
@@ -177,7 +177,7 @@ def construir_html_historico(
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;background:rgba(0,0,0,0.4);padding:14px;border-radius:10px;font-size:12.5px;text-align:center;">
       <div>📅 <strong>Fecha:</strong> {fecha_ult}</div>
       <div>🏟️ <strong>Escenario:</strong> {estadio_ult}</div>
-      <div>📊 <strong>Tabla Anual:</strong> <span style="color:#ffd100;font-weight:900;">64 pts (Líder Solitario)</span></div>
+      <div>📊 <strong>Tabla Anual:</strong> <span style="color:#ffd100;font-weight:900;">66 pts (Líder Solitario)</span></div>
     </div>
 
   </div>
@@ -293,7 +293,7 @@ def construir_html_historico(
       <div style="border-left:2px solid #ffd100;margin-left:10px;padding-left:14px;position:relative;margin-bottom:14px;">
         <span style="position:absolute;left:-7px;top:2px;width:12px;height:12px;background:#ffd100;border-radius:50%;"></span>
         <strong style="color:#ffd100;font-size:13px;">90+5' • FINAL DEL PARTIDO</strong>
-        <p style="font-size:13px;color:#d4d4d8;margin:2px 0 0;">Pitazo final del árbitro en el Centenario. Juventud 0 - 0 Peñarol. El Decano suma un punto y continúa como líder solitario de la Tabla Anual con 64 unidades.</p>
+        <p style="font-size:13px;color:#d4d4d8;margin:2px 0 0;">Pitazo final del árbitro en el Centenario. Juventud 0 - 0 Peñarol. El Decano suma un punto y continúa como líder solitario de la Tabla Anual con 66 unidades.</p>
       </div>
 
       <div style="border-left:2px solid #ffd100;margin-left:10px;padding-left:14px;position:relative;margin-bottom:14px;">

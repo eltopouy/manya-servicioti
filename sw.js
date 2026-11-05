@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v8.4-duelos-tacticos-defensor-certified';
+const CACHE_NAME = 'manya-servicioti-v8.5-ecosystem-unified';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -17,7 +17,9 @@ const CORE_ASSETS = [
   '/data/historial_wanderers.json',
   '/data/efemerides_hoy.json',
   '/data/rival_intelligence.json',
-  '/data/blogger_pagina_historica.json'
+  '/data/blogger_pagina_historica.json',
+  '/data/influencers_feed.json',
+  '/data/tatuajes_manya.json'
 ];
 
 self.addEventListener('install', event => {

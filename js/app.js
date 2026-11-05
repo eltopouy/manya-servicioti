@@ -542,7 +542,7 @@
     window._manyaLivePolling = setInterval(async () => {
       if (state.live && (state.live.fase_partido === 'EN_VIVO' || state.live.fase_partido === 'PREVIA')) {
         try {
-          const fresh = await loadJsonSafe(`data/live_status.json?v=${Date.now()}`);
+          const fresh = await loadJsonSafe('data/live_status.json');
           if (fresh && fresh.actualizado !== state.live.actualizado) {
             state.live = fresh;
             renderMatchHero(fresh);
@@ -561,8 +561,8 @@
     const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
       ? state.live.tablas_campeonatos
       : [
-          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 13', es_proximo: true },
-          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 65p', es_proximo: false },
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 14', es_proximo: true },
+          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 66p', es_proximo: false },
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
 
@@ -645,7 +645,7 @@
         const proxMatch = state.live.proximo_partido || {};
         const rivalNom = (proxMatch.local && !proxMatch.local.es_penarol)
           ? proxMatch.local.nombre
-          : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Montevideo Wanderers');
+          : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Defensor Sporting');
         subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>${rivalNom}</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (66 pts) →</button>`;
       } else if (activeTourn.id === 'anual') {
         subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada oficial. Define el Campeón Uruguayo 2026. <strong style="color:var(--manya-gold);">Peñarol es líder solitario con 66 puntos (+24 DG).</strong> <button type="button" id="btn-quick-switch-clausura" style="background:#27272a;color:#ffd100;font-weight:900;border:1px solid #ffd100;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">⚽ Ver Torneo Clausura (Próximo Partido) →</button>`;

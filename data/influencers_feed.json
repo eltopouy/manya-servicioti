@@ -1,21 +1,21 @@
 [
   {
-    "id": "oficialcap_previa_wanderers",
+    "id": "oficialcap_previa_defensor",
     "handle": "@oficialcap",
     "nombre": "Club Atlético Peñarol (Oficial)",
     "badge": "Cuenta Oficial • +750K Fans",
     "avatar": "assets/img/influencers/avatar_oficialcap.svg",
     "url_instagram": "https://www.instagram.com/oficialcap/",
-    "titulo": "El Decano concentrado en Los Aromos para la duelo en el Parque Saroldi",
-    "descripcion": "Último ensayo táctico en el Complejo Washington Cataldi. Diego Aguirre definió el once titular y la lista de convocados para enfrentar a Montevideo Wanderers en la Fecha 13 del Torneo Clausura.",
+    "titulo": "El Decano concentrado en Los Aromos para el choque ante Defensor Sporting en el Franzini",
+    "descripcion": "Semana de máxima intensidad en el Complejo Washington Cataldi. Diego Aguirre ajusta el bloque táctico y variantes de ataque para enfrentar a Defensor Sporting por la Fecha 14 del Torneo Clausura.",
     "imagen_webp": "assets/ig/manya_entrenamiento_los_aromos_tactica.webp",
     "imagen_jpg": "assets/ig/manya_entrenamiento_los_aromos_tactica.jpg",
-    "partido": "Wanderers vs Peñarol • Fecha 13 Clausura",
+    "partido": "Defensor Sporting vs Peñarol • Fecha 14 Clausura",
     "categoria": "partidos",
     "likes": 58200,
     "comments": 1450,
     "likes_formato": "58.2K",
-    "hashtags": "#Peñarol #VamosCarbonero #TorneoClausura #LosAromos #LaVidaPorPeñarol"
+    "hashtags": "#Peñarol #VamosCarbonero #TorneoClausura #LosAromos #Franzini"
   },
   {
     "id": "padreydecanocom_fiesta_tribunas",

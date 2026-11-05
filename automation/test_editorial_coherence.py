@@ -212,6 +212,23 @@ def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
     else:
         errors.append("No existe data/rival_intelligence.json")
 
+    # 5. Auditar data/influencers_feed.json (Anti-Contaminación en el Feed Social de la Previa)
+    inf_file = DATA_DIR / "influencers_feed.json"
+    if inf_file.exists():
+        try:
+            inf = json.loads(inf_file.read_text(encoding="utf-8"))
+            if inf and len(inf) > 0:
+                item0_str = json.dumps(inf[0], ensure_ascii=False).lower()
+                for prohibido, motivo in terminos_prohibidos_en_editorial:
+                    if prohibido.lower() in item0_str:
+                        errors.append(f"influencers_feed.json (item 0): {motivo} ('{prohibido}')")
+                if rival_esperado.lower() not in item0_str:
+                    errors.append(f"influencers_feed.json (item 0): No menciona al rival activo '{rival_esperado}'")
+        except Exception as e:
+            errors.append(f"Error procesando data/influencers_feed.json: {e}")
+    else:
+        errors.append("No existe data/influencers_feed.json")
+
     return len(errors) == 0, errors
 
 
