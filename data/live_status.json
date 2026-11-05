@@ -1,9 +1,9 @@
 {
-  "actualizado": "05/11/2026 09:45",
+  "actualizado": "05/11/2026 10:15",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 111.3,
+  "horas_desde_ultimo_partido": 111.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Defensor Sporting vs Peñarol el Domingo 15/11/2026 a las 20:00 hs (Estadio Luis Franzini (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -369,12 +369,12 @@
       "equipo": "Peñarol",
       "es_penarol": true,
       "pj": 35,
-      "pg": 19,
+      "pg": 18,
       "pe": 9,
       "pp": 7,
-      "gf": 52,
-      "gc": 28,
-      "dg": "+24",
+      "gf": 49,
+      "gc": 27,
+      "dg": "+22",
       "pts": 66
     },
     {
@@ -459,13 +459,13 @@
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 13,
       "pe": 8,
-      "pp": 14,
-      "gf": 47,
-      "gc": 44,
-      "dg": "+3",
+      "pp": 13,
+      "gf": 46,
+      "gc": 41,
+      "dg": "+5",
       "pts": 47
     },
     {
@@ -1065,7 +1065,7 @@
       "nombre": "Tabla Anual Acumulada Oficial (AUF)",
       "nombre_corto": "Tabla Anual",
       "icono": "🏆",
-      "badge": "Líder Solitario • 66 pts",
+      "badge": "Líder Solitario • 65 pts",
       "es_proximo": false,
       "datos": [
         {
@@ -1073,12 +1073,12 @@
           "equipo": "Peñarol",
           "es_penarol": true,
           "pj": 35,
-          "pg": 19,
+          "pg": 18,
           "pe": 9,
           "pp": 7,
-          "gf": 52,
-          "gc": 28,
-          "dg": "+24",
+          "gf": 49,
+          "gc": 27,
+          "dg": "+22",
           "pts": 66
         },
         {
@@ -1163,13 +1163,13 @@
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 13,
           "pe": 8,
-          "pp": 14,
-          "gf": 47,
-          "gc": 44,
-          "dg": "+3",
+          "pp": 13,
+          "gf": 46,
+          "gc": 41,
+          "dg": "+5",
           "pts": 47
         },
         {
@@ -1348,13 +1348,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 20.3,
-    "sensacion_c": 19.8,
-    "viento_kmh": 13.0,
-    "humedad_pct": 53,
+    "temperatura_c": 20.9,
+    "sensacion_c": 20.6,
+    "viento_kmh": 13.8,
+    "humedad_pct": 50,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "05/11/2026 09:45"
+    "actualizado": "05/11/2026 10:15"
   },
   "minuto_a_minuto": [
     {
