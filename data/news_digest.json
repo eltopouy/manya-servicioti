@@ -1,10 +1,10 @@
 {
-  "actualizado": "04/11/2026 22:06",
+  "actualizado": "04/11/2026 22:15",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
   "partido_id": "",
-  "titular_dia": "La cuenta regresiva carbonera apunta al Franzini: Peñarol ajusta las piezas con la mira en Defensor",
-  "bajada_seo": "Torneo Clausura (Fecha 14): Peñarol intensifica los trabajos en Los Aromos para visitar a Defensor Sporting en el Estadio Luis Franzini (Domingo 15 de noviembre, 20:00 hs). Peñarol lidera la Tabla Anual con 66 puntos oficiales AUF.",
+  "titular_dia": "Con la mira en el Franzini: Peñarol ajusta las piezas en Los Aromos a 11 días de un duelo clave",
+  "bajada_seo": "Torneo Clausura (Fecha 14): El aurinegro intensifica los trabajos pensando en Defensor Sporting vs Peñarol en el Estadio Luis Franzini (Montevideo). Enterate de los detalles del equipo de Diego Aguirre, la recuperación de Leonardo Fernández y cómo ver el partido en vivo por VTV Plus y Disney+ Premium. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
@@ -24,17 +24,12 @@
     {
       "icono": "📊",
       "titulo": "Puntos en Juego",
-      "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 65 pts)"
-    },
-    {
-      "icono": "📊",
-      "titulo": "Cima de la Tabla Anual",
-      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
+      "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 66 puntos oficiales AUF)"
     }
   ],
   "articulo_principal": {
-    "titulo": "Con la mira en el Parque Rodó: la interna aurinegra a once días del duelo ante el violeta",
-    "subtitulo": "El plantel de Diego Aguirre trabaja con intensidad en Los Aromos, afinando detalles físicos y futbolísticos de cara a una visita de máxima exigencia por el campeonato.",
+    "titulo": "Cuenta regresiva en Los Aromos: el carbonero se prepara para una parada brava en Parque Rodó",
+    "subtitulo": "El plantel aurinegro trabaja con máxima concentración de cara al choque ante los violetas, sabiendo que cada punto vale oro en la recta final.",
     "parrafos": [
       "Párrafo 1: El clima previo en Los Aromos y la concentración aurinegra...",
       "Párrafo 2: El rival de turno (Defensor Sporting vs Peñarol), su momento y cómo contrarrestar su juego en Estadio Luis Franzini (Montevideo)...",
