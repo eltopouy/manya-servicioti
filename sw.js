@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v8.3-pizarra-tactica-elite';
+const CACHE_NAME = 'manya-servicioti-v8.4-duelos-tacticos-defensor-certified';
 const CORE_ASSETS = [
   '/',
   '/index.html',

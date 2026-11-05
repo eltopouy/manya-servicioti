@@ -67,7 +67,7 @@ def generar_parrafos_editoriales_certificados(match_info: dict, rival_nombre: st
         f"Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con {puntos_anual} puntos oficiales, "
         f"el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. "
         f"El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad "
-        f"al equipo para afrontar la visita ante {rival_nombre} en {estadio}."
+        f"al equipo para afrontar la visita ante {rival_nombre} en {estadio} por la Fecha {match_info.get('fecha_numero', 14)} del Torneo Clausura."
     )
     p2 = (
         f"Enfrente estará un {rival_nombre} tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación "

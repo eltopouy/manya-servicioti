@@ -42,7 +42,7 @@
           if ('caches' in window) {
             caches.keys().then(function(keys) {
               keys.forEach(function(k) {
-                if (!k.includes('v8.3')) {
+                if (!k.includes('v8.4')) {
                   caches.delete(k);
                 }
               });
@@ -57,7 +57,7 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=8.3" />
+  <link rel="stylesheet" href="css/styles.css?v=8.4" />
 
   <!-- Grafo Schema.org @graph (SportsTeam + SportsEvent + WebApplication + FAQPage) -->
   <script type="application/ld+json">
