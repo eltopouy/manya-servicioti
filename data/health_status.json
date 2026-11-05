@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "05/11/2026 14:30:05",
-  "timestamp": "2026-11-05T14:30:05.332090-03:00",
-  "score_salud": 100.0,
+  "fecha_auditoria": "05/11/2026 14:49:29",
+  "timestamp": "2026-11-05T14:49:29.563305-03:00",
+  "score_salud": 90.0,
   "total_pruebas": 10,
-  "pruebas_exitosas": 10,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 9,
+  "pruebas_fallidas": 1,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 14:30:02",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-05 14:49:26",
       "details": {
-        "now_uy": "2026-11-05 14:30:02.179593-03:00",
+        "now_uy": "2026-11-05 14:49:26.530656-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-05T14:30:02.179639-03:00"
+      "timestamp": "2026-11-05T14:49:26.530696-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 10,
         "es_hoy": false
       },
-      "timestamp": "2026-11-05T14:30:02.180943-03:00"
+      "timestamp": "2026-11-05T14:49:26.531318-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T14:30:02.184401-03:00"
+      "timestamp": "2026-11-05T14:49:26.533603-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T14:30:02.188093-03:00"
+      "timestamp": "2026-11-05T14:49:26.534885-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-05T14:30:02.194105-03:00"
+      "timestamp": "2026-11-05T14:49:26.536221-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,36 +68,36 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-05T14:30:02.194394-03:00"
+      "timestamp": "2026-11-05T14:49:26.536360-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-05T14:30:05.298900-03:00"
+      "timestamp": "2026-11-05T14:49:29.553328-03:00"
     },
     {
       "test": "PWA Network-First y Selector Clausura/Anual",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T14:30:05.304883-03:00"
+      "timestamp": "2026-11-05T14:49:29.554754-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -117,7 +117,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T14:30:05.322700-03:00"
+      "timestamp": "2026-11-05T14:49:29.558997-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -127,10 +127,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-05T14:30:05.331868-03:00"
+      "timestamp": "2026-11-05T14:49:29.563208-03:00"
     }
-  ],
-  "reparaciones_aplicadas": [
-    "Auto-corregido live_status.json: actualizadas referencias a 65 puntos."
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "actualizado": "05/11/2026 14:45",
+  "actualizado": "05/11/2026 14:49",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
@@ -1065,7 +1065,7 @@
       "nombre": "Tabla Anual Acumulada Oficial (AUF)",
       "nombre_corto": "Tabla Anual",
       "icono": "🏆",
-      "badge": "Líder Solitario • 65 pts",
+      "badge": "Líder Solitario • 66 pts",
       "es_proximo": false,
       "datos": [
         {
@@ -1354,7 +1354,7 @@
     "humedad_pct": 38,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "05/11/2026 14:45"
+    "actualizado": "05/11/2026 14:49"
   },
   "minuto_a_minuto": [
     {
