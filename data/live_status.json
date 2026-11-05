@@ -1,9 +1,9 @@
 {
-  "actualizado": "05/11/2026 13:15",
+  "actualizado": "05/11/2026 13:45",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 114.8,
+  "horas_desde_ultimo_partido": 115.3,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Defensor Sporting vs Peñarol el Domingo 15/11/2026 a las 20:00 hs (Estadio Luis Franzini (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -433,14 +433,14 @@
       "pos": 6,
       "equipo": "Liverpool",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 16,
-      "pe": 10,
+      "pe": 11,
       "pp": 8,
-      "gf": 46,
-      "gc": 30,
+      "gf": 47,
+      "gc": 31,
       "dg": "+16",
-      "pts": 58
+      "pts": 59
     },
     {
       "pos": 7,
@@ -509,6 +509,19 @@
     },
     {
       "pos": 12,
+      "equipo": "Cerro Largo",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 9,
+      "pe": 10,
+      "pp": 16,
+      "gf": 33,
+      "gc": 41,
+      "dg": "-8",
+      "pts": 37
+    },
+    {
+      "pos": 13,
       "equipo": "Cerro",
       "es_penarol": false,
       "pj": 35,
@@ -521,7 +534,7 @@
       "pts": 37
     },
     {
-      "pos": 13,
+      "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
       "pj": 35,
@@ -532,19 +545,6 @@
       "gc": 47,
       "dg": "-13",
       "pts": 37
-    },
-    {
-      "pos": 14,
-      "equipo": "Cerro Largo",
-      "es_penarol": false,
-      "pj": 34,
-      "pg": 9,
-      "pe": 9,
-      "pp": 16,
-      "gf": 32,
-      "gc": 40,
-      "dg": "-8",
-      "pts": 36
     },
     {
       "pos": 15,
@@ -1065,7 +1065,7 @@
       "nombre": "Tabla Anual Acumulada Oficial (AUF)",
       "nombre_corto": "Tabla Anual",
       "icono": "🏆",
-      "badge": "Líder Solitario • 66 pts",
+      "badge": "Líder Solitario • 65 pts",
       "es_proximo": false,
       "datos": [
         {
@@ -1137,14 +1137,14 @@
           "pos": 6,
           "equipo": "Liverpool",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 16,
-          "pe": 10,
+          "pe": 11,
           "pp": 8,
-          "gf": 46,
-          "gc": 30,
+          "gf": 47,
+          "gc": 31,
           "dg": "+16",
-          "pts": 58
+          "pts": 59
         },
         {
           "pos": 7,
@@ -1213,6 +1213,19 @@
         },
         {
           "pos": 12,
+          "equipo": "Cerro Largo",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 9,
+          "pe": 10,
+          "pp": 16,
+          "gf": 33,
+          "gc": 41,
+          "dg": "-8",
+          "pts": 37
+        },
+        {
+          "pos": 13,
           "equipo": "Cerro",
           "es_penarol": false,
           "pj": 35,
@@ -1225,7 +1238,7 @@
           "pts": 37
         },
         {
-          "pos": 13,
+          "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
           "pj": 35,
@@ -1236,19 +1249,6 @@
           "gc": 47,
           "dg": "-13",
           "pts": 37
-        },
-        {
-          "pos": 14,
-          "equipo": "Cerro Largo",
-          "es_penarol": false,
-          "pj": 34,
-          "pg": 9,
-          "pe": 9,
-          "pp": 16,
-          "gf": 32,
-          "gc": 40,
-          "dg": "-8",
-          "pts": 36
         },
         {
           "pos": 15,
@@ -1348,13 +1348,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 23.3,
-    "sensacion_c": 22.6,
-    "viento_kmh": 19.2,
-    "humedad_pct": 40,
+    "temperatura_c": 23.6,
+    "sensacion_c": 22.4,
+    "viento_kmh": 19.5,
+    "humedad_pct": 37,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "05/11/2026 13:15"
+    "actualizado": "05/11/2026 13:45"
   },
   "minuto_a_minuto": [
     {
