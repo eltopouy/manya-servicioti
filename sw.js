@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v8.0-post-wanderers-1-1';
+const CACHE_NAME = 'manya-servicioti-v8.1-previa-defensor-franzini';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -13,6 +13,7 @@ const CORE_ASSETS = [
   '/data/history_1891.json',
   '/data/escudos_uruguay.json',
   '/data/historial_activo.json',
+  '/data/historial_defensor_sporting.json',
   '/data/historial_wanderers.json',
   '/data/efemerides_hoy.json',
   '/data/rival_intelligence.json',
