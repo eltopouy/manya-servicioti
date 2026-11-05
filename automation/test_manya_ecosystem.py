@@ -346,6 +346,18 @@ class ManyaEcosystemTester:
         msg = "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)" if passed else f"Inconsistencias editoriales: {'; '.join(errors)}"
         self.record_result("Coherencia Editorial y Anti-Contaminación", passed, msg, {"errors": errors})
 
+    def test_tactical_board_integrity(self):
+        """Audita exhaustivamente la pizarra táctica: squad, esquemas 4-2-3-1/4-3-3/4-4-2, sustituciones y canvas."""
+        try:
+            from test_tactical_board import auditar_pizarra_tactica_exhaustiva
+            passed, errors = auditar_pizarra_tactica_exhaustiva()
+        except Exception as ex:
+            passed = False
+            errors = [f"Excepción en test_tactical_board: {ex}"]
+
+        msg = "Pizarra táctica 100% certificada (squad 2026, 3 formaciones, sustituciones bidireccionales y Canvas)" if passed else f"Inconsistencias en pizarra táctica: {'; '.join(errors)}"
+        self.record_result("Pizarra Táctica Interactiva (Armá tu 11)", passed, msg, {"errors": errors})
+
     def run_all_tests(self) -> Dict[str, Any]:
         """Ejecuta toda la batería de pruebas y devuelve el resumen consolidado."""
         self.results = []
@@ -361,6 +373,7 @@ class ManyaEcosystemTester:
         self.test_external_endpoints_reachability()
         self.test_pwa_network_first_and_standings_selector()
         self.test_editorial_coherence_and_anti_contamination()
+        self.test_tactical_board_integrity()
 
         total = self.passed_count + self.failed_count
         score = round((self.passed_count / total * 100), 1) if total > 0 else 0.0

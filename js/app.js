@@ -429,7 +429,8 @@
       const act = live.partido_activo || prox;
       if (sHome) sHome.textContent = act.local ? (act.local.goles || '1') : '1';
       if (sAway) sAway.textContent = act.visitante ? (act.visitante.goles || '1') : '1';
-      if (clkTxt) clkTxt.textContent = '🏁 FINALIZADO (90+5') • PARQUE SAROLDI';
+      const estNom = (act && act.estadio && act.estadio.nombre) || (prox && prox.estadio && prox.estadio.nombre) || 'Estadio Centenario';
+      if (clkTxt) clkTxt.textContent = `🏁 FINALIZADO (90+5') • ${estNom.toUpperCase()}`;
 
       if (heroBadge) {
         heroBadge.textContent = '🏁 RESULTADO FINAL • TORNEO CLAUSURA (FECHA 13)';
