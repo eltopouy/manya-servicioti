@@ -3,3 +3,8 @@ __pycache__/
 .env
 _ref_temp_*
 _raw_seed_*
+*.db
+*.sqlite
+*.sqlite3
+logs/*.log
+.manya_locks/

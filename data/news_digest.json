@@ -1,35 +1,35 @@
 {
-  "actualizado": "05/11/2026 20:16",
+  "actualizado": "05/11/2026 20:46",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
   "partido_id": "",
-  "titular_dia": "Enfoque absoluto en Los Aromos: Peñarol proyecta su visita al Franzini con la mira puesta en blindar la cima",
-  "bajada_seo": "Peñarol afina detalles tácticos en Los Aromos a diez días del cruce ante Defensor Sporting en el Estadio Luis Franzini por la Fecha 14 del Torneo Clausura. El Decano custodia sus 66 puntos en la Anual y la pantalla de VTV Plus y Disney+ Premium transmitirá las acciones.",
+  "titular_dia": "Peñarol afina la puntería en Los Aromos con la mira puesta en el Franzini para blindar la cima",
+  "bajada_seo": "Peñarol prepara el cruce ante Defensor Sporting por la Fecha 14 del Torneo Clausura 2026. Firme líder de la Tabla Anual con 66 puntos, el Carbonero visita el Estadio Luis Franzini (Montevideo) el próximo domingo 15 de noviembre a las 20:00 hs con televisación de VTV Plus y Disney+ Premium.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Clave Táctica",
-      "detalle": "Esquema 4-2-3-1 de Diego Aguirre enfocado en transiciones rápidas y presión asfixiante en campo violeta"
+      "detalle": "Planteo táctico 4-2-3-1 de Diego Aguirre con transiciones rápidas y presión alta en Parque Rodó."
     },
     {
       "icono": "🔥",
       "titulo": "La Figura a Seguir",
-      "detalle": "Leonardo Fernández como director de orquesta con su pegada letal a balón parado"
+      "detalle": "Leonardo Fernández y su pegada magistral para desnivelar con pelota quieta y conducción central."
     },
     {
       "icono": "📺",
       "titulo": "Transmisión y Horario",
-      "detalle": "Próximo Domingo 15/11/2026 20:00 hs por las señales de VTV Plus y Disney+ Premium"
+      "detalle": "Domingo 15/11/2026 20:00 hs en vivo por VTV Plus y Disney+ Premium."
     },
     {
       "icono": "📊",
       "titulo": "Puntos en Juego",
-      "detalle": "Peñarol comanda en solitario la Tabla Anual con 66 puntos oficiales AUF y saldo +24"
+      "detalle": "Peñarol manda en la Tabla Anual con 66 puntos oficiales AUF (+24 DG) y busca estirar la ventaja."
     }
   ],
   "articulo_principal": {
-    "titulo": "Semana de alta intensidad en Los Aromos: la pizarra de Diego Aguirre para la excursión al Parque Rodó",
-    "subtitulo": "Con diez jornadas completas de planificación por delante, el Carbonero diseña la estrategia para visitar a Defensor Sporting en el Luis Franzini",
+    "titulo": "Operación Franzini: el líder Peñarol calibra detalles tácticos a diez días de otra final",
+    "subtitulo": "Diego Aguirre intensifica las jornadas en Los Aromos pensando en vulnerar a Defensor Sporting y consolidar la Tabla Anual.",
     "parrafos": [
       "Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos oficiales, el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad al equipo para afrontar la visita ante Defensor Sporting vs Peñarol en Estadio Luis Franzini (Montevideo) por la Fecha 14 del Torneo Clausura.",
       "Enfrente estará un Defensor Sporting vs Peñarol tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación carbonera mediante repliegue ordenado y transiciones rápidas por las bandas. El plan táctico de Peñarol radicará en imponer la jerarquía en la posesión, asfixiar la salida adversaria con la presión alta de Maximiliano Silvera y liberar los callejones interiores para la zurda magistral de Leonardo Fernández, respaldado por la aceleración de Javier Cabrera y Jaime Báez.",
@@ -39,15 +39,15 @@
     "preguntas_frecuentes": [
       {
         "q": "¿A qué hora juega Peñarol y dónde verlo?",
-        "a": "Peñarol disputará su próximo partido el Domingo 15/11/2026 a las 20:00 hs en el Estadio Luis Franzini (Montevideo), con televisación en vivo a través de VTV Plus y la plataforma Disney+ Premium."
+        "a": "Peñarol jugará el próximo Domingo 15/11/2026 20:00 hs en el Estadio Luis Franzini (Montevideo), televisado por VTV Plus y vía streaming por Disney+ Premium."
       },
       {
-        "q": "¿Cómo formaría Peñarol ante Defensor Sporting?",
-        "a": "Diego Aguirre perfila su clásico 4-2-3-1 con Washington Aguerre en el arco, Guzmán Rodríguez y Javier Méndez en la zaga, y Leo Fernández como armador y eje creativo."
+        "q": "¿Cómo formaría Peñarol?",
+        "a": "Diego Aguirre perfila un esquema táctico 4-2-3-1 con Washington Aguerre en el arco, zaga con Méndez y Guzmán Rodríguez, y Leonardo Fernández como eje creativo."
       },
       {
-        "q": "¿Qué se juega Peñarol en este partido de la Fecha 14?",
-        "a": "El Carbonero se juega tres puntos determinantes para asegurar el liderazgo de la Tabla Anual, donde marcha primero con 66 puntos, y pelear hasta el final por la obtención del Torneo Clausura."
+        "q": "¿Qué se juega Peñarol en este partido?",
+        "a": "Puntos vitales para custodiar la cima de la Tabla Anual (66 puntos) y encaminar la definición del Torneo Clausura 2026."
       }
     ]
   },

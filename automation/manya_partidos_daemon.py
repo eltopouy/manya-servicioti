@@ -49,14 +49,25 @@ from blogger_manya_publisher import publish_manya_article_to_blogger
 
 
 def git_commit_and_push(mensaje: str):
-    """Sincroniza los cambios hacia GitHub Pages."""
+    """Sincroniza los cambios hacia GitHub Pages de forma robusta y no interactiva."""
     try:
-        subprocess.run(["git", "pull", "--no-rebase", "-s", "ort", "-X", "ours", "origin", "main"], cwd=str(BASE_DIR), check=False)
-        subprocess.run(["git", "add", "data/", "assets/", "index.html"], cwd=str(BASE_DIR), check=False)
-        res = subprocess.run(["git", "commit", "-m", mensaje], cwd=str(BASE_DIR), capture_output=True, text=True)
-        if "nothing to commit" not in res.stdout and "nothing to commit" not in res.stderr:
-            subprocess.run(["git", "push", "origin", "main"], cwd=str(BASE_DIR), check=True, timeout=45)
+        git_env = os.environ.copy()
+        git_env["GIT_TERMINAL_PROMPT"] = "0"
+        
+        # 1. Staging y commit de cambios locales PRIMERO (deja el working tree limpio)
+        subprocess.run(["git", "add", "data/", "assets/", "index.html", "js/", "css/", ".gitignore"], cwd=str(BASE_DIR), env=git_env, check=False)
+        res = subprocess.run(["git", "commit", "-m", mensaje], cwd=str(BASE_DIR), env=git_env, capture_output=True, text=True)
+        
+        # 2. Fetch y merge de cambios remotos (estrategia ort con prioridad -X ours)
+        subprocess.run(["git", "fetch", "origin", "main"], cwd=str(BASE_DIR), env=git_env, check=False, timeout=30)
+        subprocess.run(["git", "merge", "-s", "ort", "-X", "ours", "origin/main", "-m", f"merge: integrar cambios remotos con '{mensaje}'"], cwd=str(BASE_DIR), env=git_env, check=False, timeout=30)
+        
+        # 3. Push a origin main
+        push_res = subprocess.run(["git", "push", "origin", "main"], cwd=str(BASE_DIR), env=git_env, capture_output=True, text=True, timeout=45)
+        if push_res.returncode == 0:
             logger.info(f"[GitHub Pages] ✓ Cambios empujados a main: '{mensaje}'")
+        else:
+            logger.warning(f"[GitHub Pages] Aviso al hacer push: {push_res.stderr.strip() if push_res.stderr else 'código ' + str(push_res.returncode)}")
     except Exception as e:
         logger.warning(f"[GitHub Pages] Aviso al sincronizar git: {e}")
 
@@ -181,11 +192,22 @@ def sanear_y_validar_parrafos_editoriales(
             p1 += "."
         parrafos_limpios[0] = f"{p1} Peñarol llega a esta cita como líder solitario de la Tabla Anual con {puntos_anual} puntos oficiales."
 
-    # Asegurar mención al rival y al estadio
+    # Asegurar mención al rival y al estadio de forma inteligente por palabras clave
     texto_final = " ".join(parrafos_limpios).lower()
-    if rival_nombre.lower() not in texto_final or estadio.lower() not in texto_final:
+    loc_m = match_info.get("local", {})
+    vis_m = match_info.get("visitante", {})
+    rival_real = loc_m.get("nombre") if not loc_m.get("es_penarol") else vis_m.get("nombre", "Defensor Sporting")
+    rival_kw = "defensor" if "defensor" in rival_real.lower() else ("wanderers" if "wanderers" in rival_real.lower() else rival_real.lower().split()[0])
+    
+    estadio_clean = estadio.replace("(Montevideo)", "").replace("(Prado)", "").strip()
+    estadio_kw = "franzini" if "franzini" in estadio.lower() else ("saroldi" if "saroldi" in estadio.lower() else ("centenario" if "centenario" in estadio.lower() else estadio_clean.lower().split()[0]))
+    
+    rival_presente = rival_kw in texto_final or rival_real.lower() in texto_final or rival_nombre.lower() in texto_final
+    estadio_presente = estadio_kw in texto_final or estadio_clean.lower() in texto_final or estadio.lower() in texto_final
+
+    if not rival_presente or not estadio_presente:
         logger.warning("[Editorial Coherence] Falta mención a rival o estadio en párrafos generados. Sustituyendo por certificados.")
-        return generar_parrafos_editoriales_certificados(match_info, rival_nombre, estadio, puntos_anual)
+        return generar_parrafos_editoriales_certificados(match_info, rival_real, estadio_clean, puntos_anual)
 
     return parrafos_limpios
 
@@ -251,52 +273,66 @@ def ejecutar_ciclo_previa(match_info: dict, noticias_prensa: list):
         for n in noticias_prensa[:10]
     ])
 
-    prompt_redaccion = f"""
-Actúa como el Jefe de Redacción y Periodista Deportivo Especializado del Club Atlético Peñarol para 'Manya ServicioTI'.
-Tu estilo es analítico, profesional, 100% futbolero uruguayo, riguroso y con autoridad de vestuario.
+    loc_m = match_info.get("local", {})
+    vis_m = match_info.get("visitante", {})
+    rival_nombre_real = loc_m.get("nombre") if not loc_m.get("es_penarol") else vis_m.get("nombre", "Defensor Sporting")
+    estadio_clean = estadio.replace("(Montevideo)", "").replace("(Prado)", "").strip()
 
-MISIÓN EDITORIAL:
-Elaborar la crónica periodística de análisis previo y estado de situación del plantel en Los Aromos de cara al próximo compromiso oficial.
-ESTADO TEMPORAL: {temporal_label}.
-{temporal_instructions}
-Partido Oficial: {match_title}.
-Estadio: {estadio}.
-Fecha y Hora de Uruguay: {hora_str}.
-Televisación: {tv}.
-Torneo: Torneo Clausura 2026 ({fecha_tag}).
-Puntaje Oficial: Peñarol es líder absoluto de la Tabla Anual con 66 puntos oficiales AUF (+24 DG).
+    # Filtrar noticias de prensa eliminando términos que activen filtros de apuestas
+    noticias_filtradas = []
+    for n in noticias_prensa[:10]:
+        t_tit = n.get("titulo", "")
+        t_res = n.get("resumen", "")
+        if any(w in t_tit.lower() or w in t_res.lower() for w in ["apuesta", "pronóstico", "pronostico"]):
+            continue
+        noticias_filtradas.append(f"- [{n['fuente']}] {t_tit}: {t_res[:160]}")
+    resumenes_prensa = "\n".join(noticias_filtradas)
 
-Contexto periodístico confirmado de medios uruguayos (Ovación, Referí, Tenfield, Padre y Decano):
+    prompt_redaccion = f"""Actúa como el Jefe de Redacción y Periodista Deportivo Especializado del Club Atlético Peñarol para el medio 'Manya ServicioTI'.
+Tu estilo es profesional, 100% futbolero uruguayo, riguroso, de vestuario y análisis táctico.
+
+MISIÓN:
+Redacta el informe periodístico de actualidad aurinegra, los trabajos de Diego Aguirre en Los Aromos y la proyección táctica del equipo de cara al partido ante {rival_nombre_real} por la {fecha_tag} del Torneo Clausura.
+
+DATOS OFICIALES CONFIRMADOS DEL INFORME:
+- Partido: {rival_nombre_real} vs Peñarol.
+- Estadio: {estadio_clean}.
+- Fecha y horario: {hora_str}.
+- Televisación oficial: {tv}.
+- Torneo: Torneo Clausura 2026 ({fecha_tag}).
+- Tabla Anual Oficial AUF: Peñarol es líder solitario con 66 puntos oficiales (+24 DG).
+- Situación del plantel: Diego Aguirre afina el once titular con Leonardo Fernández en la conducción ofensiva, Washington Aguerre en el arco y Maximiliano Silvera en el ataque.
+
+ACTUALIDAD PERIODÍSTICA:
 {resumenes_prensa}
 
-IMPORTANTE - GARANTÍA DE FORMATO Y CONTENIDO (ANTI-DISCLAIMER):
-- Esto NO es una predicción del futuro ni pronósticos de apuestas. Es un análisis periodístico estándar de hechos ya verificados (entrenamientos en Los Aromos, aspectos tácticos de Diego Aguirre, puntos en juego).
-- PROHIBICIÓN ABSOLUTA: Está terminantemente prohibido incluir disclaimers o frases como 'Como modelo de lenguaje...', 'Como modelo de inteligencia artificial...', 'No puedo predecir...', 'Como IA...'. Escribe directamente el JSON solicitado sin notas previas ni posteriores.
-- REQUISITO OBLIGATORIO: El Párrafo 1 del artículo principal DEBE incluir expresamente '{fecha_tag}' y los '66 puntos' de Peñarol en la Tabla Anual.
-- Responde ÚNICAMENTE en formato JSON plano válido (sin markdown ```json).
+PAUTAS DE REDACCIÓN:
+1. Enfoque 100% deportivo: análisis de la semana de entrenamientos, táctica del 4-2-3-1 de Aguirre, presión alta y pelota quieta.
+2. Obligatorio incluir en el Párrafo 1 del artículo principal la '{fecha_tag}' y los '66 puntos' de Peñarol en la Tabla Anual.
+3. Mencionar expresamente el escenario ({estadio_clean}) y al rival ({rival_nombre_real}) en los párrafos de análisis.
+4. Responde ÚNICAMENTE con el objeto JSON estructurado, sin textos introductorios ni comentarios anexos:
 
-Estructura del JSON requerida:
 {{
-  "titular_dia": "Frase contundente sobre la previa del partido en {estadio}",
-  "bajada_seo": "Resumen periodístico SEO con Peñarol, rival ({match_title}), estadio ({estadio}), {fecha_tag}, 66 puntos y TV.",
+  "titular_dia": "Titular de alto impacto sobre la concentración en Los Aromos y la visita ante {rival_nombre_real} en {estadio_clean}",
+  "bajada_seo": "Bajada periodística resumiendo el momento de Peñarol, {rival_nombre_real}, {estadio_clean}, la {fecha_tag}, los 66 puntos y {tv}.",
   "claves_60_segundos": [
-    {{"icono": "⚽", "titulo": "Clave Táctica", "detalle": "Planteo táctico 4-2-3-1 de Diego Aguirre y presión alta"}},
-    {{"icono": "🔥", "titulo": "La Figura a Seguir", "detalle": "Leonardo Fernández y su pegada magistral"}},
-    {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "Hora oficial de Uruguay ({hora_str}) y televisación ({tv})"}},
-    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Peñarol manda en la Tabla Anual con 66 puntos oficiales AUF"}}
+    {{"icono": "⚽", "titulo": "Enfoque Táctico", "detalle": "Esquema 4-2-3-1 de Diego Aguirre y presión sobre la salida rival para el duelo en {estadio_clean}."}},
+    {{"icono": "🔥", "titulo": "La Figura", "detalle": "La influencia de Leonardo Fernández en la creación y la pelota detenida."}},
+    {{"icono": "📺", "titulo": "Transmisión y Horario", "detalle": "{hora_str} en directo por {tv}."}},
+    {{"icono": "📊", "titulo": "Puntos en Juego", "detalle": "Peñarol manda en la Tabla Anual con 66 puntos oficiales AUF."}}
   ],
   "articulo_principal": {{
-    "titulo": "Título periodístico de análisis de la previa",
-    "subtitulo": "Subtítulo periodístico sobre el momento de Peñarol y el planteo ante {match_title}",
+    "titulo": "Concentración total en Los Aromos: Peñarol alista artillería para la batalla en {estadio_clean}",
+    "subtitulo": "Diego Aguirre calibra el once titular para defender la punta de la Tabla Anual ante {rival_nombre_real}",
     "parrafos": [
-      "Párrafo 1: El clima de trabajo en Los Aromos bajo el mando de Diego Aguirre, mencionando expresamente la {fecha_tag} y los 66 puntos en la Tabla Anual...",
-      "Párrafo 2: El análisis del rival ({match_title}), su propuesta en {estadio} y cómo vulnerar su bloque defensivo...",
-      "Párrafo 3: El once probable aurinegro, la solidez de Washington Aguerre y la zaga central Guzmán Rodríguez - Méndez...",
-      "Párrafo 4: La expectativa de la parcialidad carbonera y la trascendencia de una victoria en {estadio} para la Tabla Anual..."
+      "Párrafo 1: Semana de altísima exigencia en Los Aromos de cara a la {fecha_tag} del Torneo Clausura, con Peñarol liderando la Tabla Anual con 66 puntos oficiales...",
+      "Párrafo 2: Disección táctica del rival ({rival_nombre_real}) en {estadio_clean}, cómo quebrar su bloque defensivo y ocupar los espacios...",
+      "Párrafo 3: Rendimiento de los referentes aurinegros: la seguridad de Washington Aguerre, la zaga Guzmán Rodríguez - Méndez y la movilidad de Silvera...",
+      "Párrafo 4: La expectativa de la parcialidad carbonera y la trascendencia de una victoria en {estadio_clean} para la recta final del campeonato..."
     ],
     "preguntas_frecuentes": [
-      {{"q": "¿A qué hora juega Peñarol y dónde verlo?", "a": "Peñarol juega {dia_partido_texto} a las {hora_str} en {estadio}, televisado por {tv}."}},
-      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1 con Leo Fernández como eje."}},
+      {{"q": "¿Cuándo y a qué hora juega Peñarol?", "a": "Peñarol juega {dia_partido_texto} a las {hora_str} en {estadio_clean}, televisado por {tv}."}},
+      {{"q": "¿Cómo formaría Peñarol?", "a": "Diego Aguirre perfila un esquema 4-2-3-1 con Leonardo Fernández en la conducción."}},
       {{"q": "¿Qué se juega Peñarol en este partido?", "a": "Puntos vitales para custodiar la cima de la Tabla Anual (66 puntos) y la definición del Clausura."}}
     ]
   }}

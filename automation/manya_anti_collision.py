@@ -158,7 +158,8 @@ class ManyaBloggerCatalog:
 
     @classmethod
     def init_db(cls):
-        with sqlite3.connect(cls.DB_PATH) as conn:
+        conn = sqlite3.connect(cls.DB_PATH)
+        try:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS manya_posts (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -177,6 +178,8 @@ class ManyaBloggerCatalog:
             conn.execute("CREATE INDEX IF NOT EXISTS idx_manya_match ON manya_posts(match_id, post_type);")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_manya_date ON manya_posts(published_date, post_type);")
             conn.commit()
+        finally:
+            conn.close()
 
     @classmethod
     def can_publish(cls, post_type: str, match_id: Optional[str] = None) -> (bool, str):
@@ -188,10 +191,10 @@ class ManyaBloggerCatalog:
         cls.init_db()
         today_str = datetime.now(UY_TZ).strftime("%Y-%m-%d")
 
-        with sqlite3.connect(cls.DB_PATH) as conn:
+        conn = sqlite3.connect(cls.DB_PATH)
+        try:
             cursor = conn.cursor()
             if match_id and post_type == "EN_VIVO":
-                # Para EN_VIVO, siempre se permite publicar o actualizar la cobertura en directo
                 return True, f"Permitido publicar / actualizar cobertura EN VIVO para el partido {match_id}."
             elif match_id and post_type in ("PREVIA", "HOY_JUEGA", "CRONICA"):
                 cursor.execute(
@@ -209,8 +212,9 @@ class ManyaBloggerCatalog:
                 count = cursor.fetchone()[0]
                 if count >= 1:
                     return False, f"Ya se publicó una noticia diaria de Peñarol hoy ({today_str})."
-
-        return True, "Permitido publicar."
+            return True, "Permitido publicar."
+        finally:
+            conn.close()
 
     @classmethod
     def register_post(cls, post_type: str, match_id: Optional[str], match_title: str,
@@ -218,13 +222,16 @@ class ManyaBloggerCatalog:
         cls.init_db()
         today_str = datetime.now(UY_TZ).strftime("%Y-%m-%d")
         now_iso = datetime.now(UY_TZ).isoformat()
-        with sqlite3.connect(cls.DB_PATH) as conn:
+        conn = sqlite3.connect(cls.DB_PATH)
+        try:
             conn.execute("""
                 INSERT OR REPLACE INTO manya_posts 
                 (post_type, match_id, match_title, blogger_post_id, blogger_url, title, published_date, published_at, word_count, status)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'PUBLICADO')
             """, (post_type, str(match_id or ""), match_title, blogger_post_id, blogger_url, title, today_str, now_iso, word_count))
             conn.commit()
+        finally:
+            conn.close()
         logger.info(f"[Catálogo Peñarol] ✓ Registrado post {post_type} en BD: {blogger_url}")
 
 
