@@ -1,35 +1,40 @@
 {
-  "actualizado": "05/11/2026 02:15",
+  "actualizado": "05/11/2026 02:45",
   "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
   "fase_publicacion": "PREVIA",
   "partido_id": "",
-  "titular_dia": "Con la mira en el Franzini: Peñarol ajusta las piezas en Los Aromos a diez días de una parada clave",
-  "bajada_seo": "Torneo Clausura (Fecha 14): Análisis de la previa de Defensor Sporting vs Peñarol en el Estadio Luis Franzini (Montevideo). Conoce cómo ver el partido en vivo por VTV Plus y Disney+ Premium y el panorama aurinegro. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
+  "titular_dia": "Con la mira en el Franzini: Peñarol ajusta las piezas en Los Aromos a diez días de la final",
+  "bajada_seo": "Torneo Clausura (Fecha 14): Análisis exclusivo de Manya ServicioTI sobre la previa de Defensor Sporting vs Peñarol. Enterate cómo llega el aurinegro, el equipo de Diego Aguirre, formaciones, estadio Luis Franzini (Montevideo) y cómo ver el partido en vivo por VTV Plus y Disney+ Premium. Peñarol lidera la Tabla Anual con 66 puntos oficiales.",
   "claves_60_segundos": [
     {
       "icono": "⚽",
       "titulo": "Clave Táctica",
-      "detalle": "Detalle del planteo de Diego Aguirre"
+      "detalle": "Diego Aguirre planifica un planteo inteligente en Los Aromos para copar el mediocampo y neutralizar el circuito de juego violeta."
     },
     {
       "icono": "🔥",
       "titulo": "La Figura a Seguir",
-      "detalle": "Rendimiento esperado de Leonardo Fernández"
+      "detalle": "El despliegue ofensivo y la conducción de Leonardo Fernández, pieza fundamental en el armado del ataque carbonero."
     },
     {
       "icono": "📺",
       "titulo": "Transmisión y Horario",
-      "detalle": "Hora oficial de Uruguay (Domingo 15/11/2026 20:00 hs) y televisación (VTV Plus / Disney+ Premium)"
+      "detalle": "Domingo 15/11/2026 20:00 hs en Uruguay. Televisación en directo a través de VTV Plus y Disney+ Premium."
     },
     {
       "icono": "📊",
       "titulo": "Puntos en Juego",
-      "detalle": "Impacto directo en la Tabla Anual (Peñarol líder con 66 puntos oficiales AUF)"
+      "detalle": "Tres unidades de oro en disputa para afianzar el liderazgo absoluto en la Tabla Anual y la aspiración al título."
+    },
+    {
+      "icono": "📊",
+      "titulo": "Cima de la Tabla Anual",
+      "detalle": "Peñarol manda en la Tabla Anual Acumulada con 66 puntos oficiales (+24 DG)."
     }
   ],
   "articulo_principal": {
-    "titulo": "Trabajo silencioso y máxima exigencia: el carbonero se prepara para visitar a Defensor",
-    "subtitulo": "A diez días del encuentro en el Parque Rodó, el plantel principal intensifica los entrenamientos bajo las órdenes de Diego Aguirre.",
+    "titulo": "A diez días del duelo clave: la interna aurinegra y la preparación bajo las órdenes de la Fiera",
+    "subtitulo": "El plantel carbonero intensifica los trabajos semanales en Los Aromos con la mira puesta en el reducto del Parque Rodó.",
     "parrafos": [
       "Con la tranquilidad y el temple que otorga sostener el liderazgo absoluto de la Tabla Anual con 66 puntos oficiales, el plantel principal del Club Atlético Peñarol cumple una semana de altísima concentración en el complejo de Los Aromos. El cuerpo técnico encabezado por Diego Aguirre se enfocó de lleno en afinar la gestación ofensiva y dotar de máxima verticalidad al equipo para afrontar la visita ante Defensor Sporting vs Peñarol en Estadio Luis Franzini (Montevideo) por la Fecha 14 del Torneo Clausura.",
       "Enfrente estará un Defensor Sporting vs Peñarol tradicionalmente incómodo y combativo en su reducto, que buscará cerrarle los caminos a la creación carbonera mediante repliegue ordenado y transiciones rápidas por las bandas. El plan táctico de Peñarol radicará en imponer la jerarquía en la posesión, asfixiar la salida adversaria con la presión alta de Maximiliano Silvera y liberar los callejones interiores para la zurda magistral de Leonardo Fernández, respaldado por la aceleración de Javier Cabrera y Jaime Báez.",
@@ -39,15 +44,15 @@
     "preguntas_frecuentes": [
       {
         "q": "¿A qué hora juega Peñarol y dónde verlo?",
-        "a": "Peñarol juega el próximo Domingo 15/11/2026 20:00 hs en Estadio Luis Franzini (Montevideo), televisado por VTV Plus / Disney+ Premium."
+        "a": "Peñarol juega el próximo Domingo 15/11/2026 20:00 hs en el Estadio Luis Franzini (Montevideo), televisado por VTV Plus / Disney+ Premium."
       },
       {
         "q": "¿Cómo formaría Peñarol?",
-        "a": "Diego Aguirre perfila un esquema ofensivo 4-2-3-1."
+        "a": "Diego Aguirre perfila un esquema táctico equilibrado, priorizando la solidez defensiva y el desequilibrio en el sector ofensivo."
       },
       {
         "q": "¿Qué se juega Peñarol en este partido?",
-        "a": "Puntos vitales para custodiar la cima de la Tabla Anual y la definición del Clausura."
+        "a": "Puntos vitales para custodiar la cima de la Tabla Anual y consolidar el rendimiento colectivo de cara a la definición."
       }
     ]
   },
