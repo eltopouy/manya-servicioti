@@ -1,9 +1,9 @@
 {
-  "actualizado": "06/11/2026 03:15",
+  "actualizado": "06/11/2026 03:45",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 128.8,
+  "horas_desde_ultimo_partido": 129.3,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Defensor Sporting vs Peñarol el Domingo 15/11/2026 a las 20:00 hs (Estadio Luis Franzini (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -379,6 +379,19 @@
     },
     {
       "pos": 2,
+      "equipo": "Deportivo Maldonado",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 18,
+      "pe": 9,
+      "pp": 8,
+      "gf": 54,
+      "gc": 32,
+      "dg": "+22",
+      "pts": 63
+    },
+    {
+      "pos": 3,
       "equipo": "Montevideo City Torque",
       "es_penarol": false,
       "pj": 35,
@@ -391,7 +404,7 @@
       "pts": 63
     },
     {
-      "pos": 3,
+      "pos": 4,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 35,
@@ -404,20 +417,20 @@
       "pts": 61
     },
     {
-      "pos": 4,
-      "equipo": "Deportivo Maldonado",
+      "pos": 5,
+      "equipo": "Racing",
       "es_penarol": false,
-      "pj": 34,
-      "pg": 17,
-      "pe": 9,
-      "pp": 8,
-      "gf": 52,
+      "pj": 35,
+      "pg": 16,
+      "pe": 12,
+      "pp": 7,
+      "gf": 45,
       "gc": 31,
-      "dg": "+21",
+      "dg": "+14",
       "pts": 60
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "Liverpool",
       "es_penarol": false,
       "pj": 35,
@@ -427,19 +440,6 @@
       "gf": 47,
       "gc": 31,
       "dg": "+16",
-      "pts": 59
-    },
-    {
-      "pos": 6,
-      "equipo": "Racing",
-      "es_penarol": false,
-      "pj": 34,
-      "pg": 16,
-      "pe": 11,
-      "pp": 7,
-      "gf": 42,
-      "gc": 28,
-      "dg": "+14",
       "pts": 59
     },
     {
@@ -470,6 +470,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Juventud",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 10,
+      "pe": 11,
+      "pp": 14,
+      "gf": 37,
+      "gc": 43,
+      "dg": "-6",
+      "pts": 41
+    },
+    {
+      "pos": 10,
       "equipo": "Central Español",
       "es_penarol": false,
       "pj": 35,
@@ -482,30 +495,17 @@
       "pts": 41
     },
     {
-      "pos": 10,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 34,
-      "pg": 10,
-      "pe": 10,
-      "pp": 14,
-      "gf": 37,
-      "gc": 43,
-      "dg": "-6",
-      "pts": 40
-    },
-    {
       "pos": 11,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 9,
-      "pe": 11,
+      "pe": 12,
       "pp": 14,
-      "gf": 32,
-      "gc": 40,
+      "gf": 35,
+      "gc": 43,
       "dg": "-8",
-      "pts": 38
+      "pts": 39
     },
     {
       "pos": 12,
@@ -563,13 +563,13 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 6,
       "pe": 14,
-      "pp": 14,
-      "gf": 28,
-      "gc": 43,
-      "dg": "-15",
+      "pp": 15,
+      "gf": 29,
+      "gc": 45,
+      "dg": "-16",
       "pts": 32
     }
   ],
@@ -1083,6 +1083,19 @@
         },
         {
           "pos": 2,
+          "equipo": "Deportivo Maldonado",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 18,
+          "pe": 9,
+          "pp": 8,
+          "gf": 54,
+          "gc": 32,
+          "dg": "+22",
+          "pts": 63
+        },
+        {
+          "pos": 3,
           "equipo": "Montevideo City Torque",
           "es_penarol": false,
           "pj": 35,
@@ -1095,7 +1108,7 @@
           "pts": 63
         },
         {
-          "pos": 3,
+          "pos": 4,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 35,
@@ -1108,20 +1121,20 @@
           "pts": 61
         },
         {
-          "pos": 4,
-          "equipo": "Deportivo Maldonado",
+          "pos": 5,
+          "equipo": "Racing",
           "es_penarol": false,
-          "pj": 34,
-          "pg": 17,
-          "pe": 9,
-          "pp": 8,
-          "gf": 52,
+          "pj": 35,
+          "pg": 16,
+          "pe": 12,
+          "pp": 7,
+          "gf": 45,
           "gc": 31,
-          "dg": "+21",
+          "dg": "+14",
           "pts": 60
         },
         {
-          "pos": 5,
+          "pos": 6,
           "equipo": "Liverpool",
           "es_penarol": false,
           "pj": 35,
@@ -1131,19 +1144,6 @@
           "gf": 47,
           "gc": 31,
           "dg": "+16",
-          "pts": 59
-        },
-        {
-          "pos": 6,
-          "equipo": "Racing",
-          "es_penarol": false,
-          "pj": 34,
-          "pg": 16,
-          "pe": 11,
-          "pp": 7,
-          "gf": 42,
-          "gc": 28,
-          "dg": "+14",
           "pts": 59
         },
         {
@@ -1174,6 +1174,19 @@
         },
         {
           "pos": 9,
+          "equipo": "Juventud",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 10,
+          "pe": 11,
+          "pp": 14,
+          "gf": 37,
+          "gc": 43,
+          "dg": "-6",
+          "pts": 41
+        },
+        {
+          "pos": 10,
           "equipo": "Central Español",
           "es_penarol": false,
           "pj": 35,
@@ -1186,30 +1199,17 @@
           "pts": 41
         },
         {
-          "pos": 10,
-          "equipo": "Juventud",
-          "es_penarol": false,
-          "pj": 34,
-          "pg": 10,
-          "pe": 10,
-          "pp": 14,
-          "gf": 37,
-          "gc": 43,
-          "dg": "-6",
-          "pts": 40
-        },
-        {
           "pos": 11,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 9,
-          "pe": 11,
+          "pe": 12,
           "pp": 14,
-          "gf": 32,
-          "gc": 40,
+          "gf": 35,
+          "gc": 43,
           "dg": "-8",
-          "pts": 38
+          "pts": 39
         },
         {
           "pos": 12,
@@ -1267,13 +1267,13 @@
           "pos": 16,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 6,
           "pe": 14,
-          "pp": 14,
-          "gf": 28,
-          "gc": 43,
-          "dg": "-15",
+          "pp": 15,
+          "gf": 29,
+          "gc": 45,
+          "dg": "-16",
           "pts": 32
         }
       ]
@@ -1348,13 +1348,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.0,
-    "sensacion_c": 12.1,
-    "viento_kmh": 9.4,
-    "humedad_pct": 69,
+    "temperatura_c": 13.8,
+    "sensacion_c": 11.9,
+    "viento_kmh": 8.9,
+    "humedad_pct": 68,
     "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "06/11/2026 03:15"
+    "actualizado": "06/11/2026 03:45"
   },
   "minuto_a_minuto": [
     {
