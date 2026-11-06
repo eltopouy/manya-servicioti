@@ -375,13 +375,13 @@ class ManyaGeminiWebEngine:
             from services.gemini_web_text_service import GeminiWebTextService
             logger.info("[Redactor GFlash 3.8] Ejecutando redacción en Gemini Web...")
             if esperar_json:
-                res_web = GeminiWebTextService.generar_json(prompt=prompt, headless=True, timeout_seconds=65)
+                res_web = GeminiWebTextService.generar_json(prompt=prompt, headless=True, timeout_seconds=95)
                 if res_web and not cls.contiene_disclaimer_o_rechazo(res_web):
                     return res_web
                 elif res_web:
                     logger.warning("[Redactor GFlash 3.8] Gemini Web devolvió texto con disclaimer de modelo de lenguaje. Descartando y activando API...")
             else:
-                txt = GeminiWebTextService.generar_texto(prompt=prompt, headless=True, timeout_seconds=65)
+                txt = GeminiWebTextService.generar_texto(prompt=prompt, headless=True, timeout_seconds=95)
                 if txt and not cls.contiene_disclaimer_o_rechazo(txt):
                     return {"text": txt}
                 elif txt:
