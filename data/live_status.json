@@ -1,12 +1,12 @@
 {
-  "actualizado": "05/11/2026 23:45",
+  "actualizado": "06/11/2026 00:06",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 125.3,
+  "horas_desde_ultimo_partido": 125.6,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Defensor Sporting vs Peñarol el Domingo 15/11/2026 a las 20:00 hs (Estadio Luis Franzini (Montevideo)) • VTV Plus / Disney+ Premium.",
+  "alerta_banner": "🟡⚫ ¡HOY JUEGA PEÑAROL! Defensor Sporting vs Peñarol a las Domingo 15/11/2026 20:00 hs en Estadio Luis Franzini (Montevideo) • VTV Plus / Disney+ Premium.",
   "partido_activo": {
     "fecha_numero": 14,
     "nombre": "Defensor Sporting vs Peñarol",
@@ -30,7 +30,7 @@
     },
     "tv": "VTV Plus / Disney+ Premium",
     "completado": false,
-    "es_hoy": false,
+    "es_hoy": true,
     "fase": "PREVIA",
     "detalles_avanzados": {}
   },
@@ -1348,13 +1348,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 15.3,
-    "sensacion_c": 13.8,
-    "viento_kmh": 8.2,
+    "temperatura_c": 15.1,
+    "sensacion_c": 13.6,
+    "viento_kmh": 8.1,
     "humedad_pct": 66,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "05/11/2026 23:45"
+    "actualizado": "06/11/2026 00:06"
   },
   "minuto_a_minuto": [
     {
