@@ -1,9 +1,9 @@
 {
-  "actualizado": "06/11/2026 00:45",
+  "actualizado": "06/11/2026 01:15",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 126.3,
+  "horas_desde_ultimo_partido": 126.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Defensor Sporting vs Peñarol el Domingo 15/11/2026 a las 20:00 hs (Estadio Luis Franzini (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -379,19 +379,6 @@
     },
     {
       "pos": 2,
-      "equipo": "Montevideo City Torque",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 19,
-      "pe": 6,
-      "pp": 10,
-      "gf": 59,
-      "gc": 41,
-      "dg": "+18",
-      "pts": 63
-    },
-    {
-      "pos": 3,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
       "pj": 34,
@@ -404,7 +391,7 @@
       "pts": 62
     },
     {
-      "pos": 4,
+      "pos": 3,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 35,
@@ -415,6 +402,19 @@
       "gc": 42,
       "dg": "+11",
       "pts": 61
+    },
+    {
+      "pos": 4,
+      "equipo": "Montevideo City Torque",
+      "es_penarol": false,
+      "pj": 34,
+      "pg": 18,
+      "pe": 6,
+      "pp": 10,
+      "gf": 57,
+      "gc": 40,
+      "dg": "+17",
+      "pts": 60
     },
     {
       "pos": 5,
@@ -537,13 +537,13 @@
       "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 10,
       "pe": 7,
-      "pp": 18,
-      "gf": 34,
-      "gc": 47,
-      "dg": "-13",
+      "pp": 17,
+      "gf": 33,
+      "gc": 45,
+      "dg": "-12",
       "pts": 37
     },
     {
@@ -1083,19 +1083,6 @@
         },
         {
           "pos": 2,
-          "equipo": "Montevideo City Torque",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 19,
-          "pe": 6,
-          "pp": 10,
-          "gf": 59,
-          "gc": 41,
-          "dg": "+18",
-          "pts": 63
-        },
-        {
-          "pos": 3,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
           "pj": 34,
@@ -1108,7 +1095,7 @@
           "pts": 62
         },
         {
-          "pos": 4,
+          "pos": 3,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 35,
@@ -1119,6 +1106,19 @@
           "gc": 42,
           "dg": "+11",
           "pts": 61
+        },
+        {
+          "pos": 4,
+          "equipo": "Montevideo City Torque",
+          "es_penarol": false,
+          "pj": 34,
+          "pg": 18,
+          "pe": 6,
+          "pp": 10,
+          "gf": 57,
+          "gc": 40,
+          "dg": "+17",
+          "pts": 60
         },
         {
           "pos": 5,
@@ -1241,13 +1241,13 @@
           "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 10,
           "pe": 7,
-          "pp": 18,
-          "gf": 34,
-          "gc": 47,
-          "dg": "-13",
+          "pp": 17,
+          "gf": 33,
+          "gc": 45,
+          "dg": "-12",
           "pts": 37
         },
         {
@@ -1348,13 +1348,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.6,
-    "sensacion_c": 13.2,
+    "temperatura_c": 14.4,
+    "sensacion_c": 13.0,
     "viento_kmh": 7.6,
-    "humedad_pct": 68,
+    "humedad_pct": 69,
     "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Llevar campera aurinegra de abrigo.",
-    "actualizado": "06/11/2026 00:45"
+    "actualizado": "06/11/2026 01:15"
   },
   "minuto_a_minuto": [
     {
