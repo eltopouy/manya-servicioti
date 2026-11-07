@@ -3,9 +3,9 @@
   "timestamp": "2026-11-07T00:00:06.120018-03:00",
   "score_salud": 100.0,
   "total_pruebas": 10,
-  "pruebas_exitosas": 10,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 9,
+  "pruebas_fallidas": 1,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
@@ -72,9 +72,9 @@
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -93,7 +93,7 @@
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
@@ -129,6 +129,5 @@
       },
       "timestamp": "2026-11-07T00:00:06.119702-03:00"
     }
-  ],
-  "reparaciones_aplicadas": []
+  ]
 }
