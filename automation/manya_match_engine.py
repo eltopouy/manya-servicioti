@@ -135,7 +135,7 @@ def resolve_team_crest(team_name: str, fallback_logo: str = "") -> str:
     if not team_name:
         return "assets/img/escudos/escudo_penarol.webp"
 
-    norm_lower = team_name.lower()
+    norm_lower = team_name.lower().strip()
     if "peñarol" in norm_lower or "penarol" in norm_lower:
         return "assets/img/escudos/escudo_penarol.webp"
 
@@ -150,28 +150,63 @@ def resolve_team_crest(team_name: str, fallback_logo: str = "") -> str:
             norm = "".join(c for c in norm.lower() if c.isalnum() or c.isspace()).strip()
             slug = alias_index.get(norm)
             if slug and slug in clubes:
+                for ext in ["ruta_webp", "ruta_svg", "ruta_png"]:
+                    if ext in clubes[slug]:
+                        cand = clubes[slug][ext]
+                        if (BASE_DIR / cand).exists():
+                            return cand
                 return clubes[slug].get("ruta_webp", f"assets/img/escudos/escudo_{slug}.webp")
         except Exception:
             pass
 
-    # Mapeo rápido de fallback
-    nm = team_name.lower()
-    if "juventud" in nm:
-        return "assets/img/escudos/escudo_juventud.webp"
-    if "liverpool" in nm:
-        return "assets/img/escudos/escudo_liverpool.webp"
-    if "nacional" in nm:
-        return "assets/img/escudos/escudo_nacional.webp"
-    if "defensor" in nm:
-        return "assets/img/escudos/escudo_defensor_sporting.webp"
-    if "danubio" in nm:
-        return "assets/img/escudos/escudo_danubio.webp"
-    if "boston" in nm:
-        return "assets/img/escudos/escudo_boston_river.webp"
-    if "wanderers" in nm:
-        return "assets/img/escudos/escudo_montevideo_wanderers.webp"
-    if "cerro largo" in nm:
-        return "assets/img/escudos/escudo_cerro_largo.webp"
+    # Direct local file check for common slugs
+    slug_norm = re.sub(r"[^a-z0-9]+", "_", norm_lower).strip("_")
+    for ext in [".webp", ".svg", ".png"]:
+        crest_candidate = f"assets/img/escudos/escudo_{slug_norm}{ext}"
+        if (BASE_DIR / crest_candidate).exists():
+            return crest_candidate
+
+    # Mapeo exhaustivo de clubes uruguayos y CONMEBOL Libertadores
+    conmebol_map = {
+        "corinthians": "assets/img/escudos/escudo_corinthians.webp",
+        "platense": "assets/img/escudos/escudo_platense.webp",
+        "santa fe": "assets/img/escudos/escudo_independiente_santa_fe.webp",
+        "independiente santa fe": "assets/img/escudos/escudo_independiente_santa_fe.webp",
+        "flamengo": "assets/img/escudos/escudo_flamengo.webp",
+        "estudiantes": "assets/img/escudos/escudo_estudiantes.webp",
+        "tolima": "assets/img/escudos/escudo_deportes_tolima.webp",
+        "coquimbo": "assets/img/escudos/escudo_coquimbo_unido.webp",
+        "cusco": "assets/img/escudos/escudo_cusco.webp",
+        "universitario": "assets/img/escudos/escudo_universitario.webp",
+        "independiente medellin": "assets/img/escudos/escudo_independiente_medellin.webp",
+        "juventud": "assets/img/escudos/escudo_juventud.webp",
+        "liverpool": "assets/img/escudos/escudo_liverpool.webp",
+        "nacional": "assets/img/escudos/escudo_nacional.webp",
+        "defensor": "assets/img/escudos/escudo_defensor_sporting.webp",
+        "danubio": "assets/img/escudos/escudo_danubio.webp",
+        "boston": "assets/img/escudos/escudo_boston_river.webp",
+        "wanderers": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+        "cerro largo": "assets/img/escudos/escudo_cerro_largo.webp",
+        "cerro": "assets/img/escudos/escudo_cerro.webp",
+        "progreso": "assets/img/escudos/escudo_progreso.webp",
+        "racing": "assets/img/escudos/escudo_racing.webp",
+        "deportivo maldonado": "assets/img/escudos/escudo_deportivo_maldonado.webp",
+        "torque": "assets/img/escudos/escudo_montevideo_city_torque.webp",
+        "albion": "assets/img/escudos/escudo_albion.webp",
+        "central": "assets/img/escudos/escudo_central_espanol.webp",
+        "miramar": "assets/img/escudos/escudo_miramar_misiones.webp",
+        "rampla": "assets/img/escudos/escudo_rampla_juniors.webp",
+        "river": "assets/img/escudos/escudo_river_plate.webp",
+        "rentistas": "assets/img/escudos/escudo_rentistas.webp",
+        "fenix": "assets/img/escudos/escudo_fenix.webp"
+    }
+    for k, v in conmebol_map.items():
+        if k in norm_lower:
+            base_cand = v.rsplit(".", 1)[0]
+            for ext in [".webp", ".svg", ".png"]:
+                if (BASE_DIR / f"{base_cand}{ext}").exists():
+                    return f"{base_cand}{ext}"
+            return v
 
     return fallback_logo or "assets/img/escudos/escudo_penarol.webp"
 
@@ -315,6 +350,8 @@ class ManyaMatchEngine:
                     name = ev.get("name", "").lower()
                     if "peñarol" in name or "penarol" in name:
                         match_info = cls._parse_espn_event(ev)
+                        if not match_info.get("es_hoy"):
+                            continue
                         state = match_info.get("state", "pre")
                         completed = match_info.get("completado", False)
                         if state == "in":
@@ -671,11 +708,17 @@ class ManyaMatchEngine:
                         tm = ent.get("team", {})
                         t_name = tm.get("displayName") or tm.get("name") or "Equipo"
                         logo_url = tm.get("logo") or ""
+                        if not logo_url and tm.get("logos"):
+                            logos_list = tm.get("logos", [])
+                            if logos_list and isinstance(logos_list[0], dict):
+                                logo_url = logos_list[0].get("href", "")
                         stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
+                        escudo_path = resolve_team_crest(t_name, logo_url)
                         libertadores_group.append({
                             "pos": idx,
                             "equipo": t_name,
                             "logo": logo_url,
+                            "escudo": escudo_path,
                             "es_penarol": "peñarol" in t_name.lower() or "penarol" in t_name.lower(),
                             "pj": int(stats.get("gamesPlayed", 0) or 0),
                             "pg": int(stats.get("wins", 0) or 0),
@@ -692,10 +735,10 @@ class ManyaMatchEngine:
 
         if not libertadores_group:
             libertadores_group = [
-                {"pos": 1, "equipo": "Corinthians", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png", "es_penarol": False, "pj": 6, "pg": 3, "pe": 2, "pp": 1, "gf": 8, "gc": 4, "dg": "+4", "pts": 11},
-                {"pos": 2, "equipo": "Platense", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10.png", "es_penarol": False, "pj": 6, "pg": 3, "pe": 1, "pp": 2, "gf": 8, "gc": 7, "dg": "+1", "pts": 10},
-                {"pos": 3, "equipo": "Independiente Santa Fe", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2884.png", "es_penarol": False, "pj": 6, "pg": 2, "pe": 2, "pp": 2, "gf": 6, "gc": 7, "dg": "-1", "pts": 8},
-                {"pos": 4, "equipo": "Peñarol", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png", "es_penarol": True, "pj": 6, "pg": 0, "pe": 3, "pp": 3, "gf": 4, "gc": 8, "dg": "-4", "pts": 3}
+                {"pos": 1, "equipo": "Corinthians", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png", "escudo": "assets/img/escudos/escudo_corinthians.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 2, "pp": 1, "gf": 8, "gc": 4, "dg": "+4", "pts": 11},
+                {"pos": 2, "equipo": "Platense", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png", "escudo": "assets/img/escudos/escudo_platense.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 1, "pp": 2, "gf": 8, "gc": 7, "dg": "+1", "pts": 10},
+                {"pos": 3, "equipo": "Independiente Santa Fe", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5488.png", "escudo": "assets/img/escudos/escudo_independiente_santa_fe.webp", "es_penarol": False, "pj": 6, "pg": 2, "pe": 2, "pp": 2, "gf": 6, "gc": 7, "dg": "-1", "pts": 8},
+                {"pos": 4, "equipo": "Peñarol", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png", "escudo": "assets/img/escudos/escudo_penarol.webp", "es_penarol": True, "pj": 6, "pg": 0, "pe": 3, "pp": 3, "gf": 4, "gc": 8, "dg": "-4", "pts": 3}
             ]
 
         return {
@@ -861,12 +904,16 @@ class ManyaMatchEngine:
                     pass
 
             partido_activo_data["es_hoy"] = es_hoy_prox
+            proximo_partido_data["es_hoy"] = es_hoy_prox
             partido_activo_data["fase"] = "PREVIA"
             partido_activo_data["detalles_avanzados"] = summary_adv
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
             tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
             estadio_nom = proximo_partido_data.get('estadio') or 'Estadio Luis Franzini (Montevideo)'
-            alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
+            if es_hoy_prox:
+                alerta_banner = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {proximo_partido_data.get('nombre', 'Peñarol')} a las {hora_str} en {estadio_nom} • {tv_channel}."
+            else:
+                alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
 
         # Identificar el rival activo para la sincronización de inteligencia y 1891 BD
         loc_act = partido_activo_data.get("local", {})

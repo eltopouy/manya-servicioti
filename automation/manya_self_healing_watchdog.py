@@ -108,6 +108,13 @@ class ManyaSelfHealingWatchdog:
         if not fecha_iso:
             return False
 
+        loc = prox.get("local", {})
+        vis = prox.get("visitante", {})
+        rival_activo_nombre = loc.get("nombre") if not loc.get("es_penarol") else vis.get("nombre", "Defensor Sporting")
+        estadio_prox = prox.get("estadio", "Estadio Luis Franzini (Montevideo)")
+        hora_prox = prox.get("fecha_legible", "Domingo 15/11/2026 20:00 hs")
+        tv_prox = prox.get("tv", "VTV Plus / Disney+ Premium")
+
         try:
             m_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
             delta_days = (m_dt.date() - now_uy.date()).days
@@ -143,8 +150,11 @@ class ManyaSelfHealingWatchdog:
 
         elif delta_days > 0:
             # FALTAN DÍAS: no puede decir 'hoy juega'
-            if live_data.get("partido_activo", {}).get("es_hoy"):
+            if live_data.get("partido_activo", {}).get("es_hoy") or live_data.get("proximo_partido", {}).get("es_hoy"):
                 live_data["partido_activo"]["es_hoy"] = False
+                if "proximo_partido" in live_data:
+                    live_data["proximo_partido"]["es_hoy"] = False
+                live_data["alerta_banner"] = f"⚡ ¡PRÓXIMO PARTIDO! {prox.get('nombre', 'Defensor Sporting vs Peñarol')} el {hora_prox} ({estadio_prox}) • {tv_prox}."
                 live_file.write_text(json.dumps(live_data, ensure_ascii=False, indent=2), encoding="utf-8")
                 msg = f"Auto-ajuste: Desactivado 'es_hoy' (faltan {delta_days} días para el encuentro)."
                 self.reparaciones_realizadas.append(msg)
@@ -154,10 +164,28 @@ class ManyaSelfHealingWatchdog:
             if digest_file.exists():
                 digest_data = json.loads(digest_file.read_text(encoding="utf-8"))
                 tit = digest_data.get("titular_dia", "")
+                fase_pub = digest_data.get("fase_publicacion", "")
+                art_tit = digest_data.get("articulo_principal", {}).get("titulo", "")
+                port_tit = digest_data.get("portada_visual", {}).get("titular_portada", "")
+                mod_digest = False
+                
                 if "hoy juega" in tit.lower():
                     digest_data["titular_dia"] = f"La Previa Aurinegra: Peñarol afina detalles antes de enfrentar a {rival_activo_nombre}"
+                    mod_digest = True
+                if fase_pub == "HOY_JUEGA":
+                    digest_data["fase_publicacion"] = "PREVIA"
+                    mod_digest = True
+                if "hoy juega" in art_tit.lower():
+                    digest_data["articulo_principal"]["titulo"] = f"Concentración total en Los Aromos: Peñarol alista artillería para la batalla ante {rival_activo_nombre}"
+                    mod_digest = True
+                if "hoy juega" in port_tit.lower():
+                    digest_data["portada_visual"]["titular_portada"] = f"⚡ LA PREVIA AURINEGRA: Peñarol visita {estadio_prox} en busca de afianzar la punta"
+                    digest_data["portada_visual"]["bajada_portada"] = f"A las {hora_prox} el Carbonero salta a la cancha de {estadio_prox} ante {prox.get('nombre', 'Defensor Sporting vs Peñarol')} por la Fecha 14 del Clausura. Peñarol manda en la Tabla Anual con 66 puntos. Televisa {tv_prox}."
+                    mod_digest = True
+
+                if mod_digest:
                     digest_file.write_text(json.dumps(digest_data, ensure_ascii=False, indent=2), encoding="utf-8")
-                    msg = "Auto-ajuste: Saneado titular para no decir 'hoy juega' antes de fecha."
+                    msg = "Auto-ajuste: Saneado news_digest.json para no decir 'hoy juega' antes de fecha."
                     self.reparaciones_realizadas.append(msg)
                     logger.info(f"[Auto-Healing] ✓ {msg}")
                     cambio_realizado = True

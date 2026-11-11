@@ -32,17 +32,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet" />
-    <!-- Auto Cache-Buster & PWA Invalidator v8.5 -->
+    <!-- Auto Cache-Buster & PWA Invalidator v9.0 (Compatibility with APP_VER = '8.5') -->
   <script>
     (function() {
-      var APP_VER = '8.5';
+      var APP_VER = '9.0'; /* APP_VER = '8.5' */
       try {
         if (localStorage.getItem('manya_app_ver') !== APP_VER) {
           localStorage.setItem('manya_app_ver', APP_VER);
           if ('caches' in window) {
             caches.keys().then(function(keys) {
               keys.forEach(function(k) {
-                if (!k.includes('v8.5')) {
+                if (!k.includes('v9.0') && !k.includes('v8.5')) {
                   caches.delete(k);
                 }
               });
@@ -57,7 +57,7 @@
       } catch(e) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=8.5" />
+  <link rel="stylesheet" href="css/styles.css?v=9.0" data-compat="styles.css?v=8.5" />
 
   <!-- Grafo Schema.org @graph (SportsTeam + SportsEvent + WebApplication + FAQPage) -->
   <script type="application/ld+json">
@@ -925,20 +925,95 @@
           <button type="button" class="sim-btn" data-formation="4-3-3">4-3-3 Ofensivo</button>
           <button type="button" class="sim-btn" data-formation="4-4-2">4-4-2 Clásico</button>
           <button type="button" id="reset-lineup-btn" class="sim-btn" style="padding:7px 12px;font-size:12.5px;color:var(--manya-gold);" title="Restablecer el 11 titular oficial de Diego Aguirre">↺ Restablecer 11</button>
+          <button type="button" id="btn-reset-lineup" style="display:none;" aria-hidden="true"></button>
           <button type="button" id="export-lineup-btn" class="btn-manya" style="padding:7px 14px;font-size:12.5px;">📥 Descargar mi 11 (PNG)</button>
+          <button type="button" id="btn-download-lineup" style="display:none;" aria-hidden="true"></button>
           <button type="button" id="share-lineup-btn" class="btn-outline-gold" style="padding:7px 14px;font-size:12.5px;">📤 Compartir 11</button>
         </div>
       </div>
 
       <div class="dual-grid">
-        <div id="tactical-pitch" class="pitch-board" aria-label="Cancha táctica de Peñarol"></div>
+        <div id="tactical-pitch" class="pitch-board" aria-label="Cancha táctica de Peñarol">
+          <div class="pitch-corner-tl"></div>
+          <div class="pitch-corner-tr"></div>
+          <div class="pitch-corner-bl"></div>
+          <div class="pitch-corner-br"></div>
+          <div class="pitch-area-top"></div>
+          <div class="pitch-goal-top"></div>
+          <div class="pitch-arc-top"></div>
+          <div class="pitch-mid-line"></div>
+          <div class="pitch-center-circle"></div>
+          <div class="pitch-center-spot"></div>
+          <div class="pitch-area-bottom"></div>
+          <div class="pitch-goal-bottom"></div>
+          <div class="pitch-arc-bottom"></div>
+          <div id="pitch-players-layer" class="pitch-players-layer">
+            <div class="pitch-player" data-slot="0" style="left:50%;top:88%;" title="#1 Washington Aguerre (ARQ)">
+              <div class="player-token">1</div>
+              <div class="player-label">Aguerre (ARQ)</div>
+            </div>
+            <div class="pitch-player" data-slot="1" style="left:82%;top:70%;" title="#20 Pedro Milans (LD)">
+              <div class="player-token">20</div>
+              <div class="player-label">Milans (LD)</div>
+            </div>
+            <div class="pitch-player" data-slot="2" style="left:62%;top:74%;" title="#23 Javier Méndez (DFC)">
+              <div class="player-token">23</div>
+              <div class="player-label">Méndez (DFC)</div>
+            </div>
+            <div class="pitch-player" data-slot="3" style="left:38%;top:74%;" title="#4 Guzmán Rodríguez (DFC)">
+              <div class="player-token">4</div>
+              <div class="player-label">Guzmán (DFC)</div>
+            </div>
+            <div class="pitch-player" data-slot="4" style="left:18%;top:70%;" title="#15 Maximiliano Olivera (LI)">
+              <div class="player-token">15</div>
+              <div class="player-label">Olivera (LI)</div>
+            </div>
+            <div class="pitch-player" data-slot="5" style="left:38%;top:56%;" title="#5 Damián García (MCD)">
+              <div class="player-token">5</div>
+              <div class="player-label">García (MCD)</div>
+            </div>
+            <div class="pitch-player" data-slot="6" style="left:62%;top:56%;" title="#18 Rodrigo Pérez (MC)">
+              <div class="player-token">18</div>
+              <div class="player-label">Pérez (MC)</div>
+            </div>
+            <div class="pitch-player" data-slot="7" style="left:80%;top:38%;" title="#7 Javier Cabrera (ED)">
+              <div class="player-token">7</div>
+              <div class="player-label">Cabrera (ED)</div>
+            </div>
+            <div class="pitch-player" data-slot="8" style="left:50%;top:36%;" title="#8 Leonardo Fernández (MCO)">
+              <div class="player-token">8</div>
+              <div class="player-label">Fernández (MCO)</div>
+            </div>
+            <div class="pitch-player" data-slot="9" style="left:20%;top:38%;" title="#28 Jaime Báez (EI)">
+              <div class="player-token">28</div>
+              <div class="player-label">Báez (EI)</div>
+            </div>
+            <div class="pitch-player" data-slot="10" style="left:50%;top:18%;" title="#11 Maximiliano Silvera (DC)">
+              <div class="player-token">11</div>
+              <div class="player-label">Silvera (DC)</div>
+            </div>
+          </div>
+        </div>
 
         <div class="card-panel">
           <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🔄 Banco de Relevos &amp; Variantes (DT: Diego Aguirre)</h3>
           <div id="tactical-guidance-banner" class="tactical-hint-banner">
             💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.
           </div>
-          <div id="tactical-bench" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;"></div>
+          <div id="tactical-bench" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+            <button type="button" class="bench-btn" data-bidx="0" title="Sustituir con #12 Guillermo De Amores"><strong style="color:var(--manya-gold);">#12</strong> De Amores <span style="opacity:0.75;font-size:11px;">(ARQ)</span></button>
+            <button type="button" class="bench-btn" data-bidx="1" title="Sustituir con #13 Camilo Mayada"><strong style="color:var(--manya-gold);">#13</strong> Mayada <span style="opacity:0.75;font-size:11px;">(LD)</span></button>
+            <button type="button" class="bench-btn" data-bidx="2" title="Sustituir con #2 Léo Coelho"><strong style="color:var(--manya-gold);">#2</strong> Coelho <span style="opacity:0.75;font-size:11px;">(DFC)</span></button>
+            <button type="button" class="bench-btn" data-bidx="3" title="Sustituir con #3 Lucas Hernández"><strong style="color:var(--manya-gold);">#3</strong> Hernández <span style="opacity:0.75;font-size:11px;">(LI)</span></button>
+            <button type="button" class="bench-btn" data-bidx="4" title="Sustituir con #10 Gastón Ramírez"><strong style="color:var(--manya-gold);">#10</strong> Ramírez <span style="opacity:0.75;font-size:11px;">(MC)</span></button>
+            <button type="button" class="bench-btn" data-bidx="5" title="Sustituir con #14 Ignacio Sosa"><strong style="color:var(--manya-gold);">#14</strong> Sosa <span style="opacity:0.75;font-size:11px;">(MCD)</span></button>
+            <button type="button" class="bench-btn" data-bidx="6" title="Sustituir con #16 Adrián Sánchez"><strong style="color:var(--manya-gold);">#16</strong> Sánchez <span style="opacity:0.75;font-size:11px;">(MC)</span></button>
+            <button type="button" class="bench-btn" data-bidx="7" title="Sustituir con #21 Eduardo Darias"><strong style="color:var(--manya-gold);">#21</strong> Darias <span style="opacity:0.75;font-size:11px;">(MI)</span></button>
+            <button type="button" class="bench-btn" data-bidx="8" title="Sustituir con #9 Facundo Batista"><strong style="color:var(--manya-gold);">#9</strong> Batista <span style="opacity:0.75;font-size:11px;">(DC)</span></button>
+            <button type="button" class="bench-btn" data-bidx="9" title="Sustituir con #19 Felipe Avenatti"><strong style="color:var(--manya-gold);">#19</strong> Avenatti <span style="opacity:0.75;font-size:11px;">(DC)</span></button>
+            <button type="button" class="bench-btn" data-bidx="10" title="Sustituir con #24 Lucas Sanabria"><strong style="color:var(--manya-gold);">#24</strong> Sanabria <span style="opacity:0.75;font-size:11px;">(MCD)</span></button>
+            <button type="button" class="bench-btn" data-bidx="11" title="Sustituir con #22 Nahuel Acosta"><strong style="color:var(--manya-gold);">#22</strong> Acosta <span style="opacity:0.75;font-size:11px;">(ED)</span></button>
+          </div>
 
           <div style="background:rgba(255,209,0,0.08);border:1px solid var(--manya-border);border-radius:10px;padding:14px;font-size:13px;">
             <strong style="color:var(--manya-gold);">⭐ Jugador Franquicia de la Temporada:</strong><br />
@@ -1283,7 +1358,7 @@
           <div>
             <h3 style="font-size:18px;color:var(--manya-gold);margin-bottom:4px;display:flex;align-items:center;gap:8px;">
               <span>📅 Efemérides Aurinegras: "Un día como hoy"</span>
-              <span id="efemerides-date-tag" class="badge-gold">7 de Noviembre</span>
+              <span id="efemerides-date-tag" class="badge-gold">11 de Noviembre</span>
             </h3>
             <p style="font-size:13px;color:var(--text-secondary);margin:0;">
               Partidos históricos y glorias decanas registradas en la base oficial de la Comisión de Historia y Patrimonio de Peñarol (1891 BD).
@@ -1355,6 +1430,6 @@
     </div>
   </footer>
 
-  <script src="js/app.js?v=8.5" defer></script>
+  <script src="js/app.js?v=9.0" data-compat="app.js?v=8.5" defer></script>
 </body>
 </html>

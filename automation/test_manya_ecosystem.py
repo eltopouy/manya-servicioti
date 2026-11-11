@@ -307,15 +307,17 @@ class ManyaEcosystemTester:
         self.record_result("Accesibilidad de Endpoints Oficiales", passed, msg, results_map)
 
     def test_pwa_network_first_and_standings_selector(self):
-        """Verifica que Service Worker use Network-First, la tabla por defecto sea Clausura y no haya datos viejos en el match center."""
+        """Verifica que Service Worker use Network-First, la versión sea v9.0 unificada y la tabla por defecto sea Clausura."""
         errors = []
         sw_file = BASE_DIR / "sw.js"
         if sw_file.exists():
             txt = sw_file.read_text(encoding="utf-8")
-            if not ("v7.0-network-first" in txt or "v7.1-mobile-pts" in txt or "v7." in txt or "v8." in txt):
-                errors.append("sw.js no tiene la versión v8.x / v7.x network-first")
+            if "v9.0" not in txt:
+                errors.append("sw.js no tiene la versión v9.0 unificada")
             if "caches.match(event.request).then(cached => cached || fetch(event.request))" in txt:
                 errors.append("sw.js aún tiene fetch cache-first")
+            if "influencers_feed.json" not in txt:
+                errors.append("sw.js CORE_ASSETS no incluye influencers_feed.json")
         else:
             errors.append("sw.js no existe")
 
@@ -334,39 +336,130 @@ class ManyaEcosystemTester:
                 errors.append("index.html contiene relato viejo del Centenario en el match center")
             if "manya_app_ver" not in txt:
                 errors.append("index.html no tiene el script auto-invalidador de caché PWA")
-            if "APP_VER = '8.5'" not in txt:
-                errors.append("index.html no tiene APP_VER unificada en 8.5")
-            if "styles.css?v=8.5" not in txt:
-                errors.append("index.html no enlaza css/styles.css?v=8.5")
-            if "app.js?v=8.5" not in txt:
-                errors.append("index.html no enlaza js/app.js?v=8.5")
+            if "APP_VER = '9.0'" not in txt:
+                errors.append("index.html no tiene APP_VER unificada en 9.0")
+            if "styles.css?v=9.0" not in txt:
+                errors.append("index.html no enlaza css/styles.css?v=9.0")
+            if "app.js?v=9.0" not in txt:
+                errors.append("index.html no enlaza js/app.js?v=9.0")
 
-        if sw_file.exists():
-            sw_txt = sw_file.read_text(encoding="utf-8")
-            if "v8.5" not in sw_txt:
-                errors.append("sw.js CACHE_NAME no está alineado con v8.5")
-            if "influencers_feed.json" not in sw_txt:
-                errors.append("sw.js CORE_ASSETS no incluye influencers_feed.json")
+        css_file = BASE_DIR / "css" / "styles.css"
+        if css_file.exists():
+            txt_css = css_file.read_text(encoding="utf-8", errors="replace")
+            if "v9.0" not in txt_css:
+                errors.append("css/styles.css no contiene la cabecera de versión v9.0")
 
         passed = len(errors) == 0
-        msg = "PWA Network-First, versiones v8.5 en armonía completa y selector Clausura/Anual certificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
-        self.record_result("PWA Network-First y Armonía de Versiones v8.5", passed, msg, {"errors": errors})
+        msg = "PWA Network-First, versiones v9.0 en armonía completa y selector Clausura/Anual certificados" if passed else f"Inconsistencias: {'; '.join(errors)}"
+        self.record_result("PWA Network-First y Armonía de Versiones v9.0", passed, msg, {"errors": errors})
 
+    def test_copa_libertadores_crests(self):
+        """Verifica que todos los equipos de la Copa Libertadores (Corinthians, Platense, etc.) tengan escudo válido y archivo en disco."""
+        errors = []
+        live_file = DATA_DIR / "live_status.json"
+        escudos_file = DATA_DIR / "escudos_uruguay.json"
+        app_js = BASE_DIR / "js" / "app.js"
+
+        if not escudos_file.exists():
+            errors.append("No existe data/escudos_uruguay.json")
+            catalog = {}
+        else:
+            try:
+                catalog = json.loads(escudos_file.read_text(encoding="utf-8"))
+            except Exception as e:
+                errors.append(f"Error parseando escudos_uruguay.json: {e}")
+                catalog = {}
+
+        libertadores_teams = []
+        if live_file.exists():
+            try:
+                live_data = json.loads(live_file.read_text(encoding="utf-8"))
+                tablas = live_data.get("tablas_campeonatos", [])
+                if isinstance(tablas, list):
+                    lib_tab = [t for t in tablas if t.get("id") == "libertadores"]
+                    if lib_tab:
+                        rows = lib_tab[0].get("filas", []) or lib_tab[0].get("datos", [])
+                        for r in rows:
+                            eq_name = r.get("equipo") or r.get("nombre")
+                            if eq_name:
+                                libertadores_teams.append(eq_name)
+            except Exception as e:
+                errors.append(f"Error leyendo live_status.json tablas_campeonatos: {e}")
+
+        # Si no había filas en el JSON, validar al menos los equipos reportados por el usuario
+        if not libertadores_teams:
+            libertadores_teams = ["Corinthians", "Platense", "Peñarol", "Independiente Santa Fe"]
+
+        alias_index = catalog.get("alias_index", {})
+        clubes = catalog.get("clubes", {})
+
+        for team in libertadores_teams:
+            # Buscar en catálogo
+            normalized = team.lower().strip()
+            found = False
+            escudo_path = None
+
+            if normalized in alias_index:
+                key = alias_index[normalized]
+                if key in clubes:
+                    found = True
+                    escudo_path = clubes[key].get("escudo") or clubes[key].get("ruta_webp") or clubes[key].get("ruta_png") or clubes[key].get("ruta_svg")
+            elif normalized in clubes:
+                found = True
+                escudo_path = clubes[normalized].get("escudo") or clubes[normalized].get("ruta_webp") or clubes[normalized].get("ruta_png") or clubes[normalized].get("ruta_svg")
+
+            if not found:
+                # Comprobar si existe archivo directo en assets/img/escudos/
+                slug = normalized.replace(" ", "_").replace("ñ", "n")
+                possible = list((BASE_DIR / "assets" / "img" / "escudos").glob(f"*{slug}*"))
+                if not possible:
+                    errors.append(f"Equipo de Copa Libertadores '{team}' no se encuentra en escudos_uruguay.json ni tiene archivo en disco")
+            elif escudo_path:
+                clean_p = escudo_path.lstrip("/")
+                f_on_disk = BASE_DIR / clean_p
+                if not f_on_disk.exists():
+                    errors.append(f"Escudo de '{team}' ({escudo_path}) no existe en disco")
+                elif f_on_disk.stat().st_size == 0:
+                    errors.append(f"Escudo de '{team}' ({escudo_path}) tiene tamaño 0 bytes")
+
+        # Verificar que app.js renderice <img> para los escudos en tablas
+        if app_js.exists():
+            code_js = app_js.read_text(encoding="utf-8")
+            if "renderStandings" in code_js:
+                # Verificar que renderice imagen o getTeamCrest
+                if "getTeamCrest" not in code_js and "<img" not in code_js:
+                    errors.append("js/app.js no implementa resolución ni renderizado de escudos <img> en tablas")
+
+        passed = len(errors) == 0
+        msg = f"Escudos de Copa Libertadores ({len(libertadores_teams)} clubes validados: Corinthians, Platense, etc.) 100% íntegros" if passed else f"Inconsistencias en escudos: {'; '.join(errors)}"
+        self.record_result("Escudos Oficiales Copa CONMEBOL Libertadores", passed, msg, {"errors": errors})
+
+    def test_instagram_and_galleries_freshness(self):
+        """Verifica que no persistan fotos viejas de festejos de Liverpool y que todas las imágenes en assets/ig/ existan."""
+        try:
+            from test_editorial_coherence import auditar_fotos_e_instagram_feed
+            passed, errors = auditar_fotos_e_instagram_feed()
+        except Exception as ex:
+            passed = False
+            errors = [f"Excepción en auditar_fotos_e_instagram_feed: {ex}"]
+
+        msg = "Galerías e Instagram Feed 100% actualizados (sin rastros de Liverpool y fotos verificadas en disco)" if passed else f"Inconsistencias fotográficas: {'; '.join(errors)}"
+        self.record_result("Frescura Fotográfica y Feed de Redes Sociales", passed, msg, {"errors": errors})
 
     def test_editorial_coherence_and_anti_contamination(self):
-        """Verifica que el cuerpo editorial de El Diario de Peñarol no tenga contaminación con rivales pasados ni placeholders."""
+        """Verifica que el cuerpo editorial de El Diario de Peñarol no tenga contaminación con rivales pasados, ni 'Hoy Juega' en días sin partido."""
         try:
-            from test_editorial_coherence import auditar_coherencia_editorial
-            passed, errors = auditar_coherencia_editorial()
+            from test_editorial_coherence import auditar_coherencia_editorial_completa
+            passed, errors = auditar_coherencia_editorial_completa()
         except Exception as ex:
             passed = False
             errors = [f"Excepción en test_editorial_coherence: {ex}"]
 
-        msg = "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)" if passed else f"Inconsistencias editoriales: {'; '.join(errors)}"
+        msg = "Coherencia editorial certificada (sin contaminaciones de rivales, sin 'Hoy Juega' falso y sin placeholders)" if passed else f"Inconsistencias editoriales: {'; '.join(errors)}"
         self.record_result("Coherencia Editorial y Anti-Contaminación", passed, msg, {"errors": errors})
 
     def test_tactical_board_integrity(self):
-        """Audita exhaustivamente la pizarra táctica: squad, esquemas 4-2-3-1/4-3-3/4-4-2, sustituciones y canvas."""
+        """Audita exhaustivamente la pizarra táctica: squad, esquemas 4-2-3-1/4-3-3/4-4-2, sustituciones, ficha visible y sintaxis JS."""
         try:
             from test_tactical_board import auditar_pizarra_tactica_exhaustiva
             passed, errors = auditar_pizarra_tactica_exhaustiva()
@@ -374,7 +467,7 @@ class ManyaEcosystemTester:
             passed = False
             errors = [f"Excepción en test_tactical_board: {ex}"]
 
-        msg = "Pizarra táctica 100% certificada (squad 2026, 3 formaciones, sustituciones bidireccionales y Canvas)" if passed else f"Inconsistencias en pizarra táctica: {'; '.join(errors)}"
+        msg = "Pizarra táctica 100% certificada (squad 2026, 3 formaciones, fichas visibles en pitch, sustituciones y Canvas)" if passed else f"Inconsistencias en pizarra táctica: {'; '.join(errors)}"
         self.record_result("Pizarra Táctica Interactiva (Armá tu 11)", passed, msg, {"errors": errors})
 
     def run_all_tests(self) -> Dict[str, Any]:
@@ -391,6 +484,8 @@ class ManyaEcosystemTester:
         self.test_concurrency_locks_health()
         self.test_external_endpoints_reachability()
         self.test_pwa_network_first_and_standings_selector()
+        self.test_copa_libertadores_crests()
+        self.test_instagram_and_galleries_freshness()
         self.test_editorial_coherence_and_anti_contamination()
         self.test_tactical_board_integrity()
 

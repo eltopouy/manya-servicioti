@@ -207,9 +207,19 @@ def procesar_y_publicar_galerias():
 
     # Si hay suficientes imágenes, actualizar también el instagram_feed.json principal con enlaces reales
     if galerias_catalogo:
-        with open(DATA_DIR / "galleries.json", "w", encoding="utf-8") as f:
-            json.dump(galerias_catalogo, f, ensure_ascii=False, indent=2)
-        print(f"[✓] Guardado data/galleries.json con {len(galerias_catalogo)} fotografías procesadas.")
+        # Preservar tatuajes y fichas 1891 existentes para no sobreescribir el catálogo permanente
+        gal_path = DATA_DIR / "galleries.json"
+        tattoos_and_history = []
+        if gal_path.exists():
+            try:
+                curr = json.loads(gal_path.read_text(encoding="utf-8"))
+                tattoos_and_history = [c for c in curr if c.get("id", "").startswith("tattoo_") or c.get("id", "").startswith("1891_")]
+            except Exception:
+                pass
+        final_catalogo = galerias_catalogo + tattoos_and_history
+        with open(gal_path, "w", encoding="utf-8") as f:
+            json.dump(final_catalogo, f, ensure_ascii=False, indent=2)
+        print(f"[✓] Guardado data/galleries.json con {len(final_catalogo)} fotografías procesadas y tatuajes preservados.")
 
         # Copiar las mejores 6 también a assets/ig/ para el muro visual
         for idx, g in enumerate(galerias_catalogo[:6]):

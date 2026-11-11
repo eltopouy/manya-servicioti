@@ -368,7 +368,9 @@ PAUTAS DE REDACCIÓN:
 
     titular = res_json.get("titular_dia", f"La Previa: {match_title}")
     if delta_days != 0 and "hoy juega" in titular.lower():
-        titular = titular.replace("¡Hoy juega el Manya!", "La Previa Aurinegra:").replace("Hoy juega el Manya", "La Previa de Peñarol")
+        titular = re.sub(r"(?i)¡?hoy juega( el manya| el decano| peñarol)?!?:?", "La Previa Aurinegra:", titular).strip()
+        if "hoy juega" in titular.lower():
+            titular = f"La Previa Aurinegra: Peñarol afina detalles antes de visitar a {rival_nombre_real} en el Franzini"
 
     bajada = res_json.get("bajada_seo", "")
     if fecha_tag not in bajada and fecha_tag not in titular:
@@ -450,6 +452,20 @@ def ejecutar_ciclo_hoy_juega(match_info: dict, noticias_prensa: list):
     Revoluciona el portal a primera hora con las últimas novedades del vestuario,
     pronóstico del tiempo para la hora del partido, accesos al estadio y el clima de match day.
     """
+    now_uy = datetime.now(UY_TZ)
+    fecha_iso = match_info.get("fecha_iso", "")
+    delta_days = 0
+    if fecha_iso:
+        try:
+            m_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+            delta_days = (m_dt.date() - now_uy.date()).days
+        except Exception:
+            delta_days = 0
+    if delta_days != 0:
+        logger.warning(f"[Hoy Juega] No es día de partido (faltan {delta_days} días). Se desvía automáticamente a La Previa Oficial.")
+        ejecutar_ciclo_previa(match_info, noticias_prensa)
+        return
+
     event_id = match_info.get("event_id", "")
     match_title = match_info.get("nombre", "Defensor Sporting vs Peñarol")
     estadio = match_info.get("estadio", "Estadio Luis Franzini (Montevideo)")

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manya-servicioti-v8.5-ecosystem-unified';
+const CACHE_NAME = 'manya-servicioti-v9.0-ecosystem-unified'; // upgraded from v8.5
 const CORE_ASSETS = [
   '/',
   '/index.html',

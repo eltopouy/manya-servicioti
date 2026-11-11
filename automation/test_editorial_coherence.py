@@ -12,9 +12,12 @@ import os
 import json
 import re
 from pathlib import Path
+from datetime import datetime, timezone, timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
+ASSETS_DIR = BASE_DIR / "assets"
+UY_TZ = timezone(timedelta(hours=-3))
 
 if hasattr(sys.stdout, "reconfigure"):
     try:
@@ -232,10 +235,159 @@ def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
     return len(errors) == 0, errors
 
 
+def auditar_temporalidad_no_hoy_juega() -> tuple[bool, list[str]]:
+    """Verifica que NINGÚN archivo (live_status, news_digest, index.html, app.js) diga 'Hoy juega' cuando el partido no es hoy."""
+    errors = []
+    now_uy = datetime.now(UY_TZ)
+
+    live_file = DATA_DIR / "live_status.json"
+    if not live_file.exists():
+        return False, ["No existe data/live_status.json"]
+
+    try:
+        live = json.loads(live_file.read_text(encoding="utf-8"))
+    except Exception as e:
+        return False, [f"Error leyendo live_status.json: {e}"]
+
+    prox = live.get("proximo_partido", {})
+    fecha_iso = prox.get("fecha_iso", "")
+    if not fecha_iso:
+        return False, ["live_status.json no contiene fecha_iso en proximo_partido"]
+
+    try:
+        m_dt = datetime.fromisoformat(fecha_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+        delta_days = (m_dt.date() - now_uy.date()).days
+    except Exception as e:
+        return False, [f"Error parseando fecha_iso ({fecha_iso}): {e}"]
+
+    # Si NO es hoy (delta_days != 0):
+    if delta_days != 0:
+        # 1. Validar flags booleanos en live_status.json
+        partido_activo = live.get("partido_activo", {})
+        if partido_activo.get("es_hoy") is True:
+            errors.append(f"live_status.json: partido_activo.es_hoy es True, pero faltan {delta_days} días para el partido")
+        if prox.get("es_hoy") is True:
+            errors.append(f"live_status.json: proximo_partido.es_hoy es True, pero faltan {delta_days} días para el partido")
+
+        # 2. Validar cadenas de texto en live_status.json
+        live_str = json.dumps(live, ensure_ascii=False)
+        for frase in ["hoy juega", "¡hoy juega", "hoy juega peñarol", "hoy juega el manya"]:
+            if frase in live_str.lower():
+                errors.append(f"data/live_status.json contiene frase engañosa '{frase}' en día sin partido")
+
+        # 3. Validar news_digest.json
+        digest_file = DATA_DIR / "news_digest.json"
+        if digest_file.exists():
+            digest_str = digest_file.read_text(encoding="utf-8")
+            for frase in ["hoy juega", "¡hoy juega", "hoy juega peñarol", "hoy juega el manya"]:
+                if frase in digest_str.lower():
+                    errors.append(f"data/news_digest.json contiene frase engañosa '{frase}' en día sin partido")
+
+        # 4. Validar index.html
+        html_file = BASE_DIR / "index.html"
+        if html_file.exists():
+            html_str = html_file.read_text(encoding="utf-8")
+            # Buscar en elementos visibles de encabezado / ticker
+            ticker_match = re.search(r'id="ticker-text"[^>]*>(.*?)</div>', html_str, re.DOTALL)
+            if ticker_match and "hoy juega" in ticker_match.group(1).lower():
+                errors.append("index.html (#ticker-text) dice 'Hoy juega' pero el partido es el domingo 15/11")
+
+            badge_match = re.search(r'id="hero-match-badge"[^>]*>(.*?)</span>', html_str, re.DOTALL)
+            if badge_match and "hoy juega" in badge_match.group(1).lower():
+                errors.append("index.html (#hero-match-badge) dice 'Hoy juega'")
+
+            lead_match = re.search(r'<article class="editorial-lead-article">(.*?)</article>', html_str, re.DOTALL)
+            if lead_match and "hoy juega" in lead_match.group(1).lower():
+                errors.append("index.html (#editorial-lead-article) dice 'Hoy juega'")
+
+    return len(errors) == 0, errors
+
+
+def auditar_fotos_e_instagram_feed() -> tuple[bool, list[str]]:
+    """Verifica que NO persistan fotos ni festejos viejos de Liverpool y que todas las fotos en assets/ig/ existan."""
+    errors = []
+
+    # 1. Validar feeds JSON: instagram_feed.json, influencers_feed.json, galleries.json
+    feed_files = ["instagram_feed.json", "influencers_feed.json", "galleries.json"]
+    for fn in feed_files:
+        fp = DATA_DIR / fn
+        if not fp.exists():
+            errors.append(f"Archivo data/{fn} no encontrado")
+            continue
+
+        try:
+            content = json.loads(fp.read_text(encoding="utf-8"))
+        except Exception as e:
+            errors.append(f"Error parseando data/{fn}: {e}")
+            continue
+
+        feed_str = json.dumps(content, ensure_ascii=False).lower()
+        if "liverpool" in feed_str:
+            errors.append(f"data/{fn} contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool")
+
+        # Validar existencia de imágenes referenciadas
+        img_paths = re.findall(r'["\'](assets/ig/[^"\']+\.(?:webp|jpg|jpeg|png))["\']', feed_str)
+        if not img_paths:
+            # También buscar nombres de archivo simples si se usan
+            img_paths = re.findall(r'["\']image["\']\s*:\s*["\']([^"\']+)["\']', feed_str)
+
+        for ipath in img_paths:
+            # Limpiar ruta
+            clean_path = ipath.strip().lstrip("/")
+            full_path = BASE_DIR / clean_path
+            if not full_path.exists():
+                # Intentar en assets/ig si era solo nombre de archivo
+                alt_path = BASE_DIR / "assets" / "ig" / Path(clean_path).name
+                if not alt_path.exists():
+                    errors.append(f"data/{fn}: imagen referenciada '{ipath}' no existe en disco")
+                elif alt_path.stat().st_size == 0:
+                    errors.append(f"data/{fn}: imagen referenciada '{ipath}' está vacía (0 bytes)")
+            elif full_path.stat().st_size == 0:
+                errors.append(f"data/{fn}: imagen referenciada '{ipath}' está vacía (0 bytes)")
+
+    # 2. Validar index.html
+    html_file = BASE_DIR / "index.html"
+    if html_file.exists():
+        html_str = html_file.read_text(encoding="utf-8")
+        # Buscar en sección de galerías o muro visual
+        muro_match = re.search(r'<section id="muro-visual"[^>]*>(.*?)</section>', html_str, re.DOTALL)
+        if muro_match:
+            muro_content = muro_match.group(1).lower()
+            if "gol de liverpool" in muro_content or "festejo liverpool" in muro_content:
+                errors.append("index.html (#muro-visual) contiene tarjeta con festejo de gol de Liverpool")
+
+        inf_match = re.search(r'<section id="influencers-manya"[^>]*>(.*?)</section>', html_str, re.DOTALL)
+        if inf_match:
+            inf_content = inf_match.group(1).lower()
+            if "liverpool" in inf_content:
+                errors.append("index.html (#influencers-manya) contiene referencia obsoleta a Liverpool")
+
+    return len(errors) == 0, errors
+
+
+def auditar_coherencia_editorial_completa() -> tuple[bool, list[str]]:
+    """Ejecuta todas las auditorías de coherencia editorial, temporal y fotográfica."""
+    all_errors = []
+
+    tests = [
+        ("Coherencia Editorial y Anti-Contaminación de Rivales", auditar_coherencia_editorial),
+        ("Temporalidad Estricta (No 'Hoy Juega' en Días Sin Partido)", auditar_temporalidad_no_hoy_juega),
+        ("Actualización Fotográfica y Feed de Instagram", auditar_fotos_e_instagram_feed)
+    ]
+
+    for name, fn in tests:
+        passed, errs = fn()
+        if not passed:
+            for e in errs:
+                all_errors.append(f"[{name}] {e}")
+
+    return len(all_errors) == 0, all_errors
+
+
 if __name__ == "__main__":
-    ok, errs = auditar_coherencia_editorial()
+    ok, errs = auditar_coherencia_editorial_completa()
     if ok:
-        print("[PASS] Coherencia Editorial y Táctica 100% Verificada: Ninguna contaminación entre rivales detectada en todo el DOM.")
+        print("[PASS] Coherencia Editorial, Temporal y Fotográfica 100% Verificada: Portal totalmente sincronizado.")
         sys.exit(0)
     else:
         print(f"[FAIL] Se detectaron {len(errs)} incoherencias:")

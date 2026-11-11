@@ -1,4 +1,4 @@
-/* Manya ServicioTI Stylesheet v8.5 */
+/* Manya ServicioTI Stylesheet v9.0 */
 :root {
   --manya-gold: #ffd100;
   --manya-gold-bright: #ffe14d;
@@ -763,6 +763,22 @@ body {
   pointer-events: none;
 }
 
+#pitch-players-layer,
+.pitch-players-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: auto;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
 .pitch-player {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -772,7 +788,9 @@ body {
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
   user-select: none;
-  z-index: 5;
+  z-index: 15;
+  visibility: visible;
+  opacity: 1;
   touch-action: manipulation;
 }
 

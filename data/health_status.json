@@ -1,33 +1,33 @@
 {
-  "fecha_auditoria": "07/11/2026 00:00:06",
-  "timestamp": "2026-11-07T00:00:06.120018-03:00",
+  "fecha_auditoria": "11/11/2026 09:18:37",
+  "timestamp": "2026-11-11T09:18:37.238365-03:00",
   "score_salud": 100.0,
-  "total_pruebas": 10,
-  "pruebas_exitosas": 9,
-  "pruebas_fallidas": 1,
-  "estado_general": "ALERTA",
+  "total_pruebas": 12,
+  "pruebas_exitosas": 12,
+  "pruebas_fallidas": 0,
+  "estado_general": "OPTIMO",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-07 00:00:02",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-11 09:18:34",
       "details": {
-        "now_uy": "2026-11-07 00:00:02.772000-03:00",
+        "now_uy": "2026-11-11 09:18:34.188119-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-07T00:00:02.772047-03:00"
+      "timestamp": "2026-11-11T09:18:34.188158-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 8, es_hoy: False (partido: 15/11/2026)",
+      "message": "delta_days: 4, es_hoy: False (partido: 15/11/2026)",
       "details": {
-        "delta_days": 8,
+        "delta_days": 4,
         "es_hoy": false
       },
-      "timestamp": "2026-11-07T00:00:02.773396-03:00"
+      "timestamp": "2026-11-11T09:18:34.189674-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-07T00:00:02.779668-03:00"
+      "timestamp": "2026-11-11T09:18:34.193526-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-07T00:00:02.784367-03:00"
+      "timestamp": "2026-11-11T09:18:34.199098-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-07T00:00:02.789927-03:00"
+      "timestamp": "2026-11-11T09:18:34.204911-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,13 +68,13 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-07T00:00:02.790328-03:00"
+      "timestamp": "2026-11-11T09:18:34.205112-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Endpoints con error: ['Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -93,41 +93,61 @@
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-07T00:00:06.083812-03:00"
+      "timestamp": "2026-11-11T09:18:37.087780-03:00"
     },
     {
-      "test": "PWA Network-First y Armonía de Versiones v8.5",
+      "test": "PWA Network-First y Armonía de Versiones v9.0",
       "status": "PASS",
       "passed": true,
-      "message": "PWA Network-First, versiones v8.5 en armonía completa y selector Clausura/Anual certificados",
+      "message": "PWA Network-First, versiones v9.0 en armonía completa y selector Clausura/Anual certificados",
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-07T00:00:06.092000-03:00"
+      "timestamp": "2026-11-11T09:18:37.102398-03:00"
+    },
+    {
+      "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
+      "status": "PASS",
+      "passed": true,
+      "message": "Escudos de Copa Libertadores (4 clubes validados: Corinthians, Platense, etc.) 100% íntegros",
+      "details": {
+        "errors": []
+      },
+      "timestamp": "2026-11-11T09:18:37.113656-03:00"
+    },
+    {
+      "test": "Frescura Fotográfica y Feed de Redes Sociales",
+      "status": "PASS",
+      "passed": true,
+      "message": "Galerías e Instagram Feed 100% actualizados (sin rastros de Liverpool y fotos verificadas en disco)",
+      "details": {
+        "errors": []
+      },
+      "timestamp": "2026-11-11T09:18:37.127301-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
       "status": "PASS",
       "passed": true,
-      "message": "Coherencia editorial certificada (sin contaminaciones de rivales ni placeholders)",
+      "message": "Coherencia editorial certificada (sin contaminaciones de rivales, sin 'Hoy Juega' falso y sin placeholders)",
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-07T00:00:06.109764-03:00"
+      "timestamp": "2026-11-11T09:18:37.146177-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
       "status": "PASS",
       "passed": true,
-      "message": "Pizarra táctica 100% certificada (squad 2026, 3 formaciones, sustituciones bidireccionales y Canvas)",
+      "message": "Pizarra táctica 100% certificada (squad 2026, 3 formaciones, fichas visibles en pitch, sustituciones y Canvas)",
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-07T00:00:06.119702-03:00"
+      "timestamp": "2026-11-11T09:18:37.238163-03:00"
     }
   ]
 }

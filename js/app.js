@@ -282,13 +282,29 @@
     window._manyaCountdownInterval = setInterval(tick, 1000);
   }
 
+  function isMatchToday(fechaIso) {
+    if (!fechaIso) return false;
+    try {
+      const now = new Date();
+      // Hora oficial Montevideo UY_TZ (UTC-3)
+      const nowUy = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (3 * 3600000));
+      const matchDate = new Date(fechaIso);
+      const matchUy = new Date(matchDate.getTime() + (matchDate.getTimezoneOffset() * 60000) - (3 * 3600000));
+      return nowUy.getFullYear() === matchUy.getFullYear() &&
+             nowUy.getMonth() === matchUy.getMonth() &&
+             nowUy.getDate() === matchUy.getDate();
+    } catch (e) {
+      return false;
+    }
+  }
+
   function resolveClubCrest(team) {
     if (!team) return 'assets/img/escudos/escudo_penarol.webp';
     if (team.es_penarol || (team.nombre && team.nombre.toLowerCase().includes('peñarol'))) {
       return 'assets/img/escudos/escudo_penarol.webp';
     }
     // Si el objeto ya trae el escudo oficial verificado localmente, usarlo directamente
-    if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || team.escudo.endsWith('.webp') || team.escudo.endsWith('.png'))) {
+    if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || team.escudo.endsWith('.webp') || team.escudo.endsWith('.png') || team.escudo.endsWith('.svg'))) {
       return team.escudo;
     }
     const rawName = (team.nombre || team.equipo || '').toLowerCase();
@@ -301,10 +317,11 @@
     if (state.escudosCatalog && state.escudosCatalog.alias_index) {
       const slug = state.escudosCatalog.alias_index[norm];
       if (slug && state.escudosCatalog.clubes && state.escudosCatalog.clubes[slug]) {
-        return state.escudosCatalog.clubes[slug].ruta_webp;
+        return state.escudosCatalog.clubes[slug].ruta_webp || state.escudosCatalog.clubes[slug].escudo;
       }
     }
-    // Mapeos rápidos directos por palabras clave
+
+    // Mapeos rápidos directos por palabras clave para Primera División AUF
     if (norm.includes('juventud')) return 'assets/img/escudos/escudo_juventud.webp';
     if (norm.includes('liverpool')) return 'assets/img/escudos/escudo_liverpool.webp';
     if (norm.includes('nacional')) return 'assets/img/escudos/escudo_nacional.webp';
@@ -313,6 +330,7 @@
     if (norm.includes('boston')) return 'assets/img/escudos/escudo_boston_river.webp';
     if (norm.includes('wanderers')) return 'assets/img/escudos/escudo_montevideo_wanderers.webp';
     if (norm.includes('cerro largo')) return 'assets/img/escudos/escudo_cerro_largo.webp';
+    if (norm.includes('cerro porteno')) return 'assets/img/escudos/escudo_cerro_porteno.webp';
     if (norm.includes('cerro')) return 'assets/img/escudos/escudo_cerro.webp';
     if (norm.includes('racing')) return 'assets/img/escudos/escudo_racing.webp';
     if (norm.includes('progreso')) return 'assets/img/escudos/escudo_progreso.webp';
@@ -327,8 +345,33 @@
     if (norm.includes('rentistas')) return 'assets/img/escudos/escudo_rentistas.webp';
     if (norm.includes('fenix')) return 'assets/img/escudos/escudo_fenix.webp';
 
+    // Mapeos rápidos para Copa CONMEBOL Libertadores
+    if (norm.includes('corinthians')) return 'assets/img/escudos/escudo_corinthians.webp';
+    if (norm.includes('platense')) return 'assets/img/escudos/escudo_platense.webp';
+    if (norm.includes('santa fe') || norm.includes('independiente santa')) return 'assets/img/escudos/escudo_independiente_santa_fe.webp';
+    if (norm.includes('flamengo')) return 'assets/img/escudos/escudo_flamengo.webp';
+    if (norm.includes('palmeiras')) return 'assets/img/escudos/escudo_palmeiras.webp';
+    if (norm.includes('boca')) return 'assets/img/escudos/escudo_boca_juniors.webp';
+    if (norm.includes('bolivar')) return 'assets/img/escudos/escudo_bolivar.webp';
+    if (norm.includes('cruzeiro')) return 'assets/img/escudos/escudo_cruzeiro.webp';
+    if (norm.includes('estudiantes')) return 'assets/img/escudos/escudo_estudiantes.webp';
+    if (norm.includes('rosario central')) return 'assets/img/escudos/escudo_rosario_central.webp';
+    if (norm.includes('junior') || norm.includes('tolima')) return 'assets/img/escudos/escudo_junior.webp';
+    if (norm.includes('ldu') || norm.includes('quito')) return 'assets/img/escudos/escudo_liga_de_quito.webp';
+    if (norm.includes('fluminense')) return 'assets/img/escudos/escudo_fluminense.webp';
+    if (norm.includes('universitario')) return 'assets/img/escudos/escudo_universitario.webp';
+    if (norm.includes('cristal')) return 'assets/img/escudos/escudo_sporting_cristal.webp';
+    if (norm.includes('libertad')) return 'assets/img/escudos/escudo_libertad.webp';
+    if (norm.includes('barcelona')) return 'assets/img/escudos/escudo_barcelona_sc.webp';
+    if (norm.includes('coquimbo')) return 'assets/img/escudos/escudo_coquimbo_unido.webp';
+    if (norm.includes('mirassol')) return 'assets/img/escudos/escudo_mirassol.webp';
+    if (norm.includes('always ready')) return 'assets/img/escudos/escudo_always_ready.webp';
+    if (norm.includes('cusco')) return 'assets/img/escudos/escudo_cusco.webp';
+    if (norm.includes('la guaira')) return 'assets/img/escudos/escudo_deportivo_la_guaira.webp';
+    if (norm.includes('ucv')) return 'assets/img/escudos/escudo_ucv.webp';
+
     if (team.logo && team.logo.startsWith('http')) return team.logo;
-    return 'assets/img/escudos/escudo_penarol.webp';
+    return 'assets/img/escudos/escudo_conmebol.svg';
   }
 
   function renderMatchHero(live) {
@@ -561,7 +604,7 @@
     const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
       ? state.live.tablas_campeonatos
       : [
-          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy) ? 'Hoy Juega' : 'Fecha 14', es_proximo: true },
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy && isMatchToday(state.live.partido_activo.fecha_iso)) ? 'Hoy Juega' : 'Fecha 14', es_proximo: true },
           { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 66p', es_proximo: false },
           { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
         ];
@@ -710,18 +753,19 @@
       if (r.es_penarol) {
         tagExtra = '<span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span>';
       } else if (isRivalNext) {
-        const esHoy = state.live && state.live.partido_activo && state.live.partido_activo.es_hoy === true;
+        const esHoy = state.live && state.live.partido_activo && state.live.partido_activo.es_hoy === true && isMatchToday(state.live.partido_activo.fecha_iso);
         const tagLabel = esHoy ? 'RIVAL DE HOY' : 'PRÓXIMO RIVAL';
         tagExtra = `<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">${tagLabel}</span>`;
       }
 
       const ptsClass = r.es_penarol ? 'pts-pill is-leader' : 'pts-pill';
+      const fallbackCrest = (state.standingsTab === 'libertadores') ? 'assets/img/escudos/escudo_conmebol.svg' : 'assets/img/escudos/escudo_auf.svg';
       return `
         <tr class="${rowClass}">
           <td class="col-pos">${i + 1}</td>
           <td class="col-team">
             <div style="display:flex;align-items:center;gap:6px;">
-              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.src='assets/img/escudos/escudo_auf.webp'" />
+              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.onerror=null;this.src='${fallbackCrest}'" />
               <span class="team-name-label">${r.equipo}</span>${tagExtra}
             </div>
           </td>
@@ -831,8 +875,40 @@
     }
   }
 
+  const DEFAULT_LINEUP = [
+    { id: "aguerre", numero: 1, nombre: "Washington Aguerre", posicion: "ARQ", titular: true },
+    { id: "milans", numero: 20, nombre: "Pedro Milans", posicion: "LD", titular: true },
+    { id: "mendez", numero: 23, nombre: "Javier Méndez", posicion: "DFC", titular: true },
+    { id: "rodriguez", numero: 4, nombre: "Guzmán Rodríguez", posicion: "DFC", titular: true },
+    { id: "olivera", numero: 15, nombre: "Maximiliano Olivera", posicion: "LI", titular: true },
+    { id: "garcia", numero: 5, nombre: "Damián García", posicion: "MCD", titular: true },
+    { id: "perez", numero: 18, nombre: "Rodrigo Pérez", posicion: "MC", titular: true },
+    { id: "cabrera", numero: 7, nombre: "Javier Cabrera", posicion: "ED", titular: true },
+    { id: "fernandez", numero: 8, nombre: "Leonardo Fernández", posicion: "MCO", titular: true },
+    { id: "baez", numero: 28, nombre: "Jaime Báez", posicion: "EI", titular: true },
+    { id: "silvera", numero: 11, nombre: "Maximiliano Silvera", posicion: "DC", titular: true }
+  ];
+
+  const DEFAULT_BENCH = [
+    { id: "deamores", numero: 12, nombre: "Guillermo De Amores", posicion: "ARQ", titular: false },
+    { id: "mayada", numero: 13, nombre: "Camilo Mayada", posicion: "LD", titular: false },
+    { id: "coelho", numero: 2, nombre: "Léo Coelho", posicion: "DFC", titular: false },
+    { id: "hernandez", numero: 3, nombre: "Lucas Hernández", posicion: "LI", titular: false },
+    { id: "ramirez", numero: 10, nombre: "Gastón Ramírez", posicion: "MC", titular: false },
+    { id: "sosa", numero: 14, nombre: "Ignacio Sosa", posicion: "MCD", titular: false },
+    { id: "sanchez", numero: 16, nombre: "Adrián Sánchez", posicion: "MC", titular: false },
+    { id: "darias", numero: 21, nombre: "Eduardo Darias", posicion: "MI", titular: false },
+    { id: "batista", numero: 9, nombre: "Facundo Batista", posicion: "DC", titular: false },
+    { id: "avenatti", numero: 19, nombre: "Felipe Avenatti", posicion: "DC", titular: false },
+    { id: "sanabria", numero: 24, nombre: "Lucas Sanabria", posicion: "MCD", titular: false },
+    { id: "acosta", numero: 22, nombre: "Nahuel Acosta", posicion: "ED", titular: false }
+  ];
+
   function resetTacticalLineup() {
-    if (!state.initialLineup || !state.initialLineup.length) return;
+    if (!state.initialLineup || !state.initialLineup.length) {
+      state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+      state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+    }
     state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
     state.bench = JSON.parse(JSON.stringify(state.initialBench));
     state.selectedSlotIndex = null;
@@ -845,7 +921,14 @@
     const pitch = document.getElementById('tactical-pitch');
     const benchBox = document.getElementById('tactical-bench');
     const banner = document.getElementById('tactical-guidance-banner');
-    if (!pitch || !state.lineup.length) return;
+    if (!pitch) return;
+
+    if (!state.lineup || !state.lineup.length) {
+      state.lineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+      state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+      state.bench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+      state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+    }
 
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
 
@@ -879,7 +962,7 @@
       `;
     }).join('');
 
-    pitch.innerHTML = pitchMarkings + playersHtml;
+    pitch.innerHTML = pitchMarkings + `<div id="pitch-players-layer" class="pitch-players-layer">${playersHtml}</div>`;
 
     // Escuchador de clics en futbolistas titulares
     pitch.querySelectorAll('.pitch-player').forEach(el => {
@@ -1166,6 +1249,106 @@
     }
   }
 
+  async function handleShareLineup() {
+    const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
+    const titularesStr = (state.lineup || []).slice(0, 11).map((p, i) => {
+      const role = coords[i]?.role || p.posicion;
+      return `${i + 1}. #${p.numero} ${p.nombre} (${role})`;
+    }).join('\n');
+
+    const relevosStr = (state.bench || []).map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]} (${b.posicion})`).join(', ');
+
+    const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\n` +
+      `DT: Diego Aguirre • vs Defensor Sporting (Estadio Luis Franzini)\n\n` +
+      `11 TITULAR:\n` +
+      `${titularesStr}\n\n` +
+      `Banco de relevos:\n${relevosStr}\n\n` +
+      `¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Mi 11 Titular del Glorioso Peñarol',
+          text: text,
+          url: 'https://manya.servicioti.com.uy/#pizarra-tactica'
+        });
+        showTacticalToast('📤 ¡Alineación compartida con éxito!');
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      const shareLineupBtn = document.getElementById('share-lineup-btn');
+      if (shareLineupBtn) {
+        const orig = shareLineupBtn.textContent;
+        shareLineupBtn.textContent = '✅ ¡Copiado!';
+        showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
+        setTimeout(() => { shareLineupBtn.textContent = orig; }, 2500);
+      }
+    } catch (err) {
+      showTacticalToast('⚠️ No se pudo copiar la alineación', false);
+    }
+  }
+
+  function initTacticalBoard() {
+    try {
+      if (!state.lineup || !state.lineup.length) {
+        state.lineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+        state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+        state.bench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+        state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+      }
+
+      renderTacticalBoard();
+
+      // Botones selectores de formación táctica
+      document.querySelectorAll('[data-formation]').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.formation = btn.getAttribute('data-formation');
+          state.selectedSlotIndex = null;
+          state.selectedBenchIndex = null;
+          renderTacticalBoard();
+        };
+      });
+
+      // Botón restablecer 11 (soporte para #reset-lineup-btn y #btn-reset-lineup)
+      ['reset-lineup-btn', 'btn-reset-lineup'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.onclick = resetTacticalLineup;
+      });
+
+      // Botón exportar PNG (soporte para #export-lineup-btn y #btn-download-lineup)
+      ['export-lineup-btn', 'btn-download-lineup'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.onclick = exportLineupPNG;
+      });
+
+      // Botón compartir 11
+      const shareLineupBtn = document.getElementById('share-lineup-btn');
+      if (shareLineupBtn) {
+        shareLineupBtn.onclick = handleShareLineup;
+      }
+    } catch (err) {
+      console.error('Error initializing tactical board:', err);
+    }
+  }
+
   let triviaAudioEnabled = true;
 
   function playAudioTone(type) {
@@ -1347,55 +1530,7 @@
           triviaState.maxStreak = 0;
           triviaState.answered = false;
           triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
-      
-  function initLiveVoting() {
-    const buttons = document.querySelectorAll('.vote-player-btn');
-    const countEl = document.getElementById('vote-total-count');
-    if (!buttons.length) return;
-
-    let voted = localStorage.getItem('manya_mvp_voted');
-    let counts = JSON.parse(localStorage.getItem('manya_mvp_counts') || '{"leo": 685, "cabrera": 342, "damian": 214, "guzman": 187}');
-
-    function updateUI() {
-      const total = Object.values(counts).reduce((a, b) => a + b, 0);
-      if (countEl) countEl.textContent = `${total.toLocaleString('es-UY')} Votos Emitidos`;
-      buttons.forEach(btn => {
-        const p = btn.getAttribute('data-player');
-        const pct = Math.round((counts[p] / total) * 100) || 0;
-        const pctEl = btn.querySelector('.vote-pct');
-        const barEl = btn.querySelector('.vote-bar');
-        if (pctEl) pctEl.textContent = `${pct}%`;
-        if (barEl) barEl.style.width = `${pct}%`;
-        if (voted === p) {
-          btn.classList.add('has-voted');
-          const voteTxt = btn.querySelector('span:nth-child(1)');
-          if (voteTxt && voteTxt.textContent === 'Votar') voteTxt.textContent = '✓ Tu Voto';
-        } else {
-          btn.classList.remove('has-voted');
-          const voteTxt = btn.querySelector('span:nth-child(1)');
-          if (voteTxt && voteTxt.textContent === '✓ Tu Voto') voteTxt.textContent = 'Votar';
-        }
-      });
-    }
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = btn.getAttribute('data-player');
-        if (voted === p) return;
-        if (voted && counts[voted] > 0) counts[voted]--;
-        counts[p] = (counts[p] || 0) + 1;
-        voted = p;
-        localStorage.setItem('manya_mvp_voted', voted);
-        localStorage.setItem('manya_mvp_counts', JSON.stringify(counts));
-        updateUI();
-      });
-    });
-
-    updateUI();
-  }
-
-    initLiveVoting();
-    renderTrivia();
+          renderTrivia();
         });
       }
       return;
@@ -1546,6 +1681,55 @@
       });
     });
   }
+
+  function initLiveVoting() {
+    const buttons = document.querySelectorAll('.vote-player-btn');
+    const countEl = document.getElementById('vote-total-count');
+    if (!buttons.length) return;
+
+    let voted = localStorage.getItem('manya_mvp_voted');
+    let counts = JSON.parse(localStorage.getItem('manya_mvp_counts') || '{"leo": 685, "cabrera": 342, "damian": 214, "guzman": 187}');
+
+    function updateUI() {
+      const total = Object.values(counts).reduce((a, b) => a + b, 0);
+      if (countEl) countEl.textContent = `${total.toLocaleString('es-UY')} Votos Emitidos`;
+      buttons.forEach(btn => {
+        const p = btn.getAttribute('data-player');
+        const pct = Math.round((counts[p] / total) * 100) || 0;
+        const pctEl = btn.querySelector('.vote-pct');
+        const barEl = btn.querySelector('.vote-bar');
+        if (pctEl) pctEl.textContent = `${pct}%`;
+        if (barEl) barEl.style.width = `${pct}%`;
+        if (voted === p) {
+          btn.classList.add('has-voted');
+          const voteTxt = btn.querySelector('span:nth-child(1)');
+          if (voteTxt && voteTxt.textContent === 'Votar') voteTxt.textContent = '✓ Tu Voto';
+        } else {
+          btn.classList.remove('has-voted');
+          const voteTxt = btn.querySelector('span:nth-child(1)');
+          if (voteTxt && voteTxt.textContent === '✓ Tu Voto') voteTxt.textContent = 'Votar';
+        }
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.onclick = () => {
+        const p = btn.getAttribute('data-player');
+        if (voted === p) return;
+        if (voted && counts[voted] > 0) counts[voted]--;
+        counts[p] = (counts[p] || 0) + 1;
+        voted = p;
+        try {
+          localStorage.setItem('manya_mvp_voted', voted);
+          localStorage.setItem('manya_mvp_counts', JSON.stringify(counts));
+        } catch (_) {}
+        updateUI();
+      };
+    });
+
+    updateUI();
+  }
+
   function setupLightbox() {
     const modal = document.getElementById('manya-lightbox');
     const overlay = document.getElementById('lightbox-overlay');
@@ -2205,158 +2389,228 @@
     });
   }
 
-  async function init() {
-    setupLightbox();
+  function renderTattooGallery(tattoos, filter = 'all') {
+    const grid = document.getElementById('tattoo-cards-grid');
+    const artistsList = document.getElementById('tattoo-artists-list');
+    if (!grid || !tattoos || !tattoos.length) return;
 
-    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
-      loadJsonSafe('data/live_status.json'),
-      loadJsonSafe('data/news_digest.json'),
-      loadJsonSafe('data/instagram_feed.json'),
-      loadJsonSafe('data/galleries.json'),
-      loadJsonSafe('data/squad_2026.json'),
-      loadJsonSafe('data/history_1891.json'),
-      loadJsonSafe('data/escudos_uruguay.json'),
-      loadJsonSafe('data/historial_activo.json'),
-      loadJsonSafe('data/efemerides_hoy.json'),
-      loadJsonSafe('data/rival_intelligence.json'),
-      loadJsonSafe('data/influencers_feed.json'),
-      loadJsonSafe('data/tatuajes_manya.json')
-    ]);
+    if (artistsList && !artistsList.children.length) {
+      const seen = new Set();
+      const uniqueArtists = [];
+      tattoos.forEach(t => {
+        if (t.tatuador && !seen.has(t.tatuador)) {
+          seen.add(t.tatuador);
+          uniqueArtists.push({
+            tatuador: t.tatuador,
+            estudio: t.estudio || 'Estudio Oficial',
+            barrio: t.barrio || 'Montevideo',
+            url: t.url_instagram || 'https://www.instagram.com/explore/tags/peñarolenlapiel/'
+          });
+        }
+      });
+      artistsList.innerHTML = uniqueArtists.slice(0, 6).map(a => `
+        <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="tattoo-artist-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,209,0,0.2);border-radius:999px;font-size:12px;color:#fff;">
+          <span style="color:var(--manya-gold);font-weight:900;">💉</span>
+          <span><strong>${a.tatuador}</strong> (${a.estudio})</span>
+        </a>
+      `).join('');
+    }
+
+    const filtered = (filter === 'all') ? tattoos : tattoos.filter(t => t.categoria === filter);
+
+    grid.innerHTML = filtered.map(t => {
+      const img = t.imagen_webp || t.imagen_jpg || 'assets/ig/manya_festejo_gol_aurinegro_cds.webp';
+      const igUrl = t.url_instagram || 'https://www.instagram.com/explore/tags/peñarolenlapiel/';
+      return `
+        <article class="tattoo-card" style="background:#111115;border:1px solid rgba(255,209,0,0.2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+          <div class="ig-img-wrap" style="aspect-ratio:1/1;position:relative;background:#000;">
+            <img src="${img}" alt="${t.titulo}" width="600" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='assets/ig/manya_festejo_gol_aurinegro_cds.webp';" />
+            <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.8);color:var(--manya-gold);border:1px solid var(--manya-gold);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:800;">${t.estilo || 'Tatuaje Aurinegro'}</span>
+          </div>
+          <div style="padding:12px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">📍 ${t.zona_cuerpo || 'Piel Carbonera'} • ${t.barrio || 'Montevideo'}</div>
+              <h3 style="font-size:13.5px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;">${t.titulo}</h3>
+              <p style="font-size:12px;color:#a1a1aa;margin:0 0 8px;line-height:1.4;">${t.descripcion || ''}</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px;">
+              <span style="color:var(--manya-gold);font-weight:700;">${t.tatuador}</span>
+              <a href="${igUrl}" target="_blank" rel="noopener noreferrer" style="color:#ffd100;text-decoration:none;font-weight:700;">Ver en IG ↗</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  function setupTattooFilters(tattoos) {
+    const tabs = document.querySelectorAll('#tattoo-filter-tabs .tattoo-filter-btn');
+    tabs.forEach(btn => {
+      btn.onclick = () => {
+        tabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-cat') || 'all';
+        renderTattooGallery(tattoos, cat);
+      };
+    });
+  }
+
+  async function init() {
+    try {
+      setupLightbox();
+    } catch (e) {
+      console.error('Lightbox setup error:', e);
+    }
+
+    try {
+      initTacticalBoard();
+    } catch (e) {
+      console.error('Initial tactical board render error:', e);
+    }
+
+    try {
+      initLiveVoting();
+    } catch (e) {
+      console.error('Initial live voting error:', e);
+    }
+
+    let live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos;
+    try {
+      [live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
+        loadJsonSafe('data/live_status.json'),
+        loadJsonSafe('data/news_digest.json'),
+        loadJsonSafe('data/instagram_feed.json'),
+        loadJsonSafe('data/galleries.json'),
+        loadJsonSafe('data/squad_2026.json'),
+        loadJsonSafe('data/history_1891.json'),
+        loadJsonSafe('data/escudos_uruguay.json'),
+        loadJsonSafe('data/historial_activo.json'),
+        loadJsonSafe('data/efemerides_hoy.json'),
+        loadJsonSafe('data/rival_intelligence.json'),
+        loadJsonSafe('data/influencers_feed.json'),
+        loadJsonSafe('data/tatuajes_manya.json')
+      ]);
+    } catch (err) {
+      console.error('Error fetching data JSONs:', err);
+    }
 
     if (escudosCatalog) {
       state.escudosCatalog = escudosCatalog;
     }
 
     if (live) {
-      state.live = live;
-      state.standingsTab = live.torneo_activo_id || 'clausura';
-      renderMatchHero(live);
-      renderLiveTimeline(live);
-      renderStandings();
-      setupLivePolling();
+      try {
+        state.live = live;
+        state.standingsTab = live.torneo_activo_id || 'clausura';
+        renderMatchHero(live);
+        renderLiveTimeline(live);
+        renderStandings();
+        setupLivePolling();
+      } catch (e) {
+        console.error('Error in live rendering:', e);
+      }
     }
+
     if (h2hWanderers) {
-      renderHeadToHead(h2hWanderers);
+      try {
+        renderHeadToHead(h2hWanderers);
+      } catch (e) {
+        console.error('Error in head-to-head:', e);
+      }
     }
+
     if (efemeridesHoy) {
-      renderEfemerides(efemeridesHoy);
+      try {
+        renderEfemerides(efemeridesHoy);
+      } catch (e) {
+        console.error('Error in efemerides:', e);
+      }
     }
+
     if (rivalIntel) {
-      renderRivalIntelligence(rivalIntel);
+      try {
+        renderRivalIntelligence(rivalIntel);
+      } catch (e) {
+        console.error('Error in rival intel:', e);
+      }
     }
-    initHistoricoDrawer();
-    initStandingsTabs();
-    initSimulator();
+
+    try {
+      initHistoricoDrawer();
+      initStandingsTabs();
+      initSimulator();
+    } catch (e) {
+      console.error('Error in interactive tabs/simulator:', e);
+    }
+
     if (influencers && influencers.length) {
-      renderInfluencersSection(influencers);
+      try {
+        renderInfluencersSection(influencers);
+      } catch (e) {
+        console.error('Error in influencers:', e);
+      }
     }
+
     if (tattoos && tattoos.length) {
-      renderTattooGallery(tattoos);
-      setupTattooFilters(tattoos);
+      try {
+        renderTattooGallery(tattoos);
+        setupTattooFilters(tattoos);
+      } catch (e) {
+        console.error('Error in tattoos:', e);
+      }
     }
 
-    // Priorizar galería completa multicanal (galleries.json) combinada con instagram_feed.json
-    const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
-    renderHeroInstagramPost(allGalleryItems.length ? allGalleryItems[0] : null, digest);
+    try {
+      const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
+      renderHeroInstagramPost(allGalleryItems.length ? allGalleryItems[0] : null, digest);
 
-    if (allGalleryItems.length) {
-      state.galleries = allGalleryItems;
-      renderGallery(allGalleryItems, 'all');
-      setupGalleryFilters(allGalleryItems);
+      if (allGalleryItems.length) {
+        state.galleries = allGalleryItems;
+        renderGallery(allGalleryItems, 'all');
+        setupGalleryFilters(allGalleryItems);
+      }
+    } catch (e) {
+      console.error('Error in galleries:', e);
     }
 
     if (squad && squad.jugadores) {
-      state.squad = squad;
-      state.initialLineup = JSON.parse(JSON.stringify(squad.jugadores.filter(p => p.titular).slice(0, 11)));
-      state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
-      state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
-      state.bench = JSON.parse(JSON.stringify(state.initialBench));
-      renderTacticalBoard();
+      try {
+        state.squad = squad;
+        state.initialLineup = JSON.parse(JSON.stringify(squad.jugadores.filter(p => p.titular).slice(0, 11)));
+        state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
+        state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
+        state.bench = JSON.parse(JSON.stringify(state.initialBench));
+        renderTacticalBoard();
+      } catch (e) {
+        console.error('Error applying squad to tactical board:', e);
+      }
     }
 
-    document.querySelectorAll('[data-formation]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.formation = btn.getAttribute('data-formation');
-        state.selectedSlotIndex = null;
-        state.selectedBenchIndex = null;
-        renderTacticalBoard();
-      });
-    });
-
-    const resetBtn = document.getElementById('reset-lineup-btn');
-    if (resetBtn) resetBtn.addEventListener('click', resetTacticalLineup);
-
-    const expBtn = document.getElementById('export-lineup-btn');
-    if (expBtn) expBtn.addEventListener('click', exportLineupPNG);
-
-    const shareLineupBtn = document.getElementById('share-lineup-btn');
-    if (shareLineupBtn) {
-      shareLineupBtn.addEventListener('click', async () => {
-        const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
-        const titularesStr = state.lineup.slice(0, 11).map((p, i) => {
-          const role = coords[i]?.role || p.posicion;
-          return `${i + 1}. #${p.numero} ${p.nombre} (${role})`;
-        }).join('\n');
-
-        const relevosStr = state.bench.map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]} (${b.posicion})`).join(', ');
-
-        const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\n` +
-          `DT: Diego Aguirre • vs Defensor Sporting (Estadio Luis Franzini)\n\n` +
-          `11 TITULAR:\n` +
-          `${titularesStr}\n\n` +
-          `Banco de relevos:\n${relevosStr}\n\n` +
-          `¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !`;
-
-        if (navigator.share) {
-          try {
-            await navigator.share({
-              title: 'Mi 11 Titular del Glorioso Peñarol',
-              text: text,
-              url: 'https://manya.servicioti.com.uy/#pizarra-tactica'
-            });
-            showTacticalToast('📤 ¡Alineación compartida con éxito!');
-            return;
-          } catch (e) {
-            if (e.name === 'AbortError') return;
-          }
-        }
-
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(text);
-          } else {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-          }
-          const orig = shareLineupBtn.textContent;
-          shareLineupBtn.textContent = '✅ ¡Copiado!';
-          showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
-          setTimeout(() => { shareLineupBtn.textContent = orig; }, 2500);
-        } catch (err) {
-          showTacticalToast('⚠️ No se pudo copiar la alineación', false);
-        }
-      });
+    try {
+      initTacticalBoard();
+    } catch (e) {
+      console.error('Error re-initing tactical board:', e);
     }
 
     if (digest) {
-      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
-      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
-        a.href = bUrl;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-      });
-      hydrateEditorialSection(digest);
+      try {
+        const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
+        document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
+          a.href = bUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        });
+        hydrateEditorialSection(digest);
+      } catch (e) {
+        console.error('Error hydrating editorial section:', e);
+      }
     }
 
-    renderTrivia();
+    try {
+      renderTrivia();
+    } catch (e) {
+      console.error('Error rendering trivia:', e);
+    }
 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').then(reg => {

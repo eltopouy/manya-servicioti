@@ -15,6 +15,7 @@ import sys
 import os
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Tuple, List, Dict, Any
 
@@ -230,7 +231,7 @@ def auditar_simulacion_sustituciones() -> Tuple[bool, List[str]]:
 
 
 def auditar_marcado_html_y_componentes() -> Tuple[bool, List[str]]:
-    """Verifica que index.html contenga todos los elementos interactivos y accesibles de la pizarra."""
+    """Verifica que index.html contenga todos los elementos interactivos, accesibles y fichas visibles de la pizarra."""
     errors = []
     index_html = BASE_DIR / "index.html"
     if not index_html.exists():
@@ -260,6 +261,20 @@ def auditar_marcado_html_y_componentes() -> Tuple[bool, List[str]]:
         errors.append("index.html no menciona a Diego Aguirre en la sección táctica")
     if "Defensor Sporting" not in html:
         errors.append("index.html no menciona a Defensor Sporting en la sección táctica")
+
+    # Verificar capa de futbolistas y renderizado visible de 11 jugadores
+    # Debe existir el contenedor de jugadores #pitch-players-layer o elementos .pitch-player
+    has_players_layer = ('id="pitch-players-layer"' in html) or ('class="pitch-player"' in html) or ('renderTacticalBoard' in html)
+    if not has_players_layer:
+        errors.append("index.html no contiene la capa de futbolistas ni fichas visibles en la cancha táctica")
+
+    # Verificar que el pitch no esté vacío de estructura táctica
+    pitch_match = re.search(r'<div[^>]*id="tactical-pitch"[^>]*>(.*?)</div>\s*<div class="card-panel">', html, re.DOTALL)
+    if pitch_match:
+        pitch_content = pitch_match.group(1).strip()
+        # Si tiene contenido estático de respaldo, verificar que contenga jugadores o capa
+        if pitch_content and ('pitch-player' not in pitch_content and 'pitch-players-layer' not in pitch_content):
+            errors.append("El contenedor #tactical-pitch tiene contenido pero carece de fichas o capa de jugadores")
 
     return len(errors) == 0, errors
 
@@ -291,7 +306,7 @@ def auditar_canvas_y_compartir() -> Tuple[bool, List[str]]:
 
 
 def auditar_estilos_y_responsividad() -> Tuple[bool, List[str]]:
-    """Verifica los estilos CSS de la cancha y su adaptación responsiva."""
+    """Verifica los estilos CSS de la cancha, no colapso de fichas y su adaptación responsiva."""
     errors = []
     styles_css = CSS_DIR / "styles.css"
     if not styles_css.exists():
@@ -316,9 +331,52 @@ def auditar_estilos_y_responsividad() -> Tuple[bool, List[str]]:
         if cls_name not in css:
             errors.append(f"Falta clase CSS en styles.css: {desc}")
 
+    # Verificar que las fichas de jugadores no estén ocultas por CSS
+    if re.search(r'\.pitch-player\s*\{[^}]*display:\s*none', css):
+        errors.append("CSS oculta .pitch-player con display: none")
+    if re.search(r'\.pitch-player\s*\{[^}]*visibility:\s*hidden', css):
+        errors.append("CSS oculta .pitch-player con visibility: hidden")
+
+    # Verificar que la cancha tenga altura definida (min-height o height)
+    if not re.search(r'\.pitch-board\s*\{[^}]*(min-height|height):', css):
+        errors.append("CSS no define altura o min-height para .pitch-board")
+
     # Verificar adaptación móvil
     if "@media (max-width: 640px)" not in css and "@media (max-width: 600px)" not in css:
         errors.append("Faltan reglas @media para pantallas móviles en la pizarra táctica")
+
+    return len(errors) == 0, errors
+
+
+def auditar_js_sintaxis_y_robustez() -> Tuple[bool, List[str]]:
+    """Verifica sintaxis de app.js con node --check y resiliencia de inicialización de la pizarra."""
+    errors = []
+    app_js = JS_DIR / "app.js"
+    if not app_js.exists():
+        return False, ["Archivo js/app.js no encontrado."]
+
+    # 1. Validar sintaxis con node --check
+    try:
+        proc = subprocess.run(
+            ["node", "--check", str(app_js)],
+            capture_output=True,
+            text=True,
+            timeout=15
+        )
+        if proc.returncode != 0:
+            errors.append(f"node --check js/app.js falló: {proc.stderr.strip() or proc.stdout.strip()}")
+    except Exception as e:
+        errors.append(f"No se pudo ejecutar node --check: {e}")
+
+    # 2. Validar que la función de renderizado de la pizarra exista y esté conectada
+    code = app_js.read_text(encoding="utf-8")
+    if "function renderTacticalBoard(" not in code and "const renderTacticalBoard" not in code:
+        errors.append("js/app.js no contiene la función 'renderTacticalBoard'")
+
+    # 3. Validar que las formaciones estén soportadas
+    for f in ["4-2-3-1", "4-3-3", "4-4-2"]:
+        if f not in code:
+            errors.append(f"js/app.js no menciona la formación '{f}'")
 
     return len(errors) == 0, errors
 
@@ -333,7 +391,8 @@ def auditar_pizarra_tactica_exhaustiva() -> Tuple[bool, List[str]]:
         ("Simulación de Sustituciones e Intercambios", auditar_simulacion_sustituciones),
         ("Marcado HTML y Componentes Interactivos", auditar_marcado_html_y_componentes),
         ("Exportación Canvas PNG 1080x1350 y Compartir", auditar_canvas_y_compartir),
-        ("Estilos CSS y Responsividad Móvil", auditar_estilos_y_responsividad)
+        ("Estilos CSS y Responsividad Móvil", auditar_estilos_y_responsividad),
+        ("Sintaxis JS y Robustez de Inicialización", auditar_js_sintaxis_y_robustez)
     ]
 
     for name, fn in tests:
