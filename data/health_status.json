@@ -1,33 +1,33 @@
 {
-  "fecha_auditoria": "12/11/2026 23:30:30",
-  "timestamp": "2026-11-12T23:30:30.597206-03:00",
-  "score_salud": 75.0,
+  "fecha_auditoria": "13/11/2026 08:48:13",
+  "timestamp": "2026-11-13T08:48:13.068054-03:00",
+  "score_salud": 83.3,
   "total_pruebas": 12,
-  "pruebas_exitosas": 9,
-  "pruebas_fallidas": 3,
-  "estado_general": "CRITICO",
+  "pruebas_exitosas": 10,
+  "pruebas_fallidas": 2,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-12 23:30:29",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-13 08:48:10",
       "details": {
-        "now_uy": "2026-11-12 23:30:29.549125-03:00",
+        "now_uy": "2026-11-13 08:48:10.519806-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-12T23:30:29.549154-03:00"
+      "timestamp": "2026-11-13T08:48:10.519843-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 3, es_hoy: False (partido: 15/11/2026)",
+      "message": "delta_days: 2, es_hoy: False (partido: 15/11/2026)",
       "details": {
-        "delta_days": 3,
+        "delta_days": 2,
         "es_hoy": false
       },
-      "timestamp": "2026-11-12T23:30:29.549580-03:00"
+      "timestamp": "2026-11-13T08:48:10.520433-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-12T23:30:29.552116-03:00"
+      "timestamp": "2026-11-13T08:48:10.523480-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-12T23:30:29.553137-03:00"
+      "timestamp": "2026-11-13T08:48:10.524726-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-12T23:30:29.554493-03:00"
+      "timestamp": "2026-11-13T08:48:10.526294-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,13 +68,13 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-12T23:30:29.554611-03:00"
+      "timestamp": "2026-11-13T08:48:10.526425-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Endpoints con error: ['Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -93,11 +93,11 @@
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-12T23:30:30.555921-03:00"
+      "timestamp": "2026-11-13T08:48:13.009631-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-12T23:30:30.557065-03:00"
+      "timestamp": "2026-11-13T08:48:13.011349-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -117,7 +117,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-12T23:30:30.559228-03:00"
+      "timestamp": "2026-11-13T08:48:13.014429-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -129,7 +129,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-12T23:30:30.562045-03:00"
+      "timestamp": "2026-11-13T08:48:13.017766-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -141,7 +141,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-12T23:30:30.569046-03:00"
+      "timestamp": "2026-11-13T08:48:13.025875-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -151,7 +151,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-12T23:30:30.597111-03:00"
+      "timestamp": "2026-11-13T08:48:13.067919-03:00"
     }
   ]
 }
