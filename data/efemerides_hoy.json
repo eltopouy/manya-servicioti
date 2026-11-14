@@ -1,96 +1,63 @@
 {
-  "fecha_consulta": "13/11/2026",
-  "dia_mes": "13 de Noviembre",
+  "fecha_consulta": "14/11/2026",
+  "dia_mes": "14 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 10,
+  "total_partidos_dia": 5,
   "partidos_historicos": [
     {
-      "fecha": "2016-11-13",
-      "ano": "2016",
-      "rival": "Racing",
-      "goles_penarol": 5,
-      "goles_rival": 2,
-      "resultado": "Peñarol 5 - 2 Racing",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Líber Quiñónes (R) 11' de penal, Nicolás Albarracín (P) 29', Ignacio Ithurralde (R e/c) 33', Junior Arias (P) 38', Gabriel Fernández (R) 39', Nicolás Albarracín (P) 77' de penal y Junior Arias (P) 81'"
-    },
-    {
-      "fecha": "1999-11-13",
-      "ano": "1999",
-      "rival": "Nacional",
+      "fecha": "2024-11-14",
+      "ano": "2024",
+      "rival": "Montevideo Wanderers",
       "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Nacional",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Gabriel Álvez (N) 19' de penal, Darío Rodríguez (P) 33' y Walter Pandiani (P) 35'"
+      "goles_rival": 0,
+      "resultado": "Peñarol 2 - 0 Montevideo Wanderers",
+      "torneo": "Torneo Clausura",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "goles_detalle": "Facundo Batista (P) 9' y Leonardo Fernández (P) 17'"
     },
     {
-      "fecha": "1989-11-13",
-      "ano": "1989",
-      "rival": "Rentistas",
+      "fecha": "1982-11-14",
+      "ano": "1982",
+      "rival": "Miramar Misiones",
+      "goles_penarol": 6,
+      "goles_rival": 1,
+      "resultado": "Peñarol 6 - 1 Miramar Misiones",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Miguel Peirano 13', José Luis Zalazar 35', Daniel Rodríguez (2) 50' y 55', John Yawson 60' y Venancio Ramos 65'"
+    },
+    {
+      "fecha": "1979-11-14",
+      "ano": "1979",
+      "rival": "Nacional",
       "goles_penarol": 1,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Rentistas",
+      "resultado": "Peñarol 1 - 0 Nacional",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Diego Aguirre (P) 49'"
+      "goles_detalle": "Ernesto Vargas 63'"
     },
     {
-      "fecha": "1988-11-13",
-      "ano": "1988",
-      "rival": "Central Español",
-      "goles_penarol": 2,
+      "fecha": "1954-11-14",
+      "ano": "1954",
+      "rival": "Sportivo Miramar",
+      "goles_penarol": 5,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Central Español",
+      "resultado": "Peñarol 5 - 1 Sportivo Miramar",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Adolfo Barán (P) 80' y Venancio Ramos (P) 92' de penal"
+      "goles_detalle": "Carlos Borges (2) 38' y 41' y Óscar Míguez (3) 44', 60' de penal y 75'"
     },
     {
-      "fecha": "1986-11-13",
-      "ano": "1986",
-      "rival": "Bella Vista",
-      "goles_penarol": 2,
+      "fecha": "1926-11-14",
+      "ano": "1926",
+      "rival": "Colo Colo (Chi)",
+      "goles_penarol": 5,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Bella Vista",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Gustavo Matosas 29' y Daniel Rodríguez 75'"
-    },
-    {
-      "fecha": "1984-11-13",
-      "ano": "1984",
-      "rival": "Danubio",
-      "goles_penarol": 4,
-      "goles_rival": 2,
-      "resultado": "Peñarol 4 - 2 Danubio",
-      "torneo": "Torneo 60mo. Aniversario de Colombes",
-      "estadio": "Centenario",
-      "goles_detalle": "M. Beltrán 5' en contra, Daniel Rodríguez 19', Hebert Revetria 44' y José Batista 55'"
-    },
-    {
-      "fecha": "1976-11-13",
-      "ano": "1976",
-      "rival": "Fénix",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Fénix",
-      "torneo": "Torneo Liga Mayor",
-      "estadio": "Centenario",
-      "goles_detalle": "Norberto Galilea 31', Juan Ramón Silva 46' y Víctor Hugo Diogo 85'"
-    },
-    {
-      "fecha": "1974-11-13",
-      "ano": "1974",
-      "rival": "Huracán Buceo",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Huracán Buceo",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Fernando Morena (2) 21' y 63'"
+      "resultado": "Peñarol 5 - 1 Colo Colo (Chi)",
+      "torneo": "Copa Administración de Campos de Sports de Nuñoa",
+      "estadio": "Campos de Sports de Nuñoa",
+      "goles_detalle": "Pablo Terevinto (P) 10', Pablo Terevinto (P) 14', Juan Peregrino Anselmo (P) 26', Juan Peregrino Anselmo (P) 35', David Arellano (C) 53' de penal y Arturo Suffiotti (P) 68'"
     }
   ],
   "cumpleanos_glorias": [
