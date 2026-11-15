@@ -1,9 +1,9 @@
 {
-  "actualizado": "15/11/2026 13:44",
+  "actualizado": "15/11/2026 19:24",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 665.2,
+  "horas_desde_ultimo_partido": 670.9,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🟡⚫ ¡HOY JUEGA PEÑAROL! Defensor Sporting vs Peñarol a las 20:00 hs en Estadio Luis Franzini (Montevideo) • VTV Plus / Disney+ Premium.",
@@ -171,14 +171,14 @@
       "pos": 1,
       "equipo": "Liverpool",
       "es_penarol": false,
-      "pj": 13,
-      "pg": 9,
+      "pj": 14,
+      "pg": 10,
       "pe": 3,
       "pp": 1,
-      "gf": 22,
-      "gc": 8,
-      "dg": "+14",
-      "pts": 30
+      "gf": 24,
+      "gc": 9,
+      "dg": "+15",
+      "pts": 33
     },
     {
       "pos": 2,
@@ -366,13 +366,13 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 13,
+      "pj": 14,
       "pg": 2,
       "pe": 4,
-      "pp": 7,
-      "gf": 7,
-      "gc": 15,
-      "dg": "-8",
+      "pp": 8,
+      "gf": 8,
+      "gc": 17,
+      "dg": "-9",
       "pts": 10
     }
   ],
@@ -394,30 +394,17 @@
       "pos": 2,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 18,
-      "pe": 9,
+      "pe": 8,
       "pp": 8,
       "gf": 54,
       "gc": 32,
       "dg": "+22",
-      "pts": 63
+      "pts": 62
     },
     {
       "pos": 3,
-      "equipo": "Montevideo City Torque",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 19,
-      "pe": 6,
-      "pp": 10,
-      "gf": 59,
-      "gc": 41,
-      "dg": "+18",
-      "pts": 63
-    },
-    {
-      "pos": 4,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 35,
@@ -428,6 +415,19 @@
       "gc": 42,
       "dg": "+11",
       "pts": 61
+    },
+    {
+      "pos": 4,
+      "equipo": "Montevideo City Torque",
+      "es_penarol": false,
+      "pj": 34,
+      "pg": 18,
+      "pe": 6,
+      "pp": 10,
+      "gf": 57,
+      "gc": 40,
+      "dg": "+17",
+      "pts": 60
     },
     {
       "pos": 5,
@@ -472,14 +472,14 @@
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 13,
-      "pe": 8,
+      "pe": 7,
       "pp": 14,
       "gf": 47,
       "gc": 44,
       "dg": "+3",
-      "pts": 47
+      "pts": 46
     },
     {
       "pos": 9,
@@ -537,13 +537,13 @@
       "pos": 13,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 10,
       "pe": 7,
-      "pp": 18,
-      "gf": 34,
-      "gc": 47,
-      "dg": "-13",
+      "pp": 17,
+      "gf": 33,
+      "gc": 45,
+      "dg": "-12",
       "pts": 37
     },
     {
@@ -591,14 +591,14 @@
       "pos": 1,
       "equipo": "Liverpool",
       "es_penarol": false,
-      "pj": 13,
-      "pg": 9,
+      "pj": 14,
+      "pg": 10,
       "pe": 3,
       "pp": 1,
-      "gf": 22,
-      "gc": 8,
-      "dg": "+14",
-      "pts": 30
+      "gf": 24,
+      "gc": 9,
+      "dg": "+15",
+      "pts": 33
     },
     {
       "pos": 2,
@@ -786,13 +786,13 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 13,
+      "pj": 14,
       "pg": 2,
       "pe": 4,
-      "pp": 7,
-      "gf": 7,
-      "gc": 15,
-      "dg": "-8",
+      "pp": 8,
+      "gf": 8,
+      "gc": 17,
+      "dg": "-9",
       "pts": 10
     }
   ],
@@ -871,14 +871,14 @@
           "pos": 1,
           "equipo": "Liverpool",
           "es_penarol": false,
-          "pj": 13,
-          "pg": 9,
+          "pj": 14,
+          "pg": 10,
           "pe": 3,
           "pp": 1,
-          "gf": 22,
-          "gc": 8,
-          "dg": "+14",
-          "pts": 30
+          "gf": 24,
+          "gc": 9,
+          "dg": "+15",
+          "pts": 33
         },
         {
           "pos": 2,
@@ -1066,13 +1066,13 @@
           "pos": 16,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 13,
+          "pj": 14,
           "pg": 2,
           "pe": 4,
-          "pp": 7,
-          "gf": 7,
-          "gc": 15,
-          "dg": "-8",
+          "pp": 8,
+          "gf": 8,
+          "gc": 17,
+          "dg": "-9",
           "pts": 10
         }
       ]
@@ -1102,30 +1102,17 @@
           "pos": 2,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 18,
-          "pe": 9,
+          "pe": 8,
           "pp": 8,
           "gf": 54,
           "gc": 32,
           "dg": "+22",
-          "pts": 63
+          "pts": 62
         },
         {
           "pos": 3,
-          "equipo": "Montevideo City Torque",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 19,
-          "pe": 6,
-          "pp": 10,
-          "gf": 59,
-          "gc": 41,
-          "dg": "+18",
-          "pts": 63
-        },
-        {
-          "pos": 4,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 35,
@@ -1136,6 +1123,19 @@
           "gc": 42,
           "dg": "+11",
           "pts": 61
+        },
+        {
+          "pos": 4,
+          "equipo": "Montevideo City Torque",
+          "es_penarol": false,
+          "pj": 34,
+          "pg": 18,
+          "pe": 6,
+          "pp": 10,
+          "gf": 57,
+          "gc": 40,
+          "dg": "+17",
+          "pts": 60
         },
         {
           "pos": 5,
@@ -1180,14 +1180,14 @@
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 13,
-          "pe": 8,
+          "pe": 7,
           "pp": 14,
           "gf": 47,
           "gc": 44,
           "dg": "+3",
-          "pts": 47
+          "pts": 46
         },
         {
           "pos": 9,
@@ -1245,13 +1245,13 @@
           "pos": 13,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 10,
           "pe": 7,
-          "pp": 18,
-          "gf": 34,
-          "gc": 47,
-          "dg": "-13",
+          "pp": 17,
+          "gf": 33,
+          "gc": 45,
+          "dg": "-12",
           "pts": 37
         },
         {
@@ -1369,13 +1369,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 23.9,
-    "sensacion_c": 26.9,
-    "viento_kmh": 13.9,
-    "humedad_pct": 70,
-    "condicion": "Cielo despejado sobre Bañados de Carrasco",
+    "temperatura_c": 20.6,
+    "sensacion_c": 22.4,
+    "viento_kmh": 10.5,
+    "humedad_pct": 91,
+    "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "15/11/2026 13:44"
+    "actualizado": "15/11/2026 19:24"
   },
   "minuto_a_minuto": [
     {
