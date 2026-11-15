@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "14/11/2026 22:29:31",
-  "timestamp": "2026-11-14T22:29:31.386727-03:00",
+  "fecha_auditoria": "15/11/2026 05:43:36",
+  "timestamp": "2026-11-15T05:43:36.646746-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
   "pruebas_exitosas": 9,
@@ -11,23 +11,23 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-14 22:29:28",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-15 05:43:33",
       "details": {
-        "now_uy": "2026-11-14 22:29:28.515989-03:00",
+        "now_uy": "2026-11-15 05:43:33.884899-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-14T22:29:28.516017-03:00"
+      "timestamp": "2026-11-15T05:43:33.884926-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 1, es_hoy: False (partido: 15/11/2026)",
+      "message": "delta_days: 0, es_hoy: True (partido: 15/11/2026)",
       "details": {
-        "delta_days": 1,
-        "es_hoy": false
+        "delta_days": 0,
+        "es_hoy": true
       },
-      "timestamp": "2026-11-14T22:29:28.516379-03:00"
+      "timestamp": "2026-11-15T05:43:33.885476-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-14T22:29:28.518441-03:00"
+      "timestamp": "2026-11-15T05:43:33.888095-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-14T22:29:28.519222-03:00"
+      "timestamp": "2026-11-15T05:43:33.889205-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-14T22:29:28.520182-03:00"
+      "timestamp": "2026-11-15T05:43:33.890688-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,7 +68,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-14T22:29:28.520265-03:00"
+      "timestamp": "2026-11-15T05:43:33.890787-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -97,7 +97,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-14T22:29:31.354343-03:00"
+      "timestamp": "2026-11-15T05:43:36.606654-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-14T22:29:31.355248-03:00"
+      "timestamp": "2026-11-15T05:43:36.607811-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -117,7 +117,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-14T22:29:31.356945-03:00"
+      "timestamp": "2026-11-15T05:43:36.609911-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -129,7 +129,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-14T22:29:31.359064-03:00"
+      "timestamp": "2026-11-15T05:43:36.612729-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -141,7 +141,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-14T22:29:31.363870-03:00"
+      "timestamp": "2026-11-15T05:43:36.617990-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -151,7 +151,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-14T22:29:31.386666-03:00"
+      "timestamp": "2026-11-15T05:43:36.646658-03:00"
     }
   ]
 }
