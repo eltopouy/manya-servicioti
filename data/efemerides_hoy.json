@@ -1,63 +1,96 @@
 {
-  "fecha_consulta": "14/11/2026",
-  "dia_mes": "14 de Noviembre",
+  "fecha_consulta": "15/11/2026",
+  "dia_mes": "15 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 5,
+  "total_partidos_dia": 9,
   "partidos_historicos": [
     {
-      "fecha": "2024-11-14",
-      "ano": "2024",
-      "rival": "Montevideo Wanderers",
+      "fecha": "2014-11-15",
+      "ano": "2014",
+      "rival": "Rentistas",
+      "goles_penarol": 4,
+      "goles_rival": 0,
+      "resultado": "Peñarol 4 - 0 Rentistas",
+      "torneo": "Torneo Apertura",
+      "estadio": "Centenario",
+      "goles_detalle": "Fabián Estoyanoff (P) 30', Sebastián Píriz (P) 52', Sebastián Píriz (P) 61' y Marcelo Zalayeta (P) 62'"
+    },
+    {
+      "fecha": "2008-11-15",
+      "ano": "2008",
+      "rival": "Liverpool",
+      "goles_penarol": 3,
+      "goles_rival": 2,
+      "resultado": "Peñarol 3 - 2 Liverpool",
+      "torneo": "Torneo Apertura",
+      "estadio": "Centenario",
+      "goles_detalle": "Antonio Pacheco (P) 14', Danilo Asconeguy (P) 48', Darío Rodríguez (P e/c) 62', Antonio Pacheco (P) 88' y Elías Figueroa (L) 89'"
+    },
+    {
+      "fecha": "1996-11-15",
+      "ano": "1996",
+      "rival": "Rampla Juniors",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Rampla Juniors",
+      "torneo": "Torneo Liguilla Pre Libertadores",
+      "estadio": "Centenario",
+      "goles_detalle": "Martín Lasarte (R) 33', Martín García (P) 54' y Martín García (P) 84'"
+    },
+    {
+      "fecha": "1995-11-15",
+      "ano": "1995",
+      "rival": "Nacional",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Nacional",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Robert Lima (P) 23', Luis Romero (P) 60', Fabián O'Neill (N) 87' y Pablo Javier Bengoechea (P) 88'"
+    },
+    {
+      "fecha": "1987-11-15",
+      "ano": "1987",
+      "rival": "Danubio",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Danubio",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Diego Aguirre 15' y José Perdomo 22'"
+    },
+    {
+      "fecha": "1981-11-15",
+      "ano": "1981",
+      "rival": "Rampla Juniors",
+      "goles_penarol": 4,
+      "goles_rival": 1,
+      "resultado": "Peñarol 4 - 1 Rampla Juniors",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Fernando Morena 17', Rubén Paz (2) 30' y 83' y Rodolfo Abalde 38'"
+    },
+    {
+      "fecha": "1961-11-15",
+      "ano": "1961",
+      "rival": "Rampla Juniors",
       "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Montevideo Wanderers",
-      "torneo": "Torneo Clausura",
-      "estadio": "Parque Alfredo Víctor Viera",
-      "goles_detalle": "Facundo Batista (P) 9' y Leonardo Fernández (P) 17'"
-    },
-    {
-      "fecha": "1982-11-14",
-      "ano": "1982",
-      "rival": "Miramar Misiones",
-      "goles_penarol": 6,
-      "goles_rival": 1,
-      "resultado": "Peñarol 6 - 1 Miramar Misiones",
+      "resultado": "Peñarol 2 - 0 Rampla Juniors",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Miguel Peirano 13', José Luis Zalazar 35', Daniel Rodríguez (2) 50' y 55', John Yawson 60' y Venancio Ramos 65'"
+      "goles_detalle": "Ángel Cabrera (2) 48' y 60'"
     },
     {
-      "fecha": "1979-11-14",
-      "ano": "1979",
-      "rival": "Nacional",
-      "goles_penarol": 1,
+      "fecha": "1953-11-15",
+      "ano": "1953",
+      "rival": "River Plate",
+      "goles_penarol": 5,
       "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Nacional",
+      "resultado": "Peñarol 5 - 0 River Plate",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Ernesto Vargas 63'"
-    },
-    {
-      "fecha": "1954-11-14",
-      "ano": "1954",
-      "rival": "Sportivo Miramar",
-      "goles_penarol": 5,
-      "goles_rival": 1,
-      "resultado": "Peñarol 5 - 1 Sportivo Miramar",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Carlos Borges (2) 38' y 41' y Óscar Míguez (3) 44', 60' de penal y 75'"
-    },
-    {
-      "fecha": "1926-11-14",
-      "ano": "1926",
-      "rival": "Colo Colo (Chi)",
-      "goles_penarol": 5,
-      "goles_rival": 1,
-      "resultado": "Peñarol 5 - 1 Colo Colo (Chi)",
-      "torneo": "Copa Administración de Campos de Sports de Nuñoa",
-      "estadio": "Campos de Sports de Nuñoa",
-      "goles_detalle": "Pablo Terevinto (P) 10', Pablo Terevinto (P) 14', Juan Peregrino Anselmo (P) 26', Juan Peregrino Anselmo (P) 35', David Arellano (C) 53' de penal y Arturo Suffiotti (P) 68'"
+      "goles_detalle": "Óscar Míguez 19', Juan Eduardo Hohberg 33', Juan Alberto Schiaffino 68', Julio César Abbadie 73' y Américo Galván 81'"
     }
   ],
   "cumpleanos_glorias": [
