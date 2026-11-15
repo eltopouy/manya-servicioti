@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "15/11/2026 05:43:36",
-  "timestamp": "2026-11-15T05:43:36.646746-03:00",
-  "score_salud": 75.0,
+  "fecha_auditoria": "15/11/2026 13:45:10",
+  "timestamp": "2026-11-15T13:45:10.159911-03:00",
+  "score_salud": 83.3,
   "total_pruebas": 12,
-  "pruebas_exitosas": 9,
-  "pruebas_fallidas": 3,
-  "estado_general": "CRITICO",
+  "pruebas_exitosas": 10,
+  "pruebas_fallidas": 2,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-15 05:43:33",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-15 13:45:09",
       "details": {
-        "now_uy": "2026-11-15 05:43:33.884899-03:00",
+        "now_uy": "2026-11-15 13:45:09.430153-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-15T05:43:33.884926-03:00"
+      "timestamp": "2026-11-15T13:45:09.430181-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 0,
         "es_hoy": true
       },
-      "timestamp": "2026-11-15T05:43:33.885476-03:00"
+      "timestamp": "2026-11-15T13:45:09.430615-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T05:43:33.888095-03:00"
+      "timestamp": "2026-11-15T13:45:09.433257-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -47,7 +47,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T05:43:33.889205-03:00"
+      "timestamp": "2026-11-15T13:45:09.434290-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -58,7 +58,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-15T05:43:33.890688-03:00"
+      "timestamp": "2026-11-15T13:45:09.435665-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -68,36 +68,36 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-15T05:43:33.890787-03:00"
+      "timestamp": "2026-11-15T13:45:09.435759-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-15T05:43:36.606654-03:00"
+      "timestamp": "2026-11-15T13:45:10.119285-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -107,7 +107,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T05:43:36.607811-03:00"
+      "timestamp": "2026-11-15T13:45:10.120574-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -117,7 +117,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T05:43:36.609911-03:00"
+      "timestamp": "2026-11-15T13:45:10.122801-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -129,7 +129,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-15T05:43:36.612729-03:00"
+      "timestamp": "2026-11-15T13:45:10.125634-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -141,7 +141,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-15T05:43:36.617990-03:00"
+      "timestamp": "2026-11-15T13:45:10.130890-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -151,7 +151,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T05:43:36.646658-03:00"
+      "timestamp": "2026-11-15T13:45:10.159785-03:00"
     }
   ]
 }
