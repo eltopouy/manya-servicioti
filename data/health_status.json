@@ -3,9 +3,9 @@
   "timestamp": "2026-11-15T20:00:06.098866-03:00",
   "score_salud": 100.0,
   "total_pruebas": 12,
-  "pruebas_exitosas": 12,
-  "pruebas_fallidas": 0,
-  "estado_general": "OPTIMO",
+  "pruebas_exitosas": 10,
+  "pruebas_fallidas": 2,
+  "estado_general": "ALERTA",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
@@ -121,21 +121,25 @@
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Galerías e Instagram Feed 100% actualizados (sin rastros de Liverpool y fotos verificadas en disco)",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Inconsistencias fotográficas: data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool",
       "details": {
-        "errors": []
+        "errors": [
+          "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
+        ]
       },
       "timestamp": "2026-11-15T20:00:05.991753-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
-      "status": "PASS",
-      "passed": true,
-      "message": "Coherencia editorial certificada (sin contaminaciones de rivales, sin 'Hoy Juega' falso y sin placeholders)",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Inconsistencias editoriales: [Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool",
       "details": {
-        "errors": []
+        "errors": [
+          "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
+        ]
       },
       "timestamp": "2026-11-15T20:00:06.009585-03:00"
     },
