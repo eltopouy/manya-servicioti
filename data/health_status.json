@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "15/11/2026 23:30:07",
-  "timestamp": "2026-11-15T23:30:07.581996-03:00",
+  "fecha_auditoria": "16/11/2026 00:00:08",
+  "timestamp": "2026-11-16T00:00:08.225501-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
   "pruebas_exitosas": 9,
@@ -11,23 +11,23 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-15 23:30:05",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-16 00:00:06",
       "details": {
-        "now_uy": "2026-11-15 23:30:05.560538-03:00",
+        "now_uy": "2026-11-16 00:00:06.239698-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-15T23:30:05.560578-03:00"
+      "timestamp": "2026-11-16T00:00:06.239741-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 7, es_hoy: False (partido: 22/11/2026)",
+      "message": "delta_days: 6, es_hoy: False (partido: 22/11/2026)",
       "details": {
-        "delta_days": 7,
+        "delta_days": 6,
         "es_hoy": false
       },
-      "timestamp": "2026-11-15T23:30:05.561936-03:00"
+      "timestamp": "2026-11-16T00:00:06.240929-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T23:30:05.566781-03:00"
+      "timestamp": "2026-11-16T00:00:06.246389-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -53,7 +53,7 @@
           "data/rival_intelligence.json no tiene a Mathías Corujo como entrenador"
         ]
       },
-      "timestamp": "2026-11-15T23:30:05.571338-03:00"
+      "timestamp": "2026-11-16T00:00:06.250595-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -64,7 +64,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-15T23:30:05.577889-03:00"
+      "timestamp": "2026-11-16T00:00:06.256989-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -74,7 +74,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-15T23:30:05.578220-03:00"
+      "timestamp": "2026-11-16T00:00:06.257317-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -103,7 +103,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-15T23:30:07.448334-03:00"
+      "timestamp": "2026-11-16T00:00:08.094167-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -113,7 +113,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T23:30:07.451835-03:00"
+      "timestamp": "2026-11-16T00:00:08.097541-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -123,7 +123,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T23:30:07.459621-03:00"
+      "timestamp": "2026-11-16T00:00:08.103438-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -135,7 +135,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-15T23:30:07.467334-03:00"
+      "timestamp": "2026-11-16T00:00:08.110296-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -182,7 +182,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-15T23:30:07.488131-03:00"
+      "timestamp": "2026-11-16T00:00:08.133073-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -192,7 +192,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-15T23:30:07.581768-03:00"
+      "timestamp": "2026-11-16T00:00:08.225275-03:00"
     }
   ],
   "reparaciones_aplicadas": []
