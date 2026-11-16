@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 19:15",
+  "actualizado": "16/11/2026 19:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 21.3,
+  "horas_desde_ultimo_partido": 21.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -386,19 +386,32 @@
     },
     {
       "pos": 2,
+      "equipo": "Montevideo City Torque",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 19,
+      "pe": 7,
+      "pp": 10,
+      "gf": 61,
+      "gc": 43,
+      "dg": "+18",
+      "pts": 64
+    },
+    {
+      "pos": 3,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 18,
-      "pe": 8,
+      "pe": 9,
       "pp": 9,
       "gf": 54,
       "gc": 33,
       "dg": "+21",
-      "pts": 62
+      "pts": 63
     },
     {
-      "pos": 3,
+      "pos": 4,
       "equipo": "Liverpool",
       "es_penarol": false,
       "pj": 36,
@@ -411,20 +424,20 @@
       "pts": 62
     },
     {
-      "pos": 4,
-      "equipo": "Montevideo City Torque",
+      "pos": 5,
+      "equipo": "Nacional",
       "es_penarol": false,
-      "pj": 35,
-      "pg": 18,
-      "pe": 7,
-      "pp": 10,
-      "gf": 59,
-      "gc": 42,
-      "dg": "+17",
-      "pts": 61
+      "pj": 36,
+      "pg": 19,
+      "pe": 5,
+      "pp": 12,
+      "gf": 54,
+      "gc": 43,
+      "dg": "+11",
+      "pts": 62
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "Racing",
       "es_penarol": false,
       "pj": 36,
@@ -434,19 +447,6 @@
       "gf": 47,
       "gc": 33,
       "dg": "+14",
-      "pts": 61
-    },
-    {
-      "pos": 6,
-      "equipo": "Nacional",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 19,
-      "pe": 4,
-      "pp": 12,
-      "gf": 53,
-      "gc": 42,
-      "dg": "+11",
       "pts": 61
     },
     {
@@ -466,17 +466,30 @@
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 36,
       "pg": 13,
-      "pe": 7,
+      "pe": 9,
       "pp": 14,
-      "gf": 47,
-      "gc": 44,
+      "gf": 48,
+      "gc": 45,
       "dg": "+3",
-      "pts": 46
+      "pts": 48
     },
     {
       "pos": 9,
+      "equipo": "Central Español",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 12,
+      "pe": 8,
+      "pp": 16,
+      "gf": 36,
+      "gc": 48,
+      "dg": "-12",
+      "pts": 44
+    },
+    {
+      "pos": 10,
       "equipo": "Juventud",
       "es_penarol": false,
       "pj": 35,
@@ -486,19 +499,6 @@
       "gf": 37,
       "gc": 43,
       "dg": "-6",
-      "pts": 41
-    },
-    {
-      "pos": 10,
-      "equipo": "Central Español",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 11,
-      "pe": 8,
-      "pp": 16,
-      "gf": 35,
-      "gc": 48,
-      "dg": "-13",
       "pts": 41
     },
     {
@@ -544,13 +544,13 @@
       "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 36,
       "pg": 10,
       "pe": 7,
-      "pp": 17,
-      "gf": 33,
-      "gc": 45,
-      "dg": "-12",
+      "pp": 19,
+      "gf": 34,
+      "gc": 48,
+      "dg": "-14",
       "pts": 37
     },
     {
@@ -1094,19 +1094,32 @@
         },
         {
           "pos": 2,
+          "equipo": "Montevideo City Torque",
+          "es_penarol": false,
+          "pj": 36,
+          "pg": 19,
+          "pe": 7,
+          "pp": 10,
+          "gf": 61,
+          "gc": 43,
+          "dg": "+18",
+          "pts": 64
+        },
+        {
+          "pos": 3,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 18,
-          "pe": 8,
+          "pe": 9,
           "pp": 9,
           "gf": 54,
           "gc": 33,
           "dg": "+21",
-          "pts": 62
+          "pts": 63
         },
         {
-          "pos": 3,
+          "pos": 4,
           "equipo": "Liverpool",
           "es_penarol": false,
           "pj": 36,
@@ -1119,20 +1132,20 @@
           "pts": 62
         },
         {
-          "pos": 4,
-          "equipo": "Montevideo City Torque",
+          "pos": 5,
+          "equipo": "Nacional",
           "es_penarol": false,
-          "pj": 35,
-          "pg": 18,
-          "pe": 7,
-          "pp": 10,
-          "gf": 59,
-          "gc": 42,
-          "dg": "+17",
-          "pts": 61
+          "pj": 36,
+          "pg": 19,
+          "pe": 5,
+          "pp": 12,
+          "gf": 54,
+          "gc": 43,
+          "dg": "+11",
+          "pts": 62
         },
         {
-          "pos": 5,
+          "pos": 6,
           "equipo": "Racing",
           "es_penarol": false,
           "pj": 36,
@@ -1142,19 +1155,6 @@
           "gf": 47,
           "gc": 33,
           "dg": "+14",
-          "pts": 61
-        },
-        {
-          "pos": 6,
-          "equipo": "Nacional",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 19,
-          "pe": 4,
-          "pp": 12,
-          "gf": 53,
-          "gc": 42,
-          "dg": "+11",
           "pts": 61
         },
         {
@@ -1174,17 +1174,30 @@
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 36,
           "pg": 13,
-          "pe": 7,
+          "pe": 9,
           "pp": 14,
-          "gf": 47,
-          "gc": 44,
+          "gf": 48,
+          "gc": 45,
           "dg": "+3",
-          "pts": 46
+          "pts": 48
         },
         {
           "pos": 9,
+          "equipo": "Central Español",
+          "es_penarol": false,
+          "pj": 36,
+          "pg": 12,
+          "pe": 8,
+          "pp": 16,
+          "gf": 36,
+          "gc": 48,
+          "dg": "-12",
+          "pts": 44
+        },
+        {
+          "pos": 10,
           "equipo": "Juventud",
           "es_penarol": false,
           "pj": 35,
@@ -1194,19 +1207,6 @@
           "gf": 37,
           "gc": 43,
           "dg": "-6",
-          "pts": 41
-        },
-        {
-          "pos": 10,
-          "equipo": "Central Español",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 11,
-          "pe": 8,
-          "pp": 16,
-          "gf": 35,
-          "gc": 48,
-          "dg": "-13",
           "pts": 41
         },
         {
@@ -1252,13 +1252,13 @@
           "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 36,
           "pg": 10,
           "pe": 7,
-          "pp": 17,
-          "gf": 33,
-          "gc": 45,
-          "dg": "-12",
+          "pp": 19,
+          "gf": 34,
+          "gc": 48,
+          "dg": "-14",
           "pts": 37
         },
         {
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 23.4,
-    "sensacion_c": 26.6,
-    "viento_kmh": 7.1,
-    "humedad_pct": 85,
+    "temperatura_c": 22.5,
+    "sensacion_c": 25.7,
+    "viento_kmh": 6.2,
+    "humedad_pct": 90,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 19:15"
+    "actualizado": "16/11/2026 19:45"
   },
   "minuto_a_minuto": [
     {
