@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 04:45",
+  "actualizado": "16/11/2026 05:15",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 6.8,
+  "horas_desde_ultimo_partido": 7.3,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -503,32 +503,6 @@
     },
     {
       "pos": 11,
-      "equipo": "Cerro",
-      "es_penarol": false,
-      "pj": 36,
-      "pg": 11,
-      "pe": 7,
-      "pp": 18,
-      "gf": 30,
-      "gc": 53,
-      "dg": "-23",
-      "pts": 39
-    },
-    {
-      "pos": 12,
-      "equipo": "Cerro Largo",
-      "es_penarol": false,
-      "pj": 36,
-      "pg": 9,
-      "pe": 11,
-      "pp": 16,
-      "gf": 35,
-      "gc": 43,
-      "dg": "-8",
-      "pts": 38
-    },
-    {
-      "pos": 13,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
       "pj": 34,
@@ -539,6 +513,32 @@
       "gc": 40,
       "dg": "-8",
       "pts": 38
+    },
+    {
+      "pos": 12,
+      "equipo": "Cerro",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 11,
+      "pe": 6,
+      "pp": 18,
+      "gf": 29,
+      "gc": 52,
+      "dg": "-23",
+      "pts": 38
+    },
+    {
+      "pos": 13,
+      "equipo": "Cerro Largo",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 9,
+      "pe": 10,
+      "pp": 16,
+      "gf": 34,
+      "gc": 42,
+      "dg": "-8",
+      "pts": 37
     },
     {
       "pos": 14,
@@ -1211,32 +1211,6 @@
         },
         {
           "pos": 11,
-          "equipo": "Cerro",
-          "es_penarol": false,
-          "pj": 36,
-          "pg": 11,
-          "pe": 7,
-          "pp": 18,
-          "gf": 30,
-          "gc": 53,
-          "dg": "-23",
-          "pts": 39
-        },
-        {
-          "pos": 12,
-          "equipo": "Cerro Largo",
-          "es_penarol": false,
-          "pj": 36,
-          "pg": 9,
-          "pe": 11,
-          "pp": 16,
-          "gf": 35,
-          "gc": 43,
-          "dg": "-8",
-          "pts": 38
-        },
-        {
-          "pos": 13,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
           "pj": 34,
@@ -1247,6 +1221,32 @@
           "gc": 40,
           "dg": "-8",
           "pts": 38
+        },
+        {
+          "pos": 12,
+          "equipo": "Cerro",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 11,
+          "pe": 6,
+          "pp": 18,
+          "gf": 29,
+          "gc": 52,
+          "dg": "-23",
+          "pts": 38
+        },
+        {
+          "pos": 13,
+          "equipo": "Cerro Largo",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 9,
+          "pe": 10,
+          "pp": 16,
+          "gf": 34,
+          "gc": 42,
+          "dg": "-8",
+          "pts": 37
         },
         {
           "pos": 14,
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 16.6,
-    "sensacion_c": 16.9,
-    "viento_kmh": 11.1,
-    "humedad_pct": 95,
+    "temperatura_c": 17.5,
+    "sensacion_c": 17.8,
+    "viento_kmh": 12.2,
+    "humedad_pct": 92,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 04:45"
+    "actualizado": "16/11/2026 05:15"
   },
   "minuto_a_minuto": [
     {
