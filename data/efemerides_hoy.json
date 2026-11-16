@@ -2,104 +2,96 @@
   "fecha_consulta": "15/11/2026",
   "dia_mes": "15 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 9,
+  "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2014-11-15",
-      "ano": "2014",
-      "rival": "Rentistas",
-      "goles_penarol": 4,
-      "goles_rival": 0,
-      "resultado": "Peñarol 4 - 0 Rentistas",
-      "torneo": "Torneo Apertura",
-      "estadio": "Centenario",
-      "goles_detalle": "Fabián Estoyanoff (P) 30', Sebastián Píriz (P) 52', Sebastián Píriz (P) 61' y Marcelo Zalayeta (P) 62'"
-    },
-    {
-      "fecha": "2008-11-15",
-      "ano": "2008",
+      "fecha": "2025-11-16",
+      "ano": "2025",
       "rival": "Liverpool",
-      "goles_penarol": 3,
-      "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Liverpool",
-      "torneo": "Torneo Apertura",
-      "estadio": "Centenario",
-      "goles_detalle": "Antonio Pacheco (P) 14', Danilo Asconeguy (P) 48', Darío Rodríguez (P e/c) 62', Antonio Pacheco (P) 88' y Elías Figueroa (L) 89'"
-    },
-    {
-      "fecha": "1996-11-15",
-      "ano": "1996",
-      "rival": "Rampla Juniors",
       "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Rampla Juniors",
-      "torneo": "Torneo Liguilla Pre Libertadores",
-      "estadio": "Centenario",
-      "goles_detalle": "Martín Lasarte (R) 33', Martín García (P) 54' y Martín García (P) 84'"
-    },
-    {
-      "fecha": "1995-11-15",
-      "ano": "1995",
-      "rival": "Nacional",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Nacional",
+      "resultado": "Peñarol 2 - 1 Liverpool",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Robert Lima (P) 23', Luis Romero (P) 60', Fabián O'Neill (N) 87' y Pablo Javier Bengoechea (P) 88'"
+      "goles_detalle": "Abel Hernández (L) 92', Diego García (P) 103' y Leonardo Fernández (P) 115' de penal"
     },
     {
-      "fecha": "1987-11-15",
-      "ano": "1987",
+      "fecha": "2017-11-16",
+      "ano": "2017",
       "rival": "Danubio",
       "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Danubio",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Diego Aguirre 15' y José Perdomo 22'"
+      "goles_rival": 0,
+      "resultado": "Peñarol 2 - 0 Danubio",
+      "torneo": "Torneo Clausura",
+      "estadio": "Jardines del Hipódromo",
+      "goles_detalle": "Cristian Palacios (P) 7' y Cristian Palacios (P) 45'"
     },
     {
-      "fecha": "1981-11-15",
-      "ano": "1981",
-      "rival": "Rampla Juniors",
-      "goles_penarol": 4,
+      "fecha": "2002-11-16",
+      "ano": "2002",
+      "rival": "Marconi Stallyons (Aus)",
+      "goles_penarol": 3,
       "goles_rival": 1,
-      "resultado": "Peñarol 4 - 1 Rampla Juniors",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Fernando Morena 17', Rubén Paz (2) 30' y 83' y Rodolfo Abalde 38'"
+      "resultado": "Peñarol 3 - 1 Marconi Stallyons (Aus)",
+      "torneo": "Trofeo New Loan Challenger Cup",
+      "estadio": "Bossley Park de Sidney",
+      "goles_detalle": "Shane Weeb (M e/c) 35', Fabián Canobbio (P) 38', Chad Gibson (M) 55' de penal y Pablo Javier Bengoechea (P) 65' de penal"
     },
     {
-      "fecha": "1961-11-15",
-      "ano": "1961",
-      "rival": "Rampla Juniors",
+      "fecha": "1982-11-16",
+      "ano": "1982",
+      "rival": "Flamengo (Bra)",
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 Flamengo (Bra)",
+      "torneo": "Copa Libertadores de América",
+      "estadio": "Jornalista Mário Filho (Maracanã) de Rio de Janeiro",
+      "goles_detalle": "Jair 25'"
+    },
+    {
+      "fecha": "1977-11-16",
+      "ano": "1977",
+      "rival": "Huracán Buceo",
+      "goles_penarol": 5,
+      "goles_rival": 1,
+      "resultado": "Peñarol 5 - 1 Huracán Buceo",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Lorenzo Unánue 17', Venancio Ramos (2) 67' y 69' y Fernando Morena (2) 70' y 87'"
+    },
+    {
+      "fecha": "1969-11-16",
+      "ano": "1969",
+      "rival": "Danubio",
       "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Rampla Juniors",
+      "resultado": "Peñarol 2 - 0 Danubio",
       "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Ángel Cabrera (2) 48' y 60'"
+      "estadio": "Jardines del Hipódromo",
+      "goles_detalle": "Ermindo Onega 59' y Nilo Acuña 83'"
     },
     {
-      "fecha": "1953-11-15",
-      "ano": "1953",
-      "rival": "River Plate",
-      "goles_penarol": 5,
-      "goles_rival": 0,
-      "resultado": "Peñarol 5 - 0 River Plate",
+      "fecha": "1963-11-16",
+      "ano": "1963",
+      "rival": "Cerro",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Cerro",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Óscar Míguez 19', Juan Eduardo Hohberg 33', Juan Alberto Schiaffino 68', Julio César Abbadie 73' y Américo Galván 81'"
+      "goles_detalle": "Pedro Rocha (3) 7', 29' y 38'"
+    },
+    {
+      "fecha": "1957-11-16",
+      "ano": "1957",
+      "rival": "Fénix",
+      "goles_penarol": 5,
+      "goles_rival": 2,
+      "resultado": "Peñarol 5 - 2 Fénix",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Óscar Míguez (P) 8' de penal, Roberto Gonzalvo (P)10', Óscar Míguez (P) 44', Óscar Míguez (P) 72' y Juan Manuel Romay (P) 75'"
     }
   ],
-  "cumpleanos_glorias": [
-    {
-      "nombre": "Ernesto Vidal",
-      "fecha_nacimiento": "1921-11-15T00:00:00.000Z",
-      "partidos": null,
-      "goles": null,
-      "titulos": 0
-    }
-  ]
+  "cumpleanos_glorias": []
 }
