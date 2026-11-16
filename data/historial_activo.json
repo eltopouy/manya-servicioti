@@ -6,17 +6,24 @@
   "escudo_rival": "assets/img/escudos/escudo_defensor_sporting.webp",
   "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
   "resumen": {
-    "partidos_jugados": 337,
+    "partidos_jugados": 338,
     "ganados_penarol": 199,
-    "empatados": 80,
+    "empatados": 81,
     "perdidos_penarol": 58,
-    "goles_penarol": 691,
-    "goles_rival": 361,
+    "goles_penarol": 692,
+    "goles_rival": 362,
     "diferencia_goles": "+330",
     "ventaja_victorias": "+141 partidos a favor del Decano",
-    "efectividad_pct": "67.0%"
+    "efectividad_pct": "66.9%"
   },
   "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-11-15",
+      "marcador": "Peñarol 1 - 1 Defensor Sporting",
+      "estadio": "Luis Franzini",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Roberto Fernández (P) 72' y Xavier Biscayzacú (D) 90+4'"
+    },
     {
       "fecha": "2026-05-24",
       "marcador": "Peñarol 2 - 0 Defensor Sporting",
@@ -44,13 +51,6 @@
       "estadio": "Parque Alfredo Víctor Viera",
       "torneo": "Copa AUF Uruguay",
       "incidencias": "Matías Arezo (P) 47' y Maximiliano Silvera (P) 61'"
-    },
-    {
-      "fecha": "2025-06-07",
-      "marcador": "Peñarol 3 - 0 Defensor Sporting",
-      "estadio": "Campeón del Siglo",
-      "torneo": "Torneo Intermedio",
-      "incidencias": "Leonardo Fernández (P) 30' de penal, Maximiliano Olivera (P) 63' y David Terans (P) 88'"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generado_el": "16/11/2026 17:15",
+  "generado_el": "16/11/2026 17:45",
   "rival_nombre": "Defensor Sporting Club",
   "rival_corto": "Defensor Sporting",
   "rival_slug": "defensor_sporting",
@@ -125,15 +125,15 @@
     }
   ],
   "historial_certificacion_1891": {
-    "partidos_jugados": 337,
+    "partidos_jugados": 338,
     "ganados_penarol": 199,
-    "empatados": 80,
+    "empatados": 81,
     "perdidos_penarol": 58,
-    "goles_penarol": 691,
-    "goles_rival": 361,
+    "goles_penarol": 692,
+    "goles_rival": 362,
     "ventaja_victorias": "+141 partidos a favor del Decano",
     "diferencia_goles": "+330",
-    "efectividad_pct": "67.0%"
+    "efectividad_pct": "66.9%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",
