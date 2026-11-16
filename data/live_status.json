@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 13:45",
+  "actualizado": "16/11/2026 14:15",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 15.8,
+  "horas_desde_ultimo_partido": 16.3,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -440,14 +440,14 @@
       "pos": 6,
       "equipo": "Liverpool",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 16,
-      "pe": 11,
+      "pe": 10,
       "pp": 8,
-      "gf": 47,
-      "gc": 31,
+      "gf": 46,
+      "gc": 30,
       "dg": "+16",
-      "pts": 59
+      "pts": 58
     },
     {
       "pos": 7,
@@ -531,14 +531,14 @@
       "pos": 13,
       "equipo": "Cerro Largo",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 9,
-      "pe": 11,
+      "pe": 10,
       "pp": 16,
-      "gf": 35,
-      "gc": 43,
+      "gf": 34,
+      "gc": 42,
       "dg": "-8",
-      "pts": 38
+      "pts": 37
     },
     {
       "pos": 14,
@@ -1148,14 +1148,14 @@
           "pos": 6,
           "equipo": "Liverpool",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 16,
-          "pe": 11,
+          "pe": 10,
           "pp": 8,
-          "gf": 47,
-          "gc": 31,
+          "gf": 46,
+          "gc": 30,
           "dg": "+16",
-          "pts": 59
+          "pts": 58
         },
         {
           "pos": 7,
@@ -1239,14 +1239,14 @@
           "pos": 13,
           "equipo": "Cerro Largo",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 9,
-          "pe": 11,
+          "pe": 10,
           "pp": 16,
-          "gf": 35,
-          "gc": 43,
+          "gf": 34,
+          "gc": 42,
           "dg": "-8",
-          "pts": 38
+          "pts": 37
         },
         {
           "pos": 14,
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 26.2,
-    "sensacion_c": 26.8,
-    "viento_kmh": 11.2,
-    "humedad_pct": 56,
+    "temperatura_c": 26.5,
+    "sensacion_c": 27.2,
+    "viento_kmh": 10.4,
+    "humedad_pct": 54,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 13:45"
+    "actualizado": "16/11/2026 14:15"
   },
   "minuto_a_minuto": [
     {
