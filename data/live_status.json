@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 03:15",
+  "actualizado": "16/11/2026 03:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 5.3,
+  "horas_desde_ultimo_partido": 5.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -379,8 +379,8 @@
       "pg": 19,
       "pe": 9,
       "pp": 7,
-      "gf": 51,
-      "gc": 27,
+      "gf": 52,
+      "gc": 28,
       "dg": "+24",
       "pts": 66
     },
@@ -388,17 +388,30 @@
       "pos": 2,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 18,
-      "pe": 8,
+      "pe": 9,
       "pp": 9,
       "gf": 54,
       "gc": 33,
       "dg": "+21",
-      "pts": 62
+      "pts": 63
     },
     {
       "pos": 3,
+      "equipo": "Montevideo City Torque",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 19,
+      "pe": 6,
+      "pp": 10,
+      "gf": 59,
+      "gc": 41,
+      "dg": "+18",
+      "pts": 63
+    },
+    {
+      "pos": 4,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 36,
@@ -409,19 +422,6 @@
       "gc": 43,
       "dg": "+11",
       "pts": 62
-    },
-    {
-      "pos": 4,
-      "equipo": "Montevideo City Torque",
-      "es_penarol": false,
-      "pj": 34,
-      "pg": 18,
-      "pe": 6,
-      "pp": 10,
-      "gf": 57,
-      "gc": 40,
-      "dg": "+17",
-      "pts": 60
     },
     {
       "pos": 5,
@@ -453,27 +453,27 @@
       "pos": 7,
       "equipo": "Montevideo Wanderers",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 14,
-      "pe": 8,
+      "pe": 9,
       "pp": 12,
-      "gf": 41,
-      "gc": 43,
+      "gf": 42,
+      "gc": 44,
       "dg": "-2",
-      "pts": 50
+      "pts": 51
     },
     {
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 13,
-      "pe": 8,
+      "pe": 9,
       "pp": 14,
       "gf": 48,
       "gc": 45,
       "dg": "+3",
-      "pts": 47
+      "pts": 48
     },
     {
       "pos": 9,
@@ -544,13 +544,13 @@
       "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
-      "pj": 34,
+      "pj": 35,
       "pg": 10,
       "pe": 7,
-      "pp": 17,
-      "gf": 33,
-      "gc": 45,
-      "dg": "-12",
+      "pp": 18,
+      "gf": 34,
+      "gc": 47,
+      "dg": "-13",
       "pts": 37
     },
     {
@@ -1087,8 +1087,8 @@
           "pg": 19,
           "pe": 9,
           "pp": 7,
-          "gf": 51,
-          "gc": 27,
+          "gf": 52,
+          "gc": 28,
           "dg": "+24",
           "pts": 66
         },
@@ -1096,17 +1096,30 @@
           "pos": 2,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 18,
-          "pe": 8,
+          "pe": 9,
           "pp": 9,
           "gf": 54,
           "gc": 33,
           "dg": "+21",
-          "pts": 62
+          "pts": 63
         },
         {
           "pos": 3,
+          "equipo": "Montevideo City Torque",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 19,
+          "pe": 6,
+          "pp": 10,
+          "gf": 59,
+          "gc": 41,
+          "dg": "+18",
+          "pts": 63
+        },
+        {
+          "pos": 4,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 36,
@@ -1117,19 +1130,6 @@
           "gc": 43,
           "dg": "+11",
           "pts": 62
-        },
-        {
-          "pos": 4,
-          "equipo": "Montevideo City Torque",
-          "es_penarol": false,
-          "pj": 34,
-          "pg": 18,
-          "pe": 6,
-          "pp": 10,
-          "gf": 57,
-          "gc": 40,
-          "dg": "+17",
-          "pts": 60
         },
         {
           "pos": 5,
@@ -1161,27 +1161,27 @@
           "pos": 7,
           "equipo": "Montevideo Wanderers",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 14,
-          "pe": 8,
+          "pe": 9,
           "pp": 12,
-          "gf": 41,
-          "gc": 43,
+          "gf": 42,
+          "gc": 44,
           "dg": "-2",
-          "pts": 50
+          "pts": 51
         },
         {
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 13,
-          "pe": 8,
+          "pe": 9,
           "pp": 14,
           "gf": 48,
           "gc": 45,
           "dg": "+3",
-          "pts": 47
+          "pts": 48
         },
         {
           "pos": 9,
@@ -1252,13 +1252,13 @@
           "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
-          "pj": 34,
+          "pj": 35,
           "pg": 10,
           "pe": 7,
-          "pp": 17,
-          "gf": 33,
-          "gc": 45,
-          "dg": "-12",
+          "pp": 18,
+          "gf": 34,
+          "gc": 47,
+          "dg": "-13",
           "pts": 37
         },
         {
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 16.8,
-    "sensacion_c": 17.4,
-    "viento_kmh": 9.0,
-    "humedad_pct": 92,
+    "temperatura_c": 16.7,
+    "sensacion_c": 17.1,
+    "viento_kmh": 9.7,
+    "humedad_pct": 93,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 03:15"
+    "actualizado": "16/11/2026 03:45"
   },
   "minuto_a_minuto": [
     {
