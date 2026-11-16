@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 20:45",
+  "actualizado": "16/11/2026 20:56",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 22.8,
+  "horas_desde_ultimo_partido": 22.9,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -399,19 +399,6 @@
     },
     {
       "pos": 3,
-      "equipo": "Deportivo Maldonado",
-      "es_penarol": false,
-      "pj": 36,
-      "pg": 18,
-      "pe": 9,
-      "pp": 9,
-      "gf": 54,
-      "gc": 33,
-      "dg": "+21",
-      "pts": 63
-    },
-    {
-      "pos": 4,
       "equipo": "Liverpool",
       "es_penarol": false,
       "pj": 36,
@@ -424,7 +411,7 @@
       "pts": 62
     },
     {
-      "pos": 5,
+      "pos": 4,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 36,
@@ -437,17 +424,30 @@
       "pts": 62
     },
     {
+      "pos": 5,
+      "equipo": "Deportivo Maldonado",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 17,
+      "pe": 9,
+      "pp": 9,
+      "gf": 52,
+      "gc": 32,
+      "dg": "+20",
+      "pts": 60
+    },
+    {
       "pos": 6,
       "equipo": "Racing",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 16,
-      "pe": 13,
+      "pe": 12,
       "pp": 7,
-      "gf": 47,
-      "gc": 33,
+      "gf": 44,
+      "gc": 30,
       "dg": "+14",
-      "pts": 61
+      "pts": 60
     },
     {
       "pos": 7,
@@ -505,14 +505,14 @@
       "pos": 11,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 9,
-      "pe": 13,
+      "pe": 12,
       "pp": 14,
-      "gf": 36,
-      "gc": 44,
+      "gf": 33,
+      "gc": 41,
       "dg": "-8",
-      "pts": 40
+      "pts": 39
     },
     {
       "pos": 12,
@@ -570,13 +570,13 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 6,
       "pe": 14,
-      "pp": 16,
-      "gf": 30,
-      "gc": 47,
-      "dg": "-17",
+      "pp": 15,
+      "gf": 29,
+      "gc": 45,
+      "dg": "-16",
       "pts": 32
     }
   ],
@@ -1107,19 +1107,6 @@
         },
         {
           "pos": 3,
-          "equipo": "Deportivo Maldonado",
-          "es_penarol": false,
-          "pj": 36,
-          "pg": 18,
-          "pe": 9,
-          "pp": 9,
-          "gf": 54,
-          "gc": 33,
-          "dg": "+21",
-          "pts": 63
-        },
-        {
-          "pos": 4,
           "equipo": "Liverpool",
           "es_penarol": false,
           "pj": 36,
@@ -1132,7 +1119,7 @@
           "pts": 62
         },
         {
-          "pos": 5,
+          "pos": 4,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 36,
@@ -1145,17 +1132,30 @@
           "pts": 62
         },
         {
+          "pos": 5,
+          "equipo": "Deportivo Maldonado",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 17,
+          "pe": 9,
+          "pp": 9,
+          "gf": 52,
+          "gc": 32,
+          "dg": "+20",
+          "pts": 60
+        },
+        {
           "pos": 6,
           "equipo": "Racing",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 16,
-          "pe": 13,
+          "pe": 12,
           "pp": 7,
-          "gf": 47,
-          "gc": 33,
+          "gf": 44,
+          "gc": 30,
           "dg": "+14",
-          "pts": 61
+          "pts": 60
         },
         {
           "pos": 7,
@@ -1213,14 +1213,14 @@
           "pos": 11,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 9,
-          "pe": 13,
+          "pe": 12,
           "pp": 14,
-          "gf": 36,
-          "gc": 44,
+          "gf": 33,
+          "gc": 41,
           "dg": "-8",
-          "pts": 40
+          "pts": 39
         },
         {
           "pos": 12,
@@ -1278,13 +1278,13 @@
           "pos": 16,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 6,
           "pe": 14,
-          "pp": 16,
-          "gf": 30,
-          "gc": 47,
-          "dg": "-17",
+          "pp": 15,
+          "gf": 29,
+          "gc": 45,
+          "dg": "-16",
           "pts": 32
         }
       ]
@@ -1369,7 +1369,7 @@
     "humedad_pct": 88,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 20:45"
+    "actualizado": "16/11/2026 20:56"
   },
   "minuto_a_minuto": [
     {
