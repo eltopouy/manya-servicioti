@@ -1,9 +1,9 @@
 {
-  "actualizado": "16/11/2026 00:45",
+  "actualizado": "16/11/2026 01:15",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 2.8,
+  "horas_desde_ultimo_partido": 3.3,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -388,13 +388,13 @@
       "pos": 2,
       "equipo": "Deportivo Maldonado",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 18,
       "pe": 9,
-      "pp": 8,
+      "pp": 9,
       "gf": 54,
-      "gc": 32,
-      "dg": "+22",
+      "gc": 33,
+      "dg": "+21",
       "pts": 63
     },
     {
@@ -414,14 +414,14 @@
       "pos": 4,
       "equipo": "Nacional",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 19,
-      "pe": 5,
+      "pe": 4,
       "pp": 12,
-      "gf": 54,
-      "gc": 43,
+      "gf": 53,
+      "gc": 42,
       "dg": "+11",
-      "pts": 62
+      "pts": 61
     },
     {
       "pos": 5,
@@ -466,14 +466,14 @@
       "pos": 8,
       "equipo": "Albion",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 13,
-      "pe": 9,
+      "pe": 8,
       "pp": 14,
-      "gf": 48,
-      "gc": 45,
+      "gf": 47,
+      "gc": 44,
       "dg": "+3",
-      "pts": 48
+      "pts": 47
     },
     {
       "pos": 9,
@@ -516,6 +516,19 @@
     },
     {
       "pos": 12,
+      "equipo": "Cerro",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 11,
+      "pe": 7,
+      "pp": 18,
+      "gf": 30,
+      "gc": 53,
+      "dg": "-23",
+      "pts": 39
+    },
+    {
+      "pos": 13,
       "equipo": "Cerro Largo",
       "es_penarol": false,
       "pj": 36,
@@ -528,7 +541,7 @@
       "pts": 38
     },
     {
-      "pos": 13,
+      "pos": 14,
       "equipo": "Boston River",
       "es_penarol": false,
       "pj": 35,
@@ -539,19 +552,6 @@
       "gc": 47,
       "dg": "-13",
       "pts": 37
-    },
-    {
-      "pos": 14,
-      "equipo": "Cerro",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 10,
-      "pe": 7,
-      "pp": 18,
-      "gf": 29,
-      "gc": 53,
-      "dg": "-24",
-      "pts": 36
     },
     {
       "pos": 15,
@@ -1096,13 +1096,13 @@
           "pos": 2,
           "equipo": "Deportivo Maldonado",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 18,
           "pe": 9,
-          "pp": 8,
+          "pp": 9,
           "gf": 54,
-          "gc": 32,
-          "dg": "+22",
+          "gc": 33,
+          "dg": "+21",
           "pts": 63
         },
         {
@@ -1122,14 +1122,14 @@
           "pos": 4,
           "equipo": "Nacional",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 19,
-          "pe": 5,
+          "pe": 4,
           "pp": 12,
-          "gf": 54,
-          "gc": 43,
+          "gf": 53,
+          "gc": 42,
           "dg": "+11",
-          "pts": 62
+          "pts": 61
         },
         {
           "pos": 5,
@@ -1174,14 +1174,14 @@
           "pos": 8,
           "equipo": "Albion",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 13,
-          "pe": 9,
+          "pe": 8,
           "pp": 14,
-          "gf": 48,
-          "gc": 45,
+          "gf": 47,
+          "gc": 44,
           "dg": "+3",
-          "pts": 48
+          "pts": 47
         },
         {
           "pos": 9,
@@ -1224,6 +1224,19 @@
         },
         {
           "pos": 12,
+          "equipo": "Cerro",
+          "es_penarol": false,
+          "pj": 36,
+          "pg": 11,
+          "pe": 7,
+          "pp": 18,
+          "gf": 30,
+          "gc": 53,
+          "dg": "-23",
+          "pts": 39
+        },
+        {
+          "pos": 13,
           "equipo": "Cerro Largo",
           "es_penarol": false,
           "pj": 36,
@@ -1236,7 +1249,7 @@
           "pts": 38
         },
         {
-          "pos": 13,
+          "pos": 14,
           "equipo": "Boston River",
           "es_penarol": false,
           "pj": 35,
@@ -1247,19 +1260,6 @@
           "gc": 47,
           "dg": "-13",
           "pts": 37
-        },
-        {
-          "pos": 14,
-          "equipo": "Cerro",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 10,
-          "pe": 7,
-          "pp": 18,
-          "gf": 29,
-          "gc": 53,
-          "dg": "-24",
-          "pts": 36
         },
         {
           "pos": 15,
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 18.3,
-    "sensacion_c": 18.8,
-    "viento_kmh": 11.3,
+    "temperatura_c": 18.0,
+    "sensacion_c": 18.4,
+    "viento_kmh": 11.2,
     "humedad_pct": 88,
     "condicion": "Parcialmente nublado en Ruta 102",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 00:45"
+    "actualizado": "16/11/2026 01:15"
   },
   "minuto_a_minuto": [
     {
