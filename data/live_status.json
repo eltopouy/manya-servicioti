@@ -1,5 +1,5 @@
 {
-  "actualizado": "16/11/2026 01:15",
+  "actualizado": "16/11/2026 01:19",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
@@ -1369,7 +1369,7 @@
     "humedad_pct": 88,
     "condicion": "Parcialmente nublado en Ruta 102",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "16/11/2026 01:15"
+    "actualizado": "16/11/2026 01:19"
   },
   "minuto_a_minuto": [
     {
