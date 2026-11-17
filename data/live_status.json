@@ -1,9 +1,9 @@
 {
-  "actualizado": "17/11/2026 16:15",
+  "actualizado": "17/11/2026 16:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 42.3,
+  "horas_desde_ultimo_partido": 42.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 24.0,
-    "sensacion_c": 25.1,
-    "viento_kmh": 15.9,
-    "humedad_pct": 75,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "temperatura_c": 23.8,
+    "sensacion_c": 24.5,
+    "viento_kmh": 17.4,
+    "humedad_pct": 73,
+    "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "17/11/2026 16:15"
+    "actualizado": "17/11/2026 16:45"
   },
   "minuto_a_minuto": [
     {
