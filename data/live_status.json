@@ -1,5 +1,5 @@
 {
-  "actualizado": "17/11/2026 14:15",
+  "actualizado": "17/11/2026 14:18",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
@@ -1369,7 +1369,7 @@
     "humedad_pct": 71,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "17/11/2026 14:15"
+    "actualizado": "17/11/2026 14:18"
   },
   "minuto_a_minuto": [
     {
