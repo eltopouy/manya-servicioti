@@ -1,9 +1,9 @@
 {
-  "actualizado": "17/11/2026 04:15",
+  "actualizado": "17/11/2026 04:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 30.3,
+  "horas_desde_ultimo_partido": 30.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -479,13 +479,13 @@
       "pos": 9,
       "equipo": "Central Español",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 12,
       "pe": 8,
-      "pp": 16,
+      "pp": 15,
       "gf": 36,
-      "gc": 48,
-      "dg": "-12",
+      "gc": 47,
+      "dg": "-11",
       "pts": 44
     },
     {
@@ -570,14 +570,14 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 35,
-      "pg": 6,
+      "pj": 34,
+      "pg": 5,
       "pe": 14,
       "pp": 15,
-      "gf": 29,
+      "gf": 28,
       "gc": 45,
-      "dg": "-16",
-      "pts": 32
+      "dg": "-17",
+      "pts": 29
     }
   ],
   "tabla_clausura": [
@@ -1187,13 +1187,13 @@
           "pos": 9,
           "equipo": "Central Español",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 12,
           "pe": 8,
-          "pp": 16,
+          "pp": 15,
           "gf": 36,
-          "gc": 48,
-          "dg": "-12",
+          "gc": 47,
+          "dg": "-11",
           "pts": 44
         },
         {
@@ -1278,14 +1278,14 @@
           "pos": 16,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 35,
-          "pg": 6,
+          "pj": 34,
+          "pg": 5,
           "pe": 14,
           "pp": 15,
-          "gf": 29,
+          "gf": 28,
           "gc": 45,
-          "dg": "-16",
-          "pts": 32
+          "dg": "-17",
+          "pts": 29
         }
       ]
     },
@@ -1363,13 +1363,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 19.1,
+    "temperatura_c": 19.0,
     "sensacion_c": 20.5,
-    "viento_kmh": 12.3,
+    "viento_kmh": 11.6,
     "humedad_pct": 98,
     "condicion": "Templado en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "17/11/2026 04:15"
+    "actualizado": "17/11/2026 04:45"
   },
   "minuto_a_minuto": [
     {
