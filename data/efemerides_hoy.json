@@ -2,96 +2,111 @@
   "fecha_consulta": "17/11/2026",
   "dia_mes": "17 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 10,
+  "total_partidos_dia": 9,
   "partidos_historicos": [
     {
-      "fecha": "2025-11-16",
-      "ano": "2025",
-      "rival": "Liverpool",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Liverpool",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Abel Hernández (L) 92', Diego García (P) 103' y Leonardo Fernández (P) 115' de penal"
-    },
-    {
-      "fecha": "2017-11-16",
-      "ano": "2017",
-      "rival": "Danubio",
+      "fecha": "2024-11-17",
+      "ano": "2024",
+      "rival": "Defensor Sporting",
       "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Danubio",
+      "resultado": "Peñarol 2 - 0 Defensor Sporting",
       "torneo": "Torneo Clausura",
-      "estadio": "Jardines del Hipódromo",
-      "goles_detalle": "Cristian Palacios (P) 7' y Cristian Palacios (P) 45'"
+      "estadio": "Campeón del Siglo",
+      "goles_detalle": "Leonardo Fernández (P) 45+5' y Álan Medina (P) 90+2'"
     },
     {
-      "fecha": "2002-11-16",
-      "ano": "2002",
-      "rival": "Marconi Stallyons (Aus)",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Marconi Stallyons (Aus)",
-      "torneo": "Trofeo New Loan Challenger Cup",
-      "estadio": "Bossley Park de Sidney",
-      "goles_detalle": "Shane Weeb (M e/c) 35', Fabián Canobbio (P) 38', Chad Gibson (M) 55' de penal y Pablo Javier Bengoechea (P) 65' de penal"
-    },
-    {
-      "fecha": "1982-11-16",
-      "ano": "1982",
-      "rival": "Flamengo (Bra)",
-      "goles_penarol": 1,
-      "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Flamengo (Bra)",
-      "torneo": "Copa Libertadores de América",
-      "estadio": "Jornalista Mário Filho (Maracanã) de Rio de Janeiro",
-      "goles_detalle": "Jair 25'"
-    },
-    {
-      "fecha": "1977-11-16",
-      "ano": "1977",
-      "rival": "Huracán Buceo",
-      "goles_penarol": 5,
-      "goles_rival": 1,
-      "resultado": "Peñarol 5 - 1 Huracán Buceo",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Lorenzo Unánue 17', Venancio Ramos (2) 67' y 69' y Fernando Morena (2) 70' y 87'"
-    },
-    {
-      "fecha": "1969-11-16",
-      "ano": "1969",
-      "rival": "Danubio",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Danubio",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Jardines del Hipódromo",
-      "goles_detalle": "Ermindo Onega 59' y Nilo Acuña 83'"
-    },
-    {
-      "fecha": "1963-11-16",
-      "ano": "1963",
-      "rival": "Cerro",
-      "goles_penarol": 3,
-      "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Cerro",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Pedro Rocha (3) 7', 29' y 38'"
-    },
-    {
-      "fecha": "1957-11-16",
-      "ano": "1957",
+      "fecha": "2013-11-17",
+      "ano": "2013",
       "rival": "Fénix",
-      "goles_penarol": 5,
-      "goles_rival": 2,
-      "resultado": "Peñarol 5 - 2 Fénix",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Fénix",
+      "torneo": "Torneo Apertura",
+      "estadio": "Centenario",
+      "goles_detalle": "Carlos Núñez (P) 15', Jonathan Rodríguez (P) 65' y Maximiliano Pérez (F) 70'"
+    },
+    {
+      "fecha": "2012-11-17",
+      "ano": "2012",
+      "rival": "Progreso",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Progreso",
+      "torneo": "Torneo Apertura",
+      "estadio": "Centenario",
+      "goles_detalle": "Fabián Estoyanoff (Pe) 31', Fabián Canobbio (Pr) 53', Marcelo Zalayeta (Pe) 72' y Fabián Estoyanoff (Pe) 80'"
+    },
+    {
+      "fecha": "1965-11-17",
+      "ano": "1965",
+      "rival": "Estudiantes de La Plata (Arg)",
+      "goles_penarol": 0,
+      "goles_rival": 0,
+      "resultado": "Peñarol 0 - 0 Estudiantes de La Plata (Arg)",
+      "torneo": "Amistoso (internacional)",
+      "estadio": "1 y 57 de la Ciudad de La Plata",
+      "goles_detalle": null
+    },
+    {
+      "fecha": "1956-11-17",
+      "ano": "1956",
+      "rival": "Liverpool",
+      "goles_penarol": 3,
+      "goles_rival": 1,
+      "resultado": "Peñarol 3 - 1 Liverpool",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Belvedere",
+      "goles_detalle": "Óscar Míguez (P) 5', Julio Toja (P) 27', Óscar Míguez (P) 33' y Carlos Chaves (L) 37'"
+    },
+    {
+      "fecha": "1945-11-17",
+      "ano": "1945",
+      "rival": "River Plate",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 River Plate",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Óscar Míguez (P) 8' de penal, Roberto Gonzalvo (P)10', Óscar Míguez (P) 44', Óscar Míguez (P) 72' y Juan Manuel Romay (P) 75'"
+      "goles_detalle": "Raúl Schiaffino (P) 35' y Ernesto Vidal (P) 53'"
+    },
+    {
+      "fecha": "1940-11-17",
+      "ano": "1940",
+      "rival": "Rampla Juniors",
+      "goles_penarol": 4,
+      "goles_rival": 1,
+      "resultado": "Peñarol 4 - 1 Rampla Juniors",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "José Antonio Vázquez (P) 1', Severino Varela (P) 60', Mattas (R) 73', Ubaldo Cruche (P) 86' y Severino Varela (P) 88'"
+    },
+    {
+      "fecha": "1935-11-17",
+      "ano": "1935",
+      "rival": "River Plate",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 River Plate",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Parque Federico Omar Saroldi",
+      "goles_detalle": "Alberto Taboada (P) 35', Juan José García (P) 43' y Lerena (R) 86'"
     }
   ],
-  "cumpleanos_glorias": []
+  "cumpleanos_glorias": [
+    {
+      "nombre": "Tomas Lewis",
+      "fecha_nacimiento": "1882-11-21T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Ernesto Mascheroni",
+      "fecha_nacimiento": "1907-11-21T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    }
+  ]
 }
