@@ -1,9 +1,9 @@
 {
-  "actualizado": "17/11/2026 02:15",
+  "actualizado": "17/11/2026 02:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 28.3,
+  "horas_desde_ultimo_partido": 28.8,
   "rival_activo_slug": "defensor_sporting",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Defensor Sporting 1 - 1 Peñarol • Crónica post-partido y análisis táctico en primer plano.",
@@ -379,8 +379,8 @@
       "pg": 19,
       "pe": 9,
       "pp": 7,
-      "gf": 53,
-      "gc": 29,
+      "gf": 52,
+      "gc": 28,
       "dg": "+24",
       "pts": 66
     },
@@ -453,14 +453,14 @@
       "pos": 7,
       "equipo": "Montevideo Wanderers",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 34,
       "pg": 14,
-      "pe": 9,
+      "pe": 8,
       "pp": 12,
-      "gf": 42,
-      "gc": 44,
+      "gf": 41,
+      "gc": 43,
       "dg": "-2",
-      "pts": 51
+      "pts": 50
     },
     {
       "pos": 8,
@@ -1087,8 +1087,8 @@
           "pg": 19,
           "pe": 9,
           "pp": 7,
-          "gf": 53,
-          "gc": 29,
+          "gf": 52,
+          "gc": 28,
           "dg": "+24",
           "pts": 66
         },
@@ -1161,14 +1161,14 @@
           "pos": 7,
           "equipo": "Montevideo Wanderers",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 34,
           "pg": 14,
-          "pe": 9,
+          "pe": 8,
           "pp": 12,
-          "gf": 42,
-          "gc": 44,
+          "gf": 41,
+          "gc": 43,
           "dg": "-2",
-          "pts": 51
+          "pts": 50
         },
         {
           "pos": 8,
@@ -1364,12 +1364,12 @@
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
     "temperatura_c": 19.8,
-    "sensacion_c": 20.6,
-    "viento_kmh": 16.1,
+    "sensacion_c": 20.5,
+    "viento_kmh": 16.5,
     "humedad_pct": 93,
     "condicion": "Garúa leve en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "17/11/2026 02:15"
+    "actualizado": "17/11/2026 02:45"
   },
   "minuto_a_minuto": [
     {
