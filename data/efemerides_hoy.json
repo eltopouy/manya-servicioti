@@ -2,95 +2,95 @@
   "fecha_consulta": "18/11/2026",
   "dia_mes": "18 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 9,
+  "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2024-11-17",
-      "ano": "2024",
-      "rival": "Defensor Sporting",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Defensor Sporting",
-      "torneo": "Torneo Clausura",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "Leonardo Fernández (P) 45+5' y Álan Medina (P) 90+2'"
-    },
-    {
-      "fecha": "2013-11-17",
-      "ano": "2013",
-      "rival": "Fénix",
+      "fecha": "2006-11-18",
+      "ano": "2006",
+      "rival": "Central Español",
       "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Fénix",
+      "resultado": "Peñarol 2 - 1 Central Español",
       "torneo": "Torneo Apertura",
       "estadio": "Centenario",
-      "goles_detalle": "Carlos Núñez (P) 15', Jonathan Rodríguez (P) 65' y Maximiliano Pérez (F) 70'"
+      "goles_detalle": "Matías Cresseri (C) 9', Alejandro Delorte (P) 20' y Rubén Capria (P) 45'"
     },
     {
-      "fecha": "2012-11-17",
-      "ano": "2012",
-      "rival": "Progreso",
-      "goles_penarol": 3,
+      "fecha": "1984-11-18",
+      "ano": "1984",
+      "rival": "Central Español",
+      "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Progreso",
-      "torneo": "Torneo Apertura",
+      "resultado": "Peñarol 2 - 1 Central Español",
+      "torneo": "Torneo 60mo. Aniversario de Colombes",
       "estadio": "Centenario",
-      "goles_detalle": "Fabián Estoyanoff (Pe) 31', Fabián Canobbio (Pr) 53', Marcelo Zalayeta (Pe) 72' y Fabián Estoyanoff (Pe) 80'"
+      "goles_detalle": "Fernando Morena (2) 7' y 55'"
     },
     {
-      "fecha": "1965-11-17",
-      "ano": "1965",
-      "rival": "Estudiantes de La Plata (Arg)",
-      "goles_penarol": 0,
+      "fecha": "1979-11-18",
+      "ano": "1979",
+      "rival": "Montevideo Wanderers",
+      "goles_penarol": 2,
       "goles_rival": 0,
-      "resultado": "Peñarol 0 - 0 Estudiantes de La Plata (Arg)",
-      "torneo": "Amistoso (internacional)",
-      "estadio": "1 y 57 de la Ciudad de La Plata",
-      "goles_detalle": null
+      "resultado": "Peñarol 2 - 0 Montevideo Wanderers",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Rubén Paz (2) 85' de penal y 90'"
     },
     {
-      "fecha": "1956-11-17",
-      "ano": "1956",
-      "rival": "Liverpool",
+      "fecha": "1973-11-18",
+      "ano": "1973",
+      "rival": "Central Español",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Central Español",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Fernando Morena (2) 60' y 89'"
+    },
+    {
+      "fecha": "1962-11-18",
+      "ano": "1962",
+      "rival": "Defensor",
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 Defensor",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Alberto Spencer 40'"
+    },
+    {
+      "fecha": "1961-11-18",
+      "ano": "1961",
+      "rival": "Racing",
       "goles_penarol": 3,
       "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Liverpool",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Belvedere",
-      "goles_detalle": "Óscar Míguez (P) 5', Julio Toja (P) 27', Óscar Míguez (P) 33' y Carlos Chaves (L) 37'"
-    },
-    {
-      "fecha": "1945-11-17",
-      "ano": "1945",
-      "rival": "River Plate",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 River Plate",
+      "resultado": "Peñarol 3 - 1 Racing",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Raúl Schiaffino (P) 35' y Ernesto Vidal (P) 53'"
+      "goles_detalle": "Ángel Cabrera 35', Roberto Guelmo en contra 47' y Alberto Spencer 85'"
     },
     {
-      "fecha": "1940-11-17",
-      "ano": "1940",
-      "rival": "Rampla Juniors",
-      "goles_penarol": 4,
-      "goles_rival": 1,
-      "resultado": "Peñarol 4 - 1 Rampla Juniors",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "José Antonio Vázquez (P) 1', Severino Varela (P) 60', Mattas (R) 73', Ubaldo Cruche (P) 86' y Severino Varela (P) 88'"
-    },
-    {
-      "fecha": "1935-11-17",
-      "ano": "1935",
-      "rival": "River Plate",
+      "fecha": "1959-11-18",
+      "ano": "1959",
+      "rival": "Defensor",
       "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 River Plate",
+      "resultado": "Peñarol 2 - 1 Defensor",
       "torneo": "Campeonato Uruguayo",
-      "estadio": "Parque Federico Omar Saroldi",
-      "goles_detalle": "Alberto Taboada (P) 35', Juan José García (P) 43' y Lerena (R) 86'"
+      "estadio": "Centenario",
+      "goles_detalle": "Salvador 13' y Oscar Leicht 87'"
+    },
+    {
+      "fecha": "1951-11-18",
+      "ano": "1951",
+      "rival": "Danubio",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Danubio",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Juan Alberto Schiaffino 25' y Alcides Ghiggia 48'"
     }
   ],
   "cumpleanos_glorias": [
@@ -104,6 +104,20 @@
     {
       "nombre": "Ernesto Mascheroni",
       "fecha_nacimiento": "1907-11-21T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Jorge Fossati",
+      "fecha_nacimiento": "1952-11-22T00:00:00.000Z",
+      "partidos": null,
+      "goles": null,
+      "titulos": 0
+    },
+    {
+      "nombre": "Jorge Fossati",
+      "fecha_nacimiento": "1952-11-22T00:00:00.000Z",
       "partidos": null,
       "goles": null,
       "titulos": 0
