@@ -1,9 +1,9 @@
 {
-  "actualizado": "18/11/2026 13:45",
+  "actualizado": "18/11/2026 14:15",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 63.8,
+  "horas_desde_ultimo_partido": 64.3,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Wanderers vs Peñarol el Domingo 22/11/2026 a las 16:30 hs (Parque Alfredo Víctor Viera (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -405,19 +405,6 @@
     },
     {
       "pos": 4,
-      "equipo": "Liverpool",
-      "es_penarol": false,
-      "pj": 36,
-      "pg": 17,
-      "pe": 11,
-      "pp": 8,
-      "gf": 49,
-      "gc": 32,
-      "dg": "+17",
-      "pts": 62
-    },
-    {
-      "pos": 5,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 36,
@@ -428,6 +415,19 @@
       "gc": 43,
       "dg": "+11",
       "pts": 62
+    },
+    {
+      "pos": 5,
+      "equipo": "Liverpool",
+      "es_penarol": false,
+      "pj": 35,
+      "pg": 17,
+      "pe": 10,
+      "pp": 8,
+      "gf": 48,
+      "gc": 31,
+      "dg": "+17",
+      "pts": 61
     },
     {
       "pos": 6,
@@ -524,14 +524,14 @@
       "pos": 13,
       "equipo": "Cerro Largo",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 35,
       "pg": 9,
-      "pe": 11,
+      "pe": 10,
       "pp": 16,
-      "gf": 35,
-      "gc": 43,
+      "gf": 34,
+      "gc": 42,
       "dg": "-8",
-      "pts": 38
+      "pts": 37
     },
     {
       "pos": 14,
@@ -1113,19 +1113,6 @@
         },
         {
           "pos": 4,
-          "equipo": "Liverpool",
-          "es_penarol": false,
-          "pj": 36,
-          "pg": 17,
-          "pe": 11,
-          "pp": 8,
-          "gf": 49,
-          "gc": 32,
-          "dg": "+17",
-          "pts": 62
-        },
-        {
-          "pos": 5,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 36,
@@ -1136,6 +1123,19 @@
           "gc": 43,
           "dg": "+11",
           "pts": 62
+        },
+        {
+          "pos": 5,
+          "equipo": "Liverpool",
+          "es_penarol": false,
+          "pj": 35,
+          "pg": 17,
+          "pe": 10,
+          "pp": 8,
+          "gf": 48,
+          "gc": 31,
+          "dg": "+17",
+          "pts": 61
         },
         {
           "pos": 6,
@@ -1232,14 +1232,14 @@
           "pos": 13,
           "equipo": "Cerro Largo",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 35,
           "pg": 9,
-          "pe": 11,
+          "pe": 10,
           "pp": 16,
-          "gf": 35,
-          "gc": 43,
+          "gf": 34,
+          "gc": 42,
           "dg": "-8",
-          "pts": 38
+          "pts": 37
         },
         {
           "pos": 14,
@@ -1357,12 +1357,12 @@
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
     "temperatura_c": 25.9,
-    "sensacion_c": 26.7,
-    "viento_kmh": 19.5,
-    "humedad_pct": 50,
+    "sensacion_c": 26.0,
+    "viento_kmh": 20.2,
+    "humedad_pct": 48,
     "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "18/11/2026 13:45"
+    "actualizado": "18/11/2026 14:15"
   },
   "minuto_a_minuto": [
     {
