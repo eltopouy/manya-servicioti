@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "18/11/2026 15:30:08",
-  "timestamp": "2026-11-18T15:30:08.464260-03:00",
+  "fecha_auditoria": "18/11/2026 16:00:08",
+  "timestamp": "2026-11-18T16:00:08.893268-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
-  "pruebas_exitosas": 8,
-  "pruebas_fallidas": 4,
+  "pruebas_exitosas": 9,
+  "pruebas_fallidas": 3,
   "estado_general": "CRITICO",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-18 15:30:06",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-18 16:00:06",
       "details": {
-        "now_uy": "2026-11-18 15:30:06.126465-03:00",
+        "now_uy": "2026-11-18 16:00:06.027961-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-18T15:30:06.126496-03:00"
+      "timestamp": "2026-11-18T16:00:06.027992-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 4,
         "es_hoy": false
       },
-      "timestamp": "2026-11-18T15:30:06.127346-03:00"
+      "timestamp": "2026-11-18T16:00:06.028828-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:30:06.131319-03:00"
+      "timestamp": "2026-11-18T16:00:06.032822-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -51,7 +51,7 @@
           "index.html no menciona la 'Fecha 15' del Torneo Clausura"
         ]
       },
-      "timestamp": "2026-11-18T15:30:06.134732-03:00"
+      "timestamp": "2026-11-18T16:00:06.036182-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -62,7 +62,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-18T15:30:06.138974-03:00"
+      "timestamp": "2026-11-18T16:00:06.040417-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -72,13 +72,13 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-18T15:30:06.139214-03:00"
+      "timestamp": "2026-11-18T16:00:06.040649-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "FAIL",
-      "passed": false,
-      "message": "Endpoints con error: ['Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
+      "status": "PASS",
+      "passed": true,
+      "message": "Todos los endpoints responden HTTP 200 OK",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -89,19 +89,19 @@
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "error": "HTTP Error 429: Too Many Requests",
+          "status": 200,
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-18T15:30:08.366672-03:00"
+      "timestamp": "2026-11-18T16:00:08.797725-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -111,7 +111,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:30:08.371971-03:00"
+      "timestamp": "2026-11-18T16:00:08.803779-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -121,7 +121,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:30:08.376526-03:00"
+      "timestamp": "2026-11-18T16:00:08.808189-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -133,7 +133,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-18T15:30:08.381468-03:00"
+      "timestamp": "2026-11-18T16:00:08.812955-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -170,7 +170,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-18T15:30:08.396200-03:00"
+      "timestamp": "2026-11-18T16:00:08.826682-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -180,7 +180,8 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:30:08.464043-03:00"
+      "timestamp": "2026-11-18T16:00:08.893044-03:00"
     }
-  ]
+  ],
+  "reparaciones_aplicadas": []
 }
