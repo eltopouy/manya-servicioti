@@ -1,22 +1,22 @@
 {
-  "fecha_auditoria": "18/11/2026 15:00:08",
-  "timestamp": "2026-11-18T15:00:08.000452-03:00",
-  "score_salud": 75.0,
+  "fecha_auditoria": "18/11/2026 15:35:32",
+  "timestamp": "2026-11-18T15:35:32.650266-03:00",
+  "score_salud": 66.7,
   "total_pruebas": 12,
-  "pruebas_exitosas": 9,
-  "pruebas_fallidas": 3,
+  "pruebas_exitosas": 8,
+  "pruebas_fallidas": 4,
   "estado_general": "CRITICO",
   "detalle_pruebas": [
     {
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-18 15:00:05",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-18 15:35:29",
       "details": {
-        "now_uy": "2026-11-18 15:00:05.898728-03:00",
+        "now_uy": "2026-11-18 15:35:29.608221-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-18T15:00:05.898759-03:00"
+      "timestamp": "2026-11-18T15:35:29.608261-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 4,
         "es_hoy": false
       },
-      "timestamp": "2026-11-18T15:00:05.899603-03:00"
+      "timestamp": "2026-11-18T15:35:29.608742-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:00:05.903596-03:00"
+      "timestamp": "2026-11-18T15:35:29.611459-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -51,7 +51,7 @@
           "index.html no menciona la 'Fecha 15' del Torneo Clausura"
         ]
       },
-      "timestamp": "2026-11-18T15:00:05.907000-03:00"
+      "timestamp": "2026-11-18T15:35:29.612694-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -62,7 +62,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-18T15:00:05.911043-03:00"
+      "timestamp": "2026-11-18T15:35:29.614712-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -72,13 +72,13 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-18T15:00:05.911277-03:00"
+      "timestamp": "2026-11-18T15:35:29.614820-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Previa Post (HTTP Error 429: Too Many Requests)', 'Blogger Archivo Histórico (HTTP Error 429: Too Many Requests)', 'Blogger Post Concluido (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
@@ -89,19 +89,19 @@
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html"
         },
         "Blogger Post Concluido": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-18T15:00:07.903130-03:00"
+      "timestamp": "2026-11-18T15:35:32.605705-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -111,7 +111,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:00:07.910349-03:00"
+      "timestamp": "2026-11-18T15:35:32.607029-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -121,7 +121,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:00:07.914590-03:00"
+      "timestamp": "2026-11-18T15:35:32.609329-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -133,7 +133,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-18T15:00:07.919707-03:00"
+      "timestamp": "2026-11-18T15:35:32.612364-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -170,7 +170,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-18T15:00:07.933406-03:00"
+      "timestamp": "2026-11-18T15:35:32.619496-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -180,8 +180,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-18T15:00:08.000248-03:00"
+      "timestamp": "2026-11-18T15:35:32.650151-03:00"
     }
-  ],
-  "reparaciones_aplicadas": []
+  ]
 }
