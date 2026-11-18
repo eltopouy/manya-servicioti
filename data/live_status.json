@@ -1,9 +1,9 @@
 {
-  "actualizado": "18/11/2026 10:45",
+  "actualizado": "18/11/2026 11:15",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 60.8,
+  "horas_desde_ultimo_partido": 61.3,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Wanderers vs Peñarol el Domingo 22/11/2026 a las 16:30 hs (Parque Alfredo Víctor Viera (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -1356,13 +1356,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 24.6,
-    "sensacion_c": 26.6,
-    "viento_kmh": 15.0,
-    "humedad_pct": 61,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "temperatura_c": 24.9,
+    "sensacion_c": 26.8,
+    "viento_kmh": 15.9,
+    "humedad_pct": 58,
+    "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "18/11/2026 10:45"
+    "actualizado": "18/11/2026 11:15"
   },
   "minuto_a_minuto": [
     {
