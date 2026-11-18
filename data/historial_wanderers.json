@@ -10,13 +10,20 @@
     "ganados_penarol": 207,
     "empatados": 113,
     "perdidos_penarol": 76,
-    "goles_penarol": 701,
-    "goles_rival": 394,
+    "goles_penarol": 702,
+    "goles_rival": 395,
     "diferencia_goles": "+307",
     "ventaja_victorias": "+131 partidos a favor del Decano",
     "efectividad_pct": "61.8%"
   },
   "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-10-31",
+      "marcador": "Peñarol 1 - 1 Wanderers",
+      "estadio": "Parque Federico Omar Saroldi",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Facundo Labandeira (W) 74' y Luis Angulo (P) 90'"
+    },
     {
       "fecha": "2026-08-05",
       "marcador": "Peñarol 5 - 1 Wanderers",
@@ -44,13 +51,6 @@
       "estadio": "Campeón del Siglo",
       "torneo": "Torneo Intermedio",
       "incidencias": "Ignacio Sosa (P) 45' y Maximiliano Silvera (P) 46'"
-    },
-    {
-      "fecha": "2025-04-19",
-      "marcador": "Peñarol 2 - 1 Wanderers",
-      "estadio": "Parque Alfredo Víctor Viera",
-      "torneo": "Torneo Apertura",
-      "incidencias": "Bruno Veglio (W) 18', Maximiliano Silvera (P) 31' y Héctor Villalba (P) 84'"
     }
   ]
 }

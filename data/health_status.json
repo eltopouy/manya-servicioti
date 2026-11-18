@@ -194,5 +194,8 @@
       },
       "timestamp": "2026-11-17T22:01:05.771894-03:00"
     }
+  ],
+  "reparaciones_aplicadas": [
+    "Auto-ajuste: Expiraron las 48 hs post-partido (48.0 hs transcurridas). Transición automática a PREVIA del próximo partido."
   ]
 }
