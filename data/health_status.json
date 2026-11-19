@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "19/11/2026 01:00:08",
-  "timestamp": "2026-11-19T01:00:08.446761-03:00",
+  "fecha_auditoria": "19/11/2026 01:30:07",
+  "timestamp": "2026-11-19T01:30:07.602420-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
   "pruebas_exitosas": 9,
@@ -11,23 +11,23 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-19 01:00:05",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-19 01:30:05",
       "details": {
-        "now_uy": "2026-11-19 01:00:05.671847-03:00",
+        "now_uy": "2026-11-19 01:30:05.443295-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-19T01:00:05.671883-03:00"
+      "timestamp": "2026-11-19T01:30:05.443328-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
       "status": "PASS",
       "passed": true,
-      "message": "delta_days: 3, es_hoy: False (partido: 22/11/2026)",
+      "message": "delta_days: 0, es_hoy: True (partido: 19/11/2026)",
       "details": {
-        "delta_days": 3,
-        "es_hoy": false
+        "delta_days": 0,
+        "es_hoy": true
       },
-      "timestamp": "2026-11-19T01:00:05.672733-03:00"
+      "timestamp": "2026-11-19T01:30:05.444179-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,21 +37,20 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-19T01:00:05.676562-03:00"
+      "timestamp": "2026-11-19T01:30:05.448147-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
       "status": "FAIL",
       "passed": false,
-      "message": "Errores de escenario/rival/DT: index.html no contiene el escenario oficial esperado 'Saroldi'; index.html no menciona al DT oficial 'Mathías Corujo'; index.html no menciona la 'Fecha 15' del Torneo Clausura",
+      "message": "Errores de escenario/rival/DT: data/news_digest.json no menciona al rival 'Defensor Sporting'; data/rival_intelligence.json no tiene a Andrés Rodríguez como entrenador",
       "details": {
         "errors": [
-          "index.html no contiene el escenario oficial esperado 'Saroldi'",
-          "index.html no menciona al DT oficial 'Mathías Corujo'",
-          "index.html no menciona la 'Fecha 15' del Torneo Clausura"
+          "data/news_digest.json no menciona al rival 'Defensor Sporting'",
+          "data/rival_intelligence.json no tiene a Andrés Rodríguez como entrenador"
         ]
       },
-      "timestamp": "2026-11-19T01:00:05.679842-03:00"
+      "timestamp": "2026-11-19T01:30:05.451548-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -62,7 +61,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-19T01:00:05.683954-03:00"
+      "timestamp": "2026-11-19T01:30:05.455553-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -72,7 +71,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-19T01:00:05.684190-03:00"
+      "timestamp": "2026-11-19T01:30:05.455791-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -101,7 +100,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-19T01:00:08.330841-03:00"
+      "timestamp": "2026-11-19T01:30:07.509476-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -111,7 +110,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-19T01:00:08.343413-03:00"
+      "timestamp": "2026-11-19T01:30:07.515046-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -121,7 +120,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-19T01:00:08.355538-03:00"
+      "timestamp": "2026-11-19T01:30:07.519394-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -133,13 +132,13 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-19T01:00:08.363521-03:00"
+      "timestamp": "2026-11-19T01:30:07.524238-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
       "status": "FAIL",
       "passed": false,
-      "message": "Inconsistencias editoriales: [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): No menciona el escenario 'Saroldi'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#claves-editorial-container): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Elizari) en duelos tácticos de Wanderers ('Elizari'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Spinelli) en duelos tácticos de Wanderers ('Spinelli'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Duarte) en duelos tácticos de Wanderers ('Duarte'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Término 'violeta' en duelos tácticos de Wanderers ('violeta'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Falta figura clave del rival 'Gonzalo Freitas'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Falta figura clave del rival 'Formiliano'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Elizari) en duelos tácticos de Wanderers ('Elizari'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Spinelli) en duelos tácticos de Wanderers ('Spinelli'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Duarte) en duelos tácticos de Wanderers ('Duarte'); [Coherencia Editorial y Anti-Contaminación de Rivales] news_digest.json: No menciona la Fecha 14 del Torneo Clausura; [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): No menciona al rival activo 'Montevideo Wanderers'; [Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool",
+      "message": "Inconsistencias editoriales: [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): No menciona el escenario 'Saroldi'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#claves-editorial-container): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Elizari) en duelos tácticos de Wanderers ('Elizari'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Spinelli) en duelos tácticos de Wanderers ('Spinelli'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Jugador de Defensor (Duarte) en duelos tácticos de Wanderers ('Duarte'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Término 'violeta' en duelos tácticos de Wanderers ('violeta'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Falta figura clave del rival 'Gonzalo Freitas'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#duelos-1x1-box): Falta figura clave del rival 'Formiliano'; [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Elizari) en duelos tácticos de Wanderers ('Elizari'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Spinelli) en duelos tácticos de Wanderers ('Spinelli'); [Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Duarte) en duelos tácticos de Wanderers ('Duarte'); [Coherencia Editorial y Anti-Contaminación de Rivales] rival_intelligence.json: Menos de 3 duelos tácticos 1x1 (0); [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting'); [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención a Franzini en editorial de Wanderers ('Franzini'); [Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): No menciona al rival activo 'Montevideo Wanderers'; [Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool",
       "details": {
         "errors": [
           "[Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#editorial-lead-article): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting')",
@@ -163,14 +162,14 @@
           "[Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Elizari) en duelos tácticos de Wanderers ('Elizari')",
           "[Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Spinelli) en duelos tácticos de Wanderers ('Spinelli')",
           "[Coherencia Editorial y Anti-Contaminación de Rivales] index.html (#rival-scout-box): Jugador de Defensor (Duarte) en duelos tácticos de Wanderers ('Duarte')",
-          "[Coherencia Editorial y Anti-Contaminación de Rivales] news_digest.json: No menciona la Fecha 14 del Torneo Clausura",
+          "[Coherencia Editorial y Anti-Contaminación de Rivales] rival_intelligence.json: Menos de 3 duelos tácticos 1x1 (0)",
           "[Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención no permitida a Defensor en editorial de Wanderers ('Defensor Sporting')",
           "[Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): Mención a Franzini en editorial de Wanderers ('Franzini')",
           "[Coherencia Editorial y Anti-Contaminación de Rivales] influencers_feed.json (item 0): No menciona al rival activo 'Montevideo Wanderers'",
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-19T01:00:08.380054-03:00"
+      "timestamp": "2026-11-19T01:30:07.534846-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -180,8 +179,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-19T01:00:08.446557-03:00"
+      "timestamp": "2026-11-19T01:30:07.602208-03:00"
     }
-  ],
-  "reparaciones_aplicadas": []
+  ]
 }
