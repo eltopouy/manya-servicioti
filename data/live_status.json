@@ -1,9 +1,9 @@
 {
-  "actualizado": "18/11/2026 21:15",
+  "actualizado": "18/11/2026 21:45",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 71.3,
+  "horas_desde_ultimo_partido": 71.8,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Wanderers vs Peñarol el Domingo 22/11/2026 a las 16:30 hs (Parque Alfredo Víctor Viera (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -392,6 +392,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Deportivo Maldonado",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 18,
+      "pe": 9,
+      "pp": 9,
+      "gf": 54,
+      "gc": 33,
+      "dg": "+21",
+      "pts": 63
+    },
+    {
+      "pos": 4,
       "equipo": "Liverpool",
       "es_penarol": false,
       "pj": 36,
@@ -404,7 +417,7 @@
       "pts": 62
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Nacional",
       "es_penarol": false,
       "pj": 36,
@@ -417,30 +430,17 @@
       "pts": 62
     },
     {
-      "pos": 5,
-      "equipo": "Deportivo Maldonado",
-      "es_penarol": false,
-      "pj": 35,
-      "pg": 17,
-      "pe": 9,
-      "pp": 9,
-      "gf": 52,
-      "gc": 32,
-      "dg": "+20",
-      "pts": 60
-    },
-    {
       "pos": 6,
       "equipo": "Racing",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 16,
-      "pe": 12,
+      "pe": 13,
       "pp": 7,
-      "gf": 44,
-      "gc": 30,
+      "gf": 47,
+      "gc": 33,
       "dg": "+14",
-      "pts": 60
+      "pts": 61
     },
     {
       "pos": 7,
@@ -485,27 +485,27 @@
       "pos": 10,
       "equipo": "Juventud",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 10,
-      "pe": 10,
+      "pe": 11,
       "pp": 15,
       "gf": 38,
       "gc": 45,
       "dg": "-7",
-      "pts": 40
+      "pts": 41
     },
     {
       "pos": 11,
       "equipo": "Defensor Sporting",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 9,
-      "pe": 12,
+      "pe": 13,
       "pp": 14,
-      "gf": 33,
-      "gc": 41,
+      "gf": 36,
+      "gc": 44,
       "dg": "-8",
-      "pts": 39
+      "pts": 40
     },
     {
       "pos": 12,
@@ -563,13 +563,13 @@
       "pos": 16,
       "equipo": "Danubio",
       "es_penarol": false,
-      "pj": 35,
+      "pj": 36,
       "pg": 6,
       "pe": 14,
-      "pp": 15,
-      "gf": 29,
-      "gc": 45,
-      "dg": "-16",
+      "pp": 16,
+      "gf": 30,
+      "gc": 47,
+      "dg": "-17",
       "pts": 32
     }
   ],
@@ -1100,6 +1100,19 @@
         },
         {
           "pos": 3,
+          "equipo": "Deportivo Maldonado",
+          "es_penarol": false,
+          "pj": 36,
+          "pg": 18,
+          "pe": 9,
+          "pp": 9,
+          "gf": 54,
+          "gc": 33,
+          "dg": "+21",
+          "pts": 63
+        },
+        {
+          "pos": 4,
           "equipo": "Liverpool",
           "es_penarol": false,
           "pj": 36,
@@ -1112,7 +1125,7 @@
           "pts": 62
         },
         {
-          "pos": 4,
+          "pos": 5,
           "equipo": "Nacional",
           "es_penarol": false,
           "pj": 36,
@@ -1125,30 +1138,17 @@
           "pts": 62
         },
         {
-          "pos": 5,
-          "equipo": "Deportivo Maldonado",
-          "es_penarol": false,
-          "pj": 35,
-          "pg": 17,
-          "pe": 9,
-          "pp": 9,
-          "gf": 52,
-          "gc": 32,
-          "dg": "+20",
-          "pts": 60
-        },
-        {
           "pos": 6,
           "equipo": "Racing",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 16,
-          "pe": 12,
+          "pe": 13,
           "pp": 7,
-          "gf": 44,
-          "gc": 30,
+          "gf": 47,
+          "gc": 33,
           "dg": "+14",
-          "pts": 60
+          "pts": 61
         },
         {
           "pos": 7,
@@ -1193,27 +1193,27 @@
           "pos": 10,
           "equipo": "Juventud",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 10,
-          "pe": 10,
+          "pe": 11,
           "pp": 15,
           "gf": 38,
           "gc": 45,
           "dg": "-7",
-          "pts": 40
+          "pts": 41
         },
         {
           "pos": 11,
           "equipo": "Defensor Sporting",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 9,
-          "pe": 12,
+          "pe": 13,
           "pp": 14,
-          "gf": 33,
-          "gc": 41,
+          "gf": 36,
+          "gc": 44,
           "dg": "-8",
-          "pts": 39
+          "pts": 40
         },
         {
           "pos": 12,
@@ -1271,13 +1271,13 @@
           "pos": 16,
           "equipo": "Danubio",
           "es_penarol": false,
-          "pj": 35,
+          "pj": 36,
           "pg": 6,
           "pe": 14,
-          "pp": 15,
-          "gf": 29,
-          "gc": 45,
-          "dg": "-16",
+          "pp": 16,
+          "gf": 30,
+          "gc": 47,
+          "dg": "-17",
           "pts": 32
         }
       ]
@@ -1356,13 +1356,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 19.7,
-    "sensacion_c": 19.3,
-    "viento_kmh": 13.7,
-    "humedad_pct": 75,
+    "temperatura_c": 18.8,
+    "sensacion_c": 18.8,
+    "viento_kmh": 11.9,
+    "humedad_pct": 81,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "18/11/2026 21:15"
+    "actualizado": "18/11/2026 21:45"
   },
   "minuto_a_minuto": [
     {
