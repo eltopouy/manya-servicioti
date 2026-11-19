@@ -184,5 +184,8 @@
       },
       "timestamp": "2026-11-19T19:00:10.920892-03:00"
     }
+  ],
+  "reparaciones_aplicadas": [
+    "Auto-ajuste: Saneado news_digest.json para no decir 'hoy juega' antes de fecha."
   ]
 }
