@@ -1,0 +1,56 @@
+{
+  "rival": "Cerro Largo",
+  "rival_oficial": "Cerro Largo Fútbol Club",
+  "rival_id": 48,
+  "rival_slug": "cerro_largo",
+  "escudo_rival": "assets/img/escudos/escudo_cerro_largo.webp",
+  "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
+  "resumen": {
+    "partidos_jugados": 30,
+    "ganados_penarol": 18,
+    "empatados": 8,
+    "perdidos_penarol": 4,
+    "goles_penarol": 58,
+    "goles_rival": 26,
+    "diferencia_goles": "+32",
+    "ventaja_victorias": "+14 partidos a favor del Decano",
+    "efectividad_pct": "68.9%"
+  },
+  "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-08-01",
+      "marcador": "Peñarol 3 - 0 Cerro Largo",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Abel Hernández (P) 34', Abel Hernández (P) 55' y Matías Arezo (P) 59'"
+    },
+    {
+      "fecha": "2026-05-11",
+      "marcador": "Peñarol 3 - 2 Cerro Largo",
+      "estadio": "Arquitecto Antonio Eleuterio Ubilla de Melo",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Diego Daguerre (C) 45+2', Facundo Batista (P) 60', Leandro Umpiérrez (P) 74', Federico Sellechchia (C) 83' y Abel Hernández (P) 87'"
+    },
+    {
+      "fecha": "2025-09-27",
+      "marcador": "Peñarol 3 - 1 Cerro Largo",
+      "estadio": "Centenario",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Lucas Correa (C) 21', Eric Remedi (P) 45+2', Maximiliano Silvera (P) 56' y Jaime Báez (P) 90+6'"
+    },
+    {
+      "fecha": "2025-06-01",
+      "marcador": "Peñarol 1 - 1 Cerro Largo",
+      "estadio": "Arquitecto Antonio Eleuterio Ubilla de Melo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Diego García (P) 25' y Facundo Bonifazi (C) 28'"
+    },
+    {
+      "fecha": "2025-03-30",
+      "marcador": "Peñarol 0 - 2 Cerro Largo",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Nicolás Bertocchi (C) 27' y Leandro Otormín (C) 75'"
+    }
+  ]
+}

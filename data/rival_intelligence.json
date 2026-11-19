@@ -1,139 +1,53 @@
 {
-  "generado_el": "19/11/2026 00:45",
-  "rival_nombre": "Montevideo Wanderers Fútbol Club",
-  "rival_corto": "Wanderers",
-  "rival_slug": "wanderers",
-  "escudo_oficial": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+  "generado_el": "19/11/2026 01:15",
+  "rival_nombre": "Cerro Largo Fútbol Club",
+  "rival_corto": "Cerro Largo",
+  "rival_slug": "cerro_largo",
+  "escudo_oficial": "assets/img/escudos/escudo_cerro_largo.webp",
   "escudo_auf_remoto": "",
   "datos_institucionales_auf": {
-    "fundacion": "15 de agosto de 1902",
-    "sede": "Prado, Montevideo, Uruguay",
-    "estadio_propio": "Parque Alfredo Víctor Viera (Prado)",
-    "capacidad": 15000,
-    "web_oficial": "https://mwfc.com.uy/",
+    "fundacion": "19 de noviembre de 2002",
+    "sede": "Melo, Cerro Largo, Uruguay",
+    "estadio_propio": "Estadio Municipal Arquitecto Antonio Eleuterio Ubilla (Melo)",
+    "capacidad": 10000,
+    "web_oficial": "https://auf.org.uy/",
     "redes": {}
   },
   "scouting_tactico": {
-    "entrenador": "Mathías Corujo",
-    "esquema_base": "4-2-3-1 de posesión y transiciones veloces",
-    "propuesta_juego": "Montevideo Wanderers, conducido tácticamente por Mathías Corujo, pregona un fútbol de buen trato de balón, salida limpia desde el fondo y posesión paciente para generar espacios entre líneas. Apuestan a la creatividad de Tabaré Viudez y Bruno Veglio en tres cuartos y al desequilibrio punzante de Matías Fonseca y Nicolás Royón en el área rival.",
+    "entrenador": "Danielo Núñez",
+    "esquema_base": "4-4-2 combativo y juego aéreo directo",
+    "propuesta_juego": "Equipo rocoso, de alta intensidad física, repliegue ordenado y contragolpes letales por las bandas.",
     "figuras_a_seguir": [
       {
-        "nombre": "Tabaré Viudez",
-        "rol": "Mediapunta / Extremo",
-        "analisis": "Talento individual, pausa y pegada refinada de tiro libre y media distancia. Exige marca escalonada."
+        "nombre": "Sebastián Sosa",
+        "rol": "Delantero centro",
+        "analisis": "Poderío físico y juego aéreo."
       },
       {
-        "nombre": "Bruno Veglio",
-        "rol": "Volante Mixto / Eje",
-        "analisis": "El termómetro del mediocampo bohemio: distribución con criterio, visión panorámica y llegada sorpresiva al área."
-      },
-      {
-        "nombre": "Matías Fonseca",
-        "rol": "Centrodelantero",
-        "analisis": "Goleador móvil que busca diagonales constantes a las espaldas de los centrales y define de primera intención."
-      },
-      {
-        "nombre": "Mauro Silveira",
+        "nombre": "Gino Santilli",
         "rol": "Arquero",
-        "analisis": "Seguridad bajo los tres palos, reflejos felinos en disparos a quemarropa y excelente pegada para el inicio del juego."
+        "analisis": "Gran respuesta en remates de media distancia."
       }
     ],
     "puntos_fuertes": [
-      "Fluidez en la circulación media y velocidad asociativa.",
-      "Orden táctico y solidez defensiva bajo la conducción de Mathías Corujo.",
-      "Peligro constante en balones detenidos y remates de media distancia de Viudez."
+      "Solidez en pelota quieta",
+      "Juego aéreo defensivo y ofensivo"
     ],
     "vulnerabilidades_a_explotar": [
-      "Sufren el repliegue defensivo si Peñarol recupera alto con Damián García y presiona la salida.",
-      "Espacios a espaldas de los laterales bohemios cuando se suman al circuito ofensivo.",
-      "Desventaja física en el juego aéreo ante la potencia de Guzmán Rodríguez y Maximiliano Silvera."
+      "Dificultades en repliegue ante transiciones rápidas"
     ]
   },
-  "duelos_tacticos_1x1": [
-    {
-      "id": "duelo_conductores",
-      "titulo": "El Duelo de Motores: Generación vs. Circulación",
-      "zona_campo": "Zona 14 / Mediocampo Central",
-      "penarol": {
-        "jugador": "Leonardo Fernández",
-        "dorsal": "8",
-        "rol": "Enganche / Conductor Aurinegro",
-        "atributos_clave": "Visión panorámica, pegada quirúrgica de balón parado y latigazo teledirigido."
-      },
-      "rival": {
-        "jugador": "Bruno Veglio",
-        "dorsal": "10",
-        "rol": "Eje y Gestor de Wanderers",
-        "atributos_clave": "Buen pie, distribución rápida y manejo de los ritmos del partido."
-      },
-      "clave_del_duelo": "El equipo que logre imponer el ritmo de su cerebro dominará el desarrollo. Si Leo Fernández tiene libertad para girar, romperá la zaga bohemia con pases filtrados."
-    },
-    {
-      "id": "duelo_goleador_zaga",
-      "titulo": "La Fiera del Gol vs. La Zaga Bohemia",
-      "zona_campo": "Área de Wanderers",
-      "penarol": {
-        "jugador": "Maximiliano Silvera",
-        "dorsal": "11",
-        "rol": "Centrodelantero de Presión",
-        "atributos_clave": "Presión asfixiante sobre la salida rival, diagonales y olfato goleador."
-      },
-      "rival": {
-        "jugador": "Emiliano García & Zaga Bohemia",
-        "dorsal": "2 / 3",
-        "rol": "Defensa Central de Wanderers",
-        "atributos_clave": "Oficio, anticipo terrestre y cobertura de espacios reducidos."
-      },
-      "clave_del_duelo": "Silvera deberá presionar la salida de los centrales de Pacheco para provocar errores no forzados en salida corta."
-    },
-    {
-      "id": "duelo_bandas_viera",
-      "titulo": "Desborde por Fuera vs. Cobertura de Laterales",
-      "zona_campo": "Bandas / Cancha del Parque Viera",
-      "penarol": {
-        "jugador": "Javier Cabrera & Jaime Báez",
-        "dorsal": "7 / 23",
-        "rol": "Extremos Aurinegros",
-        "atributos_clave": "Cambio de marcha en 1x1, profundidad y centros rasantes venenosos atrás."
-      },
-      "rival": {
-        "jugador": "Laterales de Wanderers",
-        "dorsal": "4 / 6",
-        "rol": "Laterales con proyección",
-        "atributos_clave": "Vocación ofensiva, pero espacios abiertos a sus espaldas en transición rápida."
-      },
-      "clave_del_duelo": "La cancha rápida favorece las transiciones veloces de Cabrera y Báez para desarticular la última línea bohemia."
-    },
-    {
-      "id": "duelo_cerrojo_decano",
-      "titulo": "La Muralla Decana vs. La Movilidad de Fonseca",
-      "zona_campo": "Área Aurinegra",
-      "penarol": {
-        "jugador": "Guzmán Rodríguez & Washington Aguerre",
-        "dorsal": "4 / 1",
-        "rol": "Zaguero Central y Arquero Decano",
-        "atributos_clave": "Fuerza aérea, anticipación impecable y solidez bajo los tres palos."
-      },
-      "rival": {
-        "jugador": "Matías Fonseca / Nicolás Royón",
-        "dorsal": "9 / 18",
-        "rol": "Delanteros de Wanderers",
-        "atributos_clave": "Movilidad constante, desmarques de apoyo y remate instantáneo."
-      },
-      "clave_del_duelo": "Neutralizar los centros hacia el corazón del área y cortar los circuitos con Viudez antes de que el balón llegue al área."
-    }
-  ],
+  "duelos_tacticos_1x1": [],
   "historial_certificacion_1891": {
-    "partidos_jugados": 396,
-    "ganados_penarol": 207,
-    "empatados": 113,
-    "perdidos_penarol": 76,
-    "goles_penarol": 702,
-    "goles_rival": 395,
-    "ventaja_victorias": "+131 partidos a favor del Decano",
-    "diferencia_goles": "+307",
-    "efectividad_pct": "61.8%"
+    "partidos_jugados": 30,
+    "ganados_penarol": 18,
+    "empatados": 8,
+    "perdidos_penarol": 4,
+    "goles_penarol": 58,
+    "goles_rival": 26,
+    "ventaja_victorias": "+14 partidos a favor del Decano",
+    "diferencia_goles": "+32",
+    "efectividad_pct": "68.9%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",
