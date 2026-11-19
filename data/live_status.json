@@ -1,9 +1,9 @@
 {
-  "actualizado": "18/11/2026 22:15",
+  "actualizado": "18/11/2026 22:37",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 72.3,
+  "horas_desde_ultimo_partido": 72.6,
   "rival_activo_slug": "wanderers",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "⚡ ¡PRÓXIMO PARTIDO! Wanderers vs Peñarol el Domingo 22/11/2026 a las 16:30 hs (Parque Alfredo Víctor Viera (Montevideo)) • VTV Plus / Disney+ Premium.",
@@ -1362,7 +1362,7 @@
     "humedad_pct": 82,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "18/11/2026 22:15"
+    "actualizado": "18/11/2026 22:37"
   },
   "minuto_a_minuto": [
     {
