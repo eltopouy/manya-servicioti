@@ -1,12 +1,12 @@
 {
-  "actualizado": "19/11/2026 17:15",
+  "actualizado": "19/11/2026 17:45",
   "fase_partido": "EN_VIVO",
   "estado_ciclo_vida": "EN_VIVO",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 91.3,
+  "horas_desde_ultimo_partido": 91.8,
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "🔴 EN VIVO AHORA: Peñarol 2 - 0 Cerro Largo (45')",
+  "alerta_banner": "🔴 EN VIVO AHORA: Peñarol 2 - 0 Cerro Largo (56')",
   "partido_activo": {
     "event_id": "401934686",
     "nombre": "Peñarol vs Cerro Largo",
@@ -32,8 +32,8 @@
       "goles": "0",
       "es_penarol": false
     },
-    "minuto_reloj": "45'",
-    "tiempo_periodo": 1,
+    "minuto_reloj": "56'",
+    "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
     "tv": "VTV Plus / Disney+ Premium",
@@ -76,8 +76,8 @@
       "goles": "0",
       "es_penarol": false
     },
-    "minuto_reloj": "45'",
-    "tiempo_periodo": 1,
+    "minuto_reloj": "56'",
+    "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
     "tv": "VTV Plus / Disney+ Premium",
@@ -175,8 +175,8 @@
         "goles": "0",
         "es_penarol": false
       },
-      "minuto_reloj": "45'",
-      "tiempo_periodo": 1,
+      "minuto_reloj": "56'",
+      "tiempo_periodo": 2,
       "completado": false,
       "state": "in",
       "tv": "VTV Plus / Disney+ Premium",
@@ -1387,13 +1387,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 23.3,
-    "sensacion_c": 23.4,
-    "viento_kmh": 10.8,
-    "humedad_pct": 60,
+    "temperatura_c": 22.6,
+    "sensacion_c": 23.2,
+    "viento_kmh": 8.7,
+    "humedad_pct": 64,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "19/11/2026 17:15"
+    "actualizado": "19/11/2026 17:45"
   },
   "minuto_a_minuto": [
     {
