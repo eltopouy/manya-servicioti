@@ -1,12 +1,12 @@
 {
-  "actualizado": "19/11/2026 17:45",
+  "actualizado": "19/11/2026 18:15",
   "fase_partido": "EN_VIVO",
   "estado_ciclo_vida": "EN_VIVO",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 91.8,
+  "horas_desde_ultimo_partido": 92.3,
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "🔴 EN VIVO AHORA: Peñarol 2 - 0 Cerro Largo (56')",
+  "alerta_banner": "🔴 EN VIVO AHORA: Peñarol 3 - 1 Cerro Largo (87')",
   "partido_activo": {
     "event_id": "401934686",
     "nombre": "Peñarol vs Cerro Largo",
@@ -20,7 +20,7 @@
       "abreviatura": "PEN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "2",
+      "goles": "3",
       "es_penarol": true
     },
     "visitante": {
@@ -29,10 +29,10 @@
       "abreviatura": "CERR",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9902.png",
       "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
-    "minuto_reloj": "56'",
+    "minuto_reloj": "87'",
     "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
@@ -64,7 +64,7 @@
       "abreviatura": "PEN",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "2",
+      "goles": "3",
       "es_penarol": true
     },
     "visitante": {
@@ -73,10 +73,10 @@
       "abreviatura": "CERR",
       "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9902.png",
       "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
-      "goles": "0",
+      "goles": "1",
       "es_penarol": false
     },
-    "minuto_reloj": "56'",
+    "minuto_reloj": "87'",
     "tiempo_periodo": 2,
     "completado": false,
     "state": "in",
@@ -163,7 +163,7 @@
         "abreviatura": "PEN",
         "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
         "escudo": "assets/img/escudos/escudo_penarol.webp",
-        "goles": "2",
+        "goles": "3",
         "es_penarol": true
       },
       "visitante": {
@@ -172,10 +172,10 @@
         "abreviatura": "CERR",
         "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9902.png",
         "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
-        "goles": "0",
+        "goles": "1",
         "es_penarol": false
       },
-      "minuto_reloj": "56'",
+      "minuto_reloj": "87'",
       "tiempo_periodo": 2,
       "completado": false,
       "state": "in",
@@ -1387,13 +1387,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 22.6,
-    "sensacion_c": 23.2,
-    "viento_kmh": 8.7,
-    "humedad_pct": 64,
+    "temperatura_c": 21.9,
+    "sensacion_c": 22.9,
+    "viento_kmh": 6.7,
+    "humedad_pct": 69,
     "condicion": "Cielo despejado sobre Bañados de Carrasco",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "19/11/2026 17:45"
+    "actualizado": "19/11/2026 18:15"
   },
   "minuto_a_minuto": [
     {
