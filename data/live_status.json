@@ -1,18 +1,36 @@
 {
-  "actualizado": "20/11/2026 15:45",
+  "actualizado": "20/11/2026 16:15",
+  "schema_version": "10.0",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 21.3,
+  "horas_desde_ultimo_partido": 21.8,
+  "rival_activo_nombre": "Cerro Largo",
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • Crónica post-partido y análisis táctico en primer plano.",
+  "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • 🏆 CAMPEÓN DE LA TABLA ANUAL (69 pts) • ⚽ Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+  "resumen_temporada": {
+    "penarol_anual_pts": 69,
+    "penarol_anual_pos": 1,
+    "penarol_anual_pj": 37,
+    "penarol_anual_dg": "+27",
+    "penarol_clausura_pts": 26,
+    "penarol_clausura_pos": 4,
+    "penarol_clausura_pj": 15,
+    "campeon_anual": true,
+    "libertadores_2027": "Clasificado directo a Fase de Grupos (Uruguay 1)",
+    "definicion_uruguayo": {
+      "semifinal": "Racing (Campeón Apertura) vs Liverpool (Campeón Clausura)",
+      "fecha_semifinal": "Domingo 29/11/2026 (tentativa)",
+      "finales": "Peñarol (Campeón Tabla Anual) vs Ganador Semifinal — Ida: Jueves 3/12 • Vuelta: Domingo 6/12"
+    }
+  },
   "partido_activo": {
     "event_id": "401934686",
     "nombre": "Peñarol vs Cerro Largo",
     "fecha_iso": "2026-11-19T16:30:00-03:00",
     "fecha_legible": "Jueves 19/11/2026 16:30 hs",
-    "torneo": "Campeonato Uruguayo • Clausura",
+    "torneo": "Campeonato Uruguayo • Torneo Clausura • Fecha 15",
     "estadio": "Estadio Campeón del Siglo",
     "local": {
       "id": "2683",
@@ -38,40 +56,121 @@
     "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
     "es_hoy": false,
+    "id_1891": 32174,
+    "fase_1891": "Fecha 15",
+    "juez": "Tejera, Gustavo",
+    "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+    "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
+    "dt_rival": "Bruno Silva",
+    "video_youtube_id": "0BU8HYWYBiA",
+    "video_youtube_url": "https://www.youtube.com/watch?v=0BU8HYWYBiA",
+    "alineacion_1891": [
+      "Washington Aguerre",
+      "Ignacio Alegre",
+      "Nahuel Herrera",
+      "Germán Pezzella",
+      "Maximiliano Olivera",
+      "Eric Remedi",
+      "Eduardo Darias",
+      "Javier Cabrera",
+      "Leandro Umpiérrez",
+      "Leonel Jaime",
+      "Matías Arezo"
+    ],
+    "cambios_1891": [
+      {
+        "minuto": "66'",
+        "entra": "Lucas Ferreira",
+        "sale": "Nahuel Herrera"
+      },
+      {
+        "minuto": "76'",
+        "entra": "Jesús Trindade",
+        "sale": "Germán Pezzella"
+      },
+      {
+        "minuto": "46'",
+        "entra": "Thiago Espinosa",
+        "sale": "Maximiliano Olivera"
+      },
+      {
+        "minuto": "66'",
+        "entra": "Nicolás Fernández",
+        "sale": "Eric Remedi"
+      },
+      {
+        "minuto": "66'",
+        "entra": "Luis Angulo",
+        "sale": "Javier Cabrera"
+      }
+    ],
     "fase": "POST_PARTIDO",
-    "detalles_avanzados": {}
+    "detalles_avanzados": {
+      "goles": [
+        {
+          "minuto": "28'",
+          "texto": "Nahuel Herrera (Peñarol) Goal at 28'",
+          "equipo": "Peñarol"
+        },
+        {
+          "minuto": "32'",
+          "texto": "Cristian Jaime (Peñarol) Goal at 32'",
+          "equipo": "Peñarol"
+        },
+        {
+          "minuto": "70'",
+          "texto": "Douglas Arezo (Peñarol) Goal at 70'",
+          "equipo": "Peñarol"
+        }
+      ],
+      "tarjetas": [],
+      "estadisticas": {},
+      "titulares_penarol": [],
+      "suplentes_penarol": [],
+      "titulares_rival": []
+    }
   },
   "proximo_partido": {
-    "fecha_numero": 15,
-    "nombre": "Wanderers vs Peñarol",
-    "fecha_iso": "2026-11-22T16:30:00-03:00",
-    "fecha_legible": "Domingo 22/11/2026 16:30 hs",
-    "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 15)",
-    "estadio": "Parque Alfredo Víctor Viera (Montevideo)",
+    "event_id": "uf2026_final_ida",
+    "es_definicion_final": true,
+    "nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
+    "fecha_iso": "2026-12-03T20:00:00-03:00",
+    "fecha_legible": "Jueves 03/12/2026 • Horario a confirmar AUF",
+    "torneo": "Campeonato Uruguayo 2026 • Gran Final (Ida y Vuelta)",
+    "estadio": "Estadio Campeón del Siglo / Sede a sortear",
     "local": {
-      "nombre": "Wanderers",
-      "abreviatura": "WAN",
-      "goles": "-",
-      "es_penarol": false,
-      "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp"
-    },
-    "visitante": {
+      "id": "2683",
       "nombre": "Peñarol",
       "abreviatura": "CAP",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
       "goles": "-",
-      "es_penarol": true,
-      "escudo": "assets/img/escudos/escudo_penarol.webp"
+      "es_penarol": true
+    },
+    "visitante": {
+      "id": "tbd",
+      "nombre": "Ganador Racing / Liverpool",
+      "abreviatura": "SEM",
+      "escudo": "assets/img/escudos/escudo_auf.svg",
+      "goles": "-",
+      "es_penarol": false
     },
     "tv": "VTV Plus / Disney+ Premium",
     "completado": false,
-    "es_hoy": false
+    "state": "pre",
+    "es_hoy": false,
+    "nota_definicion": "Peñarol conquistó la Tabla Anual con 69 puntos, aseguró fase de grupos de Copa Libertadores 2027 y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y Liverpool (Clausura).",
+    "semifinal": {
+      "equipos": "Racing vs Liverpool",
+      "fecha_tentativa": "Domingo 29/11/2026",
+      "contexto": "Campeón Apertura (Racing) vs Campeón Clausura (Liverpool)"
+    }
   },
   "ultimo_partido": {
     "event_id": "401934686",
     "nombre": "Peñarol vs Cerro Largo",
     "fecha_iso": "2026-11-19T16:30:00-03:00",
     "fecha_legible": "Jueves 19/11/2026 16:30 hs",
-    "torneo": "Campeonato Uruguayo • Clausura",
+    "torneo": "Campeonato Uruguayo • Torneo Clausura • Fecha 15",
     "estadio": "Estadio Campeón del Siglo",
     "local": {
       "id": "2683",
@@ -96,7 +195,55 @@
     "completado": true,
     "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
-    "es_hoy": false
+    "es_hoy": false,
+    "id_1891": 32174,
+    "fase_1891": "Fecha 15",
+    "juez": "Tejera, Gustavo",
+    "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+    "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
+    "dt_rival": "Bruno Silva",
+    "video_youtube_id": "0BU8HYWYBiA",
+    "video_youtube_url": "https://www.youtube.com/watch?v=0BU8HYWYBiA",
+    "alineacion_1891": [
+      "Washington Aguerre",
+      "Ignacio Alegre",
+      "Nahuel Herrera",
+      "Germán Pezzella",
+      "Maximiliano Olivera",
+      "Eric Remedi",
+      "Eduardo Darias",
+      "Javier Cabrera",
+      "Leandro Umpiérrez",
+      "Leonel Jaime",
+      "Matías Arezo"
+    ],
+    "cambios_1891": [
+      {
+        "minuto": "66'",
+        "entra": "Lucas Ferreira",
+        "sale": "Nahuel Herrera"
+      },
+      {
+        "minuto": "76'",
+        "entra": "Jesús Trindade",
+        "sale": "Germán Pezzella"
+      },
+      {
+        "minuto": "46'",
+        "entra": "Thiago Espinosa",
+        "sale": "Maximiliano Olivera"
+      },
+      {
+        "minuto": "66'",
+        "entra": "Nicolás Fernández",
+        "sale": "Eric Remedi"
+      },
+      {
+        "minuto": "66'",
+        "entra": "Luis Angulo",
+        "sale": "Javier Cabrera"
+      }
+    ]
   },
   "ultimos_resultados": [
     {
@@ -104,7 +251,7 @@
       "nombre": "Peñarol vs Cerro Largo",
       "fecha_iso": "2026-11-19T16:30:00-03:00",
       "fecha_legible": "Jueves 19/11/2026 16:30 hs",
-      "torneo": "Campeonato Uruguayo • Clausura",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura • Fecha 15",
       "estadio": "Estadio Campeón del Siglo",
       "local": {
         "id": "2683",
@@ -129,290 +276,270 @@
       "completado": true,
       "state": "post",
       "tv": "VTV Plus / Disney+ Premium",
+      "es_hoy": false,
+      "id_1891": 32174,
+      "fase_1891": "Fecha 15",
+      "juez": "Tejera, Gustavo",
+      "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+      "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
+      "dt_rival": "Bruno Silva",
+      "video_youtube_id": "0BU8HYWYBiA",
+      "video_youtube_url": "https://www.youtube.com/watch?v=0BU8HYWYBiA",
+      "alineacion_1891": [
+        "Washington Aguerre",
+        "Ignacio Alegre",
+        "Nahuel Herrera",
+        "Germán Pezzella",
+        "Maximiliano Olivera",
+        "Eric Remedi",
+        "Eduardo Darias",
+        "Javier Cabrera",
+        "Leandro Umpiérrez",
+        "Leonel Jaime",
+        "Matías Arezo"
+      ],
+      "cambios_1891": [
+        {
+          "minuto": "66'",
+          "entra": "Lucas Ferreira",
+          "sale": "Nahuel Herrera"
+        },
+        {
+          "minuto": "76'",
+          "entra": "Jesús Trindade",
+          "sale": "Germán Pezzella"
+        },
+        {
+          "minuto": "46'",
+          "entra": "Thiago Espinosa",
+          "sale": "Maximiliano Olivera"
+        },
+        {
+          "minuto": "66'",
+          "entra": "Nicolás Fernández",
+          "sale": "Eric Remedi"
+        },
+        {
+          "minuto": "66'",
+          "entra": "Luis Angulo",
+          "sale": "Javier Cabrera"
+        }
+      ]
+    },
+    {
+      "event_id": "401933376",
+      "nombre": "Defensor Sporting vs Peñarol",
+      "fecha_iso": "2026-11-15T20:00:00-03:00",
+      "fecha_legible": "Domingo 15/11/2026 20:00 hs",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura",
+      "estadio": "Estadio Luis Franzini",
+      "local": {
+        "id": "1007",
+        "nombre": "Defensor Sporting",
+        "abreviatura": "DSC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1007.png",
+        "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
+        "goles": "1",
+        "es_penarol": false
+      },
+      "visitante": {
+        "id": "2683",
+        "nombre": "Peñarol",
+        "abreviatura": "PEN",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
+        "goles": "1",
+        "es_penarol": true
+      },
+      "minuto_reloj": "90'+6'",
+      "tiempo_periodo": 2,
+      "completado": true,
+      "state": "post",
+      "tv": "VTV Plus / Disney+ Premium",
+      "es_hoy": false
+    },
+    {
+      "event_id": "401931258",
+      "nombre": "Peñarol vs Montevideo Wanderers",
+      "fecha_iso": "2026-10-31T16:30:00-03:00",
+      "fecha_legible": "Sábado 31/10/2026 16:30 hs",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura",
+      "estadio": "Estadio Saroldi",
+      "local": {
+        "id": "2683",
+        "nombre": "Peñarol",
+        "abreviatura": "PEN",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
+        "goles": "1",
+        "es_penarol": true
+      },
+      "visitante": {
+        "id": "5501",
+        "nombre": "Montevideo Wanderers",
+        "abreviatura": "WAN",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5501.png",
+        "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+        "goles": "1",
+        "es_penarol": false
+      },
+      "minuto_reloj": "90'+8'",
+      "tiempo_periodo": 2,
+      "completado": true,
+      "state": "post",
+      "tv": "VTV Plus / Disney+ Premium",
+      "es_hoy": false
+    },
+    {
+      "event_id": "401930317",
+      "nombre": "Juventud vs Peñarol",
+      "fecha_iso": "2026-10-23T20:00:00-03:00",
+      "fecha_legible": "Viernes 23/10/2026 20:00 hs",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura",
+      "estadio": "Estadio Centenario",
+      "local": {
+        "id": "8416",
+        "nombre": "Juventud",
+        "abreviatura": "JUV",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png",
+        "escudo": "assets/img/escudos/escudo_juventud.webp",
+        "goles": "0",
+        "es_penarol": false
+      },
+      "visitante": {
+        "id": "2683",
+        "nombre": "Peñarol",
+        "abreviatura": "PEN",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
+        "goles": "0",
+        "es_penarol": true
+      },
+      "minuto_reloj": "90'+6'",
+      "tiempo_periodo": 2,
+      "completado": true,
+      "state": "post",
+      "tv": "VTV Plus / Disney+ Premium",
+      "es_hoy": false
+    },
+    {
+      "event_id": "401929259",
+      "nombre": "Liverpool vs Peñarol",
+      "fecha_iso": "2026-10-18T18:30:00-03:00",
+      "fecha_legible": "Domingo 18/10/2026 18:30 hs",
+      "torneo": "Campeonato Uruguayo • Torneo Clausura",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "local": {
+        "id": "5492",
+        "nombre": "Liverpool",
+        "abreviatura": "LIV",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png",
+        "escudo": "assets/img/escudos/escudo_liverpool.webp",
+        "goles": "1",
+        "es_penarol": false
+      },
+      "visitante": {
+        "id": "2683",
+        "nombre": "Peñarol",
+        "abreviatura": "PEN",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
+        "goles": "0",
+        "es_penarol": true
+      },
+      "minuto_reloj": "90'+3'",
+      "tiempo_periodo": 2,
+      "completado": true,
+      "state": "post",
+      "tv": "VTV Plus / Disney+ Premium",
       "es_hoy": false
     }
   ],
   "proximos_partidos": [
     {
-      "fecha_numero": 15,
-      "nombre": "Wanderers vs Peñarol",
-      "fecha_iso": "2026-11-22T16:30:00-03:00",
-      "fecha_legible": "Domingo 22/11/2026 16:30 hs",
-      "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 15)",
-      "estadio": "Parque Alfredo Víctor Viera (Montevideo)",
+      "event_id": "uf2026_final_ida",
+      "es_definicion_final": true,
+      "nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
+      "fecha_iso": "2026-12-03T20:00:00-03:00",
+      "fecha_legible": "Jueves 03/12/2026 • Horario a confirmar AUF",
+      "torneo": "Campeonato Uruguayo 2026 • Gran Final (Ida y Vuelta)",
+      "estadio": "Estadio Campeón del Siglo / Sede a sortear",
       "local": {
-        "nombre": "Wanderers",
-        "abreviatura": "WAN",
-        "goles": "-",
-        "es_penarol": false,
-        "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp"
-      },
-      "visitante": {
+        "id": "2683",
         "nombre": "Peñarol",
         "abreviatura": "CAP",
+        "escudo": "assets/img/escudos/escudo_penarol.webp",
         "goles": "-",
-        "es_penarol": true,
-        "escudo": "assets/img/escudos/escudo_penarol.webp"
+        "es_penarol": true
+      },
+      "visitante": {
+        "id": "tbd",
+        "nombre": "Ganador Racing / Liverpool",
+        "abreviatura": "SEM",
+        "escudo": "assets/img/escudos/escudo_auf.svg",
+        "goles": "-",
+        "es_penarol": false
       },
       "tv": "VTV Plus / Disney+ Premium",
       "completado": false,
-      "es_hoy": false
+      "state": "pre",
+      "es_hoy": false,
+      "nota_definicion": "Peñarol conquistó la Tabla Anual con 69 puntos, aseguró fase de grupos de Copa Libertadores 2027 y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y Liverpool (Clausura).",
+      "semifinal": {
+        "equipos": "Racing vs Liverpool",
+        "fecha_tentativa": "Domingo 29/11/2026",
+        "contexto": "Campeón Apertura (Racing) vs Campeón Clausura (Liverpool)"
+      }
     }
   ],
-  "torneo_activo_id": "clausura",
+  "torneo_activo_id": "anual",
   "tabla_posiciones": [
     {
       "pos": 1,
-      "equipo": "Liverpool",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 10,
-      "pe": 3,
-      "pp": 1,
-      "gf": 24,
-      "gc": 9,
-      "dg": "+15",
-      "pts": 33
-    },
-    {
-      "pos": 2,
-      "equipo": "Montevideo City Torque",
-      "es_penarol": false,
-      "pj": 15,
-      "pg": 9,
-      "pe": 3,
-      "pp": 3,
-      "gf": 29,
-      "gc": 17,
-      "dg": "+12",
-      "pts": 30
-    },
-    {
-      "pos": 3,
-      "equipo": "Nacional",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 8,
-      "pe": 3,
-      "pp": 3,
-      "gf": 20,
-      "gc": 14,
-      "dg": "+6",
-      "pts": 27
-    },
-    {
-      "pos": 4,
       "equipo": "Peñarol",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
       "es_penarol": true,
-      "pj": 15,
-      "pg": 7,
-      "pe": 6,
-      "pp": 2,
-      "gf": 21,
-      "gc": 10,
-      "dg": "+11",
-      "pts": 26
-    },
-    {
-      "pos": 5,
-      "equipo": "Deportivo Maldonado",
-      "es_penarol": false,
-      "pj": 15,
-      "pg": 6,
-      "pe": 4,
-      "pp": 5,
-      "gf": 18,
-      "gc": 12,
-      "dg": "+6",
-      "pts": 22
-    },
-    {
-      "pos": 6,
-      "equipo": "Progreso",
-      "es_penarol": false,
-      "pj": 15,
-      "pg": 6,
-      "pe": 3,
-      "pp": 6,
-      "gf": 16,
-      "gc": 18,
-      "dg": "-2",
-      "pts": 21
-    },
-    {
-      "pos": 7,
-      "equipo": "Cerro",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 6,
-      "pe": 3,
-      "pp": 5,
-      "gf": 16,
-      "gc": 19,
-      "dg": "-3",
-      "pts": 21
-    },
-    {
-      "pos": 8,
-      "equipo": "Racing (Montevideo)",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 5,
-      "pe": 5,
-      "pp": 4,
-      "gf": 20,
-      "gc": 16,
-      "dg": "+4",
-      "pts": 20
-    },
-    {
-      "pos": 9,
-      "equipo": "Montevideo Wanderers",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 5,
-      "pe": 4,
-      "pp": 5,
-      "gf": 16,
-      "gc": 20,
-      "dg": "-4",
-      "pts": 19
-    },
-    {
-      "pos": 10,
-      "equipo": "Juventud",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 4,
-      "pe": 6,
-      "pp": 4,
-      "gf": 13,
-      "gc": 12,
-      "dg": "+1",
-      "pts": 18
-    },
-    {
-      "pos": 11,
-      "equipo": "Boston River",
-      "es_penarol": false,
-      "pj": 15,
-      "pg": 5,
-      "pe": 3,
+      "pj": 37,
+      "pg": 20,
+      "pe": 10,
       "pp": 7,
-      "gf": 16,
-      "gc": 18,
-      "dg": "-2",
-      "pts": 18
-    },
-    {
-      "pos": 12,
-      "equipo": "Albion FC",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 4,
-      "pe": 2,
-      "pp": 8,
-      "gf": 16,
-      "gc": 21,
-      "dg": "-5",
-      "pts": 14
-    },
-    {
-      "pos": 13,
-      "equipo": "Defensor Sporting",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 3,
-      "pe": 4,
-      "pp": 7,
-      "gf": 17,
-      "gc": 24,
-      "dg": "-7",
-      "pts": 13
-    },
-    {
-      "pos": 14,
-      "equipo": "Central Español Fútbol Club",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 3,
-      "pe": 2,
-      "pp": 9,
-      "gf": 9,
-      "gc": 22,
-      "dg": "-13",
-      "pts": 11
-    },
-    {
-      "pos": 15,
-      "equipo": "Danubio",
-      "es_penarol": false,
-      "pj": 14,
-      "pg": 2,
-      "pe": 4,
-      "pp": 8,
-      "gf": 8,
-      "gc": 17,
-      "dg": "-9",
-      "pts": 10
-    },
-    {
-      "pos": 16,
-      "equipo": "Cerro Largo",
-      "es_penarol": false,
-      "pj": 15,
-      "pg": 1,
-      "pe": 7,
-      "pp": 7,
-      "gf": 12,
-      "gc": 22,
-      "dg": "-10",
-      "pts": 10
-    }
-  ],
-  "tabla_anual": [
-    {
-      "pos": 1,
-      "equipo": "Peñarol",
-      "es_penarol": true,
-      "pj": 35,
-      "pg": 19,
-      "pe": 9,
-      "pp": 7,
-      "gf": 53,
+      "gf": 56,
       "gc": 29,
-      "dg": "+24",
-      "pts": 66
+      "dg": "+27",
+      "pts": 69
     },
     {
       "pos": 2,
       "equipo": "Montevideo City Torque",
+      "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 37,
       "pg": 19,
-      "pe": 7,
+      "pe": 8,
       "pp": 10,
-      "gf": 61,
-      "gc": 43,
+      "gf": 62,
+      "gc": 44,
       "dg": "+18",
-      "pts": 64
+      "pts": 65
     },
     {
       "pos": 3,
       "equipo": "Deportivo Maldonado",
+      "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 37,
       "pg": 18,
       "pe": 9,
-      "pp": 9,
+      "pp": 10,
       "gf": 54,
-      "gc": 33,
-      "dg": "+21",
+      "gc": 34,
+      "dg": "+20",
       "pts": 63
     },
     {
       "pos": 4,
       "equipo": "Liverpool",
+      "escudo": "assets/img/escudos/escudo_liverpool.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 17,
@@ -426,6 +553,7 @@
     {
       "pos": 5,
       "equipo": "Nacional",
+      "escudo": "assets/img/escudos/escudo_nacional.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 19,
@@ -439,6 +567,7 @@
     {
       "pos": 6,
       "equipo": "Racing",
+      "escudo": "assets/img/escudos/escudo_racing.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 16,
@@ -452,6 +581,7 @@
     {
       "pos": 7,
       "equipo": "Montevideo Wanderers",
+      "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 15,
@@ -465,6 +595,7 @@
     {
       "pos": 8,
       "equipo": "Albion",
+      "escudo": "assets/img/escudos/escudo_albion.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 13,
@@ -478,6 +609,7 @@
     {
       "pos": 9,
       "equipo": "Central Español",
+      "escudo": "assets/img/escudos/escudo_central_espanol.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 12,
@@ -491,6 +623,7 @@
     {
       "pos": 10,
       "equipo": "Juventud",
+      "escudo": "assets/img/escudos/escudo_juventud.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 10,
@@ -504,6 +637,7 @@
     {
       "pos": 11,
       "equipo": "Defensor Sporting",
+      "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 9,
@@ -516,7 +650,22 @@
     },
     {
       "pos": 12,
+      "equipo": "Boston River",
+      "escudo": "assets/img/escudos/escudo_boston_river.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 11,
+      "pe": 7,
+      "pp": 19,
+      "gf": 35,
+      "gc": 48,
+      "dg": "-13",
+      "pts": 40
+    },
+    {
+      "pos": 13,
       "equipo": "Cerro",
+      "escudo": "assets/img/escudos/escudo_cerro.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 11,
@@ -528,47 +677,263 @@
       "pts": 39
     },
     {
-      "pos": 13,
+      "pos": 14,
       "equipo": "Cerro Largo",
+      "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 37,
       "pg": 9,
       "pe": 11,
-      "pp": 16,
+      "pp": 17,
       "gf": 35,
-      "gc": 43,
-      "dg": "-8",
+      "gc": 46,
+      "dg": "-11",
       "pts": 38
-    },
-    {
-      "pos": 14,
-      "equipo": "Boston River",
-      "es_penarol": false,
-      "pj": 36,
-      "pg": 10,
-      "pe": 7,
-      "pp": 19,
-      "gf": 34,
-      "gc": 48,
-      "dg": "-14",
-      "pts": 37
     },
     {
       "pos": 15,
       "equipo": "Progreso",
+      "escudo": "assets/img/escudos/escudo_progreso.webp",
       "es_penarol": false,
-      "pj": 36,
+      "pj": 37,
       "pg": 10,
-      "pe": 6,
+      "pe": 7,
       "pp": 20,
-      "gf": 33,
-      "gc": 51,
+      "gf": 34,
+      "gc": 52,
       "dg": "-18",
-      "pts": 36
+      "pts": 37
     },
     {
       "pos": 16,
       "equipo": "Danubio",
+      "escudo": "assets/img/escudos/escudo_danubio.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 6,
+      "pe": 14,
+      "pp": 16,
+      "gf": 30,
+      "gc": 47,
+      "dg": "-17",
+      "pts": 32
+    }
+  ],
+  "tabla_anual": [
+    {
+      "pos": 1,
+      "equipo": "Peñarol",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
+      "es_penarol": true,
+      "pj": 37,
+      "pg": 20,
+      "pe": 10,
+      "pp": 7,
+      "gf": 56,
+      "gc": 29,
+      "dg": "+27",
+      "pts": 69
+    },
+    {
+      "pos": 2,
+      "equipo": "Montevideo City Torque",
+      "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 19,
+      "pe": 8,
+      "pp": 10,
+      "gf": 62,
+      "gc": 44,
+      "dg": "+18",
+      "pts": 65
+    },
+    {
+      "pos": 3,
+      "equipo": "Deportivo Maldonado",
+      "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 18,
+      "pe": 9,
+      "pp": 10,
+      "gf": 54,
+      "gc": 34,
+      "dg": "+20",
+      "pts": 63
+    },
+    {
+      "pos": 4,
+      "equipo": "Liverpool",
+      "escudo": "assets/img/escudos/escudo_liverpool.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 17,
+      "pe": 11,
+      "pp": 8,
+      "gf": 49,
+      "gc": 32,
+      "dg": "+17",
+      "pts": 62
+    },
+    {
+      "pos": 5,
+      "equipo": "Nacional",
+      "escudo": "assets/img/escudos/escudo_nacional.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 19,
+      "pe": 5,
+      "pp": 12,
+      "gf": 54,
+      "gc": 43,
+      "dg": "+11",
+      "pts": 62
+    },
+    {
+      "pos": 6,
+      "equipo": "Racing",
+      "escudo": "assets/img/escudos/escudo_racing.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 16,
+      "pe": 13,
+      "pp": 7,
+      "gf": 47,
+      "gc": 33,
+      "dg": "+14",
+      "pts": 61
+    },
+    {
+      "pos": 7,
+      "equipo": "Montevideo Wanderers",
+      "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 15,
+      "pe": 9,
+      "pp": 12,
+      "gf": 44,
+      "gc": 45,
+      "dg": "-1",
+      "pts": 54
+    },
+    {
+      "pos": 8,
+      "equipo": "Albion",
+      "escudo": "assets/img/escudos/escudo_albion.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 13,
+      "pe": 9,
+      "pp": 14,
+      "gf": 48,
+      "gc": 45,
+      "dg": "+3",
+      "pts": 48
+    },
+    {
+      "pos": 9,
+      "equipo": "Central Español",
+      "escudo": "assets/img/escudos/escudo_central_espanol.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 12,
+      "pe": 8,
+      "pp": 16,
+      "gf": 36,
+      "gc": 48,
+      "dg": "-12",
+      "pts": 44
+    },
+    {
+      "pos": 10,
+      "equipo": "Juventud",
+      "escudo": "assets/img/escudos/escudo_juventud.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 10,
+      "pe": 11,
+      "pp": 15,
+      "gf": 38,
+      "gc": 45,
+      "dg": "-7",
+      "pts": 41
+    },
+    {
+      "pos": 11,
+      "equipo": "Defensor Sporting",
+      "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 9,
+      "pe": 13,
+      "pp": 14,
+      "gf": 36,
+      "gc": 44,
+      "dg": "-8",
+      "pts": 40
+    },
+    {
+      "pos": 12,
+      "equipo": "Boston River",
+      "escudo": "assets/img/escudos/escudo_boston_river.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 11,
+      "pe": 7,
+      "pp": 19,
+      "gf": 35,
+      "gc": 48,
+      "dg": "-13",
+      "pts": 40
+    },
+    {
+      "pos": 13,
+      "equipo": "Cerro",
+      "escudo": "assets/img/escudos/escudo_cerro.webp",
+      "es_penarol": false,
+      "pj": 36,
+      "pg": 11,
+      "pe": 7,
+      "pp": 18,
+      "gf": 30,
+      "gc": 53,
+      "dg": "-23",
+      "pts": 39
+    },
+    {
+      "pos": 14,
+      "equipo": "Cerro Largo",
+      "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 9,
+      "pe": 11,
+      "pp": 17,
+      "gf": 35,
+      "gc": 46,
+      "dg": "-11",
+      "pts": 38
+    },
+    {
+      "pos": 15,
+      "equipo": "Progreso",
+      "escudo": "assets/img/escudos/escudo_progreso.webp",
+      "es_penarol": false,
+      "pj": 37,
+      "pg": 10,
+      "pe": 7,
+      "pp": 20,
+      "gf": 34,
+      "gc": 52,
+      "dg": "-18",
+      "pts": 37
+    },
+    {
+      "pos": 16,
+      "equipo": "Danubio",
+      "escudo": "assets/img/escudos/escudo_danubio.webp",
       "es_penarol": false,
       "pj": 36,
       "pg": 6,
@@ -584,6 +949,7 @@
     {
       "pos": 1,
       "equipo": "Liverpool",
+      "escudo": "assets/img/escudos/escudo_liverpool.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 10,
@@ -597,6 +963,7 @@
     {
       "pos": 2,
       "equipo": "Montevideo City Torque",
+      "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
       "es_penarol": false,
       "pj": 15,
       "pg": 9,
@@ -610,6 +977,7 @@
     {
       "pos": 3,
       "equipo": "Nacional",
+      "escudo": "assets/img/escudos/escudo_nacional.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 8,
@@ -623,6 +991,7 @@
     {
       "pos": 4,
       "equipo": "Peñarol",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
       "es_penarol": true,
       "pj": 15,
       "pg": 7,
@@ -636,6 +1005,7 @@
     {
       "pos": 5,
       "equipo": "Deportivo Maldonado",
+      "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
       "es_penarol": false,
       "pj": 15,
       "pg": 6,
@@ -649,6 +1019,7 @@
     {
       "pos": 6,
       "equipo": "Progreso",
+      "escudo": "assets/img/escudos/escudo_progreso.webp",
       "es_penarol": false,
       "pj": 15,
       "pg": 6,
@@ -662,6 +1033,7 @@
     {
       "pos": 7,
       "equipo": "Cerro",
+      "escudo": "assets/img/escudos/escudo_cerro.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 6,
@@ -674,7 +1046,8 @@
     },
     {
       "pos": 8,
-      "equipo": "Racing (Montevideo)",
+      "equipo": "Racing",
+      "escudo": "assets/img/escudos/escudo_racing.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 5,
@@ -688,6 +1061,7 @@
     {
       "pos": 9,
       "equipo": "Montevideo Wanderers",
+      "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 5,
@@ -701,6 +1075,7 @@
     {
       "pos": 10,
       "equipo": "Juventud",
+      "escudo": "assets/img/escudos/escudo_juventud.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 4,
@@ -714,6 +1089,7 @@
     {
       "pos": 11,
       "equipo": "Boston River",
+      "escudo": "assets/img/escudos/escudo_boston_river.webp",
       "es_penarol": false,
       "pj": 15,
       "pg": 5,
@@ -726,7 +1102,8 @@
     },
     {
       "pos": 12,
-      "equipo": "Albion FC",
+      "equipo": "Albion",
+      "escudo": "assets/img/escudos/escudo_albion.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 4,
@@ -740,6 +1117,7 @@
     {
       "pos": 13,
       "equipo": "Defensor Sporting",
+      "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 3,
@@ -752,7 +1130,8 @@
     },
     {
       "pos": 14,
-      "equipo": "Central Español Fútbol Club",
+      "equipo": "Central Español",
+      "escudo": "assets/img/escudos/escudo_central_espanol.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 3,
@@ -766,6 +1145,7 @@
     {
       "pos": 15,
       "equipo": "Danubio",
+      "escudo": "assets/img/escudos/escudo_danubio.webp",
       "es_penarol": false,
       "pj": 14,
       "pg": 2,
@@ -779,6 +1159,7 @@
     {
       "pos": 16,
       "equipo": "Cerro Largo",
+      "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
       "es_penarol": false,
       "pj": 15,
       "pg": 1,
@@ -808,18 +1189,18 @@
     },
     {
       "pos": 2,
-      "equipo": "Peñarol",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-      "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "es_penarol": true,
+      "equipo": "Platense",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png",
+      "escudo": "assets/img/escudos/escudo_platense.webp",
+      "es_penarol": false,
       "pj": 6,
-      "pg": 0,
-      "pe": 3,
-      "pp": 3,
-      "gf": 4,
-      "gc": 8,
-      "dg": "-4",
-      "pts": 3
+      "pg": 3,
+      "pe": 1,
+      "pp": 2,
+      "gf": 8,
+      "gc": 7,
+      "dg": "+1",
+      "pts": 10
     },
     {
       "pos": 3,
@@ -838,289 +1219,75 @@
     },
     {
       "pos": 4,
-      "equipo": "Platense",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png",
-      "escudo": "assets/img/escudos/escudo_platense.webp",
-      "es_penarol": false,
+      "equipo": "Peñarol",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+      "escudo": "assets/img/escudos/escudo_penarol.webp",
+      "es_penarol": true,
       "pj": 6,
-      "pg": 3,
-      "pe": 1,
-      "pp": 2,
-      "gf": 8,
-      "gc": 7,
-      "dg": "+1",
-      "pts": 10
+      "pg": 0,
+      "pe": 3,
+      "pp": 3,
+      "gf": 4,
+      "gc": 8,
+      "dg": "-4",
+      "pts": 3
     }
   ],
   "tablas_campeonatos": [
-    {
-      "id": "clausura",
-      "nombre": "Torneo Clausura 2026",
-      "nombre_corto": "Torneo Clausura",
-      "icono": "⚽",
-      "badge": "En Disputa • Fecha 14",
-      "es_proximo": true,
-      "datos": [
-        {
-          "pos": 1,
-          "equipo": "Liverpool",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 10,
-          "pe": 3,
-          "pp": 1,
-          "gf": 24,
-          "gc": 9,
-          "dg": "+15",
-          "pts": 33
-        },
-        {
-          "pos": 2,
-          "equipo": "Montevideo City Torque",
-          "es_penarol": false,
-          "pj": 15,
-          "pg": 9,
-          "pe": 3,
-          "pp": 3,
-          "gf": 29,
-          "gc": 17,
-          "dg": "+12",
-          "pts": 30
-        },
-        {
-          "pos": 3,
-          "equipo": "Nacional",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 8,
-          "pe": 3,
-          "pp": 3,
-          "gf": 20,
-          "gc": 14,
-          "dg": "+6",
-          "pts": 27
-        },
-        {
-          "pos": 4,
-          "equipo": "Peñarol",
-          "es_penarol": true,
-          "pj": 15,
-          "pg": 7,
-          "pe": 6,
-          "pp": 2,
-          "gf": 21,
-          "gc": 10,
-          "dg": "+11",
-          "pts": 26
-        },
-        {
-          "pos": 5,
-          "equipo": "Deportivo Maldonado",
-          "es_penarol": false,
-          "pj": 15,
-          "pg": 6,
-          "pe": 4,
-          "pp": 5,
-          "gf": 18,
-          "gc": 12,
-          "dg": "+6",
-          "pts": 22
-        },
-        {
-          "pos": 6,
-          "equipo": "Progreso",
-          "es_penarol": false,
-          "pj": 15,
-          "pg": 6,
-          "pe": 3,
-          "pp": 6,
-          "gf": 16,
-          "gc": 18,
-          "dg": "-2",
-          "pts": 21
-        },
-        {
-          "pos": 7,
-          "equipo": "Cerro",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 6,
-          "pe": 3,
-          "pp": 5,
-          "gf": 16,
-          "gc": 19,
-          "dg": "-3",
-          "pts": 21
-        },
-        {
-          "pos": 8,
-          "equipo": "Racing (Montevideo)",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 5,
-          "pe": 5,
-          "pp": 4,
-          "gf": 20,
-          "gc": 16,
-          "dg": "+4",
-          "pts": 20
-        },
-        {
-          "pos": 9,
-          "equipo": "Montevideo Wanderers",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 5,
-          "pe": 4,
-          "pp": 5,
-          "gf": 16,
-          "gc": 20,
-          "dg": "-4",
-          "pts": 19
-        },
-        {
-          "pos": 10,
-          "equipo": "Juventud",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 4,
-          "pe": 6,
-          "pp": 4,
-          "gf": 13,
-          "gc": 12,
-          "dg": "+1",
-          "pts": 18
-        },
-        {
-          "pos": 11,
-          "equipo": "Boston River",
-          "es_penarol": false,
-          "pj": 15,
-          "pg": 5,
-          "pe": 3,
-          "pp": 7,
-          "gf": 16,
-          "gc": 18,
-          "dg": "-2",
-          "pts": 18
-        },
-        {
-          "pos": 12,
-          "equipo": "Albion FC",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 4,
-          "pe": 2,
-          "pp": 8,
-          "gf": 16,
-          "gc": 21,
-          "dg": "-5",
-          "pts": 14
-        },
-        {
-          "pos": 13,
-          "equipo": "Defensor Sporting",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 3,
-          "pe": 4,
-          "pp": 7,
-          "gf": 17,
-          "gc": 24,
-          "dg": "-7",
-          "pts": 13
-        },
-        {
-          "pos": 14,
-          "equipo": "Central Español Fútbol Club",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 3,
-          "pe": 2,
-          "pp": 9,
-          "gf": 9,
-          "gc": 22,
-          "dg": "-13",
-          "pts": 11
-        },
-        {
-          "pos": 15,
-          "equipo": "Danubio",
-          "es_penarol": false,
-          "pj": 14,
-          "pg": 2,
-          "pe": 4,
-          "pp": 8,
-          "gf": 8,
-          "gc": 17,
-          "dg": "-9",
-          "pts": 10
-        },
-        {
-          "pos": 16,
-          "equipo": "Cerro Largo",
-          "es_penarol": false,
-          "pj": 15,
-          "pg": 1,
-          "pe": 7,
-          "pp": 7,
-          "gf": 12,
-          "gc": 22,
-          "dg": "-10",
-          "pts": 10
-        }
-      ]
-    },
     {
       "id": "anual",
       "nombre": "Tabla Anual Acumulada Oficial (AUF)",
       "nombre_corto": "Tabla Anual",
       "icono": "🏆",
-      "badge": "Líder Solitario • 66 pts",
-      "es_proximo": false,
+      "badge": "Campeón Anual • 69 pts",
+      "es_proximo": true,
       "datos": [
         {
           "pos": 1,
           "equipo": "Peñarol",
+          "escudo": "assets/img/escudos/escudo_penarol.webp",
           "es_penarol": true,
-          "pj": 35,
-          "pg": 19,
-          "pe": 9,
+          "pj": 37,
+          "pg": 20,
+          "pe": 10,
           "pp": 7,
-          "gf": 53,
+          "gf": 56,
           "gc": 29,
-          "dg": "+24",
-          "pts": 66
+          "dg": "+27",
+          "pts": 69
         },
         {
           "pos": 2,
           "equipo": "Montevideo City Torque",
+          "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 37,
           "pg": 19,
-          "pe": 7,
+          "pe": 8,
           "pp": 10,
-          "gf": 61,
-          "gc": 43,
+          "gf": 62,
+          "gc": 44,
           "dg": "+18",
-          "pts": 64
+          "pts": 65
         },
         {
           "pos": 3,
           "equipo": "Deportivo Maldonado",
+          "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 37,
           "pg": 18,
           "pe": 9,
-          "pp": 9,
+          "pp": 10,
           "gf": 54,
-          "gc": 33,
-          "dg": "+21",
+          "gc": 34,
+          "dg": "+20",
           "pts": 63
         },
         {
           "pos": 4,
           "equipo": "Liverpool",
+          "escudo": "assets/img/escudos/escudo_liverpool.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 17,
@@ -1134,6 +1301,7 @@
         {
           "pos": 5,
           "equipo": "Nacional",
+          "escudo": "assets/img/escudos/escudo_nacional.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 19,
@@ -1147,6 +1315,7 @@
         {
           "pos": 6,
           "equipo": "Racing",
+          "escudo": "assets/img/escudos/escudo_racing.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 16,
@@ -1160,6 +1329,7 @@
         {
           "pos": 7,
           "equipo": "Montevideo Wanderers",
+          "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 15,
@@ -1173,6 +1343,7 @@
         {
           "pos": 8,
           "equipo": "Albion",
+          "escudo": "assets/img/escudos/escudo_albion.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 13,
@@ -1186,6 +1357,7 @@
         {
           "pos": 9,
           "equipo": "Central Español",
+          "escudo": "assets/img/escudos/escudo_central_espanol.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 12,
@@ -1199,6 +1371,7 @@
         {
           "pos": 10,
           "equipo": "Juventud",
+          "escudo": "assets/img/escudos/escudo_juventud.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 10,
@@ -1212,6 +1385,7 @@
         {
           "pos": 11,
           "equipo": "Defensor Sporting",
+          "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 9,
@@ -1224,7 +1398,22 @@
         },
         {
           "pos": 12,
+          "equipo": "Boston River",
+          "escudo": "assets/img/escudos/escudo_boston_river.webp",
+          "es_penarol": false,
+          "pj": 37,
+          "pg": 11,
+          "pe": 7,
+          "pp": 19,
+          "gf": 35,
+          "gc": 48,
+          "dg": "-13",
+          "pts": 40
+        },
+        {
+          "pos": 13,
           "equipo": "Cerro",
+          "escudo": "assets/img/escudos/escudo_cerro.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 11,
@@ -1236,47 +1425,37 @@
           "pts": 39
         },
         {
-          "pos": 13,
+          "pos": 14,
           "equipo": "Cerro Largo",
+          "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 37,
           "pg": 9,
           "pe": 11,
-          "pp": 16,
+          "pp": 17,
           "gf": 35,
-          "gc": 43,
-          "dg": "-8",
+          "gc": 46,
+          "dg": "-11",
           "pts": 38
-        },
-        {
-          "pos": 14,
-          "equipo": "Boston River",
-          "es_penarol": false,
-          "pj": 36,
-          "pg": 10,
-          "pe": 7,
-          "pp": 19,
-          "gf": 34,
-          "gc": 48,
-          "dg": "-14",
-          "pts": 37
         },
         {
           "pos": 15,
           "equipo": "Progreso",
+          "escudo": "assets/img/escudos/escudo_progreso.webp",
           "es_penarol": false,
-          "pj": 36,
+          "pj": 37,
           "pg": 10,
-          "pe": 6,
+          "pe": 7,
           "pp": 20,
-          "gf": 33,
-          "gc": 51,
+          "gf": 34,
+          "gc": 52,
           "dg": "-18",
-          "pts": 36
+          "pts": 37
         },
         {
           "pos": 16,
           "equipo": "Danubio",
+          "escudo": "assets/img/escudos/escudo_danubio.webp",
           "es_penarol": false,
           "pj": 36,
           "pg": 6,
@@ -1290,11 +1469,245 @@
       ]
     },
     {
+      "id": "clausura",
+      "nombre": "Torneo Clausura 2026",
+      "nombre_corto": "Torneo Clausura",
+      "icono": "⚽",
+      "badge": "Fecha 15 • 26 pts",
+      "es_proximo": false,
+      "datos": [
+        {
+          "pos": 1,
+          "equipo": "Liverpool",
+          "escudo": "assets/img/escudos/escudo_liverpool.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 10,
+          "pe": 3,
+          "pp": 1,
+          "gf": 24,
+          "gc": 9,
+          "dg": "+15",
+          "pts": 33
+        },
+        {
+          "pos": 2,
+          "equipo": "Montevideo City Torque",
+          "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
+          "es_penarol": false,
+          "pj": 15,
+          "pg": 9,
+          "pe": 3,
+          "pp": 3,
+          "gf": 29,
+          "gc": 17,
+          "dg": "+12",
+          "pts": 30
+        },
+        {
+          "pos": 3,
+          "equipo": "Nacional",
+          "escudo": "assets/img/escudos/escudo_nacional.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 8,
+          "pe": 3,
+          "pp": 3,
+          "gf": 20,
+          "gc": 14,
+          "dg": "+6",
+          "pts": 27
+        },
+        {
+          "pos": 4,
+          "equipo": "Peñarol",
+          "escudo": "assets/img/escudos/escudo_penarol.webp",
+          "es_penarol": true,
+          "pj": 15,
+          "pg": 7,
+          "pe": 6,
+          "pp": 2,
+          "gf": 21,
+          "gc": 10,
+          "dg": "+11",
+          "pts": 26
+        },
+        {
+          "pos": 5,
+          "equipo": "Deportivo Maldonado",
+          "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
+          "es_penarol": false,
+          "pj": 15,
+          "pg": 6,
+          "pe": 4,
+          "pp": 5,
+          "gf": 18,
+          "gc": 12,
+          "dg": "+6",
+          "pts": 22
+        },
+        {
+          "pos": 6,
+          "equipo": "Progreso",
+          "escudo": "assets/img/escudos/escudo_progreso.webp",
+          "es_penarol": false,
+          "pj": 15,
+          "pg": 6,
+          "pe": 3,
+          "pp": 6,
+          "gf": 16,
+          "gc": 18,
+          "dg": "-2",
+          "pts": 21
+        },
+        {
+          "pos": 7,
+          "equipo": "Cerro",
+          "escudo": "assets/img/escudos/escudo_cerro.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 6,
+          "pe": 3,
+          "pp": 5,
+          "gf": 16,
+          "gc": 19,
+          "dg": "-3",
+          "pts": 21
+        },
+        {
+          "pos": 8,
+          "equipo": "Racing",
+          "escudo": "assets/img/escudos/escudo_racing.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 5,
+          "pe": 5,
+          "pp": 4,
+          "gf": 20,
+          "gc": 16,
+          "dg": "+4",
+          "pts": 20
+        },
+        {
+          "pos": 9,
+          "equipo": "Montevideo Wanderers",
+          "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 5,
+          "pe": 4,
+          "pp": 5,
+          "gf": 16,
+          "gc": 20,
+          "dg": "-4",
+          "pts": 19
+        },
+        {
+          "pos": 10,
+          "equipo": "Juventud",
+          "escudo": "assets/img/escudos/escudo_juventud.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 4,
+          "pe": 6,
+          "pp": 4,
+          "gf": 13,
+          "gc": 12,
+          "dg": "+1",
+          "pts": 18
+        },
+        {
+          "pos": 11,
+          "equipo": "Boston River",
+          "escudo": "assets/img/escudos/escudo_boston_river.webp",
+          "es_penarol": false,
+          "pj": 15,
+          "pg": 5,
+          "pe": 3,
+          "pp": 7,
+          "gf": 16,
+          "gc": 18,
+          "dg": "-2",
+          "pts": 18
+        },
+        {
+          "pos": 12,
+          "equipo": "Albion",
+          "escudo": "assets/img/escudos/escudo_albion.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 4,
+          "pe": 2,
+          "pp": 8,
+          "gf": 16,
+          "gc": 21,
+          "dg": "-5",
+          "pts": 14
+        },
+        {
+          "pos": 13,
+          "equipo": "Defensor Sporting",
+          "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 3,
+          "pe": 4,
+          "pp": 7,
+          "gf": 17,
+          "gc": 24,
+          "dg": "-7",
+          "pts": 13
+        },
+        {
+          "pos": 14,
+          "equipo": "Central Español",
+          "escudo": "assets/img/escudos/escudo_central_espanol.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 3,
+          "pe": 2,
+          "pp": 9,
+          "gf": 9,
+          "gc": 22,
+          "dg": "-13",
+          "pts": 11
+        },
+        {
+          "pos": 15,
+          "equipo": "Danubio",
+          "escudo": "assets/img/escudos/escudo_danubio.webp",
+          "es_penarol": false,
+          "pj": 14,
+          "pg": 2,
+          "pe": 4,
+          "pp": 8,
+          "gf": 8,
+          "gc": 17,
+          "dg": "-9",
+          "pts": 10
+        },
+        {
+          "pos": 16,
+          "equipo": "Cerro Largo",
+          "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
+          "es_penarol": false,
+          "pj": 15,
+          "pg": 1,
+          "pe": 7,
+          "pp": 7,
+          "gf": 12,
+          "gc": 22,
+          "dg": "-10",
+          "pts": 10
+        }
+      ]
+    },
+    {
       "id": "libertadores",
-      "nombre": "Copa CONMEBOL Libertadores • Group E",
+      "nombre": "Copa CONMEBOL Libertadores • Grupo E",
       "nombre_corto": "Copa Libertadores",
       "icono": "🌎",
-      "badge": "Conmebol Internacional",
+      "badge": "CONMEBOL 2026",
       "es_proximo": false,
       "datos": [
         {
@@ -1314,18 +1727,18 @@
         },
         {
           "pos": 2,
-          "equipo": "Peñarol",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
-          "escudo": "assets/img/escudos/escudo_penarol.webp",
-          "es_penarol": true,
+          "equipo": "Platense",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png",
+          "escudo": "assets/img/escudos/escudo_platense.webp",
+          "es_penarol": false,
           "pj": 6,
-          "pg": 0,
-          "pe": 3,
-          "pp": 3,
-          "gf": 4,
-          "gc": 8,
-          "dg": "-4",
-          "pts": 3
+          "pg": 3,
+          "pe": 1,
+          "pp": 2,
+          "gf": 8,
+          "gc": 7,
+          "dg": "+1",
+          "pts": 10
         },
         {
           "pos": 3,
@@ -1344,18 +1757,18 @@
         },
         {
           "pos": 4,
-          "equipo": "Platense",
-          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png",
-          "escudo": "assets/img/escudos/escudo_platense.webp",
-          "es_penarol": false,
+          "equipo": "Peñarol",
+          "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+          "escudo": "assets/img/escudos/escudo_penarol.webp",
+          "es_penarol": true,
           "pj": 6,
-          "pg": 3,
-          "pe": 1,
-          "pp": 2,
-          "gf": 8,
-          "gc": 7,
-          "dg": "+1",
-          "pts": 10
+          "pg": 0,
+          "pe": 3,
+          "pp": 3,
+          "gf": 4,
+          "gc": 8,
+          "dg": "-4",
+          "pts": 3
         }
       ]
     }
@@ -1363,50 +1776,86 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 19.7,
-    "sensacion_c": 21.4,
-    "viento_kmh": 7.1,
-    "humedad_pct": 88,
-    "condicion": "Chaparrones aislados",
-    "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "20/11/2026 15:45"
+    "temperatura_c": 19.0,
+    "sensacion_c": 19.0,
+    "viento_kmh": 12.0,
+    "humedad_pct": 65,
+    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
+    "actualizado": "20/11/2026 16:15"
   },
   "minuto_a_minuto": [
     {
-      "minuto": "90+5'",
-      "tipo": "final",
-      "texto": "Pitazo final de Leodán González en el Saroldi: Peñarol 1 - 1 Montevideo Wanderers. Empate agónico."
+      "minuto": "1'",
+      "icono": "🟢",
+      "tipo": "inicio",
+      "titulo": "Comenzó el partido en Estadio Campeón del Siglo",
+      "descripcion": "Rueda la pelota para Peñarol vs Cerro Largo por Campeonato Uruguayo • Torneo Clausura • Fecha 15 (Árbitro: Tejera, Gustavo)."
+    },
+    {
+      "minuto": "28'",
+      "icono": "⚽",
+      "tipo": "gol_penarol",
+      "titulo": "¡GOOOL DE PEÑAROL!",
+      "descripcion": "Nahuel Herrera (Peñarol) Goal at 28'"
+    },
+    {
+      "minuto": "32'",
+      "icono": "⚽",
+      "tipo": "gol_penarol",
+      "titulo": "¡GOOOL DE PEÑAROL!",
+      "descripcion": "Cristian Jaime (Peñarol) Goal at 32'"
+    },
+    {
+      "minuto": "46'",
+      "icono": "🔄",
+      "tipo": "cambio",
+      "titulo": "Variante en Peñarol",
+      "descripcion": "Ingresó Thiago Espinosa en lugar de Maximiliano Olivera."
+    },
+    {
+      "minuto": "66'",
+      "icono": "🔄",
+      "tipo": "cambio",
+      "titulo": "Variante en Peñarol",
+      "descripcion": "Ingresó Lucas Ferreira en lugar de Nahuel Herrera."
+    },
+    {
+      "minuto": "66'",
+      "icono": "🔄",
+      "tipo": "cambio",
+      "titulo": "Variante en Peñarol",
+      "descripcion": "Ingresó Nicolás Fernández en lugar de Eric Remedi."
+    },
+    {
+      "minuto": "66'",
+      "icono": "🔄",
+      "tipo": "cambio",
+      "titulo": "Variante en Peñarol",
+      "descripcion": "Ingresó Luis Angulo en lugar de Javier Cabrera."
+    },
+    {
+      "minuto": "70'",
+      "icono": "⚽",
+      "tipo": "gol_penarol",
+      "titulo": "¡GOOOL DE PEÑAROL!",
+      "descripcion": "Douglas Arezo (Peñarol) Goal at 70'"
+    },
+    {
+      "minuto": "76'",
+      "icono": "🔄",
+      "tipo": "cambio",
+      "titulo": "Variante en Peñarol",
+      "descripcion": "Ingresó Jesús Trindade en lugar de Germán Pezzella."
     },
     {
       "minuto": "90'",
-      "tipo": "gol_penarol",
-      "texto": "¡GOOOL DE PEÑAROL! Luis Miguel Angulo aprovechó una pelota sucia en el área y decretó el 1-1 con el alma."
-    },
-    {
-      "minuto": "85'",
-      "tipo": "incidencia",
-      "texto": "Asedio total carbonero. Diego Aguirre mandó al campo a Angulo y Ramírez buscando el empate."
-    },
-    {
-      "minuto": "72'",
-      "tipo": "gol_rival",
-      "texto": "Gol de Wanderers: Facundo Labandeira definió cruzado en una rápida réplica bohemia (0-1)."
-    },
-    {
-      "minuto": "60'",
-      "tipo": "incidencia",
-      "texto": "Peñarol empuja pero choca con la zaga de Formiliano y las manos de Silveira."
-    },
-    {
-      "minuto": "45'",
-      "tipo": "entretiempo",
-      "texto": "Final de la primera mitad en el Saroldi: Peñarol 0 - 0 Montevideo Wanderers."
-    },
-    {
-      "minuto": "1'",
-      "tipo": "inicio",
-      "texto": "Rueda la pelota en el Parque Federico Omar Saroldi. Peñarol enfrenta a Wanderers por la fecha 13."
+      "icono": "🏁",
+      "tipo": "final",
+      "titulo": "Final del partido: Peñarol 3 - 0 Cerro Largo",
+      "descripcion": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo"
     }
   ],
+  "minuto_a_minuto_event_id": "401934686",
   "blogger_live_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 }

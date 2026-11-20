@@ -1,143 +1,212 @@
 {
-  "actualizado": "19/11/2026 01:15",
-  "modelo_ia": "Google Gemini Web (GFlash 3.8 Multimodal)",
-  "fase_publicacion": "PREVIA",
+  "actualizado": "20/11/2026 16:16",
+  "schema_version": "10.0",
+  "modelo_ia": "Manya Editorial Engine v10.0 (1891 BD + ESPN + Prensa Verificada)",
+  "fase_publicacion": "CRONICA_POST_PARTIDO",
   "partido_id": "401934686",
-  "titular_dia": "La Previa Aurinegra: Peñarol afina detalles antes de enfrentar a Wanderers",
-  "bajada_seo": "Peñarol ultima detalles en Los Aromos para enfrentar a Cerro Largo este jueves 19/11/2026 a las 16:30 hs en el Estadio Campeón del Siglo por la Fecha 14 del Torneo Clausura. Líder solitario de la Tabla Anual con 66 puntos (+24 DG), el equipo de Diego Aguirre buscará imponer su jerarquía con transmisión oficial de VTV Plus / Disney+ Premium.",
+  "partido_nombre": "Peñarol vs Cerro Largo",
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-cronica-mando-jerarquia.html",
+  "titular_dia": "DUEÑOS DEL AÑO: PEÑAROL GOLEÓ 3-0 A CERRO LARGO, GANÓ LA ANUAL Y ESPERA EN LA GRAN FINAL",
+  "bajada_seo": "Con tantos de Nahuel Herrera, la joya Leonel Jaime y Matías Arezo, Peñarol despachó 3-0 a Cerro Largo en el Campeón del Siglo, conquistó la Tabla Anual con 69 puntos y aseguró boleto directo a fase de grupos de Copa Libertadores.",
+  "epigrafe_estilo": "Pizarrón aceitado, mordida en la mitad y contundencia implacable: la Fiera Aguirre puso la casa en orden y el Carbonero mira a todos desde arriba a la espera de la Gran Final.",
   "claves_60_segundos": [
     {
-      "icono": "⚽",
-      "titulo": "Enfoque Táctico",
-      "detalle": "Esquema 4-2-3-1 de Diego Aguirre con asfixia en campo rival, amplitud por bandas y circulación rápida para vulnerar a Cerro Largo en el Estadio Campeón del Siglo."
+      "icono": "trophy",
+      "titulo": "Boleto Directo a la Gran Final",
+      "detalle": "Con el 3-0 indiscutible, el Manya cerró la Tabla Anual con 69 puntos (+27 DG) y aguarda en la Gran Final al vencedor del cruce entre Racing y Liverpool."
     },
     {
-      "icono": "🔥",
-      "titulo": "La Figura",
-      "detalle": "Leonardo Fernández será el eje de la generación ofensiva, dueño absoluto de los ritmos en tres cuartos de cancha y principal arma en la pelota quieta."
+      "icono": "star",
+      "titulo": "El Show de Leonel Jaime",
+      "detalle": "Desequilibrio puro por la banda, aceleración y una definición exquisita a los 31' para quebrar el partido y desatar el delirio en las tribunas del CDS."
     },
     {
-      "icono": "📺",
-      "titulo": "Transmisión y Horario",
-      "detalle": "Jueves 19/11/2026 a las 16:30 hs en el Estadio Campeón del Siglo, con emisión en vivo a través de VTV Plus / Disney+ Premium."
+      "icono": "shield",
+      "titulo": "Firmeza y Pelota Parada",
+      "detalle": "Nahuel Herrera rompió el cero con un cabezazo letal a los 27', respaldado por la solvencia de Germán Pezzella y Maxi Olivera para anular cualquier intento arachán."
     },
     {
-      "icono": "📊",
-      "titulo": "Puntos en Juego",
-      "detalle": "El Carbonero lidera en solitario la Tabla Anual con 66 puntos oficiales AUF (+24 DG) y busca dar un golpe decisivo en la recta final."
+      "icono": "dollar-sign",
+      "titulo": "Pasaje a Libertadores 2027",
+      "detalle": "Al asegurarse el primer lugar anual, Peñarol selló su clasificación directa a fase de grupos de la Copa Libertadores 2027, garantizando un ingreso de tres millones de dólares."
     }
   ],
-  "articulo_principal": {
-    "titulo": "Concentración total en Los Aromos: Peñarol alista artillería para la batalla en el Estadio Campeón del Siglo",
-    "subtitulo": "Diego Aguirre calibra el 4-2-3-1 titular para defender el liderato de la Tabla Anual ante un duro Cerro Largo",
-    "parrafos": [
-      "Semana de máxima intensidad y puertas cerradas en Los Aromos bajo la batuta de Diego Aguirre. El plantel aurinegro ajusta cada engranaje físico y futbolístico de cara al trascendental duelo por la Fecha 14 del Torneo Clausura 2026, instancia a la que el Carbonero llega como líder solitario de la Tabla Anual con 66 puntos oficiales (+24 de diferencia de gol). Con el margen de error reducido al mínimo en la definición de la temporada, el cuerpo técnico priorizó trabajos de tenencia bajo presión, transiciones defensa-ataque a un toque y ensayos específicos de pelota detenida tanto ofensiva como defensiva.",
-      "El análisis táctico del cuerpo técnico apunta a desarticular el bloque medio-bajo que suele proponer Cerro Largo en condición de visitante. Para imponer condiciones desde el pitazo inicial en el Estadio Campeón del Siglo, Aguirre sostiene su matriz 4-2-3-1, apostando por una presión alta coordinada tras pérdida para ahogar la salida arachana. La clave pasará por fijar a los zagueros rivales y generar superioridad numérica por los carriles exteriores, obligando al conjunto visitante a bascular constantemente hasta abrir grietas en el embudo central.",
-      "En el repaso línea por línea, la columna vertebral transmite plena confianza de vestuario: Washington Aguerre aporta seguridad bajo los tres palos y voz de mando para adelantar el bloque defensivo; en la zona de gestación, Leonardo Fernández asume la conducción ofensiva con total libertad para flotar a espaldas del doble cinco de Cerro Largo y castigar en cada envío parado; mientras que en el frente de ataque, Maximiliano Silvera lidera la presión inicial y ofrece movilidad constante para arrastrar marcas y atacar los espacios vacíos dentro del área.",
-      "Con el respaldo de su gente colmando las tribunas del Estadio Campeón del Siglo, Peñarol sabe que tiene ante sí una prueba de carácter para ratificar su chapa de candidato. Sumar de a tres frente a Cerro Largo significaría blindar la cima de la Tabla Anual y encarar la última estación del campeonato dependiendo exclusivamente de su propio peso futbolístico."
-    ],
-    "preguntas_frecuentes": [
-      {
-        "q": "¿Cuándo y a qué hora juega Peñarol ante Cerro Largo?",
-        "a": "El partido se disputa este jueves 19/11/2026 a las 16:30 hs en el Estadio Campeón del Siglo, con televisación oficial de VTV Plus / Disney+ Premium."
-      },
-      {
-        "q": "¿Cuál es la propuesta táctica de Diego Aguirre para este encuentro?",
-        "a": "Aguirre mantiene el sistema 4-2-3-1, apostando por la presión alta en campo rival, el aprovechamiento de la pelota quieta y la conducción de Leonardo Fernández para abastecer a Maximiliano Silvera."
-      },
-      {
-        "q": "¿Cómo llega Peñarol en la Tabla Anual a la Fecha 14?",
-        "a": "Peñarol llega como único líder de la Tabla Anual con 66 puntos oficiales AUF y una diferencia de gol de +24, defendiendo una ventaja clave en el tramo final del Torneo Clausura 2026."
-      }
-    ]
+  "prismas_analisis": {
+    "epica_tribuna": {
+      "eje": "El rugido de las cuatro tribunas",
+      "subtitulo": "El Campeón del Siglo fue una caldera en una tarde consagratoria",
+      "texto": "La hinchada carbonera copó las gradas con la certeza de que la Anual no se podía escapar. Desde el zapatazo goleador de Jaime hasta la sentencia de Arezo, el grito unísono bajó desde la Cataldi y la Damiani: este equipo aguantó los golpes del año, se plantó con carácter y coronó la regularidad festejando en su propia casa con la estirpe que exige la historia aurinegra."
+    },
+    "pizarron_tactico": {
+      "eje": "Presión asfixiante y transiciones quirúrgicas",
+      "subtitulo": "El 4-2-3-1 de Diego Aguirre desactivó el cerrojo de Cerro Largo",
+      "texto": "La clave estuvo en el doble pivote: Eric Remedi mordió y raspó cada intento de salida rival, mientras Eduardo Darias rompió líneas con dinamismo. Por afuera, Javier Cabrera y Leandro Umpiérrez fijaron a los laterales arachanes para liberar los pasillos interiores. La movilidad de Leonel Jaime como mediapunta flotante descompaginó a la zaga visitante, y Matías Arezo desgastó a los centrales hasta encontrar su premio a los 69' con un anticipo voraz dentro del área chica."
+    },
+    "trastienda_vestuario": {
+      "eje": "Desahogo y comunión total",
+      "subtitulo": "Abrazos cerrados, respaldo dirigencial y la cabeza en el título",
+      "texto": "Tras el pitazo final, los pasillos del vestuario local fueron testigo de un desahogo Monumental. El abrazo sentido entre Ignacio Ruglio y Diego Aguirre ratificó la unión del grupo ante semanas de fuego cruzado y rumores. Con Washington Aguerre liderando el festejo desde el arco y Germán Pezzella aportando la voz de mando experta, el mensaje interno fue unánime: la Anual era una obligación cumplida, pero el objetivo máximo arranca en diciembre."
+    },
+    "aritmetica_campeonato": {
+      "eje": "Los números no mienten",
+      "subtitulo": "69 unidades para garantizar dos ventajas clave",
+      "texto": "Peñarol liquidó la temporada regular con 69 puntos y una diferencia de gol de +27, igualando el registro del 2020 pero con el mérito de saltar directo a la Gran Final. Evita el desgaste de la semifinal y obliga a su futuro rival —Racing (campeón del Apertura) o Liverpool (campeón del Clausura)— a matarse en un duelo eliminatorio previo antes de medir fuerzas por la corona máxima."
+    }
   },
-  "prismas_periodisticos": [
+  "articulo_principal": {
+    "titulo": "Mando, jerarquía y final: Peñarol despachó a Cerro Largo y se adueñó de la Anual",
+    "subtitulo": "La Fiera Aguirre ajustó las piezas en el momento cumbre: victoria 3-0 en el Campeón del Siglo para amarrar la acumulada, el boleto a la Libertadores 2027 y la tranquilidad de esperar rival en la definición del Uruguayo.",
+    "parrafos": [
+      "No había margen para especulaciones ni espacio para titubeos en la tarde del Campeón del Siglo. Peñarol asumió el protagonismo desde el primer silbatazo, plantando una línea de presión asfixiante conducida por Eric Remedi y Eduardo Darias en el centro del campo. Cerro Largo intentó refugiarse en un bloque bajo y cortar el ritmo con faltas tácticas, pero la resistencia duró apenas 27 minutos: Javier Cabrera ejecutó con rosca venenosa un tiro de esquina y Nahuel Herrera se elevó con potencia implacable para clavar un frentazo inatajable contra el palo izquierdo. Apenas cuatro minutos después, la joya Leonel Jaime frotó la lámpara, desairó a dos rivales en una baldosa y sacó un latigazo cruzado al ángulo superior para firmar el 2-0 y desatar la fiesta en las tribunas.",
+      "En el complemento, el trámite jamás corrió peligro gracias a la sincronización del fondo aurinegro. Germán Pezzella impuso su jerarquía internacional para anticipar por arriba y por abajo, mientras Washington Aguerre respondió con aplomo y sobriedad las escasas insinuaciones del elenco visitante. Con Ignacio Alegre y Maximiliano Olivera clausurando sus respectivas bandas, Peñarol manejó los tiempos con paciencia y cambio de frente. La estocada definitiva llegó a los 69': Leandro Umpiérrez desbordó por izquierda tras una pared rápida con Darias y sirvió el centro rasante para que Matías Arezo, con olfato goleador intacto, anticipara al golero arachán y sentenciara el 3-0 definitivo.",
+      "Con esta victoria categórica, el Carbonero alcanzó los 69 puntos en la Tabla Anual, asegurando el trofeo más preciado de la regularidad, la clasificación directa a la fase de grupos de la Copa Libertadores 2027 —con suculento premio económico incluido— y, fundamentalmente, la ventaja deportiva de aguardar en la Gran Final del Campeonato Uruguayo. Mientras Racing y Liverpool deberán dejarse la piel en una semifinal a matar o morir, Peñarol descansará, recuperará soldados y planificará con pizarrón firme la serie decisiva que arrancará en los primeros días de diciembre."
+    ],
+    "cita_destacada": "Este plantel sacó la cara cuando las papas quemaban; ganamos la Anual con autoridad y ahora vamos por el objetivo grande, que es levantar la copa de Campeón Uruguayo.",
+    "autor_cita": "Diego Aguirre en conferencia de prensa"
+  },
+  "portada_visual": {
+    "titular_portada": "🏆 PEÑAROL 3 - 0 CERRO LARGO • PEÑAROL CAMPEÓN DE LA TABLA ANUAL (69 PTS)",
+    "bajada_portada": "Peñarol venció Peñarol 3 - 0 Cerro Largo en Estadio Campeón del Siglo con goles de Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69', conquistó la Tabla Anual 2026 con 69 puntos (+27 DG), aseguró fase de grupos de la Libertadores 2027 y aguarda en la Gran Final del Uruguayo al vencedor de Racing (Campeón Apertura) vs Liverpool (Campeón Clausura).",
+    "cuenta": "@oficialcap",
+    "ubicacion": "📍 Estadio Campeón del Siglo • Montevideo",
+    "categoria": "partidos 1891",
+    "imagen_webp": "assets/gallery/1891_cerro_largo_32174_02.webp",
+    "imagen_jpg": "assets/gallery/1891_cerro_largo_32174_02.jpg"
+  },
+  "preguntas_frecuentes": [
     {
-      "prisma": "🏟️ EL CLIMA DE CANCHA • Tribunas de Estadio Campeón del Siglo",
-      "color": "#ffd100",
-      "texto": "Cita crucial en Estadio Campeón del Siglo: la parcialidad carbonera copará su sector con venta de entradas vía RedTickets y transmisión televisiva total por VTV Plus / Disney+ Premium. Tres puntos determinantes en la lucha por la Tabla Anual."
+      "q": "¿Qué beneficio deportivo obtiene Peñarol al haber ganado la Tabla Anual?",
+      "a": "Al finalizar como el mejor equipo del año con 69 puntos, Peñarol clasifica directamente a la Gran Final del Campeonato Uruguayo a régimen de ida y vuelta. No debe disputar la semifinal previa y esperará al ganador del cruce entre Racing (Apertura) y Liverpool (Clausura)."
     },
     {
-      "prisma": "♟️ EL PIZARRÓN DE AGUIRRE • Duelo Táctico vs Peñarol vs Cerro Largo",
-      "color": "#38bdf8",
-      "texto": "Peñarol buscará cortar los circuitos del rival en la medular y explotar las transiciones rápidas para abastecer la pegada de Leo Fernández y el desmarque de Maxi Silvera."
+      "q": "¿Cuándo y contra quién jugará Peñarol la definición del Campeonato Uruguayo?",
+      "a": "El Carbonero jugará la Gran Final (ida tentativa el 3 de diciembre y vuelta el 6 de diciembre) ante el vencedor de la semifinal Racing vs. Liverpool. Si Peñarol gana esa serie definitoria, se coronará automáticamente Campeón Uruguayo."
     },
     {
-      "prisma": "🔥 LA TRASTIENDA EN LOS AROMOS • Vestuario y Once Titular",
-      "color": "#f87171",
-      "texto": "Semana de alta exigencia física y repaso intensivo de pelota quieta. Aguirre perfila su once de gala: Aguerre; Milans, Méndez, Guzmán Rodríguez, Maxi Olivera; Damián García, Rodrigo Pérez; Cabrera, Leo Fernández, Báez; y Maxi Silvera."
-    },
-    {
-      "prisma": "📐 LA MATEMÁTICA DEL TÍTULO • Tabla Anual",
-      "color": "#34d399",
-      "texto": "Peñarol lidera la Anual con 66 puntos (+24 de saldo). Una victoria en Estadio Campeón del Siglo deja al Carbonero a tiro de abrochar la ventaja deportiva decisiva para la definición del Campeonato Uruguayo."
+      "q": "¿Qué repercusión internacional y económica tiene la conquista de la Anual?",
+      "a": "Peñarol aseguró su cupo como 'Uruguay 1' o 'Uruguay 2' en la fase de grupos de la Copa Libertadores 2027, garantizando un piso de ingresos de tres millones de dólares otorgados por CONMEBOL y esquivando las complejas fases previas de repechaje."
     }
   ],
   "noticias_fuentes": [
     {
-      "titulo": "Defiendan al hincha",
-      "url": "https://www.padreydecano.com/cms/noticias/defiendan-al-hincha/",
-      "resumen": "El clásico se jugará el sábado 9 de agosto a las 15 horas en el Estadio Campeón del Siglo. Resta conocer si podrá asistir el hincha a las tribunas o no. La Mesa Ejecutiva mantuvo fijado el clásico para el sábado 9 de agosto a las 15 horas, pese a que Peñarol pidió adelantar el […...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 30 Jul 2025 01:00:07 +0000",
-      "peso": 1.3
+      "titulo": "Peñarol empató al Nacional de 2020 como el ganador de la Tabla Anual con menos puntos del siglo: los números del carbonero y el curioso dato de Diego Aguirre",
+      "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOcER6X054N3gzQTJDb090elZoUlJrUVBfaU1MaExNQkZ1VmlDM1pLeWM3MTVRTm0tTUp3Um1WRlFXSnRSaG5kelRvaG51azZhU3NJRmhBZEtLRzRCMDNMdmdEYkhCZGtRSmN4OFFON2Y1ejVxMWFNcjVOQkh6NFZPa1JKa0hIMzlseFRRUV9Rb2pvSjNrX09KSkRxYk1EWTV1ZjZOZk8ydEVIMk8wVFcxbmlUcE9jSE15UE4yQ3dkMUhZVnRUWnBlNWdVaFRUYUt1LTJnSTZXSE1RUWJjdUNjdTdfaS1TTjlOd1FJeXM0MVNHS0pjekM0bXJOaElFT3V4WnBUVU1TVTM4OC12UDZQYzJ4eHlkTGJwREhV0gGgAkFVX3lxTE5OVlNjdjBja1cyTHBtWFF2SmhfSWdSa1RTc0JpZUN6MUdJZmN0UzFqSFNHejMtZXlDYzhZR1poZkJJbnEyMFlxZFRleWNZN3hnSHU4NkoyZUswMGxJUGtBM3JyTlJTUy1vZmZ3aWlYTlVKbWVPZHc0RHgxWXBLM3ozNHAxXzhVWkZ1WmZYRzEycXpucUEtYzFaeFIyR2x5TmNyMXVpLTBkQ1RYZkR6cUszV3hOQ2tXbDNMT1FSSTBIbFNQcjZBZ185cXpyTjNwZWlBcVZCLWxPbUtCdnpaZGQyNzBPVFpVaUlpRmd2dFQ3al9xcjNDVXBFamFMVDFNR1lDZUxOLUdNc3NmaEFidjNwT05qU3c5WU1pemdkRl9GNg?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 20/11/2026 a las 10:44 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "20/11/2026 10:44",
+      "fecha_iso": "2026-11-20T10:44:00-03:00",
+      "fecha_raw": "20/11/2026 10:44 hs",
+      "antiguedad_horas": 5.5,
+      "timestamp": 1795182240.0,
+      "peso": 1.25
     },
     {
-      "titulo": "Regresa al Club",
-      "url": "https://www.padreydecano.com/cms/noticias/regresa-al-club/",
-      "resumen": "Alejo Cruz es nuevamente jugador de Peñarol. El extremo zurdo de 24 años firmó contrato por una temporada y media con el decano. Peñarol sumó a su cuarto fichaje, se trata del atacante de 24 años surgido en las formativas del Club, Alejo Cruz. Debutó en el carbonero en la tempora...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Mon, 28 Jul 2025 21:47:29 +0000",
-      "peso": 1.3
+      "titulo": "Leonel Jaime dio un show para Peñarol: las jugadas claves, un golazo, su emoción y el mensaje a los hinchas",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQX29wamxXdUxkT05OU2FQck5Tc3lBTnZKbmxnMzZFT1BBRF9kbnZmZW1tWTZBampnNE9FRS10RUtPR3F5SC12ZWs3dldnY002RjVfbFZiUC1oOGRtR09zQVpjVzAybXo5eHpsM1RPMWJmdmlSVE45a3lLN0ZWR09WMkkxRzgxbUdWbHZYcVotLWtUVnhYdmlVTnUxaFFwdk1vd1d3elZ2cGhhQU5LSXRjeGV3eng1RTJtNnRkb0Y3bjVTYmVDY2Z6anBRaFVpX1pLMWRFR3k0T3lHdzFKWHc?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 20/11/2026 a las 03:47 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "20/11/2026 03:47",
+      "fecha_iso": "2026-11-20T03:47:50-03:00",
+      "fecha_raw": "20/11/2026 03:47 hs",
+      "antiguedad_horas": 12.5,
+      "timestamp": 1795157270.0,
+      "peso": 1.25
     },
     {
-      "titulo": "Peñarol hizo futbol ante Juventud",
-      "url": "https://www.padreydecano.com/cms/los-aromos/penarol-hizo-futbol-ante-juventud/",
-      "resumen": "El carbonero disputó 2 encuentros de entrenamiento ante Juventud de Las Piedras en Los Aromos pensando en el inicio de la competencia oficial. En el primer encuentro, Peñarol formó con: Kevin Morgan, Pedro Milans, Javier Méndez, Nahuel Herrera, Maxi Olivera; Javier Cabrera, Ignac...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Sat, 26 Jul 2025 17:54:14 +0000",
-      "peso": 1.3
+      "titulo": "Las fechas para la definición de la Liga AUF Uruguaya: Peñarol espera por el ganador de Racing vs Liverpool",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQU0JmdFlZc01kSkdhY1p0cVdDMERtVElHTHVpaGM0eWhZLTBxUHlVQ2R1UXFiMEx0ajJ1OEZfYmZwVDZkVmFKNGFsX1dGQ3VWYlJybUgxMXNuNU5fWmxSRGdfZWc2UTNSUUR6LWtMX3JYWE52TTFwNkhwWFNOeWcxQ1RnRnFoVVRjSDlORmd1di1XOWsyNUg5WnF2NXBWSUV1WEtSbkZOOF81X0hRRlBTSS1NdUFzR2FFZ2ZZSUh6S2x2WkktOU1pdHhaS0diVmNrNlgxUFln0gHbAUFVX3lxTFA0azREQlYzOWJjaDVrM3pVWEJ2N0owNC0tQmZGWTg0XzlhX0w3Y3VjeVBpdTd6S19hMmxiRVRwOGd3Vm96WkJqbFpteVljQXNoYzNfWHFGTmFkMTQ4d2NHR0NxeU9RWFhtNGRoeUJLUDlld0FzYU9mWTctQ3N1aThXNE5acXBxMndrd0xYZlhwbWFfQ05vX05zdGhmQTZHSEtyem9LVGtwYlg1VW9oSGdlQXRHTmtGOFhqTmZwTGlCRjVZaUhUa1dxb1EyaHBObVh6Rl9XdFQ0cDlOQQ?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 21:55 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "19/11/2026 21:55",
+      "fecha_iso": "2026-11-19T21:55:32-03:00",
+      "fecha_raw": "19/11/2026 21:55 hs",
+      "antiguedad_horas": 18.3,
+      "timestamp": 1795136132.0,
+      "peso": 1.25
     },
     {
-      "titulo": "Coelho continuará en Brasil",
-      "url": "https://www.padreydecano.com/cms/noticias/coelho-continuara-en-brasil/",
-      "resumen": "El zaguero de 32 años Leo Coelho rescindió su contrato con Peñarol y continuará su carrera en Remo de la segunda división de Brasil. Peñarol sigue teniendo altas y bajas de cara al segundo semestre del año. Uno de los jugadores que no va a continuar es el brasileño Leo Coelho, qu...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 12:14:21 +0000",
-      "peso": 1.3
+      "titulo": "Ruglio tras el 3-0 de Peñarol: “no tengo fuerzas”, “youtubers pagos” y “cuentas truchas”",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPTi1yUGhvMjhLWm5SdHl4ZlRMZHVuUG1ad2Q3S0tlYkc0Q20yTWRqWENCTUhRaFFDUlJWOXdQOGtNamtHbTRaaFdKWC1hbm1udlpLVm9wQkhWSnl2S2FFaFJaenVCc0JWS1NpdzFGZUZzMlhkbmktQTR4amh4S1IzREtGdlVHWFJIT3NETkFoYWZRMzZOaFBNVjdsaUhuNFJHVFZfbUgxLV93M0RWcElEX1Bwa0dRbVlLZkRlZ09YWmVEV0Nua3dPcWxlY9IB7wFBVV95cUxPWkVyZGJoMUNQcGRRczlCb3dGTy0zQW1ZS01CX3Nsemx2YWszbjZKU0ZNRTN1cXJiV3BkQU9jajBVVXo0eWdKNmdyNmZZSkpxYlc5b0l6YVQ2TDViUlVnckFRWUZnbUlJYUxCd2pxYlh6OFE3ejlxRXQ0ZFMzTWo2cWxNVHhNWVo1WTg5X2VQeThLOFV0TENJd1lBUUhHUXBEZEhZcTFhSlg2WHlzdzJsXzhhTld4SzBQNmVxNlNaWkNYYkRKLXlBbTdqVFhOUWw1RXZyUV85RDRZcEs3a2xtOGhrbFRlVEJrdC14Mi1Gcw?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:57 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 19:57",
+      "fecha_iso": "2026-11-19T19:57:00-03:00",
+      "fecha_raw": "19/11/2026 19:57 hs",
+      "antiguedad_horas": 20.3,
+      "timestamp": 1795129020.0,
+      "peso": 1.2
     },
     {
-      "titulo": "Regreso esperado",
-      "url": "https://www.padreydecano.com/cms/noticias/regreso-esperado/",
-      "resumen": "Matías Arezo vuelve a ser jugador de Peñarol. El delantero de 22 años llegó a préstamo desde Gremio. Gran incorporación pensando en el resto del año para la delantera de Diego Aguirre. El carbonero contrató el retorno de Matías Arezo, delantero de 22 años a sus filas y con este s...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Tue, 15 Jul 2025 10:42:51 +0000",
-      "peso": 1.3
+      "titulo": "Peñarol: el abrazo de Ignacio Ruglio con Diego Aguirre y el mensaje para Lucas Ferreira",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWFVjME5sdFJGY2VPRUM4VzlRYnJhNEIzLWtkWDY2WnRldnNwd1h3cEQzNm9OX3BWUExfdU1oZDBGZHNvTWUxUmpRVDNuRUZJLXpLT2Z0cDFaRjVaUGVyX2xRdDl4XzBoWUp2TkxsNHJiVVZjQ1RNM1RvZWRCbE9Ra3FRbWRsWkRYWjNyN0ZqMi1lT1psSlllTExxTjlkRWdaUEZyUVRvNjRubVZUbkYtRHMtdDE1OVk4UHVVWTd5eTBRZEVYS21IeE9SNmdNYkHSAfMBQVVfeXFMUEUxNnNpNTR5MlZZLTNXZ2NKTHRxcW9qSmJQb1lWU1Vza0l1R2V6ZTBWMXR6WkNCcmM3bVdDdWUtNUtLa2VHYVE4Y1h4TndnMlg0QnVscEowakFzSzU5YnYydFdVT2kyUTB4X2UzN3pOTFBaU29iTFZnSWdiclZ6RjBrTU1pUWF6R0JxbTNRZl9KSnQyZmh3Q3l2a2tBZGI1M28zRUllUmJ5WHNBVGdDbTBlUmQxQmlvN0VYaGFYb01rcXNOd3gza1UwYnBQdDlteXA5TVBkRTcxTFF2eUM2enoycXNtY3hENl9HcVkyaG5DWmZJ?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:38 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 19:38",
+      "fecha_iso": "2026-11-19T19:38:00-03:00",
+      "fecha_raw": "19/11/2026 19:38 hs",
+      "antiguedad_horas": 20.6,
+      "timestamp": 1795127880.0,
+      "peso": 1.2
     },
     {
-      "titulo": "De Amores rescindió con Peñarol",
-      "url": "https://www.padreydecano.com/cms/noticias/de-amores-rescindio-con-penarol/",
-      "resumen": "El guardameta de 30 años que tenía contrato hasta diciembre de este año, rescindió el mismo y se despidió del club Decano. Peñarol continúa en la búsqueda de su golero, un puesto que no logró tener dueño en lo que va del año. Tanto De Amores como Campaña rotaron a lo largo de la ...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Thu, 10 Jul 2025 23:32:51 +0000",
-      "peso": 1.3
+      "titulo": "Clasificación a copas: Peñarol a la Libertadores y varios esperan. ¿Qué necesita Nacional?",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQRkEtWmExVHBNRHBtbHE1RWpOckdDX3FtdGVBSEtDY2pjX2Vjalp6RXlyQThfVlZ5cVQ1cTBnejBLeW80YUJlc3kyX0FEQm1kQjB1R2R6YTFyTzliLXBXbjRLQ3V0aFlKSHlUMnRzRElMZzYzNW5NVk5TX2JsSG8yeWQ4dlBOTTF0cm1zMkxNYlJMSjROWm5VTlNQQkUxWEVDanlVZ1RRWmRRcmR5QVpqaUVtQUQ4QnZiRFU5S1ZSN3VRQTR0M2xQN09LMEJVUlFXdkE?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 18:51 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 18:51",
+      "fecha_iso": "2026-11-19T18:51:00-03:00",
+      "fecha_raw": "19/11/2026 18:51 hs",
+      "antiguedad_horas": 21.4,
+      "timestamp": 1795125060.0,
+      "peso": 1.2
     },
     {
-      "titulo": "Fecha clásica",
-      "url": "https://www.padreydecano.com/cms/formativas/fecha-clasica/",
-      "resumen": "Peñarol se consagró campeón del Apertura Sub 15 venciendo 4 a 1 a Nacional. Además cosechó otra victoria en Sub 19 y 2 empates clásicos. Se disputó la fecha clásica de formativas siendo esta la fecha 17 del Torneo Apertura. Los 5 encuentros se jugaron en el mismo día y en el mism...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Wed, 02 Jul 2025 23:48:09 +0000",
-      "peso": 1.3
+      "titulo": "Así quedaron las tablas de posiciones del Clausura y de la Anual tras la victoria de Peñarol: el triunfo que le valió US$ 3.000.000 y abrió una puerta a Nacional",
+      "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxQWE1UbGpsRDVkb1hpNlBrcURPY2diUDhuaEszMTNIaG1VRW1Wb1U4V3BtdTl0UWxxUGtQMi01dl83bDRWWkxVOEVVRkI3dWJGZWMyUDdZYWlILS1pVmY4S0xtLVEyZWRab1Q2Vzc5Q3k4d0xTS2hfTFBGYTZFSWFXU2VZZHg4MTJOTVIzNmx2MzhGRTR2T09USXpTR3NSTzFmX0JJZGktOWVyRk5LNmdyaUxsTFI4UzA2QTA3YmxLanRzdE5nSjBGT2ZBTWtwaGxudXZZMkNwZmN2OUVOcXpCWDVDVFd6Umd4UUNBNUJrQlg5MExaYnJfTEFIcmpPc24yNTdqSEdxWmxiSEwzV00yWEItQnFRUUFi0gGeAkFVX3lxTE5FT0hpYndHSDF2U1h4WUtJT3pvNVNqRWxkMEpNRGV5OUhhVWRDbkFMRldJMlAzOXJDMFluWXE2dk5QNGNXUVlJaTVVek5JVW9sdllaMm42eW1IUnlfRkxQV1plQ3ZzMFFVVG5oU0NDd0NhbDlpVmlGVUF0c0hIRC1XMkxjMmtRZE51Y0lJZWNnenN2dXNjUG9jLXIxcWp4UHlUZE5RRlhDUUEwa05fazNLREpxX3MxRHZ2Yl90SW1OTGlJNERlU2xISktQRThXWU1ueWliUlNDblZiUlBfM3VXa01ySG5PUW5xTThsb1kxUGRkaHpvXzI5ajVQTFhSRjFhUDlRVjNXZmhLNmdzV3Zib2hLdW91V2IyZzRnRUE?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 18:50 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "19/11/2026 18:50",
+      "fecha_iso": "2026-11-19T18:50:00-03:00",
+      "fecha_raw": "19/11/2026 18:50 hs",
+      "antiguedad_horas": 21.4,
+      "timestamp": 1795125000.0,
+      "peso": 1.25
     },
     {
-      "titulo": "Cambios en el equipo",
-      "url": "https://www.padreydecano.com/cms/noticias/cambios-en-el-equipo/",
-      "resumen": "Peñarol tendrá variantes para enfrentar a Montevideo Wanderers en el Estadio Campeón del Siglo por la sexta fecha del Torneo Intermedio 2025. El equipo de Diego Aguirre formará con: Guillermo De Amores; Damián Suárez, Leo Coelho, Nahuel Herrera, Juan Rodríguez; Eric Remedi, Ignac...",
-      "fuente": "Padre y Decano",
-      "fecha_raw": "Sun, 22 Jun 2025 19:05:46 +0000",
-      "peso": 1.3
+      "titulo": "Peñarol cumplió, le ganó a Cerro Largo y se quedó con la tabla anual",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNeWZiQmdONTVWNXFTYm1MY0NFUFpSazl2RDZyQnY1NHpaTVhiczVpek1QdHlkekQ4Q3dseFRRdmR6TDNOLVM0TkZKVEp1Qy1kWnVhX3ZRR2JGemMxRFkxSzNpMjl3V1lJYUlPYml0Z0tISU1UdGFBZ2syUnpRTk90bW50Nlg4YU9rMEhiUTRkQlE4MS16eS1hSl9DYzB4SzNENlhmSnZ2cXZVdV9MRXVBWGlLQ3Vic0RE?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por la diaria el 19/11/2026 a las 18:39 hs.",
+      "fuente": "la diaria",
+      "fecha": "19/11/2026 18:39",
+      "fecha_iso": "2026-11-19T18:39:05-03:00",
+      "fecha_raw": "19/11/2026 18:39 hs",
+      "antiguedad_horas": 21.6,
+      "timestamp": 1795124345.0,
+      "peso": 1.05
+    },
+    {
+      "titulo": "Leonel Jaime, la joya de River Plate que lideró a Peñarol a obtener la tabla Anual",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPUU5XQUp1N2U0Y1pmYmJTTFJYMUIzMGIyODI2all2ZWtVMGFHV0ZMMm1FMHNzTTljZTV4N1BOcEMxblRpblhzNURIWW9BMG9acnlBWjFzLTdkYS1RNFhrQU1LTWtIdktMYklqUjhnRy1xc3R1MmhtRzEyLXFnYTNUekJfQUlGRTU5a3RPQ3JwSHM4ODRQWERRS1Bvdm4ybXVjTGpLcmpXVC0wY3ZMazdvYkFhTV85clhMdkVkd1Q1VnBwWV9DNk9DWg?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 18:27 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 18:27",
+      "fecha_iso": "2026-11-19T18:27:00-03:00",
+      "fecha_raw": "19/11/2026 18:27 hs",
+      "antiguedad_horas": 21.8,
+      "timestamp": 1795123620.0,
+      "peso": 1.2
+    },
+    {
+      "titulo": "Así se define la Tabla Anual de la Liga Uruguaya 2026: la ventaja de Peñarol para avanzar a las finales y lo que necesitan City Torque y Depor Maldonado",
+      "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxQZXg4S1ZOTFNpMGZ0NlNiV2xJdEhJT0xMaXk4VUpYTzd1Z2xtQU1zTHVZMzI4cm5mTGQxSkNkNEhZWVdoTk5RV01iX3VhSVE2ZTdOb2kyNF9pNDJUS3JOT0hBMnExLWQ4WDQtbmtnd2tPSXE2ZURRMnNWeU85ajlrb1lLNGVWcjB1YzhQWEg1MTJBQUtEOW9JN2UyQkRlbllaWE5UZ0RXRWphb3N5Wl83a2hTZUtNcFh0TmpfMTQ1SHFJc3c1akMxY05FV1llU1dycWRDbnY3UEhXZ0VRRURaaEhxUmJsemxRRDlUU2lxVW9KeXRLRTBpclZnX1ZTMU5iV2FNUW1yMnpVM1ZfZUJKek5OSUPSAZoCQVVfeXFMTWJoSmRXZjdiWVJnYVBucDRaaW5fSERtWmR4em5SUkd1bk53YXB5VlpuVzJkV2JYTjRvMlhVQXhEVWdOa21rQ3ZjQlo5ZGVMeWF0M3lYZkVVeHR6ejl0dUlMSV81eEdBcTNCdlJmdzZSaHNwRnZkZFZzeEFYanZvNmJzVWsydUNBdkNhQWpaWkNMWnZZUTd0VmRNcVVQOG01NDBKRks0RmVfdWQxUk1zUk05Si1WYXdzMG1kQ3Azb1d3M1ZEOWVvRFlTRlVFQ1h6LWxsS0ZLU3JTM2tYdXdTeF91QTNoLUEwTTBPZWtrRE9JM0hDR0tUR0RjVjZ5cTdBWkxuVXl5Z1JoVi1iRlJLajJUS3NSTVNjNVpB?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 16:00 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "19/11/2026 16:00",
+      "fecha_iso": "2026-11-19T16:00:00-03:00",
+      "fecha_raw": "19/11/2026 16:00 hs",
+      "antiguedad_horas": 24.3,
+      "timestamp": 1795114800.0,
+      "peso": 1.25
     }
-  ],
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-la-previa-concentracion.html"
+  ]
 }
