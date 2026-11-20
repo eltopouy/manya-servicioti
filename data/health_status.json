@@ -1,6 +1,6 @@
 {
-  "fecha_auditoria": "20/11/2026 04:00:08",
-  "timestamp": "2026-11-20T04:00:08.064060-03:00",
+  "fecha_auditoria": "20/11/2026 04:30:07",
+  "timestamp": "2026-11-20T04:30:07.172092-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
   "pruebas_exitosas": 9,
@@ -11,12 +11,12 @@
       "test": "Zona Horaria UY_TZ (UTC-3)",
       "status": "PASS",
       "passed": true,
-      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-20 04:00:05",
+      "message": "Offset detectado: -3.0 hs (esperado: -3.0 hs). Hora UY actual: 2026-11-20 04:30:04",
       "details": {
-        "now_uy": "2026-11-20 04:00:05.237587-03:00",
+        "now_uy": "2026-11-20 04:30:04.748214-03:00",
         "offset_hours": -3.0
       },
-      "timestamp": "2026-11-20T04:00:05.237620-03:00"
+      "timestamp": "2026-11-20T04:30:04.748253-03:00"
     },
     {
       "test": "Coherencia Temporal 'es_hoy'",
@@ -27,7 +27,7 @@
         "delta_days": 2,
         "es_hoy": false
       },
-      "timestamp": "2026-11-20T04:00:05.238469-03:00"
+      "timestamp": "2026-11-20T04:30:04.749109-03:00"
     },
     {
       "test": "Integridad de Puntos (Tabla Anual 66 pts)",
@@ -37,7 +37,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-20T04:00:05.242427-03:00"
+      "timestamp": "2026-11-20T04:30:04.753117-03:00"
     },
     {
       "test": "Verificación de Rival, DT y Escenario",
@@ -53,7 +53,7 @@
           "data/rival_intelligence.json no tiene a Mathías Corujo como entrenador"
         ]
       },
-      "timestamp": "2026-11-20T04:00:05.246060-03:00"
+      "timestamp": "2026-11-20T04:30:04.756420-03:00"
     },
     {
       "test": "Integridad de Datasets JSON",
@@ -64,7 +64,7 @@
         "missing": [],
         "corrupted": []
       },
-      "timestamp": "2026-11-20T04:00:05.250086-03:00"
+      "timestamp": "2026-11-20T04:30:04.760800-03:00"
     },
     {
       "test": "Salud de Locks y Anti-Colisión",
@@ -74,7 +74,7 @@
       "details": {
         "abandoned": []
       },
-      "timestamp": "2026-11-20T04:00:05.250323-03:00"
+      "timestamp": "2026-11-20T04:30:04.761037-03:00"
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
@@ -103,7 +103,7 @@
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-juventud-vs-penarol.html"
         }
       },
-      "timestamp": "2026-11-20T04:00:07.963599-03:00"
+      "timestamp": "2026-11-20T04:30:07.076146-03:00"
     },
     {
       "test": "PWA Network-First y Armonía de Versiones v9.0",
@@ -113,7 +113,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-20T04:00:07.970280-03:00"
+      "timestamp": "2026-11-20T04:30:07.081939-03:00"
     },
     {
       "test": "Escudos Oficiales Copa CONMEBOL Libertadores",
@@ -123,7 +123,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-20T04:00:07.975063-03:00"
+      "timestamp": "2026-11-20T04:30:07.086224-03:00"
     },
     {
       "test": "Frescura Fotográfica y Feed de Redes Sociales",
@@ -135,7 +135,7 @@
           "data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-20T04:00:07.979837-03:00"
+      "timestamp": "2026-11-20T04:30:07.090927-03:00"
     },
     {
       "test": "Coherencia Editorial y Anti-Contaminación",
@@ -172,7 +172,7 @@
           "[Actualización Fotográfica y Feed de Instagram] data/galleries.json contiene mención obsoleta a 'Liverpool' o festejo de gol de Liverpool"
         ]
       },
-      "timestamp": "2026-11-20T04:00:07.994023-03:00"
+      "timestamp": "2026-11-20T04:30:07.104232-03:00"
     },
     {
       "test": "Pizarra Táctica Interactiva (Armá tu 11)",
@@ -182,7 +182,7 @@
       "details": {
         "errors": []
       },
-      "timestamp": "2026-11-20T04:00:08.063756-03:00"
+      "timestamp": "2026-11-20T04:30:07.171886-03:00"
     }
   ],
   "reparaciones_aplicadas": []
