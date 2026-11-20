@@ -3,8 +3,12 @@ __pycache__/
 .env
 _ref_temp_*
 _raw_seed_*
+automation/_temp_*
 *.db
 *.sqlite
 *.sqlite3
-logs/*.log
+logs/
+*.log
 .manya_locks/
+data/health_status.json
+data/.sync_state.json

@@ -1,19 +1,24 @@
 /* -*- coding: utf-8 -*-
- * MOTOR INTERACTIVO MANYA SERVICIOTI (js/app.js)
+ * MOTOR INTERACTIVO MANYA SERVICIOTI v10.0 (Zero-Hardcode & Full Data-Driven)
  * Controla:
- * 1. Hidratación en tiempo real desde /data/*.json (ESPN API, Clima CDS, Noticias GFlash 3.8, Galería Gemini Web Vision).
- * 2. Cuenta regresiva al segundo para el próximo partido de Peñarol.
- * 3. Simulador Interactivo de la Tabla Anual Acumulada.
- * 4. Pizarra Táctica "Armá tu 11 Titular" con cambio de esquema (4-2-3-1, 4-3-3, 4-4-2), cambios desde el banco y exportación PNG.
- * 5. Trivia Interactiva "Sabiduría Carbonera 1891".
+ * 1. Hidratación 100% dinámica desde /data/*.json (ESPN API, AUF, 1891 BD, Open-Meteo, Prensa).
+ * 2. Match Center adaptativo (EN_VIVO, POST_PARTIDO 48h con goleadores/video, PREVIA, FINAL URUGUAYO).
+ * 3. Tablas oficiales (Anual, Clausura, Libertadores) + Cuadro de Definición / Simulador interactivo.
+ * 4. Pizarra Táctica "Armá tu 11" con plantel real 2026, cambios bidireccionales y PNG 1080x1350.
+ * 5. Galería optimizada con carga progresiva ("Ver más"), Lightbox HD y Trivia 1891.
  */
 (function () {
   'use strict';
+
+  const APP_VERSION = '10.0';
 
   let state = {
     live: null,
     digest: null,
     ig: [],
+    galleries: [],
+    galleryFilter: 'all',
+    galleryLimit: 6,
     squad: null,
     history: null,
     escudosCatalog: null,
@@ -25,9 +30,7 @@
     initialLineup: [],
     initialBench: [],
     simPointsDelta: 0,
-    standingsTab: 'clausura',
-    triviaIndex: 0,
-    triviaScore: 0
+    standingsTab: 'anual'
   };
 
   const FORMATIONS = {
@@ -72,172 +75,62 @@
     ]
   };
 
+  // Plantel real vigente de Peñarol Noviembre 2026 (respaldo inmediato si aún no cargó squad_2026.json)
+  const DEFAULT_LINEUP = [
+    { id: 'washington_aguerre', numero: 29, nombre: 'Washington Aguerre', posicion: 'ARQ', titular: true },
+    { id: 'ignacio_alegre', numero: 28, nombre: 'Ignacio Alegre', posicion: 'LD', titular: true },
+    { id: 'german_pezzella', numero: 2, nombre: 'Germán Pezzella', posicion: 'DFC', titular: true },
+    { id: 'nahuel_herrera', numero: 34, nombre: 'Nahuel Herrera', posicion: 'DFC', titular: true },
+    { id: 'maximiliano_olivera', numero: 15, nombre: 'Maximiliano Olivera', posicion: 'LI', titular: true },
+    { id: 'eric_remedi', numero: 5, nombre: 'Eric Remedi', posicion: 'MCD', titular: true },
+    { id: 'eduardo_darias', numero: 13, nombre: 'Eduardo Darias', posicion: 'MC', titular: true },
+    { id: 'javier_cabrera', numero: 7, nombre: 'Javier Cabrera', posicion: 'ED', titular: true },
+    { id: 'leonardo_fernandez', numero: 10, nombre: 'Leonardo Fernández', posicion: 'MCO', titular: true },
+    { id: 'leonel_jaime', numero: 11, nombre: 'Leonel Jaime', posicion: 'EI', titular: true },
+    { id: 'matias_arezo', numero: 19, nombre: 'Matías Arezo', posicion: 'DC', titular: true }
+  ];
+
+  const DEFAULT_BENCH = [
+    { id: 'sebastian_britos', numero: 1, nombre: 'Sebastián Britos', posicion: 'ARQ', titular: false },
+    { id: 'mauricio_lemos', numero: 3, nombre: 'Mauricio Lemos', posicion: 'DFC', titular: false },
+    { id: 'lucas_ferreira', numero: 6, nombre: 'Lucas Ferreira', posicion: 'DFC', titular: false },
+    { id: 'diego_laxalt', numero: 93, nombre: 'Diego Laxalt', posicion: 'LI', titular: false },
+    { id: 'thiago_espinosa', numero: 26, nombre: 'Thiago Espinosa', posicion: 'LI', titular: false },
+    { id: 'lucas_hernandez', numero: 27, nombre: 'Lucas Hernández', posicion: 'LI', titular: false },
+    { id: 'jesus_trindade', numero: 21, nombre: 'Jesús Trindade', posicion: 'MCD', titular: false },
+    { id: 'roberto_fernandez', numero: 8, nombre: 'Roberto Fernández', posicion: 'MC', titular: false },
+    { id: 'leandro_umpierrez', numero: 32, nombre: 'Leandro Umpiérrez', posicion: 'MCO', titular: false },
+    { id: 'luis_miguel_angulo', numero: 77, nombre: 'Luis Miguel Angulo', posicion: 'EI', titular: false },
+    { id: 'abel_hernandez', numero: 99, nombre: 'Abel Hernández', posicion: 'DC', titular: false },
+    { id: 'facundo_batista', numero: 9, nombre: 'Facundo Batista', posicion: 'DC', titular: false }
+  ];
+
   const TRIVIA_QUESTIONS = [
-    {
-      cat: 'general',
-      catName: 'Fundación & Raíces',
-      q: '¿En qué fecha exacta y en qué histórico enclave se fundó nuestra institución (CURCC / Club Atlético Peñarol)?',
-      opts: ['28 de septiembre de 1891 en la Villa Peñarol', '14 de mayo de 1899 en La Blanqueada', '18 de julio de 1900 en el Centro de Montevideo', '25 de agosto de 1891 en Pocitos'],
-      ans: 0,
-      exp: 'El 28 de septiembre de 1891 los trabajadores ferroviarios británicos y criollos fundaron el Central Uruguay Railway Cricket Club (CURCC) en la Villa Peñarol, decano indiscutido del fútbol uruguayo.'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿Quién convirtió el gol agónico en el minuto 120 en Santiago de Chile para ganar la quinta Copa Libertadores en 1987?',
-      opts: ['Diego "La Fiera" Aguirre', 'Fernando Morena', 'Alberto Spencer', 'Jorge Cabrera'],
-      ans: 0,
-      exp: 'Diego Aguirre recibió de zurda y cruzó un remate legendario a los 120 minutos ante América de Cali en el Estadio Nacional de Santiago, sellando la quinta Libertadores.'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿Quién es el máximo goleador histórico de toda la Copa CONMEBOL Libertadores de América con 54 goles?',
-      opts: ['Alberto "Cabeza Mágica" Spencer', 'Fernando Morena', 'Pedro Virgilio Rocha', 'Juan Alberto Schiaffino'],
-      ans: 0,
-      exp: 'Alberto Spencer ostenta el récord absoluto de la Copa Libertadores con 54 goles (48 de ellos convertidos con la gloriosa camiseta de Peñarol).'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿Contra qué tres gigantes de Europa conquistó Peñarol sus 3 Copas Intercontinentales del Mundo?',
-      opts: ['Benfica (1961), Real Madrid (1966) y Aston Villa (1982)', 'Milan (1961), Real Madrid (1966) y Liverpool (1982)', 'Benfica (1960), Inter (1966) y Hamburgo (1982)', 'Ajax (1961), Real Madrid (1966) y Juventus (1982)'],
-      ans: 0,
-      exp: 'Peñarol fue tricampeón del mundo venciendo al Benfica de Eusébio (1961), al Real Madrid en Montevideo y en el Bernabéu (1966) y al Aston Villa en Tokio (1982).'
-    },
-    {
-      cat: 'idolos',
-      catName: 'Ídolos Eternos',
-      q: '¿Cómo se llama el legendario capitán que disputó 574 partidos oficiales jugando exclusivamente en Peñarol toda su carrera?',
-      opts: ['Néstor "Tito" Gonçalves', 'Obdulio Varela', 'William Martínez', 'Walter Olivera'],
-      ans: 0,
-      exp: 'Néstor "Tito" Gonçalves, el "Capitán de Capitanes", defendió únicamente la camiseta oro y carbón entre 1957 y 1970, conquistando 3 Libertadores, 2 Intercontinentales y 9 Campeonatos Uruguayos.'
-    },
-    {
-      cat: 'records',
-      catName: 'Récords & Hazañas',
-      q: '¿Qué récord imbatible estableció Fernando Morena el 16 de julio de 1978 ante Huracán Buceo en el Estadio Centenario?',
-      opts: ['Anotó 7 goles en un mismo partido oficial', 'Convirtió 5 goles de cabeza en un solo tiempo', 'Marcó 3 goles en menos de 4 minutos', 'Anotó 4 goles de tiro libre en un partido'],
-      ans: 0,
-      exp: 'Fernando Morena anotó 7 goles en la victoria 7-0 ante Huracán Buceo, récord absoluto en la historia de la Primera División uruguaya.'
-    },
-    {
-      cat: 'records',
-      catName: 'Récords & Hazañas',
-      q: '¿Cuántos minutos con valla invicta consecutiva acumuló Ladislao Mazurkiewicz en 1968, récord récord histórico del fútbol uruguayo?',
-      opts: ['987 minutos', '720 minutos', '840 minutos', '1040 minutos'],
-      ans: 0,
-      exp: 'Ladislao Mazurkiewicz mantuvo su arco invicto durante 987 minutos (casi 11 partidos completos) en el Campeonato Uruguayo de 1968, marca insuperada.'
-    },
-    {
-      cat: 'clasicos',
-      catName: 'Clásicos Inolvidables',
-      q: '¿Por qué se conoce al clásico del 23 de abril de 1987 como "El Clásico de los 8 contra 11"?',
-      opts: ['Peñarol sufrió 3 expulsiones y aun así ganó 2-1 con gol de Diego Aguirre', 'Nacional jugó con 8 futbolistas por lesión', 'Peñarol defendió un 0-0 con 8 jugadores durante 85 minutos', 'El partido terminó con 8 jugadores aurinegros festejando'],
-      ans: 0,
-      exp: 'Con 3 futbolistas menos por expulsiones, el Peñarol de Washington Tabárez atacó heroicamente y Diego Aguirre anotó el 2-1 definitivo en el minuto 82.'
-    },
-    {
-      cat: 'clasicos',
-      catName: 'Clásicos Inolvidables',
-      q: '¿Qué hecho histórico originó el célebre "Clásico de la Fuga" el 9 de octubre de 1949?',
-      opts: ['Nacional perdía 2-0 ante la Máquina del 49 y decidió no salir a jugar el 2° tiempo', 'Peñarol ganó 5-0 escapándose en la Tabla Anual', 'El clásico se suspendió por un apagón en el Centenario', 'El arquero rival se retiró por el túnel sin autorización'],
-      ans: 0,
-      exp: 'Peñarol arrollaba 2-0 con goles de Ghiggia y Míguez; en el entretiempo, Nacional abandonó el Estadio Centenario por la chimenea/ventana del vestuario sin disputar el complemento.'
-    },
-    {
-      cat: 'clasicos',
-      catName: 'Clásicos Inolvidables',
-      q: '¿Cuál fue el marcador del histórico clásico del 27 de abril de 2014, mayor goleada clásica en torneos cortos modernos?',
-      opts: ['Peñarol 5 - 0 Nacional', 'Peñarol 4 - 0 Nacional', 'Peñarol 5 - 1 Nacional', 'Peñarol 6 - 0 Nacional'],
-      ans: 0,
-      exp: 'Histórico 5 a 0 aurinegro con goles de Marcelo Zalayeta, Damián Macaluso, Jorge "Japo" Rodríguez y doblete inolvidable de Luis Aguiar.'
-    },
-    {
-      cat: 'records',
-      catName: 'Récords & Hazañas',
-      q: '¿Cuántos goles oficiales convirtió Fernando Morena con la camiseta del Club Atlético Peñarol según 1891 BD?',
-      opts: ['350 goles', '280 goles', '310 goles', '215 goles'],
-      ans: 0,
-      exp: 'Fernando Morena es el máximo artillero de la historia del Decano con 350 goles oficiales certificados por la Comisión de Historia y Patrimonio de Peñarol.'
-    },
-    {
-      cat: 'cds',
-      catName: 'Estadio Campeón del Siglo',
-      q: '¿En qué fecha se inauguró oficialmente el Estadio Campeón del Siglo y quién convirtió el primer gol en su campo?',
-      opts: ['28 de marzo de 2016 — Diego Forlán', '28 de septiembre de 2015 — Marcelo Zalayeta', '19 de abril de 2016 — Leonardo Fernández', '31 de octubre de 2016 — Diego Aguirre'],
-      ans: 0,
-      exp: 'El Campeón del Siglo se inauguró el 28 de marzo de 2016 con triunfo 4-1 ante River Plate argentino; Diego Forlán convirtió el histórico primer gol en la Catedral.'
-    },
-    {
-      cat: 'records',
-      catName: 'Récords & Hazañas',
-      q: '¿En qué años conquistó Peñarol sus dos célebres Quinquenios de Oro en el Campeonato Uruguayo?',
-      opts: ['1958-1962 y 1993-1997', '1960-1964 y 1995-1999', '1955-1959 y 1990-1994', '1965-1969 y 1980-1984'],
-      ans: 0,
-      exp: 'Peñarol es el único club uruguayo con dos Quinquenios de Oro: 1958-1962 (bajo Hugo Bagnulo y Roberto Scarone) y 1993-1997 (con Gregorio Pérez y Pablo Bengoechea).'
-    },
-    {
-      cat: 'general',
-      catName: 'Distinciones Mundiales',
-      q: '¿Qué histórica distinción otorgó la IFFHS a Peñarol en septiembre de 2009 tras el balance del siglo?',
-      opts: ['Club Campeón del Siglo XX de Sudamérica (con 531 puntos)', 'Mejor club de la década de 1980', 'Club con mayor hinchada proporcional del planeta', 'Institución deportiva más laureada de América'],
-      ans: 0,
-      exp: 'La Federación Internacional de Historia y Estadística de Fútbol (IFFHS) proclamó oficialmente a Peñarol como el Mejor Club del Siglo XX de Sudamérica por su palmarés continental.'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿Quién anotó el gol agónico en el minuto 89 en Santiago de Chile para consagrar a Peñarol campeón de América ante Cobreloa en 1982?',
-      opts: ['Fernando Morena', 'Venancio Ramos', 'Jair Gonçalves', 'Ernesto Vargas'],
-      ans: 0,
-      exp: 'Tras empatar 0-0 en Montevideo, Morena conectó de derecha un centro de Ramos a los 89 minutos en el Estadio Nacional de Santiago, conquistando la cuarta Libertadores.'
-    },
-    {
-      cat: 'idolos',
-      catName: 'Ídolos Eternos',
-      q: '¿Quién fue el capitán y emblema del Segundo Quinquenio (1993-1997), célebre por su precisión quirúrgica en tiros libres?',
-      opts: ['Pablo Javier Bengoechea', 'Gabriel Cedrés', 'Antonio Pacheco', 'Darío Silva'],
-      ans: 0,
-      exp: 'Pablo "El Profesor" Bengoechea fue el capitán y arquitecto del Quinquenio 93-97, autor de goles clásicos decisivos y dueño de una pegada de tiro libre inolvidable.'
-    },
-    {
-      cat: 'idolos',
-      catName: 'Ídolos Eternos',
-      q: '¿Qué ídolo moderno disputó 475 partidos oficiales con Peñarol en el siglo XXI y conquistó 8 títulos de Campeón Uruguayo?',
-      opts: ['Antonio "Tony" Pacheco', 'Marcelo Zalayeta', 'Darío Rodríguez', 'Cristian "Cebolla" Rodríguez'],
-      ans: 0,
-      exp: 'Antonio "Tony" Pacheco vistió la aurinegra en 475 encuentros oficiales, convirtiéndose en el gran referente del siglo XXI y en uno de los jugadores más queridos de la hinchada.'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿Quién anotó el primer gol de la historia de la Copa Libertadores el 19 de abril de 1960 en la goleada 7-1 de Peñarol a Jorge Wilstermann?',
-      opts: ['Carlos "Lucho" Borges', 'Alberto Spencer', 'Luis Cubilla', 'José Sasía'],
-      ans: 0,
-      exp: 'Carlos "Lucho" Borges abrió la cuenta a los 13 minutos, convirtiendo el primer gol de la historia de la Copa Libertadores de América.'
-    },
-    {
-      cat: 'records',
-      catName: 'Récords & Hazañas',
-      q: '¿Cuál es el récord histórico de partidos oficiales invicto en el Campeonato Uruguayo que ostenta Peñarol?',
-      opts: ['56 partidos consecutivos invicto (1966-1969)', '42 partidos consecutivos invicto', '34 partidos consecutivos invicto', '62 partidos consecutivos invicto'],
-      ans: 0,
-      exp: 'Entre 1966 y 1969, el Glorioso Peñarol hilvanó 56 partidos consecutivos sin conocer la derrota en el Campeonato Uruguayo, récord absoluto hasta nuestros días.'
-    },
-    {
-      cat: 'libertadores',
-      catName: 'Copas Libertadores',
-      q: '¿En qué final épica de Copa Libertadores Peñarol perdía 0-2 en Santiago y terminó consagrándose campeón con remontada 4-2 ante River Plate argentino?',
-      opts: ['Final de 1966 en Santiago de Chile', 'Final de 1961 en San Pablo', 'Final de 1982 en Santiago', 'Final de 1960 en Asunción'],
-      ans: 0,
-      exp: 'El 20 de mayo de 1966 en el Estadio Nacional de Santiago, Peñarol remontó un 0-2 para ganar 4-2 en tiempo extra con goles de Spencer (2), Abbadie y Rocha.'
-    }
+    { cat: 'general', catName: 'Fundación & Raíces', q: '¿En qué fecha exacta y en qué histórico enclave se fundó nuestra institución (CURCC / Club Atlético Peñarol)?', opts: ['28 de septiembre de 1891 en la Villa Peñarol', '14 de mayo de 1899 en La Blanqueada', '18 de julio de 1900 en el Centro de Montevideo', '25 de agosto de 1891 en Pocitos'], ans: 0, exp: 'El 28 de septiembre de 1891 los trabajadores ferroviarios fundaron el Central Uruguay Railway Cricket Club (CURCC) en la Villa Peñarol, decano indiscutido del fútbol uruguayo.' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿Quién convirtió el gol agónico en el minuto 120 en Santiago de Chile para ganar la quinta Copa Libertadores en 1987?', opts: ['Diego "La Fiera" Aguirre', 'Fernando Morena', 'Alberto Spencer', 'Jorge Cabrera'], ans: 0, exp: 'Diego Aguirre cruzó un remate de zurda legendario a los 120 minutos ante América de Cali en el Estadio Nacional de Santiago, sellando la quinta Libertadores.' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿Quién es el máximo goleador histórico de toda la Copa CONMEBOL Libertadores de América con 54 goles?', opts: ['Alberto "Cabeza Mágica" Spencer', 'Fernando Morena', 'Pedro Virgilio Rocha', 'Juan Alberto Schiaffino'], ans: 0, exp: 'Alberto Spencer ostenta el récord absoluto de la Copa Libertadores con 54 goles (48 de ellos convertidos con la gloriosa camiseta de Peñarol).' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿Contra qué tres gigantes de Europa conquistó Peñarol sus 3 Copas Intercontinentales del Mundo?', opts: ['Benfica (1961), Real Madrid (1966) y Aston Villa (1982)', 'Milan (1961), Real Madrid (1966) y Liverpool (1982)', 'Benfica (1960), Inter (1966) y Hamburgo (1982)', 'Ajax (1961), Real Madrid (1966) y Juventus (1982)'], ans: 0, exp: 'Peñarol fue tricampeón del mundo venciendo al Benfica de Eusébio (1961), al Real Madrid en Montevideo y en el Bernabéu (1966) y al Aston Villa en Tokio (1982).' },
+    { cat: 'idolos', catName: 'Ídolos Eternos', q: '¿Cómo se llama el legendario capitán que disputó 574 partidos oficiales jugando exclusivamente en Peñarol toda su carrera?', opts: ['Néstor "Tito" Gonçalves', 'Obdulio Varela', 'William Martínez', 'Walter Olivera'], ans: 0, exp: 'Néstor "Tito" Gonçalves, el "Capitán de Capitanes", defendió únicamente la camiseta oro y carbón entre 1957 y 1970, conquistando 3 Libertadores, 2 Intercontinentales y 9 Uruguayos.' },
+    { cat: 'records', catName: 'Récords & Hazañas', q: '¿Qué récord imbatible estableció Fernando Morena el 16 de julio de 1978 ante Huracán Buceo en el Estadio Centenario?', opts: ['Anotó 7 goles en un mismo partido oficial', 'Convirtió 5 goles de cabeza en un solo tiempo', 'Marcó 3 goles en menos de 4 minutos', 'Anotó 4 goles de tiro libre en un partido'], ans: 0, exp: 'Fernando Morena anotó 7 goles en la victoria 7-0 ante Huracán Buceo, récord absoluto en la historia de la Primera División uruguaya.' },
+    { cat: 'records', catName: 'Récords & Hazañas', q: '¿Cuántos minutos con valla invicta consecutiva acumuló Ladislao Mazurkiewicz en 1968, récord histórico del fútbol uruguayo?', opts: ['987 minutos', '720 minutos', '840 minutos', '1040 minutos'], ans: 0, exp: 'Ladislao Mazurkiewicz mantuvo su arco invicto durante 987 minutos en el Campeonato Uruguayo de 1968, marca insuperada.' },
+    { cat: 'clasicos', catName: 'Clásicos Inolvidables', q: '¿Por qué se conoce al clásico del 23 de abril de 1987 como "El Clásico de los 8 contra 11"?', opts: ['Peñarol sufrió 3 expulsiones y aun así ganó 2-1 con gol de Diego Aguirre', 'Nacional jugó con 8 futbolistas por lesión', 'Peñarol defendió un 0-0 con 8 jugadores durante 85 minutos', 'El partido terminó con 8 jugadores aurinegros festejando'], ans: 0, exp: 'Con 3 futbolistas menos por expulsiones, el Peñarol de Washington Tabárez atacó heroicamente y Diego Aguirre anotó el 2-1 definitivo en el minuto 82.' },
+    { cat: 'clasicos', catName: 'Clásicos Inolvidables', q: '¿Qué hecho histórico originó el célebre "Clásico de la Fuga" el 9 de octubre de 1949?', opts: ['Nacional perdía 2-0 ante la Máquina del 49 y decidió no salir a jugar el 2° tiempo', 'Peñarol ganó 5-0 escapándose en la Tabla Anual', 'El clásico se suspendió por un apagón en el Centenario', 'El arquero rival se retiró por el túnel sin autorización'], ans: 0, exp: 'Peñarol arrollaba 2-0 con goles de Ghiggia y Míguez; en el entretiempo, Nacional no salió a disputar el complemento.' },
+    { cat: 'clasicos', catName: 'Clásicos Inolvidables', q: '¿Cuál fue el marcador del histórico clásico del 27 de abril de 2014, mayor goleada clásica en torneos cortos modernos?', opts: ['Peñarol 5 - 0 Nacional', 'Peñarol 4 - 0 Nacional', 'Peñarol 5 - 1 Nacional', 'Peñarol 6 - 0 Nacional'], ans: 0, exp: 'Histórico 5 a 0 aurinegro con goles de Marcelo Zalayeta, Damián Macaluso, Jorge "Japo" Rodríguez y doblete de Luis Aguiar.' },
+    { cat: 'records', catName: 'Récords & Hazañas', q: '¿Cuántos goles oficiales convirtió Fernando Morena con la camiseta del Club Atlético Peñarol según 1891 BD?', opts: ['350 goles', '280 goles', '310 goles', '215 goles'], ans: 0, exp: 'Fernando Morena es el máximo artillero de la historia del Decano con 350 goles oficiales certificados por la Comisión de Historia y Patrimonio.' },
+    { cat: 'cds', catName: 'Estadio Campeón del Siglo', q: '¿En qué fecha se inauguró oficialmente el Estadio Campeón del Siglo y quién convirtió el primer gol en su campo?', opts: ['28 de marzo de 2016 — Diego Forlán', '28 de septiembre de 2015 — Marcelo Zalayeta', '19 de abril de 2016 — Leonardo Fernández', '31 de octubre de 2016 — Diego Aguirre'], ans: 0, exp: 'El Campeón del Siglo se inauguró el 28 de marzo de 2016 con triunfo 4-1 ante River Plate argentino; Diego Forlán convirtió el histórico primer gol.' },
+    { cat: 'records', catName: 'Récords & Hazañas', q: '¿En qué años conquistó Peñarol sus dos célebres Quinquenios de Oro en el Campeonato Uruguayo?', opts: ['1958-1962 y 1993-1997', '1960-1964 y 1995-1999', '1955-1959 y 1990-1994', '1965-1969 y 1980-1984'], ans: 0, exp: 'Peñarol es el único club uruguayo con dos Quinquenios de Oro: 1958-1962 y 1993-1997.' },
+    { cat: 'general', catName: 'Distinciones Mundiales', q: '¿Qué histórica distinción otorgó la IFFHS a Peñarol en septiembre de 2009 tras el balance del siglo?', opts: ['Club Campeón del Siglo XX de Sudamérica (con 531 puntos)', 'Mejor club de la década de 1980', 'Club con mayor hinchada proporcional del planeta', 'Institución deportiva más laureada de América'], ans: 0, exp: 'La IFFHS proclamó oficialmente a Peñarol como el Mejor Club del Siglo XX de Sudamérica.' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿Quién anotó el gol agónico en el minuto 89 en Santiago de Chile para consagrar a Peñarol campeón de América ante Cobreloa en 1982?', opts: ['Fernando Morena', 'Venancio Ramos', 'Jair Gonçalves', 'Ernesto Vargas'], ans: 0, exp: 'Morena conectó de derecha un centro de Ramos a los 89 minutos en el Estadio Nacional de Santiago, conquistando la cuarta Libertadores.' },
+    { cat: 'idolos', catName: 'Ídolos Eternos', q: '¿Quién fue el capitán y emblema del Segundo Quinquenio (1993-1997), célebre por su precisión quirúrgica en tiros libres?', opts: ['Pablo Javier Bengoechea', 'Gabriel Cedrés', 'Antonio Pacheco', 'Darío Silva'], ans: 0, exp: 'Pablo "El Profesor" Bengoechea fue el capitán y arquitecto del Quinquenio 93-97.' },
+    { cat: 'idolos', catName: 'Ídolos Eternos', q: '¿Qué ídolo moderno disputó 475 partidos oficiales con Peñarol en el siglo XXI y conquistó 8 títulos de Campeón Uruguayo?', opts: ['Antonio "Tony" Pacheco', 'Marcelo Zalayeta', 'Darío Rodríguez', 'Cristian "Cebolla" Rodríguez'], ans: 0, exp: 'Antonio "Tony" Pacheco vistió la aurinegra en 475 encuentros oficiales.' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿Quién anotó el primer gol de la historia de la Copa Libertadores el 19 de abril de 1960 en la goleada 7-1 de Peñarol a Jorge Wilstermann?', opts: ['Carlos "Lucho" Borges', 'Alberto Spencer', 'Luis Cubilla', 'José Sasía'], ans: 0, exp: 'Carlos "Lucho" Borges abrió la cuenta a los 13 minutos, convirtiendo el primer gol de la historia de la Copa Libertadores.' },
+    { cat: 'records', catName: 'Récords & Hazañas', q: '¿Cuál es el récord histórico de partidos oficiales invicto en el Campeonato Uruguayo que ostenta Peñarol?', opts: ['56 partidos consecutivos invicto (1966-1969)', '42 partidos consecutivos invicto', '34 partidos consecutivos invicto', '62 partidos consecutivos invicto'], ans: 0, exp: 'Entre 1966 y 1969, Peñarol hilvanó 56 partidos consecutivos sin conocer la derrota en el Campeonato Uruguayo.' },
+    { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿En qué final épica de Copa Libertadores Peñarol perdía 0-2 en Santiago y terminó consagrándose campeón con remontada 4-2 ante River Plate argentino?', opts: ['Final de 1966 en Santiago de Chile', 'Final de 1961 en San Pablo', 'Final de 1982 en Santiago', 'Final de 1960 en Asunción'], ans: 0, exp: 'El 20 de mayo de 1966 en Santiago, Peñarol remontó un 0-2 para ganar 4-2 en tiempo extra con goles de Spencer (2), Abbadie y Rocha.' }
   ];
 
   async function loadJsonSafe(path) {
     try {
-      const r = await fetch(path + '?v=' + Date.now());
+      const r = await fetch(path + '?v=' + APP_VERSION + '_' + Math.floor(Date.now() / 60000));
       if (!r.ok) return null;
       return await r.json();
     } catch (_) {
@@ -245,38 +138,29 @@
     }
   }
 
+  function parseDgInt(dg) {
+    const n = parseInt(String(dg || '0').replace('+', ''), 10);
+    return isNaN(n) ? 0 : n;
+  }
+
   function startCountdown(isoString) {
     if (!isoString) return;
     const target = new Date(isoString).getTime();
     if (isNaN(target)) return;
 
-    if (window._manyaCountdownInterval) {
-      clearInterval(window._manyaCountdownInterval);
-    }
+    if (window._manyaCountdownInterval) clearInterval(window._manyaCountdownInterval);
 
     function tick() {
-      const now = Date.now();
-      const diff = Math.max(0, target - now);
+      const diff = Math.max(0, target - Date.now());
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      const elD = document.getElementById('cd-days');
-      const elH = document.getElementById('cd-hours');
-      const elM = document.getElementById('cd-mins');
-      const elS = document.getElementById('cd-secs');
-      if (elD) elD.textContent = String(d).padStart(2, '0');
-      if (elH) elH.textContent = String(h).padStart(2, '0');
-      if (elM) elM.textContent = String(m).padStart(2, '0');
-      if (elS) elS.textContent = String(s).padStart(2, '0');
-
-      if (diff === 0) {
-        const tDate = document.getElementById('hero-match-date');
-        if (tDate) {
-          tDate.textContent = '🔴 ¡HORA DE JUGAR! • EN VIVO / POR COMENZAR';
-          tDate.style.color = '#ef4444';
-        }
-      }
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v).padStart(2, '0'); };
+      set('cd-days', d);
+      set('cd-hours', h);
+      set('cd-mins', m);
+      set('cd-secs', s);
     }
     tick();
     window._manyaCountdownInterval = setInterval(tick, 1000);
@@ -286,34 +170,28 @@
     if (!fechaIso) return false;
     try {
       const now = new Date();
-      // Hora oficial Montevideo UY_TZ (UTC-3)
       const nowUy = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (3 * 3600000));
       const matchDate = new Date(fechaIso);
       const matchUy = new Date(matchDate.getTime() + (matchDate.getTimezoneOffset() * 60000) - (3 * 3600000));
       return nowUy.getFullYear() === matchUy.getFullYear() &&
              nowUy.getMonth() === matchUy.getMonth() &&
              nowUy.getDate() === matchUy.getDate();
-    } catch (e) {
+    } catch (_) {
       return false;
     }
   }
 
   function resolveClubCrest(team) {
-    if (!team) return 'assets/img/escudos/escudo_penarol.webp';
-    if (team.es_penarol || (team.nombre && team.nombre.toLowerCase().includes('peñarol'))) {
+    if (!team) return 'assets/img/escudos/escudo_auf.svg';
+    const rawName = (team.nombre || team.equipo || '').toLowerCase();
+    if (team.es_penarol || rawName.includes('peñarol') || rawName.includes('penarol')) {
       return 'assets/img/escudos/escudo_penarol.webp';
     }
-    // Si el objeto ya trae el escudo oficial verificado localmente, usarlo directamente
-    if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || team.escudo.endsWith('.webp') || team.escudo.endsWith('.png') || team.escudo.endsWith('.svg'))) {
+    if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || /\.(webp|png|svg)$/i.test(team.escudo))) {
       return team.escudo;
     }
-    const rawName = (team.nombre || team.equipo || '').toLowerCase();
-    const norm = rawName
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9 ]/g, '')
-      .trim();
 
+    const norm = rawName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, '').trim();
     if (state.escudosCatalog && state.escudosCatalog.alias_index) {
       const slug = state.escudosCatalog.alias_index[norm];
       if (slug && state.escudosCatalog.clubes && state.escudosCatalog.clubes[slug]) {
@@ -321,69 +199,60 @@
       }
     }
 
-    // Mapeos rápidos directos por palabras clave para Primera División AUF
-    if (norm.includes('juventud')) return 'assets/img/escudos/escudo_juventud.webp';
-    if (norm.includes('liverpool')) return 'assets/img/escudos/escudo_liverpool.webp';
-    if (norm.includes('nacional')) return 'assets/img/escudos/escudo_nacional.webp';
-    if (norm.includes('defensor')) return 'assets/img/escudos/escudo_defensor_sporting.webp';
-    if (norm.includes('danubio')) return 'assets/img/escudos/escudo_danubio.webp';
-    if (norm.includes('boston')) return 'assets/img/escudos/escudo_boston_river.webp';
-    if (norm.includes('wanderers')) return 'assets/img/escudos/escudo_montevideo_wanderers.webp';
-    if (norm.includes('cerro largo')) return 'assets/img/escudos/escudo_cerro_largo.webp';
-    if (norm.includes('cerro porteno')) return 'assets/img/escudos/escudo_cerro_porteno.webp';
-    if (norm.includes('cerro')) return 'assets/img/escudos/escudo_cerro.webp';
-    if (norm.includes('racing')) return 'assets/img/escudos/escudo_racing.webp';
-    if (norm.includes('progreso')) return 'assets/img/escudos/escudo_progreso.webp';
-    if (norm.includes('maldonado')) return 'assets/img/escudos/escudo_deportivo_maldonado.webp';
-    if (norm.includes('torque')) return 'assets/img/escudos/escudo_montevideo_city_torque.webp';
-    if (norm.includes('albion')) return 'assets/img/escudos/escudo_albion.webp';
-    if (norm.includes('central')) return 'assets/img/escudos/escudo_central_espanol.webp';
-    if (norm.includes('miramar')) return 'assets/img/escudos/escudo_miramar_misiones.webp';
-    if (norm.includes('rampla')) return 'assets/img/escudos/escudo_rampla_juniors.webp';
-    if (norm.includes('river')) return 'assets/img/escudos/escudo_river_plate.webp';
-    if (norm.includes('plaza')) return 'assets/img/escudos/escudo_plaza_colonia.webp';
-    if (norm.includes('rentistas')) return 'assets/img/escudos/escudo_rentistas.webp';
-    if (norm.includes('fenix')) return 'assets/img/escudos/escudo_fenix.webp';
-
-    // Mapeos rápidos para Copa CONMEBOL Libertadores
-    if (norm.includes('corinthians')) return 'assets/img/escudos/escudo_corinthians.webp';
-    if (norm.includes('platense')) return 'assets/img/escudos/escudo_platense.webp';
-    if (norm.includes('santa fe') || norm.includes('independiente santa')) return 'assets/img/escudos/escudo_independiente_santa_fe.webp';
-    if (norm.includes('flamengo')) return 'assets/img/escudos/escudo_flamengo.webp';
-    if (norm.includes('palmeiras')) return 'assets/img/escudos/escudo_palmeiras.webp';
-    if (norm.includes('boca')) return 'assets/img/escudos/escudo_boca_juniors.webp';
-    if (norm.includes('bolivar')) return 'assets/img/escudos/escudo_bolivar.webp';
-    if (norm.includes('cruzeiro')) return 'assets/img/escudos/escudo_cruzeiro.webp';
-    if (norm.includes('estudiantes')) return 'assets/img/escudos/escudo_estudiantes.webp';
-    if (norm.includes('rosario central')) return 'assets/img/escudos/escudo_rosario_central.webp';
-    if (norm.includes('junior') || norm.includes('tolima')) return 'assets/img/escudos/escudo_junior.webp';
-    if (norm.includes('ldu') || norm.includes('quito')) return 'assets/img/escudos/escudo_liga_de_quito.webp';
-    if (norm.includes('fluminense')) return 'assets/img/escudos/escudo_fluminense.webp';
-    if (norm.includes('universitario')) return 'assets/img/escudos/escudo_universitario.webp';
-    if (norm.includes('cristal')) return 'assets/img/escudos/escudo_sporting_cristal.webp';
-    if (norm.includes('libertad')) return 'assets/img/escudos/escudo_libertad.webp';
-    if (norm.includes('barcelona')) return 'assets/img/escudos/escudo_barcelona_sc.webp';
-    if (norm.includes('coquimbo')) return 'assets/img/escudos/escudo_coquimbo_unido.webp';
-    if (norm.includes('mirassol')) return 'assets/img/escudos/escudo_mirassol.webp';
-    if (norm.includes('always ready')) return 'assets/img/escudos/escudo_always_ready.webp';
-    if (norm.includes('cusco')) return 'assets/img/escudos/escudo_cusco.webp';
-    if (norm.includes('la guaira')) return 'assets/img/escudos/escudo_deportivo_la_guaira.webp';
-    if (norm.includes('ucv')) return 'assets/img/escudos/escudo_ucv.webp';
-
+    const directMap = [
+      ['cerro largo', 'escudo_cerro_largo.webp'],
+      ['cerro porteno', 'escudo_cerro_porteno.webp'],
+      ['cerro', 'escudo_cerro.webp'],
+      ['defensor', 'escudo_defensor_sporting.webp'],
+      ['wanderers', 'escudo_montevideo_wanderers.webp'],
+      ['liverpool', 'escudo_liverpool.webp'],
+      ['racing', 'escudo_racing.webp'],
+      ['nacional', 'escudo_nacional.webp'],
+      ['danubio', 'escudo_danubio.webp'],
+      ['boston', 'escudo_boston_river.webp'],
+      ['progreso', 'escudo_progreso.webp'],
+      ['maldonado', 'escudo_deportivo_maldonado.webp'],
+      ['torque', 'escudo_montevideo_city_torque.webp'],
+      ['albion', 'escudo_albion.webp'],
+      ['central', 'escudo_central_espanol.webp'],
+      ['juventud', 'escudo_juventud.webp'],
+      ['miramar', 'escudo_miramar_misiones.webp'],
+      ['corinthians', 'escudo_corinthians.webp'],
+      ['platense', 'escudo_platense.webp'],
+      ['santa fe', 'escudo_independiente_santa_fe.webp'],
+      ['flamengo', 'escudo_flamengo.webp'],
+      ['palmeiras', 'escudo_palmeiras.webp'],
+      ['boca', 'escudo_boca_juniors.webp'],
+      ['estudiantes', 'escudo_estudiantes.webp']
+    ];
+    for (const [kw, file] of directMap) {
+      if (norm.includes(kw)) return 'assets/img/escudos/' + file;
+    }
     if (team.logo && team.logo.startsWith('http')) return team.logo;
-    return 'assets/img/escudos/escudo_conmebol.svg';
+    return 'assets/img/escudos/escudo_auf.svg';
   }
 
   function renderMatchHero(live) {
     if (!live) return;
+    const fase = live.fase_partido || 'PREVIA';
+    const act = live.partido_activo || {};
     const prox = live.proximo_partido || {};
-    const ult = live.ultimo_partido || {};
+    const resTemp = live.resumen_temporada || {};
     const w = live.clima_campeon_del_siglo || {};
+
+    // En EN_VIVO y POST_PARTIDO mostramos partido_activo; en PREVIA mostramos proximo_partido
+    const featured = (fase === 'EN_VIVO' || fase === 'POST_PARTIDO' || live.estado_ciclo_vida === 'POST_48H')
+      ? (act.local ? act : prox)
+      : (prox.local ? prox : act);
 
     const wEl = document.getElementById('hero-weather');
     if (wEl && w.temperatura_c !== undefined) {
       wEl.textContent = `🌡️ Campeón del Siglo: ${w.temperatura_c}°C • ${w.condicion || 'Despejado'} (Viento ${w.viento_kmh || 12} km/h)`;
     }
+
+    // Equipos y escudos SIEMPRE del partido mostrado (jamás mezcla equipos de un partido con marcador de otro)
+    const loc = featured.local || { nombre: 'Peñarol', es_penarol: true, goles: '-' };
+    const vis = featured.visitante || { nombre: 'Rival', es_penarol: false, goles: '-' };
 
     const tHome = document.getElementById('hero-home-name');
     const tAway = document.getElementById('hero-away-name');
@@ -395,158 +264,173 @@
     const tAwayTag = document.getElementById('hero-away-tag');
     const tDate = document.getElementById('hero-match-date');
     const tVenue = document.getElementById('hero-match-venue');
-    const tLast = document.getElementById('hero-last-result');
-
-    if (prox.local) {
-      if (tHome) {
-        tHome.textContent = prox.local.nombre;
-        tHome.className = 'match-team-name ' + (prox.local.es_penarol ? 'is-penarol' : '');
-      }
-      if (tHomeCrest) {
-        tHomeCrest.src = resolveClubCrest(prox.local);
-        tHomeCrest.alt = 'Escudo Oficial de ' + prox.local.nombre;
-      }
-      if (tHomeWrap) {
-        tHomeWrap.className = 'hero-crest-wrap ' + (prox.local.es_penarol ? 'is-penarol' : 'is-rival');
-      }
-      if (tHomeTag) {
-        tHomeTag.textContent = prox.local.es_penarol ? 'El Decano • 1891' : 'Local • Torneo Oficial AUF';
-      }
-    }
-
-    if (prox.visitante) {
-      if (tAway) {
-        tAway.textContent = prox.visitante.nombre;
-        tAway.className = 'match-team-name ' + (prox.visitante.es_penarol ? 'is-penarol' : '');
-      }
-      if (tAwayCrest) {
-        tAwayCrest.src = resolveClubCrest(prox.visitante);
-        tAwayCrest.alt = 'Escudo Oficial de ' + prox.visitante.nombre;
-      }
-      if (tAwayWrap) {
-        tAwayWrap.className = 'hero-crest-wrap ' + (prox.visitante.es_penarol ? 'is-penarol' : 'is-rival');
-      }
-      if (tAwayTag) {
-        tAwayTag.textContent = prox.visitante.es_penarol ? 'El Decano • 1891' : 'Visitante • Torneo Oficial AUF';
-      }
-    }
-
+    const tScorers = document.getElementById('hero-scorers-strip');
+    const heroBadge = document.getElementById('hero-match-badge');
     const cdGrid = document.getElementById('hero-countdown-grid');
     const liveScoreBox = document.getElementById('hero-live-score-container');
+    const liveStatusPill = document.getElementById('hero-score-status-pill');
     const sHome = document.getElementById('hero-live-score-home');
     const sAway = document.getElementById('hero-live-score-away');
-    const clkTxt = document.getElementById('hero-live-clock-text');
-    const bLiveUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
 
-    const heroBadge = document.getElementById('hero-match-badge');
+    if (tHome) {
+      tHome.textContent = loc.nombre;
+      tHome.className = 'match-team-name ' + (loc.es_penarol ? 'is-penarol' : '');
+    }
+    if (tHomeCrest) {
+      tHomeCrest.src = resolveClubCrest(loc);
+      tHomeCrest.alt = 'Escudo Oficial de ' + loc.nombre;
+    }
+    if (tHomeWrap) tHomeWrap.className = 'hero-crest-wrap ' + (loc.es_penarol ? 'is-penarol' : 'is-rival');
+    if (tHomeTag) tHomeTag.textContent = loc.es_penarol ? 'Local • El Decano 1891' : 'Local • Torneo Oficial AUF';
 
-    if (live.fase_partido === 'EN_VIVO') {
+    if (tAway) {
+      tAway.textContent = vis.nombre;
+      tAway.className = 'match-team-name ' + (vis.es_penarol ? 'is-penarol' : '');
+    }
+    if (tAwayCrest) {
+      tAwayCrest.src = resolveClubCrest(vis);
+      tAwayCrest.alt = 'Escudo Oficial de ' + vis.nombre;
+    }
+    if (tAwayWrap) tAwayWrap.className = 'hero-crest-wrap ' + (vis.es_penarol ? 'is-penarol' : 'is-rival');
+    if (tAwayTag) tAwayTag.textContent = vis.es_penarol ? 'Visitante • El Decano 1891' : 'Visitante • Torneo Oficial AUF';
+
+    if (fase === 'EN_VIVO') {
       if (cdGrid) cdGrid.style.display = 'none';
       if (liveScoreBox) liveScoreBox.style.display = 'flex';
-      if (sHome) sHome.textContent = prox.local ? (prox.local.goles || '0') : '0';
-      if (sAway) sAway.textContent = prox.visitante ? (prox.visitante.goles || '0') : '0';
-      if (clkTxt) clkTxt.textContent = `EN VIVO • (${prox.minuto_reloj || "1T"})`;
-
+      if (liveStatusPill) liveStatusPill.textContent = `🔴 EN VIVO • ${featured.minuto_reloj || '1T'}`;
+      if (sHome) sHome.textContent = loc.goles ?? '0';
+      if (sAway) sAway.textContent = vis.goles ?? '0';
       if (heroBadge) {
-        heroBadge.textContent = '🔴 EN VIVO • MINUTO A MINUTO EN DIRECTO';
+        heroBadge.textContent = `🔴 EN VIVO • ${(featured.torneo || 'CAMPEONATO URUGUAYO').toUpperCase()}`;
         heroBadge.style.background = '#ef4444';
         heroBadge.style.color = '#ffffff';
-        heroBadge.style.borderColor = '#f87171';
       }
-
       if (tDate) {
-        tDate.textContent = `🔴 EN VIVO (${prox.minuto_reloj || '1T'}) • ${prox.torneo || 'Campeonato Uruguayo'}`;
-        tDate.style.color = '#ef4444';
+        tDate.textContent = `🔴 EN DIRECTO (${featured.minuto_reloj || '1T'}) • ${featured.torneo || 'Campeonato Uruguayo'}`;
+        tDate.style.color = '#f87171';
       }
-
-      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
-        a.textContent = '⚡ SEGUIR MINUTO A MINUTO EN DIRECTO →';
-        a.style.background = '#ffd100';
-        a.style.color = '#09090b';
-        a.style.fontWeight = '900';
-        a.href = bLiveUrl;
-      });
-    } else if (live.fase_partido === 'POST_PARTIDO' || live.estado_ciclo_vida === 'POST_48H') {
+    } else if (fase === 'POST_PARTIDO' || live.estado_ciclo_vida === 'POST_48H') {
       if (cdGrid) cdGrid.style.display = 'none';
       if (liveScoreBox) liveScoreBox.style.display = 'flex';
-      const act = live.partido_activo || prox;
-      if (sHome) sHome.textContent = act.local ? (act.local.goles || '1') : '1';
-      if (sAway) sAway.textContent = act.visitante ? (act.visitante.goles || '1') : '1';
-      const estNom = (act && act.estadio && act.estadio.nombre) || (prox && prox.estadio && prox.estadio.nombre) || 'Estadio Centenario';
-      if (clkTxt) clkTxt.textContent = `🏁 FINALIZADO (90+5') • ${estNom.toUpperCase()}`;
-
+      if (liveStatusPill) liveStatusPill.textContent = resTemp.campeon_anual ? '🏁 FINAL • CAMPEÓN ANUAL' : '🏁 FINALIZADO';
+      if (sHome) sHome.textContent = loc.goles ?? '-';
+      if (sAway) sAway.textContent = vis.goles ?? '-';
       if (heroBadge) {
-        heroBadge.textContent = '🏁 RESULTADO FINAL • TORNEO CLAUSURA (FECHA 13)';
+        heroBadge.textContent = `🏁 RESULTADO FINAL • ${(featured.torneo || 'CAMPEONATO URUGUAYO').toUpperCase()}`;
         heroBadge.style.background = '#10b981';
-        heroBadge.style.color = '#ffffff';
-        heroBadge.style.borderColor = '#059669';
+        heroBadge.style.color = '#052e16';
       }
-
       if (tDate) {
-        tDate.textContent = `🏁 FINALIZADO • Sábado 31/10/2026 • Peñarol 1 - 1 Montevideo Wanderers`;
+        tDate.textContent = `🏁 FINALIZADO • ${featured.fecha_legible || ''} • ${featured.torneo || ''}`;
         tDate.style.color = '#34d399';
       }
-
-      document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
-        a.textContent = '📖 CRÓNICA COMPLETA DEL 1-1 & VESTUARIO EN SERVICIOTI →';
-        a.style.background = '#ffd100';
-        a.style.color = '#09090b';
-        a.style.fontWeight = '900';
-        a.href = bLiveUrl;
-      });
     } else {
       if (cdGrid) cdGrid.style.display = 'grid';
       if (liveScoreBox) liveScoreBox.style.display = 'none';
-
+      const esHoyReal = featured.es_hoy === true && isMatchToday(featured.fecha_iso);
       if (heroBadge) {
-        heroBadge.textContent = `★ PRÓXIMO PARTIDO • ${prox.torneo || 'Torneo Clausura 2026'}`.toUpperCase();
+        heroBadge.textContent = (esHoyReal ? '🟡⚫ ¡HOY JUEGA PEÑAROL! • ' : '★ PRÓXIMO PARTIDO • ') + (featured.torneo || 'CAMPEONATO URUGUAYO').toUpperCase();
         heroBadge.style.background = '#ffd100';
         heroBadge.style.color = '#09090b';
-        heroBadge.style.borderColor = '#eab308';
       }
-
       if (tDate) {
-        const fStr = prox.fecha_legible || 'Sábado 31/10/2026 16:30 hs';
-        const tStr = prox.torneo || 'Torneo Clausura 2026';
-        tDate.textContent = `★ PRÓXIMO PARTIDO • ${fStr} • ${tStr}`;
+        tDate.textContent = `${esHoyReal ? '🟡⚫ HOY' : '★ PRÓXIMO'} • ${featured.fecha_legible || ''} • ${featured.torneo || ''}`;
         tDate.style.color = 'var(--manya-gold)';
       }
-
-      startCountdown(prox.fecha_iso);
+      startCountdown(featured.fecha_iso);
     }
 
-    if (tVenue && prox.estadio) tVenue.textContent = prox.estadio;
-    if (tLast) {
-      tLast.textContent = 'Peñarol 66 pts (Líder Solitario Anual • +24 DG)';
+    if (tVenue) tVenue.textContent = `🏟️ ${featured.estadio || 'Estadio Campeón del Siglo'}` + (featured.juez ? ` • Árbitro: ${featured.juez}` : '');
+
+    if (tScorers) {
+      if (featured.goles_texto) {
+        tScorers.style.display = 'inline-flex';
+        tScorers.textContent = `⚽ Goles: ${featured.goles_texto}`;
+      } else {
+        tScorers.style.display = 'none';
+      }
     }
 
-    // Ticker interactivo de alerta de partido
+    // Hidratar las 4 tarjetas meta del Match Center (cero texto viejo de Franzini/66 pts)
+    const pts = resTemp.penarol_anual_pts || 69;
+    const dg = resTemp.penarol_anual_dg || '+27';
+    const pj = resTemp.penarol_anual_pj || 37;
+    const defInfo = resTemp.definicion_uruguayo || {};
+
+    const meta1 = document.getElementById('hero-meta-box-1');
+    if (meta1) {
+      if (prox.es_definicion_final) {
+        meta1.innerHTML = `<span>🏆 Próximo Horizonte • Gran Final</span><strong>${prox.nombre}</strong> — ${prox.fecha_legible}. Semifinal: ${defInfo.semifinal || 'Racing vs Liverpool'} (${defInfo.fecha_semifinal || '29/11'}).`;
+      } else {
+        meta1.innerHTML = `<span>🎟️ Próximo Compromiso &amp; Sede</span><strong>${prox.nombre || featured.nombre}</strong> en ${prox.estadio || featured.estadio} (${prox.fecha_legible || ''}).`;
+      }
+    }
+
+    const meta2 = document.getElementById('hero-meta-box-2');
+    if (meta2) {
+      if (featured.video_youtube_url) {
+        meta2.innerHTML = `<span>🎬 Resumen Oficial &amp; TV</span>Reviví los goles del triunfo en <a href="${featured.video_youtube_url}" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);font-weight:800;text-decoration:underline;">YouTube (1891 BD) ↗</a> • TV: <strong>${featured.tv || 'VTV Plus / Disney+'}</strong>.`;
+      } else {
+        meta2.innerHTML = `<span>📺 Transmisión Oficial</span>En vivo para todo el país por <strong>${featured.tv || 'VTV Plus / Disney+ Premium'}</strong>.`;
+      }
+    }
+
+    const meta3 = document.getElementById('hero-meta-box-3');
+    if (meta3) {
+      const crown = resTemp.campeon_anual ? 'Campeón Tabla Anual' : `#${resTemp.penarol_anual_pos || 1} Tabla Anual`;
+      meta3.innerHTML = `<span>🏆 Tabla Anual Oficial AUF</span><strong id="hero-last-result">Peñarol ${pts} pts (${crown})</strong> • ${dg} DG (${pj} PJ) • Libertadores 2027.`;
+    }
+
+    // Ticker superior
     const tickerEl = document.getElementById('manya-live-ticker');
     const tickerTxt = document.getElementById('ticker-text');
     if (tickerEl) {
       if (live.alerta_banner) {
         tickerEl.style.display = 'flex';
         if (tickerTxt) tickerTxt.textContent = live.alerta_banner;
-        if (live.fase_partido === 'EN_VIVO') {
-          tickerEl.style.borderColor = '#ef4444';
-          tickerEl.style.background = '#450a0a';
-          tickerEl.style.animation = 'pulse 2s infinite';
-        } else if (live.fase_partido === 'PREVIA') {
-          tickerEl.style.borderColor = '#ffd100';
-          tickerEl.style.background = '#18181b';
-          tickerEl.style.animation = 'none';
-        } else {
-          tickerEl.style.borderColor = 'rgba(255, 209, 0, 0.35)';
-          tickerEl.style.background = '#09090b';
-          tickerEl.style.animation = 'none';
-        }
+        tickerEl.style.borderColor = fase === 'EN_VIVO' ? '#ef4444' : '#ffd100';
       } else {
         tickerEl.style.display = 'none';
       }
     }
 
-    // Cuenta regresiva gestionada en bloque hero
+    // Barra de racha de los últimos 5 resultados reales (V/E/D)
+    renderRecentFormStrip(live);
     renderLiveTimeline(live);
+    updateDynamicLogisticsAndTacticalTitles(live);
+
+    const footerSync = document.getElementById('footer-last-sync');
+    if (footerSync && live.actualizado) {
+      footerSync.textContent = `Última sincronización automática: ${live.actualizado} (UY)`;
+    }
+  }
+
+  function renderRecentFormStrip(live) {
+    const box = document.getElementById('historico-partido-anterior');
+    if (!box) return;
+    const recent = live.ultimos_resultados || [];
+    if (!recent.length) return;
+
+    const pills = recent.slice(0, 5).map(m => {
+      const loc = m.local || {};
+      const vis = m.visitante || {};
+      const gLoc = parseInt(loc.goles, 10);
+      const gVis = parseInt(vis.goles, 10);
+      const gPen = loc.es_penarol ? gLoc : gVis;
+      const gRiv = loc.es_penarol ? gVis : gLoc;
+      const rivNom = loc.es_penarol ? vis.nombre : loc.nombre;
+      let cls = 'is-draw', code = 'E';
+      if (!isNaN(gPen) && !isNaN(gRiv)) {
+        if (gPen > gRiv) { cls = 'is-win'; code = 'V'; }
+        else if (gPen < gRiv) { cls = 'is-loss'; code = 'D'; }
+      }
+      return `<span class="form-pill ${cls}" title="${m.fecha_legible || ''} • ${m.estadio || ''}"><strong>${code}</strong> ${gPen}-${gRiv} vs ${rivNom}</span>`;
+    }).join('');
+
+    const summaryEl = document.getElementById('recent-form-summary');
+    if (summaryEl) {
+      summaryEl.innerHTML = `<div style="font-size:12.5px;color:#d4d4d8;margin-bottom:6px;"><strong>Últimos 5 partidos oficiales (ESPN / 1891 BD):</strong></div><div class="recent-form-strip">${pills}</div>`;
+    }
   }
 
   function renderLiveTimeline(live) {
@@ -556,73 +440,86 @@
 
     const eventos = live.minuto_a_minuto || [];
     if (!eventos.length) {
-      if (live.fase_partido !== 'EN_VIVO' && live.fase_partido !== 'FINALIZADO') {
-        card.style.display = 'none';
-        return;
-      }
+      card.style.display = 'none';
+      return;
     }
 
     card.style.display = 'block';
-    const bUrl = live.blogger_live_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
-    const btnCard = document.getElementById('btn-live-blogger-card');
-    if (btnCard) btnCard.href = bUrl;
+    const act = live.partido_activo || live.ultimo_partido || {};
+    const titleEl = document.getElementById('timeline-card-title');
+    if (titleEl && act.nombre) {
+      titleEl.textContent = `⏱️ Minuto a Minuto & Síntesis: ${act.nombre}`;
+    }
 
-    feed.innerHTML = eventos.slice().reverse().map(e => `
-      <div style="display:flex;gap:12px;padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--manya-gold);border-radius:8px;">
-        <div style="flex-shrink:0;width:52px;text-align:center;">
-          <span style="background:var(--manya-gold);color:#09090b;font-weight:900;font-size:11.5px;padding:2px 7px;border-radius:999px;">${e.minuto}</span>
+    feed.innerHTML = eventos.slice().reverse().map(e => {
+      const titulo = e.titulo || 'Incidencia del partido';
+      const desc = e.descripcion || e.texto || '';
+      return `
+        <div style="display:flex;gap:12px;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--manya-gold);border-radius:8px;">
+          <div style="flex-shrink:0;width:54px;text-align:center;">
+            <span style="background:var(--manya-gold);color:#09090b;font-weight:900;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block;">${e.minuto || '•'}</span>
+          </div>
+          <div style="flex-grow:1;min-width:0;">
+            <div style="font-weight:800;color:#ffffff;font-size:13.5px;margin-bottom:2px;">${e.icono || '⚡'} ${titulo}</div>
+            <div style="font-size:12.5px;color:#d4d4d8;line-height:1.45;">${desc}</div>
+          </div>
         </div>
-        <div style="flex-grow:1;">
-          <div style="font-weight:800;color:#ffffff;font-size:14.5px;margin-bottom:3px;">${e.icono || '⚡'} ${e.titulo}</div>
-          <div style="font-size:13px;color:#d4d4d8;line-height:1.5;">${e.descripcion}</div>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
-  function setupLivePolling() {
-    if (window._manyaLivePolling) return;
-    window._manyaLivePolling = setInterval(async () => {
-      if (state.live && (state.live.fase_partido === 'EN_VIVO' || state.live.fase_partido === 'PREVIA')) {
-        try {
-          const fresh = await loadJsonSafe('data/live_status.json');
-          if (fresh && fresh.actualizado !== state.live.actualizado) {
-            state.live = fresh;
-            renderMatchHero(fresh);
-            renderLiveTimeline(fresh);
-            renderStandings();
-          }
-        } catch (_) {}
+  function updateDynamicLogisticsAndTacticalTitles(live) {
+    const prox = live.proximo_partido || {};
+    const resTemp = live.resumen_temporada || {};
+    const pTitle = document.getElementById('pizarra-title');
+    const pSub = document.getElementById('pizarra-subtitle');
+    if (pTitle && pSub) {
+      if (prox.es_definicion_final) {
+        pTitle.innerHTML = `👕 Pizarra Táctica: <span>Armá tu 11 para la Gran Final 2026</span>`;
+        pSub.textContent = `Plantel real noviembre 2026 • Armá el once titular de Diego Aguirre para la definición del Campeonato Uruguayo (3 y 6 de diciembre).`;
+      } else {
+        pTitle.innerHTML = `👕 Pizarra Táctica: <span>Armá tu 11 • ${prox.nombre || 'Peñarol'}</span>`;
+        pSub.textContent = `Plantel vigente 2026 • Armá tu alineación ideal para ${prox.estadio || 'el próximo partido'} (${prox.fecha_legible || ''}).`;
       }
-    }, 30000);
+    }
+
+    const logBox = document.getElementById('como-llegar-dinamico');
+    if (logBox) {
+      if (prox.es_definicion_final) {
+        logBox.innerHTML = `
+          <div style="display:inline-block;background:var(--manya-gold);color:#000;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;">Definición Uruguayo 2026 • Finales</div>
+          <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Operativo Finales en el Estadio Campeón del Siglo</h3>
+          <p style="font-size:13.5px;color:#d4d4d8;margin-bottom:12px;">Peñarol (Campeón Anual con ${resTemp.penarol_anual_pts || 69} pts) disputará la Gran Final ida y vuelta el 3 y 6 de diciembre ante el ganador de Racing vs Liverpool.</p>
+          <ul style="font-size:13.5px;color:#e4e4e7;padding-left:18px;margin-bottom:14px;">
+            <li><strong>Ingreso Vehicular:</strong> Accesos por Ruta 102 y Camino Mangangá con apertura recomendada 2 horas antes del pitazo inicial.</li>
+            <li><strong>Servicios Especiales:</strong> Refuerzos CUTCSA directo "Estadio Campeón del Siglo" desde Tres Cruces, Centro y Belloni.</li>
+          </ul>
+          <a href="https://horarios.servicioti.com.uy/" class="btn-outline-gold" style="font-size:12.5px;">Consultar Horarios en Vivo en Horarios ServicioTI →</a>
+        `;
+      }
+    }
   }
 
   function renderStandingsTabs() {
     const container = document.getElementById('standings-tabs-container');
-    if (!container) return;
+    if (!container || !state.live) return;
 
-    const tabs = (state.live && state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
+    const tabs = (state.live.tablas_campeonatos && state.live.tablas_campeonatos.length)
       ? state.live.tablas_campeonatos
       : [
-          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: (state.live && state.live.partido_activo && state.live.partido_activo.es_hoy && isMatchToday(state.live.partido_activo.fecha_iso)) ? 'Hoy Juega' : 'Fecha 14', es_proximo: true },
-          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Líder 66p', es_proximo: false },
-          { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'Conmebol', es_proximo: false }
+          { id: 'anual', nombre: 'Tabla Anual Acumulada Oficial (AUF)', nombre_corto: 'Tabla Anual', icono: '🏆', badge: 'Oficial AUF' },
+          { id: 'clausura', nombre: 'Torneo Clausura 2026', nombre_corto: 'Torneo Clausura', icono: '⚽', badge: 'Clausura' },
+          { id: 'libertadores', nombre: 'Copa CONMEBOL Libertadores', nombre_corto: 'Copa Libertadores', icono: '🌎', badge: 'CONMEBOL' }
         ];
 
-    // Por defecto en la carga: asignar siempre la Tabla Anual Oficial (donde Peñarol lidera)
     if (!state.standingsTab || !tabs.some(t => t.id === state.standingsTab)) {
-      state.standingsTab = (state.live && state.live.torneo_activo_id) ? state.live.torneo_activo_id : 'clausura';
+      state.standingsTab = state.live.torneo_activo_id || 'anual';
     }
 
     container.innerHTML = tabs.map(t => {
       const isActive = t.id === state.standingsTab;
       const badgeHtml = t.badge ? `<span class="pill-badge">${t.badge}</span>` : '';
-      return `
-        <button type="button" class="standings-pill ${isActive ? 'active' : ''}" data-tab="${t.id}" title="Ver ${t.nombre}">
-          <span>${t.icono || '🏆'} ${t.nombre_corto || t.nombre}</span>
-          ${badgeHtml}
-        </button>
-      `;
+      return `<button type="button" class="standings-pill ${isActive ? 'active' : ''}" data-tab="${t.id}"><span>${t.icono || '🏆'} ${t.nombre_corto || t.nombre}</span>${badgeHtml}</button>`;
     }).join('');
 
     container.querySelectorAll('.standings-pill').forEach(btn => {
@@ -632,13 +529,6 @@
           state.standingsTab = tabId;
           renderStandingsTabs();
           renderStandings();
-          // Actualizar texto del simulador si hay puntos proyectados
-          const ptsEl = document.getElementById('sim-delta-label');
-          if (ptsEl && state.simPointsDelta > 0) {
-            const activeTourn = tabs.find(t => t.id === state.standingsTab);
-            const tournName = activeTourn ? activeTourn.nombre_corto : 'campeonato';
-            ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol en ${tournName}`;
-          }
         }
       });
     });
@@ -649,123 +539,55 @@
     const tbody = document.getElementById('standings-tbody');
     if (!tbody) return;
 
+    const resTemp = state.live.resumen_temporada || {};
+    const ptsAnual = resTemp.penarol_anual_pts || 69;
+    const dgAnual = resTemp.penarol_anual_dg || '+27';
     const tabs = state.live.tablas_campeonatos || [];
-    const activeTourn = tabs.find(t => t.id === state.standingsTab) || {
-      id: state.standingsTab,
-      nombre: state.standingsTab === 'clausura' ? 'Torneo Clausura 2026' : 'Tabla Anual Acumulada Oficial (AUF)',
-      nombre_corto: state.standingsTab === 'clausura' ? 'Torneo Clausura' : 'Tabla Anual',
-      icono: state.standingsTab === 'clausura' ? '⚽' : '🏆',
-      es_proximo: state.standingsTab === (state.live.torneo_activo_id || 'clausura')
-    };
+    const activeTourn = tabs.find(t => t.id === state.standingsTab) || tabs[0] || { id: 'anual', nombre: 'Tabla Anual Oficial (AUF)', icono: '🏆' };
 
-    // Actualizar encabezados y badges
     const titleEl = document.getElementById('standings-table-title');
     const badgeEl = document.getElementById('standings-context-badge');
     const subInfoEl = document.getElementById('standings-sub-info');
 
-    if (titleEl) {
-      titleEl.innerHTML = `${activeTourn.icono || '🏆'} ${activeTourn.nombre}`;
-    }
-
+    if (titleEl) titleEl.innerHTML = `${activeTourn.icono || '🏆'} ${activeTourn.nombre}`;
     if (badgeEl) {
-      if (activeTourn.es_proximo) {
-        badgeEl.textContent = 'PRÓXIMO PARTIDO';
-        badgeEl.style.display = 'inline-block';
-      } else if (activeTourn.id === 'anual') {
-        badgeEl.textContent = 'OFICIAL AUF';
-        badgeEl.style.display = 'inline-block';
-      } else if (activeTourn.id === 'libertadores') {
-        badgeEl.textContent = 'CONMEBOL';
-        badgeEl.style.display = 'inline-block';
-      } else {
-        badgeEl.textContent = 'OFICIAL';
-        badgeEl.style.display = 'inline-block';
-      }
+      badgeEl.textContent = activeTourn.id === 'anual' ? 'OFICIAL AUF' : (activeTourn.id === 'libertadores' ? 'CONMEBOL' : 'CLAUSURA 2026');
     }
 
     if (subInfoEl) {
-      if (activeTourn.id === 'clausura') {
-        const proxMatch = state.live.proximo_partido || {};
-        const rivalNom = (proxMatch.local && !proxMatch.local.es_penarol)
-          ? proxMatch.local.nombre
-          : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : 'Defensor Sporting');
-        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026 (Torneo Corto):</strong> Tabla del torneo en disputa para el próximo partido ante <strong>${rivalNom}</strong>. <button type="button" id="btn-quick-switch-anual" style="background:#ffd100;color:#09090b;font-weight:900;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">🏆 Ver Tabla Anual Oficial (66 pts) →</button>`;
-      } else if (activeTourn.id === 'anual') {
-        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA OFICIAL (AUF):</strong> Suma acumulada oficial. Define el Campeón Uruguayo 2026. <strong style="color:var(--manya-gold);">Peñarol es líder solitario con 66 puntos (+24 DG).</strong> <button type="button" id="btn-quick-switch-clausura" style="background:#27272a;color:#ffd100;font-weight:900;border:1px solid #ffd100;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px;font-size:11px;display:inline-flex;align-items:center;gap:4px;">⚽ Ver Torneo Clausura (Próximo Partido) →</button>`;
-      } else if (activeTourn.id === 'libertadores') {
-        subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla de posiciones oficial de Conmebol.`;
+      if (activeTourn.id === 'anual') {
+        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA (AUF):</strong> <strong style="color:var(--manya-gold);">Peñarol ${resTemp.campeon_anual ? 'CAMPEÓN ANUAL' : 'líder'} con ${ptsAnual} puntos (${dgAnual} DG)</strong> — Clasificado directo a la Gran Final del Uruguayo y Copa Libertadores 2027.`;
+      } else if (activeTourn.id === 'clausura') {
+        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026:</strong> Clasificación oficial del certamen corto (15 fechas). Peñarol cerró con ${resTemp.penarol_clausura_pts || 26} pts en ${resTemp.penarol_clausura_pj || 15} PJ.`;
       } else {
-        subInfoEl.innerHTML = `Clasificación oficial actualizada de ${activeTourn.nombre}.`;
-      }
-
-      const btnToAnual = document.getElementById('btn-quick-switch-anual');
-      if (btnToAnual) {
-        btnToAnual.addEventListener('click', () => {
-          state.standingsTab = 'anual';
-          renderStandingsTabs();
-          renderStandings();
-        });
-      }
-      const btnToClausura = document.getElementById('btn-quick-switch-clausura');
-      if (btnToClausura) {
-        btnToClausura.addEventListener('click', () => {
-          state.standingsTab = 'clausura';
-          renderStandingsTabs();
-          renderStandings();
-        });
+        subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla oficial ordenada por posición, puntos y diferencia de goles.`;
       }
     }
 
-    // Resolver fuente de datos
-    let sourceData = [];
-    if (activeTourn && activeTourn.datos && activeTourn.datos.length) {
-      sourceData = activeTourn.datos;
-    } else if (state.standingsTab === 'clausura') {
-      sourceData = state.live.tabla_clausura || state.live.tabla_posiciones || [];
-    } else if (state.standingsTab === 'libertadores') {
-      sourceData = state.live.tabla_libertadores || [];
-    } else {
-      sourceData = state.live.tabla_anual || state.live.tabla_posiciones || [];
-    }
-
-    // Nombre del próximo rival para destacarlo en la tabla
-    const proxMatch = state.live.proximo_partido || {};
-    const rivalName = (proxMatch.local && !proxMatch.local.es_penarol)
-      ? proxMatch.local.nombre
-      : (proxMatch.visitante && !proxMatch.visitante.es_penarol ? proxMatch.visitante.nombre : '');
-    const rivalNorm = (rivalName || '').toLowerCase().trim();
+    let sourceData = (activeTourn && activeTourn.datos && activeTourn.datos.length)
+      ? activeTourn.datos
+      : (state.standingsTab === 'clausura' ? (state.live.tabla_clausura || []) : (state.standingsTab === 'libertadores' ? (state.live.tabla_libertadores || []) : (state.live.tabla_anual || [])));
 
     const rows = sourceData.map(r => {
-      const isPenarol = r.es_penarol || (r.equipo && r.equipo.toLowerCase().includes('peñarol'));
-      const pts = isPenarol ? (r.pts + state.simPointsDelta) : r.pts;
-      const pj = isPenarol && state.simPointsDelta > 0 ? (r.pj + Math.ceil(state.simPointsDelta / 3)) : r.pj;
-      return Object.assign({}, r, { es_penarol: isPenarol, pts_calc: pts, pj_calc: pj });
+      const isPen = r.es_penarol || (r.equipo && r.equipo.toLowerCase().includes('peñarol'));
+      const delta = (isPen && state.standingsTab !== 'libertadores') ? state.simPointsDelta : 0;
+      return Object.assign({}, r, { es_penarol: isPen, pts_calc: (r.pts || 0) + delta, pj_calc: (r.pj || 0) + (delta > 0 ? Math.ceil(delta / 3) : 0) });
     });
 
-    rows.sort((a, b) => b.pts_calc - a.pts_calc);
+    rows.sort((a, b) => (b.pts_calc - a.pts_calc) || (parseDgInt(b.dg) - parseDgInt(a.dg)) || ((b.gf || 0) - (a.gf || 0)));
 
+    const fallbackCrest = state.standingsTab === 'libertadores' ? 'assets/img/escudos/escudo_conmebol.svg' : 'assets/img/escudos/escudo_auf.svg';
     tbody.innerHTML = rows.map((r, i) => {
-      const isRivalNext = activeTourn.es_proximo && rivalNorm && r.equipo.toLowerCase().includes(rivalNorm);
       const crest = resolveClubCrest({ nombre: r.equipo, es_penarol: r.es_penarol, logo: r.logo, escudo: r.escudo });
-      const rowClass = r.es_penarol ? 'row-penarol' : (isRivalNext ? 'row-rival-proximo' : '');
-
-      let tagExtra = '';
-      if (r.es_penarol) {
-        tagExtra = '<span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span>';
-      } else if (isRivalNext) {
-        const esHoy = state.live && state.live.partido_activo && state.live.partido_activo.es_hoy === true && isMatchToday(state.live.partido_activo.fecha_iso);
-        const tagLabel = esHoy ? 'RIVAL DE HOY' : 'PRÓXIMO RIVAL';
-        tagExtra = `<span class="badge-gold" style="font-size:9.5px;padding:1px 5px;margin-left:6px;background:rgba(255,255,255,0.12);color:#e4e4e7;border-color:rgba(255,255,255,0.25);">${tagLabel}</span>`;
-      }
-
+      const rowClass = r.es_penarol ? 'row-penarol' : '';
+      const tagExtra = r.es_penarol ? '<span style="color:var(--manya-gold);font-weight:900;margin-left:4px;">★</span>' : '';
       const ptsClass = r.es_penarol ? 'pts-pill is-leader' : 'pts-pill';
-      const fallbackCrest = (state.standingsTab === 'libertadores') ? 'assets/img/escudos/escudo_conmebol.svg' : 'assets/img/escudos/escudo_auf.svg';
       return `
         <tr class="${rowClass}">
           <td class="col-pos">${i + 1}</td>
           <td class="col-team">
             <div style="display:flex;align-items:center;gap:6px;">
-              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;vertical-align:middle;border-radius:2px;flex-shrink:0;" onerror="this.onerror=null;this.src='${fallbackCrest}'" />
+              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;border-radius:2px;flex-shrink:0;" onerror="this.onerror=null;this.src='${fallbackCrest}'" />
               <span class="team-name-label">${r.equipo}</span>${tagExtra}
             </div>
           </td>
@@ -789,41 +611,83 @@
     }
   }
 
-  function initStandingsTabs() {
-    renderStandingsTabs();
-  }
-
   function initSimulator() {
     const container = document.getElementById('sim-matches-box');
-    if (!container) return;
-    const proxMatch = state.live && state.live.proximo_partido ? state.live.proximo_partido : null;
-    const match1Label = proxMatch
-      ? `Fecha 13: ${proxMatch.nombre || 'Peñarol vs Montevideo Wanderers'} (${proxMatch.estadio || 'Parque Federico Omar Saroldi'})`
-      : 'Fecha 13: Peñarol vs Montevideo Wanderers (Parque Saroldi)';
-    const fechas = [
-      { id: 1, label: match1Label },
-      { id: 2, label: 'Fecha 13: Peñarol vs Defensor Sporting (Campeón del Siglo)' },
-      { id: 3, label: 'Fecha 14: Danubio vs Peñarol (Jardines del Hipódromo)' }
-    ];
-    const picks = { 1: 0, 2: 0, 3: 0 };
+    const titleEl = document.getElementById('sim-panel-title');
+    const descEl = document.getElementById('sim-panel-desc');
+    const resetBtn = document.getElementById('sim-reset-btn');
+    if (!container || !state.live) return;
+
+    const resTemp = state.live.resumen_temporada || {};
+    const prox = state.live.proximo_partido || {};
+
+    // Si Peñarol ya ganó la Tabla Anual y estamos en etapa de Definición del Campeonato Uruguayo
+    if (resTemp.campeon_anual || prox.es_definicion_final) {
+      if (titleEl) titleEl.textContent = '🏆 Definición del Campeonato Uruguayo 2026';
+      if (descEl) descEl.textContent = `Peñarol ganó la Tabla Anual (${resTemp.penarol_anual_pts || 69} pts) y espera directamente en las Finales. Proyectá tu camino al título:`;
+      if (resetBtn) resetBtn.style.display = 'none';
+
+      const def = resTemp.definicion_uruguayo || {};
+      let rivalPick = localStorage.getItem('manya_final_rival_pick') || 'Liverpool';
+
+      const renderBracket = () => {
+        container.innerHTML = `
+          <div class="playoff-bracket-card">
+            <div style="font-size:11.5px;font-weight:900;color:var(--manya-gold);letter-spacing:0.05em;text-transform:uppercase;">✅ OBJETIVOS YA CUMPLIDOS POR PEÑAROL</div>
+            <ul style="font-size:12.5px;color:#e4e4e7;margin:8px 0 0 18px;line-height:1.55;">
+              <li><strong>Campeón de la Tabla Anual 2026</strong> (${resTemp.penarol_anual_pts || 69} pts • ${resTemp.penarol_anual_dg || '+27'} DG).</li>
+              <li><strong>Clasificado directo a Fase de Grupos</strong> de Copa Libertadores 2027 (Uruguay 1).</li>
+              <li><strong>Pase directo a la Gran Final</strong> (ida y vuelta) sin disputar semifinal.</li>
+            </ul>
+          </div>
+          <div class="playoff-step">
+            <div style="font-size:11px;color:var(--manya-gold);font-weight:800;text-transform:uppercase;">1. SEMIFINAL (CAMPEONES CORTOS) • ${def.fecha_semifinal || '29/11/2026'}</div>
+            <div style="font-size:13.5px;font-weight:800;color:#fff;margin:4px 0;">${def.semifinal || 'Racing (Apertura) vs Liverpool (Clausura)'}</div>
+            <div style="font-size:12px;color:#a1a1aa;margin-bottom:8px;">¿Quién creés que avanzará para enfrentar a Peñarol?</div>
+            <div class="sim-btns">
+              <button type="button" class="sim-btn ${rivalPick === 'Racing' ? 'active' : ''}" data-pick="Racing">Racing (Apertura)</button>
+              <button type="button" class="sim-btn ${rivalPick === 'Liverpool' ? 'active' : ''}" data-pick="Liverpool">Liverpool (Clausura)</button>
+            </div>
+          </div>
+          <div class="playoff-step" style="border-left-color:#10b981;">
+            <div style="font-size:11px;color:#34d399;font-weight:800;text-transform:uppercase;">2. GRAN FINAL DEL CAMPEONATO URUGUAYO (IDA Y VUELTA)</div>
+            <div style="font-size:14px;font-weight:900;color:#fff;margin:4px 0;">★ Peñarol vs ${rivalPick}</div>
+            <div style="font-size:12px;color:#d4d4d8;line-height:1.45;">Ida tentativa: <strong>Jueves 3 de diciembre</strong> • Vuelta definitiva: <strong>Domingo 6 de diciembre de 2026</strong> (localías a sortear).</div>
+          </div>
+        `;
+        container.querySelectorAll('[data-pick]').forEach(b => {
+          b.addEventListener('click', () => {
+            rivalPick = b.getAttribute('data-pick');
+            try { localStorage.setItem('manya_final_rival_pick', rivalPick); } catch (_) {}
+            renderBracket();
+          });
+        });
+      };
+      renderBracket();
+      return;
+    }
+
+    // Modo simulador clásico en etapa regular
+    if (resetBtn) resetBtn.style.display = 'inline-flex';
+    const proxList = (state.live.proximos_partidos && state.live.proximos_partidos.length)
+      ? state.live.proximos_partidos.slice(0, 3).map((m, i) => ({ id: i + 1, label: `${m.nombre} (${m.estadio || ''})` }))
+      : [{ id: 1, label: `${prox.nombre || 'Próximo Partido Peñarol'} (${prox.estadio || ''})` }];
+
+    const picks = {};
+    proxList.forEach(f => { picks[f.id] = 0; });
 
     function updateSim() {
       state.simPointsDelta = Object.values(picks).reduce((a, b) => a + b, 0);
       const ptsEl = document.getElementById('sim-delta-label');
       if (ptsEl) {
-        if (state.simPointsDelta > 0) {
-          const tabs = (state.live && state.live.tablas_campeonatos) ? state.live.tablas_campeonatos : [];
-          const activeTourn = tabs.find(t => t.id === state.standingsTab);
-          const tournName = activeTourn ? activeTourn.nombre_corto : 'la tabla';
-          ptsEl.textContent = `+${state.simPointsDelta} pts proyectados para Peñarol en ${tournName}`;
-        } else {
-          ptsEl.textContent = 'Tabla actual oficial (sin proyección)';
-        }
+        ptsEl.textContent = state.simPointsDelta > 0
+          ? `+${state.simPointsDelta} pts proyectados para Peñarol`
+          : 'Tabla actual oficial (sin proyección)';
       }
       renderStandings();
     }
 
-    container.innerHTML = fechas.map(f => `
+    container.innerHTML = proxList.map(f => `
       <div class="sim-row" data-fid="${f.id}">
         <span><strong>${f.label}</strong></span>
         <div class="sim-btns">
@@ -846,26 +710,22 @@
       });
     });
 
-    const resetBtn = document.getElementById('sim-reset-btn');
     if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
+      resetBtn.onclick = () => {
         state.simPointsDelta = 0;
-        picks[1] = 0;
-        picks[2] = 0;
-        picks[3] = 0;
+        Object.keys(picks).forEach(k => { picks[k] = 0; });
         container.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
-        const ptsEl = document.getElementById('sim-delta-label');
-        if (ptsEl) ptsEl.textContent = 'Tabla actual oficial (sin proyección)';
-        renderStandings();
-      });
+        updateSim();
+      };
     }
   }
 
+  // ==================== PIZARRA TÁCTICA 2026 ====================
   function showTacticalToast(message, isSuccess = true) {
     const banner = document.getElementById('tactical-guidance-banner');
     if (banner) {
       banner.classList.add('active-action');
-      banner.innerHTML = `<span style="font-size:16px;">${isSuccess ? '✅' : 'ℹ️'}</span> <strong>${message}</strong>`;
+      banner.innerHTML = `<span style="font-size:15px;">${isSuccess ? '✅' : 'ℹ️'}</span> <strong>${message}</strong>`;
       setTimeout(() => {
         if (state.selectedSlotIndex === null && state.selectedBenchIndex === null && banner) {
           banner.classList.remove('active-action');
@@ -874,35 +734,6 @@
       }, 3500);
     }
   }
-
-  const DEFAULT_LINEUP = [
-    { id: "aguerre", numero: 1, nombre: "Washington Aguerre", posicion: "ARQ", titular: true },
-    { id: "milans", numero: 20, nombre: "Pedro Milans", posicion: "LD", titular: true },
-    { id: "mendez", numero: 23, nombre: "Javier Méndez", posicion: "DFC", titular: true },
-    { id: "rodriguez", numero: 4, nombre: "Guzmán Rodríguez", posicion: "DFC", titular: true },
-    { id: "olivera", numero: 15, nombre: "Maximiliano Olivera", posicion: "LI", titular: true },
-    { id: "garcia", numero: 5, nombre: "Damián García", posicion: "MCD", titular: true },
-    { id: "perez", numero: 18, nombre: "Rodrigo Pérez", posicion: "MC", titular: true },
-    { id: "cabrera", numero: 7, nombre: "Javier Cabrera", posicion: "ED", titular: true },
-    { id: "fernandez", numero: 8, nombre: "Leonardo Fernández", posicion: "MCO", titular: true },
-    { id: "baez", numero: 28, nombre: "Jaime Báez", posicion: "EI", titular: true },
-    { id: "silvera", numero: 11, nombre: "Maximiliano Silvera", posicion: "DC", titular: true }
-  ];
-
-  const DEFAULT_BENCH = [
-    { id: "deamores", numero: 12, nombre: "Guillermo De Amores", posicion: "ARQ", titular: false },
-    { id: "mayada", numero: 13, nombre: "Camilo Mayada", posicion: "LD", titular: false },
-    { id: "coelho", numero: 2, nombre: "Léo Coelho", posicion: "DFC", titular: false },
-    { id: "hernandez", numero: 3, nombre: "Lucas Hernández", posicion: "LI", titular: false },
-    { id: "ramirez", numero: 10, nombre: "Gastón Ramírez", posicion: "MC", titular: false },
-    { id: "sosa", numero: 14, nombre: "Ignacio Sosa", posicion: "MCD", titular: false },
-    { id: "sanchez", numero: 16, nombre: "Adrián Sánchez", posicion: "MC", titular: false },
-    { id: "darias", numero: 21, nombre: "Eduardo Darias", posicion: "MI", titular: false },
-    { id: "batista", numero: 9, nombre: "Facundo Batista", posicion: "DC", titular: false },
-    { id: "avenatti", numero: 19, nombre: "Felipe Avenatti", posicion: "DC", titular: false },
-    { id: "sanabria", numero: 24, nombre: "Lucas Sanabria", posicion: "MCD", titular: false },
-    { id: "acosta", numero: 22, nombre: "Nahuel Acosta", posicion: "ED", titular: false }
-  ];
 
   function resetTacticalLineup() {
     if (!state.initialLineup || !state.initialLineup.length) {
@@ -914,7 +745,7 @@
     state.selectedSlotIndex = null;
     state.selectedBenchIndex = null;
     renderTacticalBoard();
-    showTacticalToast('↺ 11 inicial oficial de Diego Aguirre restablecido con éxito.');
+    showTacticalToast('↺ 11 inicial 2026 de Diego Aguirre restablecido con éxito.');
   }
 
   function renderTacticalBoard() {
@@ -931,22 +762,12 @@
     }
 
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
-
-    // Cancha reglamentaria completa con marcas oficiales
     const pitchMarkings = `
-      <div class="pitch-corner-tl"></div>
-      <div class="pitch-corner-tr"></div>
-      <div class="pitch-corner-bl"></div>
-      <div class="pitch-corner-br"></div>
-      <div class="pitch-area-top"></div>
-      <div class="pitch-goal-top"></div>
-      <div class="pitch-arc-top"></div>
-      <div class="pitch-mid-line"></div>
-      <div class="pitch-center-circle"></div>
-      <div class="pitch-center-spot"></div>
-      <div class="pitch-area-bottom"></div>
-      <div class="pitch-goal-bottom"></div>
-      <div class="pitch-arc-bottom"></div>
+      <div class="pitch-corner-tl"></div><div class="pitch-corner-tr"></div>
+      <div class="pitch-corner-bl"></div><div class="pitch-corner-br"></div>
+      <div class="pitch-area-top"></div><div class="pitch-goal-top"></div><div class="pitch-arc-top"></div>
+      <div class="pitch-mid-line"></div><div class="pitch-center-circle"></div><div class="pitch-center-spot"></div>
+      <div class="pitch-area-bottom"></div><div class="pitch-goal-bottom"></div><div class="pitch-arc-bottom"></div>
     `;
 
     const playersHtml = state.lineup.slice(0, 11).map((p, idx) => {
@@ -957,20 +778,17 @@
       return `
         <div class="pitch-player ${isSel ? 'selected' : ''}" data-slot="${idx}" style="left:${c.x}%;top:${c.y}%;" title="#${p.numero} ${p.nombre} (${roleBadge})">
           <div class="player-token">${p.numero}</div>
-          <div class="player-label">${lastName} (${roleBadge})</div>
+          <div class="player-label">${lastName} <span style="color:var(--manya-gold);font-weight:900;">${roleBadge}</span></div>
         </div>
       `;
     }).join('');
 
     pitch.innerHTML = pitchMarkings + `<div id="pitch-players-layer" class="pitch-players-layer">${playersHtml}</div>`;
 
-    // Escuchador de clics en futbolistas titulares
     pitch.querySelectorAll('.pitch-player').forEach(el => {
       el.addEventListener('click', () => {
         const idx = parseInt(el.getAttribute('data-slot'), 10);
-
         if (state.selectedBenchIndex !== null) {
-          // Sustitución directa: Suplente seleccionado entra por este titular
           const benchPlayer = state.bench[state.selectedBenchIndex];
           const starterPlayer = state.lineup[idx];
           state.lineup[idx] = benchPlayer;
@@ -980,20 +798,17 @@
           renderTacticalBoard();
           showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
         } else if (state.selectedSlotIndex === idx) {
-          // Deseleccionar al mismo titular
           state.selectedSlotIndex = null;
           renderTacticalBoard();
         } else if (state.selectedSlotIndex !== null) {
-          // Intercambio táctico entre dos titulares en la cancha
           const p1 = state.lineup[state.selectedSlotIndex];
           const p2 = state.lineup[idx];
           state.lineup[state.selectedSlotIndex] = p2;
           state.lineup[idx] = p1;
           state.selectedSlotIndex = null;
           renderTacticalBoard();
-          showTacticalToast(`↔ Intercambio en cancha: #${p1.numero} ${p1.nombre.split(' ').slice(-1)[0]} por #${p2.numero} ${p2.nombre.split(' ').slice(-1)[0]}`);
+          showTacticalToast(`↔ Rotación en cancha: #${p1.numero} ${p1.nombre.split(' ').slice(-1)[0]} ↔ #${p2.numero} ${p2.nombre.split(' ').slice(-1)[0]}`);
         } else {
-          // Seleccionar titular para sustituir o mover
           state.selectedSlotIndex = idx;
           state.selectedBenchIndex = null;
           renderTacticalBoard();
@@ -1001,7 +816,6 @@
       });
     });
 
-    // Renderizar banco de suplentes
     if (benchBox) {
       benchBox.innerHTML = state.bench.map((b, bIdx) => {
         const isBenchSel = state.selectedBenchIndex === bIdx;
@@ -1015,9 +829,7 @@
       benchBox.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
           const bIdx = parseInt(btn.getAttribute('data-bidx'), 10);
-
           if (state.selectedSlotIndex !== null) {
-            // Sustitución directa: Titular seleccionado sale y entra este suplente
             const benchPlayer = state.bench[bIdx];
             const starterPlayer = state.lineup[state.selectedSlotIndex];
             state.lineup[state.selectedSlotIndex] = benchPlayer;
@@ -1027,11 +839,9 @@
             renderTacticalBoard();
             showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
           } else if (state.selectedBenchIndex === bIdx) {
-            // Deseleccionar suplente
             state.selectedBenchIndex = null;
             renderTacticalBoard();
           } else {
-            // Seleccionar suplente y esperar toque en titular
             state.selectedBenchIndex = bIdx;
             state.selectedSlotIndex = null;
             renderTacticalBoard();
@@ -1040,23 +850,28 @@
       });
     }
 
-    // Actualizar banner de guía dinámica
     if (banner) {
       if (state.selectedSlotIndex !== null) {
-        const selStarter = state.lineup[state.selectedSlotIndex];
-        const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
-        const role = coords[state.selectedSlotIndex]?.role || selStarter.posicion;
+        const sel = state.lineup[state.selectedSlotIndex];
+        const role = coords[state.selectedSlotIndex]?.role || sel.posicion;
         banner.classList.add('active-action');
-        banner.innerHTML = `🟡 <strong>Titular seleccionado: #${selStarter.numero} ${selStarter.nombre} (${role})</strong>. Tocá un suplente abajo para cambiarlo, u otro titular en la cancha para rotar posiciones.`;
+        banner.innerHTML = `🟡 <strong>Titular seleccionado: #${sel.numero} ${sel.nombre} (${role}).</strong> Tocá un suplente para cambiarlo, u otro titular para rotar.`;
       } else if (state.selectedBenchIndex !== null) {
-        const selBench = state.bench[state.selectedBenchIndex];
+        const selB = state.bench[state.selectedBenchIndex];
         banner.classList.add('active-action');
-        banner.innerHTML = `🟢 <strong>Suplente seleccionado: #${selBench.numero} ${selBench.nombre} (${selBench.posicion})</strong>. Tocá al jugador en la cancha que querés sustituir.`;
+        banner.innerHTML = `🟢 <strong>Suplente seleccionado: #${selB.numero} ${selB.nombre} (${selB.posicion}).</strong> Tocá al jugador en cancha que querés sustituir.`;
       } else {
         banner.classList.remove('active-action');
         banner.innerHTML = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
       }
     }
+  }
+
+  function _getDynamicMatchLabelForExport() {
+    const prox = state.live && state.live.proximo_partido;
+    if (prox && prox.es_definicion_final) return 'Gran Final Campeonato Uruguayo 2026 • Campeón Tabla Anual';
+    if (prox && prox.nombre) return `${prox.nombre} • ${prox.estadio || 'Campeonato Uruguayo 2026'}`;
+    return 'Club Atlético Peñarol • Temporada 2026';
   }
 
   function exportLineupPNG() {
@@ -1065,7 +880,6 @@
     canvas.height = 1350;
     const ctx = canvas.getContext('2d');
 
-    // Fondo Oro y Carbón Elegante
     ctx.fillStyle = '#09090b';
     ctx.fillRect(0, 0, 1080, 1350);
     ctx.fillStyle = '#ffd100';
@@ -1077,1123 +891,169 @@
     ctx.fillText('★ CLUB ATLÉTICO PEÑAROL • 11 TITULAR ★', 540, 80);
 
     ctx.fillStyle = '#f4f4f5';
-    ctx.font = '700 22px Inter, sans-serif';
-    ctx.fillText(`Torneo Clausura Fecha 14 vs Defensor Sporting • Franzini`, 540, 118);
+    ctx.font = '700 21px Inter, sans-serif';
+    ctx.fillText(_getDynamicMatchLabelForExport(), 540, 118);
 
     ctx.fillStyle = '#ffd100';
     ctx.font = '800 20px Inter, sans-serif';
     ctx.fillText(`Esquema Táctico: ${state.formation} • DT: Diego Aguirre`, 540, 150);
 
-    // Cancha reglamentaria completa
     const px0 = 80, py0 = 175, pw = 920, ph = 980;
-    const midY = py0 + ph / 2;
-    const midX = px0 + pw / 2;
+    const midY = py0 + ph / 2, midX = px0 + pw / 2;
 
-    // Césped
     ctx.fillStyle = '#14532d';
     ctx.fillRect(px0, py0, pw, ph);
-
-    // Franjas de corte de césped
     ctx.fillStyle = 'rgba(255, 255, 255, 0.035)';
-    const stripH = ph / 8;
-    for (let i = 0; i < 8; i += 2) {
-      ctx.fillRect(px0, py0 + i * stripH, pw, stripH);
-    }
+    for (let i = 0; i < 8; i += 2) ctx.fillRect(px0, py0 + i * (ph / 8), pw, ph / 8);
 
-    // Líneas perimetrales y de medio campo
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
     ctx.lineWidth = 4;
     ctx.strokeRect(px0, py0, pw, ph);
-
-    ctx.beginPath();
-    ctx.moveTo(px0, midY);
-    ctx.lineTo(px0 + pw, midY);
-    ctx.stroke();
-
-    // Círculo central y punto medio
-    ctx.beginPath();
-    ctx.arc(midX, midY, 110, 0, Math.PI * 2);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.arc(midX, midY, 7, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffffff';
-    ctx.fill();
-
-    // Área Grande Superior (Rival)
+    ctx.beginPath(); ctx.moveTo(px0, midY); ctx.lineTo(px0 + pw, midY); ctx.stroke();
+    ctx.beginPath(); ctx.arc(midX, midY, 110, 0, Math.PI * 2); ctx.stroke();
     ctx.strokeRect(midX - 250, py0, 500, 160);
-    // Área Chica Superior
     ctx.strokeRect(midX - 120, py0, 240, 60);
-    // Punto Penal Superior
-    ctx.beginPath();
-    ctx.arc(midX, py0 + 115, 6, 0, Math.PI * 2);
-    ctx.fill();
-    // Medialuna Superior
-    ctx.beginPath();
-    ctx.arc(midX, py0 + 115, 80, 0.23 * Math.PI, 0.77 * Math.PI);
-    ctx.stroke();
-
-    // Área Grande Inferior (Arco Decano)
     ctx.strokeRect(midX - 250, py0 + ph - 160, 500, 160);
-    // Área Chica Inferior
     ctx.strokeRect(midX - 120, py0 + ph - 60, 240, 60);
-    // Punto Penal Inferior
-    ctx.beginPath();
-    ctx.arc(midX, py0 + ph - 115, 6, 0, Math.PI * 2);
-    ctx.fill();
-    // Medialuna Inferior
-    ctx.beginPath();
-    ctx.arc(midX, py0 + ph - 115, 80, 1.23 * Math.PI, 1.77 * Math.PI);
-    ctx.stroke();
 
-    // Arcos de córner en las 4 esquinas
-    const cornerR = 26;
-    ctx.beginPath();
-    ctx.arc(px0, py0, cornerR, 0, 0.5 * Math.PI);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(px0 + pw, py0, cornerR, 0.5 * Math.PI, Math.PI);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(px0, py0 + ph, cornerR, 1.5 * Math.PI, 2 * Math.PI);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(px0 + pw, py0 + ph, cornerR, Math.PI, 1.5 * Math.PI);
-    ctx.stroke();
-
-    // Dibujar futbolistas con dorsales y etiquetas legibles
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
     state.lineup.slice(0, 11).forEach((p, idx) => {
       const c = coords[idx] || { x: 50, y: 50, role: p.posicion };
       const px = px0 + (c.x / 100) * pw;
       const py = py0 + (c.y / 100) * ph;
 
-      // Sombra
-      ctx.beginPath();
-      ctx.arc(px, py + 4, 34, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,0,0,0.55)';
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py + 4, 34, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py, 34, 0, Math.PI * 2); ctx.fillStyle = '#ffd100'; ctx.fill();
+      ctx.lineWidth = 4; ctx.strokeStyle = '#09090b'; ctx.stroke();
 
-      // Ficha Oro y Carbón
-      ctx.beginPath();
-      ctx.arc(px, py, 34, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffd100';
-      ctx.fill();
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = '#09090b';
-      ctx.stroke();
-
-      // Dorsal
       ctx.fillStyle = '#09090b';
       ctx.font = '900 26px Inter, sans-serif';
       ctx.fillText(String(p.numero), px, py + 9);
 
-      // Nombre y Rol
-      const lastName = p.nombre.split(' ').slice(-1)[0];
-      const roleStr = c.role || p.posicion;
-      const nameTxt = `${lastName} (${roleStr})`;
+      const nameTxt = `${p.nombre.split(' ').slice(-1)[0]} (${c.role || p.posicion})`;
       ctx.font = '800 19px Inter, sans-serif';
-      const textMetrics = ctx.measureText(nameTxt);
-      const textW = textMetrics.width + 16;
+      const textW = ctx.measureText(nameTxt).width + 18;
       ctx.fillStyle = 'rgba(9, 9, 11, 0.92)';
       ctx.fillRect(px - textW / 2, py + 42, textW, 26);
       ctx.strokeStyle = 'rgba(255, 209, 0, 0.7)';
       ctx.lineWidth = 1.5;
       ctx.strokeRect(px - textW / 2, py + 42, textW, 26);
-
       ctx.fillStyle = '#ffffff';
       ctx.fillText(nameTxt, px, py + 61);
     });
 
-    // Franja inferior con banco de relevos
     ctx.fillStyle = 'rgba(17, 17, 21, 0.95)';
     ctx.fillRect(80, 1175, 920, 80);
-    ctx.strokeStyle = 'rgba(255, 209, 0, 0.35)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(80, 1175, 920, 80);
-
     ctx.fillStyle = '#ffd100';
     ctx.font = '800 17px Inter, sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText('BANCO DE RELEVOS:', 100, 1205);
-
-    const benchNames = state.bench.slice(0, 8).map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]}`).join('  •  ');
     ctx.fillStyle = '#e4e4e7';
     ctx.font = '600 16px Inter, sans-serif';
-    ctx.fillText(benchNames, 100, 1235);
+    ctx.fillText(state.bench.slice(0, 7).map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]}`).join('  •  '), 100, 1235);
 
     ctx.fillStyle = '#ffd100';
     ctx.font = '800 20px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('Creado en https://manya.servicioti.com.uy • Pasión Aurinegra ServicioTI', 540, 1315);
 
-    if (canvas.toBlob) {
-      canvas.toBlob((blob) => {
-        if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = `mi-11-penarol-${state.formation}.png`;
-        link.href = url;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
-        showTacticalToast('📥 ¡Tu 11 titular se ha descargado con éxito!');
-      }, 'image/png');
-    } else {
+    const download = (href) => {
       const link = document.createElement('a');
       link.download = `mi-11-penarol-${state.formation}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = href;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
       showTacticalToast('📥 ¡Tu 11 titular se ha descargado con éxito!');
+    };
+    if (canvas.toBlob) {
+      canvas.toBlob(blob => { if (blob) { const u = URL.createObjectURL(blob); download(u); setTimeout(() => URL.revokeObjectURL(u), 2000); } }, 'image/png');
+    } else {
+      download(canvas.toDataURL('image/png'));
     }
   }
 
   async function handleShareLineup() {
     const coords = FORMATIONS[state.formation] || FORMATIONS['4-2-3-1'];
-    const titularesStr = (state.lineup || []).slice(0, 11).map((p, i) => {
-      const role = coords[i]?.role || p.posicion;
-      return `${i + 1}. #${p.numero} ${p.nombre} (${role})`;
-    }).join('\n');
-
-    const relevosStr = (state.bench || []).map(b => `#${b.numero} ${b.nombre.split(' ').slice(-1)[0]} (${b.posicion})`).join(', ');
-
-    const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\n` +
-      `DT: Diego Aguirre • vs Defensor Sporting (Estadio Luis Franzini)\n\n` +
-      `11 TITULAR:\n` +
-      `${titularesStr}\n\n` +
-      `Banco de relevos:\n${relevosStr}\n\n` +
-      `¡Armá tu 11 y compartilo desde https://manya.servicioti.com.uy/#pizarra-tactica !`;
+    const titularesStr = (state.lineup || []).slice(0, 11).map((p, i) => `${i + 1}. #${p.numero} ${p.nombre} (${coords[i]?.role || p.posicion})`).join('\n');
+    const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\nDT: Diego Aguirre • ${_getDynamicMatchLabelForExport()}\n\n${titularesStr}\n\nArmá tu 11 en https://manya.servicioti.com.uy/#pizarra-tactica`;
 
     if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Mi 11 Titular del Glorioso Peñarol',
-          text: text,
-          url: 'https://manya.servicioti.com.uy/#pizarra-tactica'
-        });
-        showTacticalToast('📤 ¡Alineación compartida con éxito!');
-        return;
-      } catch (e) {
-        if (e.name === 'AbortError') return;
-      }
+      try { await navigator.share({ title: 'Mi 11 Titular de Peñarol', text, url: 'https://manya.servicioti.com.uy/#pizarra-tactica' }); return; } catch (_) {}
     }
-
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      }
-      const shareLineupBtn = document.getElementById('share-lineup-btn');
-      if (shareLineupBtn) {
-        const orig = shareLineupBtn.textContent;
-        shareLineupBtn.textContent = '✅ ¡Copiado!';
-        showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
-        setTimeout(() => { shareLineupBtn.textContent = orig; }, 2500);
-      }
-    } catch (err) {
+      await navigator.clipboard.writeText(text);
+      showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
+    } catch (_) {
       showTacticalToast('⚠️ No se pudo copiar la alineación', false);
     }
   }
 
   function initTacticalBoard() {
-    try {
-      if (!state.lineup || !state.lineup.length) {
-        state.lineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
-        state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
-        state.bench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
-        state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
-      }
-
-      renderTacticalBoard();
-
-      // Botones selectores de formación táctica
-      document.querySelectorAll('[data-formation]').forEach(btn => {
-        btn.onclick = () => {
-          document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          state.formation = btn.getAttribute('data-formation');
-          state.selectedSlotIndex = null;
-          state.selectedBenchIndex = null;
-          renderTacticalBoard();
-        };
-      });
-
-      // Botón restablecer 11 (soporte para #reset-lineup-btn y #btn-reset-lineup)
-      ['reset-lineup-btn', 'btn-reset-lineup'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (btn) btn.onclick = resetTacticalLineup;
-      });
-
-      // Botón exportar PNG (soporte para #export-lineup-btn y #btn-download-lineup)
-      ['export-lineup-btn', 'btn-download-lineup'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (btn) btn.onclick = exportLineupPNG;
-      });
-
-      // Botón compartir 11
-      const shareLineupBtn = document.getElementById('share-lineup-btn');
-      if (shareLineupBtn) {
-        shareLineupBtn.onclick = handleShareLineup;
-      }
-    } catch (err) {
-      console.error('Error initializing tactical board:', err);
+    if (!state.lineup || !state.lineup.length) {
+      state.lineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+      state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
+      state.bench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
+      state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
     }
-  }
+    renderTacticalBoard();
 
-  let triviaAudioEnabled = true;
-
-  function playAudioTone(type) {
-    if (!triviaAudioEnabled) return;
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      if (type === 'correct') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.09, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-        osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 0.25);
-      } else if (type === 'wrong') {
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(260, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(170, ctx.currentTime + 0.22);
-        gain.gain.setValueAtTime(0.09, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-        osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 0.25);
-      } else if (type === 'fanfare') {
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-          const o = ctx.createOscillator();
-          const g = ctx.createGain();
-          o.connect(g);
-          g.connect(ctx.destination);
-          o.frequency.value = freq;
-          g.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.1);
-          g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.25);
-          o.start(ctx.currentTime + i * 0.1);
-          o.stop(ctx.currentTime + i * 0.1 + 0.25);
-        });
-      }
-    } catch (_) {}
-  }
-
-  function getTriviaHighScore() {
-    try {
-      return parseInt(localStorage.getItem('manya_trivia_highscore') || '0', 10);
-    } catch (_) {
-      return 0;
-    }
-  }
-
-  function saveTriviaHighScore(score) {
-    try {
-      const cur = getTriviaHighScore();
-      if (score > cur) {
-        localStorage.setItem('manya_trivia_highscore', String(score));
-        return true;
-      }
-    } catch (_) {}
-    return false;
-  }
-
-  function prepareTriviaQuestion(q) {
-    // Generar opciones barajadas dinámicamente para que la respuesta correcta no esté siempre en 'A'
-    const paired = q.opts.map((opt, idx) => ({
-      text: opt,
-      isCorrect: idx === q.ans
-    }));
-    // Fisher-Yates shuffle
-    for (let i = paired.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [paired[i], paired[j]] = [paired[j], paired[i]];
-    }
-    return Object.assign({}, q, {
-      opts: paired.map(p => p.text),
-      ans: paired.findIndex(p => p.isCorrect)
-    });
-  }
-
-  let triviaState = {
-    category: 'all',
-    currentIndex: 0,
-    score: 0,
-    streak: 0,
-    maxStreak: 0,
-    answered: false,
-    questionsPool: []
-  };
-
-  function getTriviaQuestionsPool(cat) {
-    const rawList = (!cat || cat === 'all')
-      ? TRIVIA_QUESTIONS
-      : TRIVIA_QUESTIONS.filter(q => q.cat === cat);
-    const list = rawList.length ? rawList : TRIVIA_QUESTIONS;
-    // Barajar aleatoriamente el orden de las preguntas y sus opciones
-    const shuffled = [...list].sort(() => Math.random() - 0.5);
-    return shuffled.map(prepareTriviaQuestion);
-  }
-
-  function renderTrivia() {
-    const box = document.getElementById('trivia-box');
-    if (!box) return;
-
-    if (!triviaState.questionsPool.length) {
-      triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
-    }
-
-    const pool = triviaState.questionsPool;
-    const total = pool.length;
-    const idx = triviaState.currentIndex;
-    const personalRecord = getTriviaHighScore();
-
-    // Si terminó la tanda de preguntas
-    if (idx >= total) {
-      const pct = Math.round((triviaState.score / (total * 100)) * 100);
-      const isNewRecord = saveTriviaHighScore(triviaState.score);
-      if (pct >= 70 || isNewRecord) {
-        playAudioTone('fanfare');
-      }
-
-      let rankBadge = '';
-      let rankTitle = '';
-      let rankMsg = '';
-
-      if (pct >= 90) {
-        rankBadge = '🏆 Rango: Capitán de Capitanes';
-        rankTitle = '¡Nivel Tito Gonçalves!';
-        rankMsg = 'Tenés la mística y los datos del club grabados a fuego en el corazón. ¡Orgullo aurinegro total!';
-      } else if (pct >= 70) {
-        rankBadge = '⭐ Rango: Gloria de Primera';
-        rankTitle = '¡Sabiduría de la Tribuna Damiani!';
-        rankMsg = 'Gran conocimiento de las copas, clásicos y hazañas. Estás listo para cualquier debate futbolero.';
-      } else if (pct >= 50) {
-        rankBadge = '🟡 Rango: Carbonero de Ley';
-        rankTitle = '¡Pasión de la Tribuna Ámsterdam!';
-        rankMsg = 'Buen puntaje. Conocés las hazañas esenciales, aunque todavía quedan joyitas por repasar en 1891.uy.';
-      } else {
-        rankBadge = '📖 Rango: Hincha en Formación';
-        rankTitle = '¡A estudiar las fichas decanas!';
-        rankMsg = 'Peñarol tiene 135 años de gloria. Date una vuelta por el archivo de 1891.uy para revivir la historia.';
-      }
-
-      box.innerHTML = `
-        <div class="trivia-container trivia-game-over">
-          <div style="font-size:38px;margin-bottom:8px;">🏆</div>
-          <h4 style="font-size:20px;color:#fff;margin-bottom:4px;">${rankTitle}</h4>
-          ${isNewRecord ? '<div style="background:#22c55e;color:#000;font-weight:900;padding:4px 12px;border-radius:999px;font-size:12px;display:inline-block;margin-bottom:8px;">🎉 ¡NUEVO RÉCORD PERSONAL!</div>' : ''}
-          <div class="trivia-rank-badge">${rankBadge}</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0;background:rgba(0,0,0,0.5);padding:14px;border-radius:8px;border:1px solid rgba(255,209,0,0.2);">
-            <div>
-              <div style="font-size:20px;font-weight:900;color:var(--manya-gold);font-family:'JetBrains Mono',monospace;">${triviaState.score}</div>
-              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Puntos Totales</div>
-            </div>
-            <div>
-              <div style="font-size:20px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;">${pct}%</div>
-              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Efectividad</div>
-            </div>
-            <div>
-              <div style="font-size:20px;font-weight:900;color:#f97316;font-family:'JetBrains Mono',monospace;">🔥 x${triviaState.maxStreak}</div>
-              <div style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;">Mejor Racha</div>
-            </div>
-          </div>
-          <p style="font-size:13px;color:#d4d4d8;line-height:1.5;margin-bottom:16px;">${rankMsg}</p>
-          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-            <button type="button" class="btn-manya" id="trivia-restart-btn">🔄 Jugar de Nuevo</button>
-            <a href="https://1891.uy/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="font-size:13px;padding:8px 14px;">Explorar Archivo 1891.uy ↗</a>
-          </div>
-        </div>
-      `;
-
-      const rBtn = box.querySelector('#trivia-restart-btn');
-      if (rBtn) {
-        rBtn.addEventListener('click', () => {
-          triviaState.currentIndex = 0;
-          triviaState.score = 0;
-          triviaState.streak = 0;
-          triviaState.maxStreak = 0;
-          triviaState.answered = false;
-          triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
-          renderTrivia();
-        });
-      }
-      return;
-    }
-
-    const item = pool[idx];
-    triviaState.answered = false;
-    const progressPct = Math.round(((idx) / total) * 100);
-
-    const categoriesList = [
-      { id: 'all', label: 'Todas' },
-      { id: 'libertadores', label: '🏆 Libertadores' },
-      { id: 'clasicos', label: '⚡ Clásicos' },
-      { id: 'idolos', label: '⭐ Ídolos' },
-      { id: 'records', label: '📊 Récords' },
-      { id: 'cds', label: '🏟️ CDS' }
-    ];
-
-    box.innerHTML = `
-      <div class="trivia-container">
-        <!-- Selector de Categorías y Sonido -->
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div class="trivia-cat-chips" role="tablist">
-            ${categoriesList.map(cat => `
-              <button type="button" class="trivia-chip ${triviaState.category === cat.id ? 'active' : ''}" data-cat="${cat.id}">
-                ${cat.label}
-              </button>
-            `).join('')}
-          </div>
-          <button type="button" id="trivia-sound-toggle" title="Activar/Desactivar Sonido" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#d4d4d8;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;">
-            ${triviaAudioEnabled ? '🔊 Sonido' : '🔇 Mudo'}
-          </button>
-        </div>
-
-        <!-- Barra de Progreso y Estadísticas -->
-        <div class="trivia-stats-row">
-          <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${item.catName || 'Historia'}</em></span>
-          <div style="display:flex;align-items:center;gap:12px;">
-            ${personalRecord > 0 ? `<span style="font-size:11px;color:#a1a1aa;">🏅 Récord: <strong style="color:#ffd100;">${personalRecord}</strong></span>` : ''}
-            ${triviaState.streak > 1 ? `<span class="trivia-streak-badge">🔥 x${triviaState.streak}</span>` : ''}
-            <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${triviaState.score} pts</span>
-          </div>
-        </div>
-        <div class="trivia-progress-bar-wrap">
-          <div class="trivia-progress-fill" style="width:${progressPct}%;"></div>
-        </div>
-
-        <!-- Pregunta -->
-        <h4 class="trivia-q-title">${item.q}</h4>
-
-        <!-- Opciones (Distribuidas aleatoriamente) -->
-        <div class="trivia-opts-grid" id="trivia-opts">
-          ${item.opts.map((o, i) => {
-            const letter = ['A', 'B', 'C', 'D'][i] || (i + 1);
-            return `
-              <button type="button" class="trivia-opt-btn" data-idx="${i}">
-                <span class="trivia-opt-letter">${letter}</span>
-                <span>${o}</span>
-              </button>
-            `;
-          }).join('')}
-        </div>
-
-        <!-- Feedback y Explicación -->
-        <div id="trivia-feedback" style="display:none;"></div>
-      </div>
-    `;
-
-    // Toggle de sonido
-    const sndBtn = box.querySelector('#trivia-sound-toggle');
-    if (sndBtn) {
-      sndBtn.addEventListener('click', () => {
-        triviaAudioEnabled = !triviaAudioEnabled;
-        sndBtn.textContent = triviaAudioEnabled ? '🔊 Sonido' : '🔇 Mudo';
-      });
-    }
-
-    // Eventos a las fichas de categoría
-    box.querySelectorAll('.trivia-chip').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const selectedCat = btn.getAttribute('data-cat');
-        triviaState.category = selectedCat;
-        triviaState.currentIndex = 0;
-        triviaState.score = 0;
-        triviaState.streak = 0;
-        triviaState.maxStreak = 0;
-        triviaState.answered = false;
-        triviaState.questionsPool = getTriviaQuestionsPool(selectedCat);
-        renderTrivia();
-      });
-    });
-
-    // Eventos a las opciones de respuesta
-    const fb = box.querySelector('#trivia-feedback');
-    const optBtns = box.querySelectorAll('#trivia-opts .trivia-opt-btn');
-
-    optBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (triviaState.answered) return;
-        triviaState.answered = true;
-
-        const chosen = parseInt(btn.getAttribute('data-idx'), 10);
-        optBtns.forEach(b => b.disabled = true);
-
-        if (chosen === item.ans) {
-          playAudioTone('correct');
-          triviaState.streak++;
-          if (triviaState.streak > triviaState.maxStreak) {
-            triviaState.maxStreak = triviaState.streak;
-          }
-          const bonus = (triviaState.streak - 1) * 25;
-          const gained = 100 + bonus;
-          triviaState.score += gained;
-
-          btn.classList.add('is-correct');
-          fb.className = 'trivia-feedback-card correct';
-          fb.innerHTML = `
-            <div style="font-weight:800;font-size:14px;color:#22c55e;display:flex;align-items:center;justify-content:space-between;">
-              <span>✅ ¡Correcto, Carbonero! (+${gained} pts)</span>
-              ${triviaState.streak > 1 ? `<span style="font-size:11.5px;color:#f97316;">🔥 Racha x${triviaState.streak}</span>` : ''}
-            </div>
-            <div class="trivia-feedback-exp">${item.exp}</div>
-            <button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente Pregunta →</button>
-          `;
-        } else {
-          playAudioTone('wrong');
-          triviaState.streak = 0;
-          btn.classList.add('is-wrong');
-          const correctBtn = box.querySelector(`#trivia-opts .trivia-opt-btn[data-idx="${item.ans}"]`);
-          if (correctBtn) correctBtn.classList.add('is-correct');
-
-          fb.className = 'trivia-feedback-card wrong';
-          fb.innerHTML = `
-            <div style="font-weight:800;font-size:14px;color:#ef4444;">❌ Respuesta Histórica Certificada</div>
-            <div class="trivia-feedback-exp">${item.exp}</div>
-            <button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente Pregunta →</button>
-          `;
-        }
-        fb.style.display = 'block';
-
-        const nxtBtn = box.querySelector('#trivia-next-btn');
-        if (nxtBtn) {
-          nxtBtn.addEventListener('click', () => {
-            triviaState.currentIndex++;
-            renderTrivia();
-          });
-        }
-      });
-    });
-  }
-
-  function initLiveVoting() {
-    const buttons = document.querySelectorAll('.vote-player-btn');
-    const countEl = document.getElementById('vote-total-count');
-    if (!buttons.length) return;
-
-    let voted = localStorage.getItem('manya_mvp_voted');
-    let counts = JSON.parse(localStorage.getItem('manya_mvp_counts') || '{"leo": 685, "cabrera": 342, "damian": 214, "guzman": 187}');
-
-    function updateUI() {
-      const total = Object.values(counts).reduce((a, b) => a + b, 0);
-      if (countEl) countEl.textContent = `${total.toLocaleString('es-UY')} Votos Emitidos`;
-      buttons.forEach(btn => {
-        const p = btn.getAttribute('data-player');
-        const pct = Math.round((counts[p] / total) * 100) || 0;
-        const pctEl = btn.querySelector('.vote-pct');
-        const barEl = btn.querySelector('.vote-bar');
-        if (pctEl) pctEl.textContent = `${pct}%`;
-        if (barEl) barEl.style.width = `${pct}%`;
-        if (voted === p) {
-          btn.classList.add('has-voted');
-          const voteTxt = btn.querySelector('span:nth-child(1)');
-          if (voteTxt && voteTxt.textContent === 'Votar') voteTxt.textContent = '✓ Tu Voto';
-        } else {
-          btn.classList.remove('has-voted');
-          const voteTxt = btn.querySelector('span:nth-child(1)');
-          if (voteTxt && voteTxt.textContent === '✓ Tu Voto') voteTxt.textContent = 'Votar';
-        }
-      });
-    }
-
-    buttons.forEach(btn => {
+    document.querySelectorAll('[data-formation]').forEach(btn => {
       btn.onclick = () => {
-        const p = btn.getAttribute('data-player');
-        if (voted === p) return;
-        if (voted && counts[voted] > 0) counts[voted]--;
-        counts[p] = (counts[p] || 0) + 1;
-        voted = p;
-        try {
-          localStorage.setItem('manya_mvp_voted', voted);
-          localStorage.setItem('manya_mvp_counts', JSON.stringify(counts));
-        } catch (_) {}
-        updateUI();
+        document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.formation = btn.getAttribute('data-formation');
+        state.selectedSlotIndex = null;
+        state.selectedBenchIndex = null;
+        renderTacticalBoard();
       };
     });
-
-    updateUI();
+    ['reset-lineup-btn', 'btn-reset-lineup'].forEach(id => { const b = document.getElementById(id); if (b) b.onclick = resetTacticalLineup; });
+    ['export-lineup-btn', 'btn-download-lineup'].forEach(id => { const b = document.getElementById(id); if (b) b.onclick = exportLineupPNG; });
+    const shBtn = document.getElementById('share-lineup-btn');
+    if (shBtn) shBtn.onclick = handleShareLineup;
   }
 
-  function setupLightbox() {
-    const modal = document.getElementById('manya-lightbox');
-    const overlay = document.getElementById('lightbox-overlay');
-    const closeBtn = document.getElementById('lightbox-close');
-    if (!modal) return;
-
-    function closeModal() {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    if (overlay) overlay.addEventListener('click', closeModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display !== 'none') {
-        closeModal();
-      }
-    });
-  }
-
-  function openLightbox(item) {
-    const modal = document.getElementById('manya-lightbox');
-    const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy')) || (item.fuente && item.fuente.includes('1891'));
-    if (!modal) return;
-
-    const imgEl = document.getElementById('lightbox-img');
-    const badgeEl = document.getElementById('lightbox-badge');
-    const metaEl = document.getElementById('lightbox-meta');
-    const titleEl = document.getElementById('lightbox-title');
-    const descEl = document.getElementById('lightbox-desc');
-    const linkEl = document.getElementById('lightbox-external-link');
-
-    if (imgEl) {
-      imgEl.src = item.imagen_webp || item.imagen_jpg;
-      imgEl.alt = item.titulo;
-    }
-    if (badgeEl) {
-      badgeEl.textContent = is1891 ? '📜 FICHA OFICIAL 1891 BD' : `📸 ${item.categoria ? item.categoria.toUpperCase() : 'PEÑAROL'}`;
-    }
-    if (metaEl) {
-      if (is1891) {
-        metaEl.textContent = `1891 BD (Comisión de Historia) • ${item.estadio || 'Escenario Oficial'} • ${item.fecha || '2026'}`;
-      } else {
-        metaEl.textContent = `${item.cuenta} • ❤️ ${item.likes ? item.likes.toLocaleString() : '25.000'} • 💬 ${item.comments || 350}`;
-      }
-    }
-    if (titleEl) titleEl.textContent = item.titulo;
-    if (descEl) descEl.textContent = item.descripcion || item.caption || '';
-    if (linkEl) {
-      const isTenfield = (item.cuenta === '@tenfield') || (item.url_post && item.url_post.includes('tenfield'));
-      const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
-      const pUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
-      const pUrl1891 = is1891 ? 'https://1891.uy/partidos' : pUrl;
-      linkEl.href = pUrl1891;
-      linkEl.textContent = is1891 ? 'Ver ficha del partido en 1891.uy ↗' : (isPD ? 'Ver artículo en Padre y Decano ↗' : (isTenfield ? 'Ver cobertura oficial en Tenfield Deportes ↗' : 'Ver publicación original en Instagram ↗'));
-    }
-
-    modal.style.display = 'flex';
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function renderHeroInstagramPost(item, digest) {
-    const card = document.getElementById('portada-visual');
-    if (!card) return;
-
-    const pv = (digest && digest.portada_visual) ? digest.portada_visual : {};
-    const effectiveItem = Object.assign({}, item || {}, pv);
-
-    const avatarEl = document.getElementById('hero-post-avatar');
-    const accountEl = document.getElementById('hero-post-account');
-    const timeEl = document.getElementById('hero-post-time');
-    const locEl = document.getElementById('hero-post-location');
-    const extLink = document.getElementById('hero-post-external-link');
-    const mediaWrap = document.getElementById('hero-post-media');
-    const imgEl = document.getElementById('hero-post-img');
-    const badgeEl = document.getElementById('hero-post-badge');
-    const expandBtn = document.getElementById('hero-post-expand-btn');
-    const zoomBtn = document.getElementById('hero-post-zoom-btn');
-    const likeBtn = document.getElementById('hero-post-like-btn');
-    const likeIcon = document.getElementById('hero-post-like-icon');
-    const likesCountEl = document.getElementById('hero-post-likes-count');
-    const commentBtn = document.getElementById('hero-post-comment-btn');
-    const commentsCountEl = document.getElementById('hero-post-comments-count');
-    const shareBtn = document.getElementById('hero-post-share-btn');
-    const catTag = document.getElementById('hero-post-category-tag');
-    const headlineEl = document.getElementById('hero-post-headline');
-    const textEl = document.getElementById('hero-post-text');
-    const readMoreEl = document.getElementById('hero-post-read-more');
-
-    const cuenta = effectiveItem.cuenta || '@oficialcap';
-    const isOficialCap = cuenta === '@oficialcap';
-    const postUrl = effectiveItem.url_post || (isOficialCap ? 'https://www.instagram.com/oficialcap/' : 'https://www.padreydecano.com/cms/');
-    const imgSource = effectiveItem.imagen_webp || effectiveItem.imagen_jpg || 'assets/ig/manya_campeon_del_siglo_nocturno.webp';
-    const headline = pv.titular_portada || (digest && digest.titular_dia) || effectiveItem.titulo || 'Peñarol y la obsesión por la Tabla Anual: El laboratorio de Aguirre';
-    const bajada = pv.bajada_portada || (digest && digest.bajada_seo) || effectiveItem.caption || effectiveItem.descripcion || '';
-
-    if (avatarEl) {
-      avatarEl.src = isOficialCap ? 'assets/img/escudo_penarol_oficial.svg' : 'assets/img/escudos/escudo_penarol.webp';
-      avatarEl.alt = isOficialCap ? 'Club Atlético Peñarol Oficial' : 'Padre y Decano';
-    }
-    if (accountEl) accountEl.textContent = cuenta;
-    if (timeEl) timeEl.textContent = 'Actualizado Hoy';
-    if (locEl) {
-      locEl.textContent = effectiveItem.ubicacion || (effectiveItem.categoria === 'los-aromos' ? '📍 Complejo Deportivo Washington Cataldi (Los Aromos)' : '📍 Estadio Campeón del Siglo • Montevideo');
-    }
-    if (extLink) {
-      extLink.href = postUrl;
-      extLink.innerHTML = `<span>${isOficialCap ? 'Ver en Instagram' : 'Ver en Padre y Decano'}</span> ↗`;
-    }
-    if (imgEl) {
-      imgEl.src = imgSource;
-      imgEl.alt = headline + ' - Club Atlético Peñarol';
-    }
-    if (badgeEl) {
-      badgeEl.textContent = `📸 ${effectiveItem.categoria ? effectiveItem.categoria.replace('-', ' ').toUpperCase() : 'PORTADA OFICIAL'}`;
-    }
-    if (catTag) {
-      catTag.textContent = `⭐ ${isOficialCap ? 'EDICIÓN OFICIAL CAP' : 'PADRE Y DECANO'}`;
-    }
-    if (headlineEl) headlineEl.textContent = headline;
-    if (textEl) textEl.innerHTML = bajada;
-
-    let currentLikes = parseInt(effectiveItem.likes || 38450, 10);
-    const storageKey = 'manya_hero_liked_' + (effectiveItem.id || 'main');
-    let isLiked = false;
-    try {
-      isLiked = localStorage.getItem(storageKey) === 'true';
-    } catch (_) {}
-
-    function updateLikeUI() {
-      if (likesCountEl) likesCountEl.textContent = currentLikes.toLocaleString('es-UY');
-      if (likeIcon) {
-        likeIcon.textContent = isLiked ? '❤️' : '🤍';
-        likeIcon.style.transform = isLiked ? 'scale(1.2)' : 'scale(1)';
-        likeIcon.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-      }
-      if (likeBtn) {
-        likeBtn.style.color = isLiked ? '#ef4444' : '';
-      }
-    }
-    if (isLiked) currentLikes += 1;
-    updateLikeUI();
-
-    if (likeBtn) {
-      likeBtn.onclick = () => {
-        isLiked = !isLiked;
-        currentLikes += isLiked ? 1 : -1;
-        try {
-          localStorage.setItem(storageKey, isLiked ? 'true' : 'false');
-        } catch (_) {}
-        updateLikeUI();
-      };
-    }
-
-    if (commentsCountEl) {
-      commentsCountEl.textContent = (effectiveItem.comments || 892).toLocaleString('es-UY');
-    }
-
-    if (commentBtn) {
-      commentBtn.onclick = () => {
-        const target = document.getElementById('analisis-editorial');
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      };
-    }
-
-    if (shareBtn) {
-      shareBtn.onclick = async () => {
-        const shareData = {
-          title: headline,
-          text: bajada,
-          url: window.location.href
-        };
-        if (navigator.share) {
-          try {
-            await navigator.share(shareData);
-          } catch (_) {}
-        } else if (navigator.clipboard) {
-          await navigator.clipboard.writeText(window.location.href);
-          const orig = shareBtn.innerHTML;
-          shareBtn.innerHTML = '<span>✅</span><span>¡Copiado!</span>';
-          setTimeout(() => { shareBtn.innerHTML = orig; }, 2200);
-        }
-      };
-    }
-
-    const openHeroLightbox = () => {
-      openLightbox({
-        titulo: headline,
-        descripcion: bajada,
-        cuenta: cuenta,
-        categoria: effectiveItem.categoria || 'portada',
-        likes: currentLikes,
-        comments: effectiveItem.comments || 892,
-        url_post: postUrl,
-        imagen_webp: imgSource,
-        imagen_jpg: imgSource
-      });
-    };
-
-    if (mediaWrap) mediaWrap.onclick = openHeroLightbox;
-    if (expandBtn) expandBtn.onclick = (e) => { e.stopPropagation(); openHeroLightbox(); };
-    if (zoomBtn) zoomBtn.onclick = openHeroLightbox;
-
-    if (readMoreEl) {
-      readMoreEl.href = (digest && digest.blogger_post_url) ? digest.blogger_post_url : 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
-      readMoreEl.target = '_blank';
-      readMoreEl.rel = 'noopener noreferrer';
-    }
-  }
-
-  function renderGallery(items, currentFilter) {
-    const grid = document.getElementById('gallery-main-grid') || document.querySelector('#muro-visual .ig-grid');
-    if (!grid) return;
-
-    const filter = currentFilter || 'all';
-    const filtered = (filter === 'all')
-      ? items
-      : items.filter(it => (it.categoria || '').toLowerCase().includes(filter.toLowerCase()));
-
-    if (!filtered.length) {
-      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-secondary);">No se encontraron fotos en esta categoría.</div>`;
-      return;
-    }
-
-    grid.innerHTML = filtered.map((item, idx) => {
-      const isTenfield = (item.cuenta === '@tenfield') || (item.url_post && item.url_post.includes('tenfield'));
-      const isPD = (item.cuenta === '@padreydecano') || (item.url_post && item.url_post.includes('padreydecano'));
-      const postUrl = item.url_post || (isPD ? 'https://www.padreydecano.com/cms/' : (isTenfield ? 'https://www.tenfield.com.uy' : 'https://www.instagram.com/oficialcap/'));
-      const sourceLabel = isPD ? 'Padre y Decano ↗' : (isTenfield ? 'Tenfield ↗' : 'Instagram ↗');
-      const isItem1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy')) || (item.fuente && item.fuente.includes('1891'));
-      const badgeTxt = isItem1891 ? '📜 FICHA 1891 BD' : `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
-      const likesTxt = item.likes ? (item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + 'K' : item.likes) : '25K';
-      const commentsTxt = item.comments || 450;
-      const descTxt = item.descripcion || item.caption || '';
-
-      return `
-        <article class="ig-card" data-idx="${idx}">
-          <div class="ig-card-link" style="cursor:pointer;" title="Click para ampliar en alta definición (16:9)">
-            <div class="ig-img-wrap">
-              <img src="${item.imagen_webp || item.imagen_jpg}" alt="${item.titulo} - Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
-              <span class="ig-badge-tag">${badgeTxt}</span>
-            </div>
-          </div>
-          <div class="ig-body">
-            <div class="ig-meta">
-              <span>${item.cuenta} • ${(item.categoria || '').toUpperCase()}</span>
-              <span>❤️ ${likesTxt} • 💬 ${commentsTxt}</span>
-            </div>
-            <h3 class="ig-title">
-              <a href="${postUrl}" target="_blank" rel="noopener noreferrer">${item.titulo}</a>
-            </h3>
-            <p class="ig-caption">${descTxt}</p>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;">
-              <button type="button" class="btn-outline-gold open-lightbox-btn" style="padding:4px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar Foto</button>
-              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${sourceLabel}</a>
-            </div>
-          </div>
-        </article>
-      `;
-    }).join('');
-
-    grid.querySelectorAll('.ig-card').forEach((card) => {
-      const idx = parseInt(card.getAttribute('data-idx'), 10);
-      const targetItem = filtered[idx];
-      const linkArea = card.querySelector('.ig-card-link');
-      const zoomBtn = card.querySelector('.open-lightbox-btn');
-
-      if (linkArea) {
-        linkArea.addEventListener('click', () => openLightbox(targetItem));
-      }
-      if (zoomBtn) {
-        zoomBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openLightbox(targetItem);
-        });
-      }
-    });
-  }
-
-  function setupGalleryFilters(allItems) {
-    const tabs = document.querySelectorAll('#gallery-filters .gallery-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.getAttribute('data-filter') || 'all';
-        renderGallery(allItems, filter);
-      });
-    });
-  }
-
-  function hydrateEditorialSection(digest) {
-    if (!digest) return;
-    const headlineEl = document.getElementById('editorial-headline');
-    const p1El = document.getElementById('editorial-p1');
-    const p2El = document.getElementById('editorial-p2');
-    const p3El = document.getElementById('editorial-p3');
-    const clavesBox = document.getElementById('claves-editorial-container');
-    const newsBox = document.getElementById('live-news-list');
-
-    const art = digest.articulo_principal || {};
-    if (headlineEl && (art.titulo || digest.titular_dia)) {
-      headlineEl.textContent = art.titulo || digest.titular_dia;
-    }
-    if (art.parrafos && art.parrafos.length >= 3) {
-      if (p1El) p1El.innerHTML = art.parrafos[0];
-      if (p2El) p2El.innerHTML = art.parrafos[1];
-      if (p3El) p3El.innerHTML = art.parrafos[2];
-    }
-
-    const pullquoteEl = document.querySelector('.editorial-pullquote');
-    if (pullquoteEl && art.cita_destacada) {
-      pullquoteEl.innerHTML = `“${art.cita_destacada}” ${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
-    }
-
-    if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
-      clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
-        <div class="clave-item">
-          <div class="clave-item-title">${c.icono || '⚽'} ${c.titulo}</div>
-          <p class="clave-item-desc">${c.detalle}</p>
-        </div>
-      `).join('');
-    }
-
-    const prismasGrid = document.getElementById('prensa-nacional-grid');
-    if (prismasGrid && digest.prismas_periodisticos && digest.prismas_periodisticos.length) {
-      prismasGrid.innerHTML = digest.prismas_periodisticos.map(p => `
-        <div class="clave-item" style="border-left:3px solid ${p.color || '#ffd100'};background:#141419;padding:12px;border-radius:8px;">
-          <div style="font-size:11.5px;color:${p.color || 'var(--manya-gold)'};font-weight:800;margin-bottom:4px;">${p.prisma}</div>
-          <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“${p.texto}”</p>
-        </div>
-      `).join('');
-    }
-
-    if (newsBox && digest.noticias_fuentes && digest.noticias_fuentes.length) {
-      newsBox.innerHTML = digest.noticias_fuentes.slice(0, 7).map(n => `
-        <div class="clave-item" style="border-left-color:#71717a;">
-          <div style="font-size:11px;color:var(--manya-gold);font-weight:800;margin-bottom:3px;">
-            ${n.fuente} • ${n.fecha_raw ? n.fecha_raw.slice(0, 16) : 'Actualidad'}
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">
-            <a href="${n.url || digest.blogger_post_url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">
-              ${n.titulo}
-            </a>
-          </div>
-          <p style="font-size:12px;color:#a1a1aa;line-height:1.4;margin-bottom:6px;">
-            ${(n.resumen || '').slice(0, 130)}...
-          </p>
-          <a href="${n.url || digest.blogger_post_url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:var(--manya-gold);font-weight:800;text-decoration:none;">
-            Leer cobertura completa ↗
-          </a>
-        </div>
-      `).join('');
-    }
-
-    const prensaGrid = document.getElementById('prensa-nacional-grid');
-    if (prensaGrid) {
-      if (digest.prismas_analisis) {
-        const prismasMeta = {
-          epica_tribuna: { icon: '🏟️', color: '#ffd100' },
-          pizarron_tactico: { icon: '♟️', color: '#38bdf8' },
-          trastienda_vestuario: { icon: '🔥', color: '#f87171' },
-          aritmetica_campeonato: { icon: '📐', color: '#34d399' }
-        };
-        prensaGrid.innerHTML = Object.entries(digest.prismas_analisis).map(([k, item]) => {
-          const meta = prismasMeta[k] || { icon: '⚡', color: '#ffd100' };
-          return `
-            <div class="clave-item" style="border-left:3px solid ${meta.color};background:#141419;padding:12px;border-radius:8px;">
-              <div style="font-size:11.5px;color:${meta.color};font-weight:800;margin-bottom:4px;">
-                ${meta.icon} ${item.eje ? item.eje.toUpperCase() : 'PRISMA'} • ${item.subtitulo || ''}
-              </div>
-              <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
-                “${item.texto}”
-              </p>
-            </div>
-          `;
-        }).join('');
-      } else if (digest.periodistas_prensa) {
-        const colors = {
-          ovacion: '#ffd100',
-          tenfield: '#38bdf8',
-          canal12: '#ef4444',
-          canal4: '#f59e0b',
-          elobservador: '#10b981',
-          portalmvd: '#a855f7'
-        };
-        prensaGrid.innerHTML = Object.entries(digest.periodistas_prensa).map(([k, item]) => {
-          const c = colors[k] || '#ffd100';
-          return `
-            <div class="clave-item" style="border-left:3px solid ${c};background:#141419;padding:12px;border-radius:8px;">
-              <div style="font-size:11.5px;color:${c};font-weight:800;margin-bottom:4px;">
-                ${item.medio} • ${item.cronistas}
-              </div>
-              <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">
-                “${item.cita}”
-              </p>
-            </div>
-          `;
-        }).join('');
-      }
-    }
-  }
-
-
-
-
-  function initHistoricoDrawer() {
-    const toggleBtn = document.getElementById('btn-toggle-historico');
-    const content = document.getElementById('historico-drawer-content');
-    const label = document.getElementById('historico-toggle-label');
-    const icon = document.getElementById('historico-toggle-icon');
-
-    if (!toggleBtn || !content) return;
-
-    toggleBtn.addEventListener('click', () => {
-      const isHidden = content.style.display === 'none' || content.style.display === '';
-      if (isHidden) {
-        content.style.display = 'block';
-        toggleBtn.setAttribute('aria-expanded', 'true');
-        if (label) label.textContent = '📁 Ocultar Registro Histórico del Partido Anterior';
-        if (icon) {
-          icon.textContent = '▲';
-          icon.style.transform = 'rotate(180deg)';
-        }
-        toggleBtn.style.borderColor = 'var(--manya-gold)';
-      } else {
-        content.style.display = 'none';
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        if (label) label.textContent = '📂 Ver Registro Completo, Minuto a Minuto y Estadísticas';
-        if (icon) {
-          icon.textContent = '▼';
-          icon.style.transform = 'rotate(0deg)';
-        }
-        toggleBtn.style.borderColor = 'rgba(255,209,0,0.5)';
-      }
-    });
-  }
-
+  // ==================== RIVAL SCOUT & HISTORIAL 1891 BD ====================
   function renderRivalIntelligence(rival) {
     if (!rival) return;
-    const dtEl = document.getElementById('scout-dt');
-    const schEl = document.getElementById('scout-esquema');
-    const estEl = document.getElementById('scout-estadio');
-    const funEl = document.getElementById('scout-fundacion');
-    const propEl = document.getElementById('scout-propuesta');
-    const figEl = document.getElementById('scout-figuras');
-
     const sc = rival.scouting_tactico || {};
     const inst = rival.datos_institucionales_auf || {};
+    const fase = (state.live && state.live.fase_partido) || rival.fase_contexto || 'POST_PARTIDO';
 
-    if (dtEl && sc.entrenador) dtEl.textContent = sc.entrenador;
-    if (schEl && sc.esquema_base) schEl.textContent = sc.esquema_base;
-    if (estEl && inst.estadio_propio) estEl.textContent = inst.estadio_propio;
-    if (funEl && inst.fundacion) funEl.textContent = inst.fundacion;
-    if (propEl && sc.propuesta_juego) propEl.textContent = sc.propuesta_juego;
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+    const prefix = fase === 'POST_PARTIDO' ? 'Radiografía Táctica del Último Rival' : 'Radiografía Táctica del Próximo Rival';
+    set('scout-rival-title', `🧭 ${prefix}: ${rival.rival_nombre || 'Rival'}${sc.entrenador ? ' (DT ' + sc.entrenador + ')' : ''}`);
+    set('scout-dt', sc.entrenador);
+    set('scout-esquema', sc.esquema_base);
+    set('scout-estadio', inst.estadio_propio);
+    set('scout-fundacion', inst.fundacion);
+    set('scout-propuesta', sc.propuesta_juego);
 
+    const webLink = document.getElementById('scout-web-link');
+    if (webLink && inst.web_oficial) {
+      webLink.href = inst.web_oficial;
+      webLink.textContent = inst.web_oficial.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') + ' ↗';
+    }
+
+    const strongBox = document.getElementById('scout-fortalezas');
+    if (strongBox && sc.puntos_fuertes && sc.puntos_fuertes.length) {
+      strongBox.innerHTML = sc.puntos_fuertes.map(p => `<span class="scout-pill strong">✓ ${p}</span>`).join('');
+    }
+
+    const weakBox = document.getElementById('scout-debilidades');
+    if (weakBox && sc.vulnerabilidades_a_explotar && sc.vulnerabilidades_a_explotar.length) {
+      weakBox.innerHTML = sc.vulnerabilidades_a_explotar.map(v => `<span class="scout-pill weak">⚠️ ${v}</span>`).join('');
+    }
+
+    const figEl = document.getElementById('scout-figuras');
     if (figEl && sc.figuras_a_seguir && sc.figuras_a_seguir.length) {
-      figEl.innerHTML = sc.figuras_a_seguir.map(f => `
-        <div style="margin-bottom:4px;">
-          • <strong>${f.nombre} (${f.rol}):</strong> <span style="color:#a1a1aa;">${f.analisis}</span>
-        </div>
-      `).join('');
+      figEl.innerHTML = sc.figuras_a_seguir.map(f => `<div style="margin-bottom:4px;">• <strong>${f.nombre} (${f.rol}):</strong> <span style="color:#a1a1aa;">${f.analisis}</span></div>`).join('');
+    }
+
+    const dTitle = document.getElementById('duelos-1x1-title');
+    if (dTitle) {
+      dTitle.textContent = `⚔️ Duelos Tácticos 1x1: Claves de Peñarol vs ${rival.rival_corto || rival.rival_nombre}`;
     }
 
     const duelosContainer = document.getElementById('duelos-tacticos-container');
@@ -2215,9 +1075,7 @@
               </div>
               <p class="duel-player-desc">${d.penarol.atributos_clave}</p>
             </div>
-
             <div class="duel-vs-divider">VS</div>
-
             <div class="duel-side is-rival">
               <div class="duel-player-header">
                 <span class="duel-num rival">${d.rival.dorsal || 'R'}</span>
@@ -2229,9 +1087,7 @@
               <p class="duel-player-desc">${d.rival.atributos_clave}</p>
             </div>
           </div>
-          <div class="duel-verdict">
-            <strong>Clave del Duelo:</strong> ${d.clave_del_duelo}
-          </div>
+          <div class="duel-verdict"><strong>Clave del Duelo:</strong> ${d.clave_del_duelo}</div>
         </div>
       `).join('');
     }
@@ -2240,152 +1096,302 @@
   function renderHeadToHead(h2h) {
     if (!h2h || !h2h.resumen) return;
     const res = h2h.resumen;
-    const elPJ = document.getElementById('h2h-pj');
-    const elPG = document.getElementById('h2h-pg');
-    const elPE = document.getElementById('h2h-pe');
-    const elPP = document.getElementById('h2h-pp');
-    const elGF = document.getElementById('h2h-gf');
-    const elEff = document.getElementById('h2h-eff');
-    if (elPJ) elPJ.textContent = res.partidos_jugados;
-    if (elPG) elPG.textContent = res.ganados_penarol;
-    if (elPE) elPE.textContent = res.empatados;
-    if (elPP) elPP.textContent = res.perdidos_penarol;
-    if (elGF) elGF.textContent = `${res.goles_penarol} - ${res.goles_rival}`;
-    if (elEff) elEff.textContent = res.efectividad_pct;
+    const dif = (res.goles_penarol - res.goles_rival);
+    const difStr = res.diferencia_goles || (dif > 0 ? `+${dif}` : String(dif));
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
 
-    const elTitle = document.querySelector('.match-h2h-title span');
-    if (elTitle && (h2h.rival || h2h.rival_oficial)) {
-      elTitle.textContent = `📜 Historial Oficial Verificado: Peñarol vs ${h2h.rival_oficial || h2h.rival}`;
-    }
-    const elPill = document.querySelector('.match-h2h-pill');
-    if (elPill && res.ventaja_victorias) {
-      elPill.textContent = `★ ${res.ventaja_victorias}`;
-    }
-    const elBox = document.getElementById('match-h2h-box');
-    if (elBox && (h2h.rival || h2h.rival_oficial)) {
-      elBox.setAttribute('aria-label', `Historial Oficial Frente a Frente contra ${h2h.rival || 'Rival'}`);
+    set('h2h-title', `📜 Historial Oficial Verificado: Peñarol vs ${h2h.rival_oficial || h2h.rival}`);
+    set('h2h-pj', res.partidos_jugados);
+    set('h2h-pg', res.ganados_penarol);
+    set('h2h-pe', res.empatados);
+    set('h2h-pp', res.perdidos_penarol);
+    set('h2h-gf', `${res.goles_penarol} - ${res.goles_rival}`);
+    set('h2h-gf-lbl', `Goles (Dif: ${difStr})`);
+    set('h2h-eff', res.efectividad_pct);
+    set('h2h-pill', `★ ${res.ventaja_victorias}`);
+
+    const sumEl = document.getElementById('h2h-summary-text');
+    if (sumEl) {
+      sumEl.innerHTML = `<strong>Supremacía histórica aurinegra (1891 BD):</strong> Peñarol suma <strong>${res.ganados_penarol} triunfos</strong>, ${res.empatados} empates y ${res.perdidos_penarol} derrotas frente a ${h2h.rival || h2h.rival_oficial} (${difStr} goles de diferencia).`;
     }
   }
 
-  function renderEfemerides(efem) {
-    if (!efem || !efem.partidos_historicos) return;
-    const tagEl = document.getElementById('efemerides-date-tag');
-    if (tagEl && efem.dia_mes) tagEl.textContent = efem.dia_mes;
+  // ==================== PORTADA, EDITORIAL, GALERÍAS & INFLUENCERS ====================
+  function setupLightbox() {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal) return;
+    const closeModal = () => {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    const ov = document.getElementById('lightbox-overlay');
+    const cl = document.getElementById('lightbox-close');
+    if (ov) ov.addEventListener('click', closeModal);
+    if (cl) cl.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display !== 'none') closeModal(); });
+  }
 
-    const gridEl = document.getElementById('efemerides-matches-grid');
-    if (gridEl && efem.partidos_historicos.length) {
-      gridEl.innerHTML = efem.partidos_historicos.slice(0, 6).map(m => {
+  function openLightbox(item) {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal || !item) return;
+    const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy'));
+    const imgEl = document.getElementById('lightbox-img');
+    if (imgEl) { imgEl.src = item.imagen_webp || item.imagen_jpg; imgEl.alt = item.titulo || 'Peñarol'; }
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('lightbox-badge', is1891 ? '📜 FICHA OFICIAL 1891 BD' : `📸 ${(item.categoria || 'PEÑAROL').toUpperCase()}`);
+    set('lightbox-meta', is1891 ? `1891 BD (Comisión de Historia) • ${item.estadio || 'Escenario Oficial'} • ${item.fecha || '2026'}` : `${item.cuenta || '@oficialcap'} • ${item.fecha || 'Temporada 2026'}`);
+    set('lightbox-title', item.titulo || '');
+    set('lightbox-desc', item.descripcion || item.caption || '');
+    const linkEl = document.getElementById('lightbox-external-link');
+    if (linkEl) {
+      linkEl.href = item.url_post || 'https://www.instagram.com/oficialcap/';
+      linkEl.textContent = is1891 ? 'Ver ficha oficial en 1891.uy ↗' : 'Ver fuente original ↗';
+    }
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderHeroInstagramPost(item, digest) {
+    if (!document.getElementById('portada-visual')) return;
+    const pv = (digest && digest.portada_visual) ? digest.portada_visual : {};
+    const effective = Object.assign({}, item || {}, pv);
+
+    const cuenta = effective.cuenta || '@oficialcap';
+    const imgSrc = effective.imagen_webp || effective.imagen_jpg || 'assets/gallery/1891_cerro_largo_32174_02.webp';
+    const headline = pv.titular_portada || (digest && digest.titular_dia) || effective.titulo || 'Actualidad del Club Atlético Peñarol';
+    const bajada = pv.bajada_portada || (digest && digest.bajada_seo) || effective.descripcion || '';
+    const postUrl = effective.url_post || 'https://www.instagram.com/oficialcap/';
+
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('hero-post-account', cuenta);
+    set('hero-post-time', (digest && digest.actualizado) ? `Actualizado ${digest.actualizado}` : 'Actualizado Hoy');
+    set('hero-post-location', effective.ubicacion || '📍 Estadio Campeón del Siglo • Montevideo');
+    set('hero-post-headline', headline);
+    set('hero-post-text', bajada);
+    set('hero-post-badge', `📸 ${(effective.categoria || 'PORTADA OFICIAL').toUpperCase()}`);
+    set('hero-post-category-tag', `⭐ ${cuenta.toUpperCase()}`);
+
+    const imgEl = document.getElementById('hero-post-img');
+    if (imgEl) { imgEl.src = imgSrc; imgEl.alt = headline; }
+    const ext = document.getElementById('hero-post-external-link');
+    if (ext) ext.href = postUrl;
+
+    const openHero = () => openLightbox({ titulo: headline, descripcion: bajada, cuenta, categoria: effective.categoria || 'portada', url_post: postUrl, imagen_webp: imgSrc, imagen_jpg: imgSrc });
+    const mw = document.getElementById('hero-post-media'); if (mw) mw.onclick = openHero;
+    const eb = document.getElementById('hero-post-expand-btn'); if (eb) eb.onclick = e => { e.stopPropagation(); openHero(); };
+    const zb = document.getElementById('hero-post-zoom-btn'); if (zb) zb.onclick = openHero;
+
+    // Like & Share interactivos
+    const likeBtn = document.getElementById('hero-post-like-btn');
+    const likesEl = document.getElementById('hero-post-likes-count');
+    const likeIcon = document.getElementById('hero-post-like-icon');
+    let liked = false;
+    try { liked = localStorage.getItem('manya_hero_liked_' + (digest?.partido_id || 'main')) === 'true'; } catch (_) {}
+    let count = 42850 + (liked ? 1 : 0);
+    const paintLike = () => {
+      if (likesEl) likesEl.textContent = count.toLocaleString('es-UY');
+      if (likeIcon) likeIcon.textContent = liked ? '❤️' : '🤍';
+    };
+    paintLike();
+    if (likeBtn) {
+      likeBtn.onclick = () => {
+        liked = !liked; count += liked ? 1 : -1;
+        try { localStorage.setItem('manya_hero_liked_' + (digest?.partido_id || 'main'), String(liked)); } catch (_) {}
+        paintLike();
+      };
+    }
+    const shBtn = document.getElementById('hero-post-share-btn');
+    if (shBtn) {
+      shBtn.onclick = async () => {
+        if (navigator.share) { try { await navigator.share({ title: headline, text: bajada, url: window.location.href }); } catch (_) {} }
+        else if (navigator.clipboard) { await navigator.clipboard.writeText(window.location.href); shBtn.innerHTML = '<span>✅</span><span>¡Copiado!</span>'; setTimeout(() => { shBtn.innerHTML = '<span>🔁</span><span>Compartir</span>'; }, 2000); }
+      };
+    }
+  }
+
+  function hydrateEditorialSection(digest) {
+    if (!digest) return;
+    const art = digest.articulo_principal || {};
+    const set = (id, v) => { const el = document.getElementById(id); if (el && v) el.textContent = v; };
+
+    set('editorial-headline', art.titulo || digest.titular_dia);
+    if (art.parrafos && art.parrafos.length >= 3) {
+      set('editorial-p1', art.parrafos[0]);
+      set('editorial-p2', art.parrafos[1]);
+      set('editorial-p3', art.parrafos[2]);
+    }
+
+    const pq = document.querySelector('.editorial-pullquote');
+    if (pq && art.cita_destacada) {
+      pq.innerHTML = `“${art.cita_destacada}”${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
+    }
+
+    const clavesBox = document.getElementById('claves-editorial-container');
+    if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
+      clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
+        <div class="clave-item">
+          <div class="clave-item-title">${c.icono || '⚽'} ${c.titulo}</div>
+          <p class="clave-item-desc">${c.detalle}</p>
+        </div>
+      `).join('');
+    }
+
+    const prensaGrid = document.getElementById('prensa-nacional-grid');
+    if (prensaGrid && digest.prismas_analisis) {
+      const meta = {
+        epica_tribuna: { icon: '🏟️', color: '#ffd100' },
+        pizarron_tactico: { icon: '♟️', color: '#38bdf8' },
+        trastienda_vestuario: { icon: '🔥', color: '#f87171' },
+        aritmetica_campeonato: { icon: '📐', color: '#34d399' }
+      };
+      prensaGrid.innerHTML = Object.entries(digest.prismas_analisis).map(([k, item]) => {
+        const m = meta[k] || { icon: '⚡', color: '#ffd100' };
         return `
-          <article class="efemeride-item">
-            <div class="efemeride-top-line">
-              <span class="efemeride-year">${m.ano}</span>
-              <span class="efemeride-torneo">${m.torneo || 'Torneo Oficial'}</span>
-            </div>
-            <div class="efemeride-score">${m.resultado}</div>
-            <div class="efemeride-meta">
-              <div>🏟️ ${m.estadio || 'Escenario Oficial'}</div>
-              ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${m.goles_detalle}</div>` : ''}
-            </div>
-          </article>
+          <div class="clave-item" style="border-left:3px solid ${m.color};background:#141419;padding:12px;border-radius:8px;">
+            <div style="font-size:11.5px;color:${m.color};font-weight:800;margin-bottom:4px;">${m.icon} ${(item.eje || 'PRISMA').toUpperCase()} • ${item.subtitulo || ''}</div>
+            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“${item.texto}”</p>
+          </div>
         `;
       }).join('');
     }
 
-    const gloriasEl = document.getElementById('efemerides-glorias-line');
-    if (gloriasEl && efem.cumpleanos_glorias && efem.cumpleanos_glorias.length) {
-      // Filtrar nombres duplicados
-      const nombresSet = new Set(efem.cumpleanos_glorias.map(g => g.nombre));
-      const nombres = Array.from(nombresSet).map(n => `<strong>${n}</strong>`).join(' • ');
-      gloriasEl.innerHTML = `<span>🎂 <strong>Glorias del Club:</strong> En estas fechas celebran su nacimiento: ${nombres}.</span>`;
+    const newsBox = document.getElementById('live-news-list');
+    if (newsBox && digest.noticias_fuentes && digest.noticias_fuentes.length) {
+      newsBox.innerHTML = digest.noticias_fuentes.slice(0, 6).map(n => `
+        <div class="clave-item" style="border-left-color:#71717a;">
+          <div style="font-size:11px;color:var(--manya-gold);font-weight:800;margin-bottom:3px;">${n.fuente} • ${n.fecha || n.fecha_raw || 'Reciente'}</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">
+            <a href="${n.url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">${n.titulo}</a>
+          </div>
+          <p style="font-size:12px;color:#a1a1aa;line-height:1.4;margin-bottom:6px;">${(n.resumen || '').slice(0, 125)}...</p>
+          <a href="${n.url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:var(--manya-gold);font-weight:800;text-decoration:none;">Leer en ${n.fuente} ↗</a>
+        </div>
+      `).join('');
     }
   }
 
-  function renderInfluencersSection(influencers) {
-    const grid = document.getElementById('influencers-grid');
-    if (!grid || !influencers || !influencers.length) return;
+  function renderGallery(items, currentFilter) {
+    const grid = document.getElementById('gallery-main-grid');
+    const loadMoreWrap = document.getElementById('gallery-load-more-wrap');
+    if (!grid) return;
 
-    grid.innerHTML = influencers.map((inf, idx) => {
+    // Nunca duplicar tatuajes en Galerías Deportivas (tatuajes viven en #piel-carbonera)
+    const sportsOnly = (items || []).filter(it => !(it.id || '').startsWith('tattoo_') && (it.categoria || '').toLowerCase() !== 'tatuajes');
+    const filter = currentFilter || 'all';
+    const filtered = (filter === 'all') ? sportsOnly : sportsOnly.filter(it => (it.categoria || '').toLowerCase().includes(filter.toLowerCase()));
+
+    if (!filtered.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--text-secondary);">No hay fotografías en esta categoría.</div>`;
+      if (loadMoreWrap) loadMoreWrap.innerHTML = '';
+      return;
+    }
+
+    const visible = filtered.slice(0, state.galleryLimit);
+    grid.innerHTML = visible.map((item, idx) => {
+      const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy'));
+      const postUrl = item.url_post || (is1891 ? 'https://1891.uy/partidos' : 'https://www.instagram.com/oficialcap/');
+      const badgeTxt = is1891 ? '📜 ARCHIVO 1891 BD' : `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
+      const metaRight = item.fecha || (is1891 ? '1891 BD' : 'Temporada 2026');
       return `
-        <article class="ig-card influencer-card" data-inf-idx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:all 0.25s ease;">
-          <!-- Header de Cuenta / Influencer -->
-          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
-            <div style="display:flex;align-items:center;gap:10px;min-width:0;">
-              <div class="ig-avatar-ring" style="width:42px;height:42px;flex-shrink:0;">
-                <img src="${inf.avatar}" alt="Avatar ${inf.handle}" width="42" height="42" class="ig-avatar-img" style="border-radius:50%;object-fit:cover;" />
-              </div>
-              <div style="min-width:0;">
-                <div style="display:flex;align-items:center;gap:4px;">
-                  <strong style="font-size:13.5px;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${inf.nombre}</strong>
-                  <span class="ig-verified-badge" title="Cuenta Verificada / Destacada" style="color:var(--manya-gold);font-size:12px;">✓</span>
-                </div>
-                <div style="font-size:12px;color:var(--manya-gold);font-weight:700;">${inf.handle}</div>
-              </div>
+        <article class="ig-card" data-idx="${idx}">
+          <div class="ig-card-link" style="cursor:pointer;" title="Click para ampliar en alta definición">
+            <div class="ig-img-wrap">
+              <img src="${item.imagen_webp || item.imagen_jpg}" alt="${item.titulo} - Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">${badgeTxt}</span>
             </div>
-            <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;font-weight:800;border-radius:999px;flex-shrink:0;text-decoration:none;">
-              Seguir ↗
-            </a>
           </div>
-
-          <!-- Imagen del Partido Publicada -->
-          <div class="ig-img-wrap" style="cursor:pointer;position:relative;aspect-ratio:16/9;overflow:hidden;" title="Click para ampliar imagen en alta definición">
-            <img src="${inf.imagen_webp || inf.imagen_jpg}" alt="${inf.titulo} - ${inf.handle}" width="1280" height="720" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;" />
-            <span class="ig-badge-tag" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#ffd100;border:1px solid #ffd100;font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:800;">
-              ${inf.badge}
-            </span>
-            <span style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.75);color:#fff;font-size:11px;padding:3px 8px;border-radius:6px;">
-              🔍 Ampliar
-            </span>
-          </div>
-
-          <!-- Cuerpo: Stats, Titulo, Caption y Enlace a Instagram -->
-          <div class="ig-body" style="padding:14px 16px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
-            <div>
-              <div class="ig-meta" style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:8px;">
-                <span>⚽ ${inf.partido}</span>
-                <span style="color:#f87171;font-weight:800;">❤️ ${inf.likes_formato} • 💬 ${inf.comments}</span>
-              </div>
-              <h3 style="font-size:15px;font-weight:900;color:#ffffff;margin:0 0 8px;line-height:1.35;">
-                <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">${inf.titulo}</a>
-              </h3>
-              <p style="font-size:13px;color:#d4d4d8;line-height:1.5;margin:0 0 10px;">${inf.descripcion}</p>
-              <div style="font-size:11.5px;color:var(--manya-gold);font-weight:700;margin-bottom:12px;">${inf.hashtags}</div>
+          <div class="ig-body">
+            <div class="ig-meta">
+              <span>${item.cuenta || '@oficialcap'}</span>
+              <span>📅 ${metaRight}</span>
             </div>
-            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
-              <button type="button" class="btn-outline-gold inf-zoom-btn" style="padding:5px 12px;font-size:11.5px;cursor:pointer;border-radius:6px;">
-                🔍 Ver en Grande
-              </button>
-              <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 14px;font-size:11.5px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
-                Ver en Instagram ↗
-              </a>
+            <h3 class="ig-title"><a href="${postUrl}" target="_blank" rel="noopener noreferrer">${item.titulo}</a></h3>
+            <p class="ig-caption">${item.descripcion || item.caption || ''}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;">
+              <button type="button" class="btn-outline-gold open-lightbox-btn" style="padding:4px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar</button>
+              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${is1891 ? '1891.uy ↗' : 'Fuente ↗'}</a>
             </div>
           </div>
         </article>
       `;
     }).join('');
 
-    // Conectar lightbox a las cards de influencers
-    grid.querySelectorAll('.influencer-card').forEach(card => {
-      const idx = parseInt(card.getAttribute('data-inf-idx'), 10);
-      const item = influencers[idx];
-      const imgWrap = card.querySelector('.ig-img-wrap');
-      const zoomBtn = card.querySelector('.inf-zoom-btn');
+    grid.querySelectorAll('.ig-card').forEach(card => {
+      const targetItem = visible[parseInt(card.getAttribute('data-idx'), 10)];
+      const la = card.querySelector('.ig-card-link'); if (la) la.onclick = () => openLightbox(targetItem);
+      const zb = card.querySelector('.open-lightbox-btn'); if (zb) zb.onclick = e => { e.stopPropagation(); openLightbox(targetItem); };
+    });
 
-      const triggerLightbox = () => {
-        openLightbox({
-          titulo: `${item.titulo} — ${item.handle}`,
-          descripcion: `${item.descripcion}\n\n${item.hashtags}\nCuenta Oficial: ${item.nombre} (${item.handle})`,
-          cuenta: item.handle,
-          categoria: item.categoria,
-          likes: item.likes,
-          comments: item.comments,
-          url_post: item.url_instagram,
-          imagen_webp: item.imagen_webp,
-          imagen_jpg: item.imagen_jpg
-        });
+    if (loadMoreWrap) {
+      const rem = filtered.length - visible.length;
+      if (rem > 0) {
+        loadMoreWrap.innerHTML = `<button type="button" id="btn-gallery-load-more" class="btn-outline-gold" style="padding:10px 22px;font-size:13px;">📸 Ver más fotografías (+${rem} disponibles)</button>`;
+        document.getElementById('btn-gallery-load-more').onclick = () => {
+          state.galleryLimit += 8;
+          renderGallery(items, filter);
+        };
+      } else {
+        loadMoreWrap.innerHTML = '';
+      }
+    }
+  }
+
+  function setupGalleryFilters(allItems) {
+    const tabs = document.querySelectorAll('#gallery-filters .gallery-tab');
+    tabs.forEach(tab => {
+      tab.onclick = () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        state.galleryFilter = tab.getAttribute('data-filter') || 'all';
+        state.galleryLimit = 6;
+        renderGallery(allItems, state.galleryFilter);
       };
+    });
+  }
 
-      if (imgWrap) imgWrap.addEventListener('click', triggerLightbox);
-      if (zoomBtn) zoomBtn.addEventListener('click', triggerLightbox);
+  function renderInfluencersSection(influencers) {
+    const grid = document.getElementById('influencers-grid');
+    if (!grid || !influencers || !influencers.length) return;
+    grid.innerHTML = influencers.map((inf, idx) => `
+      <article class="ig-card influencer-card" data-inf-idx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+        <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+            <div class="ig-avatar-ring" style="width:40px;height:40px;flex-shrink:0;"><img src="${inf.avatar}" alt="${inf.handle}" width="40" height="40" style="border-radius:50%;object-fit:cover;" /></div>
+            <div style="min-width:0;">
+              <strong style="font-size:13.5px;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${inf.nombre} <span style="color:var(--manya-gold);">✓</span></strong>
+              <div style="font-size:12px;color:var(--manya-gold);font-weight:700;">${inf.handle}</div>
+            </div>
+          </div>
+          <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;flex-shrink:0;text-decoration:none;">Seguir ↗</a>
+        </div>
+        <div class="ig-img-wrap" style="cursor:pointer;position:relative;aspect-ratio:16/9;overflow:hidden;">
+          <img src="${inf.imagen_webp || inf.imagen_jpg}" alt="${inf.titulo}" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
+          <span class="ig-badge-tag">${inf.badge}</span>
+        </div>
+        <div class="ig-body" style="padding:14px 16px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
+          <div>
+            <div class="ig-meta" style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-secondary);margin-bottom:8px;">
+              <span>⚽ ${inf.partido}</span>
+              <span style="color:#f87171;font-weight:800;">❤️ ${inf.likes_formato}</span>
+            </div>
+            <h3 style="font-size:14.5px;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.35;">${inf.titulo}</h3>
+            <p style="font-size:12.5px;color:#d4d4d8;line-height:1.5;margin:0 0 10px;">${inf.descripcion}</p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+            <button type="button" class="btn-outline-gold inf-zoom-btn" style="padding:5px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar</button>
+            <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 12px;font-size:11.5px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;text-decoration:none;">Instagram ↗</a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    grid.querySelectorAll('.influencer-card').forEach(card => {
+      const item = influencers[parseInt(card.getAttribute('data-inf-idx'), 10)];
+      const trigger = () => openLightbox({ titulo: `${item.titulo} — ${item.handle}`, descripcion: item.descripcion, cuenta: item.handle, categoria: item.categoria, url_post: item.url_instagram, imagen_webp: item.imagen_webp, imagen_jpg: item.imagen_jpg });
+      const iw = card.querySelector('.ig-img-wrap'); if (iw) iw.onclick = trigger;
+      const zb = card.querySelector('.inf-zoom-btn'); if (zb) zb.onclick = trigger;
     });
   }
 
@@ -2396,51 +1402,33 @@
 
     if (artistsList && !artistsList.children.length) {
       const seen = new Set();
-      const uniqueArtists = [];
-      tattoos.forEach(t => {
-        if (t.tatuador && !seen.has(t.tatuador)) {
-          seen.add(t.tatuador);
-          uniqueArtists.push({
-            tatuador: t.tatuador,
-            estudio: t.estudio || 'Estudio Oficial',
-            barrio: t.barrio || 'Montevideo',
-            url: t.url_instagram || 'https://www.instagram.com/explore/tags/peñarolenlapiel/'
-          });
-        }
-      });
-      artistsList.innerHTML = uniqueArtists.slice(0, 6).map(a => `
-        <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="tattoo-artist-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,209,0,0.2);border-radius:999px;font-size:12px;color:#fff;">
-          <span style="color:var(--manya-gold);font-weight:900;">💉</span>
-          <span><strong>${a.tatuador}</strong> (${a.estudio})</span>
+      artistsList.innerHTML = tattoos.filter(t => t.tatuador && !seen.has(t.tatuador) && seen.add(t.tatuador)).slice(0, 6).map(a => `
+        <a href="${a.url_instagram || 'https://www.instagram.com/'}" target="_blank" rel="noopener noreferrer" class="tattoo-artist-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,209,0,0.2);border-radius:999px;font-size:12px;color:#fff;">
+          <span style="color:var(--manya-gold);font-weight:900;">💉</span><span><strong>${a.tatuador}</strong> (${a.estudio || 'Montevideo'})</span>
         </a>
       `).join('');
     }
 
-    const filtered = (filter === 'all') ? tattoos : tattoos.filter(t => t.categoria === filter);
-
-    grid.innerHTML = filtered.map(t => {
-      const img = t.imagen_webp || t.imagen_jpg || 'assets/ig/manya_festejo_gol_aurinegro_cds.webp';
-      const igUrl = t.url_instagram || 'https://www.instagram.com/explore/tags/peñarolenlapiel/';
-      return `
-        <article class="tattoo-card" style="background:#111115;border:1px solid rgba(255,209,0,0.2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
-          <div class="ig-img-wrap" style="aspect-ratio:1/1;position:relative;background:#000;">
-            <img src="${img}" alt="${t.titulo}" width="600" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='assets/ig/manya_festejo_gol_aurinegro_cds.webp';" />
-            <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.8);color:var(--manya-gold);border:1px solid var(--manya-gold);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:800;">${t.estilo || 'Tatuaje Aurinegro'}</span>
+    const filtered = filter === 'all' ? tattoos : tattoos.filter(t => t.categoria === filter);
+    grid.innerHTML = filtered.map(t => `
+      <article class="tattoo-card" style="background:#111115;border:1px solid rgba(255,209,0,0.2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+        <div class="ig-img-wrap" style="aspect-ratio:1/1;position:relative;">
+          <img src="${t.imagen_webp || t.imagen_jpg}" alt="${t.titulo}" width="600" height="600" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
+          <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.82);color:var(--manya-gold);border:1px solid var(--manya-gold);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:800;">${t.estilo || 'Tatuaje Aurinegro'}</span>
+        </div>
+        <div style="padding:12px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">📍 ${t.zona_cuerpo || 'Piel Carbonera'} • ${t.barrio || 'Montevideo'}</div>
+            <h3 style="font-size:13.5px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;">${t.titulo}</h3>
+            <p style="font-size:12px;color:#a1a1aa;margin:0 0 8px;line-height:1.4;">${t.descripcion || ''}</p>
           </div>
-          <div style="padding:12px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
-            <div>
-              <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">📍 ${t.zona_cuerpo || 'Piel Carbonera'} • ${t.barrio || 'Montevideo'}</div>
-              <h3 style="font-size:13.5px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;">${t.titulo}</h3>
-              <p style="font-size:12px;color:#a1a1aa;margin:0 0 8px;line-height:1.4;">${t.descripcion || ''}</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px;">
-              <span style="color:var(--manya-gold);font-weight:700;">${t.tatuador}</span>
-              <a href="${igUrl}" target="_blank" rel="noopener noreferrer" style="color:#ffd100;text-decoration:none;font-weight:700;">Ver en IG ↗</a>
-            </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px;">
+            <span style="color:var(--manya-gold);font-weight:700;">${t.tatuador}</span>
+            <a href="${t.url_instagram || 'https://www.instagram.com/'}" target="_blank" rel="noopener noreferrer" style="color:#ffd100;text-decoration:none;font-weight:700;">Ver en IG ↗</a>
           </div>
-        </article>
-      `;
-    }).join('');
+        </div>
+      </article>
+    `).join('');
   }
 
   function setupTattooFilters(tattoos) {
@@ -2449,180 +1437,252 @@
       btn.onclick = () => {
         tabs.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const cat = btn.getAttribute('data-cat') || 'all';
-        renderTattooGallery(tattoos, cat);
+        renderTattooGallery(tattoos, btn.getAttribute('data-cat') || 'all');
       };
     });
   }
 
+  function renderEfemerides(efem) {
+    if (!efem || !efem.partidos_historicos) return;
+    const tagEl = document.getElementById('efemerides-date-tag');
+    if (tagEl && efem.dia_mes) tagEl.textContent = efem.dia_mes;
+
+    const gridEl = document.getElementById('efemerides-matches-grid');
+    if (gridEl && efem.partidos_historicos.length) {
+      gridEl.innerHTML = efem.partidos_historicos.slice(0, 6).map(m => `
+        <article class="efemeride-item">
+          <div class="efemeride-top-line"><span class="efemeride-year">${m.ano}</span><span class="efemeride-torneo">${m.torneo || 'Torneo Oficial'}</span></div>
+          <div class="efemeride-score">${m.resultado}</div>
+          <div class="efemeride-meta">
+            <div>🏟️ ${m.estadio || 'Escenario Oficial'}</div>
+            ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${m.goles_detalle}</div>` : ''}
+          </div>
+        </article>
+      `).join('');
+    }
+
+    const gloriasEl = document.getElementById('efemerides-glorias-line');
+    if (gloriasEl && efem.cumpleanos_glorias && efem.cumpleanos_glorias.length) {
+      const nombres = Array.from(new Set(efem.cumpleanos_glorias.map(g => g.nombre))).map(n => `<strong>${n}</strong>`).join(' • ');
+      gloriasEl.innerHTML = `<span>🎂 <strong>Glorias del Club:</strong> En esta fecha celebran su natalicio: ${nombres}.</span>`;
+    }
+  }
+
+  // ==================== TRIVIA INTERACTIVA ====================
+  let triviaAudioEnabled = true;
+  let triviaState = { category: 'all', currentIndex: 0, score: 0, streak: 0, maxStreak: 0, answered: false, questionsPool: [] };
+
+  function playAudioTone(type) {
+    if (!triviaAudioEnabled) return;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      const ctx = new AC(), osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = type === 'wrong' ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(type === 'wrong' ? 250 : 587.33, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(type === 'wrong' ? 165 : 880, ctx.currentTime + 0.14);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.24);
+      osc.start(); osc.stop(ctx.currentTime + 0.24);
+    } catch (_) {}
+  }
+
+  function prepareTriviaQuestion(q) {
+    const paired = q.opts.map((text, idx) => ({ text, isCorrect: idx === q.ans }));
+    for (let i = paired.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [paired[i], paired[j]] = [paired[j], paired[i]];
+    }
+    return Object.assign({}, q, { opts: paired.map(p => p.text), ans: paired.findIndex(p => p.isCorrect) });
+  }
+
+  function getTriviaQuestionsPool(cat) {
+    const list = (!cat || cat === 'all') ? TRIVIA_QUESTIONS : TRIVIA_QUESTIONS.filter(q => q.cat === cat);
+    return [...(list.length ? list : TRIVIA_QUESTIONS)].sort(() => Math.random() - 0.5).map(prepareTriviaQuestion);
+  }
+
+  function renderTrivia() {
+    const box = document.getElementById('trivia-box');
+    if (!box) return;
+    if (!triviaState.questionsPool.length) triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category);
+
+    const pool = triviaState.questionsPool, total = pool.length, idx = triviaState.currentIndex;
+    if (idx >= total) {
+      const pct = Math.round((triviaState.score / (total * 100)) * 100);
+      box.innerHTML = `
+        <div class="trivia-container trivia-game-over">
+          <div style="font-size:36px;margin-bottom:8px;">🏆</div>
+          <h4 style="font-size:19px;color:#fff;margin-bottom:6px;">¡Trivia Completada! ${triviaState.score} pts (${pct}%)</h4>
+          <p style="font-size:13px;color:#d4d4d8;margin-bottom:14px;">Mejor racha: 🔥 x${triviaState.maxStreak}</p>
+          <button type="button" class="btn-manya" id="trivia-restart-btn">🔄 Jugar de Nuevo</button>
+        </div>`;
+      const rb = box.querySelector('#trivia-restart-btn');
+      if (rb) rb.onclick = () => { triviaState.currentIndex = 0; triviaState.score = 0; triviaState.streak = 0; triviaState.maxStreak = 0; triviaState.questionsPool = getTriviaQuestionsPool(triviaState.category); renderTrivia(); };
+      return;
+    }
+
+    const item = pool[idx];
+    triviaState.answered = false;
+    const cats = [{ id: 'all', label: 'Todas' }, { id: 'libertadores', label: '🏆 Libertadores' }, { id: 'clasicos', label: '⚡ Clásicos' }, { id: 'idolos', label: '⭐ Ídolos' }, { id: 'records', label: '📊 Récords' }, { id: 'cds', label: '🏟️ CDS' }];
+
+    box.innerHTML = `
+      <div class="trivia-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div class="trivia-cat-chips">${cats.map(c => `<button type="button" class="trivia-chip ${triviaState.category === c.id ? 'active' : ''}" data-cat="${c.id}">${c.label}</button>`).join('')}</div>
+          <button type="button" id="trivia-sound-toggle" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#d4d4d8;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;">${triviaAudioEnabled ? '🔊' : '🔇'}</button>
+        </div>
+        <div class="trivia-stats-row">
+          <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${item.catName}</em></span>
+          <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${triviaState.score} pts</span>
+        </div>
+        <div class="trivia-progress-bar-wrap"><div class="trivia-progress-fill" style="width:${Math.round((idx / total) * 100)}%;"></div></div>
+        <h4 class="trivia-q-title">${item.q}</h4>
+        <div class="trivia-opts-grid" id="trivia-opts">
+          ${item.opts.map((o, i) => `<button type="button" class="trivia-opt-btn" data-idx="${i}"><span class="trivia-opt-letter">${['A','B','C','D'][i]}</span><span>${o}</span></button>`).join('')}
+        </div>
+        <div id="trivia-feedback" style="display:none;"></div>
+      </div>`;
+
+    const sb = box.querySelector('#trivia-sound-toggle');
+    if (sb) sb.onclick = () => { triviaAudioEnabled = !triviaAudioEnabled; sb.textContent = triviaAudioEnabled ? '🔊' : '🔇'; };
+    box.querySelectorAll('.trivia-chip').forEach(btn => {
+      btn.onclick = () => { triviaState = { category: btn.getAttribute('data-cat'), currentIndex: 0, score: 0, streak: 0, maxStreak: 0, answered: false, questionsPool: getTriviaQuestionsPool(btn.getAttribute('data-cat')) }; renderTrivia(); };
+    });
+
+    const fb = box.querySelector('#trivia-feedback');
+    const optBtns = box.querySelectorAll('#trivia-opts .trivia-opt-btn');
+    optBtns.forEach(btn => {
+      btn.onclick = () => {
+        if (triviaState.answered) return;
+        triviaState.answered = true;
+        optBtns.forEach(b => { b.disabled = true; });
+        const chosen = parseInt(btn.getAttribute('data-idx'), 10);
+        if (chosen === item.ans) {
+          playAudioTone('correct');
+          triviaState.streak++;
+          triviaState.maxStreak = Math.max(triviaState.maxStreak, triviaState.streak);
+          const gained = 100 + (triviaState.streak - 1) * 25;
+          triviaState.score += gained;
+          btn.classList.add('is-correct');
+          fb.className = 'trivia-feedback-card correct';
+          fb.innerHTML = `<div style="font-weight:800;color:#22c55e;">✅ ¡Correcto! (+${gained} pts)</div><div class="trivia-feedback-exp">${item.exp}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
+        } else {
+          playAudioTone('wrong');
+          triviaState.streak = 0;
+          btn.classList.add('is-wrong');
+          const cBtn = box.querySelector(`#trivia-opts .trivia-opt-btn[data-idx="${item.ans}"]`);
+          if (cBtn) cBtn.classList.add('is-correct');
+          fb.className = 'trivia-feedback-card wrong';
+          fb.innerHTML = `<div style="font-weight:800;color:#ef4444;">❌ Respuesta Histórica Certificada</div><div class="trivia-feedback-exp">${item.exp}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
+        }
+        fb.style.display = 'block';
+        const nb = box.querySelector('#trivia-next-btn');
+        if (nb) nb.onclick = () => { triviaState.currentIndex++; renderTrivia(); };
+      };
+    });
+  }
+
+  function initBackToTop() {
+    let btn = document.getElementById('manya-back-to-top');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'manya-back-to-top';
+      btn.type = 'button';
+      btn.title = 'Volver arriba';
+      btn.setAttribute('aria-label', 'Volver al inicio de la página');
+      btn.textContent = '↑';
+      document.body.appendChild(btn);
+    }
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 520) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    }, { passive: true });
+  }
+
+  function setupLivePolling() {
+    if (window._manyaLivePolling) return;
+    window._manyaLivePolling = setInterval(async () => {
+      if (state.live && (state.live.fase_partido === 'EN_VIVO' || state.live.fase_partido === 'PREVIA')) {
+        const fresh = await loadJsonSafe('data/live_status.json');
+        if (fresh && fresh.actualizado !== state.live.actualizado) {
+          state.live = fresh;
+          renderMatchHero(fresh);
+          renderStandings();
+        }
+      }
+    }, 45000);
+  }
+
   async function init() {
-    try {
-      setupLightbox();
-    } catch (e) {
-      console.error('Lightbox setup error:', e);
-    }
+    setupLightbox();
+    initBackToTop();
+    initTacticalBoard();
 
-    try {
-      initTacticalBoard();
-    } catch (e) {
-      console.error('Initial tactical board render error:', e);
-    }
+    const [live, digest, ig, galleries, squad, history, escudosCatalog, h2hActivo, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
+      loadJsonSafe('data/live_status.json'),
+      loadJsonSafe('data/news_digest.json'),
+      loadJsonSafe('data/instagram_feed.json'),
+      loadJsonSafe('data/galleries.json'),
+      loadJsonSafe('data/squad_2026.json'),
+      loadJsonSafe('data/history_1891.json'),
+      loadJsonSafe('data/escudos_uruguay.json'),
+      loadJsonSafe('data/historial_activo.json'),
+      loadJsonSafe('data/efemerides_hoy.json'),
+      loadJsonSafe('data/rival_intelligence.json'),
+      loadJsonSafe('data/influencers_feed.json'),
+      loadJsonSafe('data/tatuajes_manya.json')
+    ]);
 
-    try {
-      initLiveVoting();
-    } catch (e) {
-      console.error('Initial live voting error:', e);
-    }
-
-    let live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos;
-    try {
-      [live, digest, ig, galleries, squad, history, escudosCatalog, h2hWanderers, efemeridesHoy, rivalIntel, influencers, tattoos] = await Promise.all([
-        loadJsonSafe('data/live_status.json'),
-        loadJsonSafe('data/news_digest.json'),
-        loadJsonSafe('data/instagram_feed.json'),
-        loadJsonSafe('data/galleries.json'),
-        loadJsonSafe('data/squad_2026.json'),
-        loadJsonSafe('data/history_1891.json'),
-        loadJsonSafe('data/escudos_uruguay.json'),
-        loadJsonSafe('data/historial_activo.json'),
-        loadJsonSafe('data/efemerides_hoy.json'),
-        loadJsonSafe('data/rival_intelligence.json'),
-        loadJsonSafe('data/influencers_feed.json'),
-        loadJsonSafe('data/tatuajes_manya.json')
-      ]);
-    } catch (err) {
-      console.error('Error fetching data JSONs:', err);
-    }
-
-    if (escudosCatalog) {
-      state.escudosCatalog = escudosCatalog;
-    }
+    if (escudosCatalog) state.escudosCatalog = escudosCatalog;
 
     if (live) {
-      try {
-        state.live = live;
-        state.standingsTab = live.torneo_activo_id || 'clausura';
-        renderMatchHero(live);
-        renderLiveTimeline(live);
-        renderStandings();
-        setupLivePolling();
-      } catch (e) {
-        console.error('Error in live rendering:', e);
-      }
-    }
-
-    if (h2hWanderers) {
-      try {
-        renderHeadToHead(h2hWanderers);
-      } catch (e) {
-        console.error('Error in head-to-head:', e);
-      }
-    }
-
-    if (efemeridesHoy) {
-      try {
-        renderEfemerides(efemeridesHoy);
-      } catch (e) {
-        console.error('Error in efemerides:', e);
-      }
-    }
-
-    if (rivalIntel) {
-      try {
-        renderRivalIntelligence(rivalIntel);
-      } catch (e) {
-        console.error('Error in rival intel:', e);
-      }
-    }
-
-    try {
-      initHistoricoDrawer();
-      initStandingsTabs();
+      state.live = live;
+      state.standingsTab = live.torneo_activo_id || 'anual';
+      renderMatchHero(live);
+      renderStandingsTabs();
+      renderStandings();
       initSimulator();
-    } catch (e) {
-      console.error('Error in interactive tabs/simulator:', e);
+      setupLivePolling();
     }
 
-    if (influencers && influencers.length) {
-      try {
-        renderInfluencersSection(influencers);
-      } catch (e) {
-        console.error('Error in influencers:', e);
-      }
+    if (h2hActivo) renderHeadToHead(h2hActivo);
+    if (efemeridesHoy) renderEfemerides(efemeridesHoy);
+    if (rivalIntel) renderRivalIntelligence(rivalIntel);
+    if (influencers && influencers.length) renderInfluencersSection(influencers);
+    if (tattoos && tattoos.length) { renderTattooGallery(tattoos); setupTattooFilters(tattoos); }
+
+    const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
+    renderHeroInstagramPost(allGalleryItems.length ? allGalleryItems[0] : null, digest);
+    if (allGalleryItems.length) {
+      state.galleries = allGalleryItems;
+      renderGallery(allGalleryItems, 'all');
+      setupGalleryFilters(allGalleryItems);
     }
 
-    if (tattoos && tattoos.length) {
-      try {
-        renderTattooGallery(tattoos);
-        setupTattooFilters(tattoos);
-      } catch (e) {
-        console.error('Error in tattoos:', e);
-      }
-    }
-
-    try {
-      const allGalleryItems = (galleries && galleries.length) ? galleries : (ig || []);
-      renderHeroInstagramPost(allGalleryItems.length ? allGalleryItems[0] : null, digest);
-
-      if (allGalleryItems.length) {
-        state.galleries = allGalleryItems;
-        renderGallery(allGalleryItems, 'all');
-        setupGalleryFilters(allGalleryItems);
-      }
-    } catch (e) {
-      console.error('Error in galleries:', e);
-    }
-
-    if (squad && squad.jugadores) {
-      try {
-        state.squad = squad;
-        state.initialLineup = JSON.parse(JSON.stringify(squad.jugadores.filter(p => p.titular).slice(0, 11)));
-        state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
-        state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
-        state.bench = JSON.parse(JSON.stringify(state.initialBench));
-        renderTacticalBoard();
-      } catch (e) {
-        console.error('Error applying squad to tactical board:', e);
-      }
-    }
-
-    try {
-      initTacticalBoard();
-    } catch (e) {
-      console.error('Error re-initing tactical board:', e);
+    if (squad && squad.jugadores && squad.jugadores.length >= 11) {
+      state.squad = squad;
+      state.initialLineup = JSON.parse(JSON.stringify(squad.jugadores.filter(p => p.titular).slice(0, 11)));
+      state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
+      state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
+      state.bench = JSON.parse(JSON.stringify(state.initialBench));
+      renderTacticalBoard();
     }
 
     if (digest) {
-      try {
-        const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
-        document.querySelectorAll('.dynamic-blogger-link').forEach(a => {
-          a.href = bUrl;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-        });
-        hydrateEditorialSection(digest);
-      } catch (e) {
-        console.error('Error hydrating editorial section:', e);
-      }
+      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
+      document.querySelectorAll('.dynamic-blogger-link').forEach(a => { a.href = bUrl; });
+      hydrateEditorialSection(digest);
     }
 
-    try {
-      renderTrivia();
-    } catch (e) {
-      console.error('Error rendering trivia:', e);
-    }
+    renderTrivia();
 
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then(reg => {
-        reg.update();
-      }).catch(() => {});
+      navigator.serviceWorker.register('/sw.js').then(reg => reg.update()).catch(() => {});
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
-

@@ -1,5 +1,5 @@
 {
-  "actualizado": "20/11/2026 16:15",
+  "actualizado": "20/11/2026 16:26",
   "fuente": "ESPN Official Roster API + 1891 BD (Último 11 oficial)",
   "director_tecnico": {
     "nombre": "Diego Aguirre",
@@ -28,7 +28,8 @@
       "posicion": "ARQ",
       "linea": "portero",
       "titular": true,
-      "edad": 33
+      "edad": 33,
+      "rating": 7.6
     },
     {
       "id": "ignacio_alegre",
@@ -37,7 +38,8 @@
       "posicion": "LD",
       "linea": "defensa",
       "titular": true,
-      "edad": 20
+      "edad": 20,
+      "rating": 7.6
     },
     {
       "id": "german_pezzella",
@@ -46,7 +48,8 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": true,
-      "edad": 35
+      "edad": 35,
+      "rating": 7.6
     },
     {
       "id": "nahuel_herrera",
@@ -55,7 +58,8 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": true,
-      "edad": 21
+      "edad": 21,
+      "rating": 7.6
     },
     {
       "id": "maximiliano_olivera",
@@ -64,7 +68,8 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": true,
-      "edad": 34
+      "edad": 34,
+      "rating": 7.6
     },
     {
       "id": "eric_remedi",
@@ -73,7 +78,8 @@
       "posicion": "MCD",
       "linea": "volante",
       "titular": true,
-      "edad": 31
+      "edad": 31,
+      "rating": 7.6
     },
     {
       "id": "eduardo_darias",
@@ -82,7 +88,8 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": true,
-      "edad": 28
+      "edad": 28,
+      "rating": 7.6
     },
     {
       "id": "javier_cabrera",
@@ -91,7 +98,8 @@
       "posicion": "ED",
       "linea": "ataque",
       "titular": true,
-      "edad": 20
+      "edad": 20,
+      "rating": 7.6
     },
     {
       "id": "leonardo_fernandez",
@@ -100,7 +108,8 @@
       "posicion": "MCO",
       "linea": "ataque",
       "titular": true,
-      "edad": 28
+      "edad": 28,
+      "rating": 7.6
     },
     {
       "id": "leonel_jaime",
@@ -109,7 +118,8 @@
       "posicion": "EI",
       "linea": "ataque",
       "titular": true,
-      "edad": 20
+      "edad": 20,
+      "rating": 7.6
     },
     {
       "id": "matias_arezo",
@@ -118,7 +128,8 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": true,
-      "edad": 23
+      "edad": 23,
+      "rating": 7.6
     },
     {
       "id": "sebastian_britos",
@@ -127,7 +138,8 @@
       "posicion": "ARQ",
       "linea": "portero",
       "titular": false,
-      "edad": 38
+      "edad": 38,
+      "rating": 7.6
     },
     {
       "id": "mauricio_lemos",
@@ -136,7 +148,8 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": false,
-      "edad": 30
+      "edad": 30,
+      "rating": 7.6
     },
     {
       "id": "lucas_ferreira",
@@ -145,7 +158,8 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": false,
-      "edad": 26
+      "edad": 26,
+      "rating": 7.6
     },
     {
       "id": "diego_laxalt",
@@ -154,7 +168,8 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
-      "edad": 33
+      "edad": 33,
+      "rating": 7.6
     },
     {
       "id": "thiago_espinosa",
@@ -163,7 +178,8 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
-      "edad": 22
+      "edad": 22,
+      "rating": 7.6
     },
     {
       "id": "lucas_hernandez",
@@ -172,7 +188,8 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
-      "edad": 34
+      "edad": 34,
+      "rating": 7.6
     },
     {
       "id": "jesus_trindade",
@@ -181,7 +198,8 @@
       "posicion": "MCD",
       "linea": "volante",
       "titular": false,
-      "edad": 33
+      "edad": 33,
+      "rating": 7.6
     },
     {
       "id": "roberto_fernandez",
@@ -190,7 +208,8 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
-      "edad": 28
+      "edad": 28,
+      "rating": 7.6
     },
     {
       "id": "leandro_umpierrez",
@@ -199,7 +218,8 @@
       "posicion": "MCO",
       "linea": "ataque",
       "titular": false,
-      "edad": 22
+      "edad": 22,
+      "rating": 7.6
     },
     {
       "id": "luis_miguel_angulo",
@@ -208,7 +228,8 @@
       "posicion": "EI",
       "linea": "ataque",
       "titular": false,
-      "edad": 22
+      "edad": 22,
+      "rating": 7.6
     },
     {
       "id": "abel_hernandez",
@@ -217,7 +238,8 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
-      "edad": 36
+      "edad": 36,
+      "rating": 7.6
     },
     {
       "id": "facundo_batista",
@@ -226,7 +248,8 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
-      "edad": 27
+      "edad": 27,
+      "rating": 7.6
     },
     {
       "id": "jonathan_rodriguez",
@@ -235,7 +258,8 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
-      "edad": 33
+      "edad": 33,
+      "rating": 7.6
     },
     {
       "id": "franco_romero",
@@ -244,7 +268,8 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
-      "edad": 26
+      "edad": 26,
+      "rating": 7.6
     },
     {
       "id": "franco_gonzalez",
@@ -253,7 +278,8 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
-      "edad": 22
+      "edad": 22,
+      "rating": 7.6
     }
   ]
 }

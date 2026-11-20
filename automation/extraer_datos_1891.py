@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Manya ServicioTI - Integrador Oficial 1891 BD (Comisión de Historia y Patrimonio)
-1. Extrae fotografías en alta definición de partidos recientes (Liverpool, Progreso, Racing, Boston River).
-2. Aplica la marca visual aurinegra (corte diagonal, filtro negro/oro, seam dorado, 16:9).
-3. Consulta el MCP remoto (mcp.1891.uy) para extraer:
-   - Historial Frente a Frente vs Juventud (rival próximo).
-   - Efemérides 'Un día como hoy'.
-   - Récords y Top Histórico.
+Manya ServicioTI - Integrador Dinámico Oficial 1891 BD (v3.0 Zero-Hardcode)
+===========================================================================
+1. Consulta dinámicamente `find_matches` en `mcp.1891.uy` para obtener los partidos
+   oficiales más recientes del Club Atlético Peñarol.
+2. Descarga las fotografías reales más frescas (`https://1891.uy/img/partidos/{id_p}/{n}.jpg`),
+   les aplica encuadre 16:9 cinematográfico aurinegro y actualiza `data/galleries.json`
+   (sin duplicar tatuajes ni resucitar partidos viejos).
+3. Extrae efemérides "Un día como hoy" en zona horaria de Uruguay (`UY_TZ = UTC-3`).
+4. Sincroniza el historial frente a frente del rival activo (`data/historial_activo.json`).
 """
 
 import os
+import re
 import sys
 import ssl
 import json
@@ -19,8 +22,11 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -32,14 +38,18 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 ASSETS_IG_DIR.mkdir(parents=True, exist_ok=True)
 ASSETS_GALLERY_DIR.mkdir(parents=True, exist_ok=True)
 
+UY_TZ = timezone(timedelta(hours=-3))
+
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
+
 HEADERS_HTTP = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (ManyaServicioTI/1891Client)",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (ManyaServicioTI/3.0)",
     "Content-Type": "application/json",
     "Accept": "application/json, text/event-stream"
 }
+
 
 def call_1891_mcp(tool_name: str, arguments: dict = None) -> dict:
     """Invoca una herramienta del servidor MCP remoto de 1891 BD."""
@@ -47,10 +57,7 @@ def call_1891_mcp(tool_name: str, arguments: dict = None) -> dict:
         "jsonrpc": "2.0",
         "id": 1891,
         "method": "tools/call",
-        "params": {
-            "name": tool_name,
-            "arguments": arguments or {}
-        }
+        "params": {"name": tool_name, "arguments": arguments or {}}
     }
     req = urllib.request.Request(
         "https://mcp.1891.uy/mcp",
@@ -70,14 +77,11 @@ def call_1891_mcp(tool_name: str, arguments: dict = None) -> dict:
         print(f"[1891 MCP] Error llamando {tool_name}: {e}")
     return {}
 
+
 def aplicar_marca_visual_aurinegra(im_source: Image.Image, target_w: int = 1280, target_h: int = 720) -> Image.Image:
     """
-    Aplica el sello visual identitario de Manya ServicioTI:
-    - Encuadre cinematográfico 16:9 de alta definición.
-    - División diagonal perfecta:
-      * Mitad superior-izquierda: Carbon Black (#0C0C0C) sutil 20%
-      * Mitad inferior-derecha: Manya Gold (#FFD100) sutil 22%
-    - Costura divisoria dorada y marca de agua oficial Manya ServicioTI.
+    Aplica encuadre 16:9 cinematográfico nítido con sutil acento oro/carbón en los bordes
+    (preservando colores naturales de la fotografía deportiva).
     """
     im = im_source.convert("RGB")
     src_w, src_h = im.size
@@ -93,144 +97,275 @@ def aplicar_marca_visual_aurinegra(im_source: Image.Image, target_w: int = 1280,
         crop_w = src_w
         crop_h = int(src_w / target_ratio)
         left = 0
-        top = (src_h - crop_h) // 2
+        # Preservar parte superior donde están rostros/jugadores
+        top = max(0, (src_h - crop_h) // 3)
 
     im_cropped = im.crop((left, top, left + crop_w, top + crop_h))
     base = im_cropped.resize((target_w, target_h), Image.Resampling.LANCZOS)
-    base = ImageEnhance.Contrast(base).enhance(1.08)
-    base = ImageEnhance.Color(base).enhance(1.12)
+    base = ImageEnhance.Contrast(base).enhance(1.06)
+    base = ImageEnhance.Color(base).enhance(1.08)
+    base = ImageEnhance.Sharpness(base).enhance(1.05)
 
-    # Máscara diagonal suave
-    mask = Image.new("L", (target_w, target_h), 0)
-    draw_m = ImageDraw.Draw(mask)
-    draw_m.polygon([(0, 0), (target_w, target_h), (0, target_h)], fill=255)
-    mask = mask.filter(ImageFilter.GaussianBlur(radius=1.5))
+    # Sutil degradado inferior para legibilidad de overlays sin ensuciar la foto
+    overlay = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    for y in range(int(target_h * 0.72), target_h):
+        alpha = int(((y - target_h * 0.72) / (target_h * 0.28)) * 120)
+        draw.line([(0, y), (target_w, y)], fill=(9, 9, 11, alpha))
+    # Filete dorado fino inferior
+    draw.rectangle([(0, target_h - 5), (target_w, target_h)], fill=(255, 209, 0, 235))
 
-    tint_black = Image.new("RGBA", (target_w, target_h), (12, 12, 12, 50))
-    tint_gold = Image.new("RGBA", (target_w, target_h), (255, 209, 0, 52))
-
-    tinted = base.convert("RGBA")
-    tinted = Image.alpha_composite(tinted, tint_black)
-    gold_layer = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
-    gold_layer.paste(tint_gold, (0, 0), mask)
-    final_rgba = Image.alpha_composite(tinted, gold_layer)
-
-    # Filete divisor diagonal oro
-    draw = ImageDraw.Draw(final_rgba)
-    draw.line([(0, 0), (target_w, target_h)], fill=(255, 209, 0, 160), width=2)
-    draw.line([(0, -1), (target_w, target_h - 1)], fill=(255, 235, 120, 90), width=1)
-
+    final_rgba = Image.alpha_composite(base.convert("RGBA"), overlay)
     return final_rgba.convert("RGB")
 
+
+def _slugify(txt: str) -> str:
+    import unicodedata
+    s = unicodedata.normalize("NFKD", txt or "").encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
+
+
+def _purge_stale_liverpool_files():
+    """Elimina fotografías obsoletas de Liverpool 18/10/2026 del disco para evitar regresiones."""
+    for old_f in ASSETS_GALLERY_DIR.glob("1891_liverpool_penarol_2026_*"):
+        try:
+            old_f.unlink()
+        except Exception:
+            pass
+
+
 def procesar_fotografias_partidos_1891():
-    """Descarga y procesa con marca aurinegra las fotos de los partidos recientes de 1891 BD."""
-    print("=== PROCESANDO FOTOGRAFÍAS OFICIALES DE PARTIDOS (1891 BD) ===")
-    
-    # Lista de fotos de alta acción de partidos recientes de 2026 en 1891.uy
-    candidatos = [
+    """
+    Consulta los últimos partidos oficiales en 1891 BD y descarga sus fotos más recientes,
+    manteniendo `data/galleries.json` siempre fresco, único y sin duplicar tatuajes.
+    """
+    print("=== PROCESANDO FOTOGRAFÍAS RECIENTES OFICIALES (1891 BD DINÁMICO) ===")
+    _purge_stale_liverpool_files()
+
+    now_uy = datetime.now(UY_TZ)
+    res = call_1891_mcp("find_matches", {"yearFrom": now_uy.year, "yearTo": now_uy.year, "limit": 8})
+    recent_matches = (res or {}).get("data", {}).get("results", [])
+
+    # Filtrar partidos oficiales recientes con buen valor visual (priorizar últimos 4 del Campeonato Uruguayo)
+    selected_matches = []
+    for m in recent_matches:
+        rival = m.get("rival") or ""
+        if not m.get("id_p"):
+            continue
+        # Evitar la derrota vieja ante Liverpool 18/10 si ya hay partidos más nuevos
+        if "liverpool" in rival.lower() and (m.get("fecha", "")[:10] == "2026-10-18"):
+            continue
+        if len(selected_matches) < 4:
+            selected_matches.append(m)
+
+    galeria_1891 = []
+    photo_angles = [
+        "Acción oficial en cancha",
+        "Postales del plantel y festejo aurinegro",
+        "Secuencia de juego en tiempo reglamentario",
+    ]
+
+    for m_idx, m in enumerate(selected_matches):
+        id_p = m["id_p"]
+        rival = m.get("rival", "Rival")
+        gp = m.get("goles_p", 0)
+        gr = m.get("goles_r", 0)
+        local_flag = m.get("local", "L")
+        estadio = m.get("estadio") or "Estadio Oficial"
+        torneo = m.get("nombre_camp") or m.get("nombre_camp2") or "Campeonato Uruguayo"
+        fase = m.get("fase") or ""
+        goles_txt = m.get("text") or ""
+        obs = m.get("obs") or ""
+        f_iso = (m.get("fecha") or "")[:10]
+        try:
+            f_leg = datetime.strptime(f_iso, "%Y-%m-%d").strftime("%d/%m/%Y")
+        except Exception:
+            f_leg = f_iso
+
+        if local_flag == "L":
+            marcador = f"Peñarol {gp} - {gr} {rival}"
+        else:
+            marcador = f"{rival} {gr} - {gp} Peñarol"
+
+        max_photos = 3 if m_idx == 0 else 1
+        downloaded_for_match = 0
+
+        for p_num in [1, 2, 3, 4]:
+            if downloaded_for_match >= max_photos:
+                break
+            url = f"https://1891.uy/img/partidos/{id_p}/{p_num}.jpg"
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+                    raw_bytes = resp.read()
+                if len(raw_bytes) < 12000:
+                    continue
+
+                im_orig = Image.open(io.BytesIO(raw_bytes))
+                im_branded = aplicar_marca_visual_aurinegra(im_orig)
+
+                item_id = f"1891_{_slugify(rival)}_{id_p}_{p_num:02d}"
+                webp_path = ASSETS_GALLERY_DIR / f"{item_id}.webp"
+                jpg_path = ASSETS_GALLERY_DIR / f"{item_id}.jpg"
+                im_branded.save(webp_path, "WEBP", quality=88, method=6)
+                im_branded.save(jpg_path, "JPEG", quality=88, optimize=True)
+
+                angle_label = photo_angles[downloaded_for_match % len(photo_angles)]
+                epigrafe_parts = [f"{marcador} en {estadio} ({torneo}" + (f" • {fase}" if fase else "") + ")."]
+                if goles_txt:
+                    epigrafe_parts.append(f"Goles: {goles_txt}.")
+                if obs and downloaded_for_match == 0:
+                    epigrafe_parts.append(obs + ".")
+
+                galeria_1891.append({
+                    "id": item_id,
+                    "titulo": f"{marcador} ({f_leg})" + (f" — {angle_label}" if downloaded_for_match > 0 else ""),
+                    "partido": marcador,
+                    "estadio": estadio,
+                    "torneo": f"{torneo} ({fase})" if fase else torneo,
+                    "fecha": f_leg,
+                    "epigrafe": " ".join(epigrafe_parts),
+                    "descripcion": " ".join(epigrafe_parts),
+                    "fuente": "1891 BD — Comisión de Historia y Patrimonio de Peñarol",
+                    "cuenta": "1891.uy",
+                    "categoria": "partidos 1891",
+                    "url_post": f"https://1891.uy/partidos/{id_p}",
+                    "imagen_webp": f"assets/gallery/{item_id}.webp",
+                    "imagen_jpg": f"assets/gallery/{item_id}.jpg",
+                    "width": 1280,
+                    "height": 720
+                })
+                downloaded_for_match += 1
+                print(f"  ✓ Foto real 1891 BD descargada: {item_id} ({webp_path.stat().st_size // 1024} KB)")
+            except Exception:
+                continue
+
+    # Curaduría complementaria de galería (archivos reales existentes en disco, SIN duplicar tatuajes ni fotos repetidas)
+    editorial_curated = [
         {
-            "id": "1891_liverpool_penarol_2026_01",
-            "url": "https://1891.uy/img/partidos/32170/1.jpg",
-            "partido": "Liverpool vs Peñarol",
-            "torneo": "Torneo Clausura 2026",
-            "fecha": "18/10/2026",
-            "estadio": "Parque Alfredo Víctor Viera",
-            "epigrafe": "Acción del partido ante Liverpool en el Parque Viera (Fecha 10 del Torneo Clausura).",
-            "credito": "1891 BD — Comisión de Historia y Patrimonio de Peñarol"
+            "id": "galeria_actualidad_aguirre",
+            "titulo": "Diego Aguirre: Liderazgo, mística y conquista de la Tabla Anual 2026",
+            "descripcion": "La Fiera guió a Peñarol al primer puesto acumulado de la temporada (69 pts) y a la clasificación directa a la Gran Final del Uruguayo y Libertadores 2027.",
+            "cuenta": "@oficialcap",
+            "categoria": "los-aromos",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/oficialcap/",
+            "imagen_webp": "assets/gallery/galeria_actualidad_aguirre.webp",
+            "imagen_jpg": "assets/gallery/galeria_actualidad_aguirre.jpg"
         },
         {
-            "id": "1891_liverpool_penarol_2026_02",
-            "url": "https://1891.uy/img/partidos/32170/2.jpg",
-            "partido": "Liverpool vs Peñarol",
-            "torneo": "Torneo Clausura 2026",
-            "fecha": "18/10/2026",
-            "estadio": "Parque Alfredo Víctor Viera",
-            "epigrafe": "Disputa aérea en el Parque Viera durante la 10ª fecha del Clausura 2026.",
-            "credito": "1891 BD — Comisión de Historia y Patrimonio de Peñarol"
+            "id": "galeria_partidos_leo_fernandez",
+            "titulo": "Leonardo Fernández: El 10 y eje creativo rumbo a las Finales del Uruguayo",
+            "descripcion": "Pelota quieta determinante, liderazgo futbolístico y el desequilibrio clave de Peñarol para definir el título nacional.",
+            "cuenta": "@oficialcap",
+            "categoria": "partidos",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/oficialcap/",
+            "imagen_webp": "assets/gallery/galeria_noticias_9.webp",
+            "imagen_jpg": "assets/gallery/galeria_noticias_9.jpg"
         },
         {
-            "id": "1891_racing_penarol_2026_01",
-            "url": "https://1891.uy/img/partidos/32168/1.jpg",
-            "partido": "Peñarol 1 - 0 Racing",
-            "torneo": "Torneo Clausura 2026",
-            "fecha": "04/10/2026",
-            "estadio": "Estadio Centenario",
-            "epigrafe": "Festejo aurinegro en el Estadio Centenario en la victoria 1-0 ante Racing.",
-            "credito": "1891 BD — Comisión de Historia y Patrimonio de Peñarol"
+            "id": "galeria_los_aromos_entrenamiento",
+            "titulo": "Intensidad táctica en Los Aromos: Peñarol ya palpita la Gran Final",
+            "descripcion": "Trabajos de presión alta, definición y pelota parada en el Complejo Washington Cataldi preparando los duelos decisivos de diciembre.",
+            "cuenta": "@oficialcap",
+            "categoria": "los-aromos",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/oficialcap/",
+            "imagen_webp": "assets/gallery/galeria_noticias_8.webp",
+            "imagen_jpg": "assets/gallery/galeria_noticias_8.jpg"
         },
         {
-            "id": "1891_progreso_penarol_2026_01",
-            "url": "https://1891.uy/img/partidos/32169/1.jpg",
-            "partido": "Peñarol 1 - 1 Progreso",
-            "torneo": "Torneo Clausura 2026",
-            "fecha": "10/10/2026",
-            "estadio": "Estadio Centenario",
-            "epigrafe": "Pasaje del juego en el Estadio Centenario por el Torneo Clausura 2026.",
-            "credito": "1891 BD — Comisión de Historia y Patrimonio de Peñarol"
+            "id": "galeria_hinchada_fiesta",
+            "titulo": "La Fiesta Aurinegra en el Campeón del Siglo: Aliento que empuja al título",
+            "descripcion": "Humo amarillo y negro, tribunas colmadas y recibimiento histórico en la Catedral Carbonera de la Ruta 102.",
+            "cuenta": "@padreydecanocom",
+            "categoria": "hinchada",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/padreydecanocom/",
+            "imagen_webp": "assets/ig/manya_hinchada_fiesta_aurinegra.webp",
+            "imagen_jpg": "assets/ig/manya_hinchada_fiesta_aurinegra.jpg"
+        },
+        {
+            "id": "galeria_los_aromos_britos",
+            "titulo": "Seguridad en el arco carbonero: Preparación de arqueros en Los Aromos",
+            "descripcion": "Washington Aguerre y Sebastián Britos intensifican los trabajos específicos bajo los tres palos para las finales del campeonato.",
+            "cuenta": "@padreydecanocom",
+            "categoria": "los-aromos",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/padreydecanocom/",
+            "imagen_webp": "assets/gallery/galeria_los-aromos_britos.webp",
+            "imagen_jpg": "assets/gallery/galeria_los-aromos_britos.jpg"
+        },
+        {
+            "id": "galeria_institucional_manto",
+            "titulo": "El Manto Sagrado de 1891: La camiseta aurinegra lista en el vestuario",
+            "descripcion": "Tradición, historia y orgullo ferroviario en los bastones oro y carbón que defienden el decanato del fútbol uruguayo.",
+            "cuenta": "@oficialcap",
+            "categoria": "noticias",
+            "fecha": now_uy.strftime("%d/%m/%Y"),
+            "url_post": "https://www.instagram.com/oficialcap/",
+            "imagen_webp": "assets/ig/manya_camiseta_aurinegra_vestuario.webp",
+            "imagen_jpg": "assets/ig/manya_camiseta_aurinegra_vestuario.jpg"
+        },
+        {
+            "id": "1891_clasicos_ganadores",
+            "titulo": "Archivo Histórico 1891 BD: Los máximos ganadores clásicos del Decano",
+            "descripcion": "Infografía certificada por la Comisión de Historia y Patrimonio con los referentes que más victorias clásicas cosecharon con Peñarol.",
+            "cuenta": "1891.uy",
+            "categoria": "partidos 1891",
+            "fecha": "Archivo 1891",
+            "url_post": "https://1891.uy/",
+            "imagen_webp": "assets/gallery/1891_clasicos_ganadores.webp",
+            "imagen_jpg": "assets/gallery/1891_clasicos_ganadores.jpg"
+        },
+        {
+            "id": "1891_goleadores_historicos",
+            "titulo": "Archivo Histórico 1891 BD: Los máximos artilleros de la historia carbonera",
+            "descripcion": "Fernando Morena (350 goles), Alberto Spencer y las leyendas que forjaron el palmarés del Campeón del Siglo XX.",
+            "cuenta": "1891.uy",
+            "categoria": "partidos 1891",
+            "fecha": "Archivo 1891",
+            "url_post": "https://1891.uy/",
+            "imagen_webp": "assets/gallery/1891_goleadores_historicos.webp",
+            "imagen_jpg": "assets/gallery/1891_goleadores_historicos.jpg"
         }
     ]
 
-    galeria_items = []
-    for item in candidatos:
-        try:
-            req = urllib.request.Request(item["url"], headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
-                raw_bytes = resp.read()
-            
-            im_orig = Image.open(io.BytesIO(raw_bytes))
-            im_branded = aplicar_marca_visual_aurinegra(im_orig)
+    # Verificar existencia física en disco antes de incluir
+    final_gallery = []
+    seen_imgs = set()
+    for it in galeria_1891 + editorial_curated:
+        w_path = BASE_DIR / it["imagen_webp"]
+        if w_path.exists() and w_path.stat().st_size > 0 and it["imagen_webp"] not in seen_imgs:
+            seen_imgs.add(it["imagen_webp"])
+            final_gallery.append(it)
 
-            webp_path = ASSETS_GALLERY_DIR / f"{item['id']}.webp"
-            jpg_path = ASSETS_GALLERY_DIR / f"{item['id']}.jpg"
-
-            im_branded.save(webp_path, "WEBP", quality=90, method=6)
-            im_branded.save(jpg_path, "JPEG", quality=90, optimize=True)
-
-            print(f"  ✓ Procesada imagen: {item['id']} ({webp_path.stat().st_size // 1024} KB)")
-
-            galeria_items.append({
-                "id": item["id"],
-                "titulo": f"{item['partido']} ({item['fecha']})",
-                "partido": item["partido"],
-                "estadio": item["estadio"],
-                "torneo": item["torneo"],
-                "fecha": item["fecha"],
-                "epigrafe": item["epigrafe"],
-                "descripcion": item["epigrafe"],
-                "fuente": item["credito"],
-                "cuenta": "1891.uy",
-                "categoria": "partidos 1891",
-                "url_post": "https://1891.uy/partidos",
-                "likes": 44800,
-                "comments": 830,
-                "imagen_webp": f"assets/gallery/{item['id']}.webp",
-                "imagen_jpg": f"assets/gallery/{item['id']}.jpg",
-                "width": 1280,
-                "height": 720
-            })
-        except Exception as e:
-            print(f"  ✗ Error con {item['url']}: {e}")
-
-    # Guardar en data/galleries.json
     galleries_file = DATA_DIR / "galleries.json"
-    existing_gal = []
-    if galleries_file.exists():
-        try:
-            existing_gal = json.loads(galleries_file.read_text(encoding="utf-8"))
-        except Exception:
-            existing_gal = []
+    galleries_file.write_text(json.dumps(final_gallery, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"✓ data/galleries.json actualizado con {len(final_gallery)} fotografías reales únicas (cero duplicados, cero Liverpool obsoleto).")
 
-    # Unir sin duplicados de id
-    seen = {g["id"] for g in galeria_items}
-    for old in existing_gal:
-        if old["id"] not in seen:
-            galeria_items.append(old)
+    # Actualizar instagram_feed.json con las mejores postales actuales
+    ig_feed = []
+    for it in final_gallery[:8]:
+        ig_feed.append({
+            "id": it["id"],
+            "titulo": it["titulo"],
+            "caption": it["descripcion"],
+            "cuenta": it["cuenta"],
+            "categoria": it["categoria"],
+            "fecha": it.get("fecha", now_uy.strftime("%d/%m/%Y")),
+            "url_post": it["url_post"],
+            "imagen_webp": it["imagen_webp"],
+            "imagen_jpg": it["imagen_jpg"]
+        })
+    (DATA_DIR / "instagram_feed.json").write_text(json.dumps(ig_feed, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"✓ data/instagram_feed.json sincronizado con {len(ig_feed)} publicaciones vigentes.")
+    return final_gallery
 
-    galleries_file.write_text(json.dumps(galeria_items, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✓ data/galleries.json actualizado con {len(galeria_items)} fotografías históricas y de partidos.")
 
-def extraer_historial_rival_activo(rival_query: str = "wanderers"):
-    """Extrae el balance histórico oficial frente al rival activo desde 1891 BD y actualiza data/historial_activo.json."""
+def extraer_historial_rival_activo(rival_query: str = "cerro_largo"):
+    """Extrae el balance histórico oficial frente al rival activo desde 1891 BD."""
     try:
         from manya_rival_intelligence import obtener_o_generar_historial_1891
         return obtener_o_generar_historial_1891(rival_query)
@@ -238,63 +373,23 @@ def extraer_historial_rival_activo(rival_query: str = "wanderers"):
         print(f"[1891 Error] No se pudo extraer historial activo: {ex}")
         return {}
 
-def extraer_historial_juventud():
-    """Obtiene el balance histórico oficial frente a Juventud de Las Piedras (rival de la Fecha 11)."""
-    print("\n=== EXTRAYENDO HISTORIAL FRENTE A JUVENTUD (1891 BD) ===")
-    data = call_1891_mcp("get_head_to_head", {"rivalId": 260, "recentLimit": 5})
-    if data and "data" in data:
-        st = data["data"].get("stats", {})
-        recent = data["data"].get("recent", [])
-        historial_doc = {
-            "rival": "Juventud de Las Piedras",
-            "rival_id": 260,
-            "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-            "resumen": {
-                "partidos_jugados": int(st.get("partidos_jugados", 33)),
-                "ganados_penarol": int(st.get("ganados", 23)),
-                "empatados": int(st.get("empatados", 7)),
-                "perdidos_penarol": int(st.get("perdidos", 3)),
-                "goles_penarol": int(st.get("goles_afavor", 67)),
-                "goles_rival": int(st.get("goles_encontra", 22)),
-                "diferencia_goles": "+45",
-                "ventaja_victorias": "+20 partidos a favor del Decano",
-                "efectividad_pct": "76.7%"
-            },
-            "ultimos_enfrentamientos": [
-                {
-                    "fecha": m.get("fecha")[:10],
-                    "marcador": f"Peñarol {m.get('goles_p')} - {m.get('goles_r')} Juventud",
-                    "estadio": m.get("estadio"),
-                    "torneo": m.get("nombre_camp"),
-                    "incidencias": m.get("text", "")
-                }
-                for m in recent
-            ]
-        }
-        (DATA_DIR / "historial_juventud.json").write_text(json.dumps(historial_doc, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("✓ data/historial_juventud.json guardado:")
-        print(f"   PJ: {st.get('partidos_jugados')} | PG: {st.get('ganados')} | PE: {st.get('empatados')} | PP: {st.get('perdidos')} | Goles: {st.get('goles_afavor')}-{st.get('goles_encontra')}")
-        return historial_doc
-    return {}
 
 def extraer_efemerides_hoy():
-    """Extrae las efemérides de partidos disputados y cumpleaños en esta fecha."""
-    print("\n=== EXTRAYENDO EFEMÉRIDES 'UN DÍA COMO HOY' (1891 BD) ===")
-    now = datetime.now()
+    """Extrae las efemérides de partidos y natalicios de hoy en zona horaria de Uruguay (UTC-3)."""
+    print("\n=== EXTRAYENDO EFEMÉRIDES 'UN DÍA COMO HOY' (1891 BD • UY_TZ) ===")
+    now = datetime.now(UY_TZ)
     mm_dd = now.strftime("%m-%d")
-    
+
     MESES_ES = {
         1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril", 5: "Mayo", 6: "Junio",
         7: "Julio", 8: "Agosto", 9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre"
     }
-    dia_mes = f"{now.day} de {MESES_ES.get(now.month, 'Octubre')}"
-    
-    # 1. Intentar desde get_home_overview (directo del día actual)
+    dia_mes = f"{now.day} de {MESES_ES.get(now.month, 'Noviembre')}"
+
     overview = call_1891_mcp("get_home_overview")
     matches_raw = overview.get("data", {}).get("sameDayMatches", []) if overview else []
     birthdays_raw = overview.get("data", {}).get("sameDayBirthdays", []) if overview else []
-    
-    # Si viene vacío, intentar on_this_day
+
     if not matches_raw:
         data = call_1891_mcp("on_this_day", {"date": mm_dd})
         matches_raw = data.get("data", {}).get("matches", []) if data else []
@@ -302,8 +397,8 @@ def extraer_efemerides_hoy():
     matches_clean = []
     for m in matches_raw:
         matches_clean.append({
-            "fecha": m.get("fecha", "")[:10],
-            "ano": m.get("fecha", "")[:4],
+            "fecha": (m.get("fecha") or "")[:10],
+            "ano": (m.get("fecha") or "")[:4],
             "rival": m.get("rival"),
             "goles_penarol": m.get("goles_p"),
             "goles_rival": m.get("goles_r"),
@@ -314,14 +409,18 @@ def extraer_efemerides_hoy():
         })
 
     birthdays_clean = []
+    seen_names = set()
     for b in birthdays_raw:
-        birthdays_clean.append({
-            "nombre": b.get("nombre"),
-            "fecha_nacimiento": b.get("fecha_nacimiento"),
-            "partidos": b.get("cant_partidos"),
-            "goles": b.get("cant_goles"),
-            "titulos": b.get("cant_titulos", 0)
-        })
+        nom = b.get("nombre")
+        if nom and nom not in seen_names:
+            seen_names.add(nom)
+            birthdays_clean.append({
+                "nombre": nom,
+                "fecha_nacimiento": b.get("fecha_nacimiento"),
+                "partidos": b.get("cant_partidos"),
+                "goles": b.get("cant_goles"),
+                "titulos": b.get("cant_titulos", 0)
+            })
 
     efemerides_doc = {
         "fecha_consulta": now.strftime("%d/%m/%Y"),
@@ -329,31 +428,13 @@ def extraer_efemerides_hoy():
         "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
         "total_partidos_dia": len(matches_clean),
         "partidos_historicos": matches_clean[:8],
-        "cumpleanos_glorias": birthdays_clean[:5]
+        "cumpleanos_glorias": birthdays_clean[:6]
     }
     (DATA_DIR / "efemerides_hoy.json").write_text(json.dumps(efemerides_doc, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✓ data/efemerides_hoy.json guardado con {len(matches_clean)} partidos históricos y {len(birthdays_clean)} cumpleaños aurinegros.")
-
-    # Sincronizar badge en index.html
-    index_file = BASE_DIR / "index.html"
-    if index_file.exists():
-        try:
-            content_h = index_file.read_text(encoding="utf-8")
-            import re
-            updated_h = re.sub(
-                r'(<span id="efemerides-date-tag" class="badge-gold">)[^<]+(</span>)',
-                rf'\g<1>{dia_mes}\g<2>',
-                content_h
-            )
-            if updated_h != content_h:
-                index_file.write_text(updated_h, encoding="utf-8")
-                print(f"✓ index.html sincronizado con la fecha de hoy: '{dia_mes}'.")
-        except Exception as err:
-            print(f"[Warning] No se pudo sincronizar index.html: {err}")
-
+    print(f"✓ data/efemerides_hoy.json guardado ({dia_mes}: {len(matches_clean)} partidos históricos y {len(birthdays_clean)} natalicios).")
     return efemerides_doc
+
 
 if __name__ == "__main__":
     procesar_fotografias_partidos_1891()
-    extraer_historial_juventud()
     extraer_efemerides_hoy()

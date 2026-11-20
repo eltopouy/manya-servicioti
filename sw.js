@@ -1,9 +1,9 @@
-const CACHE_NAME = 'manya-servicioti-v9.0-ecosystem-unified'; // upgraded from v8.5
+const CACHE_NAME = 'manya-servicioti-v10.0-unified';
 const CORE_ASSETS = [
   '/',
   '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
+  '/css/styles.css?v=10.0',
+  '/js/app.js?v=10.0',
   '/manifest.json',
   '/data/live_status.json',
   '/data/news_digest.json',
@@ -13,11 +13,8 @@ const CORE_ASSETS = [
   '/data/history_1891.json',
   '/data/escudos_uruguay.json',
   '/data/historial_activo.json',
-  '/data/historial_defensor_sporting.json',
-  '/data/historial_wanderers.json',
   '/data/efemerides_hoy.json',
   '/data/rival_intelligence.json',
-  '/data/blogger_pagina_historica.json',
   '/data/influencers_feed.json',
   '/data/tatuajes_manya.json'
 ];
@@ -43,16 +40,15 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ESTRATEGIA NETWORK-FIRST:
-// Prioriza siempre datos en vivo y código actualizado desde la red.
-// Solo recurre a la caché local cuando el dispositivo se queda sin conexión (offline).
+// ESTRATEGIA NETWORK-FIRST v10.0:
+// Prioriza siempre los datos en vivo y activos frescos desde la red.
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-  
+
   event.respondWith(
     fetch(event.request)
       .then(res => {
-        if (res && res.status === 200) {
+        if (res && res.status === 200 && res.type === 'basic') {
           const clone = res.clone();
           caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
         }

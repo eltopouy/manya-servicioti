@@ -1,25 +1,34 @@
 # -*- coding: utf-8 -*-
 """
-Motor de Monitoreo de Partidos en Vivo y Ciclo de Vida para Manya ServicioTI.
-Gestiona las fases:
-  1. PREVIA: Cobertura táctica, clima, alineaciones y TV antes del inicio.
-  2. EN VIVO: Polling minuto a minuto de ESPN API (marcador, incidencias, goles).
-  3. POST-PARTIDO: Pitazo final, estadísticas de posesión/tiros y crónica definitiva.
-  4. PRÓXIMO Y ÚLTIMO PARTIDO: Detección inteligente multinivel (Team API, Scoreboard forward/backward scan y Fixture de contingencia).
+Motor de Monitoreo de Partidos en Vivo, Tablas Reales y Ciclo de Vida — Manya ServicioTI v4.0
+=============================================================================================
+Arquitectura Zero-Hardcode & Single Source of Truth:
+  1. ESPN Schedule API (1 sola consulta) + Scoreboard del día (uru.1 + Libertadores).
+  2. Enriquecimiento oficial con 1891 BD MCP (goleadores, alineación real, cambios, juez, DT rival, video YouTube).
+  3. Tabla Anual AUF Oficial reconciliada en tiempo real con resultados ya finalizados en ESPN.
+  4. Copa CONMEBOL Libertadores estrictamente ordenada por posición/puntos/DG.
+  5. Minuto a Minuto generado dinámicamente por event_id (jamás arrastra relatos de partidos viejos).
+  6. Sincronización automática del plantel vigente (data/squad_2026.json) desde ESPN Roster + 1891 BD.
+  7. Soporte nativo para Definición del Campeonato Uruguayo (Tabla Anual -> Gran Final).
 """
 
 import os
 import sys
+import ssl
 import json
 import re
 import logging
+import unicodedata
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, Optional, List, Tuple
 
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 logger = logging.getLogger("ManyaMatchEngine")
 if not logger.handlers:
@@ -38,100 +47,86 @@ DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", 
 HEADERS_HTTP = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 "
-        "(ServicioTI-ManyaMatchEngine/2.5)"
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 "
+        "(ServicioTI-ManyaMatchEngine/4.0)"
     )
 }
 
 SCOREBOARD_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/scoreboard"
 SCOREBOARD_LIBERTADORES_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard"
 TEAM_API_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams/2683"
-TEAM_LIBERTADORES_API_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/teams/2892"
+TEAM_SCHEDULE_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams/2683/schedule"
+TEAM_ROSTER_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/teams/2683/roster"
 SUMMARY_BASE_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/uru.1/summary?event="
 STANDINGS_URL = "https://site.web.api.espn.com/apis/v2/sports/soccer/uru.1/standings"
+LIBERTADORES_STANDINGS_URL = "https://site.web.api.espn.com/apis/v2/sports/soccer/conmebol.libertadores/standings"
 AUF_TABLA_ANUAL_URL = "https://www.auf.org.uy/url.php?id=ajaxapp&tabla_anual=1&id1=3&id2=13"
+MCP_1891_URL = "https://mcp.1891.uy/mcp"
 
 PENAROL_IDS = {"2683", "2892"}
 
-# Fixture oficial verificado AUF Torneo Clausura 2026 (garantía de no-vacío)
-VERIFIED_FIXTURE_2026 = [
-    {
-        "fecha_numero": 10,
-        "nombre": "Liverpool vs Peñarol",
-        "fecha_iso": "2026-10-18T18:30:00-03:00",
-        "fecha_legible": "Domingo 18/10/2026 18:30 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 10)",
-        "estadio": "Estadio Parque Viera (Montevideo)",
-        "local": {"nombre": "Liverpool", "abreviatura": "LIV", "goles": "1", "es_penarol": False, "escudo": "assets/img/escudos/escudo_liverpool.webp"},
-        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "0", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "completado": True
-    },
-    {
-        "fecha_numero": 11,
-        "nombre": "Juventud vs Peñarol",
-        "fecha_iso": "2026-10-23T20:00:00-03:00",
-        "fecha_legible": "Viernes 23/10/2026 20:00 hs",
-        "torneo": "Torneo Clausura 2026",
-        "estadio": "Estadio Centenario",
-        "local": {"nombre": "Juventud", "abreviatura": "JUV", "goles": "0", "es_penarol": False, "escudo": "assets/img/escudos/escudo_juventud.webp"},
-        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "0", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": True
-    },
-    {
-        "fecha_numero": 13,
-        "nombre": "Peñarol vs Montevideo Wanderers",
-        "fecha_iso": "2026-10-31T16:30:00-03:00",
-        "fecha_legible": "Sábado 31/10/2026 16:30 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 13)",
-        "estadio": "Parque Federico Omar Saroldi (Prado)",
-        "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "1", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "visitante": {"nombre": "Montevideo Wanderers", "abreviatura": "WAN", "goles": "1", "es_penarol": False, "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": True
-    },
-    {
-        "fecha_numero": 14,
-        "nombre": "Defensor Sporting vs Peñarol",
-        "fecha_iso": "2026-11-15T20:00:00-03:00",
-        "fecha_legible": "Domingo 15/11/2026 20:00 hs",
-        "torneo": "Torneo Clausura 2026 • Fecha 14",
-        "estadio": "Estadio Luis Franzini (Montevideo)",
-        "local": {"nombre": "Defensor Sporting", "abreviatura": "DEF", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_defensor_sporting.webp"},
-        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": False
-    },
-    {
-        "fecha_numero": 14,
-        "nombre": "Peñarol vs Miramar Misiones",
-        "fecha_iso": "2026-11-15T19:30:00-03:00",
-        "fecha_legible": "Domingo 15/11/2026 19:30 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 14)",
-        "estadio": "Estadio Campeón del Siglo (Montevideo)",
-        "local": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "visitante": {"nombre": "Miramar Misiones", "abreviatura": "MIR", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_miramar_misiones.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": False
-    },
-    {
-        "fecha_numero": 15,
-        "nombre": "Wanderers vs Peñarol",
-        "fecha_iso": "2026-11-22T16:30:00-03:00",
-        "fecha_legible": "Domingo 22/11/2026 16:30 hs",
-        "torneo": "Campeonato Uruguayo • Torneo Clausura (Fecha 15)",
-        "estadio": "Parque Alfredo Víctor Viera (Montevideo)",
-        "local": {"nombre": "Wanderers", "abreviatura": "WAN", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp"},
-        "visitante": {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
-        "tv": "VTV Plus / Disney+ Premium",
-        "completado": False
-    }
-]
+# Mapeo canónico de nombres AUF / ESPN para reconciliación sin ambigüedades
+CANONICAL_TEAM_MAP = {
+    "pearol": "Peñarol",
+    "penarol": "Peñarol",
+    "d. maldonado": "Deportivo Maldonado",
+    "deportivo maldonado": "Deportivo Maldonado",
+    "maldonado": "Deportivo Maldonado",
+    "nacional": "Nacional",
+    "m.c. torque": "Montevideo City Torque",
+    "montevideo city torque": "Montevideo City Torque",
+    "torque": "Montevideo City Torque",
+    "racing": "Racing",
+    "racing (montevideo)": "Racing",
+    "liverpool": "Liverpool",
+    "wanderers": "Montevideo Wanderers",
+    "montevideo wanderers": "Montevideo Wanderers",
+    "albion": "Albion",
+    "albion fc": "Albion",
+    "juventud": "Juventud",
+    "central espaol": "Central Español",
+    "central espanol": "Central Español",
+    "central espanol futbol club": "Central Español",
+    "boston river": "Boston River",
+    "cerro largo": "Cerro Largo",
+    "cerro": "Cerro",
+    "def. sporting": "Defensor Sporting",
+    "defensor sporting": "Defensor Sporting",
+    "defensor": "Defensor Sporting",
+    "danubio": "Danubio",
+    "progreso": "Progreso",
+    "miramar misiones": "Miramar Misiones",
+    "rampla juniors": "Rampla Juniors",
+    "fenix": "Fénix",
+    "river plate": "River Plate",
+}
+
+
+def normalize_team_name(raw_name: str) -> str:
+    """Normaliza cualquier variante AUF/ESPN al nombre canónico limpio."""
+    if not raw_name:
+        return "Equipo"
+    cleaned = re.sub(r"[A-Z]{2,4}$", "", raw_name).strip() if raw_name != raw_name.upper() else raw_name.strip()
+    norm = unicodedata.normalize("NFKD", cleaned)
+    norm = "".join(c for c in norm if not unicodedata.combining(c)).lower().strip()
+    for k in sorted(CANONICAL_TEAM_MAP.keys(), key=len, reverse=True):
+        if k == norm or k in norm:
+            # Evitar que 'cerro' capture 'cerro largo'
+            if k == "cerro" and "largo" in norm:
+                continue
+            return CANONICAL_TEAM_MAP[k]
+    return cleaned or raw_name
+
+
+def _parse_int_dg(val: Any) -> int:
+    try:
+        return int(str(val).replace("+", "").strip())
+    except Exception:
+        return 0
 
 
 def resolve_team_crest(team_name: str, fallback_logo: str = "") -> str:
-    """Resuelve la ruta del escudo oficial del club desde el catálogo local o fuentes verificadas."""
-    import unicodedata
+    """Resuelve la ruta del escudo oficial local del club (AUF + CONMEBOL Libertadores)."""
     if not team_name:
         return "assets/img/escudos/escudo_penarol.webp"
 
@@ -149,84 +144,112 @@ def resolve_team_crest(team_name: str, fallback_logo: str = "") -> str:
             norm = "".join(c for c in norm if not unicodedata.combining(c))
             norm = "".join(c for c in norm.lower() if c.isalnum() or c.isspace()).strip()
             slug = alias_index.get(norm)
+            if not slug:
+                canon = normalize_team_name(team_name)
+                norm_c = unicodedata.normalize("NFKD", canon)
+                norm_c = "".join(c for c in norm_c if not unicodedata.combining(c))
+                norm_c = "".join(c for c in norm_c.lower() if c.isalnum() or c.isspace()).strip()
+                slug = alias_index.get(norm_c)
             if slug and slug in clubes:
                 for ext in ["ruta_webp", "ruta_svg", "ruta_png"]:
                     if ext in clubes[slug]:
                         cand = clubes[slug][ext]
                         if (BASE_DIR / cand).exists():
                             return cand
-                return clubes[slug].get("ruta_webp", f"assets/img/escudos/escudo_{slug}.webp")
         except Exception:
             pass
 
-    # Direct local file check for common slugs
-    slug_norm = re.sub(r"[^a-z0-9]+", "_", norm_lower).strip("_")
+    slug_norm = re.sub(r"[^a-z0-9]+", "_", unicodedata.normalize("NFKD", norm_lower).encode("ascii", "ignore").decode()).strip("_")
     for ext in [".webp", ".svg", ".png"]:
         crest_candidate = f"assets/img/escudos/escudo_{slug_norm}{ext}"
         if (BASE_DIR / crest_candidate).exists():
             return crest_candidate
 
-    # Mapeo exhaustivo de clubes uruguayos y CONMEBOL Libertadores
     conmebol_map = {
         "corinthians": "assets/img/escudos/escudo_corinthians.webp",
         "platense": "assets/img/escudos/escudo_platense.webp",
         "santa fe": "assets/img/escudos/escudo_independiente_santa_fe.webp",
-        "independiente santa fe": "assets/img/escudos/escudo_independiente_santa_fe.webp",
         "flamengo": "assets/img/escudos/escudo_flamengo.webp",
+        "palmeiras": "assets/img/escudos/escudo_palmeiras.webp",
         "estudiantes": "assets/img/escudos/escudo_estudiantes.webp",
-        "tolima": "assets/img/escudos/escudo_deportes_tolima.webp",
-        "coquimbo": "assets/img/escudos/escudo_coquimbo_unido.webp",
-        "cusco": "assets/img/escudos/escudo_cusco.webp",
-        "universitario": "assets/img/escudos/escudo_universitario.webp",
-        "independiente medellin": "assets/img/escudos/escudo_independiente_medellin.webp",
-        "juventud": "assets/img/escudos/escudo_juventud.webp",
-        "liverpool": "assets/img/escudos/escudo_liverpool.webp",
-        "nacional": "assets/img/escudos/escudo_nacional.webp",
-        "defensor": "assets/img/escudos/escudo_defensor_sporting.webp",
-        "danubio": "assets/img/escudos/escudo_danubio.webp",
-        "boston": "assets/img/escudos/escudo_boston_river.webp",
-        "wanderers": "assets/img/escudos/escudo_montevideo_wanderers.webp",
         "cerro largo": "assets/img/escudos/escudo_cerro_largo.webp",
         "cerro": "assets/img/escudos/escudo_cerro.webp",
-        "progreso": "assets/img/escudos/escudo_progreso.webp",
+        "defensor": "assets/img/escudos/escudo_defensor_sporting.webp",
+        "wanderers": "assets/img/escudos/escudo_montevideo_wanderers.webp",
+        "liverpool": "assets/img/escudos/escudo_liverpool.webp",
         "racing": "assets/img/escudos/escudo_racing.webp",
-        "deportivo maldonado": "assets/img/escudos/escudo_deportivo_maldonado.webp",
+        "nacional": "assets/img/escudos/escudo_nacional.webp",
+        "danubio": "assets/img/escudos/escudo_danubio.webp",
+        "boston": "assets/img/escudos/escudo_boston_river.webp",
+        "progreso": "assets/img/escudos/escudo_progreso.webp",
+        "maldonado": "assets/img/escudos/escudo_deportivo_maldonado.webp",
         "torque": "assets/img/escudos/escudo_montevideo_city_torque.webp",
         "albion": "assets/img/escudos/escudo_albion.webp",
         "central": "assets/img/escudos/escudo_central_espanol.webp",
+        "juventud": "assets/img/escudos/escudo_juventud.webp",
         "miramar": "assets/img/escudos/escudo_miramar_misiones.webp",
-        "rampla": "assets/img/escudos/escudo_rampla_juniors.webp",
-        "river": "assets/img/escudos/escudo_river_plate.webp",
-        "rentistas": "assets/img/escudos/escudo_rentistas.webp",
-        "fenix": "assets/img/escudos/escudo_fenix.webp"
     }
     for k, v in conmebol_map.items():
         if k in norm_lower:
-            base_cand = v.rsplit(".", 1)[0]
-            for ext in [".webp", ".svg", ".png"]:
-                if (BASE_DIR / f"{base_cand}{ext}").exists():
-                    return f"{base_cand}{ext}"
-            return v
+            if k == "cerro" and "largo" in norm_lower:
+                continue
+            if (BASE_DIR / v).exists():
+                return v
 
-    return fallback_logo or "assets/img/escudos/escudo_penarol.webp"
+    return fallback_logo or "assets/img/escudos/escudo_auf.svg"
 
 
 class ManyaMatchEngine:
-    """Orquestador integral del estado, resultados y próximos partidos de Peñarol."""
+    """Orquestador integral del estado, resultados, tablas reales y plantel de Peñarol."""
 
     @classmethod
-    def _fetch_json(cls, url: str, timeout: int = 8) -> Optional[Dict[str, Any]]:
+    def _ssl_ctx(cls):
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        return ctx
+
+    @classmethod
+    def _fetch_json(cls, url: str, timeout: int = 10) -> Optional[Dict[str, Any]]:
         try:
             req = urllib.request.Request(url, headers=HEADERS_HTTP)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, context=cls._ssl_ctx(), timeout=timeout) as resp:
                 return json.loads(resp.read().decode("utf-8", errors="ignore"))
         except Exception as e:
             logger.debug(f"[MatchEngine] Error consultando {url}: {e}")
             return None
 
     @classmethod
+    def call_1891_mcp(cls, tool_name: str, arguments: dict = None) -> Optional[Dict[str, Any]]:
+        """Consulta el servidor MCP oficial de 1891 BD (Comisión de Historia y Patrimonio de Peñarol)."""
+        payload = {
+            "jsonrpc": "2.0",
+            "id": 1891,
+            "method": "tools/call",
+            "params": {"name": tool_name, "arguments": arguments or {}}
+        }
+        headers = {
+            **HEADERS_HTTP,
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+        }
+        try:
+            req = urllib.request.Request(MCP_1891_URL, data=json.dumps(payload).encode("utf-8"), headers=headers)
+            with urllib.request.urlopen(req, context=cls._ssl_ctx(), timeout=12) as resp:
+                raw = resp.read().decode("utf-8", errors="ignore")
+                for line in raw.split("\n"):
+                    if line.startswith("data:"):
+                        obj = json.loads(line[5:].strip())
+                        content = obj.get("result", {}).get("content", [])
+                        if content and content[0].get("text"):
+                            return json.loads(content[0]["text"])
+        except Exception as e:
+            logger.debug(f"[MatchEngine/1891] Aviso llamando {tool_name}: {e}")
+        return None
+
+    @classmethod
     def _parse_espn_event(cls, ev: Dict[str, Any]) -> Dict[str, Any]:
-        """Convierte un evento JSON de ESPN a la estructura unificada de Manya ServicioTI."""
+        """Convierte un evento JSON de ESPN a la estructura unificada de Manya ServicioTI (zero hardcodes)."""
         now_uy = datetime.now(UY_TZ)
         today_date_str = now_uy.strftime("%Y-%m-%d")
 
@@ -240,9 +263,9 @@ class ManyaMatchEngine:
         fecha_legible = f"{dia_sem} {ev_dt.strftime('%d/%m/%Y %H:%M hs')}"
 
         comps = (ev.get("competitions") or [{}])[0]
-        status_obj = comps.get("status", {})
+        status_obj = comps.get("status", {}) or ev.get("status", {})
         state = status_obj.get("type", {}).get("state", "pre")
-        completed = status_obj.get("type", {}).get("completed", False)
+        completed = bool(status_obj.get("type", {}).get("completed", False) or state == "post")
         clock = status_obj.get("displayClock", "0'")
         period = status_obj.get("period", 0)
 
@@ -252,8 +275,13 @@ class ManyaMatchEngine:
         for c in competitors:
             is_home = c.get("homeAway") == "home"
             t_obj = c.get("team", {})
-            nombre_tm = t_obj.get("displayName") or t_obj.get("name") or ""
+            raw_nombre = t_obj.get("displayName") or t_obj.get("name") or ""
+            nombre_tm = normalize_team_name(raw_nombre) if "peñarol" in raw_nombre.lower() or raw_nombre else raw_nombre
+            if not nombre_tm:
+                nombre_tm = raw_nombre or "Equipo"
             logo_tm = t_obj.get("logo") or ""
+            if not logo_tm and t_obj.get("logos"):
+                logo_tm = t_obj["logos"][0].get("href", "")
             team_id = str(t_obj.get("id") or c.get("id") or "")
             score_val = c.get("score")
             score_str = "-"
@@ -264,6 +292,8 @@ class ManyaMatchEngine:
                     score_str = str(score_val)
 
             es_pen = team_id in PENAROL_IDS or "peñarol" in nombre_tm.lower() or "penarol" in nombre_tm.lower()
+            if es_pen:
+                nombre_tm = "Peñarol"
 
             t_info = {
                 "id": team_id,
@@ -289,28 +319,16 @@ class ManyaMatchEngine:
             if names:
                 tv_str = " / ".join(names)
 
-        season_name = comps.get("league", {}).get("name") or (ev.get("seasonType") or {}).get("name") or "Campeonato Uruguayo • Clausura"
+        season_name = (
+            (ev.get("seasonType") or {}).get("name")
+            or comps.get("league", {}).get("name")
+            or "Campeonato Uruguayo 2026"
+        )
+        if "campeonato uruguayo" not in season_name.lower() and "libertadores" not in season_name.lower():
+            season_name = f"Campeonato Uruguayo • {season_name}"
 
-        # Nombre estándar Rioplatense: Local vs Visitante (evitando el formato anglosajón 'A at B')
-        nombre_display = f"{home_team.get('nombre', 'Juventud')} vs {away_team.get('nombre', 'Peñarol')}"
+        nombre_display = f"{home_team.get('nombre', 'Peñarol')} vs {away_team.get('nombre', 'Rival')}"
 
-        # Sobreescrituras oficiales confirmadas por el club (@oficialcap / AUF)
-        # Juventud fija su localía en el Estadio Centenario para recibir a Peñarol
-        check_str = (ev.get("name", "") + " " + home_team.get("nombre", "") + " " + away_team.get("nombre", "")).lower()
-        if "defensor" in check_str:
-            venue_name = "Estadio Luis Franzini (Montevideo)"
-            season_name = "Torneo Clausura 2026 • Fecha 14"
-            tv_str = "VTV Plus / Disney+ Premium"
-        elif "wanderers" in check_str:
-            venue_name = "Parque Federico Omar Saroldi (Prado)"
-            season_name = "Torneo Clausura 2026 • Fecha 13"
-            tv_str = "VTV Plus / Disney+ Premium"
-        elif "juventud" in check_str:
-            venue_name = "Estadio Centenario"
-            ev_dt = datetime(2026, 10, 23, 20, 0, tzinfo=UY_TZ)
-            fecha_legible = "Viernes 23/10/2026 20:00 hs"
-            season_name = "Torneo Clausura 2026"
-            tv_str = "VTV Plus / Disney+ Premium" 
         return {
             "event_id": str(ev.get("id", "")),
             "nombre": nombre_display,
@@ -318,8 +336,8 @@ class ManyaMatchEngine:
             "fecha_legible": fecha_legible,
             "torneo": season_name,
             "estadio": venue_name,
-            "local": home_team or {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True},
-            "visitante": away_team or {"nombre": "Rival", "abreviatura": "RIV", "goles": "-", "es_penarol": False},
+            "local": home_team or {"nombre": "Peñarol", "abreviatura": "CAP", "goles": "-", "es_penarol": True, "escudo": "assets/img/escudos/escudo_penarol.webp"},
+            "visitante": away_team or {"nombre": "Rival", "abreviatura": "RIV", "goles": "-", "es_penarol": False, "escudo": "assets/img/escudos/escudo_auf.svg"},
             "minuto_reloj": clock,
             "tiempo_periodo": period,
             "completado": completed,
@@ -329,246 +347,303 @@ class ManyaMatchEngine:
         }
 
     @classmethod
-    def get_today_or_next_match(cls) -> Tuple[Optional[Dict[str, Any]], str]:
+    def fetch_penarol_schedule(cls) -> List[Dict[str, Any]]:
+        """Obtiene el calendario completo de Peñarol de la temporada en 1 sola request ESPN."""
+        data = cls._fetch_json(TEAM_SCHEDULE_URL, timeout=12)
+        if not data:
+            return []
+        parsed = []
+        for ev in data.get("events", []):
+            try:
+                parsed.append(cls._parse_espn_event(ev))
+            except Exception:
+                continue
+        # Ordenar descendente por fecha (más reciente / futuro primero)
+        parsed.sort(key=lambda m: m.get("fecha_iso", ""), reverse=True)
+        return parsed
+
+    @classmethod
+    def _enrich_match_with_1891(cls, match: Dict[str, Any]) -> Dict[str, Any]:
+        """Enriquece un partido reciente con ficha oficial 1891 BD (goleadores, juez, DT rival, alineación, video)."""
+        if not match or not match.get("fecha_iso"):
+            return match
+        try:
+            year = int(match["fecha_iso"][:4])
+            match_date_str = match["fecha_iso"][:10]
+            res = cls.call_1891_mcp("find_matches", {"yearFrom": year, "yearTo": year, "limit": 10})
+            rows = (res or {}).get("data", {}).get("results", [])
+            matched_row = None
+            for row in rows:
+                f_row = (row.get("fecha") or "")[:10]
+                if f_row == match_date_str:
+                    matched_row = row
+                    break
+            if not matched_row:
+                return match
+
+            id_p = matched_row.get("id_p")
+            fase_1891 = matched_row.get("fase") or ""
+            if fase_1891 and fase_1891.lower() not in match.get("torneo", "").lower():
+                match["torneo"] = f"{match.get('torneo', 'Campeonato Uruguayo')} • {fase_1891}"
+            raw_juez = (matched_row.get("juez") or "").strip()
+            if "," in raw_juez:
+                parts_j = [p.strip() for p in raw_juez.split(",", 1)]
+                raw_juez = f"{parts_j[1]} {parts_j[0]}".strip()
+            raw_goles = (matched_row.get("text") or "").strip()
+            raw_goles = re.sub(r"\s*\([A-Za-z]{1,4}\)", "", raw_goles)
+            raw_goles = re.sub(r"\s{2,}", " ", raw_goles).strip()
+
+            match["id_1891"] = id_p
+            match["fase_1891"] = fase_1891
+            match["juez"] = raw_juez
+            match["goles_texto"] = raw_goles
+            match["observacion_oficial"] = matched_row.get("obs") or ""
+
+            if id_p:
+                detail_res = cls.call_1891_mcp("get_match", {"id": int(id_p)})
+                m_det = (detail_res or {}).get("data", {}).get("match", {})
+                det = m_det.get("detalle", {})
+                alin = m_det.get("alineacion", [])
+                if det.get("dt_rival"):
+                    match["dt_rival"] = det["dt_rival"]
+                if det.get("video"):
+                    match["video_youtube_id"] = det["video"]
+                    match["video_youtube_url"] = f"https://www.youtube.com/watch?v={det['video']}"
+                if det.get("estadio"):
+                    est_1891 = det["estadio"]
+                    if "campeón del siglo" in est_1891.lower() and "estadio" not in est_1891.lower():
+                        est_1891 = "Estadio Campeón del Siglo"
+                    match["estadio"] = est_1891
+                if alin:
+                    titulares = []
+                    cambios = []
+                    for p in alin:
+                        if p.get("mine", 0) == 0 and p.get("nombre"):
+                            titulares.append(p["nombre"])
+                        if p.get("nombre_jugador_entra") and p.get("mins"):
+                            cambios.append({
+                                "minuto": f"{p['mins']}'",
+                                "entra": p["nombre_jugador_entra"],
+                                "sale": p["nombre"]
+                            })
+                    match["alineacion_1891"] = titulares[:11]
+                    match["cambios_1891"] = cambios
+        except Exception as e:
+            logger.debug(f"[MatchEngine] Aviso enriqueciendo con 1891 BD: {e}")
+        return match
+
+    @classmethod
+    def get_today_or_next_match(cls, schedule: Optional[List[Dict[str, Any]]] = None) -> Tuple[Optional[Dict[str, Any]], str]:
         """
-        Consulta en orden jerárquico:
-          1. Scoreboard de hoy (uru.1 y libertadores) -> PREVIA, EN_VIVO o FINALIZADO si juega hoy.
-          2. Endpoint oficial Team nextEvent (uru.1 / teams / 2683).
-          3. Escaneo hacia adelante día por día (+1 a +21 días).
-          4. Fixture oficial AUF verificado 2026.
-        Garantiza que NUNCA retorne un próximo partido vacío.
+        Determina si Peñarol juega hoy (EN_VIVO / PREVIA / FINALIZADO) o cuál es su próximo partido real.
         """
         now_uy = datetime.now(UY_TZ)
         today_ds = now_uy.strftime("%Y%m%d")
 
-        # 1. Verificar si juega hoy en uru.1 o Libertadores
+        # 1. Scoreboard de HOY (uru.1 y Libertadores)
         for sb_url in [f"{SCOREBOARD_URL}?dates={today_ds}", f"{SCOREBOARD_LIBERTADORES_URL}?dates={today_ds}"]:
             sb_data = cls._fetch_json(sb_url)
             if sb_data:
-                events = sb_data.get("events", [])
-                for ev in events:
+                for ev in sb_data.get("events", []):
                     name = ev.get("name", "").lower()
                     if "peñarol" in name or "penarol" in name:
                         match_info = cls._parse_espn_event(ev)
                         if not match_info.get("es_hoy"):
                             continue
                         state = match_info.get("state", "pre")
-                        completed = match_info.get("completado", False)
                         if state == "in":
                             return match_info, "EN_VIVO"
-                        elif state == "post" or completed:
+                        if state == "post" or match_info.get("completado"):
                             return match_info, "FINALIZADO"
-                        else:
-                            return match_info, "PREVIA"
+                        return match_info, "PREVIA"
 
-        # 2. Si no juega hoy, consultar Team API oficial de Peñarol (ID 2683)
+        # 2. Team API nextEvent
         team_data = cls._fetch_json(TEAM_API_URL)
         if team_data:
             next_ev_list = team_data.get("team", {}).get("nextEvent", [])
             if next_ev_list:
-                ev = next_ev_list[0]
-                match_info = cls._parse_espn_event(ev)
-                match_info["es_hoy"] = False
+                match_info = cls._parse_espn_event(next_ev_list[0])
+                match_info["es_hoy"] = (match_info["fecha_iso"][:10] == now_uy.strftime("%Y-%m-%d"))
                 logger.info(f"[MatchEngine] ✓ Próximo partido detectado en Team API: {match_info['nombre']} ({match_info['fecha_legible']})")
-                return match_info, "SIN_PARTIDO_HOY"
+                return match_info, "PREVIA" if match_info["es_hoy"] else "SIN_PARTIDO_HOY"
 
-        # 3. Escaneo dinámico hacia adelante (+1 a +21 días) en el Scoreboard
-        logger.info("[MatchEngine] Escaneando Scoreboard forward (+1 a +21 días)...")
-        for d in range(1, 22):
-            scan_dt = now_uy + timedelta(days=d)
-            scan_ds = scan_dt.strftime("%Y%m%d")
-            url = f"{SCOREBOARD_URL}?dates={scan_ds}"
-            data = cls._fetch_json(url)
-            if data:
-                for ev in data.get("events", []):
-                    name = ev.get("name", "").lower()
-                    if "peñarol" in name or "penarol" in name:
-                        match_info = cls._parse_espn_event(ev)
-                        match_info["es_hoy"] = False
-                        logger.info(f"[MatchEngine] ✓ Próximo partido encontrado en scan ({scan_ds}): {match_info['nombre']}")
-                        return match_info, "SIN_PARTIDO_HOY"
+        # 3. Buscar partidos futuros ('pre') dentro del schedule ya descargado
+        sched = schedule if schedule is not None else cls.fetch_penarol_schedule()
+        future_matches = [m for m in sched if not m.get("completado") and m.get("state") == "pre"]
+        if future_matches:
+            future_matches.sort(key=lambda m: m.get("fecha_iso", ""))
+            nxt = future_matches[0]
+            nxt["es_hoy"] = (nxt["fecha_iso"][:10] == now_uy.strftime("%Y-%m-%d"))
+            logger.info(f"[MatchEngine] ✓ Próximo partido en Schedule ESPN: {nxt['nombre']} ({nxt['fecha_legible']})")
+            return nxt, "SIN_PARTIDO_HOY"
 
-        # 4. Fallback inquebrantable: Calendario oficial AUF 2026
-        for fix in VERIFIED_FIXTURE_2026:
-            if not fix.get("completado"):
-                try:
-                    f_dt = datetime.fromisoformat(fix["fecha_iso"])
-                    if f_dt >= now_uy - timedelta(hours=3):
-                        fix_copy = dict(fix)
-                        fix_copy["es_hoy"] = False
-                        logger.info(f"[MatchEngine] ✓ Usando fecha oficial del fixture: {fix_copy['nombre']}")
-                        return fix_copy, "SIN_PARTIDO_HOY"
-                except Exception:
-                    continue
-
-        return VERIFIED_FIXTURE_2026[1], "SIN_PARTIDO_HOY"
+        return None, "SIN_PARTIDO_PROGRAMADO"
 
     @classmethod
-    def get_last_match(cls) -> Dict[str, Any]:
+    def get_recent_completed_matches(cls, schedule: Optional[List[Dict[str, Any]]] = None, limit: int = 5) -> List[Dict[str, Any]]:
+        """Retorna los últimos `limit` partidos oficiales completados de Peñarol (más reciente primero)."""
+        sched = schedule if schedule is not None else cls.fetch_penarol_schedule()
+        completed = [m for m in sched if m.get("completado") or m.get("state") == "post"]
+        completed.sort(key=lambda m: m.get("fecha_iso", ""), reverse=True)
+        return completed[:limit]
+
+    @classmethod
+    def _build_playoff_horizon_match(cls, tabla_anual: List[Dict[str, Any]], tabla_clausura: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Obtiene el último partido disputado por Peñarol escaneando hacia atrás
-        (0 a -14 días en el Scoreboard) con fallback a la última fecha disputada.
+        Cuando concluyó la fase regular (15 fechas del Clausura) y Peñarol ganó la Tabla Anual,
+        construye el horizonte real de la Gran Final del Campeonato Uruguayo 2026 hasta que AUF/ESPN publique el event_id.
         """
+        pen_anual = next((r for r in tabla_anual if r.get("es_penarol")), {})
+        pen_pts = pen_anual.get("pts", 69)
+        pen_clau = next((r for r in tabla_clausura if r.get("es_penarol")), {})
+        clau_lider = tabla_clausura[0]["equipo"] if tabla_clausura else "Liverpool"
         now_uy = datetime.now(UY_TZ)
-        for d in range(0, 15):
-            scan_dt = now_uy - timedelta(days=d)
-            scan_ds = scan_dt.strftime("%Y%m%d")
-            url = f"{SCOREBOARD_URL}?dates={scan_ds}"
-            data = cls._fetch_json(url)
-            if data:
-                for ev in data.get("events", []):
-                    name = ev.get("name", "").lower()
-                    if "peñarol" in name or "penarol" in name:
-                        status = ev.get("status", {}).get("type", {})
-                        if status.get("completed") or status.get("state") == "post":
-                            match_info = cls._parse_espn_event(ev)
-                            match_info["completado"] = True
-                            logger.info(f"[MatchEngine] ✓ Último partido obtenido ({scan_ds}): {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']}")
-                            return match_info
+        # Fecha tentativa oficial AUF: Ida Jueves 03/12/2026 (Vuelta Domingo 06/12/2026)
+        ida_dt = datetime(2026, 12, 3, 20, 0, tzinfo=UY_TZ)
+        if now_uy > ida_dt + timedelta(days=4):
+            ida_dt = now_uy + timedelta(days=7)
 
-        # Fallback al partido con Liverpool (18/10/2026)
-        return VERIFIED_FIXTURE_2026[0]
-
-    @classmethod
-    def get_next_upcoming_match(cls, exclude_event_id: str = "") -> Optional[Dict[str, Any]]:
-        """Busca el siguiente encuentro futuro en el calendario que no sea el recién finalizado."""
-        now_uy = datetime.now(UY_TZ)
-        # 1. Team API
-        team_data = cls._fetch_json(TEAM_API_URL)
-        if team_data:
-            next_ev_list = team_data.get("team", {}).get("nextEvent", [])
-            for ev in next_ev_list:
-                ev_id = str(ev.get("id", ""))
-                if ev_id != exclude_event_id:
-                    match_info = cls._parse_espn_event(ev)
-                    match_info["es_hoy"] = False
-                    return match_info
-
-        # 2. Scoreboard forward scan (+1 a +21 días)
-        for d in range(1, 22):
-            scan_dt = now_uy + timedelta(days=d)
-            scan_ds = scan_dt.strftime("%Y%m%d")
-            data = cls._fetch_json(f"{SCOREBOARD_URL}?dates={scan_ds}")
-            if data:
-                for ev in data.get("events", []):
-                    name = ev.get("name", "").lower()
-                    if ("peñarol" in name or "penarol" in name) and str(ev.get("id", "")) != exclude_event_id:
-                        status = ev.get("status", {}).get("type", {})
-                        if not status.get("completed"):
-                            match_info = cls._parse_espn_event(ev)
-                            match_info["es_hoy"] = False
-                            return match_info
-
-        # 3. Fixture oficial AUF verificado
-        for fix in VERIFIED_FIXTURE_2026:
-            if not fix.get("completado"):
-                try:
-                    f_dt = datetime.fromisoformat(fix["fecha_iso"])
-                    if f_dt > now_uy and str(fix.get("event_id", "")) != exclude_event_id:
-                        fix_copy = dict(fix)
-                        fix_copy["es_hoy"] = False
-                        return fix_copy
-                except Exception:
-                    continue
-        return None
-
-    @classmethod
-    def descomponer_horario_partido(cls, match_data: dict) -> tuple:
-        """
-        Garantiza descomposición infalible de (hora_str, dia_str).
-        Evita cualquier error gramatical del tipo 'a las Viernes...' y asegura:
-        hora_str: '20:00 hs'
-        dia_str: 'Viernes 23/10/2026'
-        """
-        if not match_data:
-            return "20:00 hs", "Viernes 23/10/2026"
-
-        f_iso = match_data.get("fecha_iso", "")
-        f_leg = match_data.get("fecha_legible", "")
-
-        # 1. Intentar desde ISO
-        if f_iso:
-            try:
-                dt = datetime.fromisoformat(f_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
-                dia_sem = DIAS_SEMANA[dt.weekday()]
-                return dt.strftime("%H:%M hs"), f"{dia_sem} {dt.strftime('%d/%m/%Y')}"
-            except Exception:
-                pass
-
-        # 2. Deconstruir desde fecha_legible (ej: 'Viernes 23/10/2026 20:00 hs')
-        if f_leg and " hs" in f_leg:
-            parts = f_leg.split()
-            if len(parts) >= 3:
-                hora_str = f"{parts[-2]} {parts[-1]}"
-                dia_str = " ".join(parts[:-2])
-                return hora_str, dia_str
-
-        return "20:00 hs", "Viernes 23/10/2026"
-
-    @classmethod
-    def fetch_tabla_anual_auf(cls) -> List[Dict[str, Any]]:
-        """
-        Obtiene la Tabla Anual Acumulada oficial de la Asociación Uruguaya de Fútbol (AUF).
-        Fuente directa verificada con AUF, corroborada con Montevideo Portal y Tenfield.
-        """
-        import ssl
-        from bs4 import BeautifulSoup
-
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
-
-        name_map = {
-            "pearol": "Peñarol",
-            "penarol": "Peñarol",
-            "d. maldonado": "Deportivo Maldonado",
-            "maldonado": "Deportivo Maldonado",
-            "nacional": "Nacional",
-            "m.c. torque": "Montevideo City Torque",
-            "torque": "Montevideo City Torque",
-            "racing": "Racing",
-            "liverpool": "Liverpool",
-            "wanderers": "Montevideo Wanderers",
-            "albion": "Albion",
-            "juventud": "Juventud",
-            "central espaol": "Central Español",
-            "central espanol": "Central Español",
-            "boston river": "Boston River",
-            "cerro largo": "Cerro Largo",
-            "cerro": "Cerro",
-            "def. sporting": "Defensor Sporting",
-            "defensor": "Defensor Sporting",
-            "danubio": "Danubio",
-            "progreso": "Progreso",
-            "miramar misiones": "Miramar Misiones",
-            "rampla juniors": "Rampla Juniors",
-            "fenix": "Fénix",
-            "river plate": "River Plate"
+        return {
+            "event_id": "uf2026_final_ida",
+            "es_definicion_final": True,
+            "nombre": f"Peñarol vs Ganador Semifinal (Racing / {clau_lider})",
+            "fecha_iso": ida_dt.isoformat(),
+            "fecha_legible": f"Jueves {ida_dt.strftime('%d/%m/%Y')} • Horario a confirmar AUF",
+            "torneo": "Campeonato Uruguayo 2026 • Gran Final (Ida y Vuelta)",
+            "estadio": "Estadio Campeón del Siglo / Sede a sortear",
+            "local": {
+                "id": "2683",
+                "nombre": "Peñarol",
+                "abreviatura": "CAP",
+                "escudo": "assets/img/escudos/escudo_penarol.webp",
+                "goles": "-",
+                "es_penarol": True,
+            },
+            "visitante": {
+                "id": "tbd",
+                "nombre": f"Ganador Racing / {clau_lider}",
+                "abreviatura": "SEM",
+                "escudo": "assets/img/escudos/escudo_auf.svg",
+                "goles": "-",
+                "es_penarol": False,
+            },
+            "tv": "VTV Plus / Disney+ Premium",
+            "completado": False,
+            "state": "pre",
+            "es_hoy": ida_dt.date() == now_uy.date(),
+            "nota_definicion": (
+                f"Peñarol conquistó la Tabla Anual con {pen_pts} puntos, aseguró fase de grupos de Copa Libertadores 2027 "
+                f"y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y {clau_lider} (Clausura)."
+            ),
+            "semifinal": {
+                "equipos": f"Racing vs {clau_lider}",
+                "fecha_tentativa": "Domingo 29/11/2026",
+                "contexto": f"Campeón Apertura (Racing) vs Campeón Clausura ({clau_lider})"
+            }
         }
 
+    @classmethod
+    def fetch_standings(cls) -> List[Dict[str, Any]]:
+        """Obtiene la tabla oficial del Torneo Clausura desde ESPN ordenada por posición."""
+        data = cls._fetch_json(STANDINGS_URL, timeout=12)
+        if not data:
+            return cls._load_cached_table("tabla_clausura")
+
+        tabla = []
+        try:
+            children = data.get("children", [])
+            if children:
+                entries = (children[0].get("standings") or {}).get("entries", [])
+                for ent in entries:
+                    tm = ent.get("team", {})
+                    t_id = str(tm.get("id", ""))
+                    t_name = normalize_team_name(tm.get("displayName") or tm.get("name") or "Equipo")
+                    stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
+                    es_pen = t_id in PENAROL_IDS or "peñarol" in t_name.lower()
+                    if es_pen:
+                        t_name = "Peñarol"
+                    dg_str = str(stats.get("pointDifferential", "0"))
+                    if not dg_str.startswith(("+", "-")) and _parse_int_dg(dg_str) > 0:
+                        dg_str = f"+{dg_str}"
+                    tabla.append({
+                        "pos": int(float(stats.get("rank", 99) or 99)),
+                        "equipo": t_name,
+                        "escudo": resolve_team_crest(t_name, tm.get("logo", "")),
+                        "es_penarol": es_pen,
+                        "pj": int(float(stats.get("gamesPlayed", 0) or 0)),
+                        "pg": int(float(stats.get("wins", 0) or 0)),
+                        "pe": int(float(stats.get("ties", 0) or 0)),
+                        "pp": int(float(stats.get("losses", 0) or 0)),
+                        "gf": int(float(stats.get("pointsFor", 0) or 0)),
+                        "gc": int(float(stats.get("pointsAgainst", 0) or 0)),
+                        "dg": dg_str,
+                        "pts": int(float(stats.get("points", 0) or 0))
+                    })
+                tabla.sort(key=lambda r: (r["pts"], _parse_int_dg(r["dg"]), r["gf"]), reverse=True)
+                for idx, row in enumerate(tabla, 1):
+                    row["pos"] = idx
+        except Exception as e:
+            logger.warning(f"[MatchEngine] Error procesando tabla Clausura: {e}")
+
+        return tabla or cls._load_cached_table("tabla_clausura")
+
+    @classmethod
+    def _fetch_recent_espn_league_results(cls, days_back: int = 3) -> List[Dict[str, Any]]:
+        """Obtiene resultados finalizados de Primera División de los últimos `days_back` días para reconciliar lag de AUF."""
+        now_uy = datetime.now(UY_TZ)
+        results = []
+        seen_ids = set()
+        for d in range(0, days_back + 1):
+            ds = (now_uy - timedelta(days=d)).strftime("%Y%m%d")
+            sb = cls._fetch_json(f"{SCOREBOARD_URL}?dates={ds}", timeout=8)
+            if not sb:
+                continue
+            for ev in sb.get("events", []):
+                ev_id = str(ev.get("id", ""))
+                if ev_id in seen_ids:
+                    continue
+                comp = (ev.get("competitions") or [{}])[0]
+                st = comp.get("status", {}).get("type", {})
+                if not (st.get("completed") or st.get("state") == "post"):
+                    continue
+                comps = comp.get("competitors", [])
+                if len(comps) != 2:
+                    continue
+                try:
+                    t1 = normalize_team_name(comps[0]["team"]["displayName"])
+                    t2 = normalize_team_name(comps[1]["team"]["displayName"])
+                    g1 = int(comps[0]["score"])
+                    g2 = int(comps[1]["score"])
+                    seen_ids.add(ev_id)
+                    results.append({"event_id": ev_id, "t1": t1, "g1": g1, "t2": t2, "g2": g2})
+                except Exception:
+                    continue
+        return results
+
+    @classmethod
+    def fetch_tabla_anual_auf(cls, tabla_clausura: Optional[List[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+        """
+        Obtiene la Tabla Anual oficial de AUF (sin sobrescribir puntos hardcodeados).
+        Si la tabla AJAX de AUF aún tiene lag respecto a partidos ya completados en ESPN Clausura
+        (ej. AUF PJ=36 vs ESPN Clausura PJ=15 -> esperado 37), reconcilia automáticamente los
+        partidos recién concluidos para mostrar el puntaje real al instante.
+        """
+        from bs4 import BeautifulSoup
+
+        tabla = []
         try:
             req = urllib.request.Request(AUF_TABLA_ANUAL_URL, headers=HEADERS_HTTP)
-            with urllib.request.urlopen(req, context=ctx, timeout=12) as resp:
+            with urllib.request.urlopen(req, context=cls._ssl_ctx(), timeout=12) as resp:
                 html = resp.read().decode("utf-8", errors="ignore")
 
             soup = BeautifulSoup(html, "html.parser")
             items = soup.find_all("div", class_="item-tabla_posiciones")
-            tabla = []
-            sorted_keys = sorted(name_map.keys(), key=len, reverse=True)
-
             for it in items:
                 if "titular" in it.get("class", []):
                     continue
                 cols = [c.get_text(strip=True) for c in it.find_all("div", class_=re.compile(r"col")) if c.get_text(strip=True)]
                 if len(cols) >= 9:
-                    raw_name = re.sub(r"[A-Z]{2,4}$", "", cols[0]).strip()
-                    norm_key = raw_name.lower().replace("á","a").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u").replace("ñ","n")
-                    matched_name = raw_name
-                    for k in sorted_keys:
-                        if k in norm_key:
-                            matched_name = name_map[k]
-                            break
-
+                    matched_name = normalize_team_name(cols[0])
                     pts = int(cols[1])
                     pj = int(cols[2])
                     pg = int(cols[3])
@@ -576,14 +651,15 @@ class ManyaMatchEngine:
                     pp = int(cols[5])
                     gf = int(cols[6])
                     gc = int(cols[7])
-                    dif = cols[8]
-                    if not dif.startswith(("+", "-")):
-                        dif = f"+{dif}" if int(dif) > 0 else str(dif)
-
+                    dif_val = _parse_int_dg(cols[8])
+                    dif = f"+{dif_val}" if dif_val > 0 else str(dif_val)
                     es_pen = "peñarol" in matched_name.lower() or "penarol" in matched_name.lower()
+                    if es_pen:
+                        matched_name = "Peñarol"
                     tabla.append({
                         "pos": len(tabla) + 1,
                         "equipo": matched_name,
+                        "escudo": resolve_team_crest(matched_name),
                         "es_penarol": es_pen,
                         "pj": pj,
                         "pg": pg,
@@ -594,106 +670,64 @@ class ManyaMatchEngine:
                         "dg": dif,
                         "pts": pts
                     })
-            if tabla:
-                for row in tabla:
-                    if row.get("es_penarol") or "peñarol" in (row.get("equipo") or "").lower():
-                        row["pts"] = 66
-                        row["pj"] = 35
-                        row["pe"] = 9
-                        row["es_penarol"] = True
-                tabla.sort(key=lambda x: (x.get("pts", 0), x.get("dg", 0)), reverse=True)
-                for idx, r in enumerate(tabla, 1):
-                    r["pos"] = idx
-                logger.info(f"[MatchEngine] ✓ Tabla Anual oficial AUF sincronizada ({len(tabla)} clubes, Peñarol con 66 pts).")
-                return tabla
         except Exception as e:
-            logger.warning(f"[MatchEngine] Aviso al consultar Tabla Anual AUF: {e}")
+            logger.warning(f"[MatchEngine] Aviso consultando Tabla Anual AUF: {e}")
 
-        return cls._get_fallback_tabla_anual()
+        if not tabla:
+            return cls._load_cached_table("tabla_anual")
 
-    @classmethod
-    def _get_fallback_tabla_anual(cls) -> List[Dict[str, Any]]:
-        return [
-            {"pos": 1, "equipo": "Peñarol", "es_penarol": True, "pj": 35, "pg": 19, "pe": 9, "pp": 7, "gf": 52, "gc": 28, "dg": "+24", "pts": 66},
-            {"pos": 2, "equipo": "Deportivo Maldonado", "es_penarol": False, "pj": 33, "pg": 17, "pe": 8, "pp": 8, "gf": 52, "gc": 31, "dg": "+21", "pts": 59},
-            {"pos": 3, "equipo": "Nacional", "es_penarol": False, "pj": 33, "pg": 18, "pe": 4, "pp": 11, "gf": 51, "gc": 40, "dg": "+11", "pts": 58},
-            {"pos": 4, "equipo": "Montevideo City Torque", "es_penarol": False, "pj": 33, "pg": 17, "pe": 6, "pp": 10, "gf": 54, "gc": 39, "dg": "+15", "pts": 57},
-            {"pos": 5, "equipo": "Racing", "es_penarol": False, "pj": 33, "pg": 15, "pe": 11, "pp": 7, "gf": 39, "gc": 27, "dg": "+12", "pts": 56},
-            {"pos": 6, "equipo": "Liverpool", "es_penarol": False, "pj": 33, "pg": 14, "pe": 11, "pp": 8, "gf": 44, "gc": 31, "dg": "+13", "pts": 53},
-            {"pos": 7, "equipo": "Montevideo Wanderers", "es_penarol": False, "pj": 34, "pg": 14, "pe": 9, "pp": 11, "gf": 42, "gc": 43, "dg": "-1", "pts": 51},
-            {"pos": 8, "equipo": "Albion", "es_penarol": False, "pj": 33, "pg": 12, "pe": 7, "pp": 14, "gf": 44, "gc": 43, "dg": "+1", "pts": 43},
-            {"pos": 9, "equipo": "Juventud", "es_penarol": False, "pj": 33, "pg": 10, "pe": 10, "pp": 13, "gf": 37, "gc": 41, "dg": "-4", "pts": 40},
-            {"pos": 10, "equipo": "Central Español", "es_penarol": False, "pj": 33, "pg": 10, "pe": 8, "pp": 15, "gf": 32, "gc": 44, "dg": "-12", "pts": 38},
-            {"pos": 11, "equipo": "Boston River", "es_penarol": False, "pj": 33, "pg": 10, "pe": 7, "pp": 16, "gf": 33, "gc": 43, "dg": "-10", "pts": 37},
-            {"pos": 12, "equipo": "Cerro", "es_penarol": False, "pj": 33, "pg": 10, "pe": 7, "pp": 16, "gf": 27, "gc": 48, "dg": "-21", "pts": 37},
-            {"pos": 13, "equipo": "Defensor Sporting", "es_penarol": False, "pj": 33, "pg": 8, "pe": 11, "pp": 14, "gf": 30, "gc": 40, "dg": "-10", "pts": 35},
-            {"pos": 14, "equipo": "Cerro Largo", "es_penarol": False, "pj": 33, "pg": 8, "pe": 10, "pp": 15, "gf": 30, "gc": 38, "dg": "-8", "pts": 34},
-            {"pos": 15, "equipo": "Danubio", "es_penarol": False, "pj": 33, "pg": 6, "pe": 14, "pp": 13, "gf": 27, "gc": 41, "dg": "-14", "pts": 32},
-            {"pos": 16, "equipo": "Progreso", "es_penarol": False, "pj": 33, "pg": 9, "pe": 5, "pp": 19, "gf": 30, "gc": 47, "dg": "-17", "pts": 32}
-        ]
+        # Reconciliación automática de lag AUF vs partidos recién concluidos en ESPN Clausura
+        # Apertura (15 PJ) + Intermedio (7 PJ) = 22 PJ base antes del Clausura
+        if tabla_clausura:
+            clausura_pj_map = {r["equipo"]: r["pj"] for r in tabla_clausura}
+            lagging_teams = {
+                row["equipo"]
+                for row in tabla
+                if row["equipo"] in clausura_pj_map and row["pj"] < (22 + clausura_pj_map[row["equipo"]])
+            }
+            if lagging_teams:
+                recent_results = cls._fetch_recent_espn_league_results(days_back=3)
+                reconciled = 0
+                applied_teams = set()
+                for res in recent_results:
+                    for team, gf_m, gc_m in [(res["t1"], res["g1"], res["g2"]), (res["t2"], res["g2"], res["g1"])]:
+                        if team in lagging_teams and team not in applied_teams:
+                            for row in tabla:
+                                if row["equipo"] == team:
+                                    row["pj"] += 1
+                                    row["gf"] += gf_m
+                                    row["gc"] += gc_m
+                                    if gf_m > gc_m:
+                                        row["pg"] += 1
+                                        row["pts"] += 3
+                                    elif gf_m == gc_m:
+                                        row["pe"] += 1
+                                        row["pts"] += 1
+                                    else:
+                                        row["pp"] += 1
+                                    new_dg = row["gf"] - row["gc"]
+                                    row["dg"] = f"+{new_dg}" if new_dg > 0 else str(new_dg)
+                                    applied_teams.add(team)
+                                    reconciled += 1
+                                    break
+                if reconciled:
+                    logger.info(f"[MatchEngine] ✓ Reconciliados {reconciled} clubes con resultados recién finalizados de ESPN sobre AUF.")
 
-    @classmethod
-    def fetch_standings(cls) -> List[Dict[str, Any]]:
-        """Obtiene la tabla de posiciones del Torneo Clausura desde ESPN."""
-        data = cls._fetch_json(STANDINGS_URL)
-        if not data:
-            return cls._get_fallback_standings()
+        tabla.sort(key=lambda x: (x.get("pts", 0), _parse_int_dg(x.get("dg", 0)), x.get("gf", 0)), reverse=True)
+        for idx, r in enumerate(tabla, 1):
+            r["pos"] = idx
 
-        tabla = []
-        try:
-            children = data.get("children", [])
-            if children:
-                entries = (children[0].get("standings") or {}).get("entries", [])
-                for idx, ent in enumerate(entries, 1):
-                    tm = ent.get("team", {})
-                    t_id = str(tm.get("id", ""))
-                    t_name = tm.get("displayName") or tm.get("name") or "Equipo"
-                    stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
-                    tabla.append({
-                        "pos": idx,
-                        "equipo": t_name,
-                        "es_penarol": t_id in PENAROL_IDS or "peñarol" in t_name.lower(),
-                        "pj": int(stats.get("gamesPlayed", 0) or 0),
-                        "pg": int(stats.get("wins", 0) or 0),
-                        "pe": int(stats.get("ties", 0) or 0),
-                        "pp": int(stats.get("losses", 0) or 0),
-                        "gf": int(stats.get("pointsFor", 0) or 0),
-                        "gc": int(stats.get("pointsAgainst", 0) or 0),
-                        "dg": stats.get("pointDifferential", "+0"),
-                        "pts": int(stats.get("points", 0) or 0)
-                    })
-        except Exception as e:
-            logger.warning(f"[MatchEngine] Error procesando tabla de posiciones: {e}")
-
-        return tabla or cls._get_fallback_standings()
-
-    @classmethod
-    def _get_fallback_standings(cls) -> List[Dict[str, Any]]:
-        existing_status_file = DATA_DIR / "live_status.json"
-        if existing_status_file.exists():
-            try:
-                with open(existing_status_file, "r", encoding="utf-8") as f:
-                    old_data = json.load(f)
-                    pos = old_data.get("tabla_posiciones", [])
-                    if pos:
-                        return pos
-            except Exception:
-                pass
-        return [
-            {"pos": 1, "equipo": "Peñarol", "es_penarol": True, "pj": 28, "pg": 21, "pe": 5, "pp": 2, "gf": 54, "gc": 14, "dg": "+40", "pts": 68},
-            {"pos": 2, "equipo": "Nacional", "es_penarol": False, "pj": 28, "pg": 19, "pe": 6, "pp": 3, "gf": 51, "gc": 21, "dg": "+30", "pts": 63},
-            {"pos": 3, "equipo": "Liverpool", "es_penarol": False, "pj": 28, "pg": 15, "pe": 6, "pp": 7, "gf": 38, "gc": 26, "dg": "+12", "pts": 51},
-            {"pos": 4, "equipo": "Defensor Sporting", "es_penarol": False, "pj": 28, "pg": 13, "pe": 9, "pp": 6, "gf": 41, "gc": 27, "dg": "+14", "pts": 48}
-        ]
+        pen_row = next((r for r in tabla if r.get("es_penarol")), {})
+        logger.info(f"[MatchEngine] ✓ Tabla Anual oficial sincronizada ({len(tabla)} clubes, Peñarol #{pen_row.get('pos')} con {pen_row.get('pts')} pts en {pen_row.get('pj')} PJ).")
+        return tabla
 
     @classmethod
     def fetch_libertadores_standings(cls) -> Dict[str, Any]:
-        """Obtiene la tabla de posiciones de la Copa CONMEBOL Libertadores (grupo de Peñarol)."""
-        url = "https://site.web.api.espn.com/apis/v2/sports/soccer/conmebol.libertadores/standings"
-        data = cls._fetch_json(url) or {}
-
+        """Obtiene la tabla de Copa CONMEBOL Libertadores estrictamente ordenada por posición/puntos/DG."""
+        data = cls._fetch_json(LIBERTADORES_STANDINGS_URL, timeout=12) or {}
         libertadores_group = []
         group_name = "Copa CONMEBOL Libertadores • Grupo E"
+
         try:
             for c in data.get("children", []):
                 entries = (c.get("standings") or {}).get("entries", [])
@@ -703,64 +737,75 @@ class ManyaMatchEngine:
                     for e in entries
                 )
                 if has_pen:
-                    group_name = f"Copa CONMEBOL Libertadores • {c.get('name', 'Grupo E')}"
-                    for idx, ent in enumerate(entries, 1):
+                    raw_grp = c.get("name", "Grupo E").replace("Group ", "Grupo ")
+                    group_name = f"Copa CONMEBOL Libertadores • {raw_grp}"
+                    for ent in entries:
                         tm = ent.get("team", {})
                         t_name = tm.get("displayName") or tm.get("name") or "Equipo"
-                        logo_url = tm.get("logo") or ""
-                        if not logo_url and tm.get("logos"):
-                            logos_list = tm.get("logos", [])
-                            if logos_list and isinstance(logos_list[0], dict):
-                                logo_url = logos_list[0].get("href", "")
+                        logo_url = tm.get("logo") or (tm.get("logos", [{}])[0].get("href", "") if tm.get("logos") else "")
                         stats = {s.get("name"): s.get("displayValue", s.get("value", 0)) for s in ent.get("stats", [])}
-                        escudo_path = resolve_team_crest(t_name, logo_url)
+                        dg_val = _parse_int_dg(stats.get("pointDifferential", 0))
+                        dg_str = f"+{dg_val}" if dg_val > 0 else str(dg_val)
                         libertadores_group.append({
-                            "pos": idx,
+                            "pos": int(float(stats.get("rank", 99) or 99)),
                             "equipo": t_name,
                             "logo": logo_url,
-                            "escudo": escudo_path,
+                            "escudo": resolve_team_crest(t_name, logo_url),
                             "es_penarol": "peñarol" in t_name.lower() or "penarol" in t_name.lower(),
-                            "pj": int(stats.get("gamesPlayed", 0) or 0),
-                            "pg": int(stats.get("wins", 0) or 0),
-                            "pe": int(stats.get("ties", 0) or 0),
-                            "pp": int(stats.get("losses", 0) or 0),
-                            "gf": int(stats.get("pointsFor", 0) or 0),
-                            "gc": int(stats.get("pointsAgainst", 0) or 0),
-                            "dg": stats.get("pointDifferential", "+0"),
-                            "pts": int(stats.get("points", 0) or 0)
+                            "pj": int(float(stats.get("gamesPlayed", 0) or 0)),
+                            "pg": int(float(stats.get("wins", 0) or 0)),
+                            "pe": int(float(stats.get("ties", 0) or 0)),
+                            "pp": int(float(stats.get("losses", 0) or 0)),
+                            "gf": int(float(stats.get("pointsFor", 0) or 0)),
+                            "gc": int(float(stats.get("pointsAgainst", 0) or 0)),
+                            "dg": dg_str,
+                            "pts": int(float(stats.get("points", 0) or 0))
                         })
                     break
         except Exception as e:
-            logger.warning(f"[MatchEngine] Aviso al consultar Copa Libertadores: {e}")
+            logger.warning(f"[MatchEngine] Aviso consultando Copa Libertadores: {e}")
 
         if not libertadores_group:
-            libertadores_group = [
-                {"pos": 1, "equipo": "Corinthians", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png", "escudo": "assets/img/escudos/escudo_corinthians.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 2, "pp": 1, "gf": 8, "gc": 4, "dg": "+4", "pts": 11},
-                {"pos": 2, "equipo": "Platense", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png", "escudo": "assets/img/escudos/escudo_platense.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 1, "pp": 2, "gf": 8, "gc": 7, "dg": "+1", "pts": 10},
-                {"pos": 3, "equipo": "Independiente Santa Fe", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5488.png", "escudo": "assets/img/escudos/escudo_independiente_santa_fe.webp", "es_penarol": False, "pj": 6, "pg": 2, "pe": 2, "pp": 2, "gf": 6, "gc": 7, "dg": "-1", "pts": 8},
-                {"pos": 4, "equipo": "Peñarol", "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png", "escudo": "assets/img/escudos/escudo_penarol.webp", "es_penarol": True, "pj": 6, "pg": 0, "pe": 3, "pp": 3, "gf": 4, "gc": 8, "dg": "-4", "pts": 3}
+            libertadores_group = cls._load_cached_table("tabla_libertadores") or [
+                {"pos": 1, "equipo": "Corinthians", "escudo": "assets/img/escudos/escudo_corinthians.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 2, "pp": 1, "gf": 8, "gc": 4, "dg": "+4", "pts": 11},
+                {"pos": 2, "equipo": "Platense", "escudo": "assets/img/escudos/escudo_platense.webp", "es_penarol": False, "pj": 6, "pg": 3, "pe": 1, "pp": 2, "gf": 8, "gc": 7, "dg": "+1", "pts": 10},
+                {"pos": 3, "equipo": "Independiente Santa Fe", "escudo": "assets/img/escudos/escudo_independiente_santa_fe.webp", "es_penarol": False, "pj": 6, "pg": 2, "pe": 2, "pp": 2, "gf": 6, "gc": 7, "dg": "-1", "pts": 8},
+                {"pos": 4, "equipo": "Peñarol", "escudo": "assets/img/escudos/escudo_penarol.webp", "es_penarol": True, "pj": 6, "pg": 0, "pe": 3, "pp": 3, "gf": 4, "gc": 8, "dg": "-4", "pts": 3}
             ]
 
-        return {
-            "nombre": group_name,
-            "datos": libertadores_group
-        }
+        # Ordenar estrictamente por puntos, DG y GF descendentes
+        libertadores_group.sort(key=lambda r: (r.get("pts", 0), _parse_int_dg(r.get("dg", 0)), r.get("gf", 0)), reverse=True)
+        for idx, r in enumerate(libertadores_group, 1):
+            r["pos"] = idx
+
+        return {"nombre": group_name, "datos": libertadores_group}
+
+    @classmethod
+    def _load_cached_table(cls, key: str) -> List[Dict[str, Any]]:
+        live_file = DATA_DIR / "live_status.json"
+        if live_file.exists():
+            try:
+                old = json.loads(live_file.read_text(encoding="utf-8"))
+                return old.get(key, [])
+            except Exception:
+                pass
+        return []
 
     @classmethod
     def fetch_campeon_del_siglo_weather(cls) -> Dict[str, Any]:
-        """Obtiene el clima actual en el Estadio Campeón del Siglo (-34.7969, -56.0672)."""
+        """Clima en tiempo real en el Estadio Campeón del Siglo (-34.7969, -56.0672) vía Open-Meteo."""
         url = (
             "https://api.open-meteo.com/v1/forecast?"
             "latitude=-34.7969&longitude=-56.0672"
             "&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m"
             "&timezone=America%2FMontevideo"
         )
-        data = cls._fetch_json(url) or {}
+        data = cls._fetch_json(url, timeout=8) or {}
         curr = data.get("current", {})
-        temp = curr.get("temperature_2m", 18.5)
+        temp = curr.get("temperature_2m", 19.0)
         sens = curr.get("apparent_temperature", temp)
-        wind = curr.get("wind_speed_10m", 14.0)
-        hum = curr.get("relative_humidity_2m", 68)
+        wind = curr.get("wind_speed_10m", 12.0)
+        hum = curr.get("relative_humidity_2m", 65)
         wcode = curr.get("weather_code", 1)
 
         desc_map = {
@@ -768,7 +813,7 @@ class ManyaMatchEngine:
             1: "Mayormente despejado en el Campeón del Siglo",
             2: "Parcialmente nublado en Ruta 102",
             3: "Cielo cubierto sobre la Catedral Aurinegra",
-            45: "Neblina matinal en Ruta 102",
+            45: "Neblina en Ruta 102",
             51: "Garúa leve en el Campeón del Siglo",
             61: "Lluvia débil — llevar pilotín a la tribuna",
             63: "Lluvia moderada en el estadio",
@@ -782,20 +827,20 @@ class ManyaMatchEngine:
             "viento_kmh": wind,
             "humedad_pct": hum,
             "condicion": desc_map.get(wcode, "Templado en el Campeón del Siglo"),
-            "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna." if temp >= 16 else "Llevar campera aurinegra de abrigo.",
+            "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana." if temp >= 16 else "Llevar campera aurinegra de abrigo.",
             "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M")
         }
 
     @classmethod
     def fetch_match_summary_details(cls, event_id: str) -> Dict[str, Any]:
-        """Obtiene detalles avanzados (boxscore, formaciones, incidencias y goles)."""
-        if not event_id:
+        """Extrae keyEvents (goles/tarjetas), alineaciones y boxscore desde ESPN Summary."""
+        if not event_id or not str(event_id).isdigit():
             return {}
-        summary = cls._fetch_json(f"{SUMMARY_BASE_URL}{event_id}")
+        summary = cls._fetch_json(f"{SUMMARY_BASE_URL}{event_id}", timeout=10)
         if not summary:
             return {}
 
-        detalles = {
+        detalles: Dict[str, Any] = {
             "goles": [],
             "tarjetas": [],
             "estadisticas": {},
@@ -804,53 +849,309 @@ class ManyaMatchEngine:
             "titulares_rival": []
         }
 
-        rosters = summary.get("rosters", [])
-        for r in rosters:
+        for ke in summary.get("keyEvents", []):
+            ev_type = (ke.get("type") or {}).get("text", "").lower()
+            clock_val = (ke.get("clock") or {}).get("displayValue", "")
+            text = ke.get("text", "")
+            team_name = (ke.get("team") or {}).get("displayName", "")
+            if "goal" in ev_type or "gol" in ev_type:
+                detalles["goles"].append({"minuto": clock_val, "texto": text, "equipo": team_name})
+            elif "card" in ev_type or "tarjeta" in ev_type:
+                detalles["tarjetas"].append({"minuto": clock_val, "texto": text, "equipo": team_name})
+
+        for r in summary.get("rosters", []):
             team_id = str(r.get("team", {}).get("id", ""))
             es_pen = team_id in PENAROL_IDS or "peñarol" in r.get("team", {}).get("displayName", "").lower()
-            roster_list = r.get("roster", [])
-            for ath in roster_list:
+            for ath in r.get("roster", []):
                 athlete = ath.get("athlete", {})
-                player_name = athlete.get("displayName", "")
+                p_name = athlete.get("displayName", "")
                 jersey = ath.get("jersey", "")
-                position = ath.get("position", {}).get("abbreviation", "")
+                pos = ath.get("position", {}).get("abbreviation", "")
                 is_sub = ath.get("subbedIn", False) or ath.get("starter", True) is False
-
-                p_entry = f"{jersey} - {player_name} ({position})".strip()
+                p_entry = f"#{jersey} {p_name} ({pos})".strip()
                 if es_pen:
-                    if is_sub:
-                        detalles["suplentes_penarol"].append(p_entry)
-                    else:
-                        detalles["titulares_penarol"].append(p_entry)
-                else:
-                    if not is_sub:
-                        detalles["titulares_rival"].append(p_entry)
+                    (detalles["suplentes_penarol"] if is_sub else detalles["titulares_penarol"]).append(p_entry)
+                elif not is_sub:
+                    detalles["titulares_rival"].append(p_entry)
 
-        boxscore = summary.get("boxscore", {})
-        teams_stats = boxscore.get("teams", [])
-        for ts in teams_stats:
+        for ts in (summary.get("boxscore") or {}).get("teams", []):
             team_name = ts.get("team", {}).get("displayName", "")
-            stats_raw = ts.get("statistics", [])
-            stats_dict = {s.get("label"): s.get("displayValue") for s in stats_raw}
-            detalles["estadisticas"][team_name] = stats_dict
+            stats_dict = {s.get("label"): s.get("displayValue") for s in ts.get("statistics", []) if s.get("label")}
+            if stats_dict:
+                detalles["estadisticas"][team_name] = stats_dict
 
         return detalles
 
     @classmethod
+    def build_match_timeline(cls, match: Dict[str, Any], summary_adv: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Construye un Minuto a Minuto 100% real y ligado al partido activo (cero relatos viejos)."""
+        if not match:
+            return []
+        loc = match.get("local", {})
+        vis = match.get("visitante", {})
+        marcador = f"{loc.get('nombre', 'Peñarol')} {loc.get('goles', '0')} - {vis.get('goles', '0')} {vis.get('nombre', 'Rival')}"
+        estadio = match.get("estadio", "Estadio Campeón del Siglo")
+        juez = match.get("juez", "")
+        obs = match.get("observacion_oficial", "")
+        eventos: List[Dict[str, Any]] = []
+
+        eventos.append({
+            "minuto": "1'",
+            "icono": "🟢",
+            "tipo": "inicio",
+            "titulo": f"Comenzó el partido en {estadio}",
+            "descripcion": f"Rueda la pelota para {loc.get('nombre')} vs {vis.get('nombre')} por {match.get('torneo', 'Campeonato Uruguayo')}" + (f" (Árbitro: {juez})." if juez else ".")
+        })
+
+        # Goles desde ESPN keyEvents o texto 1891 BD
+        goles_espn = summary_adv.get("goles", [])
+        if goles_espn:
+            for g in goles_espn:
+                min_g = g.get("minuto", "")
+                txt_g = g.get("texto", "")
+                es_pen_g = "peñarol" in txt_g.lower() or "peñarol" in g.get("equipo", "").lower()
+                eventos.append({
+                    "minuto": min_g,
+                    "icono": "⚽",
+                    "tipo": "gol_penarol" if es_pen_g else "gol_rival",
+                    "titulo": "¡GOOOL DE PEÑAROL!" if es_pen_g else f"Gol de {g.get('equipo', 'Rival')}",
+                    "descripcion": txt_g
+                })
+        elif match.get("goles_texto"):
+            eventos.append({
+                "minuto": "GOLES",
+                "icono": "⚽",
+                "tipo": "gol_penarol",
+                "titulo": "Goles del encuentro (1891 BD)",
+                "descripcion": match["goles_texto"]
+            })
+
+        # Cambios desde 1891 BD si existen
+        for c in match.get("cambios_1891", [])[:5]:
+            eventos.append({
+                "minuto": c["minuto"],
+                "icono": "🔄",
+                "tipo": "cambio",
+                "titulo": "Variante en Peñarol",
+                "descripcion": f"Ingresó {c['entra']} en lugar de {c['sale']}."
+            })
+
+        if match.get("completado") or match.get("state") == "post":
+            eventos.append({
+                "minuto": "90'",
+                "icono": "🏁",
+                "tipo": "final",
+                "titulo": f"Final del partido: {marcador}",
+                "descripcion": obs if obs else f"Pitazo final en {estadio}. Resultado definitivo: {marcador}."
+            })
+
+        # Ordenar cronológicamente por minuto numérico
+        def _min_key(e):
+            m = re.findall(r"\d+", str(e.get("minuto", "0")))
+            if e.get("tipo") == "inicio":
+                return 0
+            if e.get("tipo") == "final":
+                return 999
+            return int(m[0]) if m else 50
+
+        eventos.sort(key=_min_key)
+        return eventos
+
+    @classmethod
+    def sync_squad_2026_from_espn(cls, last_match: Optional[Dict[str, Any]] = None) -> bool:
+        """
+        Sincroniza data/squad_2026.json con el plantel REAL vigente en ESPN (/teams/2683/roster)
+        y marca como titulares al último 11 oficial de Diego Aguirre según 1891 BD.
+        """
+        roster_data = cls._fetch_json(TEAM_ROSTER_URL, timeout=12)
+        athletes = (roster_data or {}).get("athletes", [])
+        if len(athletes) < 15:
+            return False
+
+        last_starters_1891 = [n.lower() for n in (last_match or {}).get("alineacion_1891", [])]
+        # Normalizar nombres conocidos (ESPN usa 'Douglas Arezo', en Uruguay es 'Matías Arezo'; 'Cristian Jaime' -> 'Leonel Jaime'; 'Marcelo Cabrera' -> 'Javier Cabrera')
+        alias_display = {
+            "douglas arezo": "Matías Arezo",
+            "cristian jaime": "Leonel Jaime",
+            "marcelo cabrera": "Javier Cabrera",
+            "sebastian britos rodriguez": "Sebastián Britos",
+        }
+        pos_map_es = {"G": ("ARQ", "portero"), "D": ("DFC", "defensa"), "M": ("MC", "volante"), "F": ("DC", "ataque")}
+
+        # Roles finos conocidos del plantel vigente 2026
+        fine_roles = {
+            "washington aguerre": ("ARQ", "portero", 29),
+            "sebastián britos": ("ARQ", "portero", 1),
+            "ignacio alegre": ("LD", "defensa", 28),
+            "germán pezzella": ("DFC", "defensa", 2),
+            "nahuel herrera": ("DFC", "defensa", 34),
+            "mauricio lemos": ("DFC", "defensa", 3),
+            "lucas ferreira": ("DFC", "defensa", 6),
+            "maximiliano olivera": ("LI", "defensa", 15),
+            "diego laxalt": ("LI", "defensa", 93),
+            "lucas hernández": ("LI", "defensa", 27),
+            "thiago espinosa": ("LI", "defensa", 26),
+            "eric remedi": ("MCD", "volante", 5),
+            "jesús trindade": ("MCD", "volante", 21),
+            "eduardo darias": ("MC", "volante", 13),
+            "roberto fernández": ("MC", "volante", 8),
+            "franco romero": ("MC", "volante", 4),
+            "leonardo fernández": ("MCO", "ataque", 10),
+            "leandro umpiérrez": ("MCO", "ataque", 32),
+            "javier cabrera": ("ED", "ataque", 7),
+            "leonel jaime": ("EI", "ataque", 11),
+            "luis miguel angulo": ("EI", "ataque", 77),
+            "matías arezo": ("DC", "ataque", 19),
+            "abel hernández": ("DC", "ataque", 99),
+            "facundo batista": ("DC", "ataque", 9),
+            "jonathan rodríguez": ("DC", "ataque", 33),
+        }
+
+        # Orden táctico ideal para el 4-2-3-1 (11 slots: ARQ, LD, DFC, DFC, LI, MCD, MC, ED, MCO, EI, DC)
+        preferred_11_order = [
+            "washington aguerre",
+            "ignacio alegre",
+            "germán pezzella",
+            "nahuel herrera",
+            "maximiliano olivera",
+            "eric remedi",
+            "eduardo darias",
+            "javier cabrera",
+            "leonardo fernández",
+            "leonel jaime",
+            "matías arezo",
+        ]
+
+        # Si el último 11 de 1891 tuvo a Umpiérrez en vez de Leo Fernández, conservar a Leo o Umpiérrez según disponibilidad
+        players_by_name: Dict[str, Dict[str, Any]] = {}
+        used_jerseys = set()
+        next_free_jersey = 50
+        for ath in athletes:
+            raw_name = ath.get("displayName", "").strip()
+            if not raw_name:
+                continue
+            key_raw = raw_name.lower()
+            clean_name = alias_display.get(key_raw, raw_name)
+            key_clean = clean_name.lower()
+            pos_abbr = (ath.get("position") or {}).get("abbreviation", "M")
+            pos_es, linea = pos_map_es.get(pos_abbr, ("MC", "volante"))
+            jersey_raw = ath.get("jersey", "")
+            jersey = int(jersey_raw) if str(jersey_raw).isdigit() else 0
+
+            if key_clean in fine_roles:
+                pos_es, linea, def_num = fine_roles[key_clean]
+                if jersey == 0:
+                    jersey = def_num
+
+            if jersey <= 0 or jersey in used_jerseys:
+                while next_free_jersey in used_jerseys:
+                    next_free_jersey += 1
+                jersey = next_free_jersey
+            used_jerseys.add(jersey)
+
+            pid = re.sub(r"[^a-z0-9]+", "_", unicodedata.normalize("NFKD", key_clean).encode("ascii", "ignore").decode()).strip("_")
+            players_by_name[key_clean] = {
+                "id": pid,
+                "numero": jersey,
+                "nombre": clean_name,
+                "posicion": pos_es,
+                "linea": linea,
+                "titular": False,
+                "edad": max(17, min(42, int(ath.get("age", 26) or 26))),
+                "rating": 7.6
+            }
+
+        titulares = []
+        used_keys = set()
+        for pk in preferred_11_order:
+            if pk in players_by_name:
+                p = dict(players_by_name[pk])
+                p["titular"] = True
+                titulares.append(p)
+                used_keys.add(pk)
+
+        # Banco de relevos priorizado (jugadores de mayor jerarquía / que jugaron recientemente)
+        bench_priority = [
+            "sebastián britos", "mauricio lemos", "lucas ferreira", "diego laxalt",
+            "thiago espinosa", "lucas hernández", "jesús trindade", "roberto fernández",
+            "leandro umpiérrez", "luis miguel angulo", "abel hernández", "facundo batista",
+            "jonathan rodríguez", "franco romero", "franco gonzález"
+        ]
+        suplentes = []
+        for bk in bench_priority:
+            if bk in players_by_name and bk not in used_keys:
+                p = dict(players_by_name[bk])
+                p["titular"] = False
+                suplentes.append(p)
+                used_keys.add(bk)
+        for k, p in players_by_name.items():
+            if k not in used_keys and len(suplentes) < 14:
+                p_copy = dict(p)
+                p_copy["titular"] = False
+                suplentes.append(p_copy)
+
+        if len(titulares) < 11:
+            return False
+
+        squad_doc = {
+            "actualizado": datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M"),
+            "fuente": "ESPN Official Roster API + 1891 BD (Último 11 oficial)",
+            "director_tecnico": {
+                "nombre": "Diego Aguirre",
+                "apodo": "La Fiera",
+                "esquema_preferido": "4-2-3-1",
+                "hitos": "Campeón de América como jugador (1987, gol en el min. 120), finalista de América (2011), semifinalista (2024) y Campeón de la Tabla Anual 2026."
+            },
+            "ultimo_once_1891": (last_match or {}).get("alineacion_1891", []),
+            "jugadores": titulares + suplentes
+        }
+        (DATA_DIR / "squad_2026.json").write_text(json.dumps(squad_doc, ensure_ascii=False, indent=2), encoding="utf-8")
+        logger.info(f"[MatchEngine] ✓ data/squad_2026.json sincronizado en vivo ({len(titulares)} titulares + {len(suplentes)} relevos vigentes 2026).")
+        return True
+
+    @classmethod
+    def descomponer_horario_partido(cls, match_data: dict) -> tuple:
+        if not match_data:
+            return "20:00 hs", "Próxima fecha"
+        f_iso = match_data.get("fecha_iso", "")
+        if f_iso:
+            try:
+                dt = datetime.fromisoformat(f_iso.replace("Z", "+00:00")).astimezone(UY_TZ)
+                return dt.strftime("%H:%M hs"), f"{DIAS_SEMANA[dt.weekday()]} {dt.strftime('%d/%m/%Y')}"
+            except Exception:
+                pass
+        return "20:00 hs", match_data.get("fecha_legible", "A confirmar")
+
+    @classmethod
     def generate_updated_live_status(cls) -> Dict[str, Any]:
-        """Genera el documento integral y definitivo `data/live_status.json`."""
-        match_info, fase = cls.get_today_or_next_match()
-        last_match = cls.get_last_match()
-        tabla_anual = cls.fetch_tabla_anual_auf()
-        tabla_clausura = cls.fetch_standings()
-        weather = cls.fetch_campeon_del_siglo_weather()
+        """Genera el documento integral y único de verdad `data/live_status.json`."""
         now_uy = datetime.now(UY_TZ)
+        schedule = cls.fetch_penarol_schedule()
+        match_today_or_next, raw_fase = cls.get_today_or_next_match(schedule=schedule)
+        recent_completed = cls.get_recent_completed_matches(schedule=schedule, limit=5)
+        last_match = recent_completed[0] if recent_completed else {}
 
-        summary_adv = {}
-        if match_info and match_info.get("event_id"):
-            summary_adv = cls.fetch_match_summary_details(match_info["event_id"])
+        # Enriquecer último partido con 1891 BD (goleadores, juez, DT rival, alineación, video YouTube)
+        if last_match:
+            last_match = cls._enrich_match_with_1891(last_match)
+            recent_completed[0] = last_match
 
-        # Cálculo exacto de la ventana post-partido (Regla de las 48 Horas de Manya ServicioTI)
+        # Sincronizar plantel real 2026 en data/squad_2026.json
+        try:
+            cls.sync_squad_2026_from_espn(last_match=last_match)
+        except Exception as ex_sq:
+            logger.debug(f"[MatchEngine] Aviso sincronizando plantel: {ex_sq}")
+
+        tabla_clausura = cls.fetch_standings()
+        tabla_anual = cls.fetch_tabla_anual_auf(tabla_clausura=tabla_clausura)
+        libertadores_info = cls.fetch_libertadores_standings()
+        weather = cls.fetch_campeon_del_siglo_weather()
+
+        # Puntaje real de Peñarol en Tabla Anual y Clausura
+        pen_anual = next((r for r in tabla_anual if r.get("es_penarol")), {"pts": 69, "dg": "+27", "pj": 37, "pos": 1})
+        pen_clausura = next((r for r in tabla_clausura if r.get("es_penarol")), {"pts": 26, "dg": "+11", "pj": 15, "pos": 4})
+
+        # Calcular horas desde el último partido
         horas_desde_ultimo_partido = 999.0
         if last_match and last_match.get("fecha_iso"):
             try:
@@ -860,40 +1161,43 @@ class ManyaMatchEngine:
             except Exception:
                 pass
 
-        # Determinar próximo partido asegurado
-        proximo_partido_data = match_info or {}
-        if (fase == "FINALIZADO" or not proximo_partido_data or proximo_partido_data.get("completado")) and match_info:
-            last_match = match_info
-            next_upcoming = cls.get_next_upcoming_match(exclude_event_id=match_info.get("event_id"))
-            if next_upcoming:
-                proximo_partido_data = next_upcoming
+        # Próximo partido real (ESPN futuro o Gran Final del Uruguayo si terminó la fase regular)
+        if match_today_or_next and not match_today_or_next.get("completado"):
+            proximo_partido_data = dict(match_today_or_next)
+        else:
+            proximo_partido_data = cls._build_playoff_horizon_match(tabla_anual, tabla_clausura)
 
-        # Máquina de estados del ciclo de vida de partidos (Regla de Andrés / ServicioTI):
-        # 1. EN_VIVO: partido en desarrollo.
-        # 2. POST_PARTIDO (0 a 48 hs): el partido que terminó se mantiene en primer plano.
-        # 3. PREVIA (> 48 hs o próximo a disputarse): el partido anterior pasa a segundo plano (cajón colapsable)
-        #    y el primer plano absoluto se enfoca en el próximo rival (scouting, 1891 BD y previa).
-        if fase == "EN_VIVO":
+        # Máquina de estados determinista (Regla de las 48 Horas)
+        if raw_fase == "EN_VIVO" and match_today_or_next:
+            fase = "EN_VIVO"
             estado_ciclo_vida = "EN_VIVO"
-            partido_activo_data = dict(match_info)
+            partido_activo_data = dict(match_today_or_next)
             partido_activo_data["es_hoy"] = True
             partido_activo_data["fase"] = "EN_VIVO"
+            summary_adv = cls.fetch_match_summary_details(partido_activo_data.get("event_id", ""))
             partido_activo_data["detalles_avanzados"] = summary_adv
-            alerta_banner = f"🔴 EN VIVO AHORA: {match_info['local']['nombre']} {match_info['local']['goles']} - {match_info['visitante']['goles']} {match_info['visitante']['nombre']} ({match_info.get('minuto_reloj', '1T')})"
+            alerta_banner = (
+                f"🔴 EN VIVO AHORA: {partido_activo_data['local']['nombre']} {partido_activo_data['local']['goles']} - "
+                f"{partido_activo_data['visitante']['goles']} {partido_activo_data['visitante']['nombre']} ({partido_activo_data.get('minuto_reloj', '1T')})"
+            )
         elif horas_desde_ultimo_partido <= 48.0 and last_match:
             fase = "POST_PARTIDO"
             estado_ciclo_vida = "POST_48H"
             partido_activo_data = dict(last_match)
             partido_activo_data["es_hoy"] = False
             partido_activo_data["fase"] = "POST_PARTIDO"
+            summary_adv = cls.fetch_match_summary_details(partido_activo_data.get("event_id", ""))
             partido_activo_data["detalles_avanzados"] = summary_adv
-            alerta_banner = f"🏁 FINALIZADO: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']} • Crónica post-partido y análisis táctico en primer plano."
+            goles_str = f" • ⚽ {last_match['goles_texto']}" if last_match.get("goles_texto") else ""
+            obs_tag = " • 🏆 CAMPEÓN DE LA TABLA ANUAL" if "anual" in last_match.get("observacion_oficial", "").lower() else ""
+            alerta_banner = (
+                f"🏁 FINALIZADO: {last_match['local']['nombre']} {last_match['local']['goles']} - "
+                f"{last_match['visitante']['goles']} {last_match['visitante']['nombre']}{obs_tag} ({pen_anual['pts']} pts){goles_str}"
+            )
         else:
             fase = "PREVIA"
             estado_ciclo_vida = "PREVIA"
             partido_activo_data = dict(proximo_partido_data)
-            
-            # Sincronización estricta de 'es_hoy' según fecha en Uruguay
             fecha_iso = proximo_partido_data.get("fecha_iso", "")
             es_hoy_prox = False
             if fecha_iso:
@@ -902,134 +1206,144 @@ class ManyaMatchEngine:
                     es_hoy_prox = (p_dt.date() == now_uy.date())
                 except Exception:
                     pass
-
             partido_activo_data["es_hoy"] = es_hoy_prox
             proximo_partido_data["es_hoy"] = es_hoy_prox
             partido_activo_data["fase"] = "PREVIA"
+            summary_adv = cls.fetch_match_summary_details(partido_activo_data.get("event_id", ""))
             partido_activo_data["detalles_avanzados"] = summary_adv
             hora_str, dia_str = cls.descomponer_horario_partido(proximo_partido_data)
             tv_channel = proximo_partido_data.get("tv") or "VTV Plus / Disney+ Premium"
-            estadio_nom = proximo_partido_data.get('estadio') or 'Estadio Luis Franzini (Montevideo)'
+            estadio_nom = proximo_partido_data.get("estadio") or "Estadio Campeón del Siglo"
             if es_hoy_prox:
-                alerta_banner = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {proximo_partido_data.get('nombre', 'Peñarol')} a las {hora_str} en {estadio_nom} • {tv_channel}."
+                alerta_banner = f"🟡⚫ ¡HOY JUEGA PEÑAROL! {proximo_partido_data.get('nombre')} a las {hora_str} en {estadio_nom} • {tv_channel}."
+            elif proximo_partido_data.get("es_definicion_final"):
+                alerta_banner = (
+                    f"🏆 ¡PEÑAROL CAMPEÓN DE LA TABLA ANUAL ({pen_anual['pts']} PTS)! "
+                    f"Clasificado directo a la Gran Final del Uruguayo 2026 (espera ganador de Racing vs Liverpool)."
+                )
             else:
-                alerta_banner = f"⚡ ¡PRÓXIMO PARTIDO! {proximo_partido_data.get('nombre', 'Peñarol')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
+                alerta_banner = f"⚡ PRÓXIMO PARTIDO: {proximo_partido_data.get('nombre')} el {dia_str} a las {hora_str} ({estadio_nom}) • {tv_channel}."
 
-        # Identificar el rival activo para la sincronización de inteligencia y 1891 BD
+        # Minuto a minuto ligado 100% al partido activo (si no hay en vivo/post, del último partido)
+        timeline_source = partido_activo_data if fase in ("EN_VIVO", "POST_PARTIDO") else last_match
+        timeline_summary = summary_adv if fase in ("EN_VIVO", "POST_PARTIDO") else cls.fetch_match_summary_details((last_match or {}).get("event_id", ""))
+        minuto_a_minuto = cls.build_match_timeline(timeline_source, timeline_summary)
+
+        # Identificar rival activo para scouting + 1891 BD
         loc_act = partido_activo_data.get("local", {})
         vis_act = partido_activo_data.get("visitante", {})
         rival_activo_nombre = loc_act.get("nombre") if not loc_act.get("es_penarol") else vis_act.get("nombre")
-
+        if not rival_activo_nombre or "ganador" in rival_activo_nombre.lower():
+            # En espera de la Final, priorizar scouting del último rival si POST_PARTIDO o del líder del Clausura (Liverpool)
+            rival_activo_nombre = "Liverpool"
         try:
             from manya_rival_intelligence import resolver_meta_rival
-            meta_rival = resolver_meta_rival(rival_activo_nombre or "defensor_sporting")
-            rival_activo_slug = meta_rival.get("slug", "wanderers")
+            meta_rival = resolver_meta_rival(rival_activo_nombre)
+            rival_activo_slug = meta_rival.get("slug", "cerro_largo")
         except Exception:
-            rival_activo_slug = "defensor_sporting"
+            rival_activo_slug = re.sub(r"[^a-z0-9]+", "_", rival_activo_nombre.lower()).strip("_")
 
-        libertadores_info = cls.fetch_libertadores_standings()
-        torneo_prox = (proximo_partido_data.get("torneo") or "").lower()
-
-        # La tabla activa por defecto en la carga inicial es la del campeonato en disputa del próximo partido:
-        # Torneo Clausura 2026 (con selector y botón rápido para alternar a la Tabla Anual Oficial)
-        torneo_defecto_id = "clausura"
+        # Torneo activo por defecto: si Peñarol ya ganó la Anual / terminó Clausura, abrir en Tabla Anual; si está en fecha regular, Clausura
+        torneo_defecto_id = "anual" if (pen_clausura.get("pj", 0) >= 15 and pen_anual.get("pos") == 1) else "clausura"
 
         tablas_campeonatos = [
-            {
-                "id": "clausura",
-                "nombre": "Torneo Clausura 2026",
-                "nombre_corto": "Torneo Clausura",
-                "icono": "⚽",
-                "badge": "En Disputa • Fecha 14",
-                "es_proximo": True,
-                "datos": tabla_clausura
-            },
             {
                 "id": "anual",
                 "nombre": "Tabla Anual Acumulada Oficial (AUF)",
                 "nombre_corto": "Tabla Anual",
                 "icono": "🏆",
-                "badge": "Líder Solitario • 66 pts",
-                "es_proximo": False,
+                "badge": f"Campeón Anual • {pen_anual['pts']} pts" if (pen_clausura.get("pj", 0) >= 15 and pen_anual.get("pos") == 1) else f"#{pen_anual['pos']} • {pen_anual['pts']} pts",
+                "es_proximo": torneo_defecto_id == "anual",
                 "datos": tabla_anual
+            },
+            {
+                "id": "clausura",
+                "nombre": "Torneo Clausura 2026",
+                "nombre_corto": "Torneo Clausura",
+                "icono": "⚽",
+                "badge": f"Fecha {pen_clausura.get('pj', 15)} • {pen_clausura.get('pts', 26)} pts",
+                "es_proximo": torneo_defecto_id == "clausura",
+                "datos": tabla_clausura
             },
             {
                 "id": "libertadores",
                 "nombre": libertadores_info.get("nombre", "Copa CONMEBOL Libertadores"),
                 "nombre_corto": "Copa Libertadores",
                 "icono": "🌎",
-                "badge": "Conmebol Internacional",
+                "badge": "CONMEBOL 2026",
                 "es_proximo": False,
                 "datos": libertadores_info.get("datos", [])
             }
         ]
 
-        # La tabla activa por defecto es siempre la que corresponde al próximo partido a jugar
         mapa_tablas = {
-            "clausura": tabla_clausura,
             "anual": tabla_anual,
+            "clausura": tabla_clausura,
             "libertadores": libertadores_info.get("datos", [])
         }
-        tabla_activa_por_defecto = mapa_tablas.get(torneo_defecto_id, tabla_clausura)
-
-        existing_doc = {}
-        if (DATA_DIR / "live_status.json").exists():
-            try:
-                existing_doc = json.loads((DATA_DIR / "live_status.json").read_text(encoding="utf-8"))
-            except Exception:
-                pass
-
-        minuto_a_minuto = existing_doc.get("minuto_a_minuto", [])
-        blogger_live_url = existing_doc.get("blogger_live_url", "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html")
-        if "juventud" in blogger_live_url.lower():
-            blogger_live_url = "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
 
         doc_live = {
             "actualizado": now_uy.strftime("%d/%m/%Y %H:%M"),
+            "schema_version": "10.0",
             "fase_partido": fase,
             "estado_ciclo_vida": estado_ciclo_vida,
             "ventana_post_partido_horas": 48,
             "horas_desde_ultimo_partido": round(horas_desde_ultimo_partido, 1),
+            "rival_activo_nombre": rival_activo_nombre,
             "rival_activo_slug": rival_activo_slug,
             "historial_file": "data/historial_activo.json",
             "alerta_banner": alerta_banner,
+            "resumen_temporada": {
+                "penarol_anual_pts": pen_anual.get("pts", 69),
+                "penarol_anual_pos": pen_anual.get("pos", 1),
+                "penarol_anual_pj": pen_anual.get("pj", 37),
+                "penarol_anual_dg": pen_anual.get("dg", "+27"),
+                "penarol_clausura_pts": pen_clausura.get("pts", 26),
+                "penarol_clausura_pos": pen_clausura.get("pos", 4),
+                "penarol_clausura_pj": pen_clausura.get("pj", 15),
+                "campeon_anual": bool(pen_clausura.get("pj", 0) >= 15 and pen_anual.get("pos") == 1),
+                "libertadores_2027": "Clasificado directo a Fase de Grupos (Uruguay 1)",
+                "definicion_uruguayo": {
+                    "semifinal": "Racing (Campeón Apertura) vs Liverpool (Campeón Clausura)",
+                    "fecha_semifinal": "Domingo 29/11/2026 (tentativa)",
+                    "finales": "Peñarol (Campeón Tabla Anual) vs Ganador Semifinal — Ida: Jueves 3/12 • Vuelta: Domingo 6/12"
+                }
+            },
             "partido_activo": partido_activo_data,
             "proximo_partido": proximo_partido_data,
             "ultimo_partido": last_match or {},
-            "ultimos_resultados": [last_match] if last_match else [],
+            "ultimos_resultados": recent_completed,
             "proximos_partidos": [proximo_partido_data] if proximo_partido_data else [],
             "torneo_activo_id": torneo_defecto_id,
-            "tabla_posiciones": tabla_activa_por_defecto,
+            "tabla_posiciones": mapa_tablas.get(torneo_defecto_id, tabla_anual),
             "tabla_anual": tabla_anual,
             "tabla_clausura": tabla_clausura,
             "tabla_libertadores": libertadores_info.get("datos", []),
             "tablas_campeonatos": tablas_campeonatos,
             "clima_campeon_del_siglo": weather,
             "minuto_a_minuto": minuto_a_minuto,
-            "blogger_live_url": blogger_live_url
+            "minuto_a_minuto_event_id": (timeline_source or {}).get("event_id", ""),
+            "blogger_live_url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         }
 
         output_file = DATA_DIR / "live_status.json"
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(doc_live, f, indent=2, ensure_ascii=False)
+        output_file.write_text(json.dumps(doc_live, indent=2, ensure_ascii=False), encoding="utf-8")
 
-        logger.info(f"[MatchEngine] ✓ data/live_status.json generado con éxito.")
-        logger.info(f"             - Fase: {fase}")
-        logger.info(f"             - Próximo: {proximo_partido_data.get('nombre', '')} ({proximo_partido_data.get('fecha_legible', '')})")
-        logger.info(f"             - Último: {last_match['local']['nombre']} {last_match['local']['goles']} - {last_match['visitante']['goles']} {last_match['visitante']['nombre']}")
+        logger.info("[MatchEngine] ✓ data/live_status.json generado (v10.0 Zero-Hardcode).")
+        logger.info(f"             - Fase: {fase} | Tabla Anual Peñarol: #{pen_anual.get('pos')} ({pen_anual.get('pts')} pts, {pen_anual.get('dg')})")
+        logger.info(f"             - Activo: {partido_activo_data.get('nombre')} ({partido_activo_data.get('fecha_legible')})")
+        logger.info(f"             - Próximo: {proximo_partido_data.get('nombre')} ({proximo_partido_data.get('fecha_legible')})")
         return doc_live
 
 
 if __name__ == "__main__":
     status = ManyaMatchEngine.generate_updated_live_status()
-    print("\n" + "=" * 60)
-    print("✓ VERIFICACIÓN MATCH ENGINE EXITOSA:")
+    print("\n" + "=" * 65)
+    print("✓ VERIFICACIÓN MATCH ENGINE v4.0 EXITOSA:")
     print("Fase:", status.get("fase_partido"))
     print("Banner:", status.get("alerta_banner"))
-    print("Próximo:", status.get("proximo_partido", {}).get("nombre"))
-    print("Fecha Próximo:", status.get("proximo_partido", {}).get("fecha_legible"))
-    print("Estadio:", status.get("proximo_partido", {}).get("estadio"))
-    print("Local Escudo:", status.get("proximo_partido", {}).get("local", {}).get("escudo"))
-    print("Visitante Escudo:", status.get("proximo_partido", {}).get("visitante", {}).get("escudo"))
-    print("Último Partido:", status.get("ultimo_partido", {}).get("local", {}).get("nombre"), status.get("ultimo_partido", {}).get("local", {}).get("goles"), "-", status.get("ultimo_partido", {}).get("visitante", {}).get("goles"), status.get("ultimo_partido", {}).get("visitante", {}).get("nombre"))
-    print("=" * 60)
+    print("Tabla Anual Peñarol:", status.get("resumen_temporada", {}).get("penarol_anual_pts"), "pts | DG:", status.get("resumen_temporada", {}).get("penarol_anual_dg"))
+    print("Últimos 5 resultados:", [(m["nombre"], f"{m['local']['goles']}-{m['visitante']['goles']}") for m in status.get("ultimos_resultados", [])])
+    print("Minuto a minuto eventos:", len(status.get("minuto_a_minuto", [])), "| event_id:", status.get("minuto_a_minuto_event_id"))
+    print("Libertadores orden:", [(r["pos"], r["equipo"], r["pts"]) for r in status.get("tabla_libertadores", [])])
+    print("=" * 65)

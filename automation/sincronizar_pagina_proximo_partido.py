@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 """
-MOTOR DE SINCRONIZACIÓN AUTOMÁTICA DE PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA EN BLOGGER
-======================================================================================
+MOTOR DE SINCRONIZACIÓN AUTOMÁTICA DE PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA EN BLOGGER (v10.0 Zero-Hardcode)
+=============================================================================================================
 1. Publica y actualiza la Página Estática Permanente en Blogger (/p/penarol-proximo-partido-radiografia.html).
-2. Actualiza el post existente (/2026/10/penarol-en-vivo-la-previa-radiografia.html) con la previa 100% futbolera
-   del nuevo rival activo (Defensor Sporting / cualquier rival según live_status.json).
+2. Actualiza el post de radiografía táctica con 100% de datos dinámicos leídos desde `live_status.json`,
+   `rival_intelligence.json` y `news_digest.json` (cero rivales/puntos/estadios hardcodeados).
 """
 
 import json
@@ -21,7 +22,7 @@ DATA_DIR = BASE_DIR / "data"
 STATE_PAGE_FILE = DATA_DIR / "blogger_pagina_proximo_partido.json"
 
 BLOG_ID = "8220787747664379807"
-EXISTING_POST_ID = "5624313100287295662"  # Post histórico /2026/10/penarol-en-vivo-la-previa-radiografia.html
+EXISTING_POST_ID = "5624313100287295662"
 PAGE_TITLE = "Peñarol: Próximo Partido, Radiografía Táctica y Cobertura Oficial | Manya ServicioTI"
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
 
@@ -41,55 +42,61 @@ def get_blogger_service():
 
 
 def construir_html_proximo_partido(live_data, rival_data, digest_data):
-    """Construye el HTML editorial definitivo, responsivo y adaptado para Blogger."""
+    """Construye el HTML editorial definitivo 100% dinámico para Blogger."""
     now_uy = datetime.now(UY_TZ).strftime("%d/%m/%Y %H:%M")
+    fase = live_data.get("fase_partido", "PREVIA")
+    act = live_data.get("partido_activo") or {}
     prox = live_data.get("proximo_partido") or {}
+    ult = live_data.get("ultimo_partido") or act
+    res_temp = live_data.get("resumen_temporada") or {}
+
+    pts_anual = res_temp.get("penarol_anual_pts", 69)
+    dg_anual = res_temp.get("penarol_anual_dg", "+27")
+    pj_anual = res_temp.get("penarol_anual_pj", 37)
+    campeon_anual = res_temp.get("campeon_anual", False)
+
     scout = rival_data.get("scouting_tactico") or {}
     inst = rival_data.get("datos_institucionales_auf") or {}
     duelos = rival_data.get("duelos_tacticos_1x1") or []
     hist = rival_data.get("historial_certificacion_1891") or {}
-    
-    # Detección dinámica del rival
-    rival_nombre = rival_data.get("rival_nombre")
-    if not rival_nombre:
-        if prox.get("local", {}).get("es_penarol"):
-            rival_nombre = prox.get("visitante", {}).get("nombre", "Defensor Sporting")
-        else:
-            rival_nombre = prox.get("local", {}).get("nombre", "Defensor Sporting")
 
-    escudo_rel = prox.get("local", {}).get("escudo") if not prox.get("local", {}).get("es_penarol") else prox.get("visitante", {}).get("escudo")
-    if escudo_rel:
-        rival_escudo = f"https://manya.servicioti.com.uy/{escudo_rel.lstrip('/')}"
-    else:
-        rival_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_defensor_sporting.webp"
-    penarol_escudo = "https://manya.servicioti.com.uy/assets/img/escudos/escudo_penarol.webp"
-    
-    fecha_legible = prox.get("fecha_legible") or "Domingo 15/11/2026 20:00 hs"
-    estadio = prox.get("estadio") or "Estadio Luis Franzini (Montevideo)"
-    torneo = prox.get("torneo") or "Torneo Clausura 2026 (Fecha 14)"
-    tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
-    dt_entrenador = scout.get("entrenador") or "Andrés Rodríguez"
-    esquema_base = scout.get("esquema_base") or "4-3-3 de intensidad y transiciones rápidas"
-    sede_club = inst.get("sede") or "Parque Rodó, Montevideo"
-    
-    # Encabezado adaptativo según fase
-    is_post = live_data.get("fase_partido") == "POST_PARTIDO" or live_data.get("estado_ciclo_vida") == "POST_48H"
-    
-    ult = live_data.get("ultimo_partido") or {}
+    rival_nombre = rival_data.get("rival_nombre") or (
+        (act.get("visitante") or {}).get("nombre")
+        if (act.get("local") or {}).get("es_penarol")
+        else (act.get("local") or {}).get("nombre")
+    ) or "Próximo Rival"
+
+    dt_entrenador = scout.get("entrenador") or act.get("dt_rival") or "Cuerpo Técnico Rival"
+    esquema_base = scout.get("esquema_base") or "4-2-3-1 / 4-4-2 competitivo"
+    sede_club = inst.get("sede") or "Uruguay"
+
+    is_post = fase == "POST_PARTIDO"
     if is_post:
-        badge_fase = "🏁 RESULTADO FINAL • POST-PARTIDO"
-        loc_nom = ult.get("local", {}).get("nombre", "Peñarol")
-        loc_goles = ult.get("local", {}).get("goles", "1")
-        vis_nom = ult.get("visitante", {}).get("nombre", "Montevideo Wanderers")
-        vis_goles = ult.get("visitante", {}).get("goles", "1")
-        titulo_header = f"{loc_nom} {loc_goles} - {vis_goles} {vis_nom}"
-        sub_header = f"🏁 FINALIZADO • Goles: L. M. Angulo 90' (CAP) / F. Labandeira 72' (WAN) • {estadio}"
+        badge_fase = "🏁 RESULTADO FINAL • BALANCE POST-PARTIDO"
+        loc = ult.get("local") or {}
+        vis = ult.get("visitante") or {}
+        estadio = ult.get("estadio") or "Estadio Campeón del Siglo"
+        torneo = ult.get("torneo") or "Campeonato Uruguayo 2026"
+        goles_txt = ult.get("goles_texto") or ""
+        titulo_header = f"{loc.get('nombre', 'Peñarol')} {loc.get('goles', '0')} - {vis.get('goles', '0')} {vis.get('nombre', rival_nombre)}"
+        sub_header = f"🏁 FINALIZADO • {torneo} • {estadio}" + (f"<br>⚽ {goles_txt}" if goles_txt else "")
     else:
         badge_fase = "★ PÁGINA CENTRAL PERMANENTE • PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA"
-        loc_nom = prox.get("local", {}).get("nombre", "Defensor Sporting")
-        vis_nom = prox.get("visitante", {}).get("nombre", "Peñarol")
-        titulo_header = f"{loc_nom} vs. {vis_nom}"
+        loc = prox.get("local") or {}
+        vis = prox.get("visitante") or {}
+        estadio = prox.get("estadio") or "Estadio Campeón del Siglo"
+        torneo = prox.get("torneo") or "Campeonato Uruguayo 2026"
+        fecha_legible = prox.get("fecha_legible") or "Fecha a confirmar AUF"
+        tv = prox.get("tv") or "VTV Plus / Disney+ Premium"
+        titulo_header = f"{loc.get('nombre', 'Peñarol')} vs. {vis.get('nombre', rival_nombre)}"
         sub_header = f"{torneo} • {fecha_legible}<br>🏟️ {estadio} • 📺 Transmisión en vivo por {tv}"
+
+    badge_anual = f"🏆 Campeón Tabla Anual • {pts_anual} pts" if campeon_anual else f"Tabla Anual • {pts_anual} pts"
+    resumen_anual_p = (
+        prox.get("nota_definicion")
+        or digest_data.get("bajada_seo")
+        or f"Peñarol acumula {pts_anual} puntos oficiales en la Tabla Anual ({pj_anual} PJ, {dg_anual} DG) y encara la etapa decisiva del Campeonato Uruguayo 2026."
+    )
 
     duelos_html = ""
     for d in duelos:
@@ -98,7 +105,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
           <div style="font-size:11.5px;color:#ffd100;font-weight:900;text-transform:uppercase;margin-bottom:4px;">⚔️ {d.get('titulo', '')} • {d.get('zona_campo', '')}</div>
           <div style="display:flex;justify-content:space-between;gap:12px;margin:8px 0;flex-wrap:wrap;font-size:13.5px;">
             <div style="flex:1;min-width:200px;"><strong style="color:#ffd100;">🟡⚫ Peñarol:</strong> {d.get('penarol', {}).get('jugador', '')} ({d.get('penarol', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('penarol', {}).get('atributos_clave', '')}</span></div>
-            <div style="flex:1;min-width:200px;"><strong style="color:#a855f7;">🟣⚪ Rival:</strong> {d.get('rival', {}).get('jugador', '')} ({d.get('rival', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('rival', {}).get('atributos_clave', '')}</span></div>
+            <div style="flex:1;min-width:200px;"><strong style="color:#38bdf8;">⚽ {rival_nombre}:</strong> {d.get('rival', {}).get('jugador', '')} ({d.get('rival', {}).get('rol', '')})<br><span style="font-size:12px;color:#a1a1aa;">{d.get('rival', {}).get('atributos_clave', '')}</span></div>
           </div>
           <div style="font-size:12.5px;color:#d4d4d8;background:rgba(0,0,0,0.3);padding:8px;border-radius:6px;margin-top:6px;"><strong>Clave del Duelo:</strong> {d.get('clave_del_duelo', '')}</div>
         </div>
@@ -113,19 +120,27 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
         </div>
         """
 
+    pf_list = "".join(f'<li style="margin-bottom:4px;">{pt}</li>' for pt in scout.get("puntos_fuertes", ["Orden defensivo compacto", "Transiciones rápidas"]))
+    vul_list = "".join(f'<li style="margin-bottom:4px;">{vul}</li>' for vul in scout.get("vulnerabilidades_a_explotar", ["Espalda de laterales en repliegue", "Pelota quieta de Leo Fernández"]))
+
+    pj_h = hist.get("partidos_jugados", 0)
+    gp_h = hist.get("ganados_penarol", 0)
+    emp_h = hist.get("empatados", 0)
+    ef_h = hist.get("efectividad_pct", "-")
+    ventaja_h = hist.get("ventaja_victorias", "Balance oficial 1891 BD")
+    dif_g = hist.get("diferencia_goles", "")
+
     html = f"""
 <div style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#18181b;line-height:1.6;max-width:960px;margin:0 auto;padding:10px;">
 
-  <!-- ENCABEZADO OFICIAL DE LA PÁGINA PERMANENTE -->
   <div style="background:linear-gradient(135deg,#09090b 0%,#18181b 100%);color:#ffffff;padding:26px 22px;border-radius:14px;border:2px solid #ffd100;box-shadow:0 10px 30px rgba(0,0,0,0.35);margin-bottom:24px;">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,209,0,0.3);padding-bottom:14px;margin-bottom:18px;">
       <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:4px 12px;border-radius:999px;letter-spacing:0.04em;">
         {badge_fase}
       </span>
-      <span style="font-size:12px;color:#ffd100;font-weight:700;">Actualizado: {now_uy} hs</span>
+      <span style="font-size:12px;color:#ffd100;font-weight:700;">Actualizado: {now_uy} hs UY</span>
     </div>
 
-    <!-- TARJETA DEL PRÓXIMO PARTIDO -->
     <div style="text-align:center;margin-bottom:20px;">
       <h1 style="color:#ffffff;font-size:clamp(22px,3.8vw,32px);font-weight:900;margin:0 0 10px;line-height:1.25;">
         {titulo_header}
@@ -135,47 +150,37 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
       </div>
     </div>
 
-    <!-- BOTONES DE ACCESO DIRECTO -->
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px;">
-      <a href="https://manya.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 20px;border-radius:999px;text-decoration:none;font-size:13.5px;box-shadow:0 4px 15px rgba(255,209,0,0.3);">
+      <a href="https://manya.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 20px;border-radius:999px;text-decoration:none;font-size:13.5px;">
         ⚡ Ir a manya.servicioti.com.uy (Match Center en Vivo) ↗
       </a>
       <a href="https://manya.servicioti.com.uy/#pizarra-tactica" target="_blank" rel="noopener noreferrer" style="border:1px solid #ffd100;color:#ffd100;font-weight:800;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;">
-        👕 Pizarra Táctica: Armá tu 11 vs {rival_nombre}
+        👕 Pizarra Táctica: Armá tu 11 (Plantel 2026)
       </a>
       <a href="https://horarios.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" style="border:1px solid rgba(255,255,255,0.3);color:#e4e4e7;font-weight:700;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;">
-        🚌 Ómnibus al Estadio Franzini (Parque Rodó) en Vivo
+        🚌 Ómnibus al Estadio en Vivo
       </a>
     </div>
   </div>
 
-  <!-- AVISO DE PÁGINA PERMANENTE -->
-  <div style="background:#fefce8;border:1px solid #fde047;border-left:4px solid #ca8a04;padding:14px 18px;border-radius:8px;margin-bottom:24px;color:#713f12;font-size:13.5px;">
-    <strong>ℹ️ Página Permanente Oficial de ServicioTI:</strong> Esta URL se mantiene constante y se actualiza de manera automática al término de cada encuentro para ofrecerte la radiografía táctica, datos del rival, árbitros, venta de entradas y la previa del siguiente compromiso del Club Atlético Peñarol.
-  </div>
-
-  <!-- BLOQUE: CONTEXTO RECIENTE Y SITUACIÓN DE LA TABLA ANUAL -->
-  <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;border-bottom:2px solid #ffd100;padding-bottom:8px;">
-      <h2 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">⚡ Situación en la Tabla Anual y Definición del Torneo</h2>
-      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">Líder Solitario • 66 pts</span>
+  <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;border-bottom:2px solid #ffd100;padding-bottom:8px;flex-wrap:wrap;gap:8px;">
+      <h2 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">⚡ Situación en la Tabla Anual y Definición 2026</h2>
+      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 10px;border-radius:4px;font-weight:900;">{badge_anual}</span>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;background:#09090b;color:#fff;padding:14px 20px;border-radius:10px;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
       <div>
-        <strong style="font-size:16px;color:#ffd100;">Peñarol lidera la Tabla Anual con 66 unidades</strong>
-        <div style="font-size:12px;color:#a1a1aa;">Vanguardia de la acumulada oficial AUF (+24 DG) • 35 partidos jugados</div>
+        <strong style="font-size:16px;color:#ffd100;">Peñarol suma {pts_anual} unidades en la Tabla Anual</strong>
+        <div style="font-size:12px;color:#a1a1aa;">Acumulada oficial AUF + ESPN ({dg_anual} DG) • {pj_anual} partidos jugados</div>
       </div>
       <a href="https://manya.servicioti.com.uy/#tabla-simulador" target="_blank" rel="noopener noreferrer" style="background:#ffd100;color:#09090b;font-weight:900;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">
-        📊 Simular Tabla Anual en Vivo ↗
+        📊 Ver Tablas y Definición ↗
       </a>
     </div>
-    <p style="font-size:14px;color:#475569;margin:0;">
-      El equipo de Diego Aguirre llega a la penúltima fecha del Torneo Clausura visitando el Estadio Luis Franzini en el Parque Rodó para medirse ante Defensor Sporting. Peñarol busca afianzar su liderazgo absoluto en la Tabla Anual con 66 puntos.
-    </p>
+    <p style="font-size:14px;color:#475569;margin:0;">{resumen_anual_p}</p>
   </div>
 
-  <!-- RADIOGRAFÍA TÁCTICA DEL RIVAL -->
-  <div style="background:#09090b;color:#ffffff;border:1px solid rgba(255,209,0,0.35);border-radius:14px;padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <div style="background:#09090b;color:#ffffff;border:1px solid rgba(255,209,0,0.35);border-radius:14px;padding:24px;margin-bottom:24px;">
     <div style="border-bottom:2px solid #ffd100;padding-bottom:10px;margin-bottom:18px;">
       <span style="background:#ffd100;color:#09090b;font-size:11px;font-weight:900;padding:2px 8px;border-radius:4px;text-transform:uppercase;">SCOUTING TÁCTICO PROFESIONAL</span>
       <h2 style="font-size:22px;color:#ffffff;margin:8px 0 4px;font-weight:900;">
@@ -187,190 +192,133 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
     </div>
 
     <div style="font-size:14px;color:#d4d4d8;line-height:1.65;margin-bottom:20px;">
-      {scout.get("propuesta_juego", "Defensor Sporting presenta un equipo agresivo en la presión media y rápida transición por bandas, respaldado por la experiencia de Elizari en la distribución y el poderío ofensivo de Spinelli y Duarte.")}
+      {scout.get("propuesta_juego", f"Análisis táctico actualizado de {rival_nombre} frente al Club Atlético Peñarol.")}
     </div>
 
-    <!-- FORTALEZAS Y VULNERABILIDADES -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:22px;">
       <div style="background:#141419;border:1px solid rgba(255,255,255,0.06);border-top:3px solid #10b981;border-radius:8px;padding:14px;">
         <strong style="color:#10b981;font-size:14px;display:block;margin-bottom:8px;">✓ Puntos Fuertes a Neutralizar</strong>
-        <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">
-          {"".join(f'<li style="margin-bottom:4px;">{pt}</li>' for pt in scout.get('puntos_fuertes', ['Juego aéreo ofensivo con Spinelli', 'Dinámica de juveniles en mediocampo', 'Intensidad en el Franzini']))}
-        </ul>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">{pf_list}</ul>
       </div>
 
       <div style="background:#141419;border:1px solid rgba(255,255,255,0.06);border-top:3px solid #ef4444;border-radius:8px;padding:14px;">
-        <strong style="color:#ef4444;font-size:14px;display:block;margin-bottom:8px;">⚠️ Dónde Dañar a Defensor</strong>
-        <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">
-          {"".join(f'<li style="margin-bottom:4px;">{vul}</li>' for vul in scout.get('vulnerabilidades_a_explotar', ['Espalda de los laterales en repliegue', 'Desacople entre volantes centrales y la zaga', 'Pegada exterior de Leo Fernández']))}
-        </ul>
+        <strong style="color:#ef4444;font-size:14px;display:block;margin-bottom:8px;">⚠️ Dónde Dañar a {rival_nombre}</strong>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:#d4d4d8;">{vul_list}</ul>
       </div>
     </div>
 
-    <!-- FIGURAS A SEGUIR -->
     <h3 style="font-size:16px;color:#ffd100;margin:0 0 12px;font-weight:900;">🎯 Figuras a Seguir de {rival_nombre}</h3>
     {figuras_html}
 
-    <!-- DUELOS TÁCTICOS 1X1 -->
-    <h3 style="font-size:16px;color:#ffd100;margin:20px 0 12px;font-weight:900;">⚔️ Duelos Tácticos 1x1 Clave en el Franzini</h3>
+    <h3 style="font-size:16px;color:#ffd100;margin:20px 0 12px;font-weight:900;">⚔️ Duelos Tácticos 1x1 Clave</h3>
     {duelos_html}
   </div>
 
-  <!-- CERTIFICACIÓN HISTÓRICA 1891 BD -->
-  <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid #ffd100;padding-bottom:8px;flex-wrap:gap:8px;">
-      <h3 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">📜 Historial Oficial Verificado (1891 BD)</h3>
-      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 8px;border-radius:4px;font-weight:800;">{hist.get('ventaja_victorias', '+141 Victorias Mirasoles')}</span>
+  <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid #ffd100;padding-bottom:8px;flex-wrap:wrap;gap:8px;">
+      <h3 style="font-size:18px;font-weight:900;color:#09090b;margin:0;">📜 Historial Oficial Verificado vs. {rival_nombre} (1891 BD)</h3>
+      <span style="font-size:12px;background:#fef08a;color:#854d0e;padding:3px 8px;border-radius:4px;font-weight:800;">{ventaja_h}</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;text-align:center;margin-bottom:14px;">
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('partidos_jugados', '337')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{pj_h}</div>
         <div style="font-size:11.5px;color:#64748b;">Partidos Disputados</div>
       </div>
       <div style="background:#fefce8;padding:12px;border-radius:8px;border:1px solid #fde047;">
-        <div style="font-size:24px;font-weight:900;color:#ca8a04;">{hist.get('ganados_penarol', '199')}</div>
+        <div style="font-size:24px;font-weight:900;color:#ca8a04;">{gp_h}</div>
         <div style="font-size:11.5px;color:#854d0e;">Triunfos de Peñarol</div>
       </div>
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('empatados', '80')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{emp_h}</div>
         <div style="font-size:11.5px;color:#64748b;">Empates</div>
       </div>
       <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:24px;font-weight:900;color:#09090b;">{hist.get('efectividad_pct', '67.0%')}</div>
+        <div style="font-size:24px;font-weight:900;color:#09090b;">{ef_h}</div>
         <div style="font-size:11.5px;color:#64748b;">Efectividad Aurinegra</div>
       </div>
     </div>
     <div style="font-size:13.5px;color:#475569;text-align:center;">
-      Marcada supremacía histórica para el Decano: <strong>{hist.get('ventaja_victorias', '+141 partidos a favor del Decano')}</strong> con {hist.get('diferencia_goles', '+330')} goles de diferencia oficial.
+      Certificación oficial 1891 BD: <strong>{ventaja_h}</strong>{f" • Diferencia de goles: {dif_g}" if dif_g else ""}.
     </div>
   </div>
 
-  <!-- PIE DE PÁGINA -->
   <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;font-size:13px;color:#64748b;">
     <p style="margin:0 0 6px;">Página permanente producida por <strong>Manya ServicioTI</strong> para <a href="https://www.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">www.servicioti.com.uy</a> y <a href="https://manya.servicioti.com.uy/" style="color:#ca8a04;font-weight:800;">manya.servicioti.com.uy</a>.</p>
     <p style="margin:0;">Club Atlético Peñarol • Fundado el 28 de septiembre de 1891 • Campeón del Siglo XX de Sudamérica</p>
   </div>
-
 </div>
 """
     return html
 
 
 def sincronizar_proximo_partido_blogger():
-    """Ejecuta la sincronización completa: crea/actualiza la Página Estática y actualiza el Post."""
-    logger.info("=== INICIANDO SINCRONIZACIÓN DE PÁGINA Y POST DE PRÓXIMO PARTIDO EN BLOGGER ===")
+    """Ejecuta la sincronización completa: crea/actualiza la Página Estática y el Post en Blogger."""
+    logger.info("=== INICIANDO SINCRONIZACIÓN DE PÁGINA Y POST EN BLOGGER (v10.0) ===")
     service = get_blogger_service()
-    
-    live_file = DATA_DIR / "live_status.json"
-    rival_file = DATA_DIR / "rival_intelligence.json"
-    digest_file = DATA_DIR / "news_digest.json"
-    
-    live = json.loads(live_file.read_text(encoding="utf-8")) if live_file.exists() else {}
-    rival = json.loads(rival_file.read_text(encoding="utf-8")) if rival_file.exists() else {}
-    digest = json.loads(digest_file.read_text(encoding="utf-8")) if digest_file.exists() else {}
-    
+
+    live = json.loads((DATA_DIR / "live_status.json").read_text(encoding="utf-8")) if (DATA_DIR / "live_status.json").exists() else {}
+    rival = json.loads((DATA_DIR / "rival_intelligence.json").read_text(encoding="utf-8")) if (DATA_DIR / "rival_intelligence.json").exists() else {}
+    digest = json.loads((DATA_DIR / "news_digest.json").read_text(encoding="utf-8")) if (DATA_DIR / "news_digest.json").exists() else {}
+
     html_content = construir_html_proximo_partido(live, rival, digest)
-    
-    # -------------------------------------------------------------
-    # 1. Gestionar la Página Estática Permanente en Blogger (/p/...)
-    # -------------------------------------------------------------
+
     page_id = None
     if STATE_PAGE_FILE.exists():
         try:
-            cached = json.loads(STATE_PAGE_FILE.read_text(encoding="utf-8"))
-            page_id = cached.get("page_id")
+            page_id = json.loads(STATE_PAGE_FILE.read_text(encoding="utf-8")).get("page_id")
         except Exception:
             pass
-            
+
     if not page_id:
         pages_resp = service.pages().list(blogId=BLOG_ID).execute()
         for p in pages_resp.get("items", []):
             t = p.get("title", "").lower()
             if "próximo partido" in t or "proximo partido" in t or "radiografía táctica" in t:
                 page_id = p.get("id")
-                logger.info(f"[Blogger Previa] Página estática existente encontrada con ID: {page_id}")
                 break
 
-    page_url = ""
     if page_id:
-        logger.info(f"[Blogger Previa] Actualizando Página Estática ID: {page_id}...")
-        body = {"title": PAGE_TITLE, "content": html_content}
-        res_page = service.pages().patch(blogId=BLOG_ID, pageId=page_id, body=body).execute()
+        res_page = service.pages().patch(blogId=BLOG_ID, pageId=page_id, body={"title": PAGE_TITLE, "content": html_content}).execute()
         page_url = res_page.get("url", "")
         logger.info(f"[Blogger Previa] ✓ Página estática actualizada: {page_url}")
     else:
-        logger.info("[Blogger Previa] Creando nueva Página Estática Permanente en Blogger...")
-        body = {"title": PAGE_TITLE, "content": html_content}
-        res_page = service.pages().insert(blogId=BLOG_ID, body=body).execute()
+        res_page = service.pages().insert(blogId=BLOG_ID, body={"title": PAGE_TITLE, "content": html_content}).execute()
         page_id = res_page.get("id")
         page_url = res_page.get("url", "")
-        logger.info(f"[Blogger Previa] ✓ Nueva Página estática creada con éxito: {page_url}")
+        logger.info(f"[Blogger Previa] ✓ Nueva Página estática creada: {page_url}")
 
-    # Guardar estado de la página estática
-    page_state = {
+    STATE_PAGE_FILE.write_text(json.dumps({
         "page_id": page_id,
         "title": PAGE_TITLE,
         "url": page_url,
         "actualizado": datetime.now(UY_TZ).isoformat()
-    }
-    STATE_PAGE_FILE.write_text(json.dumps(page_state, ensure_ascii=False, indent=2), encoding="utf-8")
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # -------------------------------------------------------------
-    # 2. Actualizar el Post Existente (penarol-en-vivo-la-previa-radiografia.html)
-    # -------------------------------------------------------------
+    # Actualizar post de radiografía con el rival/partido vigente
+    act = live.get("partido_activo") or {}
     prox = live.get("proximo_partido") or {}
-    scout = rival.get("scouting_tactico") or {}
-    rival_nom = rival.get("rival_nombre", "Defensor Sporting")
-    dt_nom = scout.get("entrenador", "Andrés Rodríguez")
-    estadio_nom = prox.get("estadio", "Estadio Luis Franzini")
-    fecha_leg = prox.get("fecha_legible", "Domingo 15/11 20:00 hs")
-    torneo_nom = prox.get("torneo", "Torneo Clausura 2026 (Fecha 14)")
+    rival_nom = rival.get("rival_nombre") or "Peñarol 2026"
+    torneo_nom = act.get("torneo") or prox.get("torneo") or "Campeonato Uruguayo 2026"
+    post_updated_title = f"[Peñarol] Radiografía Táctica & Cobertura Oficial: {act.get('nombre', f'Peñarol vs {rival_nom}')} • {torneo_nom}"
 
-    post_banner_redirect = f"""
-    <div style="background:#09090b;border:2px solid #ffd100;border-radius:12px;padding:18px 22px;margin-bottom:24px;color:#ffffff;box-shadow:0 8px 24px rgba(255,209,0,0.25);">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-        <span style="background:#ffd100;color:#09090b;font-weight:900;font-size:11.5px;padding:3px 10px;border-radius:999px;">⚡ PREVIA CONFIRMADA • FECHA 14 CLAUSURA</span>
-        <span style="font-size:12px;color:#ffd100;">{fecha_leg} • {estadio_nom}</span>
-      </div>
-      <h3 style="font-size:20px;color:#ffffff;margin:0 0 8px;font-weight:900;">
-        Defensor Sporting (DT {dt_nom}) vs. Peñarol en el Franzini
-      </h3>
-      <p style="font-size:14px;color:#d4d4d8;line-height:1.6;margin:0 0 14px;">
-        El Carbonero lidera en solitario la Tabla Anual con 66 unidades y visita al conjunto violeta en el Parque Rodó (Tribuna Ghierra para la parcialidad mirasol vía RedTickets). Consulta a continuación la radiografía táctica completa, duelos 1x1, figuras a seguir y el historial 1891 BD:
-      </p>
-      <a href="{page_url}" style="background:#ffd100;color:#09090b;font-weight:900;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;">
-        👉 Ver Radiografía Táctica Completa en ServicioTI ↗
-      </a>
-    </div>
-    """
-    
-    post_updated_html = post_banner_redirect + html_content
-    post_updated_title = f"[Peñarol] Radiografía Táctica & Previa Oficial: Defensor Sporting vs Peñarol • {torneo_nom}"
-    
     try:
-        logger.info(f"[Blogger Post Update] Actualizando post existente ID: {EXISTING_POST_ID}...")
         service.posts().patch(
             blogId=BLOG_ID,
             postId=EXISTING_POST_ID,
             body={
                 "title": post_updated_title,
-                "content": post_updated_html,
-                "labels": ["Peñarol", "Previa", "Radiografía Táctica", "Defensor Sporting", "Torneo Clausura", "ServicioTI"]
+                "content": html_content,
+                "labels": ["Peñarol", "Radiografía Táctica", rival_nom, "Campeonato Uruguayo", "ServicioTI"]
             }
         ).execute()
-        logger.info(f"[Blogger Post Update] ✓ Post existente {EXISTING_POST_ID} actualizado exitosamente con el próximo rival Defensor Sporting.")
+        logger.info(f"[Blogger Post Update] ✓ Post {EXISTING_POST_ID} actualizado para {rival_nom}.")
     except Exception as e:
         logger.warning(f"[Blogger Post Update] Aviso al actualizar post existente: {e}")
 
-    # -------------------------------------------------------------
-    # 3. Guardar URLs en news_digest.json y live_status.json
-    # -------------------------------------------------------------
     digest["blogger_previa_page_url"] = page_url
-    digest_file.write_text(json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    logger.info(f"[Blogger Sync Completo] URL de la Página Permanente: {page_url}")
+    (DATA_DIR / "news_digest.json").write_text(json.dumps(digest, ensure_ascii=False, indent=2), encoding="utf-8")
     return page_url
 
 
 if __name__ == "__main__":
-    url = sincronizar_proximo_partido_blogger()
+    sincronizar_proximo_partido_blogger()

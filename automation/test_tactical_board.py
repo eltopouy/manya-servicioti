@@ -256,11 +256,11 @@ def auditar_marcado_html_y_componentes() -> Tuple[bool, List[str]]:
         if needle not in html:
             errors.append(f"Falta elemento en index.html: {desc}")
 
-    # Verificar mención al DT Diego Aguirre y al rival activo Defensor Sporting
+    # Verificar mención al DT Diego Aguirre y ausencia de ex-jugadores 2024 obsoletos
     if "Diego Aguirre" not in html:
         errors.append("index.html no menciona a Diego Aguirre en la sección táctica")
-    if "Defensor Sporting" not in html:
-        errors.append("index.html no menciona a Defensor Sporting en la sección táctica")
+    if "Léo Coelho" in html or "Guillermo De Amores" in html:
+        errors.append("index.html conserva ex-jugadores obsoletos (Coelho / De Amores) en la pizarra táctica")
 
     # Verificar capa de futbolistas y renderizado visible de 11 jugadores
     # Debe existir el contenedor de jugadores #pitch-players-layer o elementos .pitch-player

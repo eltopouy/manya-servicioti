@@ -1,14 +1,14 @@
 {
-  "actualizado": "20/11/2026 16:15",
+  "actualizado": "20/11/2026 16:26",
   "schema_version": "10.0",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 21.8,
+  "horas_desde_ultimo_partido": 21.9,
   "rival_activo_nombre": "Cerro Largo",
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • 🏆 CAMPEÓN DE LA TABLA ANUAL (69 pts) • ⚽ Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+  "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • 🏆 CAMPEÓN DE LA TABLA ANUAL (69 pts) • ⚽ Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
   "resumen_temporada": {
     "penarol_anual_pts": 69,
     "penarol_anual_pos": 1,
@@ -58,8 +58,8 @@
     "es_hoy": false,
     "id_1891": 32174,
     "fase_1891": "Fecha 15",
-    "juez": "Tejera, Gustavo",
-    "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+    "juez": "Gustavo Tejera",
+    "goles_texto": "Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
     "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
     "dt_rival": "Bruno Silva",
     "video_youtube_id": "0BU8HYWYBiA",
@@ -198,8 +198,8 @@
     "es_hoy": false,
     "id_1891": 32174,
     "fase_1891": "Fecha 15",
-    "juez": "Tejera, Gustavo",
-    "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+    "juez": "Gustavo Tejera",
+    "goles_texto": "Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
     "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
     "dt_rival": "Bruno Silva",
     "video_youtube_id": "0BU8HYWYBiA",
@@ -279,8 +279,8 @@
       "es_hoy": false,
       "id_1891": 32174,
       "fase_1891": "Fecha 15",
-      "juez": "Tejera, Gustavo",
-      "goles_texto": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'",
+      "juez": "Gustavo Tejera",
+      "goles_texto": "Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
       "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
       "dt_rival": "Bruno Silva",
       "video_youtube_id": "0BU8HYWYBiA",
@@ -1776,13 +1776,13 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 19.0,
-    "sensacion_c": 19.0,
-    "viento_kmh": 12.0,
-    "humedad_pct": 65,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "temperatura_c": 22.3,
+    "sensacion_c": 24.5,
+    "viento_kmh": 4.0,
+    "humedad_pct": 76,
+    "condicion": "Templado en el Campeón del Siglo",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
-    "actualizado": "20/11/2026 16:15"
+    "actualizado": "20/11/2026 16:26"
   },
   "minuto_a_minuto": [
     {
@@ -1790,7 +1790,7 @@
       "icono": "🟢",
       "tipo": "inicio",
       "titulo": "Comenzó el partido en Estadio Campeón del Siglo",
-      "descripcion": "Rueda la pelota para Peñarol vs Cerro Largo por Campeonato Uruguayo • Torneo Clausura • Fecha 15 (Árbitro: Tejera, Gustavo)."
+      "descripcion": "Rueda la pelota para Peñarol vs Cerro Largo por Campeonato Uruguayo • Torneo Clausura • Fecha 15 (Árbitro: Gustavo Tejera)."
     },
     {
       "minuto": "28'",
