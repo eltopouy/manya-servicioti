@@ -1,9 +1,9 @@
 {
-  "actualizado": "20/11/2026 00:15",
+  "actualizado": "20/11/2026 00:45",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 5.8,
+  "horas_desde_ultimo_partido": 6.3,
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • Crónica post-partido y análisis táctico en primer plano.",
@@ -1366,10 +1366,10 @@
     "temperatura_c": 16.4,
     "sensacion_c": 17.8,
     "viento_kmh": 4.4,
-    "humedad_pct": 98,
+    "humedad_pct": 97,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "20/11/2026 00:15"
+    "actualizado": "20/11/2026 00:45"
   },
   "minuto_a_minuto": [
     {
