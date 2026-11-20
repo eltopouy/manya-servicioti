@@ -6,17 +6,24 @@
   "escudo_rival": "assets/img/escudos/escudo_cerro_largo.webp",
   "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
   "resumen": {
-    "partidos_jugados": 30,
-    "ganados_penarol": 18,
+    "partidos_jugados": 31,
+    "ganados_penarol": 19,
     "empatados": 8,
     "perdidos_penarol": 4,
-    "goles_penarol": 58,
+    "goles_penarol": 61,
     "goles_rival": 26,
-    "diferencia_goles": "+32",
-    "ventaja_victorias": "+14 partidos a favor del Decano",
-    "efectividad_pct": "68.9%"
+    "diferencia_goles": "+35",
+    "ventaja_victorias": "+15 partidos a favor del Decano",
+    "efectividad_pct": "69.9%"
   },
   "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-11-19",
+      "marcador": "Peñarol 3 - 0 Cerro Largo",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'"
+    },
     {
       "fecha": "2026-08-01",
       "marcador": "Peñarol 3 - 0 Cerro Largo",
@@ -44,13 +51,6 @@
       "estadio": "Arquitecto Antonio Eleuterio Ubilla de Melo",
       "torneo": "Torneo Intermedio",
       "incidencias": "Diego García (P) 25' y Facundo Bonifazi (C) 28'"
-    },
-    {
-      "fecha": "2025-03-30",
-      "marcador": "Peñarol 0 - 2 Cerro Largo",
-      "estadio": "Campeón del Siglo",
-      "torneo": "Torneo Apertura",
-      "incidencias": "Nicolás Bertocchi (C) 27' y Leandro Otormín (C) 75'"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generado_el": "20/11/2026 01:45",
+  "generado_el": "20/11/2026 02:15",
   "rival_nombre": "Cerro Largo Fútbol Club",
   "rival_corto": "Cerro Largo",
   "rival_slug": "cerro_largo",
@@ -39,15 +39,15 @@
   },
   "duelos_tacticos_1x1": [],
   "historial_certificacion_1891": {
-    "partidos_jugados": 30,
-    "ganados_penarol": 18,
+    "partidos_jugados": 31,
+    "ganados_penarol": 19,
     "empatados": 8,
     "perdidos_penarol": 4,
-    "goles_penarol": 58,
+    "goles_penarol": 61,
     "goles_rival": 26,
-    "ventaja_victorias": "+14 partidos a favor del Decano",
-    "diferencia_goles": "+32",
-    "efectividad_pct": "68.9%"
+    "ventaja_victorias": "+15 partidos a favor del Decano",
+    "diferencia_goles": "+35",
+    "efectividad_pct": "69.9%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy/liga-auf-uruguaya/)",
