@@ -3,8 +3,8 @@
   "timestamp": "2026-11-19T22:30:08.832045-03:00",
   "score_salud": 75.0,
   "total_pruebas": 12,
-  "pruebas_exitosas": 9,
-  "pruebas_fallidas": 3,
+  "pruebas_exitosas": 8,
+  "pruebas_fallidas": 4,
   "estado_general": "CRITICO",
   "detalle_pruebas": [
     {
@@ -78,20 +78,20 @@
     },
     {
       "test": "Accesibilidad de Endpoints Oficiales",
-      "status": "PASS",
-      "passed": true,
-      "message": "Todos los endpoints responden HTTP 200 OK",
+      "status": "FAIL",
+      "passed": false,
+      "message": "Endpoints con error: ['Blogger Previa Permanente (HTTP Error 429: Too Many Requests)', 'Blogger Previa Post (HTTP Error 429: Too Many Requests)']",
       "details": {
         "Portal Oficial Manya": {
           "status": 200,
           "url": "https://manya.servicioti.com.uy/"
         },
         "Blogger Previa Permanente": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html"
         },
         "Blogger Previa Post": {
-          "status": 200,
+          "error": "HTTP Error 429: Too Many Requests",
           "url": "https://www.servicioti.com.uy/2026/10/penarol-en-vivo-la-previa-radiografia.html"
         },
         "Blogger Archivo Histórico": {
@@ -184,6 +184,5 @@
       },
       "timestamp": "2026-11-19T22:30:08.831829-03:00"
     }
-  ],
-  "reparaciones_aplicadas": []
+  ]
 }
