@@ -1,5 +1,5 @@
 {
-  "actualizado": "20/11/2026 19:45",
+  "actualizado": "20/11/2026 20:15",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "CRONICA_POST_PARTIDO",
@@ -89,6 +89,18 @@
   ],
   "noticias_fuentes": [
     {
+      "titulo": "Marcelo Areco, exconsejero de Peñarol, se sumó a la Lista 1414 que encabeza Freddy García para las elecciones",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQUmZTQWdVRExKTXBRWGNIT25lS3J3aThYN0thUnNVNHJXcmU2a1dvQUw2TzBUMERhdF80eVdjREhFV1gzbHVWUTZrWHNFVzFSY0VyWHgtMWlLRzRObUNkRTN2ZWxyM09DZlVPLTBHYVVDcncyT01FdU9nVVVDUjFvNkhVSVoxNXJBSVNra2Rlak4zYjdYTDU0VlNFSnhnT0hiZHg5YkwtdUtfWWNwVXE5czRkRk5LZnFIcUcyaGlYa0hKeWF0X0xCTU5UNlFjeG5GY0lKRjNWTVZvTWZpTkZJWVJR?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 20/11/2026 a las 19:14 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "20/11/2026 19:14",
+      "fecha_iso": "2026-11-20T19:14:32-03:00",
+      "fecha_raw": "20/11/2026 19:14 hs",
+      "antiguedad_horas": 1.0,
+      "timestamp": 1795212872.0,
+      "peso": 1.25
+    },
+    {
       "titulo": "Peñarol empató al Nacional de 2020 como el ganador de la Tabla Anual con menos puntos del siglo: los números del carbonero y el curioso dato de Diego Aguirre",
       "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOcER6X054N3gzQTJDb090elZoUlJrUVBfaU1MaExNQkZ1VmlDM1pLeWM3MTVRTm0tTUp3Um1WRlFXSnRSaG5kelRvaG51azZhU3NJRmhBZEtLRzRCMDNMdmdEYkhCZGtRSmN4OFFON2Y1ejVxMWFNcjVOQkh6NFZPa1JKa0hIMzlseFRRUV9Rb2pvSjNrX09KSkRxYk1EWTV1ZjZOZk8ydEVIMk8wVFcxbmlUcE9jSE15UE4yQ3dkMUhZVnRUWnBlNWdVaFRUYUt1LTJnSTZXSE1RUWJjdUNjdTdfaS1TTjlOd1FJeXM0MVNHS0pjekM0bXJOaElFT3V4WnBUVU1TVTM4OC12UDZQYzJ4eHlkTGJwREhV0gGgAkFVX3lxTE5OVlNjdjBja1cyTHBtWFF2SmhfSWdSa1RTc0JpZUN6MUdJZmN0UzFqSFNHejMtZXlDYzhZR1poZkJJbnEyMFlxZFRleWNZN3hnSHU4NkoyZUswMGxJUGtBM3JyTlJTUy1vZmZ3aWlYTlVKbWVPZHc0RHgxWXBLM3ozNHAxXzhVWkZ1WmZYRzEycXpucUEtYzFaeFIyR2x5TmNyMXVpLTBkQ1RYZkR6cUszV3hOQ2tXbDNMT1FSSTBIbFNQcjZBZ185cXpyTjNwZWlBcVZCLWxPbUtCdnpaZGQyNzBPVFpVaUlpRmd2dFQ3al9xcjNDVXBFamFMVDFNR1lDZUxOLUdNc3NmaEFidjNwT05qU3c5WU1pemdkRl9GNg?oc=5",
       "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 20/11/2026 a las 10:44 hs.",
@@ -96,21 +108,9 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 9.0,
+      "antiguedad_horas": 9.5,
       "timestamp": 1795182240.0,
       "peso": 1.25
-    },
-    {
-      "titulo": "Básquet: Peñarol derrotó a Goes de local y lidera la Liga Uruguaya de forma invicta",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNdDlpRkt6dXVMci0tNGg1VkZ4VHVHcGlsQTh3Y182dDVIWFd6c29kTThtekc4ejBBM3NZTldOS0c0YWpNVkRjRjRsQlF3cTh2V2Z4ekd5ZEZ5WGpQdXpGeFZsMnNHRE14RDNqUVpYSmo2NEplMWVMc0tHWW5rdXByR0I0WHhkU19WZmZyT2Zic0FIeUtqeWRoT0U0ZmExcDlKYWl4Mkl0X24ySDFDdGRKRjJrS2ExNlZrUURrV0p4UjliNzhveWh4b0hB?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 20/11/2026 a las 08:02 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "20/11/2026 08:02",
-      "fecha_iso": "2026-11-20T08:02:00-03:00",
-      "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 11.7,
-      "timestamp": 1795172520.0,
-      "peso": 1.2
     },
     {
       "titulo": "Leonel Jaime dio un show para Peñarol: las jugadas claves, un golazo, su emoción y el mensaje a los hinchas",
@@ -120,7 +120,7 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 16.0,
+      "antiguedad_horas": 16.5,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
@@ -132,7 +132,7 @@
       "fecha": "19/11/2026 21:55",
       "fecha_iso": "2026-11-19T21:55:32-03:00",
       "fecha_raw": "19/11/2026 21:55 hs",
-      "antiguedad_horas": 21.8,
+      "antiguedad_horas": 22.3,
       "timestamp": 1795136132.0,
       "peso": 1.25
     },
@@ -144,7 +144,7 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 23.8,
+      "antiguedad_horas": 24.3,
       "timestamp": 1795129020.0,
       "peso": 1.2
     },
@@ -156,7 +156,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 24.9,
+      "antiguedad_horas": 25.4,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -168,19 +168,19 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 25.1,
+      "antiguedad_horas": 25.6,
       "timestamp": 1795124345.0,
       "peso": 1.05
     },
     {
-      "titulo": "Peñarol se coronó campeón de la Tabla Anual al vencer 3-0 a Cerro Largo y espera por Racing o Liverpool",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPZUcyRTFCZ08xZmZsUDcwX255SldkR0MwVUk2c3Utb0trSHE4d3ZpSzVNVVNJcTd4NTMtM3RpWm1YaUswYk82T1RaUWNyQzMxT0t6RVg0N3A4Y2VaX2FJU0w5OTg3c0NlWmQ1a0ZnOHhVdzNnWnZSZkZqTGpqc0ZBWjlRb2RjVUlFY2MyLUhHSGo4WmV0LUtMSE43SWw4c19UVDJtSVlwVWlnUzlhQ1FKOUtjejRNcmhRcVo2a0xsenByZ2wxSXc2SFVhQTLSAdIBQVVfeXFMTTJNcVZ2WFl1dXp6ZVNUS2tZRElMRjlmSHhSUHlObnlCOVBydzRocWdMTVRyRU42UG83Y0tMc0kyWXVWUElONlpPYXNRSzZSU2dXTXpWek44MVJSOE82a0h2UXB0Q2VZQzJxeFgzNXZIdnVoRUJvaGlyelNRa2F5XzZndFBMZUpnWnhrVmNsb09TTXhubU1DQ3RGNHVVNWpIcy1oVjVPV0hzMTczeTFFdW1ma2pxaTJjVFN6MngxZHo2bUxxOGhZRFNrZ2RyVlFnbVhn?oc=5",
+      "titulo": "Peñarol ganó la Anual tras golear 3-0 a Cerro Largo, y espera por Racing o Liverpool para definir el campeón 2026",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWTZJNmlyWVI5QUg0OVotLTVsd3hyeDlVcG9wMG1hYUtJYndMQXB4UWh3Y3M2dndWT2tpOGFNWDEzczhjcUF3UEsxcDhhLV9ucGUwWmhsaVlSbEg1OS1HelRnTjVLaWowR2ZhTUQ1Z3I5NXNFd0NPRGxpOHhvdDloZkZSSXVhU2NBMVp1bXp3VlN3MnVEMVRCUUdtNUVoOHZTdGN1R1dBTXBLX2ZQcWNsMEVBaHFzbDZVRTcyOGdudUQzbjlldmE2UVp4VkpjeW_SAdQBQVVfeXFMUHNTemlZb2t2b0V1VjUwZG51WHlNSVA5bHpIRi1OWXU3TDlOZW8yeUo5UmNuYUMyaU1GWF9DNXNiMXRfMGFjeW93MmRUREllYmFZS3JyY1JQWjhOZTBreTZ0amNjMnltVWxaZjRnOXhJd3NFSDBVNGRTSl9Hb1dlSWtpSkJVTnVtN0tHWVdmaVQ1cXpXMFBZNFNTWHhEc1AxNkhvY3Z2ME1ZczVScGNXTERhdHJWSXhpekhyaTI1V3NLdUg2SWdUNDhwN2dSeTBybU1hQ3E?oc=5",
       "resumen": "Cobertura deportiva verificada publicada por Subrayado Deportes el 19/11/2026 a las 18:31 hs.",
       "fuente": "Subrayado Deportes",
       "fecha": "19/11/2026 18:31",
       "fecha_iso": "2026-11-19T18:31:00-03:00",
       "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 25.2,
+      "antiguedad_horas": 25.7,
       "timestamp": 1795123860.0,
       "peso": 1.1
     },
@@ -192,7 +192,7 @@
       "fecha": "19/11/2026 18:27",
       "fecha_iso": "2026-11-19T18:27:00-03:00",
       "fecha_raw": "19/11/2026 18:27 hs",
-      "antiguedad_horas": 25.3,
+      "antiguedad_horas": 25.8,
       "timestamp": 1795123620.0,
       "peso": 1.2
     },
@@ -204,7 +204,7 @@
       "fecha": "19/11/2026 16:00",
       "fecha_iso": "2026-11-19T16:00:00-03:00",
       "fecha_raw": "19/11/2026 16:00 hs",
-      "antiguedad_horas": 27.8,
+      "antiguedad_horas": 28.3,
       "timestamp": 1795114800.0,
       "peso": 1.25
     }
