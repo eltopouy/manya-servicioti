@@ -1,9 +1,9 @@
 {
-  "actualizado": "20/11/2026 10:45",
+  "actualizado": "20/11/2026 11:15",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 16.3,
+  "horas_desde_ultimo_partido": 16.8,
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
   "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • Crónica post-partido y análisis táctico en primer plano.",
@@ -1364,12 +1364,12 @@
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
     "temperatura_c": 19.8,
-    "sensacion_c": 22.6,
-    "viento_kmh": 0.6,
+    "sensacion_c": 22.2,
+    "viento_kmh": 3.5,
     "humedad_pct": 89,
     "condicion": "Garúa leve en el Campeón del Siglo",
     "recomendacion_hincha": "Noche ideal para ir con la aurinegra y campera liviana a la tribuna.",
-    "actualizado": "20/11/2026 10:45"
+    "actualizado": "20/11/2026 11:15"
   },
   "minuto_a_minuto": [
     {
