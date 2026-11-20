@@ -1,10 +1,10 @@
 {
-  "actualizado": "20/11/2026 16:26",
+  "actualizado": "20/11/2026 16:27",
   "schema_version": "10.0",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 21.9,
+  "horas_desde_ultimo_partido": 22.0,
   "rival_activo_nombre": "Cerro Largo",
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
@@ -1782,7 +1782,7 @@
     "humedad_pct": 76,
     "condicion": "Templado en el Campeón del Siglo",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
-    "actualizado": "20/11/2026 16:26"
+    "actualizado": "20/11/2026 16:28"
   },
   "minuto_a_minuto": [
     {
