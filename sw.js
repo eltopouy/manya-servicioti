@@ -1,9 +1,9 @@
-const CACHE_NAME = 'manya-servicioti-v10.0-unified';
+const CACHE_NAME = 'manya-servicioti-v11.0-unified';
 const CORE_ASSETS = [
   '/',
   '/index.html',
-  '/css/styles.css?v=10.0',
-  '/js/app.js?v=10.0',
+  '/css/styles.css?v=11.0',
+  '/js/app.js?v=11.0',
   '/manifest.json',
   '/data/live_status.json',
   '/data/news_digest.json',
@@ -40,10 +40,10 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ESTRATEGIA NETWORK-FIRST v10.0:
-// Prioriza siempre los datos en vivo y activos frescos desde la red.
+// ESTRATEGIA NETWORK-FIRST v11.0:
+// Prioriza siempre los datos en vivo y activos frescos desde la red, con respaldo offline resiliente.
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
+  if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) return;
 
   event.respondWith(
     fetch(event.request)
@@ -54,6 +54,13 @@ self.addEventListener('fetch', event => {
         }
         return res;
       })
-      .catch(() => caches.match(event.request, { ignoreSearch: true }))
+      .catch(async () => {
+        const cached = await caches.match(event.request, { ignoreSearch: true });
+        if (cached) return cached;
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+        return Response.error();
+      })
   );
 });

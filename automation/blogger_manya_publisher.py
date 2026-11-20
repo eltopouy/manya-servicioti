@@ -17,24 +17,22 @@ import os
 import sys
 import json
 import html
-import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from typing import Optional
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
-
-logger = logging.getLogger("ManyaBloggerPublisher")
-if not logger.handlers:
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("ManyaBloggerPublisher")
+
 DATA_DIR = BASE_DIR / "data"
 SCRATCH_DIR = BASE_DIR.parent
 TOKEN_PATH = SCRATCH_DIR / "seo_blogger_automation" / "token.json"
@@ -91,11 +89,16 @@ def publish_manya_article_to_blogger(post_type: str = "NOTICIA_DIARIA", match_id
     seo_desc = digest.get("bajada_seo", "Actualidad del Club Atlético Peñarol en vivo: Tabla Anual, Los Aromos, entradas en el Campeón del Siglo y estadísticas en Manya ServicioTI.")
     claves = digest.get("claves_60_segundos", [])
     parrafos = art.get("parrafos", [])
-    faqs = art.get("preguntas_frecuentes", [])
+    faqs = digest.get("preguntas_frecuentes") or art.get("preguntas_frecuentes", [])
     prox = live.get("proximo_partido", {})
     partido_activo = live.get("partido_activo", {})
 
-    hero_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_previa_balon_estadio.webp"
+    pv_img = (digest.get("portada_visual") or {}).get("imagen_webp", "").lstrip("/")
+    hero_img_cdn = (
+        f"https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/{pv_img}"
+        if pv_img and (BASE_DIR / pv_img).exists()
+        else "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_previa_balon_estadio.webp"
+    )
     second_img_cdn = "https://cdn.jsdelivr.net/gh/eltopouy/manya-servicioti@main/assets/ig/manya_hinchada_fiesta_aurinegra.webp"
 
     claves_html = "".join(

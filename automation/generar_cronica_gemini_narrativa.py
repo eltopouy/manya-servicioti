@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-GENERADOR DINÁMICO DE CRÓNICA Y ANÁLISIS EDITORIAL GEMINI — v3.0 (Zero-Hardcode)
-================================================================================
+GENERADOR DINÁMICO DE CRÓNICA Y ANÁLISIS EDITORIAL GEMINI — v4.0 (Manya v11.0 Zero-Hardcode)
+============================================================================================
 Lee 100% del contexto vivo desde `data/live_status.json`, `data/rival_intelligence.json`
 y `ManyaSportsPressService` para redactar la crónica post-partido o la previa oficial
 del partido activo (con fallback periodístico determinista si no hay API key o falla la red).
@@ -11,27 +11,21 @@ import os
 import sys
 import json
 import re
-import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, List
 
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - [GeminiNarrativa] - %(levelname)s - %(message)s"
-)
-logger = logging.getLogger("GeminiNarrativa")
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
 DATA_DIR = BASE_DIR / "data"
 SCRATCH_DIR = BASE_DIR.parent
 UY_TZ = timezone(timedelta(hours=-3))
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("GeminiNarrativa")
 
 
 def _obtener_gemini_key() -> str:
@@ -99,9 +93,9 @@ def construir_cronica_certificada_determinista(live: Dict[str, Any], rival_intel
     alin_str = ", ".join(alin[:11]) if alin else "Washington Aguerre, Ignacio Alegre, Germán Pezzella, Nahuel Herrera, Maximiliano Olivera, Eric Remedi, Eduardo Darias, Javier Cabrera, Leandro Umpiérrez, Leonel Jaime y Matías Arezo"
     alin_corto = ", ".join(alin[:4]) if len(alin) >= 4 else "Washington Aguerre, Germán Pezzella, Nahuel Herrera y Matías Arezo"
 
-    # Seleccionar la mejor foto fresca de galleries.json
-    portada_webp = "assets/gallery/1891_cerro_largo_32174_02.webp"
-    portada_jpg = "assets/gallery/1891_cerro_largo_32174_02.jpg"
+    # Seleccionar la mejor foto fresca de galleries.json (cero archivos fijos de un solo partido)
+    portada_webp = "assets/gallery/galeria_actualidad_aguirre.webp"
+    portada_jpg = "assets/gallery/galeria_actualidad_aguirre.jpg"
     gal_file = DATA_DIR / "galleries.json"
     if gal_file.exists():
         try:
@@ -353,9 +347,10 @@ def generar_cronica_con_gemini(usar_ia: bool = True, noticias: List[Dict[str, An
                     raw = resp.text.strip()
                     raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.I)
                     parsed = json.loads(raw)
-                    # Verificar anti-disclaimer y estructura mínima
+                    # Filtro anti-disclaimer y guardia contra alucinación de ex-jugadores que ya no integran el plantel 2026
                     txt_chk = json.dumps(parsed, ensure_ascii=False).lower()
-                    if any(d in txt_chk for d in ["modelo de lenguaje", "inteligencia artificial", "no puedo generar", "guzmán rodríguez", "léo coelho"]):
+                    ex_players_guard = ["guzmán rodríguez", "léo coelho", "de amores", "maxi silvera"]
+                    if any(d in txt_chk for d in ["modelo de lenguaje", "inteligencia artificial", "no puedo generar", *ex_players_guard]):
                         logger.warning(f"[GeminiNarrativa] Salida de {model_name} rechazada por filtro de calidad/plantel.")
                         continue
                     if parsed.get("articulo_principal", {}).get("parrafos") and len(parsed["articulo_principal"]["parrafos"]) >= 3:
@@ -390,8 +385,8 @@ def actualizar_digest_json(cronica_data: Dict[str, Any], noticias_fuentes: List[
 
     digest = {
         "actualizado": now_str,
-        "schema_version": "10.0",
-        "modelo_ia": "Manya Editorial Engine v10.0 (1891 BD + ESPN + Prensa Verificada)",
+        "schema_version": "11.0",
+        "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
         "fase_publicacion": "CRONICA_POST_PARTIDO" if fase == "POST_PARTIDO" else ("HOY_JUEGA" if act.get("es_hoy") else "PREVIA"),
         "partido_id": str(act.get("event_id", "")),
         "partido_nombre": act.get("nombre", ""),

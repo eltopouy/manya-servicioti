@@ -12,22 +12,19 @@ import time
 import json
 import sqlite3
 import psutil
-import logging
 from pathlib import Path
 from datetime import datetime, timezone, timedelta, time as dtime
-from typing import Optional, Dict, Any
-
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
-
-logger = logging.getLogger("ManyaAntiCollision")
-if not logger.handlers:
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
+from typing import Optional, Dict, Any, Tuple
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("ManyaAntiCollision")
+
 SCRATCH_DIR = BASE_DIR.parent
 LOCKS_DIR = SCRATCH_DIR / ".locks"
 DATA_DIR = BASE_DIR / "data"
@@ -139,7 +136,7 @@ class ScheduleSafety:
     ]
 
     @classmethod
-    def is_safe_to_publish(cls) -> (bool, str):
+    def is_safe_to_publish(cls) -> Tuple[bool, str]:
         now_time = datetime.now(UY_TZ).time()
         for start_w, end_w, motivo in cls.BLACKOUT_WINDOWS:
             if start_w <= now_time <= end_w:
@@ -182,7 +179,7 @@ class ManyaBloggerCatalog:
             conn.close()
 
     @classmethod
-    def can_publish(cls, post_type: str, match_id: Optional[str] = None) -> (bool, str):
+    def can_publish(cls, post_type: str, match_id: Optional[str] = None) -> Tuple[bool, str]:
         """
         Regla editorial:
           - Para un match_id dado: solo 1 'PREVIA' y solo 1 'CRONICA'.

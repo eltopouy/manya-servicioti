@@ -1,10 +1,10 @@
 {
-  "actualizado": "20/11/2026 17:15",
-  "schema_version": "10.0",
+  "actualizado": "20/11/2026 17:32",
+  "schema_version": "11.0",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 22.8,
+  "horas_desde_ultimo_partido": 23.0,
   "rival_activo_nombre": "Cerro Largo",
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
@@ -21,12 +21,15 @@
     "libertadores_2027": "Clasificado directo a Fase de Grupos (Uruguay 1)",
     "definicion_uruguayo": {
       "semifinal": "Racing (Campeón Apertura) vs Liverpool (Campeón Clausura)",
-      "fecha_semifinal": "Domingo 29/11/2026 (tentativa)",
+      "fecha_semifinal": "Domingo 29/11/2026",
+      "semifinal_espn_event_id": "",
+      "ganador_semifinal": "",
       "finales": "Peñarol (Campeón Tabla Anual) vs Ganador Semifinal — Ida: Jueves 3/12 • Vuelta: Domingo 6/12"
     }
   },
   "partido_activo": {
     "event_id": "401934686",
+    "es_partido_oficial_espn": true,
     "nombre": "Peñarol vs Cerro Largo",
     "fecha_iso": "2026-11-19T16:30:00-03:00",
     "fecha_legible": "Jueves 19/11/2026 16:30 hs",
@@ -109,17 +112,17 @@
       "goles": [
         {
           "minuto": "28'",
-          "texto": "Nahuel Herrera (Peñarol) Goal at 28'",
+          "texto": "Nahuel Herrera (Peñarol) Gol a los 28'",
           "equipo": "Peñarol"
         },
         {
           "minuto": "32'",
-          "texto": "Cristian Jaime (Peñarol) Goal at 32'",
+          "texto": "Leonel Jaime (Peñarol) Gol a los 32'",
           "equipo": "Peñarol"
         },
         {
           "minuto": "70'",
-          "texto": "Douglas Arezo (Peñarol) Goal at 70'",
+          "texto": "Matías Arezo (Peñarol) Gol a los 70'",
           "equipo": "Peñarol"
         }
       ],
@@ -132,6 +135,7 @@
   },
   "proximo_partido": {
     "event_id": "uf2026_final_ida",
+    "es_partido_oficial_espn": false,
     "es_definicion_final": true,
     "nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
     "fecha_iso": "2026-12-03T20:00:00-03:00",
@@ -160,13 +164,22 @@
     "es_hoy": false,
     "nota_definicion": "Peñarol conquistó la Tabla Anual con 69 puntos, aseguró fase de grupos de Copa Libertadores 2027 y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y Liverpool (Clausura).",
     "semifinal": {
+      "detectada_espn": false,
+      "event_id": "",
       "equipos": "Racing vs Liverpool",
       "fecha_tentativa": "Domingo 29/11/2026",
+      "fecha_iso": "",
+      "estadio": "Estadio Centenario (a confirmar AUF)",
+      "state": "pre",
+      "completado": false,
+      "marcador": "",
+      "ganador": "",
       "contexto": "Campeón Apertura (Racing) vs Campeón Clausura (Liverpool)"
     }
   },
   "ultimo_partido": {
     "event_id": "401934686",
+    "es_partido_oficial_espn": true,
     "nombre": "Peñarol vs Cerro Largo",
     "fecha_iso": "2026-11-19T16:30:00-03:00",
     "fecha_legible": "Jueves 19/11/2026 16:30 hs",
@@ -248,6 +261,7 @@
   "ultimos_resultados": [
     {
       "event_id": "401934686",
+      "es_partido_oficial_espn": true,
       "nombre": "Peñarol vs Cerro Largo",
       "fecha_iso": "2026-11-19T16:30:00-03:00",
       "fecha_legible": "Jueves 19/11/2026 16:30 hs",
@@ -328,6 +342,7 @@
     },
     {
       "event_id": "401933376",
+      "es_partido_oficial_espn": true,
       "nombre": "Defensor Sporting vs Peñarol",
       "fecha_iso": "2026-11-15T20:00:00-03:00",
       "fecha_legible": "Domingo 15/11/2026 20:00 hs",
@@ -360,6 +375,7 @@
     },
     {
       "event_id": "401931258",
+      "es_partido_oficial_espn": true,
       "nombre": "Peñarol vs Montevideo Wanderers",
       "fecha_iso": "2026-10-31T16:30:00-03:00",
       "fecha_legible": "Sábado 31/10/2026 16:30 hs",
@@ -392,6 +408,7 @@
     },
     {
       "event_id": "401930317",
+      "es_partido_oficial_espn": true,
       "nombre": "Juventud vs Peñarol",
       "fecha_iso": "2026-10-23T20:00:00-03:00",
       "fecha_legible": "Viernes 23/10/2026 20:00 hs",
@@ -424,6 +441,7 @@
     },
     {
       "event_id": "401929259",
+      "es_partido_oficial_espn": true,
       "nombre": "Liverpool vs Peñarol",
       "fecha_iso": "2026-10-18T18:30:00-03:00",
       "fecha_legible": "Domingo 18/10/2026 18:30 hs",
@@ -458,6 +476,7 @@
   "proximos_partidos": [
     {
       "event_id": "uf2026_final_ida",
+      "es_partido_oficial_espn": false,
       "es_definicion_final": true,
       "nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
       "fecha_iso": "2026-12-03T20:00:00-03:00",
@@ -486,8 +505,16 @@
       "es_hoy": false,
       "nota_definicion": "Peñarol conquistó la Tabla Anual con 69 puntos, aseguró fase de grupos de Copa Libertadores 2027 y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y Liverpool (Clausura).",
       "semifinal": {
+        "detectada_espn": false,
+        "event_id": "",
         "equipos": "Racing vs Liverpool",
         "fecha_tentativa": "Domingo 29/11/2026",
+        "fecha_iso": "",
+        "estadio": "Estadio Centenario (a confirmar AUF)",
+        "state": "pre",
+        "completado": false,
+        "marcador": "",
+        "ganador": "",
         "contexto": "Campeón Apertura (Racing) vs Campeón Clausura (Liverpool)"
       }
     }
@@ -948,6 +975,7 @@
   "tabla_clausura": [
     {
       "pos": 1,
+      "team_id": "5492",
       "equipo": "Liverpool",
       "escudo": "assets/img/escudos/escudo_liverpool.webp",
       "es_penarol": false,
@@ -962,6 +990,7 @@
     },
     {
       "pos": 2,
+      "team_id": "19002",
       "equipo": "Montevideo City Torque",
       "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
       "es_penarol": false,
@@ -976,6 +1005,7 @@
     },
     {
       "pos": 3,
+      "team_id": "2684",
       "equipo": "Nacional",
       "escudo": "assets/img/escudos/escudo_nacional.webp",
       "es_penarol": false,
@@ -990,6 +1020,7 @@
     },
     {
       "pos": 4,
+      "team_id": "2683",
       "equipo": "Peñarol",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
       "es_penarol": true,
@@ -1004,6 +1035,7 @@
     },
     {
       "pos": 5,
+      "team_id": "10000",
       "equipo": "Deportivo Maldonado",
       "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
       "es_penarol": false,
@@ -1018,6 +1050,7 @@
     },
     {
       "pos": 6,
+      "team_id": "6866",
       "equipo": "Progreso",
       "escudo": "assets/img/escudos/escudo_progreso.webp",
       "es_penarol": false,
@@ -1032,6 +1065,7 @@
     },
     {
       "pos": 7,
+      "team_id": "5490",
       "equipo": "Cerro",
       "escudo": "assets/img/escudos/escudo_cerro.webp",
       "es_penarol": false,
@@ -1046,6 +1080,7 @@
     },
     {
       "pos": 8,
+      "team_id": "9903",
       "equipo": "Racing",
       "escudo": "assets/img/escudos/escudo_racing.webp",
       "es_penarol": false,
@@ -1060,6 +1095,7 @@
     },
     {
       "pos": 9,
+      "team_id": "5501",
       "equipo": "Montevideo Wanderers",
       "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
       "es_penarol": false,
@@ -1074,6 +1110,7 @@
     },
     {
       "pos": 10,
+      "team_id": "8416",
       "equipo": "Juventud",
       "escudo": "assets/img/escudos/escudo_juventud.webp",
       "es_penarol": false,
@@ -1088,6 +1125,7 @@
     },
     {
       "pos": 11,
+      "team_id": "9999",
       "equipo": "Boston River",
       "escudo": "assets/img/escudos/escudo_boston_river.webp",
       "es_penarol": false,
@@ -1102,6 +1140,7 @@
     },
     {
       "pos": 12,
+      "team_id": "21403",
       "equipo": "Albion",
       "escudo": "assets/img/escudos/escudo_albion.webp",
       "es_penarol": false,
@@ -1116,6 +1155,7 @@
     },
     {
       "pos": 13,
+      "team_id": "1007",
       "equipo": "Defensor Sporting",
       "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
       "es_penarol": false,
@@ -1130,6 +1170,7 @@
     },
     {
       "pos": 14,
+      "team_id": "131688",
       "equipo": "Central Español",
       "escudo": "assets/img/escudos/escudo_central_espanol.webp",
       "es_penarol": false,
@@ -1144,6 +1185,7 @@
     },
     {
       "pos": 15,
+      "team_id": "4817",
       "equipo": "Danubio",
       "escudo": "assets/img/escudos/escudo_danubio.webp",
       "es_penarol": false,
@@ -1158,6 +1200,7 @@
     },
     {
       "pos": 16,
+      "team_id": "9902",
       "equipo": "Cerro Largo",
       "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
       "es_penarol": false,
@@ -1478,6 +1521,7 @@
       "datos": [
         {
           "pos": 1,
+          "team_id": "5492",
           "equipo": "Liverpool",
           "escudo": "assets/img/escudos/escudo_liverpool.webp",
           "es_penarol": false,
@@ -1492,6 +1536,7 @@
         },
         {
           "pos": 2,
+          "team_id": "19002",
           "equipo": "Montevideo City Torque",
           "escudo": "assets/img/escudos/escudo_montevideo_city_torque.webp",
           "es_penarol": false,
@@ -1506,6 +1551,7 @@
         },
         {
           "pos": 3,
+          "team_id": "2684",
           "equipo": "Nacional",
           "escudo": "assets/img/escudos/escudo_nacional.webp",
           "es_penarol": false,
@@ -1520,6 +1566,7 @@
         },
         {
           "pos": 4,
+          "team_id": "2683",
           "equipo": "Peñarol",
           "escudo": "assets/img/escudos/escudo_penarol.webp",
           "es_penarol": true,
@@ -1534,6 +1581,7 @@
         },
         {
           "pos": 5,
+          "team_id": "10000",
           "equipo": "Deportivo Maldonado",
           "escudo": "assets/img/escudos/escudo_deportivo_maldonado.webp",
           "es_penarol": false,
@@ -1548,6 +1596,7 @@
         },
         {
           "pos": 6,
+          "team_id": "6866",
           "equipo": "Progreso",
           "escudo": "assets/img/escudos/escudo_progreso.webp",
           "es_penarol": false,
@@ -1562,6 +1611,7 @@
         },
         {
           "pos": 7,
+          "team_id": "5490",
           "equipo": "Cerro",
           "escudo": "assets/img/escudos/escudo_cerro.webp",
           "es_penarol": false,
@@ -1576,6 +1626,7 @@
         },
         {
           "pos": 8,
+          "team_id": "9903",
           "equipo": "Racing",
           "escudo": "assets/img/escudos/escudo_racing.webp",
           "es_penarol": false,
@@ -1590,6 +1641,7 @@
         },
         {
           "pos": 9,
+          "team_id": "5501",
           "equipo": "Montevideo Wanderers",
           "escudo": "assets/img/escudos/escudo_montevideo_wanderers.webp",
           "es_penarol": false,
@@ -1604,6 +1656,7 @@
         },
         {
           "pos": 10,
+          "team_id": "8416",
           "equipo": "Juventud",
           "escudo": "assets/img/escudos/escudo_juventud.webp",
           "es_penarol": false,
@@ -1618,6 +1671,7 @@
         },
         {
           "pos": 11,
+          "team_id": "9999",
           "equipo": "Boston River",
           "escudo": "assets/img/escudos/escudo_boston_river.webp",
           "es_penarol": false,
@@ -1632,6 +1686,7 @@
         },
         {
           "pos": 12,
+          "team_id": "21403",
           "equipo": "Albion",
           "escudo": "assets/img/escudos/escudo_albion.webp",
           "es_penarol": false,
@@ -1646,6 +1701,7 @@
         },
         {
           "pos": 13,
+          "team_id": "1007",
           "equipo": "Defensor Sporting",
           "escudo": "assets/img/escudos/escudo_defensor_sporting.webp",
           "es_penarol": false,
@@ -1660,6 +1716,7 @@
         },
         {
           "pos": 14,
+          "team_id": "131688",
           "equipo": "Central Español",
           "escudo": "assets/img/escudos/escudo_central_espanol.webp",
           "es_penarol": false,
@@ -1674,6 +1731,7 @@
         },
         {
           "pos": 15,
+          "team_id": "4817",
           "equipo": "Danubio",
           "escudo": "assets/img/escudos/escudo_danubio.webp",
           "es_penarol": false,
@@ -1688,6 +1746,7 @@
         },
         {
           "pos": 16,
+          "team_id": "9902",
           "equipo": "Cerro Largo",
           "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
           "es_penarol": false,
@@ -1776,13 +1835,19 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 18.0,
-    "sensacion_c": 19.9,
-    "viento_kmh": 5.7,
+    "temperatura_c": 17.9,
+    "sensacion_c": 20.3,
+    "viento_kmh": 2.2,
     "humedad_pct": 98,
-    "condicion": "Templado en el Campeón del Siglo",
-    "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
-    "actualizado": "20/11/2026 17:15"
+    "weather_code": 53,
+    "condicion": "Llovizna moderada en Ruta 102",
+    "recomendacion_hincha": "Posible llovizna en Bañados de Carrasco: llevar rompevientos impermeable.",
+    "pronostico_partido": {
+      "disponible": false,
+      "dias_faltantes": 13,
+      "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 13 días)."
+    },
+    "actualizado": "20/11/2026 17:32"
   },
   "minuto_a_minuto": [
     {
@@ -1797,14 +1862,14 @@
       "icono": "⚽",
       "tipo": "gol_penarol",
       "titulo": "¡GOOOL DE PEÑAROL!",
-      "descripcion": "Nahuel Herrera (Peñarol) Goal at 28'"
+      "descripcion": "Nahuel Herrera (Peñarol) Gol a los 28'"
     },
     {
       "minuto": "32'",
       "icono": "⚽",
       "tipo": "gol_penarol",
       "titulo": "¡GOOOL DE PEÑAROL!",
-      "descripcion": "Cristian Jaime (Peñarol) Goal at 32'"
+      "descripcion": "Leonel Jaime (Peñarol) Gol a los 32'"
     },
     {
       "minuto": "46'",
@@ -1839,7 +1904,7 @@
       "icono": "⚽",
       "tipo": "gol_penarol",
       "titulo": "¡GOOOL DE PEÑAROL!",
-      "descripcion": "Douglas Arezo (Peñarol) Goal at 70'"
+      "descripcion": "Matías Arezo (Peñarol) Gol a los 70'"
     },
     {
       "minuto": "76'",

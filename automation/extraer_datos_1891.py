@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Manya ServicioTI - Integrador Dinámico Oficial 1891 BD (v3.0 Zero-Hardcode)
-===========================================================================
-1. Consulta dinámicamente `find_matches` en `mcp.1891.uy` para obtener los partidos
-   oficiales más recientes del Club Atlético Peñarol.
+Manya ServicioTI - Integrador Dinámico Oficial 1891 BD (v4.0 • Manya v11.0 Zero-Hardcode)
+=========================================================================================
+1. Consulta dinámicamente `find_matches` en `mcp.1891.uy` con reintentos, backoff y caché.
 2. Descarga las fotografías reales más frescas (`https://1891.uy/img/partidos/{id_p}/{n}.jpg`),
    les aplica encuadre 16:9 cinematográfico aurinegro y actualiza `data/galleries.json`
    (sin duplicar tatuajes ni resucitar partidos viejos).
@@ -17,18 +16,15 @@ import sys
 import ssl
 import json
 import io
+import time
+import random
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
 DATA_DIR = BASE_DIR / "data"
 ASSETS_DIR = BASE_DIR / "assets"
 ASSETS_IG_DIR = ASSETS_DIR / "ig"
@@ -37,7 +33,12 @@ ASSETS_GALLERY_DIR = ASSETS_DIR / "gallery"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 ASSETS_IG_DIR.mkdir(parents=True, exist_ok=True)
 ASSETS_GALLERY_DIR.mkdir(parents=True, exist_ok=True)
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
 
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("Manya1891Extractor")
 UY_TZ = timezone(timedelta(hours=-3))
 
 ctx = ssl.create_default_context()
@@ -45,36 +46,47 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 HEADERS_HTTP = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (ManyaServicioTI/3.0)",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (ManyaServicioTI/4.0)",
     "Content-Type": "application/json",
     "Accept": "application/json, text/event-stream"
 }
 
 
-def call_1891_mcp(tool_name: str, arguments: dict = None) -> dict:
-    """Invoca una herramienta del servidor MCP remoto de 1891 BD."""
+def call_1891_mcp(tool_name: str, arguments: dict = None, cache_key: str = None) -> dict:
+    """Invoca el servidor MCP remoto de 1891 BD con reintentos, backoff exponencial y caché de respaldo."""
+    try:
+        from manya_match_engine import ManyaMatchEngine
+        res = ManyaMatchEngine.call_1891_mcp(tool_name, arguments or {}, timeout=15, retries=3, cache_key=cache_key)
+        return res if isinstance(res, dict) else {}
+    except Exception:
+        pass
+
     payload = {
         "jsonrpc": "2.0",
         "id": 1891,
         "method": "tools/call",
         "params": {"name": tool_name, "arguments": arguments or {}}
     }
-    req = urllib.request.Request(
-        "https://mcp.1891.uy/mcp",
-        data=json.dumps(payload).encode("utf-8"),
-        headers=HEADERS_HTTP
-    )
-    try:
-        with urllib.request.urlopen(req, context=ctx, timeout=15) as r:
-            raw = r.read().decode("utf-8", errors="ignore")
-            for line in raw.split("\n"):
-                if line.startswith("data:"):
-                    obj = json.loads(line[5:].strip())
-                    content_list = obj.get("result", {}).get("content", [])
-                    if content_list and content_list[0].get("text"):
-                        return json.loads(content_list[0]["text"])
-    except Exception as e:
-        print(f"[1891 MCP] Error llamando {tool_name}: {e}")
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(
+                "https://mcp.1891.uy/mcp",
+                data=json.dumps(payload).encode("utf-8"),
+                headers=HEADERS_HTTP
+            )
+            with urllib.request.urlopen(req, context=ctx, timeout=15) as r:
+                raw = r.read().decode("utf-8", errors="ignore")
+                for line in raw.split("\n"):
+                    if line.startswith("data:"):
+                        obj = json.loads(line[5:].strip())
+                        content_list = obj.get("result", {}).get("content", [])
+                        if content_list and content_list[0].get("text"):
+                            return json.loads(content_list[0]["text"])
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(0.7 * (2 ** attempt) + random.uniform(0.0, 0.2))
+            else:
+                logger.warning(f"[1891 MCP] Error llamando {tool_name}: {e}")
     return {}
 
 
@@ -139,12 +151,26 @@ def procesar_fotografias_partidos_1891():
     Consulta los últimos partidos oficiales en 1891 BD y descarga sus fotos más recientes,
     manteniendo `data/galleries.json` siempre fresco, único y sin duplicar tatuajes.
     """
-    print("=== PROCESANDO FOTOGRAFÍAS RECIENTES OFICIALES (1891 BD DINÁMICO) ===")
+    logger.info("=== PROCESANDO FOTOGRAFÍAS RECIENTES OFICIALES (1891 BD DINÁMICO) ===")
     _purge_stale_liverpool_files()
 
     now_uy = datetime.now(UY_TZ)
-    res = call_1891_mcp("find_matches", {"yearFrom": now_uy.year, "yearTo": now_uy.year, "limit": 8})
+    res = call_1891_mcp(
+        "find_matches",
+        {"yearFrom": now_uy.year, "yearTo": now_uy.year, "limit": 8},
+        cache_key=f"1891_photos_matches_{now_uy.year}",
+    )
     recent_matches = (res or {}).get("data", {}).get("results", [])
+
+    # Leer puntaje anual real desde live_status.json para curaduría editorial sin hardcodes
+    pen_anual_pts = None
+    live_file = DATA_DIR / "live_status.json"
+    if live_file.exists():
+        try:
+            pen_anual_pts = (json.loads(live_file.read_text(encoding="utf-8")).get("resumen_temporada") or {}).get("penarol_anual_pts")
+        except Exception:
+            pass
+    pts_tag = f" ({pen_anual_pts} pts)" if pen_anual_pts else ""
 
     # Filtrar partidos oficiales recientes con buen valor visual (priorizar últimos 4 del Campeonato Uruguayo)
     selected_matches = []
@@ -236,7 +262,7 @@ def procesar_fotografias_partidos_1891():
                     "height": 720
                 })
                 downloaded_for_match += 1
-                print(f"  ✓ Foto real 1891 BD descargada: {item_id} ({webp_path.stat().st_size // 1024} KB)")
+                logger.info(f"  ✓ Foto real 1891 BD descargada: {item_id} ({webp_path.stat().st_size // 1024} KB)")
             except Exception:
                 continue
 
@@ -245,7 +271,7 @@ def procesar_fotografias_partidos_1891():
         {
             "id": "galeria_actualidad_aguirre",
             "titulo": "Diego Aguirre: Liderazgo, mística y conquista de la Tabla Anual 2026",
-            "descripcion": "La Fiera guió a Peñarol al primer puesto acumulado de la temporada (69 pts) y a la clasificación directa a la Gran Final del Uruguayo y Libertadores 2027.",
+            "descripcion": f"La Fiera guió a Peñarol al primer puesto acumulado de la temporada{pts_tag} y a la clasificación directa a la Gran Final del Uruguayo y Libertadores 2027.",
             "cuenta": "@oficialcap",
             "categoria": "los-aromos",
             "fecha": now_uy.strftime("%d/%m/%Y"),
@@ -343,7 +369,7 @@ def procesar_fotografias_partidos_1891():
 
     galleries_file = DATA_DIR / "galleries.json"
     galleries_file.write_text(json.dumps(final_gallery, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✓ data/galleries.json actualizado con {len(final_gallery)} fotografías reales únicas (cero duplicados, cero Liverpool obsoleto).")
+    logger.info(f"✓ data/galleries.json actualizado con {len(final_gallery)} fotografías reales únicas (cero duplicados).")
 
     # Actualizar instagram_feed.json con las mejores postales actuales
     ig_feed = []
@@ -360,23 +386,23 @@ def procesar_fotografias_partidos_1891():
             "imagen_jpg": it["imagen_jpg"]
         })
     (DATA_DIR / "instagram_feed.json").write_text(json.dumps(ig_feed, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✓ data/instagram_feed.json sincronizado con {len(ig_feed)} publicaciones vigentes.")
+    logger.info(f"✓ data/instagram_feed.json sincronizado con {len(ig_feed)} publicaciones vigentes.")
     return final_gallery
 
 
-def extraer_historial_rival_activo(rival_query: str = "cerro_largo"):
+def extraer_historial_rival_activo(rival_query: str = ""):
     """Extrae el balance histórico oficial frente al rival activo desde 1891 BD."""
     try:
         from manya_rival_intelligence import obtener_o_generar_historial_1891
         return obtener_o_generar_historial_1891(rival_query)
     except Exception as ex:
-        print(f"[1891 Error] No se pudo extraer historial activo: {ex}")
+        logger.warning(f"[1891 Error] No se pudo extraer historial activo: {ex}")
         return {}
 
 
 def extraer_efemerides_hoy():
     """Extrae las efemérides de partidos y natalicios de hoy en zona horaria de Uruguay (UTC-3)."""
-    print("\n=== EXTRAYENDO EFEMÉRIDES 'UN DÍA COMO HOY' (1891 BD • UY_TZ) ===")
+    logger.info("=== EXTRAYENDO EFEMÉRIDES 'UN DÍA COMO HOY' (1891 BD • UY_TZ) ===")
     now = datetime.now(UY_TZ)
     mm_dd = now.strftime("%m-%d")
 
@@ -386,12 +412,12 @@ def extraer_efemerides_hoy():
     }
     dia_mes = f"{now.day} de {MESES_ES.get(now.month, 'Noviembre')}"
 
-    overview = call_1891_mcp("get_home_overview")
+    overview = call_1891_mcp("get_home_overview", cache_key=f"1891_home_overview_{mm_dd}")
     matches_raw = overview.get("data", {}).get("sameDayMatches", []) if overview else []
     birthdays_raw = overview.get("data", {}).get("sameDayBirthdays", []) if overview else []
 
     if not matches_raw:
-        data = call_1891_mcp("on_this_day", {"date": mm_dd})
+        data = call_1891_mcp("on_this_day", {"date": mm_dd}, cache_key=f"1891_on_this_day_{mm_dd}")
         matches_raw = data.get("data", {}).get("matches", []) if data else []
 
     matches_clean = []
@@ -431,7 +457,7 @@ def extraer_efemerides_hoy():
         "cumpleanos_glorias": birthdays_clean[:6]
     }
     (DATA_DIR / "efemerides_hoy.json").write_text(json.dumps(efemerides_doc, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"✓ data/efemerides_hoy.json guardado ({dia_mes}: {len(matches_clean)} partidos históricos y {len(birthdays_clean)} natalicios).")
+    logger.info(f"✓ data/efemerides_hoy.json guardado ({dia_mes}: {len(matches_clean)} partidos históricos y {len(birthdays_clean)} natalicios).")
     return efemerides_doc
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-DAEMON Y ORQUESTADOR DE PARTIDOS Y PRENSA — MANYA SERVICIOTI v10.0
+DAEMON Y ORQUESTADOR DE PARTIDOS Y PRENSA — MANYA SERVICIOTI v11.0
 ==================================================================
 Delega toda la lógica central en el Orquestador Maestro Idempotente (`sync_manya_hub.py`)
 respetando:
@@ -17,35 +17,26 @@ Modos de uso:
 
 import sys
 import time
-import logging
 import argparse
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(BASE_DIR / "automation"))
+AUTOMATION_DIR = BASE_DIR / "automation"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
 UY_TZ = timezone(timedelta(hours=-3))
 
-logger = logging.getLogger("ManyaDaemon")
-if not logger.handlers:
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
-
+from manya_logging import get_manya_logger
 from manya_anti_collision import CentralAutomationLock
 from sync_manya_hub import ejecutar_sincronizacion_hub
+
+logger = get_manya_logger("ManyaDaemon")
 
 
 def ejecutar_orquestador(modo: str = "once", hoy_juega: bool = False):
     logger.info("=" * 70)
-    logger.info(f"=== VIGILANTE DE PARTIDOS Y PRENSA MANYA v10.0 (MODO: {'HOY-JUEGA' if hoy_juega else modo.upper()}) ===")
+    logger.info(f"=== VIGILANTE DE PARTIDOS Y PRENSA MANYA v11.0 (MODO: {'HOY-JUEGA' if hoy_juega else modo.upper()}) ===")
     logger.info("=" * 70)
 
     while True:
@@ -74,7 +65,7 @@ def ejecutar_orquestador(modo: str = "once", hoy_juega: bool = False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Daemon de partidos y prensa Manya ServicioTI v10.0")
+    parser = argparse.ArgumentParser(description="Daemon de partidos y prensa Manya ServicioTI v11.0")
     parser.add_argument("--daemon", action="store_true", help="Ejecutar en modo continuo")
     parser.add_argument("--once", action="store_true", help="Ejecutar un solo ciclo y salir")
     parser.add_argument("--hoy-juega", action="store_true", help="Ejecutar revisión de madrugada 00:05 hs")

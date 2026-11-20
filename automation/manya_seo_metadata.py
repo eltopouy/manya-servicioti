@@ -22,6 +22,7 @@ from typing import Optional, Dict, Any, List
 from PIL import Image, ExifTags
 
 logger = logging.getLogger("ManyaSEOMetadata")
+logger.propagate = False
 if not logger.handlers:
     handler = logging.StreamHandler()
     handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))

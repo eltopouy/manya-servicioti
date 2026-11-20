@@ -1,26 +1,33 @@
 # -*- coding: utf-8 -*-
 """
-SUITE DINÁMICA DE CERTIFICACIÓN DE COHERENCIA EDITORIAL, TEMPORAL Y FOTOGRÁFICA — v10.0
-=======================================================================================
+SUITE DINÁMICA DE CERTIFICACIÓN DE COHERENCIA EDITORIAL, TEMPORAL, PRENSA Y FOTOGRÁFICA — v11.0
+===============================================================================================
 Zero-Hardcode QA:
   1. Verifica coherencia cruzada entre live_status.json, rival_intelligence.json,
-     historial_activo.json, news_digest.json e index.html para CUALQUIER rival y fase.
-  2. Verifica temporalidad estricta (jamás 'Hoy juega' cuando es_hoy=False o delta_days!=0).
-  3. Verifica frescura y relevancia de prensa deportiva (noticias <= 14 días, 100% Peñarol).
-  4. Verifica integridad fotográfica (cero Liverpool 18/10 obsoleto, archivos existen > 0 bytes,
-     cero duplicación de tatuajes en galleries.json).
-  5. Verifica integridad del HTML (sin bloques huérfanos ni disclaimers de IA).
+     historial_activo.json, news_digest.json, squad_2026.json e index.html (schema_version 11.0).
+  2. Verifica ausencia de duplicación SSR en #hero-last-result y esquema horario de clima Open-Meteo.
+  3. Verifica temporalidad estricta (jamás 'Hoy juega' cuando es_hoy=False o delta_days!=0).
+  4. Verifica prensa deportiva fresca (<= 14 días, 100% Peñarol), limpieza de sufijos de medios
+     y deduplicación difusa (`SequenceMatcher < 0.72` en noticias activas + prueba unitaria).
+  5. Verifica integridad fotográfica (cero Liverpool 18/10 obsoleto, archivos existen > 0 bytes,
+     cero duplicación de tatuajes en galleries.json, 11 estrellas correctas).
 """
 
 import sys
 import json
 import re
+import difflib
+import unicodedata
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
+AUTOMATION_DIR = BASE_DIR / "automation"
 UY_TZ = timezone(timedelta(hours=-3))
+
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
 
 if hasattr(sys.stdout, "reconfigure"):
     try:
@@ -28,18 +35,32 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
+MEDIA_SUFFIX_RE = re.compile(
+    r"\s+(?:-|–|—|\|)\s*(?:ovación|ovacion|referí|referi|el país|el pais|el observador|"
+    r"montevideo portal|fútboluy|futboluy|la diaria|tenfield|espn|subrayado|padre y decano)\b.*$",
+    re.IGNORECASE,
+)
+
+
+def _norm_title(txt: str) -> str:
+    s = unicodedata.normalize("NFKD", txt or "")
+    s = "".join(c for c in s if not unicodedata.combining(c)).lower()
+    s = re.sub(r"[^a-z0-9\s]", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
 
 def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
-    """Audita coherencia cruzada dinámica entre todos los datasets y el HTML para cualquier rival."""
+    """Audita coherencia cruzada dinámica v11.0 entre todos los datasets, prensa y HTML SSR."""
     errors = []
 
     live_file = DATA_DIR / "live_status.json"
     digest_file = DATA_DIR / "news_digest.json"
     intel_file = DATA_DIR / "rival_intelligence.json"
     h2h_file = DATA_DIR / "historial_activo.json"
+    squad_file = DATA_DIR / "squad_2026.json"
     html_file = BASE_DIR / "index.html"
 
-    for p in [live_file, digest_file, intel_file, h2h_file, html_file]:
+    for p in [live_file, digest_file, intel_file, h2h_file, squad_file, html_file]:
         if not p.exists():
             errors.append(f"Archivo obligatorio no encontrado: {p.name}")
     if errors:
@@ -49,7 +70,17 @@ def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
     digest = json.loads(digest_file.read_text(encoding="utf-8"))
     intel = json.loads(intel_file.read_text(encoding="utf-8"))
     h2h = json.loads(h2h_file.read_text(encoding="utf-8"))
+    squad = json.loads(squad_file.read_text(encoding="utf-8"))
     html_txt = html_file.read_text(encoding="utf-8")
+
+    # 0. Verificar schema_version v11.0 en los 3 core outputs
+    for fname, obj in [
+        ("live_status.json", live),
+        ("news_digest.json", digest),
+        ("squad_2026.json", squad),
+    ]:
+        if str(obj.get("schema_version", "")) != "11.0":
+            errors.append(f"{fname} debe declarar schema_version='11.0', encontrado: '{obj.get('schema_version')}'")
 
     # 1. Rival activo coherente entre live_status, rival_intelligence y historial_activo
     live_slug = (live.get("rival_activo_slug") or "").lower()
@@ -82,13 +113,21 @@ def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
     if live.get("fase_partido") in ("EN_VIVO", "POST_PARTIDO") and act_id and tl_id and act_id != tl_id:
         errors.append(f"Minuto a minuto desfasado: timeline event_id='{tl_id}' != partido_activo='{act_id}'")
 
-    # 5. Prensa fresca (noticias_fuentes <= 14 días, sin julio 2025 ni ruido no-Peñarol)
+    # 4b. Esquema de clima Campeón del Siglo v11.0 (WMO + pronóstico horario)
+    clima = live.get("clima_campeon_del_siglo") or {}
+    if "pronostico_partido" not in clima or not isinstance(clima.get("pronostico_partido"), dict):
+        errors.append("live_status.json: clima_campeon_del_siglo carece de objeto 'pronostico_partido' v11.0")
+    if "weather_code" not in clima:
+        errors.append("live_status.json: clima_campeon_del_siglo carece de 'weather_code' WMO")
+
+    # 5. Prensa fresca (<= 14 días), sin ruido, sin sufijos de medio sucios y sin duplicados difusos
     noticias = digest.get("noticias_fuentes", [])
     if not noticias:
         errors.append("news_digest.json no contiene noticias_fuentes frescas")
     else:
         now_uy = datetime.now(UY_TZ)
-        for idx, n in enumerate(noticias[:6]):
+        norm_titles = []
+        for idx, n in enumerate(noticias):
             f_iso = n.get("fecha_iso", "")
             if f_iso:
                 try:
@@ -97,16 +136,63 @@ def auditar_coherencia_editorial() -> tuple[bool, list[str]]:
                         errors.append(f"Noticia #{idx} desactualizada ({n.get('fecha')}): {n.get('titulo', '')[:50]}")
                 except Exception:
                     pass
-            tit_l = (n.get("titulo") or "").lower()
+            tit_raw = (n.get("titulo") or "").strip()
+            tit_l = tit_raw.lower()
             if any(noise in tit_l for noise in ["carnaval", "charles carrera", "noticias de uruguay y del mundo"]):
-                errors.append(f"Noticia #{idx} contiene ruido ajeno a Peñarol: '{n.get('titulo')}'")
+                errors.append(f"Noticia #{idx} contiene ruido ajeno a Peñarol: '{tit_raw}'")
+            if MEDIA_SUFFIX_RE.search(tit_raw):
+                errors.append(f"Noticia #{idx} conserva sufijo de medio sin limpiar: '{tit_raw}'")
+            norm_titles.append(_norm_title(tit_raw))
 
-    # 6. Verificar que index.html refleje el rival activo y no tenga etiquetas rotas / basura de 1-1 Wanderers
+        # Verificar deduplicación difusa real sobre noticias_fuentes
+        for i in range(len(norm_titles)):
+            for j in range(i + 1, len(norm_titles)):
+                ratio = difflib.SequenceMatcher(None, norm_titles[i], norm_titles[j]).ratio()
+                if ratio >= 0.72:
+                    errors.append(
+                        f"Duplicado difuso en noticias_fuentes ({ratio:.2f}): "
+                        f"[{i}] '{noticias[i].get('titulo', '')[:45]}' vs [{j}] '{noticias[j].get('titulo', '')[:45]}'"
+                    )
+
+    # 5b. Prueba unitaria del motor de limpieza y deduplicación en ManyaSportsPressService
+    try:
+        from manya_sports_press import ManyaSportsPressService
+
+        cleaned, src = ManyaSportsPressService._clean_google_title_and_source(
+            "Peñarol goleó 3-0 a Cerro Largo y ganó la Tabla Anual - Ovación - EL PAÍS Uruguay",
+            "Prensa",
+        )
+        if "ovación" in cleaned.lower() or "el país" in cleaned.lower():
+            errors.append(f"Limpieza de sufijos falló en ManyaSportsPressService: '{cleaned}'")
+        if "Ovación" not in src:
+            errors.append(f"Normalización canónica de fuente falló: '{src}'")
+
+        na = ManyaSportsPressService._normalize_title_for_dedup(
+            "Peñarol goleó 3-0 a Cerro Largo y es campeón de la Tabla Anual"
+        )
+        nb = ManyaSportsPressService._normalize_title_for_dedup(
+            "Peñarol goleó 3-0 a Cerro Largo y se coronó campeón de la Tabla Anual"
+        )
+        ta = ManyaSportsPressService._title_tokens_for_dedup(na)
+        tb = ManyaSportsPressService._title_tokens_for_dedup(nb)
+        if not ManyaSportsPressService._is_similar_title(na, ta, nb, tb):
+            errors.append("ManyaSportsPressService._is_similar_title no detectó dos cables casi idénticos")
+    except Exception as e:
+        errors.append(f"Error en verificación unitaria de ManyaSportsPressService: {e}")
+
+    # 6. Verificar que index.html refleje el rival activo, sin basura vieja ni texto duplicado en #hero-last-result
     rival_corto = intel.get("rival_corto", "")
     if rival_corto and rival_corto.lower() not in html_txt.lower():
         errors.append(f"index.html SSR no refleja al rival activo '{rival_corto}'")
     if "CRÓNICA COMPLETA DEL 1-1" in html_txt:
         errors.append("index.html todavía contiene texto viejo 'CRÓNICA COMPLETA DEL 1-1'")
+
+    m_last = re.search(r'<strong[^>]*id="hero-last-result"[^>]*>(.*?)</strong>([^<]*)', html_txt, re.DOTALL)
+    if m_last:
+        inside_strong = m_last.group(1)
+        outside_sibling = m_last.group(2)
+        if "DG" in inside_strong and "DG" in outside_sibling:
+            errors.append(f"index.html SSR duplica diferencia de goles en #hero-last-result: '{inside_strong}' + '{outside_sibling.strip()}'")
 
     return len(errors) == 0, errors
 
@@ -176,7 +262,7 @@ def auditar_fotos_e_instagram_feed() -> tuple[bool, list[str]]:
 def auditar_coherencia_editorial_completa() -> tuple[bool, list[str]]:
     all_errors = []
     for name, fn in [
-        ("Coherencia Editorial y Cross-Dataset", auditar_coherencia_editorial),
+        ("Coherencia Editorial, Prensa Difusa y SSR v11.0", auditar_coherencia_editorial),
         ("Temporalidad Estricta (No 'Hoy Juega' Falso)", auditar_temporalidad_no_hoy_juega),
         ("Integridad Fotográfica y Feeds Sociales", auditar_fotos_e_instagram_feed),
     ]:
@@ -190,7 +276,7 @@ def auditar_coherencia_editorial_completa() -> tuple[bool, list[str]]:
 if __name__ == "__main__":
     ok, errs = auditar_coherencia_editorial_completa()
     if ok:
-        print("[PASS] Coherencia Editorial, Temporal y Fotográfica v10.0 100% Verificada.")
+        print("[PASS] Coherencia Editorial, Temporal, Prensa Difusa y Fotográfica v11.0 100% Verificada.")
         sys.exit(0)
     print(f"[FAIL] Se detectaron {len(errs)} incoherencias:")
     for e in errs:

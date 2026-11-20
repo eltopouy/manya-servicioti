@@ -1,4 +1,4 @@
-/* Manya ServicioTI Stylesheet v10.0 */
+/* Manya ServicioTI Stylesheet v11.0 */
 :root {
   --manya-gold: #ffd100;
   --manya-gold-bright: #ffe14d;
@@ -45,7 +45,6 @@ body {
     var(--manya-black);
   min-height: 100vh;
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 /* Franja superior oro y carbón */
@@ -572,6 +571,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 10px 12px;
   background: rgba(9, 9, 11, 0.6);
@@ -583,6 +583,7 @@ body {
 
 .sim-btns {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
@@ -947,7 +948,7 @@ body {
 /* Galería Muro Visual Instagram + Gemini Web Vision */
 .ig-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -958,6 +959,7 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-card);
   transition: transform 0.22s ease, border-color 0.22s ease;
+  min-width: 0;
 }
 
 .ig-card:hover {
@@ -968,7 +970,8 @@ body {
 .ig-img-wrap {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: linear-gradient(110deg, #16161b 25%, #242430 50%, #16161b 75%);
+  background-size: 200% 100%;
   overflow: hidden;
 }
 
@@ -1330,6 +1333,7 @@ body {
   padding-bottom: 6px;
 }
 
+.sidebar-header h3,
 .sidebar-header h4 {
   font-size: 13px;
   font-weight: 900;
@@ -1484,6 +1488,7 @@ body {
 }
 
 .lightbox-img-wrap {
+  position: relative;
   width: 100%;
   max-height: 65vh;
   background: #000;
@@ -1633,7 +1638,8 @@ body {
 .ig-post-media-wrap {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: #000000;
+  background: linear-gradient(110deg, #16161b 25%, #242430 50%, #16161b 75%);
+  background-size: 200% 100%;
   overflow: hidden;
 }
 
@@ -2976,7 +2982,8 @@ body {
    CONMUTADOR DINÁMICO DE CAMPEONATOS (STANDINGS TABS)
    ======================================================== */
 .standings-toggle-pills {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   background: rgba(0, 0, 0, 0.65);
   padding: 4px;
@@ -3087,7 +3094,7 @@ body {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.pitch-center-circle {
+.tactical-pitch-live .pitch-center-circle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -3098,7 +3105,7 @@ body {
   border-radius: 50%;
 }
 
-.pitch-center-spot {
+.tactical-pitch-live .pitch-center-spot {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -3558,7 +3565,7 @@ body {
 
 .tattoo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 20px;
   margin-bottom: 28px;
 }
@@ -3570,6 +3577,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -3584,7 +3592,8 @@ body {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #09090b;
+  background: linear-gradient(110deg, #16161b 25%, #242430 50%, #16161b 75%);
+  background-size: 200% 100%;
   cursor: pointer;
 }
 
@@ -3694,14 +3703,102 @@ body {
 }
 
 /* ================================================================
-   MANYA SERVICIOTI v10.0 — MEJORAS UX, ANTI-OVERFLOW & COMPONENTES
+   MANYA SERVICIOTI v11.0 — UX PRO, ACCESIBILIDAD, PWA & SHIMMER
    ================================================================ */
 
-/* Skeleton elegante para imágenes lazy-load (evita rectángulos negros) */
-.ig-img-wrap,
-.ig-post-media-wrap {
-  background: linear-gradient(110deg, #16161b 25%, #23232c 50%, #16161b 75%);
-  background-size: 200% 100%;
+/* Utilidades de accesibilidad (Skip-link, SR-only, Focus-Visible oro) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -120px;
+  left: 16px;
+  z-index: 10000;
+  background: var(--manya-gold);
+  color: var(--manya-black);
+  font-weight: 900;
+  font-size: 13.5px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 14px;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--manya-gold);
+  outline-offset: 2px;
+}
+
+.manya-section,
+.match-hero,
+#prensa-vivo {
+  scroll-margin-top: 86px;
+}
+
+/* Botón discreto de instalación PWA */
+.pwa-install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, rgba(255, 209, 0, 0.22), rgba(255, 209, 0, 0.08));
+  color: var(--manya-gold);
+  border: 1px solid var(--manya-gold);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.pwa-install-btn[hidden] {
+  display: none !important;
+}
+
+.pwa-install-btn:hover {
+  background: var(--manya-gold);
+  color: var(--manya-black);
+  transform: translateY(-1px);
+}
+
+/* Shimmer skeleton animado + transición suave para imágenes lazy (cero cajas negras) */
+@keyframes manyaShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ig-img-wrap.is-loading,
+.ig-post-media-wrap.is-loading,
+.tattoo-img-wrap.is-loading {
+  animation: manyaShimmer 1.6s ease-in-out infinite;
+}
+
+img.manya-lazy-img {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+img.manya-lazy-img.is-loading {
+  opacity: 0;
+}
+
+img.manya-lazy-img.is-loaded {
+  opacity: 1;
 }
 
 /* Racha últimos 5 partidos (V/E/D) */
@@ -3777,6 +3874,371 @@ body {
   margin-top: 10px;
 }
 
+/* Prensa Deportiva Filtrable + Búsqueda Rápida (#prensa-vivo) */
+.prensa-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.prensa-header-row .breaking-title {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.prensa-count-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.12);
+  border: 1px solid rgba(255, 209, 0, 0.35);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.prensa-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.prensa-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.prensa-search-input {
+  width: 100%;
+  background: #0d0d11;
+  border: 1px solid rgba(255, 209, 0, 0.28);
+  border-radius: 8px;
+  color: #fafafa;
+  font-size: 12.5px;
+  padding: 8px 30px 8px 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prensa-search-input::placeholder {
+  color: #71717a;
+}
+
+.prensa-search-input:focus {
+  border-color: var(--manya-gold);
+  box-shadow: 0 0 0 2px rgba(255, 209, 0, 0.18);
+  outline: none;
+}
+
+.prensa-search-clear {
+  position: absolute;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  font-size: 18px;
+  line-height: 1;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prensa-search-clear[hidden] {
+  display: none !important;
+}
+
+.prensa-search-clear:hover {
+  color: var(--manya-gold);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.prensa-source-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.prensa-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #d4d4d8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prensa-chip:hover {
+  border-color: var(--manya-gold);
+  color: #ffffff;
+}
+
+.prensa-chip.active {
+  background: var(--manya-gold);
+  border-color: var(--manya-gold);
+  color: var(--manya-black);
+  font-weight: 900;
+}
+
+.prensa-empty-state {
+  text-align: center;
+  padding: 18px 12px;
+  border: 1px dashed rgba(255, 209, 0, 0.3);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: #a1a1aa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.prensa-more-wrap {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Pizarra Táctica Nivel Pro: Presets + Filtro por Línea */
+.tactical-bench-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tactical-presets-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-btn {
+  background: rgba(255, 209, 0, 0.08);
+  border: 1px solid rgba(255, 209, 0, 0.35);
+  color: #f4f4f5;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.preset-btn:hover {
+  border-color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.16);
+  color: var(--manya-gold);
+}
+
+.preset-btn.active {
+  background: var(--manya-gold);
+  color: var(--manya-black);
+  border-color: var(--manya-gold);
+  font-weight: 900;
+  box-shadow: 0 2px 10px rgba(255, 209, 0, 0.3);
+}
+
+.bench-line-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.bench-filter-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d4d4d8;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  touch-action: manipulation;
+}
+
+.bench-filter-chip:hover {
+  border-color: var(--manya-gold);
+  color: #ffffff;
+}
+
+.bench-filter-chip.active {
+  background: var(--manya-gold);
+  border-color: var(--manya-gold);
+  color: var(--manya-black);
+  font-weight: 900;
+}
+
+.bench-chip-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  opacity: 0.85;
+}
+
+/* Lightbox Accesible Pro: Flechas Prev/Next, Contador y Créditos */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 209, 0, 0.65);
+  background: rgba(9, 9, 11, 0.82);
+  color: var(--manya-gold);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-nav[hidden] {
+  display: none !important;
+}
+
+.lightbox-prev {
+  left: 14px;
+}
+
+.lightbox-next {
+  right: 14px;
+}
+
+.lightbox-nav:hover {
+  background: var(--manya-gold);
+  color: var(--manya-black);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.lightbox-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.lightbox-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--manya-gold);
+  background: rgba(255, 209, 0, 0.14);
+  border: 1px solid rgba(255, 209, 0, 0.4);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.lightbox-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lightbox-credit {
+  font-size: 12px;
+  color: #a1a1aa;
+}
+
+.lightbox-credit strong {
+  color: var(--manya-gold);
+}
+
+.lightbox-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lightbox-kbd-hint {
+  font-size: 11px;
+  color: #71717a;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sistema de Notificaciones Toast (aria-live="polite") */
+.manya-toast-region {
+  position: fixed;
+  left: 20px;
+  bottom: 22px;
+  z-index: 10050;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(380px, calc(100vw - 84px));
+  pointer-events: none;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.manya-toast {
+  background: rgba(18, 18, 24, 0.96);
+  color: #fafafa;
+  border: 1px solid rgba(255, 209, 0, 0.55);
+  border-left: 4px solid var(--manya-gold);
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  animation: toastSlideIn 0.22s ease-out;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.manya-toast.toast-success {
+  border-left-color: #10b981;
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.manya-toast.toast-warning {
+  border-left-color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.manya-toast.is-hiding {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 /* Botón flotante Volver Arriba */
 #manya-back-to-top {
   position: fixed;
@@ -3814,21 +4276,6 @@ body {
 }
 
 /* Blindaje estricto contra clipping en Desktop (1440px) y Mobile (390px) */
-.sim-row {
-  flex-wrap: wrap;
-}
-
-.sim-btns {
-  flex-wrap: wrap;
-}
-
-.standings-toggle-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  max-width: 100%;
-}
-
 @media (max-width: 768px) {
   .manya-container {
     padding: 16px 12px 56px;
@@ -3865,6 +4312,48 @@ body {
     text-overflow: ellipsis;
   }
 
+  .tactical-presets-bar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+
+  .preset-btn {
+    font-size: 11.5px;
+    padding: 7px 8px;
+    text-align: center;
+  }
+
+  .tattoo-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .lightbox-prev {
+    left: 6px;
+  }
+
+  .lightbox-next {
+    right: 6px;
+  }
+
+  .lightbox-kbd-hint {
+    display: none;
+  }
+
+  .manya-toast-region {
+    left: 12px;
+    bottom: 16px;
+    max-width: calc(100vw - 76px);
+  }
+
   /* Etiquetas legibles de 2 líneas en la Pizarra Táctica móvil (sin truncamiento agresivo) */
   .player-token {
     width: 30px;
@@ -3881,5 +4370,20 @@ body {
     text-align: center;
     overflow: visible;
     text-overflow: clip;
+  }
+}
+
+/* Respeto a usuarios con preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

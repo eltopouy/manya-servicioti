@@ -1,7 +1,7 @@
 {
-  "actualizado": "20/11/2026 17:15",
-  "schema_version": "10.0",
-  "modelo_ia": "Manya Editorial Engine v10.0 (1891 BD + ESPN + Prensa Verificada)",
+  "actualizado": "20/11/2026 17:32",
+  "schema_version": "11.0",
+  "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "CRONICA_POST_PARTIDO",
   "partido_id": "401934686",
   "partido_nombre": "Peñarol vs Cerro Largo",
@@ -96,7 +96,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 6.5,
+      "antiguedad_horas": 6.8,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -108,7 +108,7 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 13.5,
+      "antiguedad_horas": 13.7,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
@@ -120,7 +120,7 @@
       "fecha": "19/11/2026 21:55",
       "fecha_iso": "2026-11-19T21:55:32-03:00",
       "fecha_raw": "19/11/2026 21:55 hs",
-      "antiguedad_horas": 19.3,
+      "antiguedad_horas": 19.6,
       "timestamp": 1795136132.0,
       "peso": 1.25
     },
@@ -132,8 +132,20 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 21.3,
+      "antiguedad_horas": 21.6,
       "timestamp": 1795129020.0,
+      "peso": 1.2
+    },
+    {
+      "titulo": "Peñarol: el abrazo de Ignacio Ruglio con Diego Aguirre y el mensaje para Lucas Ferreira",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWFVjME5sdFJGY2VPRUM4VzlRYnJhNEIzLWtkWDY2WnRldnNwd1h3cEQzNm9OX3BWUExfdU1oZDBGZHNvTWUxUmpRVDNuRUZJLXpLT2Z0cDFaRjVaUGVyX2xRdDl4XzBoWUp2TkxsNHJiVVZjQ1RNM1RvZWRCbE9Ra3FRbWRsWkRYWjNyN0ZqMi1lT1psSlllTExxTjlkRWdaUEZyUVRvNjRubVZUbkYtRHMtdDE1OVk4UHVVWTd5eTBRZEVYS21IeE9SNmdNYkHSAfMBQVVfeXFMUEUxNnNpNTR5MlZZLTNXZ2NKTHRxcW9qSmJQb1lWU1Vza0l1R2V6ZTBWMXR6WkNCcmM3bVdDdWUtNUtLa2VHYVE4Y1h4TndnMlg0QnVscEowakFzSzU5YnYydFdVT2kyUTB4X2UzN3pOTFBaU29iTFZnSWdiclZ6RjBrTU1pUWF6R0JxbTNRZl9KSnQyZmh3Q3l2a2tBZGI1M28zRUllUmJ5WHNBVGdDbTBlUmQxQmlvN0VYaGFYb01rcXNOd3gza1UwYnBQdDlteXA5TVBkRTcxTFF2eUM2enoycXNtY3hENl9HcVkyaG5DWmZJ?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:38 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 19:38",
+      "fecha_iso": "2026-11-19T19:38:00-03:00",
+      "fecha_raw": "19/11/2026 19:38 hs",
+      "antiguedad_horas": 21.9,
+      "timestamp": 1795127880.0,
       "peso": 1.2
     },
     {
@@ -144,21 +156,33 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 22.4,
+      "antiguedad_horas": 22.7,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
     {
       "titulo": "Peñarol cumplió, le ganó a Cerro Largo y se quedó con la tabla anual",
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNeWZiQmdONTVWNXFTYm1MY0NFUFpSazl2RDZyQnY1NHpaTVhiczVpek1QdHlkekQ4Q3dseFRRdmR6TDNOLVM0TkZKVEp1Qy1kWnVhX3ZRR2JGemMxRFkxSzNpMjl3V1lJYUlPYml0Z0tISU1UdGFBZ2syUnpRTk90bW50Nlg4YU9rMEhiUTRkQlE4MS16eS1hSl9DYzB4SzNENlhmSnZ2cXZVdV9MRXVBWGlLQ3Vic0RE?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por la diaria el 19/11/2026 a las 18:39 hs.",
-      "fuente": "la diaria",
+      "resumen": "Cobertura deportiva verificada publicada por La Diaria el 19/11/2026 a las 18:39 hs.",
+      "fuente": "La Diaria",
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 22.6,
+      "antiguedad_horas": 22.9,
       "timestamp": 1795124345.0,
       "peso": 1.05
+    },
+    {
+      "titulo": "Peñarol ganó la Anual tras golear 3-0 a Cerro Largo, y espera por Racing o Liverpool para definir el campeón 2026",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWTZJNmlyWVI5QUg0OVotLTVsd3hyeDlVcG9wMG1hYUtJYndMQXB4UWh3Y3M2dndWT2tpOGFNWDEzczhjcUF3UEsxcDhhLV9ucGUwWmhsaVlSbEg1OS1HelRnTjVLaWowR2ZhTUQ1Z3I5NXNFd0NPRGxpOHhvdDloZkZSSXVhU2NBMVp1bXp3VlN3MnVEMVRCUUdtNUVoOHZTdGN1R1dBTXBLX2ZQcWNsMEVBaHFzbDZVRTcyOGdudUQzbjlldmE2UVp4VkpjeW_SAdQBQVVfeXFMUHNTemlZb2t2b0V1VjUwZG51WHlNSVA5bHpIRi1OWXU3TDlOZW8yeUo5UmNuYUMyaU1GWF9DNXNiMXRfMGFjeW93MmRUREllYmFZS3JyY1JQWjhOZTBreTZ0amNjMnltVWxaZjRnOXhJd3NFSDBVNGRTSl9Hb1dlSWtpSkJVTnVtN0tHWVdmaVQ1cXpXMFBZNFNTWHhEc1AxNkhvY3Z2ME1ZczVScGNXTERhdHJWSXhpekhyaTI1V3NLdUg2SWdUNDhwN2dSeTBybU1hQ3E?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Subrayado Deportes el 19/11/2026 a las 18:31 hs.",
+      "fuente": "Subrayado Deportes",
+      "fecha": "19/11/2026 18:31",
+      "fecha_iso": "2026-11-19T18:31:00-03:00",
+      "fecha_raw": "19/11/2026 18:31 hs",
+      "antiguedad_horas": 23.0,
+      "timestamp": 1795123860.0,
+      "peso": 1.1
     },
     {
       "titulo": "Leonel Jaime, la joya de River Plate que lideró a Peñarol a obtener la tabla Anual",
@@ -168,7 +192,7 @@
       "fecha": "19/11/2026 18:27",
       "fecha_iso": "2026-11-19T18:27:00-03:00",
       "fecha_raw": "19/11/2026 18:27 hs",
-      "antiguedad_horas": 22.8,
+      "antiguedad_horas": 23.1,
       "timestamp": 1795123620.0,
       "peso": 1.2
     },
@@ -180,33 +204,9 @@
       "fecha": "19/11/2026 16:00",
       "fecha_iso": "2026-11-19T16:00:00-03:00",
       "fecha_raw": "19/11/2026 16:00 hs",
-      "antiguedad_horas": 25.3,
+      "antiguedad_horas": 25.5,
       "timestamp": 1795114800.0,
       "peso": 1.25
-    },
-    {
-      "titulo": "Peñarol vs Cerro Largo por el Torneo Clausura: día, hora, cancha, precio de las entradas y por dónde verlo",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPZTNpUWVCSk41ai1sNFEyXzVCdG1tUVlKSVhWREZLa0k5OXRLTms0Y183RnNCMDlFWFZuU2pCNGdPU0Y0MnNTTWlTWUJwM2RUdV9BaGVKMnB1YW1qMTRNTWd1N05XbWdKcDg3ejMyNS0xcEgzeXV1YzlMY2Zxb1k3SjNUV3VObzlrVjl5R3VCTE1EQVdMcXQ2dmVub3A5Z0NnVkF6a1BBMXl2VGU2eUFWQk1jaVhsN2l5c09tOXFJTloyclA0cFNjQTBVa2J4VG9YanNrYUR30gHbAUFVX3lxTE5mOEktdWk4ZTlxQW1wQVNUODlUUnJZc00teHl6d0ZCQ21nT1lRNGpHSnNYblNnYlZ6NEktZDJDRXZ6VURfSy1SMFlzRi0tcGV5eWJiMmVBME5CRzdtUzNES1NEZm5uTUp3TWlsNXV3MW56WEttTkFPbFFyaWtQVktTRXFOdldPSWJWT3hUMWdhengtd1Y5NVNIN1hEMDdtRnJPSG9LQXZkRkpZNk9fUlZhYnd4RzFSUEZBUUwyUy1IYnFjM3d2ckxsWE9NOW0yWFVON0ZMZGxZRjFOaw?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 14:46 hs.",
-      "fuente": "Referí (El Observador)",
-      "fecha": "19/11/2026 14:46",
-      "fecha_iso": "2026-11-19T14:46:00-03:00",
-      "fecha_raw": "19/11/2026 14:46 hs",
-      "antiguedad_horas": 26.5,
-      "timestamp": 1795110360.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "Peñarol y Valverde nominados a los premios Globe Soccer Awards: qué son y cómo votarlos",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxONVpvWHMwQ01oUWlRbExaSjlhVVptTFNmdVNmLXVRd1l2ZGF1aWhoUDcxNFhPMlQyT1I4Z2RjSzllR1l6aTl4V1hkRmZocS1HaUx4UmRXTzJRbmt5aWNLZ2QwMmdvNXp5QzJaUTBqMnd0NHJnWU51QzB2TnZmRjhqdUpKTU56aVZMZlYtOV9WU09DbXhzTWhqeXJUY2hsa2RWUU1Bb3padlRoeXh3Q2JWLUUwbWNXeUxrVG1uOEN6dUJGQlBJMjBMbE93VWN2T1XSAfMBQVVfeXFMUGp3eEZ0LWYwT2FmN2ltNVhBRTRBc2Y0RHNUVUw4cmp1Sm9kcmJsRGpqTkxoQUtESUQ1YURCbW95ZTdUWnhOMjVYREZUNm00cWx6bUctLXhSRmNpVU1XSm11RXdmTW43N0ZGN3hBek1rX0VIM3JqM0ZDR3ozY0xDMVFjQXdGZHpIbmdEcC1NbTBwYTN6c1ZvQmlnZktEZFY3bVY1c1dWb2xmYm93QW9vOE05WVozOWFoSFdzdVdhRGRET1pqbXlld3NTNFJlY3laQ2hleWZRcVF6MFVLYzRod1Z6YU5LY2JHSG5hbk1UZXB3SFow?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 12:13 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 12:13",
-      "fecha_iso": "2026-11-19T12:13:00-03:00",
-      "fecha_raw": "19/11/2026 12:13 hs",
-      "antiguedad_horas": 29.0,
-      "timestamp": 1795101180.0,
-      "peso": 1.2
     }
   ]
 }

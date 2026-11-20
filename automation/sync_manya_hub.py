@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-ORQUESTADOR MAESTRO UNIFICADO DE ACTUALIZACIÓN — MANYA SERVICIOTI v10.0
+ORQUESTADOR MAESTRO UNIFICADO DE ACTUALIZACIÓN — MANYA SERVICIOTI v11.0
 =======================================================================
 Punto de entrada único, determinista e idempotente para actualizar TODO el ecosistema:
-  1. Match Engine v4.0 (ESPN Schedule + AUF Tabla Anual reconciliada + Libertadores + Plantel 2026 + 1891 BD).
+  1. Match Engine v5.0 (HTTP/MCP resiliente con backoff+caché, ESPN Schedule + AUF Tabla Anual
+     reconciliada + Libertadores + Plantel 2026 con stats/DOB 1891 BD + Clima horario Open-Meteo).
   2. 1891 BD (Efemérides diarias UY_TZ + Fotografías reales de los últimos partidos).
-  3. Rival Intelligence v3.0 (Scouting + 4 Duelos Tácticos 1x1 + Historial 1891 BD).
-  4. Prensa Deportiva v3.0 (Filtro estricto Peñarol <= 10 días, ordenado por fecha real).
-  5. Redacción Editorial Idempotente (solo invoca IA al cambiar de partido/fase; refresca noticias siempre).
-  6. Sincronización Segura SSR de `index.html` mediante BeautifulSoup (cero HTML roto).
+  3. Rival Intelligence v3.1 (Scouting + 4 Duelos Tácticos 1x1 + Historial 1891 BD).
+  4. Prensa Deportiva v4.0 (Filtro estricto Peñarol <= 10 días, limpieza de sufijos y deduplicación difusa).
+  5. Redacción Editorial Idempotente v11.0 (solo invoca IA al cambiar de partido/fase; refresca noticias siempre).
+  6. Sincronización Segura SSR de `index.html` mediante BeautifulSoup (cero HTML roto, cero texto duplicado).
   7. Publicación en Blogger API v3 idempotente (1 Previa / 1 Hoy Juega / 1 Crónica por event_id).
   8. Git Sync Semántico Anti-Spam (solo hace commit/push cuando hay cambios reales de contenido).
 
@@ -23,34 +24,24 @@ import os
 import sys
 import json
 import hashlib
-import logging
 import argparse
 import subprocess
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 AUTOMATION_DIR = BASE_DIR / "automation"
 DATA_DIR = BASE_DIR / "data"
 LOGS_DIR = BASE_DIR / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
-sys.path.insert(0, str(AUTOMATION_DIR))
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
 
 UY_TZ = timezone(timedelta(hours=-3))
-
-logger = logging.getLogger("ManyaSyncHub")
-if not logger.handlers:
-    h = logging.StreamHandler(sys.stdout)
-    h.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(h)
-    logger.setLevel(logging.INFO)
+logger = get_manya_logger("ManyaSyncHub")
 
 SYNC_STATE_FILE = DATA_DIR / ".sync_state.json"
 
@@ -187,7 +178,11 @@ def sync_index_ssr_snapshot(live: Dict[str, Any], digest: Dict[str, Any], rival:
         set_text("hero-home-name", loc.get("nombre", "Peñarol"))
         set_text("hero-away-name", vis.get("nombre", "Rival"))
         set_text("hero-match-venue", display_match.get("estadio", "Estadio Campeón del Siglo"))
-        set_text("hero-last-result", f"Peñarol {pts} pts ({'Campeón Tabla Anual' if res_temp.get('campeon_anual') else 'Tabla Anual'} • {dg} DG • {pj} PJ)")
+        if display_match.get("goles_texto"):
+            set_text("hero-scorers-strip", f"⚽ Goles: {display_match['goles_texto']}")
+        # Alinear con js/app.js: #hero-last-result solo lleva 'Peñarol X pts (corona)' porque el resto vive fuera de <strong>
+        crown_lbl = "Campeón Tabla Anual" if res_temp.get("campeon_anual") else f"#{res_temp.get('penarol_anual_pos', 1)} Tabla Anual"
+        set_text("hero-last-result", f"Peñarol {pts} pts ({crown_lbl})")
 
         home_img = soup.find(id="hero-home-crest")
         if home_img and loc.get("escudo"):
@@ -198,9 +193,16 @@ def sync_index_ssr_snapshot(live: Dict[str, Any], digest: Dict[str, Any], rival:
             away_img["src"] = vis["escudo"]
             away_img["alt"] = f"Escudo Oficial de {vis.get('nombre', 'Visitante')}"
 
-        # Clima
+        # Clima (priorizar pronóstico horario del partido si está disponible dentro de <= 7 días)
         w = live.get("clima_campeon_del_siglo", {}) or {}
-        if w.get("temperatura_c") is not None:
+        w_match = w.get("pronostico_partido") or {}
+        if w_match.get("disponible") and w_match.get("temperatura_c") is not None:
+            set_text(
+                "hero-weather",
+                f"🌦️ Pronóstico Partido: {w_match['temperatura_c']}°C • {w_match.get('condicion', '')} "
+                f"(Lluvia {w_match.get('prob_lluvia_pct', 0)}% • Viento {w_match.get('viento_kmh', 12)} km/h)"
+            )
+        elif w.get("temperatura_c") is not None:
             set_text("hero-weather", f"🌡️ Campeón del Siglo: {w['temperatura_c']}°C • {w.get('condicion', '')} (Viento {w.get('viento_kmh', 12)} km/h)")
 
         # Rival Scout & Duelos
@@ -340,13 +342,18 @@ def semantic_git_sync(mensaje: str, force: bool = False) -> bool:
     return False
 
 
-def ejecutar_sincronizacion_hub(mode: str = "fast", auto_commit: bool = False, force_editorial: bool = False) -> Dict[str, Any]:
+def ejecutar_sincronizacion_hub(
+    mode: str = "fast",
+    auto_commit: bool = False,
+    force_editorial: bool = False,
+    skip_ssr: bool = False,
+) -> Dict[str, Any]:
     """Ejecuta el pipeline completo unificado según el modo solicitado."""
     logger.info("=" * 70)
-    logger.info(f"=== MANYA SYNC HUB v10.0 • MODO: {mode.upper()} • {datetime.now(UY_TZ).strftime('%d/%m/%Y %H:%M UY')} ===")
+    logger.info(f"=== MANYA SYNC HUB v11.0 • MODO: {mode.upper()} • {datetime.now(UY_TZ).strftime('%d/%m/%Y %H:%M UY')} ===")
     logger.info("=" * 70)
 
-    # 1. Match Engine v4.0 (ESPN + AUF + 1891 BD + Squad 2026)
+    # 1. Match Engine v5.0 (ESPN + AUF + 1891 BD + Squad 2026 + Open-Meteo horario)
     from manya_match_engine import ManyaMatchEngine
     live = ManyaMatchEngine.generate_updated_live_status()
 
@@ -362,17 +369,17 @@ def ejecutar_sincronizacion_hub(mode: str = "fast", auto_commit: bool = False, f
 
     # 3. Inteligencia de Rival + Historial 1891 BD
     from manya_rival_intelligence import generar_informe_rival
-    rival_slug = live.get("rival_activo_slug") or live.get("rival_activo_nombre") or "cerro_largo"
+    rival_slug = live.get("rival_activo_slug") or live.get("rival_activo_nombre") or ""
     dt_override = (live.get("partido_activo") or {}).get("dt_rival", "")
     rival = generar_informe_rival(rival_slug, dt_override=dt_override)
     h2h_file = DATA_DIR / "historial_activo.json"
     h2h = json.loads(h2h_file.read_text(encoding="utf-8")) if h2h_file.exists() else {}
 
-    # 4. Prensa Deportiva Fresca (strict Peñarol <= 10 días)
+    # 4. Prensa Deportiva Fresca v4.0 (strict Peñarol <= 10 días + deduplicación difusa + sufijos limpios)
     from manya_sports_press import ManyaSportsPressService
     noticias = ManyaSportsPressService.recolectar_todas(max_por_fuente=10)
 
-    # 5. Editorial Idempotente (news_digest.json)
+    # 5. Editorial Idempotente v11.0 (news_digest.json)
     from generar_cronica_gemini_narrativa import generar_cronica_con_gemini, actualizar_digest_json
     digest_file = DATA_DIR / "news_digest.json"
     existing_digest = {}
@@ -389,7 +396,7 @@ def ejecutar_sincronizacion_hub(mode: str = "fast", auto_commit: bool = False, f
 
     need_new_editorial = (
         force_editorial
-        or existing_digest.get("schema_version") != "10.0"
+        or existing_digest.get("schema_version") != "11.0"
         or str(existing_digest.get("partido_id", "")) != expected_event_id
         or existing_digest.get("fase_publicacion") != expected_pub_phase
         or not existing_digest.get("articulo_principal", {}).get("parrafos")
@@ -410,7 +417,10 @@ def ejecutar_sincronizacion_hub(mode: str = "fast", auto_commit: bool = False, f
     sync_influencers_lead_card(live, digest)
 
     # 6. Sincronización segura SSR de index.html
-    sync_index_ssr_snapshot(live, digest, rival, h2h, efem)
+    if not skip_ssr:
+        sync_index_ssr_snapshot(live, digest, rival, h2h, efem)
+    else:
+        logger.info("[SyncHub] Paso SSR de index.html omitido por bandera --no-ssr.")
 
     # 7. Blogger Sync (solo en modo full local con credenciales OAuth y control anti-duplicados)
     if mode == "full":
@@ -441,16 +451,22 @@ def ejecutar_sincronizacion_hub(mode: str = "fast", auto_commit: bool = False, f
         commit_msg = f"chore(sync): actualizar portal Manya ({fase} • {act.get('nombre', 'Peñarol')}) [skip ci]"
         pushed = semantic_git_sync(commit_msg)
 
-    logger.info("=== MANYA SYNC HUB COMPLETADO CON ÉXITO ===")
+    logger.info("=== MANYA SYNC HUB v11.0 COMPLETADO CON ÉXITO ===")
     return {"live": live, "digest": digest, "rival": rival, "pushed": pushed}
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Orquestador Maestro Unificado Manya ServicioTI v10.0")
+    parser = argparse.ArgumentParser(description="Orquestador Maestro Unificado Manya ServicioTI v11.0")
     parser.add_argument("--mode", choices=["fast", "ci", "full", "hoy-juega"], default="fast")
     parser.add_argument("--commit", action="store_true", help="Ejecutar git sync semántico anti-spam al finalizar")
     parser.add_argument("--force-editorial", action="store_true", help="Forzar regeneración de la nota editorial")
+    parser.add_argument("--no-ssr", action="store_true", help="Actualizar datasets JSON sin modificar index.html")
     args = parser.parse_args()
 
     effective_mode = "full" if args.mode == "hoy-juega" else args.mode
-    ejecutar_sincronizacion_hub(mode=effective_mode, auto_commit=args.commit, force_editorial=args.force_editorial)
+    ejecutar_sincronizacion_hub(
+        mode=effective_mode,
+        auto_commit=args.commit,
+        force_editorial=args.force_editorial,
+        skip_ssr=args.no_ssr,
+    )

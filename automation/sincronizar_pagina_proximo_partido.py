@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-MOTOR DE SINCRONIZACIÓN AUTOMÁTICA DE PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA EN BLOGGER (v10.0 Zero-Hardcode)
+MOTOR DE SINCRONIZACIÓN AUTOMÁTICA DE PRÓXIMO PARTIDO Y RADIOGRAFÍA TÁCTICA EN BLOGGER (v11.0 Zero-Hardcode)
 =============================================================================================================
 1. Publica y actualiza la Página Estática Permanente en Blogger (/p/penarol-proximo-partido-radiografia.html).
 2. Actualiza el post de radiografía táctica con 100% de datos dinámicos leídos desde `live_status.json`,
    `rival_intelligence.json` y `news_digest.json` (cero rivales/puntos/estadios hardcodeados).
 """
 
+import sys
 import json
-import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from googleapiclient.discovery import build
@@ -16,18 +16,22 @@ from google.oauth2.credentials import Credentials
 
 UY_TZ = timezone(timedelta(hours=-3))
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
 SCRATCH_DIR = BASE_DIR.parent
 TOKEN_PATH = SCRATCH_DIR / "seo_blogger_automation" / "token.json"
 DATA_DIR = BASE_DIR / "data"
 STATE_PAGE_FILE = DATA_DIR / "blogger_pagina_proximo_partido.json"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
 
 BLOG_ID = "8220787747664379807"
 EXISTING_POST_ID = "5624313100287295662"
 PAGE_TITLE = "Peñarol: Próximo Partido, Radiografía Táctica y Cobertura Oficial | Manya ServicioTI"
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(name)s] - %(levelname)s - %(message)s")
-logger = logging.getLogger("BloggerProximoPartidoSync")
+logger = get_manya_logger("BloggerProximoPartidoSync")
 
 
 def get_blogger_service():
@@ -253,7 +257,7 @@ def construir_html_proximo_partido(live_data, rival_data, digest_data):
 
 def sincronizar_proximo_partido_blogger():
     """Ejecuta la sincronización completa: crea/actualiza la Página Estática y el Post en Blogger."""
-    logger.info("=== INICIANDO SINCRONIZACIÓN DE PÁGINA Y POST EN BLOGGER (v10.0) ===")
+    logger.info("=== INICIANDO SINCRONIZACIÓN DE PÁGINA Y POST EN BLOGGER (v11.0) ===")
     service = get_blogger_service()
 
     live = json.loads((DATA_DIR / "live_status.json").read_text(encoding="utf-8")) if (DATA_DIR / "live_status.json").exists() else {}

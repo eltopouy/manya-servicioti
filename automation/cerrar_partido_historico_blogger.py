@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-MOTOR DE CIERRE HISTÓRICO DE PARTIDOS EN BLOGGER (v10.0 Zero-Hardcode)
+MOTOR DE CIERRE HISTÓRICO DE PARTIDOS EN BLOGGER (v11.0 Zero-Hardcode)
 ======================================================================
 Archiva cualquier partido finalizado de Peñarol leyendo 100% de los datos
 desde `data/live_status.json`, `data/news_digest.json` y `data/rival_intelligence.json`.
@@ -9,7 +9,6 @@ desde `data/live_status.json`, `data/news_digest.json` y `data/rival_intelligenc
 import sys
 import json
 import sqlite3
-import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any
@@ -19,16 +18,20 @@ from google.oauth2.credentials import Credentials
 
 UY_TZ = timezone(timedelta(hours=-3))
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
 SCRATCH_DIR = BASE_DIR.parent
 TOKEN_PATH = SCRATCH_DIR / "seo_blogger_automation" / "token.json"
 DATA_DIR = BASE_DIR / "data"
 CATALOG_DB = DATA_DIR / "manya_blogger_catalog.db"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
 
 BLOG_ID = "8220787747664379807"
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - [CierreHistoricoBlogger] - %(levelname)s - %(message)s")
-logger = logging.getLogger("CierreHistoricoBlogger")
+logger = get_manya_logger("CierreHistoricoBlogger")
 
 
 def get_blogger_service():

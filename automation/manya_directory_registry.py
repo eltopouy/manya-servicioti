@@ -8,16 +8,17 @@ APIs y medios periodísticos para todo el ecosistema de automatización.
 
 import sys
 import json
-import logging
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 
-if sys.stdout.encoding != "utf-8":
-    sys.stdout.reconfigure(encoding="utf-8")
-
-logger = logging.getLogger("ManyaDirectoryRegistry")
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("ManyaDirectoryRegistry")
 CATALOG_PATH = BASE_DIR / "data" / "fuentes_catalogo.json"
 
 
@@ -41,7 +42,7 @@ class ManyaDirectoryRegistry:
     def get_club(cls, query: str) -> Optional[Dict[str, Any]]:
         """
         Busca un club de Primera División por slug, nombre corto, nombre oficial o abreviatura.
-        Ej: get_club('juventud') o get_club('JUV') o get_club('Juventud de Las Piedras').
+        Ej: get_club('liverpool') o get_club('CAP') o get_club('Club Atlético Peñarol').
         """
         cat = cls.load()
         clubes = cat.get("clubes_primera_division_2026", {})
@@ -102,8 +103,15 @@ if __name__ == "__main__":
     print(f" - Organismos: {len(reg.get('organismos_oficiales', {}))}")
     print(f" - Medios de Prensa: {len(reg.get('prensa_deportiva', {}))}")
     print(f" - Clubes de Primera: {len(reg.get('clubes_primera_division_2026', {}))}")
-    
-    juv = ManyaDirectoryRegistry.get_club("juventud")
-    if juv:
-        print(f"\nClub verificado: {juv['nombre_oficial']} (DT: {juv.get('dt_actual')})")
-        print(f"Estadio: {juv.get('estadio_propio')} | Web: {juv.get('web_oficial')}")
+
+    sample_query = "penarol"
+    live_file = BASE_DIR / "data" / "live_status.json"
+    if live_file.exists():
+        try:
+            sample_query = json.loads(live_file.read_text(encoding="utf-8")).get("rival_activo_slug") or sample_query
+        except Exception:
+            pass
+    club = ManyaDirectoryRegistry.get_club(sample_query)
+    if club:
+        print(f"\nClub verificado: {club['nombre_oficial']} (DT: {club.get('dt_actual')})")
+        print(f"Estadio: {club.get('estadio_propio')} | Web: {club.get('web_oficial')}")

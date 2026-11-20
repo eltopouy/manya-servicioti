@@ -1,16 +1,18 @@
 /* -*- coding: utf-8 -*-
- * MOTOR INTERACTIVO MANYA SERVICIOTI v10.0 (Zero-Hardcode & Full Data-Driven)
+ * MOTOR INTERACTIVO MANYA SERVICIOTI v11.0 (Zero-Hardcode, XSS-Safe & Full UX Pro)
  * Controla:
- * 1. Hidratación 100% dinámica desde /data/*.json (ESPN API, AUF, 1891 BD, Open-Meteo, Prensa).
+ * 1. Hidratación 100% dinámica y sanitizada desde /data/*.json (ESPN API, AUF, 1891 BD, Open-Meteo, Prensa).
  * 2. Match Center adaptativo (EN_VIVO, POST_PARTIDO 48h con goleadores/video, PREVIA, FINAL URUGUAYO).
  * 3. Tablas oficiales (Anual, Clausura, Libertadores) + Cuadro de Definición / Simulador interactivo.
- * 4. Pizarra Táctica "Armá tu 11" con plantel real 2026, cambios bidireccionales y PNG 1080x1350.
- * 5. Galería optimizada con carga progresiva ("Ver más"), Lightbox HD y Trivia 1891.
+ * 4. Pizarra Táctica Pro "Armá tu 11" (3 formaciones, filtro de banco por línea, Último 11 de Aguirre, 11 Ideal 2026 y PNG 1080x1350).
+ * 5. Prensa Deportiva Filtrable + Búsqueda Instantánea (#prensa-vivo).
+ * 6. Lightbox Profesional Accesible con navegación Prev/Next, teclado, swipe táctil y soporte en Galerías, Influencers y Piel Carbonera.
+ * 7. Scroll-Spy (IntersectionObserver), Sistema de Toasts (aria-live), Shimmer Lazy-Load y PWA Install CTA.
  */
 (function () {
   'use strict';
 
-  const APP_VERSION = '10.0';
+  const APP_VERSION = '11.0';
 
   let state = {
     live: null,
@@ -19,18 +21,33 @@
     galleries: [],
     galleryFilter: 'all',
     galleryLimit: 6,
+    tattoos: [],
+    tattooFilter: 'all',
     squad: null,
     history: null,
     escudosCatalog: null,
     formation: '4-2-3-1',
     selectedSlotIndex: null,
     selectedBenchIndex: null,
+    benchLineFilter: 'all',
+    activeLineupPreset: 'ideal',
     lineup: [],
     bench: [],
     initialLineup: [],
     initialBench: [],
     simPointsDelta: 0,
-    standingsTab: 'anual'
+    standingsTab: 'anual',
+    pressArticles: [],
+    pressSourceFilter: 'all',
+    pressSearchQuery: '',
+    pressExpanded: false
+  };
+
+  const lightboxState = {
+    items: [],
+    index: 0,
+    triggerEl: null,
+    isOpen: false
   };
 
   const FORMATIONS = {
@@ -77,32 +94,32 @@
 
   // Plantel real vigente de Peñarol Noviembre 2026 (respaldo inmediato si aún no cargó squad_2026.json)
   const DEFAULT_LINEUP = [
-    { id: 'washington_aguerre', numero: 29, nombre: 'Washington Aguerre', posicion: 'ARQ', titular: true },
-    { id: 'ignacio_alegre', numero: 28, nombre: 'Ignacio Alegre', posicion: 'LD', titular: true },
-    { id: 'german_pezzella', numero: 2, nombre: 'Germán Pezzella', posicion: 'DFC', titular: true },
-    { id: 'nahuel_herrera', numero: 34, nombre: 'Nahuel Herrera', posicion: 'DFC', titular: true },
-    { id: 'maximiliano_olivera', numero: 15, nombre: 'Maximiliano Olivera', posicion: 'LI', titular: true },
-    { id: 'eric_remedi', numero: 5, nombre: 'Eric Remedi', posicion: 'MCD', titular: true },
-    { id: 'eduardo_darias', numero: 13, nombre: 'Eduardo Darias', posicion: 'MC', titular: true },
-    { id: 'javier_cabrera', numero: 7, nombre: 'Javier Cabrera', posicion: 'ED', titular: true },
-    { id: 'leonardo_fernandez', numero: 10, nombre: 'Leonardo Fernández', posicion: 'MCO', titular: true },
-    { id: 'leonel_jaime', numero: 11, nombre: 'Leonel Jaime', posicion: 'EI', titular: true },
-    { id: 'matias_arezo', numero: 19, nombre: 'Matías Arezo', posicion: 'DC', titular: true }
+    { id: 'washington_aguerre', numero: 29, nombre: 'Washington Aguerre', posicion: 'ARQ', linea: 'portero', titular: true },
+    { id: 'ignacio_alegre', numero: 28, nombre: 'Ignacio Alegre', posicion: 'LD', linea: 'defensa', titular: true },
+    { id: 'german_pezzella', numero: 2, nombre: 'Germán Pezzella', posicion: 'DFC', linea: 'defensa', titular: true },
+    { id: 'nahuel_herrera', numero: 34, nombre: 'Nahuel Herrera', posicion: 'DFC', linea: 'defensa', titular: true },
+    { id: 'maximiliano_olivera', numero: 15, nombre: 'Maximiliano Olivera', posicion: 'LI', linea: 'defensa', titular: true },
+    { id: 'eric_remedi', numero: 5, nombre: 'Eric Remedi', posicion: 'MCD', linea: 'volante', titular: true },
+    { id: 'eduardo_darias', numero: 13, nombre: 'Eduardo Darias', posicion: 'MC', linea: 'volante', titular: true },
+    { id: 'javier_cabrera', numero: 7, nombre: 'Javier Cabrera', posicion: 'ED', linea: 'ataque', titular: true },
+    { id: 'leonardo_fernandez', numero: 10, nombre: 'Leonardo Fernández', posicion: 'MCO', linea: 'ataque', titular: true },
+    { id: 'leonel_jaime', numero: 11, nombre: 'Leonel Jaime', posicion: 'EI', linea: 'ataque', titular: true },
+    { id: 'matias_arezo', numero: 19, nombre: 'Matías Arezo', posicion: 'DC', linea: 'ataque', titular: true }
   ];
 
   const DEFAULT_BENCH = [
-    { id: 'sebastian_britos', numero: 1, nombre: 'Sebastián Britos', posicion: 'ARQ', titular: false },
-    { id: 'mauricio_lemos', numero: 3, nombre: 'Mauricio Lemos', posicion: 'DFC', titular: false },
-    { id: 'lucas_ferreira', numero: 6, nombre: 'Lucas Ferreira', posicion: 'DFC', titular: false },
-    { id: 'diego_laxalt', numero: 93, nombre: 'Diego Laxalt', posicion: 'LI', titular: false },
-    { id: 'thiago_espinosa', numero: 26, nombre: 'Thiago Espinosa', posicion: 'LI', titular: false },
-    { id: 'lucas_hernandez', numero: 27, nombre: 'Lucas Hernández', posicion: 'LI', titular: false },
-    { id: 'jesus_trindade', numero: 21, nombre: 'Jesús Trindade', posicion: 'MCD', titular: false },
-    { id: 'roberto_fernandez', numero: 8, nombre: 'Roberto Fernández', posicion: 'MC', titular: false },
-    { id: 'leandro_umpierrez', numero: 32, nombre: 'Leandro Umpiérrez', posicion: 'MCO', titular: false },
-    { id: 'luis_miguel_angulo', numero: 77, nombre: 'Luis Miguel Angulo', posicion: 'EI', titular: false },
-    { id: 'abel_hernandez', numero: 99, nombre: 'Abel Hernández', posicion: 'DC', titular: false },
-    { id: 'facundo_batista', numero: 9, nombre: 'Facundo Batista', posicion: 'DC', titular: false }
+    { id: 'sebastian_britos', numero: 1, nombre: 'Sebastián Britos', posicion: 'ARQ', linea: 'portero', titular: false },
+    { id: 'mauricio_lemos', numero: 3, nombre: 'Mauricio Lemos', posicion: 'DFC', linea: 'defensa', titular: false },
+    { id: 'lucas_ferreira', numero: 6, nombre: 'Lucas Ferreira', posicion: 'DFC', linea: 'defensa', titular: false },
+    { id: 'diego_laxalt', numero: 93, nombre: 'Diego Laxalt', posicion: 'LI', linea: 'defensa', titular: false },
+    { id: 'thiago_espinosa', numero: 26, nombre: 'Thiago Espinosa', posicion: 'LI', linea: 'defensa', titular: false },
+    { id: 'lucas_hernandez', numero: 27, nombre: 'Lucas Hernández', posicion: 'LI', linea: 'defensa', titular: false },
+    { id: 'jesus_trindade', numero: 21, nombre: 'Jesús Trindade', posicion: 'MCD', linea: 'volante', titular: false },
+    { id: 'roberto_fernandez', numero: 8, nombre: 'Roberto Fernández', posicion: 'MC', linea: 'volante', titular: false },
+    { id: 'leandro_umpierrez', numero: 32, nombre: 'Leandro Umpiérrez', posicion: 'MCO', linea: 'ataque', titular: false },
+    { id: 'luis_miguel_angulo', numero: 77, nombre: 'Luis Miguel Angulo', posicion: 'EI', linea: 'ataque', titular: false },
+    { id: 'abel_hernandez', numero: 99, nombre: 'Abel Hernández', posicion: 'DC', linea: 'ataque', titular: false },
+    { id: 'facundo_batista', numero: 9, nombre: 'Facundo Batista', posicion: 'DC', linea: 'ataque', titular: false }
   ];
 
   const TRIVIA_QUESTIONS = [
@@ -127,6 +144,130 @@
     { cat: 'records', catName: 'Récords & Hazañas', q: '¿Cuál es el récord histórico de partidos oficiales invicto en el Campeonato Uruguayo que ostenta Peñarol?', opts: ['56 partidos consecutivos invicto (1966-1969)', '42 partidos consecutivos invicto', '34 partidos consecutivos invicto', '62 partidos consecutivos invicto'], ans: 0, exp: 'Entre 1966 y 1969, Peñarol hilvanó 56 partidos consecutivos sin conocer la derrota en el Campeonato Uruguayo.' },
     { cat: 'libertadores', catName: 'Copas Libertadores', q: '¿En qué final épica de Copa Libertadores Peñarol perdía 0-2 en Santiago y terminó consagrándose campeón con remontada 4-2 ante River Plate argentino?', opts: ['Final de 1966 en Santiago de Chile', 'Final de 1961 en San Pablo', 'Final de 1982 en Santiago', 'Final de 1960 en Asunción'], ans: 0, exp: 'El 20 de mayo de 1966 en Santiago, Peñarol remontó un 0-2 para ganar 4-2 en tiempo extra con goles de Spencer (2), Abbadie y Rocha.' }
   ];
+
+  // ==================== SEGURIDAD XSS, SANITIZACIÓN & UTILIDADES ====================
+  function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function safeUrl(rawUrl, fallback = '#') {
+    if (typeof rawUrl !== 'string') return fallback;
+    const trimmed = rawUrl.trim();
+    if (!trimmed) return fallback;
+    // Bloquear esquemas peligrosos, caracteres de control y rutas protocol-relative
+    if (/[\u0000-\u001F\u007F]/.test(trimmed)) return fallback;
+    if (/^(javascript|vbscript|data|file):/i.test(trimmed)) return fallback;
+    if (trimmed.startsWith('//')) return fallback;
+
+    if (trimmed.startsWith('#')) {
+      return /^#[a-zA-Z0-9_-]+$/.test(trimmed) ? trimmed : fallback;
+    }
+    if (/^https?:\/\//i.test(trimmed)) {
+      try {
+        const parsed = new URL(trimmed);
+        if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+          return parsed.href;
+        }
+      } catch (_) {
+        return fallback;
+      }
+      return fallback;
+    }
+    // Rutas relativas locales seguras (sin ../)
+    if (/^(\/)?(assets|data|css|js|index\.html|llms\.txt|manifest\.json)[a-zA-Z0-9._/?=&%-]*$/i.test(trimmed) && !trimmed.includes('..')) {
+      return trimmed;
+    }
+    return fallback;
+  }
+
+  function safeImgSrc(rawSrc, fallback = 'assets/img/escudo_penarol_oficial.svg') {
+    return safeUrl(rawSrc, fallback);
+  }
+
+  function normalizeText(value) {
+    return String(value || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
+  }
+
+  function showToast(message, type = 'gold') {
+    if (!message) return;
+    let region = document.getElementById('manya-toast-region');
+    if (!region) {
+      region = document.createElement('div');
+      region.id = 'manya-toast-region';
+      region.className = 'manya-toast-region';
+      region.setAttribute('role', 'status');
+      region.setAttribute('aria-live', 'polite');
+      region.setAttribute('aria-atomic', 'true');
+      document.body.appendChild(region);
+    }
+    while (region.children.length >= 3) {
+      region.removeChild(region.firstChild);
+    }
+    const toast = document.createElement('div');
+    const variant = ['success', 'warning', 'info', 'gold'].includes(type) ? type : 'gold';
+    toast.className = `manya-toast toast-${variant}`;
+    toast.textContent = String(message);
+    region.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('is-hiding');
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 260);
+    }, 3200);
+  }
+
+  function enhanceLazyImages(root) {
+    if (!root) return;
+    const imgs = root.querySelectorAll('img');
+    imgs.forEach(img => {
+      const wrap = img.closest('.ig-img-wrap, .ig-post-media-wrap, .tattoo-img-wrap');
+      const fallbackSrc = img.getAttribute('data-fallback-src');
+
+      if (fallbackSrc) {
+        img.addEventListener('error', () => {
+          if (img.dataset.fallbackApplied) return;
+          img.dataset.fallbackApplied = '1';
+          img.src = safeImgSrc(fallbackSrc);
+        });
+      }
+
+      if (img.getAttribute('loading') !== 'lazy' && !img.classList.contains('manya-lazy-img')) return;
+      img.classList.add('manya-lazy-img');
+
+      const markLoaded = () => {
+        img.classList.remove('is-loading');
+        img.classList.add('is-loaded');
+        if (wrap) wrap.classList.remove('is-loading');
+      };
+
+      if (img.complete && img.naturalWidth > 0) {
+        markLoaded();
+      } else {
+        img.classList.add('is-loading');
+        if (wrap) wrap.classList.add('is-loading');
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', () => {
+          if (fallbackSrc && !img.dataset.fallbackApplied) {
+            img.dataset.fallbackApplied = '1';
+            img.src = safeImgSrc(fallbackSrc);
+          } else {
+            markLoaded();
+          }
+        }, { once: true });
+      }
+    });
+  }
 
   async function loadJsonSafe(path) {
     try {
@@ -188,14 +329,15 @@
       return 'assets/img/escudos/escudo_penarol.webp';
     }
     if (team.escudo && (team.escudo.startsWith('assets/img/escudos/') || /\.(webp|png|svg)$/i.test(team.escudo))) {
-      return team.escudo;
+      return safeImgSrc(team.escudo, 'assets/img/escudos/escudo_auf.svg');
     }
 
     const norm = rawName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, '').trim();
     if (state.escudosCatalog && state.escudosCatalog.alias_index) {
       const slug = state.escudosCatalog.alias_index[norm];
       if (slug && state.escudosCatalog.clubes && state.escudosCatalog.clubes[slug]) {
-        return state.escudosCatalog.clubes[slug].ruta_webp || state.escudosCatalog.clubes[slug].escudo;
+        const candidate = state.escudosCatalog.clubes[slug].ruta_webp || state.escudosCatalog.clubes[slug].escudo;
+        return safeImgSrc(candidate, 'assets/img/escudos/escudo_auf.svg');
       }
     }
 
@@ -228,10 +370,11 @@
     for (const [kw, file] of directMap) {
       if (norm.includes(kw)) return 'assets/img/escudos/' + file;
     }
-    if (team.logo && team.logo.startsWith('http')) return team.logo;
+    if (team.logo && /^https?:\/\//i.test(team.logo)) return safeImgSrc(team.logo, 'assets/img/escudos/escudo_auf.svg');
     return 'assets/img/escudos/escudo_auf.svg';
   }
 
+  // ==================== MATCH CENTER ====================
   function renderMatchHero(live) {
     if (!live) return;
     const fase = live.fase_partido || 'PREVIA';
@@ -240,7 +383,6 @@
     const resTemp = live.resumen_temporada || {};
     const w = live.clima_campeon_del_siglo || {};
 
-    // En EN_VIVO y POST_PARTIDO mostramos partido_activo; en PREVIA mostramos proximo_partido
     const featured = (fase === 'EN_VIVO' || fase === 'POST_PARTIDO' || live.estado_ciclo_vida === 'POST_48H')
       ? (act.local ? act : prox)
       : (prox.local ? prox : act);
@@ -250,7 +392,6 @@
       wEl.textContent = `🌡️ Campeón del Siglo: ${w.temperatura_c}°C • ${w.condicion || 'Despejado'} (Viento ${w.viento_kmh || 12} km/h)`;
     }
 
-    // Equipos y escudos SIEMPRE del partido mostrado (jamás mezcla equipos de un partido con marcador de otro)
     const loc = featured.local || { nombre: 'Peñarol', es_penarol: true, goles: '-' };
     const vis = featured.visitante || { nombre: 'Rival', es_penarol: false, goles: '-' };
 
@@ -351,7 +492,6 @@
       }
     }
 
-    // Hidratar las 4 tarjetas meta del Match Center (cero texto viejo de Franzini/66 pts)
     const pts = resTemp.penarol_anual_pts || 69;
     const dg = resTemp.penarol_anual_dg || '+27';
     const pj = resTemp.penarol_anual_pj || 37;
@@ -360,28 +500,28 @@
     const meta1 = document.getElementById('hero-meta-box-1');
     if (meta1) {
       if (prox.es_definicion_final) {
-        meta1.innerHTML = `<span>🏆 Próximo Horizonte • Gran Final</span><strong>${prox.nombre}</strong> — ${prox.fecha_legible}. Semifinal: ${defInfo.semifinal || 'Racing vs Liverpool'} (${defInfo.fecha_semifinal || '29/11'}).`;
+        meta1.innerHTML = `<span>🏆 Próximo Horizonte • Gran Final</span><strong>${escapeHtml(prox.nombre)}</strong> — ${escapeHtml(prox.fecha_legible)}. Semifinal: ${escapeHtml(defInfo.semifinal || 'Racing vs Liverpool')} (${escapeHtml(defInfo.fecha_semifinal || '29/11')}).`;
       } else {
-        meta1.innerHTML = `<span>🎟️ Próximo Compromiso &amp; Sede</span><strong>${prox.nombre || featured.nombre}</strong> en ${prox.estadio || featured.estadio} (${prox.fecha_legible || ''}).`;
+        meta1.innerHTML = `<span>🎟️ Próximo Compromiso &amp; Sede</span><strong>${escapeHtml(prox.nombre || featured.nombre)}</strong> en ${escapeHtml(prox.estadio || featured.estadio)} (${escapeHtml(prox.fecha_legible || '')}).`;
       }
     }
 
     const meta2 = document.getElementById('hero-meta-box-2');
     if (meta2) {
-      if (featured.video_youtube_url) {
-        meta2.innerHTML = `<span>🎬 Resumen Oficial &amp; TV</span>Reviví los goles del triunfo en <a href="${featured.video_youtube_url}" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);font-weight:800;text-decoration:underline;">YouTube (1891 BD) ↗</a> • TV: <strong>${featured.tv || 'VTV Plus / Disney+'}</strong>.`;
+      const ytUrl = safeUrl(featured.video_youtube_url, '');
+      if (ytUrl) {
+        meta2.innerHTML = `<span>🎬 Resumen Oficial &amp; TV</span>Reviví los goles del triunfo en <a href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--manya-gold);font-weight:800;text-decoration:underline;">YouTube (1891 BD) ↗</a> • TV: <strong>${escapeHtml(featured.tv || 'VTV Plus / Disney+')}</strong>.`;
       } else {
-        meta2.innerHTML = `<span>📺 Transmisión Oficial</span>En vivo para todo el país por <strong>${featured.tv || 'VTV Plus / Disney+ Premium'}</strong>.`;
+        meta2.innerHTML = `<span>📺 Transmisión Oficial</span>En vivo para todo el país por <strong>${escapeHtml(featured.tv || 'VTV Plus / Disney+ Premium')}</strong>.`;
       }
     }
 
     const meta3 = document.getElementById('hero-meta-box-3');
     if (meta3) {
       const crown = resTemp.campeon_anual ? 'Campeón Tabla Anual' : `#${resTemp.penarol_anual_pos || 1} Tabla Anual`;
-      meta3.innerHTML = `<span>🏆 Tabla Anual Oficial AUF</span><strong id="hero-last-result">Peñarol ${pts} pts (${crown})</strong> • ${dg} DG (${pj} PJ) • Libertadores 2027.`;
+      meta3.innerHTML = `<span>🏆 Tabla Anual Oficial AUF</span><strong id="hero-last-result">Peñarol ${escapeHtml(pts)} pts (${escapeHtml(crown)})</strong> • ${escapeHtml(dg)} DG (${escapeHtml(pj)} PJ) • Libertadores 2027.`;
     }
 
-    // Ticker superior
     const tickerEl = document.getElementById('manya-live-ticker');
     const tickerTxt = document.getElementById('ticker-text');
     if (tickerEl) {
@@ -394,7 +534,6 @@
       }
     }
 
-    // Barra de racha de los últimos 5 resultados reales (V/E/D)
     renderRecentFormStrip(live);
     renderLiveTimeline(live);
     updateDynamicLogisticsAndTacticalTitles(live);
@@ -424,7 +563,8 @@
         if (gPen > gRiv) { cls = 'is-win'; code = 'V'; }
         else if (gPen < gRiv) { cls = 'is-loss'; code = 'D'; }
       }
-      return `<span class="form-pill ${cls}" title="${m.fecha_legible || ''} • ${m.estadio || ''}"><strong>${code}</strong> ${gPen}-${gRiv} vs ${rivNom}</span>`;
+      const tooltip = `${m.fecha_legible || ''} • ${m.estadio || ''}`;
+      return `<span class="form-pill ${cls}" title="${escapeHtml(tooltip)}"><strong>${code}</strong> ${escapeHtml(isNaN(gPen) ? '-' : gPen)}-${escapeHtml(isNaN(gRiv) ? '-' : gRiv)} vs ${escapeHtml(rivNom)}</span>`;
     }).join('');
 
     const summaryEl = document.getElementById('recent-form-summary');
@@ -457,11 +597,11 @@
       return `
         <div style="display:flex;gap:12px;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--manya-gold);border-radius:8px;">
           <div style="flex-shrink:0;width:54px;text-align:center;">
-            <span style="background:var(--manya-gold);color:#09090b;font-weight:900;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block;">${e.minuto || '•'}</span>
+            <span style="background:var(--manya-gold);color:#09090b;font-weight:900;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block;">${escapeHtml(e.minuto || '•')}</span>
           </div>
           <div style="flex-grow:1;min-width:0;">
-            <div style="font-weight:800;color:#ffffff;font-size:13.5px;margin-bottom:2px;">${e.icono || '⚡'} ${titulo}</div>
-            <div style="font-size:12.5px;color:#d4d4d8;line-height:1.45;">${desc}</div>
+            <div style="font-weight:800;color:#ffffff;font-size:13.5px;margin-bottom:2px;">${escapeHtml(e.icono || '⚡')} ${escapeHtml(titulo)}</div>
+            <div style="font-size:12.5px;color:#d4d4d8;line-height:1.45;">${escapeHtml(desc)}</div>
           </div>
         </div>
       `;
@@ -478,28 +618,27 @@
         pTitle.innerHTML = `👕 Pizarra Táctica: <span>Armá tu 11 para la Gran Final 2026</span>`;
         pSub.textContent = `Plantel real noviembre 2026 • Armá el once titular de Diego Aguirre para la definición del Campeonato Uruguayo (3 y 6 de diciembre).`;
       } else {
-        pTitle.innerHTML = `👕 Pizarra Táctica: <span>Armá tu 11 • ${prox.nombre || 'Peñarol'}</span>`;
+        pTitle.innerHTML = `👕 Pizarra Táctica: <span>Armá tu 11 • ${escapeHtml(prox.nombre || 'Peñarol')}</span>`;
         pSub.textContent = `Plantel vigente 2026 • Armá tu alineación ideal para ${prox.estadio || 'el próximo partido'} (${prox.fecha_legible || ''}).`;
       }
     }
 
     const logBox = document.getElementById('como-llegar-dinamico');
-    if (logBox) {
-      if (prox.es_definicion_final) {
-        logBox.innerHTML = `
-          <div style="display:inline-block;background:var(--manya-gold);color:#000;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;">Definición Uruguayo 2026 • Finales</div>
-          <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Operativo Finales en el Estadio Campeón del Siglo</h3>
-          <p style="font-size:13.5px;color:#d4d4d8;margin-bottom:12px;">Peñarol (Campeón Anual con ${resTemp.penarol_anual_pts || 69} pts) disputará la Gran Final ida y vuelta el 3 y 6 de diciembre ante el ganador de Racing vs Liverpool.</p>
-          <ul style="font-size:13.5px;color:#e4e4e7;padding-left:18px;margin-bottom:14px;">
-            <li><strong>Ingreso Vehicular:</strong> Accesos por Ruta 102 y Camino Mangangá con apertura recomendada 2 horas antes del pitazo inicial.</li>
-            <li><strong>Servicios Especiales:</strong> Refuerzos CUTCSA directo "Estadio Campeón del Siglo" desde Tres Cruces, Centro y Belloni.</li>
-          </ul>
-          <a href="https://horarios.servicioti.com.uy/" class="btn-outline-gold" style="font-size:12.5px;">Consultar Horarios en Vivo en Horarios ServicioTI →</a>
-        `;
-      }
+    if (logBox && prox.es_definicion_final) {
+      logBox.innerHTML = `
+        <div style="display:inline-block;background:var(--manya-gold);color:#000;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;">Definición Uruguayo 2026 • Finales</div>
+        <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Operativo Finales en el Estadio Campeón del Siglo</h3>
+        <p style="font-size:13.5px;color:#d4d4d8;margin-bottom:12px;">Peñarol (Campeón Anual con ${escapeHtml(resTemp.penarol_anual_pts || 69)} pts) disputará la Gran Final ida y vuelta el 3 y 6 de diciembre ante el ganador de Racing vs Liverpool.</p>
+        <ul style="font-size:13.5px;color:#e4e4e7;padding-left:18px;margin-bottom:14px;">
+          <li><strong>Ingreso Vehicular:</strong> Accesos por Ruta 102 y Camino Mangangá con apertura recomendada 2 horas antes del pitazo inicial.</li>
+          <li><strong>Servicios Especiales:</strong> Refuerzos CUTCSA directo "Estadio Campeón del Siglo" desde Tres Cruces, Centro y Belloni.</li>
+        </ul>
+        <a href="https://horarios.servicioti.com.uy/" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="font-size:12.5px;">Consultar Horarios en Vivo en Horarios ServicioTI ↗</a>
+      `;
     }
   }
 
+  // ==================== TABLAS OFICIALES & SIMULADOR ====================
   function renderStandingsTabs() {
     const container = document.getElementById('standings-tabs-container');
     if (!container || !state.live) return;
@@ -516,10 +655,11 @@
       state.standingsTab = state.live.torneo_activo_id || 'anual';
     }
 
+    container.setAttribute('role', 'tablist');
     container.innerHTML = tabs.map(t => {
       const isActive = t.id === state.standingsTab;
-      const badgeHtml = t.badge ? `<span class="pill-badge">${t.badge}</span>` : '';
-      return `<button type="button" class="standings-pill ${isActive ? 'active' : ''}" data-tab="${t.id}"><span>${t.icono || '🏆'} ${t.nombre_corto || t.nombre}</span>${badgeHtml}</button>`;
+      const badgeHtml = t.badge ? `<span class="pill-badge">${escapeHtml(t.badge)}</span>` : '';
+      return `<button type="button" role="tab" aria-selected="${isActive ? 'true' : 'false'}" class="standings-pill ${isActive ? 'active' : ''}" data-tab="${escapeHtml(t.id)}"><span>${escapeHtml(t.icono || '🏆')} ${escapeHtml(t.nombre_corto || t.nombre)}</span>${badgeHtml}</button>`;
     }).join('');
 
     container.querySelectorAll('.standings-pill').forEach(btn => {
@@ -549,22 +689,22 @@
     const badgeEl = document.getElementById('standings-context-badge');
     const subInfoEl = document.getElementById('standings-sub-info');
 
-    if (titleEl) titleEl.innerHTML = `${activeTourn.icono || '🏆'} ${activeTourn.nombre}`;
+    if (titleEl) titleEl.textContent = `${activeTourn.icono || '🏆'} ${activeTourn.nombre}`;
     if (badgeEl) {
       badgeEl.textContent = activeTourn.id === 'anual' ? 'OFICIAL AUF' : (activeTourn.id === 'libertadores' ? 'CONMEBOL' : 'CLAUSURA 2026');
     }
 
     if (subInfoEl) {
       if (activeTourn.id === 'anual') {
-        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA (AUF):</strong> <strong style="color:var(--manya-gold);">Peñarol ${resTemp.campeon_anual ? 'CAMPEÓN ANUAL' : 'líder'} con ${ptsAnual} puntos (${dgAnual} DG)</strong> — Clasificado directo a la Gran Final del Uruguayo y Copa Libertadores 2027.`;
+        subInfoEl.innerHTML = `<strong>🏆 TABLA ANUAL ACUMULADA (AUF):</strong> <strong style="color:var(--manya-gold);">Peñarol ${resTemp.campeon_anual ? 'CAMPEÓN ANUAL' : 'líder'} con ${escapeHtml(ptsAnual)} puntos (${escapeHtml(dgAnual)} DG)</strong> — Clasificado directo a la Gran Final del Uruguayo y Copa Libertadores 2027.`;
       } else if (activeTourn.id === 'clausura') {
-        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026:</strong> Clasificación oficial del certamen corto (15 fechas). Peñarol cerró con ${resTemp.penarol_clausura_pts || 26} pts en ${resTemp.penarol_clausura_pj || 15} PJ.`;
+        subInfoEl.innerHTML = `<strong>⚽ TORNEO CLAUSURA 2026:</strong> Clasificación oficial del certamen corto (15 fechas). Peñarol cerró con ${escapeHtml(resTemp.penarol_clausura_pts || 26)} pts en ${escapeHtml(resTemp.penarol_clausura_pj || 15)} PJ.`;
       } else {
         subInfoEl.innerHTML = `<strong>🌎 COPA CONMEBOL LIBERTADORES:</strong> Tabla oficial ordenada por posición, puntos y diferencia de goles.`;
       }
     }
 
-    let sourceData = (activeTourn && activeTourn.datos && activeTourn.datos.length)
+    const sourceData = (activeTourn && activeTourn.datos && activeTourn.datos.length)
       ? activeTourn.datos
       : (state.standingsTab === 'clausura' ? (state.live.tabla_clausura || []) : (state.standingsTab === 'libertadores' ? (state.live.tabla_libertadores || []) : (state.live.tabla_anual || [])));
 
@@ -587,19 +727,21 @@
           <td class="col-pos">${i + 1}</td>
           <td class="col-team">
             <div style="display:flex;align-items:center;gap:6px;">
-              <img src="${crest}" alt="${r.equipo}" width="18" height="18" style="object-fit:contain;border-radius:2px;flex-shrink:0;" onerror="this.onerror=null;this.src='${fallbackCrest}'" />
-              <span class="team-name-label">${r.equipo}</span>${tagExtra}
+              <img src="${escapeHtml(crest)}" data-fallback-src="${escapeHtml(fallbackCrest)}" alt="${escapeHtml(r.equipo)}" width="18" height="18" style="object-fit:contain;border-radius:2px;flex-shrink:0;" />
+              <span class="team-name-label">${escapeHtml(r.equipo)}</span>${tagExtra}
             </div>
           </td>
-          <td class="col-stat col-pj">${r.pj_calc}</td>
-          <td class="col-stat col-pg">${r.pg}</td>
-          <td class="col-stat col-pe">${r.pe}</td>
-          <td class="col-stat col-pp">${r.pp}</td>
-          <td class="col-stat col-dg">${r.dg}</td>
-          <td class="col-pts"><span class="${ptsClass}">${r.pts_calc}</span></td>
+          <td class="col-stat col-pj">${escapeHtml(r.pj_calc)}</td>
+          <td class="col-stat col-pg">${escapeHtml(r.pg)}</td>
+          <td class="col-stat col-pe">${escapeHtml(r.pe)}</td>
+          <td class="col-stat col-pp">${escapeHtml(r.pp)}</td>
+          <td class="col-stat col-dg">${escapeHtml(r.dg)}</td>
+          <td class="col-pts"><span class="${ptsClass}">${escapeHtml(r.pts_calc)}</span></td>
         </tr>
       `;
     }).join('');
+
+    enhanceLazyImages(tbody);
 
     const btnToggle = document.getElementById('btn-toggle-cols');
     const tableEl = document.querySelector('.manya-table');
@@ -621,45 +763,56 @@
     const resTemp = state.live.resumen_temporada || {};
     const prox = state.live.proximo_partido || {};
 
-    // Si Peñarol ya ganó la Tabla Anual y estamos en etapa de Definición del Campeonato Uruguayo
     if (resTemp.campeon_anual || prox.es_definicion_final) {
       if (titleEl) titleEl.textContent = '🏆 Definición del Campeonato Uruguayo 2026';
       if (descEl) descEl.textContent = `Peñarol ganó la Tabla Anual (${resTemp.penarol_anual_pts || 69} pts) y espera directamente en las Finales. Proyectá tu camino al título:`;
       if (resetBtn) resetBtn.style.display = 'none';
 
       const def = resTemp.definicion_uruguayo || {};
-      let rivalPick = localStorage.getItem('manya_final_rival_pick') || 'Liverpool';
+      const savedPick = (() => {
+        try {
+          const val = localStorage.getItem('manya_final_rival_pick');
+          return (val === 'Racing' || val === 'Liverpool') ? val : 'Liverpool';
+        } catch (_) {
+          return 'Liverpool';
+        }
+      })();
+      let rivalPick = savedPick;
 
       const renderBracket = () => {
         container.innerHTML = `
           <div class="playoff-bracket-card">
             <div style="font-size:11.5px;font-weight:900;color:var(--manya-gold);letter-spacing:0.05em;text-transform:uppercase;">✅ OBJETIVOS YA CUMPLIDOS POR PEÑAROL</div>
             <ul style="font-size:12.5px;color:#e4e4e7;margin:8px 0 0 18px;line-height:1.55;">
-              <li><strong>Campeón de la Tabla Anual 2026</strong> (${resTemp.penarol_anual_pts || 69} pts • ${resTemp.penarol_anual_dg || '+27'} DG).</li>
+              <li><strong>Campeón de la Tabla Anual 2026</strong> (${escapeHtml(resTemp.penarol_anual_pts || 69)} pts • ${escapeHtml(resTemp.penarol_anual_dg || '+27')} DG).</li>
               <li><strong>Clasificado directo a Fase de Grupos</strong> de Copa Libertadores 2027 (Uruguay 1).</li>
               <li><strong>Pase directo a la Gran Final</strong> (ida y vuelta) sin disputar semifinal.</li>
             </ul>
           </div>
           <div class="playoff-step">
-            <div style="font-size:11px;color:var(--manya-gold);font-weight:800;text-transform:uppercase;">1. SEMIFINAL (CAMPEONES CORTOS) • ${def.fecha_semifinal || '29/11/2026'}</div>
-            <div style="font-size:13.5px;font-weight:800;color:#fff;margin:4px 0;">${def.semifinal || 'Racing (Apertura) vs Liverpool (Clausura)'}</div>
+            <div style="font-size:11px;color:var(--manya-gold);font-weight:800;text-transform:uppercase;">1. SEMIFINAL (CAMPEONES CORTOS) • ${escapeHtml(def.fecha_semifinal || '29/11/2026')}</div>
+            <div style="font-size:13.5px;font-weight:800;color:#fff;margin:4px 0;">${escapeHtml(def.semifinal || 'Racing (Apertura) vs Liverpool (Clausura)')}</div>
             <div style="font-size:12px;color:#a1a1aa;margin-bottom:8px;">¿Quién creés que avanzará para enfrentar a Peñarol?</div>
             <div class="sim-btns">
-              <button type="button" class="sim-btn ${rivalPick === 'Racing' ? 'active' : ''}" data-pick="Racing">Racing (Apertura)</button>
-              <button type="button" class="sim-btn ${rivalPick === 'Liverpool' ? 'active' : ''}" data-pick="Liverpool">Liverpool (Clausura)</button>
+              <button type="button" class="sim-btn ${rivalPick === 'Racing' ? 'active' : ''}" aria-pressed="${rivalPick === 'Racing' ? 'true' : 'false'}" data-pick="Racing">Racing (Apertura)</button>
+              <button type="button" class="sim-btn ${rivalPick === 'Liverpool' ? 'active' : ''}" aria-pressed="${rivalPick === 'Liverpool' ? 'true' : 'false'}" data-pick="Liverpool">Liverpool (Clausura)</button>
             </div>
           </div>
           <div class="playoff-step" style="border-left-color:#10b981;">
             <div style="font-size:11px;color:#34d399;font-weight:800;text-transform:uppercase;">2. GRAN FINAL DEL CAMPEONATO URUGUAYO (IDA Y VUELTA)</div>
-            <div style="font-size:14px;font-weight:900;color:#fff;margin:4px 0;">★ Peñarol vs ${rivalPick}</div>
+            <div style="font-size:14px;font-weight:900;color:#fff;margin:4px 0;">★ Peñarol vs ${escapeHtml(rivalPick)}</div>
             <div style="font-size:12px;color:#d4d4d8;line-height:1.45;">Ida tentativa: <strong>Jueves 3 de diciembre</strong> • Vuelta definitiva: <strong>Domingo 6 de diciembre de 2026</strong> (localías a sortear).</div>
           </div>
         `;
         container.querySelectorAll('[data-pick]').forEach(b => {
           b.addEventListener('click', () => {
-            rivalPick = b.getAttribute('data-pick');
-            try { localStorage.setItem('manya_final_rival_pick', rivalPick); } catch (_) {}
-            renderBracket();
+            const pick = b.getAttribute('data-pick');
+            if (pick === 'Racing' || pick === 'Liverpool') {
+              rivalPick = pick;
+              try { localStorage.setItem('manya_final_rival_pick', rivalPick); } catch (_) {}
+              renderBracket();
+              showToast(`🏆 Gran Final proyectada: Peñarol vs ${rivalPick}`, 'info');
+            }
           });
         });
       };
@@ -667,7 +820,6 @@
       return;
     }
 
-    // Modo simulador clásico en etapa regular
     if (resetBtn) resetBtn.style.display = 'inline-flex';
     const proxList = (state.live.proximos_partidos && state.live.proximos_partidos.length)
       ? state.live.proximos_partidos.slice(0, 3).map((m, i) => ({ id: i + 1, label: `${m.nombre} (${m.estadio || ''})` }))
@@ -688,8 +840,8 @@
     }
 
     container.innerHTML = proxList.map(f => `
-      <div class="sim-row" data-fid="${f.id}">
-        <span><strong>${f.label}</strong></span>
+      <div class="sim-row" data-fid="${escapeHtml(f.id)}">
+        <span><strong>${escapeHtml(f.label)}</strong></span>
         <div class="sim-btns">
           <button type="button" class="sim-btn" data-pts="3">Gana (+3)</button>
           <button type="button" class="sim-btn" data-pts="1">Empata (+1)</button>
@@ -716,26 +868,87 @@
         Object.keys(picks).forEach(k => { picks[k] = 0; });
         container.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
         updateSim();
+        showToast('↺ Puntaje oficial restaurado', 'info');
       };
     }
   }
 
-  // ==================== PIZARRA TÁCTICA 2026 ====================
+  // ==================== PIZARRA TÁCTICA PRO 2026 ====================
+  function getPlayerLineGroup(player) {
+    if (!player) return 'VOL';
+    const pos = String(player.posicion || '').toUpperCase().trim();
+    if (pos === 'ARQ' || pos === 'GK') return 'ARQ';
+    if (['LD', 'LI', 'DFC', 'DF', 'DEF', 'CAR'].includes(pos)) return 'DEF';
+    if (['MCD', 'MC', 'MD', 'MI', 'MCO', 'VOL', 'MED'].includes(pos)) return 'VOL';
+    if (['ED', 'EI', 'SD', 'DC', 'DEL', 'ATA', 'EXT'].includes(pos)) return 'ATA';
+    const linea = normalizeText(player.linea);
+    if (linea.includes('portero') || linea.includes('arq')) return 'ARQ';
+    if (linea.includes('def')) return 'DEF';
+    if (linea.includes('vol') || linea.includes('med')) return 'VOL';
+    return 'ATA';
+  }
+
+  function orderLineupForPitch(players11) {
+    const slotOrder = [
+      p => p.posicion === 'ARQ',
+      p => p.posicion === 'LD',
+      p => p.posicion === 'DFC',
+      p => p.posicion === 'DFC',
+      p => p.posicion === 'LI',
+      p => p.posicion === 'MCD',
+      p => p.posicion === 'MC',
+      p => p.posicion === 'ED' || p.posicion === 'MD',
+      p => p.posicion === 'MCO' || p.posicion === 'SD',
+      p => p.posicion === 'EI' || p.posicion === 'MI',
+      p => p.posicion === 'DC'
+    ];
+    const remaining = players11.slice(0, 11);
+    const ordered = new Array(11).fill(null);
+
+    slotOrder.forEach((pred, idx) => {
+      const foundIdx = remaining.findIndex(pred);
+      if (foundIdx !== -1) {
+        ordered[idx] = remaining.splice(foundIdx, 1)[0];
+      }
+    });
+    for (let i = 0; i < 11; i++) {
+      if (!ordered[i] && remaining.length) {
+        ordered[i] = remaining.shift();
+      }
+    }
+    return ordered.filter(Boolean);
+  }
+
+  function updatePresetButtonsUI() {
+    const btnUlt = document.getElementById('preset-ultimo-11-btn');
+    const btnIdeal = document.getElementById('preset-ideal-11-btn');
+    if (btnUlt) {
+      const isUlt = state.activeLineupPreset === 'ultimo1891';
+      btnUlt.classList.toggle('active', isUlt);
+      btnUlt.setAttribute('aria-pressed', isUlt ? 'true' : 'false');
+    }
+    if (btnIdeal) {
+      const isId = state.activeLineupPreset === 'ideal';
+      btnIdeal.classList.toggle('active', isId);
+      btnIdeal.setAttribute('aria-pressed', isId ? 'true' : 'false');
+    }
+  }
+
   function showTacticalToast(message, isSuccess = true) {
     const banner = document.getElementById('tactical-guidance-banner');
     if (banner) {
       banner.classList.add('active-action');
-      banner.innerHTML = `<span style="font-size:15px;">${isSuccess ? '✅' : 'ℹ️'}</span> <strong>${message}</strong>`;
+      banner.innerHTML = `<span style="font-size:15px;">${isSuccess ? '✅' : 'ℹ️'}</span> <strong>${escapeHtml(message)}</strong>`;
       setTimeout(() => {
         if (state.selectedSlotIndex === null && state.selectedBenchIndex === null && banner) {
           banner.classList.remove('active-action');
-          banner.innerHTML = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
+          banner.textContent = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
         }
       }, 3500);
     }
   }
 
-  function resetTacticalLineup() {
+  function applyIdealLineup2026(silent = false) {
     if (!state.initialLineup || !state.initialLineup.length) {
       state.initialLineup = JSON.parse(JSON.stringify(DEFAULT_LINEUP));
       state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
@@ -744,8 +957,98 @@
     state.bench = JSON.parse(JSON.stringify(state.initialBench));
     state.selectedSlotIndex = null;
     state.selectedBenchIndex = null;
+    state.activeLineupPreset = 'ideal';
+    updatePresetButtonsUI();
+    renderTacticalBoard();
+    if (!silent) {
+      showTacticalToast('⭐ 11 Ideal 2026 cargado en la cancha.');
+      showToast('⭐ 11 Ideal 2026 cargado en la pizarra', 'gold');
+    }
+  }
+
+  function applyUltimoOnceAguirre() {
+    const names = (state.squad && Array.isArray(state.squad.ultimo_once_1891) && state.squad.ultimo_once_1891.length >= 11)
+      ? state.squad.ultimo_once_1891
+      : ((state.live && state.live.partido_activo && Array.isArray(state.live.partido_activo.alineacion_1891) && state.live.partido_activo.alineacion_1891.length >= 11)
+          ? state.live.partido_activo.alineacion_1891
+          : null);
+
+    if (!names) {
+      showTacticalToast('No se encontró el último 11 oficial en squad_2026.json.', false);
+      showToast('⚠️ Último 11 oficial no disponible aún', 'warning');
+      return;
+    }
+
+    const fullPool = (state.squad && Array.isArray(state.squad.jugadores) && state.squad.jugadores.length >= 11)
+      ? JSON.parse(JSON.stringify(state.squad.jugadores))
+      : JSON.parse(JSON.stringify(DEFAULT_LINEUP.concat(DEFAULT_BENCH)));
+
+    const matchedIds = new Set();
+    const starters = [];
+
+    names.slice(0, 11).forEach(rawName => {
+      const targetNorm = normalizeText(rawName);
+      let found = fullPool.find(p => !matchedIds.has(p.id) && normalizeText(p.nombre) === targetNorm);
+      if (!found) {
+        const lastTok = targetNorm.split(' ').slice(-1)[0];
+        found = fullPool.find(p => !matchedIds.has(p.id) && normalizeText(p.nombre).includes(lastTok));
+      }
+      if (found) {
+        matchedIds.add(found.id);
+        starters.push(found);
+      }
+    });
+
+    // Completar si faltara alguno por diferencia de nombre
+    fullPool.forEach(p => {
+      if (starters.length < 11 && !matchedIds.has(p.id)) {
+        matchedIds.add(p.id);
+        starters.push(p);
+      }
+    });
+
+    const orderedStarters = orderLineupForPitch(starters);
+    const remainingBench = fullPool.filter(p => !matchedIds.has(p.id));
+
+    state.lineup = orderedStarters;
+    state.bench = remainingBench;
+    state.selectedSlotIndex = null;
+    state.selectedBenchIndex = null;
+    state.activeLineupPreset = 'ultimo1891';
+    updatePresetButtonsUI();
+    renderTacticalBoard();
+
+    const matchName = (state.live && state.live.ultimo_partido && state.live.ultimo_partido.nombre) || 'último partido oficial';
+    showTacticalToast(`📋 Último 11 de Diego Aguirre (${matchName} • 1891 BD) cargado.`);
+    showToast(`📋 Último 11 de Aguirre cargado (1891 BD)`, 'success');
+  }
+
+  function resetTacticalLineup() {
+    applyIdealLineup2026(true);
+    state.benchLineFilter = 'all';
     renderTacticalBoard();
     showTacticalToast('↺ 11 inicial 2026 de Diego Aguirre restablecido con éxito.');
+    showToast('↺ Alineación restablecida al 11 Ideal 2026', 'info');
+  }
+
+  function updateBenchFilterChipsUI() {
+    const filterBar = document.getElementById('bench-line-filters');
+    if (!filterBar) return;
+
+    const counts = { all: state.bench.length, ARQ: 0, DEF: 0, VOL: 0, ATA: 0 };
+    state.bench.forEach(p => {
+      const grp = getPlayerLineGroup(p);
+      if (counts[grp] !== undefined) counts[grp]++;
+    });
+
+    const labels = { all: 'Todos', ARQ: 'ARQ', DEF: 'DEF', VOL: 'VOL', ATA: 'ATA' };
+    filterBar.querySelectorAll('.bench-filter-chip').forEach(btn => {
+      const line = btn.getAttribute('data-line') || 'all';
+      const isAct = line === state.benchLineFilter;
+      btn.classList.toggle('active', isAct);
+      btn.setAttribute('aria-selected', isAct ? 'true' : 'false');
+      btn.innerHTML = `${escapeHtml(labels[line] || line)} <span class="bench-chip-count">(${counts[line] ?? 0})</span>`;
+    });
   }
 
   function renderTacticalBoard() {
@@ -773,81 +1076,113 @@
     const playersHtml = state.lineup.slice(0, 11).map((p, idx) => {
       const c = coords[idx] || { x: 50, y: 50, role: p.posicion };
       const isSel = state.selectedSlotIndex === idx;
-      const lastName = p.nombre.split(' ').slice(-1)[0];
+      const lastName = String(p.nombre || '').split(' ').slice(-1)[0];
       const roleBadge = c.role || p.posicion;
+      const ariaTitle = `#${p.numero} ${p.nombre} (${roleBadge})`;
       return `
-        <div class="pitch-player ${isSel ? 'selected' : ''}" data-slot="${idx}" style="left:${c.x}%;top:${c.y}%;" title="#${p.numero} ${p.nombre} (${roleBadge})">
-          <div class="player-token">${p.numero}</div>
-          <div class="player-label">${lastName} <span style="color:var(--manya-gold);font-weight:900;">${roleBadge}</span></div>
+        <div class="pitch-player ${isSel ? 'selected' : ''}" role="button" tabindex="0" aria-pressed="${isSel ? 'true' : 'false'}" aria-label="Titular ${escapeHtml(ariaTitle)}" data-slot="${idx}" style="left:${c.x}%;top:${c.y}%;" title="${escapeHtml(ariaTitle)}">
+          <div class="player-token">${escapeHtml(p.numero)}</div>
+          <div class="player-label">${escapeHtml(lastName)} <span style="color:var(--manya-gold);font-weight:900;">${escapeHtml(roleBadge)}</span></div>
         </div>
       `;
     }).join('');
 
     pitch.innerHTML = pitchMarkings + `<div id="pitch-players-layer" class="pitch-players-layer">${playersHtml}</div>`;
 
+    const handleSlotActivate = (idx) => {
+      if (state.selectedBenchIndex !== null) {
+        const benchPlayer = state.bench[state.selectedBenchIndex];
+        const starterPlayer = state.lineup[idx];
+        state.lineup[idx] = benchPlayer;
+        state.bench[state.selectedBenchIndex] = starterPlayer;
+        state.selectedSlotIndex = null;
+        state.selectedBenchIndex = null;
+        state.activeLineupPreset = 'custom';
+        updatePresetButtonsUI();
+        renderTacticalBoard();
+        showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
+      } else if (state.selectedSlotIndex === idx) {
+        state.selectedSlotIndex = null;
+        renderTacticalBoard();
+      } else if (state.selectedSlotIndex !== null) {
+        const p1 = state.lineup[state.selectedSlotIndex];
+        const p2 = state.lineup[idx];
+        state.lineup[state.selectedSlotIndex] = p2;
+        state.lineup[idx] = p1;
+        state.selectedSlotIndex = null;
+        state.activeLineupPreset = 'custom';
+        updatePresetButtonsUI();
+        renderTacticalBoard();
+        showTacticalToast(`↔ Rotación en cancha: #${p1.numero} ${p1.nombre.split(' ').slice(-1)[0]} ↔ #${p2.numero} ${p2.nombre.split(' ').slice(-1)[0]}`);
+      } else {
+        state.selectedSlotIndex = idx;
+        state.selectedBenchIndex = null;
+        renderTacticalBoard();
+      }
+    };
+
     pitch.querySelectorAll('.pitch-player').forEach(el => {
-      el.addEventListener('click', () => {
-        const idx = parseInt(el.getAttribute('data-slot'), 10);
-        if (state.selectedBenchIndex !== null) {
-          const benchPlayer = state.bench[state.selectedBenchIndex];
-          const starterPlayer = state.lineup[idx];
-          state.lineup[idx] = benchPlayer;
-          state.bench[state.selectedBenchIndex] = starterPlayer;
-          state.selectedSlotIndex = null;
-          state.selectedBenchIndex = null;
-          renderTacticalBoard();
-          showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
-        } else if (state.selectedSlotIndex === idx) {
-          state.selectedSlotIndex = null;
-          renderTacticalBoard();
-        } else if (state.selectedSlotIndex !== null) {
-          const p1 = state.lineup[state.selectedSlotIndex];
-          const p2 = state.lineup[idx];
-          state.lineup[state.selectedSlotIndex] = p2;
-          state.lineup[idx] = p1;
-          state.selectedSlotIndex = null;
-          renderTacticalBoard();
-          showTacticalToast(`↔ Rotación en cancha: #${p1.numero} ${p1.nombre.split(' ').slice(-1)[0]} ↔ #${p2.numero} ${p2.nombre.split(' ').slice(-1)[0]}`);
-        } else {
-          state.selectedSlotIndex = idx;
-          state.selectedBenchIndex = null;
-          renderTacticalBoard();
+      const idx = parseInt(el.getAttribute('data-slot'), 10);
+      el.addEventListener('click', () => handleSlotActivate(idx));
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleSlotActivate(idx);
         }
       });
     });
 
-    if (benchBox) {
-      benchBox.innerHTML = state.bench.map((b, bIdx) => {
-        const isBenchSel = state.selectedBenchIndex === bIdx;
-        return `
-          <button type="button" class="bench-btn ${isBenchSel ? 'selected' : ''}" data-bidx="${bIdx}" title="Sustituir con #${b.numero} ${b.nombre}">
-            <strong style="color:var(--manya-gold);">#${b.numero}</strong> ${b.nombre} <span style="opacity:0.75;font-size:11px;">(${b.posicion})</span>
-          </button>
-        `;
-      }).join('');
+    updateBenchFilterChipsUI();
 
-      benchBox.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const bIdx = parseInt(btn.getAttribute('data-bidx'), 10);
-          if (state.selectedSlotIndex !== null) {
-            const benchPlayer = state.bench[bIdx];
-            const starterPlayer = state.lineup[state.selectedSlotIndex];
-            state.lineup[state.selectedSlotIndex] = benchPlayer;
-            state.bench[bIdx] = starterPlayer;
-            state.selectedSlotIndex = null;
-            state.selectedBenchIndex = null;
+    if (benchBox) {
+      const benchEntries = state.bench
+        .map((player, realIdx) => ({ player, realIdx, lineGroup: getPlayerLineGroup(player) }))
+        .filter(entry => state.benchLineFilter === 'all' || entry.lineGroup === state.benchLineFilter);
+
+      if (!benchEntries.length) {
+        benchBox.innerHTML = `<div style="width:100%;padding:12px;text-align:center;font-size:12.5px;color:var(--text-secondary);border:1px dashed rgba(255,209,0,0.28);border-radius:8px;">No quedan relevos en la línea <strong>${escapeHtml(state.benchLineFilter)}</strong>. <button type="button" id="bench-reset-filter-btn" style="background:none;border:none;color:var(--manya-gold);font-weight:800;cursor:pointer;text-decoration:underline;margin-left:6px;">Ver todos</button></div>`;
+        const rf = document.getElementById('bench-reset-filter-btn');
+        if (rf) {
+          rf.onclick = () => {
+            state.benchLineFilter = 'all';
             renderTacticalBoard();
-            showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
-          } else if (state.selectedBenchIndex === bIdx) {
-            state.selectedBenchIndex = null;
-            renderTacticalBoard();
-          } else {
-            state.selectedBenchIndex = bIdx;
-            state.selectedSlotIndex = null;
-            renderTacticalBoard();
-          }
+          };
+        }
+      } else {
+        benchBox.innerHTML = benchEntries.map(({ player: b, realIdx }) => {
+          const isBenchSel = state.selectedBenchIndex === realIdx;
+          return `
+            <button type="button" class="bench-btn ${isBenchSel ? 'selected' : ''}" aria-pressed="${isBenchSel ? 'true' : 'false'}" data-bidx="${realIdx}" title="Sustituir con #${escapeHtml(b.numero)} ${escapeHtml(b.nombre)}">
+              <strong style="color:var(--manya-gold);">#${escapeHtml(b.numero)}</strong> ${escapeHtml(b.nombre)} <span style="opacity:0.75;font-size:11px;">(${escapeHtml(b.posicion)})</span>
+            </button>
+          `;
+        }).join('');
+
+        benchBox.querySelectorAll('button.bench-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const bIdx = parseInt(btn.getAttribute('data-bidx'), 10);
+            if (state.selectedSlotIndex !== null) {
+              const benchPlayer = state.bench[bIdx];
+              const starterPlayer = state.lineup[state.selectedSlotIndex];
+              state.lineup[state.selectedSlotIndex] = benchPlayer;
+              state.bench[bIdx] = starterPlayer;
+              state.selectedSlotIndex = null;
+              state.selectedBenchIndex = null;
+              state.activeLineupPreset = 'custom';
+              updatePresetButtonsUI();
+              renderTacticalBoard();
+              showTacticalToast(`🔄 Cambio: Entra #${benchPlayer.numero} ${benchPlayer.nombre}, sale #${starterPlayer.numero} ${starterPlayer.nombre}`);
+            } else if (state.selectedBenchIndex === bIdx) {
+              state.selectedBenchIndex = null;
+              renderTacticalBoard();
+            } else {
+              state.selectedBenchIndex = bIdx;
+              state.selectedSlotIndex = null;
+              renderTacticalBoard();
+            }
+          });
         });
-      });
+      }
     }
 
     if (banner) {
@@ -855,14 +1190,14 @@
         const sel = state.lineup[state.selectedSlotIndex];
         const role = coords[state.selectedSlotIndex]?.role || sel.posicion;
         banner.classList.add('active-action');
-        banner.innerHTML = `🟡 <strong>Titular seleccionado: #${sel.numero} ${sel.nombre} (${role}).</strong> Tocá un suplente para cambiarlo, u otro titular para rotar.`;
+        banner.innerHTML = `🟡 <strong>Titular seleccionado: #${escapeHtml(sel.numero)} ${escapeHtml(sel.nombre)} (${escapeHtml(role)}).</strong> Tocá un suplente para cambiarlo, u otro titular para rotar.`;
       } else if (state.selectedBenchIndex !== null) {
         const selB = state.bench[state.selectedBenchIndex];
         banner.classList.add('active-action');
-        banner.innerHTML = `🟢 <strong>Suplente seleccionado: #${selB.numero} ${selB.nombre} (${selB.posicion}).</strong> Tocá al jugador en cancha que querés sustituir.`;
+        banner.innerHTML = `🟢 <strong>Suplente seleccionado: #${escapeHtml(selB.numero)} ${escapeHtml(selB.nombre)} (${escapeHtml(selB.posicion)}).</strong> Tocá al jugador en cancha que querés sustituir.`;
       } else {
         banner.classList.remove('active-action');
-        banner.innerHTML = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
+        banner.textContent = '💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.';
       }
     }
   }
@@ -964,7 +1299,8 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showTacticalToast('📥 ¡Tu 11 titular se ha descargado con éxito!');
+      showTacticalToast('📥 ¡Tu 11 titular se ha descargado en PNG 1080×1350!');
+      showToast('📥 Imagen PNG 1080×1350 de tu 11 descargada', 'success');
     };
     if (canvas.toBlob) {
       canvas.toBlob(blob => { if (blob) { const u = URL.createObjectURL(blob); download(u); setTimeout(() => URL.revokeObjectURL(u), 2000); } }, 'image/png');
@@ -979,13 +1315,19 @@
     const text = `⚽ Mi 11 Titular del Glorioso Peñarol (${state.formation})\nDT: Diego Aguirre • ${_getDynamicMatchLabelForExport()}\n\n${titularesStr}\n\nArmá tu 11 en https://manya.servicioti.com.uy/#pizarra-tactica`;
 
     if (navigator.share) {
-      try { await navigator.share({ title: 'Mi 11 Titular de Peñarol', text, url: 'https://manya.servicioti.com.uy/#pizarra-tactica' }); return; } catch (_) {}
+      try {
+        await navigator.share({ title: 'Mi 11 Titular de Peñarol', text, url: 'https://manya.servicioti.com.uy/#pizarra-tactica' });
+        showToast('📤 ¡11 Titular compartido con éxito!', 'success');
+        return;
+      } catch (_) {}
     }
     try {
       await navigator.clipboard.writeText(text);
       showTacticalToast('📋 ¡11 Titular copiado al portapapeles!');
+      showToast('📋 ¡11 Titular copiado al portapapeles!', 'success');
     } catch (_) {
       showTacticalToast('⚠️ No se pudo copiar la alineación', false);
+      showToast('⚠️ No se pudo copiar la alineación', 'warning');
     }
   }
 
@@ -996,18 +1338,40 @@
       state.bench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
       state.initialBench = JSON.parse(JSON.stringify(DEFAULT_BENCH));
     }
+    updatePresetButtonsUI();
     renderTacticalBoard();
 
     document.querySelectorAll('[data-formation]').forEach(btn => {
       btn.onclick = () => {
-        document.querySelectorAll('[data-formation]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('[data-formation]').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
-        state.formation = btn.getAttribute('data-formation');
+        btn.setAttribute('aria-pressed', 'true');
+        state.formation = btn.getAttribute('data-formation') || '4-2-3-1';
         state.selectedSlotIndex = null;
         state.selectedBenchIndex = null;
         renderTacticalBoard();
+        showToast(`⚽ Esquema táctico cambiado a ${state.formation}`, 'info');
       };
     });
+
+    const filterBar = document.getElementById('bench-line-filters');
+    if (filterBar) {
+      filterBar.querySelectorAll('.bench-filter-chip').forEach(btn => {
+        btn.onclick = () => {
+          state.benchLineFilter = btn.getAttribute('data-line') || 'all';
+          renderTacticalBoard();
+        };
+      });
+    }
+
+    const btnUlt = document.getElementById('preset-ultimo-11-btn');
+    if (btnUlt) btnUlt.onclick = applyUltimoOnceAguirre;
+    const btnIdeal = document.getElementById('preset-ideal-11-btn');
+    if (btnIdeal) btnIdeal.onclick = () => applyIdealLineup2026(false);
+
     ['reset-lineup-btn', 'btn-reset-lineup'].forEach(id => { const b = document.getElementById(id); if (b) b.onclick = resetTacticalLineup; });
     ['export-lineup-btn', 'btn-download-lineup'].forEach(id => { const b = document.getElementById(id); if (b) b.onclick = exportLineupPNG; });
     const shBtn = document.getElementById('share-lineup-btn');
@@ -1032,23 +1396,24 @@
 
     const webLink = document.getElementById('scout-web-link');
     if (webLink && inst.web_oficial) {
-      webLink.href = inst.web_oficial;
-      webLink.textContent = inst.web_oficial.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') + ' ↗';
+      const cleanWeb = safeUrl(inst.web_oficial, 'https://auf.org.uy/');
+      webLink.href = cleanWeb;
+      webLink.textContent = cleanWeb.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') + ' ↗';
     }
 
     const strongBox = document.getElementById('scout-fortalezas');
     if (strongBox && sc.puntos_fuertes && sc.puntos_fuertes.length) {
-      strongBox.innerHTML = sc.puntos_fuertes.map(p => `<span class="scout-pill strong">✓ ${p}</span>`).join('');
+      strongBox.innerHTML = sc.puntos_fuertes.map(p => `<span class="scout-pill strong">✓ ${escapeHtml(p)}</span>`).join('');
     }
 
     const weakBox = document.getElementById('scout-debilidades');
     if (weakBox && sc.vulnerabilidades_a_explotar && sc.vulnerabilidades_a_explotar.length) {
-      weakBox.innerHTML = sc.vulnerabilidades_a_explotar.map(v => `<span class="scout-pill weak">⚠️ ${v}</span>`).join('');
+      weakBox.innerHTML = sc.vulnerabilidades_a_explotar.map(v => `<span class="scout-pill weak">⚠️ ${escapeHtml(v)}</span>`).join('');
     }
 
     const figEl = document.getElementById('scout-figuras');
     if (figEl && sc.figuras_a_seguir && sc.figuras_a_seguir.length) {
-      figEl.innerHTML = sc.figuras_a_seguir.map(f => `<div style="margin-bottom:4px;">• <strong>${f.nombre} (${f.rol}):</strong> <span style="color:#a1a1aa;">${f.analisis}</span></div>`).join('');
+      figEl.innerHTML = sc.figuras_a_seguir.map(f => `<div style="margin-bottom:4px;">• <strong>${escapeHtml(f.nombre)} (${escapeHtml(f.rol)}):</strong> <span style="color:#a1a1aa;">${escapeHtml(f.analisis)}</span></div>`).join('');
     }
 
     const dTitle = document.getElementById('duelos-1x1-title');
@@ -1058,38 +1423,42 @@
 
     const duelosContainer = document.getElementById('duelos-tacticos-container');
     if (duelosContainer && rival.duelos_tacticos_1x1 && rival.duelos_tacticos_1x1.length) {
-      duelosContainer.innerHTML = rival.duelos_tacticos_1x1.map(d => `
-        <div class="duel-item">
-          <div class="duel-title-bar">
-            <span class="duel-zone">${d.zona_campo}</span>
-            <span class="duel-headline">${d.titulo}</span>
-          </div>
-          <div class="duel-sides-wrap">
-            <div class="duel-side is-penarol">
-              <div class="duel-player-header">
-                <span class="duel-num">${d.penarol.dorsal || '★'}</span>
-                <div>
-                  <strong class="duel-player-name">${d.penarol.jugador}</strong>
-                  <div class="duel-player-role">${d.penarol.rol}</div>
-                </div>
-              </div>
-              <p class="duel-player-desc">${d.penarol.atributos_clave}</p>
+      duelosContainer.innerHTML = rival.duelos_tacticos_1x1.map(d => {
+        const dp = d.penarol || {};
+        const dr = d.rival || {};
+        return `
+          <div class="duel-item">
+            <div class="duel-title-bar">
+              <span class="duel-zone">${escapeHtml(d.zona_campo)}</span>
+              <span class="duel-headline">${escapeHtml(d.titulo)}</span>
             </div>
-            <div class="duel-vs-divider">VS</div>
-            <div class="duel-side is-rival">
-              <div class="duel-player-header">
-                <span class="duel-num rival">${d.rival.dorsal || 'R'}</span>
-                <div>
-                  <strong class="duel-player-name">${d.rival.jugador}</strong>
-                  <div class="duel-player-role">${d.rival.rol}</div>
+            <div class="duel-sides-wrap">
+              <div class="duel-side is-penarol">
+                <div class="duel-player-header">
+                  <span class="duel-num">${escapeHtml(dp.dorsal || '★')}</span>
+                  <div>
+                    <strong class="duel-player-name">${escapeHtml(dp.jugador)}</strong>
+                    <div class="duel-player-role">${escapeHtml(dp.rol)}</div>
+                  </div>
                 </div>
+                <p class="duel-player-desc">${escapeHtml(dp.atributos_clave)}</p>
               </div>
-              <p class="duel-player-desc">${d.rival.atributos_clave}</p>
+              <div class="duel-vs-divider">VS</div>
+              <div class="duel-side is-rival">
+                <div class="duel-player-header">
+                  <span class="duel-num rival">${escapeHtml(dr.dorsal || 'R')}</span>
+                  <div>
+                    <strong class="duel-player-name">${escapeHtml(dr.jugador)}</strong>
+                    <div class="duel-player-role">${escapeHtml(dr.rol)}</div>
+                  </div>
+                </div>
+                <p class="duel-player-desc">${escapeHtml(dr.atributos_clave)}</p>
+              </div>
             </div>
+            <div class="duel-verdict"><strong>Clave del Duelo:</strong> ${escapeHtml(d.clave_del_duelo)}</div>
           </div>
-          <div class="duel-verdict"><strong>Clave del Duelo:</strong> ${d.clave_del_duelo}</div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
   }
 
@@ -1112,57 +1481,208 @@
 
     const sumEl = document.getElementById('h2h-summary-text');
     if (sumEl) {
-      sumEl.innerHTML = `<strong>Supremacía histórica aurinegra (1891 BD):</strong> Peñarol suma <strong>${res.ganados_penarol} triunfos</strong>, ${res.empatados} empates y ${res.perdidos_penarol} derrotas frente a ${h2h.rival || h2h.rival_oficial} (${difStr} goles de diferencia).`;
+      sumEl.innerHTML = `<strong>Supremacía histórica aurinegra (1891 BD):</strong> Peñarol suma <strong>${escapeHtml(res.ganados_penarol)} triunfos</strong>, ${escapeHtml(res.empatados)} empates y ${escapeHtml(res.perdidos_penarol)} derrotas frente a ${escapeHtml(h2h.rival || h2h.rival_oficial)} (${escapeHtml(difStr)} goles de diferencia).`;
     }
   }
 
-  // ==================== PORTADA, EDITORIAL, GALERÍAS & INFLUENCERS ====================
-  function setupLightbox() {
-    const modal = document.getElementById('manya-lightbox');
-    if (!modal) return;
-    const closeModal = () => {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
-    const ov = document.getElementById('lightbox-overlay');
-    const cl = document.getElementById('lightbox-close');
-    if (ov) ov.addEventListener('click', closeModal);
-    if (cl) cl.addEventListener('click', closeModal);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display !== 'none') closeModal(); });
-  }
+  // ==================== LIGHTBOX PROFESIONAL ACCESIBLE v11.0 ====================
+  function renderLightboxItem() {
+    const item = lightboxState.items[lightboxState.index];
+    if (!item) return;
 
-  function openLightbox(item) {
-    const modal = document.getElementById('manya-lightbox');
-    if (!modal || !item) return;
     const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy'));
+    const isTattoo = item._kind === 'tattoo';
     const imgEl = document.getElementById('lightbox-img');
-    if (imgEl) { imgEl.src = item.imagen_webp || item.imagen_jpg; imgEl.alt = item.titulo || 'Peñarol'; }
+    if (imgEl) {
+      const primarySrc = safeImgSrc(item.imagen_webp || item.imagen_jpg);
+      const fallbackSrc = safeImgSrc(item.imagen_jpg || item.imagen_webp);
+      imgEl.dataset.fallbackApplied = '';
+      imgEl.setAttribute('data-fallback-src', fallbackSrc);
+      imgEl.src = primarySrc;
+      imgEl.alt = item.titulo || 'Club Atlético Peñarol';
+    }
+
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-    set('lightbox-badge', is1891 ? '📜 FICHA OFICIAL 1891 BD' : `📸 ${(item.categoria || 'PEÑAROL').toUpperCase()}`);
-    set('lightbox-meta', is1891 ? `1891 BD (Comisión de Historia) • ${item.estadio || 'Escenario Oficial'} • ${item.fecha || '2026'}` : `${item.cuenta || '@oficialcap'} • ${item.fecha || 'Temporada 2026'}`);
-    set('lightbox-title', item.titulo || '');
+    if (isTattoo) {
+      set('lightbox-badge', `💉 ${(item.estilo || 'PIEL CARBONERA').toUpperCase()}`);
+      set('lightbox-meta', `${item.zona_cuerpo || 'Tatuaje'} • ${item.barrio || 'Montevideo'}`);
+    } else if (is1891) {
+      set('lightbox-badge', '📜 FICHA OFICIAL 1891 BD');
+      set('lightbox-meta', `1891 BD • ${item.estadio || 'Escenario Oficial'} • ${item.fecha || '2026'}`);
+    } else {
+      set('lightbox-badge', `📸 ${(item.categoria || 'PEÑAROL').toUpperCase()}`);
+      set('lightbox-meta', `${item.cuenta || '@oficialcap'} • ${item.fecha || 'Temporada 2026'}`);
+    }
+
+    set('lightbox-title', item.titulo || 'Galería Oficial del Club Atlético Peñarol');
     set('lightbox-desc', item.descripcion || item.caption || '');
+
+    const counterEl = document.getElementById('lightbox-counter');
+    if (counterEl) {
+      if (lightboxState.items.length > 1) {
+        counterEl.textContent = `${lightboxState.index + 1} / ${lightboxState.items.length}`;
+        counterEl.style.display = 'inline-block';
+      } else {
+        counterEl.textContent = '';
+        counterEl.style.display = 'none';
+      }
+    }
+
+    const creditEl = document.getElementById('lightbox-credit');
+    if (creditEl) {
+      const creditText = item.credito || (isTattoo
+        ? `${item.tatuador || 'Artista Aurinegro'}${item.estudio ? ' • ' + item.estudio : ''}`
+        : (item.fuente || item.cuenta || '@oficialcap'));
+      creditEl.innerHTML = `Crédito: <strong>${escapeHtml(creditText)}</strong>`;
+    }
+
     const linkEl = document.getElementById('lightbox-external-link');
     if (linkEl) {
-      linkEl.href = item.url_post || 'https://www.instagram.com/oficialcap/';
-      linkEl.textContent = is1891 ? 'Ver ficha oficial en 1891.uy ↗' : 'Ver fuente original ↗';
+      const targetHref = safeUrl(item.url_post || item.url_instagram || 'https://www.instagram.com/oficialcap/', 'https://www.instagram.com/oficialcap/');
+      linkEl.href = targetHref;
+      linkEl.textContent = is1891 ? 'Ver ficha oficial en 1891.uy ↗' : (isTattoo ? 'Ver artista en Instagram ↗' : 'Ver fuente original ↗');
     }
+
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    const hasMany = lightboxState.items.length > 1;
+    if (prevBtn) prevBtn.hidden = !hasMany;
+    if (nextBtn) nextBtn.hidden = !hasMany;
+
+    // Precargar imágenes vecinas para navegación instantánea
+    if (hasMany) {
+      const nextIdx = (lightboxState.index + 1) % lightboxState.items.length;
+      const prevIdx = (lightboxState.index - 1 + lightboxState.items.length) % lightboxState.items.length;
+      [nextIdx, prevIdx].forEach(idx => {
+        const neighbor = lightboxState.items[idx];
+        if (neighbor && (neighbor.imagen_webp || neighbor.imagen_jpg)) {
+          const pre = new Image();
+          pre.src = safeImgSrc(neighbor.imagen_webp || neighbor.imagen_jpg);
+        }
+      });
+    }
+  }
+
+  function stepLightbox(delta) {
+    if (!lightboxState.isOpen || lightboxState.items.length <= 1) return;
+    const len = lightboxState.items.length;
+    lightboxState.index = (lightboxState.index + delta + len) % len;
+    renderLightboxItem();
+  }
+
+  function closeLightbox() {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal || !lightboxState.isOpen) return;
+    lightboxState.isOpen = false;
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lightboxState.triggerEl && typeof lightboxState.triggerEl.focus === 'function') {
+      try { lightboxState.triggerEl.focus(); } catch (_) {}
+    }
+    lightboxState.triggerEl = null;
+  }
+
+  function openLightbox(itemsOrItem, startIndex = 0) {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal || !itemsOrItem) return;
+
+    const list = Array.isArray(itemsOrItem) ? itemsOrItem.filter(Boolean) : [itemsOrItem];
+    if (!list.length) return;
+
+    lightboxState.items = list;
+    lightboxState.index = Math.max(0, Math.min(startIndex, list.length - 1));
+    lightboxState.triggerEl = document.activeElement;
+    lightboxState.isOpen = true;
+
+    renderLightboxItem();
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    const closeBtn = document.getElementById('lightbox-close');
+    if (closeBtn) closeBtn.focus();
   }
 
+  function setupLightbox() {
+    const modal = document.getElementById('manya-lightbox');
+    if (!modal) return;
+    const ov = document.getElementById('lightbox-overlay');
+    const cl = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    const stage = document.getElementById('lightbox-stage');
+    const imgEl = document.getElementById('lightbox-img');
+
+    if (ov) ov.addEventListener('click', closeLightbox);
+    if (cl) cl.addEventListener('click', closeLightbox);
+    if (prevBtn) prevBtn.addEventListener('click', () => stepLightbox(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => stepLightbox(1));
+
+    if (imgEl) {
+      imgEl.addEventListener('error', () => {
+        const fb = imgEl.getAttribute('data-fallback-src');
+        if (fb && !imgEl.dataset.fallbackApplied) {
+          imgEl.dataset.fallbackApplied = '1';
+          imgEl.src = safeImgSrc(fb);
+        }
+      });
+    }
+
+    // Soporte gestual swipe táctil en móviles
+    if (stage) {
+      let touchStartX = 0;
+      stage.addEventListener('touchstart', e => {
+        if (e.touches && e.touches.length === 1) touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      stage.addEventListener('touchend', e => {
+        if (!touchStartX || !e.changedTouches || !e.changedTouches.length) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        touchStartX = 0;
+        if (Math.abs(dx) > 45) stepLightbox(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    }
+
+    // Teclado accesible: Esc, Flechas Izq/Der y Focus Trap con Tab
+    document.addEventListener('keydown', e => {
+      if (!lightboxState.isOpen) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stepLightbox(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        stepLightbox(1);
+      } else if (e.key === 'Tab') {
+        const focusables = Array.from(modal.querySelectorAll('button:not([hidden]):not([disabled]), a[href]'))
+          .filter(el => el.offsetParent !== null);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+
+  // ==================== PORTADA, EDITORIAL, PRENSA FILTRABLE, GALERÍAS & TATUAJES ====================
   function renderHeroInstagramPost(item, digest) {
     if (!document.getElementById('portada-visual')) return;
     const pv = (digest && digest.portada_visual) ? digest.portada_visual : {};
     const effective = Object.assign({}, item || {}, pv);
 
     const cuenta = effective.cuenta || '@oficialcap';
-    const imgSrc = effective.imagen_webp || effective.imagen_jpg || 'assets/gallery/1891_cerro_largo_32174_02.webp';
+    const imgSrc = safeImgSrc(effective.imagen_webp || effective.imagen_jpg || 'assets/gallery/1891_cerro_largo_32174_02.webp');
     const headline = pv.titular_portada || (digest && digest.titular_dia) || effective.titulo || 'Actualidad del Club Atlético Peñarol';
     const bajada = pv.bajada_portada || (digest && digest.bajada_seo) || effective.descripcion || '';
-    const postUrl = effective.url_post || 'https://www.instagram.com/oficialcap/';
+    const postUrl = safeUrl(effective.url_post || 'https://www.instagram.com/oficialcap/', 'https://www.instagram.com/oficialcap/');
 
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set('hero-post-account', cuenta);
@@ -1174,16 +1694,35 @@
     set('hero-post-category-tag', `⭐ ${cuenta.toUpperCase()}`);
 
     const imgEl = document.getElementById('hero-post-img');
-    if (imgEl) { imgEl.src = imgSrc; imgEl.alt = headline; }
+    if (imgEl) {
+      imgEl.src = imgSrc;
+      imgEl.alt = headline;
+      if (effective.imagen_jpg) imgEl.setAttribute('data-fallback-src', safeImgSrc(effective.imagen_jpg));
+    }
     const ext = document.getElementById('hero-post-external-link');
     if (ext) ext.href = postUrl;
 
-    const openHero = () => openLightbox({ titulo: headline, descripcion: bajada, cuenta, categoria: effective.categoria || 'portada', url_post: postUrl, imagen_webp: imgSrc, imagen_jpg: imgSrc });
-    const mw = document.getElementById('hero-post-media'); if (mw) mw.onclick = openHero;
+    const openHero = () => openLightbox({
+      titulo: headline,
+      descripcion: bajada,
+      cuenta,
+      credito: effective.fuente || cuenta,
+      categoria: effective.categoria || 'portada',
+      url_post: postUrl,
+      imagen_webp: imgSrc,
+      imagen_jpg: safeImgSrc(effective.imagen_jpg || imgSrc)
+    });
+    const mw = document.getElementById('hero-post-media');
+    if (mw) {
+      mw.setAttribute('role', 'button');
+      mw.setAttribute('tabindex', '0');
+      mw.setAttribute('aria-label', `Ampliar portada: ${headline}`);
+      mw.onclick = openHero;
+      mw.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHero(); } };
+    }
     const eb = document.getElementById('hero-post-expand-btn'); if (eb) eb.onclick = e => { e.stopPropagation(); openHero(); };
     const zb = document.getElementById('hero-post-zoom-btn'); if (zb) zb.onclick = openHero;
 
-    // Like & Share interactivos
     const likeBtn = document.getElementById('hero-post-like-btn');
     const likesEl = document.getElementById('hero-post-likes-count');
     const likeIcon = document.getElementById('hero-post-like-icon');
@@ -1193,6 +1732,7 @@
     const paintLike = () => {
       if (likesEl) likesEl.textContent = count.toLocaleString('es-UY');
       if (likeIcon) likeIcon.textContent = liked ? '❤️' : '🤍';
+      if (likeBtn) likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
     };
     paintLike();
     if (likeBtn) {
@@ -1200,15 +1740,176 @@
         liked = !liked; count += liked ? 1 : -1;
         try { localStorage.setItem('manya_hero_liked_' + (digest?.partido_id || 'main'), String(liked)); } catch (_) {}
         paintLike();
+        if (liked) showToast('💛🖤 ¡Gracias por tu aliento aurinegro!', 'gold');
       };
     }
     const shBtn = document.getElementById('hero-post-share-btn');
     if (shBtn) {
       shBtn.onclick = async () => {
-        if (navigator.share) { try { await navigator.share({ title: headline, text: bajada, url: window.location.href }); } catch (_) {} }
-        else if (navigator.clipboard) { await navigator.clipboard.writeText(window.location.href); shBtn.innerHTML = '<span>✅</span><span>¡Copiado!</span>'; setTimeout(() => { shBtn.innerHTML = '<span>🔁</span><span>Compartir</span>'; }, 2000); }
+        if (navigator.share) {
+          try { await navigator.share({ title: headline, text: bajada, url: window.location.href }); showToast('🔁 ¡Portada compartida!', 'success'); return; } catch (_) {}
+        }
+        if (navigator.clipboard) {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            shBtn.innerHTML = '<span>✅</span><span>¡Copiado!</span>';
+            showToast('🔗 Enlace de Manya ServicioTI copiado', 'success');
+            setTimeout(() => { shBtn.innerHTML = '<span>🔁</span><span>Compartir</span>'; }, 2000);
+          } catch (_) {}
+        }
       };
     }
+  }
+
+  function getShortPressSourceLabel(fuente) {
+    const raw = String(fuente || 'Prensa').trim();
+    const low = normalizeText(raw);
+    if (low.startsWith('ovacion')) return 'Ovación';
+    if (low.startsWith('referi')) return 'Referí';
+    if (low.startsWith('futboluy')) return 'FútbolUy';
+    if (low.startsWith('tenfield')) return 'Tenfield';
+    if (low.startsWith('espn')) return 'ESPN';
+    return raw.replace(/\s*\([^)]*\)\s*/g, '').trim() || raw;
+  }
+
+  function renderPressSourceChips() {
+    const chipsBox = document.getElementById('prensa-source-chips');
+    if (!chipsBox) return;
+
+    const countsByLabel = new Map();
+    state.pressArticles.forEach(n => {
+      const label = getShortPressSourceLabel(n.fuente);
+      countsByLabel.set(label, (countsByLabel.get(label) || 0) + 1);
+    });
+
+    const entries = [['all', 'Todas', state.pressArticles.length]];
+    countsByLabel.forEach((cnt, label) => {
+      entries.push([label, label, cnt]);
+    });
+
+    chipsBox.innerHTML = entries.map(([key, label, cnt]) => {
+      const isAct = state.pressSourceFilter === key;
+      return `<button type="button" role="tab" aria-selected="${isAct ? 'true' : 'false'}" class="prensa-chip ${isAct ? 'active' : ''}" data-source="${escapeHtml(key)}">${escapeHtml(label)} (${cnt})</button>`;
+    }).join('');
+
+    chipsBox.querySelectorAll('.prensa-chip').forEach(btn => {
+      btn.onclick = () => {
+        state.pressSourceFilter = btn.getAttribute('data-source') || 'all';
+        renderPressSourceChips();
+        renderPressNewsList();
+      };
+    });
+  }
+
+  function renderPressNewsList() {
+    const newsBox = document.getElementById('live-news-list');
+    const countBadge = document.getElementById('prensa-count-badge');
+    const moreWrap = document.getElementById('prensa-load-more-wrap');
+    if (!newsBox) return;
+
+    const q = normalizeText(state.pressSearchQuery);
+    const src = state.pressSourceFilter || 'all';
+
+    const filtered = state.pressArticles.filter(n => {
+      const matchesSource = src === 'all' || getShortPressSourceLabel(n.fuente) === src;
+      if (!matchesSource) return false;
+      if (!q) return true;
+      const haystack = normalizeText(`${n.titulo || ''} ${n.resumen || ''} ${n.fuente || ''} ${n.fecha || ''}`);
+      return haystack.includes(q);
+    });
+
+    const isFiltered = src !== 'all' || Boolean(q);
+    if (countBadge) {
+      countBadge.textContent = isFiltered
+        ? `${filtered.length} de ${state.pressArticles.length}`
+        : `${state.pressArticles.length} notas`;
+    }
+
+    if (!filtered.length) {
+      newsBox.innerHTML = `
+        <div class="prensa-empty-state">
+          <span>No encontramos titulares para <strong>“${escapeHtml(state.pressSearchQuery || state.pressSourceFilter)}”</strong>.</span>
+          <button type="button" class="btn-outline-gold" id="prensa-clear-filters-btn" style="padding:5px 12px;font-size:11.5px;">↺ Mostrar todas las noticias</button>
+        </div>
+      `;
+      if (moreWrap) moreWrap.innerHTML = '';
+      const clr = document.getElementById('prensa-clear-filters-btn');
+      if (clr) {
+        clr.onclick = () => {
+          state.pressSourceFilter = 'all';
+          state.pressSearchQuery = '';
+          const inp = document.getElementById('prensa-search-input');
+          const clrX = document.getElementById('prensa-search-clear');
+          if (inp) inp.value = '';
+          if (clrX) clrX.hidden = true;
+          renderPressSourceChips();
+          renderPressNewsList();
+        };
+      }
+      return;
+    }
+
+    const limit = (isFiltered || state.pressExpanded) ? filtered.length : 6;
+    const visible = filtered.slice(0, limit);
+
+    newsBox.innerHTML = visible.map(n => {
+      const urlSafe = safeUrl(n.url || 'https://www.servicioti.com.uy/', 'https://www.servicioti.com.uy/');
+      const rawResumo = String(n.resumen || '');
+      const resumo = rawResumo.length > 125 ? rawResumo.slice(0, 125) + '...' : rawResumo;
+      return `
+        <article class="clave-item" style="border-left-color:#71717a;">
+          <div style="font-size:11px;color:var(--manya-gold);font-weight:800;margin-bottom:3px;">${escapeHtml(n.fuente)} • ${escapeHtml(n.fecha || n.fecha_raw || 'Reciente')}</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">
+            <a href="${escapeHtml(urlSafe)}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">${escapeHtml(n.titulo)}</a>
+          </div>
+          <p style="font-size:12px;color:#a1a1aa;line-height:1.4;margin-bottom:6px;">${escapeHtml(resumo)}</p>
+          <a href="${escapeHtml(urlSafe)}" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:var(--manya-gold);font-weight:800;text-decoration:none;">Leer en ${escapeHtml(n.fuente)} ↗</a>
+        </article>
+      `;
+    }).join('');
+
+    if (moreWrap) {
+      const remaining = filtered.length - visible.length;
+      if (!isFiltered && remaining > 0) {
+        moreWrap.innerHTML = `<button type="button" class="btn-outline-gold" id="prensa-toggle-more-btn" style="padding:5px 12px;font-size:11.5px;width:100%;justify-content:center;">📰 Ver ${remaining} noticias más</button>`;
+        const btnMore = document.getElementById('prensa-toggle-more-btn');
+        if (btnMore) btnMore.onclick = () => { state.pressExpanded = true; renderPressNewsList(); };
+      } else if (!isFiltered && state.pressExpanded && filtered.length > 6) {
+        moreWrap.innerHTML = `<button type="button" class="btn-outline-gold" id="prensa-toggle-more-btn" style="padding:5px 12px;font-size:11.5px;width:100%;justify-content:center;">▲ Mostrar vista compacta</button>`;
+        const btnLess = document.getElementById('prensa-toggle-more-btn');
+        if (btnLess) btnLess.onclick = () => { state.pressExpanded = false; renderPressNewsList(); };
+      } else {
+        moreWrap.innerHTML = '';
+      }
+    }
+  }
+
+  function initPressControls(articles) {
+    state.pressArticles = Array.isArray(articles) ? articles : [];
+    state.pressSourceFilter = 'all';
+    state.pressSearchQuery = '';
+    state.pressExpanded = false;
+
+    const searchInput = document.getElementById('prensa-search-input');
+    const clearBtn = document.getElementById('prensa-search-clear');
+    if (searchInput) {
+      searchInput.oninput = () => {
+        state.pressSearchQuery = searchInput.value || '';
+        if (clearBtn) clearBtn.hidden = !state.pressSearchQuery;
+        renderPressNewsList();
+      };
+    }
+    if (clearBtn && searchInput) {
+      clearBtn.onclick = () => {
+        searchInput.value = '';
+        state.pressSearchQuery = '';
+        clearBtn.hidden = true;
+        renderPressNewsList();
+        searchInput.focus();
+      };
+    }
+    renderPressSourceChips();
+    renderPressNewsList();
   }
 
   function hydrateEditorialSection(digest) {
@@ -1225,15 +1926,15 @@
 
     const pq = document.querySelector('.editorial-pullquote');
     if (pq && art.cita_destacada) {
-      pq.innerHTML = `“${art.cita_destacada}”${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${art.autor_cita}</span>` : ''}`;
+      pq.innerHTML = `“${escapeHtml(art.cita_destacada)}”${art.autor_cita ? `<span style="display:block;font-size:12px;margin-top:6px;color:var(--manya-gold);">— ${escapeHtml(art.autor_cita)}</span>` : ''}`;
     }
 
     const clavesBox = document.getElementById('claves-editorial-container');
     if (clavesBox && digest.claves_60_segundos && digest.claves_60_segundos.length) {
       clavesBox.innerHTML = digest.claves_60_segundos.map(c => `
         <div class="clave-item">
-          <div class="clave-item-title">${c.icono || '⚽'} ${c.titulo}</div>
-          <p class="clave-item-desc">${c.detalle}</p>
+          <div class="clave-item-title">${escapeHtml(c.icono || '⚽')} ${escapeHtml(c.titulo)}</div>
+          <p class="clave-item-desc">${escapeHtml(c.detalle)}</p>
         </div>
       `).join('');
     }
@@ -1250,25 +1951,15 @@
         const m = meta[k] || { icon: '⚡', color: '#ffd100' };
         return `
           <div class="clave-item" style="border-left:3px solid ${m.color};background:#141419;padding:12px;border-radius:8px;">
-            <div style="font-size:11.5px;color:${m.color};font-weight:800;margin-bottom:4px;">${m.icon} ${(item.eje || 'PRISMA').toUpperCase()} • ${item.subtitulo || ''}</div>
-            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“${item.texto}”</p>
+            <div style="font-size:11.5px;color:${m.color};font-weight:800;margin-bottom:4px;">${m.icon} ${escapeHtml((item.eje || 'PRISMA').toUpperCase())} • ${escapeHtml(item.subtitulo || '')}</div>
+            <p style="font-size:12.5px;color:#e4e4e7;line-height:1.45;margin:0;">“${escapeHtml(item.texto)}”</p>
           </div>
         `;
       }).join('');
     }
 
-    const newsBox = document.getElementById('live-news-list');
-    if (newsBox && digest.noticias_fuentes && digest.noticias_fuentes.length) {
-      newsBox.innerHTML = digest.noticias_fuentes.slice(0, 6).map(n => `
-        <div class="clave-item" style="border-left-color:#71717a;">
-          <div style="font-size:11px;color:var(--manya-gold);font-weight:800;margin-bottom:3px;">${n.fuente} • ${n.fecha || n.fecha_raw || 'Reciente'}</div>
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">
-            <a href="${n.url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="color:#ffffff;text-decoration:none;">${n.titulo}</a>
-          </div>
-          <p style="font-size:12px;color:#a1a1aa;line-height:1.4;margin-bottom:6px;">${(n.resumen || '').slice(0, 125)}...</p>
-          <a href="${n.url || 'https://www.servicioti.com.uy'}" target="_blank" rel="noopener noreferrer" style="font-size:11px;color:var(--manya-gold);font-weight:800;text-decoration:none;">Leer en ${n.fuente} ↗</a>
-        </div>
-      `).join('');
+    if (digest.noticias_fuentes && digest.noticias_fuentes.length) {
+      initPressControls(digest.noticias_fuentes);
     }
   }
 
@@ -1277,7 +1968,6 @@
     const loadMoreWrap = document.getElementById('gallery-load-more-wrap');
     if (!grid) return;
 
-    // Nunca duplicar tatuajes en Galerías Deportivas (tatuajes viven en #piel-carbonera)
     const sportsOnly = (items || []).filter(it => !(it.id || '').startsWith('tattoo_') && (it.categoria || '').toLowerCase() !== 'tatuajes');
     const filter = currentFilter || 'all';
     const filtered = (filter === 'all') ? sportsOnly : sportsOnly.filter(it => (it.categoria || '').toLowerCase().includes(filter.toLowerCase()));
@@ -1291,47 +1981,64 @@
     const visible = filtered.slice(0, state.galleryLimit);
     grid.innerHTML = visible.map((item, idx) => {
       const is1891 = (item.cuenta === '1891.uy') || (item.url_post && item.url_post.includes('1891.uy'));
-      const postUrl = item.url_post || (is1891 ? 'https://1891.uy/partidos' : 'https://www.instagram.com/oficialcap/');
+      const postUrl = safeUrl(item.url_post || (is1891 ? 'https://1891.uy/partidos' : 'https://www.instagram.com/oficialcap/'), 'https://www.instagram.com/oficialcap/');
       const badgeTxt = is1891 ? '📜 ARCHIVO 1891 BD' : `📸 ${(item.categoria || 'Peñarol').replace('-', ' ').toUpperCase()}`;
       const metaRight = item.fecha || (is1891 ? '1891 BD' : 'Temporada 2026');
+      const imgPrimary = safeImgSrc(item.imagen_webp || item.imagen_jpg);
+      const imgFallback = safeImgSrc(item.imagen_jpg || item.imagen_webp);
       return `
         <article class="ig-card" data-idx="${idx}">
-          <div class="ig-card-link" style="cursor:pointer;" title="Click para ampliar en alta definición">
+          <div class="ig-card-link" role="button" tabindex="0" aria-label="Ampliar fotografía: ${escapeHtml(item.titulo)}" style="cursor:pointer;" title="Click para ampliar en alta definición">
             <div class="ig-img-wrap">
-              <img src="${item.imagen_webp || item.imagen_jpg}" alt="${item.titulo} - Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
-              <span class="ig-badge-tag">${badgeTxt}</span>
+              <img class="manya-lazy-img" src="${escapeHtml(imgPrimary)}" data-fallback-src="${escapeHtml(imgFallback)}" alt="${escapeHtml(item.titulo)} - Club Atlético Peñarol" width="1280" height="720" loading="lazy" decoding="async" />
+              <span class="ig-badge-tag">${escapeHtml(badgeTxt)}</span>
             </div>
           </div>
           <div class="ig-body">
             <div class="ig-meta">
-              <span>${item.cuenta || '@oficialcap'}</span>
-              <span>📅 ${metaRight}</span>
+              <span>${escapeHtml(item.cuenta || '@oficialcap')}</span>
+              <span>📅 ${escapeHtml(metaRight)}</span>
             </div>
-            <h3 class="ig-title"><a href="${postUrl}" target="_blank" rel="noopener noreferrer">${item.titulo}</a></h3>
-            <p class="ig-caption">${item.descripcion || item.caption || ''}</p>
+            <h3 class="ig-title"><a href="${escapeHtml(postUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.titulo)}</a></h3>
+            <p class="ig-caption">${escapeHtml(item.descripcion || item.caption || '')}</p>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;">
               <button type="button" class="btn-outline-gold open-lightbox-btn" style="padding:4px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar</button>
-              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${is1891 ? '1891.uy ↗' : 'Fuente ↗'}</a>
+              <a href="${escapeHtml(postUrl)}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="margin-top:0;">${is1891 ? '1891.uy ↗' : 'Fuente ↗'}</a>
             </div>
           </div>
         </article>
       `;
     }).join('');
 
+    enhanceLazyImages(grid);
+
+    const lightboxItems = filtered.map(it => Object.assign({}, it, {
+      credito: it.fuente || it.cuenta || '@oficialcap'
+    }));
+
     grid.querySelectorAll('.ig-card').forEach(card => {
-      const targetItem = visible[parseInt(card.getAttribute('data-idx'), 10)];
-      const la = card.querySelector('.ig-card-link'); if (la) la.onclick = () => openLightbox(targetItem);
-      const zb = card.querySelector('.open-lightbox-btn'); if (zb) zb.onclick = e => { e.stopPropagation(); openLightbox(targetItem); };
+      const idx = parseInt(card.getAttribute('data-idx'), 10);
+      const trigger = () => openLightbox(lightboxItems, idx);
+      const la = card.querySelector('.ig-card-link');
+      if (la) {
+        la.onclick = trigger;
+        la.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } };
+      }
+      const zb = card.querySelector('.open-lightbox-btn');
+      if (zb) zb.onclick = e => { e.stopPropagation(); trigger(); };
     });
 
     if (loadMoreWrap) {
       const rem = filtered.length - visible.length;
       if (rem > 0) {
         loadMoreWrap.innerHTML = `<button type="button" id="btn-gallery-load-more" class="btn-outline-gold" style="padding:10px 22px;font-size:13px;">📸 Ver más fotografías (+${rem} disponibles)</button>`;
-        document.getElementById('btn-gallery-load-more').onclick = () => {
-          state.galleryLimit += 8;
-          renderGallery(items, filter);
-        };
+        const lmBtn = document.getElementById('btn-gallery-load-more');
+        if (lmBtn) {
+          lmBtn.onclick = () => {
+            state.galleryLimit += 8;
+            renderGallery(items, filter);
+          };
+        }
       } else {
         loadMoreWrap.innerHTML = '';
       }
@@ -1342,8 +2049,12 @@
     const tabs = document.querySelectorAll('#gallery-filters .gallery-tab');
     tabs.forEach(tab => {
       tab.onclick = () => {
-        tabs.forEach(t => t.classList.remove('active'));
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
         state.galleryFilter = tab.getAttribute('data-filter') || 'all';
         state.galleryLimit = 6;
         renderGallery(allItems, state.galleryFilter);
@@ -1354,43 +2065,67 @@
   function renderInfluencersSection(influencers) {
     const grid = document.getElementById('influencers-grid');
     if (!grid || !influencers || !influencers.length) return;
-    grid.innerHTML = influencers.map((inf, idx) => `
-      <article class="ig-card influencer-card" data-inf-idx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
-        <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
-          <div style="display:flex;align-items:center;gap:10px;min-width:0;">
-            <div class="ig-avatar-ring" style="width:40px;height:40px;flex-shrink:0;"><img src="${inf.avatar}" alt="${inf.handle}" width="40" height="40" style="border-radius:50%;object-fit:cover;" /></div>
-            <div style="min-width:0;">
-              <strong style="font-size:13.5px;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${inf.nombre} <span style="color:var(--manya-gold);">✓</span></strong>
-              <div style="font-size:12px;color:var(--manya-gold);font-weight:700;">${inf.handle}</div>
+    grid.innerHTML = influencers.map((inf, idx) => {
+      const igUrl = safeUrl(inf.url_instagram || 'https://www.instagram.com/oficialcap/', 'https://www.instagram.com/oficialcap/');
+      const avatarSrc = safeImgSrc(inf.avatar, 'assets/img/escudo_penarol_oficial.svg');
+      const imgPrimary = safeImgSrc(inf.imagen_webp || inf.imagen_jpg);
+      const imgFallback = safeImgSrc(inf.imagen_jpg || inf.imagen_webp);
+      return `
+        <article class="ig-card influencer-card" data-inf-idx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.25);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+          <div style="padding:12px 16px;background:rgba(18,18,24,0.95);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+              <div class="ig-avatar-ring" style="width:40px;height:40px;flex-shrink:0;"><img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(inf.handle)}" width="40" height="40" style="border-radius:50%;object-fit:cover;" /></div>
+              <div style="min-width:0;">
+                <strong style="font-size:13.5px;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(inf.nombre)} <span style="color:var(--manya-gold);">✓</span></strong>
+                <div style="font-size:12px;color:var(--manya-gold);font-weight:700;">${escapeHtml(inf.handle)}</div>
+              </div>
+            </div>
+            <a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;flex-shrink:0;text-decoration:none;">Seguir ↗</a>
+          </div>
+          <div class="ig-img-wrap" role="button" tabindex="0" aria-label="Ampliar publicación de ${escapeHtml(inf.handle)}: ${escapeHtml(inf.titulo)}" style="cursor:pointer;position:relative;aspect-ratio:16/9;overflow:hidden;">
+            <img class="manya-lazy-img" src="${escapeHtml(imgPrimary)}" data-fallback-src="${escapeHtml(imgFallback)}" alt="${escapeHtml(inf.titulo)}" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
+            <span class="ig-badge-tag">${escapeHtml(inf.badge)}</span>
+          </div>
+          <div class="ig-body" style="padding:14px 16px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
+            <div>
+              <div class="ig-meta" style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-secondary);margin-bottom:8px;">
+                <span>⚽ ${escapeHtml(inf.partido)}</span>
+                <span style="color:#f87171;font-weight:800;">❤️ ${escapeHtml(inf.likes_formato)}</span>
+              </div>
+              <h3 style="font-size:14.5px;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.35;">${escapeHtml(inf.titulo)}</h3>
+              <p style="font-size:12.5px;color:#d4d4d8;line-height:1.5;margin:0 0 10px;">${escapeHtml(inf.descripcion)}</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+              <button type="button" class="btn-outline-gold inf-zoom-btn" style="padding:5px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar</button>
+              <a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 12px;font-size:11.5px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;text-decoration:none;">Instagram ↗</a>
             </div>
           </div>
-          <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="btn-outline-gold" style="padding:4px 10px;font-size:11px;border-radius:999px;flex-shrink:0;text-decoration:none;">Seguir ↗</a>
-        </div>
-        <div class="ig-img-wrap" style="cursor:pointer;position:relative;aspect-ratio:16/9;overflow:hidden;">
-          <img src="${inf.imagen_webp || inf.imagen_jpg}" alt="${inf.titulo}" width="1280" height="720" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
-          <span class="ig-badge-tag">${inf.badge}</span>
-        </div>
-        <div class="ig-body" style="padding:14px 16px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
-          <div>
-            <div class="ig-meta" style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-secondary);margin-bottom:8px;">
-              <span>⚽ ${inf.partido}</span>
-              <span style="color:#f87171;font-weight:800;">❤️ ${inf.likes_formato}</span>
-            </div>
-            <h3 style="font-size:14.5px;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.35;">${inf.titulo}</h3>
-            <p style="font-size:12.5px;color:#d4d4d8;line-height:1.5;margin:0 0 10px;">${inf.descripcion}</p>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
-            <button type="button" class="btn-outline-gold inf-zoom-btn" style="padding:5px 10px;font-size:11.5px;cursor:pointer;">🔍 Ampliar</button>
-            <a href="${inf.url_instagram}" target="_blank" rel="noopener noreferrer" class="ig-external-btn" style="padding:5px 12px;font-size:11.5px;background:#ffd100;color:#09090b;font-weight:900;border-radius:6px;text-decoration:none;">Instagram ↗</a>
-          </div>
-        </div>
-      </article>
-    `).join('');
+        </article>
+      `;
+    }).join('');
+
+    enhanceLazyImages(grid);
+
+    const lbItems = influencers.map(item => ({
+      titulo: `${item.titulo} — ${item.handle}`,
+      descripcion: item.descripcion,
+      cuenta: item.handle,
+      credito: `${item.nombre} (${item.handle})`,
+      categoria: item.categoria || 'comunidad',
+      fecha: item.partido || 'Temporada 2026',
+      url_post: item.url_instagram,
+      imagen_webp: item.imagen_webp,
+      imagen_jpg: item.imagen_jpg
+    }));
 
     grid.querySelectorAll('.influencer-card').forEach(card => {
-      const item = influencers[parseInt(card.getAttribute('data-inf-idx'), 10)];
-      const trigger = () => openLightbox({ titulo: `${item.titulo} — ${item.handle}`, descripcion: item.descripcion, cuenta: item.handle, categoria: item.categoria, url_post: item.url_instagram, imagen_webp: item.imagen_webp, imagen_jpg: item.imagen_jpg });
-      const iw = card.querySelector('.ig-img-wrap'); if (iw) iw.onclick = trigger;
+      const idx = parseInt(card.getAttribute('data-inf-idx'), 10);
+      const trigger = () => openLightbox(lbItems, idx);
+      const iw = card.querySelector('.ig-img-wrap');
+      if (iw) {
+        iw.onclick = trigger;
+        iw.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } };
+      }
       const zb = card.querySelector('.inf-zoom-btn'); if (zb) zb.onclick = trigger;
     });
   }
@@ -1400,43 +2135,81 @@
     const artistsList = document.getElementById('tattoo-artists-list');
     if (!grid || !tattoos || !tattoos.length) return;
 
+    state.tattoos = tattoos;
+    state.tattooFilter = filter;
+
     if (artistsList && !artistsList.children.length) {
       const seen = new Set();
-      artistsList.innerHTML = tattoos.filter(t => t.tatuador && !seen.has(t.tatuador) && seen.add(t.tatuador)).slice(0, 6).map(a => `
-        <a href="${a.url_instagram || 'https://www.instagram.com/'}" target="_blank" rel="noopener noreferrer" class="tattoo-artist-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,209,0,0.2);border-radius:999px;font-size:12px;color:#fff;">
-          <span style="color:var(--manya-gold);font-weight:900;">💉</span><span><strong>${a.tatuador}</strong> (${a.estudio || 'Montevideo'})</span>
-        </a>
-      `).join('');
+      artistsList.innerHTML = tattoos.filter(t => t.tatuador && !seen.has(t.tatuador) && seen.add(t.tatuador)).slice(0, 6).map(a => {
+        const igUrl = safeUrl(a.url_instagram || 'https://www.instagram.com/', 'https://www.instagram.com/');
+        return `
+          <a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener noreferrer" class="tattoo-artist-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,209,0,0.2);border-radius:999px;font-size:12px;color:#fff;">
+            <span style="color:var(--manya-gold);font-weight:900;">💉</span><span><strong>${escapeHtml(a.tatuador)}</strong> (${escapeHtml(a.estudio || 'Montevideo')})</span>
+          </a>
+        `;
+      }).join('');
     }
 
     const filtered = filter === 'all' ? tattoos : tattoos.filter(t => t.categoria === filter);
-    grid.innerHTML = filtered.map(t => `
-      <article class="tattoo-card" style="background:#111115;border:1px solid rgba(255,209,0,0.2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
-        <div class="ig-img-wrap" style="aspect-ratio:1/1;position:relative;">
-          <img src="${t.imagen_webp || t.imagen_jpg}" alt="${t.titulo}" width="600" height="600" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
-          <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.82);color:var(--manya-gold);border:1px solid var(--manya-gold);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:800;">${t.estilo || 'Tatuaje Aurinegro'}</span>
-        </div>
-        <div style="padding:12px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">📍 ${t.zona_cuerpo || 'Piel Carbonera'} • ${t.barrio || 'Montevideo'}</div>
-            <h3 style="font-size:13.5px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;">${t.titulo}</h3>
-            <p style="font-size:12px;color:#a1a1aa;margin:0 0 8px;line-height:1.4;">${t.descripcion || ''}</p>
+    grid.innerHTML = filtered.map((t, idx) => {
+      const imgPrimary = safeImgSrc(t.imagen_webp || t.imagen_jpg);
+      const imgFallback = safeImgSrc(t.imagen_jpg || t.imagen_webp);
+      const igUrl = safeUrl(t.url_instagram || 'https://www.instagram.com/', 'https://www.instagram.com/');
+      return `
+        <article class="tattoo-card" data-tidx="${idx}" style="background:#111115;border:1px solid rgba(255,209,0,0.2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+          <div class="ig-img-wrap tattoo-media-trigger" role="button" tabindex="0" aria-label="Ampliar tatuaje: ${escapeHtml(t.titulo)}" title="Click para ampliar en alta definición" style="aspect-ratio:1/1;position:relative;cursor:pointer;">
+            <img class="manya-lazy-img" src="${escapeHtml(imgPrimary)}" data-fallback-src="${escapeHtml(imgFallback)}" alt="${escapeHtml(t.titulo)}" width="600" height="600" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
+            <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.82);color:var(--manya-gold);border:1px solid var(--manya-gold);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:800;">${escapeHtml(t.estilo || 'Tatuaje Aurinegro')}</span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px;">
-            <span style="color:var(--manya-gold);font-weight:700;">${t.tatuador}</span>
-            <a href="${t.url_instagram || 'https://www.instagram.com/'}" target="_blank" rel="noopener noreferrer" style="color:#ffd100;text-decoration:none;font-weight:700;">Ver en IG ↗</a>
+          <div style="padding:12px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;">
+            <div>
+              <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">📍 ${escapeHtml(t.zona_cuerpo || 'Piel Carbonera')} • ${escapeHtml(t.barrio || 'Montevideo')}</div>
+              <h3 style="font-size:13.5px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;">${escapeHtml(t.titulo)}</h3>
+              <p style="font-size:12px;color:#a1a1aa;margin:0 0 8px;line-height:1.4;">${escapeHtml(t.descripcion || '')}</p>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px;flex-wrap:wrap;">
+              <span style="color:var(--manya-gold);font-weight:700;">${escapeHtml(t.tatuador)}</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button type="button" class="btn-outline-gold tattoo-zoom-btn" style="padding:3px 9px;font-size:11px;cursor:pointer;">🔍 Ampliar</button>
+                <a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener noreferrer" style="color:#ffd100;text-decoration:none;font-weight:700;">IG ↗</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
-    `).join('');
+        </article>
+      `;
+    }).join('');
+
+    enhanceLazyImages(grid);
+
+    const lbTattoos = filtered.map(t => Object.assign({}, t, {
+      _kind: 'tattoo',
+      url_post: t.url_instagram || 'https://www.instagram.com/explore/tags/pe%C3%B1arolenlapiel/',
+      credito: `${t.tatuador || 'Artista Aurinegro'}${t.estudio ? ' • ' + t.estudio : ''}${t.handle_instagram ? ' (' + t.handle_instagram + ')' : ''}`
+    }));
+
+    grid.querySelectorAll('.tattoo-card').forEach(card => {
+      const idx = parseInt(card.getAttribute('data-tidx'), 10);
+      const trigger = () => openLightbox(lbTattoos, idx);
+      const imgWrap = card.querySelector('.tattoo-media-trigger');
+      if (imgWrap) {
+        imgWrap.onclick = trigger;
+        imgWrap.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } };
+      }
+      const zoomBtn = card.querySelector('.tattoo-zoom-btn');
+      if (zoomBtn) zoomBtn.onclick = e => { e.stopPropagation(); trigger(); };
+    });
   }
 
   function setupTattooFilters(tattoos) {
     const tabs = document.querySelectorAll('#tattoo-filter-tabs .tattoo-filter-btn');
     tabs.forEach(btn => {
       btn.onclick = () => {
-        tabs.forEach(b => b.classList.remove('active'));
+        tabs.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         renderTattooGallery(tattoos, btn.getAttribute('data-cat') || 'all');
       };
     });
@@ -1451,11 +2224,11 @@
     if (gridEl && efem.partidos_historicos.length) {
       gridEl.innerHTML = efem.partidos_historicos.slice(0, 6).map(m => `
         <article class="efemeride-item">
-          <div class="efemeride-top-line"><span class="efemeride-year">${m.ano}</span><span class="efemeride-torneo">${m.torneo || 'Torneo Oficial'}</span></div>
-          <div class="efemeride-score">${m.resultado}</div>
+          <div class="efemeride-top-line"><span class="efemeride-year">${escapeHtml(m.ano)}</span><span class="efemeride-torneo">${escapeHtml(m.torneo || 'Torneo Oficial')}</span></div>
+          <div class="efemeride-score">${escapeHtml(m.resultado)}</div>
           <div class="efemeride-meta">
-            <div>🏟️ ${m.estadio || 'Escenario Oficial'}</div>
-            ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${m.goles_detalle}</div>` : ''}
+            <div>🏟️ ${escapeHtml(m.estadio || 'Escenario Oficial')}</div>
+            ${m.goles_detalle ? `<div style="margin-top:4px;color:#d4d4d8;">⚽ ${escapeHtml(m.goles_detalle)}</div>` : ''}
           </div>
         </article>
       `).join('');
@@ -1463,7 +2236,7 @@
 
     const gloriasEl = document.getElementById('efemerides-glorias-line');
     if (gloriasEl && efem.cumpleanos_glorias && efem.cumpleanos_glorias.length) {
-      const nombres = Array.from(new Set(efem.cumpleanos_glorias.map(g => g.nombre))).map(n => `<strong>${n}</strong>`).join(' • ');
+      const nombres = Array.from(new Set(efem.cumpleanos_glorias.map(g => g.nombre))).map(n => `<strong>${escapeHtml(n)}</strong>`).join(' • ');
       gloriasEl.innerHTML = `<span>🎂 <strong>Glorias del Club:</strong> En esta fecha celebran su natalicio: ${nombres}.</span>`;
     }
   }
@@ -1513,8 +2286,8 @@
       box.innerHTML = `
         <div class="trivia-container trivia-game-over">
           <div style="font-size:36px;margin-bottom:8px;">🏆</div>
-          <h4 style="font-size:19px;color:#fff;margin-bottom:6px;">¡Trivia Completada! ${triviaState.score} pts (${pct}%)</h4>
-          <p style="font-size:13px;color:#d4d4d8;margin-bottom:14px;">Mejor racha: 🔥 x${triviaState.maxStreak}</p>
+          <h4 style="font-size:19px;color:#fff;margin-bottom:6px;">¡Trivia Completada! ${escapeHtml(triviaState.score)} pts (${escapeHtml(pct)}%)</h4>
+          <p style="font-size:13px;color:#d4d4d8;margin-bottom:14px;">Mejor racha: 🔥 x${escapeHtml(triviaState.maxStreak)}</p>
           <button type="button" class="btn-manya" id="trivia-restart-btn">🔄 Jugar de Nuevo</button>
         </div>`;
       const rb = box.querySelector('#trivia-restart-btn');
@@ -1529,17 +2302,17 @@
     box.innerHTML = `
       <div class="trivia-container">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div class="trivia-cat-chips">${cats.map(c => `<button type="button" class="trivia-chip ${triviaState.category === c.id ? 'active' : ''}" data-cat="${c.id}">${c.label}</button>`).join('')}</div>
-          <button type="button" id="trivia-sound-toggle" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#d4d4d8;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;">${triviaAudioEnabled ? '🔊' : '🔇'}</button>
+          <div class="trivia-cat-chips">${cats.map(c => `<button type="button" class="trivia-chip ${triviaState.category === c.id ? 'active' : ''}" data-cat="${escapeHtml(c.id)}">${escapeHtml(c.label)}</button>`).join('')}</div>
+          <button type="button" id="trivia-sound-toggle" aria-label="${triviaAudioEnabled ? 'Silenciar efectos de sonido' : 'Activar efectos de sonido'}" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#d4d4d8;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:12px;">${triviaAudioEnabled ? '🔊' : '🔇'}</button>
         </div>
         <div class="trivia-stats-row">
-          <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${item.catName}</em></span>
-          <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${triviaState.score} pts</span>
+          <span>Pregunta <strong>${idx + 1}</strong> de ${total} • <em style="color:var(--manya-gold);font-style:normal;">${escapeHtml(item.catName)}</em></span>
+          <span style="color:var(--manya-gold);font-weight:800;font-family:'JetBrains Mono',monospace;">${escapeHtml(triviaState.score)} pts</span>
         </div>
         <div class="trivia-progress-bar-wrap"><div class="trivia-progress-fill" style="width:${Math.round((idx / total) * 100)}%;"></div></div>
-        <h4 class="trivia-q-title">${item.q}</h4>
+        <h4 class="trivia-q-title">${escapeHtml(item.q)}</h4>
         <div class="trivia-opts-grid" id="trivia-opts">
-          ${item.opts.map((o, i) => `<button type="button" class="trivia-opt-btn" data-idx="${i}"><span class="trivia-opt-letter">${['A','B','C','D'][i]}</span><span>${o}</span></button>`).join('')}
+          ${item.opts.map((o, i) => `<button type="button" class="trivia-opt-btn" data-idx="${i}"><span class="trivia-opt-letter">${['A','B','C','D'][i]}</span><span>${escapeHtml(o)}</span></button>`).join('')}
         </div>
         <div id="trivia-feedback" style="display:none;"></div>
       </div>`;
@@ -1566,7 +2339,7 @@
           triviaState.score += gained;
           btn.classList.add('is-correct');
           fb.className = 'trivia-feedback-card correct';
-          fb.innerHTML = `<div style="font-weight:800;color:#22c55e;">✅ ¡Correcto! (+${gained} pts)</div><div class="trivia-feedback-exp">${item.exp}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
+          fb.innerHTML = `<div style="font-weight:800;color:#22c55e;">✅ ¡Correcto! (+${gained} pts)</div><div class="trivia-feedback-exp">${escapeHtml(item.exp)}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
         } else {
           playAudioTone('wrong');
           triviaState.streak = 0;
@@ -1574,12 +2347,105 @@
           const cBtn = box.querySelector(`#trivia-opts .trivia-opt-btn[data-idx="${item.ans}"]`);
           if (cBtn) cBtn.classList.add('is-correct');
           fb.className = 'trivia-feedback-card wrong';
-          fb.innerHTML = `<div style="font-weight:800;color:#ef4444;">❌ Respuesta Histórica Certificada</div><div class="trivia-feedback-exp">${item.exp}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
+          fb.innerHTML = `<div style="font-weight:800;color:#ef4444;">❌ Respuesta Histórica Certificada</div><div class="trivia-feedback-exp">${escapeHtml(item.exp)}</div><button type="button" class="btn-manya" style="margin-top:10px;padding:7px 14px;font-size:13px;" id="trivia-next-btn">Siguiente →</button>`;
         }
         fb.style.display = 'block';
         const nb = box.querySelector('#trivia-next-btn');
         if (nb) nb.onclick = () => { triviaState.currentIndex++; renderTrivia(); };
       };
+    });
+  }
+
+  // ==================== SCROLL-SPY, PWA INSTALL CTA & BACK-TO-TOP ====================
+  function initScrollSpy() {
+    const navLinks = Array.from(document.querySelectorAll('.manya-nav a[href^="#"]'));
+    if (!navLinks.length) return;
+
+    const pairs = navLinks
+      .map(link => {
+        const id = (link.getAttribute('href') || '').slice(1);
+        const section = id ? document.getElementById(id) : null;
+        return section ? { id, link, section } : null;
+      })
+      .filter(Boolean);
+
+    if (!pairs.length) return;
+
+    let currentActiveId = pairs[0].id;
+    const setActiveLink = (targetId) => {
+      if (!targetId || targetId === currentActiveId) return;
+      currentActiveId = targetId;
+      pairs.forEach(({ id, link }) => {
+        const isMatch = id === targetId;
+        link.classList.toggle('active', isMatch);
+        if (isMatch) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    pairs.forEach(({ id, link }) => {
+      link.addEventListener('click', () => setActiveLink(id));
+    });
+
+    if ('IntersectionObserver' in window) {
+      const visibleSet = new Set();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) visibleSet.add(entry.target.id);
+          else visibleSet.delete(entry.target.id);
+        });
+        if (visibleSet.size > 0) {
+          const topMost = pairs.find(p => visibleSet.has(p.id));
+          if (topMost) setActiveLink(topMost.id);
+        }
+      }, {
+        rootMargin: '-18% 0px -65% 0px',
+        threshold: [0, 0.1, 0.25]
+      });
+
+      pairs.forEach(({ section }) => observer.observe(section));
+    }
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 100) {
+        setActiveLink(pairs[0].id);
+      } else if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveLink(pairs[pairs.length - 1].id);
+      }
+    }, { passive: true });
+  }
+
+  function initPwaInstall() {
+    const installBtn = document.getElementById('pwa-install-btn');
+    if (!installBtn) return;
+
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      try {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        if (choice && choice.outcome === 'accepted') {
+          installBtn.hidden = true;
+          showToast('📲 ¡Manya ServicioTI instalada en tu dispositivo!', 'success');
+        } else {
+          showToast('ℹ️ Podés instalar la App cuando gustes desde el menú superior', 'info');
+        }
+      } catch (_) {}
+      deferredPrompt = null;
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.hidden = true;
+      deferredPrompt = null;
+      showToast('🎉 ¡App Manya ServicioTI lista en tu pantalla de inicio!', 'success');
     });
   }
 
@@ -1617,6 +2483,8 @@
 
   async function init() {
     setupLightbox();
+    initScrollSpy();
+    initPwaInstall();
     initBackToTop();
     initTacticalBoard();
 
@@ -1667,11 +2535,13 @@
       state.initialBench = JSON.parse(JSON.stringify(squad.jugadores.filter(p => !p.titular)));
       state.lineup = JSON.parse(JSON.stringify(state.initialLineup));
       state.bench = JSON.parse(JSON.stringify(state.initialBench));
+      state.activeLineupPreset = 'ideal';
+      updatePresetButtonsUI();
       renderTacticalBoard();
     }
 
     if (digest) {
-      const bUrl = digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html';
+      const bUrl = safeUrl(digest.blogger_post_url || 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html', 'https://www.servicioti.com.uy/p/penarol-proximo-partido-radiografia.html');
       document.querySelectorAll('.dynamic-blogger-link').forEach(a => { a.href = bUrl; });
       hydrateEditorialSection(digest);
     }

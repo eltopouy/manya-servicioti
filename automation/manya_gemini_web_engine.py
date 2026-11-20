@@ -34,6 +34,7 @@ from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageDraw
 from manya_seo_metadata import ManyaSEOMetadataService
 
 logger = logging.getLogger("ManyaGeminiWebEngine")
+logger.propagate = False
 if not logger.handlers:
     handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))

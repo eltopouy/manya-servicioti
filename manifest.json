@@ -1,24 +1,54 @@
 {
+  "id": "/",
   "name": "MANYA — El Portal Definitivo del Glorioso Peñarol",
   "short_name": "MANYA",
-  "description": "Match Center en vivo, Tabla Anual, Pizarra Táctica Armá tu 11, Muro Instagram, Transporte al Campeón del Siglo y Museo 1891 del Club Atlético Peñarol.",
+  "description": "Match Center en vivo, Tabla Anual, Pizarra Táctica Armá tu 11, Prensa Deportiva en Vivo, Muro Instagram, Transporte al Campeón del Siglo y Museo 1891 del Club Atlético Peñarol.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#09090b",
   "theme_color": "#ffd100",
   "lang": "es-UY",
+  "categories": ["sports", "news"],
   "icons": [
-    {
-      "src": "assets/img/escudo_penarol_oficial.png",
-      "sizes": "800x1000",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
     {
       "src": "assets/img/escudo_penarol_oficial.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "assets/img/escudo_penarol_oficial.png",
+      "sizes": "1432x1924",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Match Center en Vivo",
+      "short_name": "Match Center",
+      "description": "Resultado en tiempo real, próximo partido y radiografía táctica",
+      "url": "/#match-center"
+    },
+    {
+      "name": "Armá tu 11 Titular",
+      "short_name": "Armá tu 11",
+      "description": "Pizarra táctica interactiva con el plantel 2026 de Diego Aguirre",
+      "url": "/#pizarra-tactica"
+    },
+    {
+      "name": "Tablas Oficiales 2026",
+      "short_name": "Tablas",
+      "description": "Tabla Anual AUF, Torneo Clausura y Copa Libertadores",
+      "url": "/#tabla-simulador"
+    },
+    {
+      "name": "Prensa Uruguaya en Vivo",
+      "short_name": "Prensa",
+      "description": "Noticias filtrables de Ovación, Referí, FútbolUy y la diaria",
+      "url": "/#prensa-vivo"
     }
   ]
 }

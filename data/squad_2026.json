@@ -1,6 +1,7 @@
 {
-  "actualizado": "20/11/2026 17:15",
-  "fuente": "ESPN Official Roster API + 1891 BD (Último 11 oficial)",
+  "actualizado": "20/11/2026 17:32",
+  "schema_version": "11.0",
+  "fuente": "ESPN Official Roster API + 1891 BD (Estadísticas 2026, DOB verificadas y Último 11 oficial)",
   "director_tecnico": {
     "nombre": "Diego Aguirre",
     "apodo": "La Fiera",
@@ -28,8 +29,14 @@
       "posicion": "ARQ",
       "linea": "portero",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 33,
-      "rating": 7.6
+      "fecha_nacimiento": "1993-03-23",
+      "pj_2026": 32,
+      "minutos_2026": 2880,
+      "goles_2026": 0,
+      "estatus": "Titular último 11",
+      "rating": 8.3
     },
     {
       "id": "ignacio_alegre",
@@ -38,8 +45,14 @@
       "posicion": "LD",
       "linea": "defensa",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 20,
-      "rating": 7.6
+      "fecha_nacimiento": "2006-06-07",
+      "pj_2026": 11,
+      "minutos_2026": 464,
+      "goles_2026": 0,
+      "estatus": "Titular último 11",
+      "rating": 7.5
     },
     {
       "id": "german_pezzella",
@@ -48,7 +61,13 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 35,
+      "fecha_nacimiento": "1991-06-27",
+      "pj_2026": 11,
+      "minutos_2026": 803,
+      "goles_2026": 0,
+      "estatus": "Titular último 11",
       "rating": 7.6
     },
     {
@@ -58,8 +77,14 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 21,
-      "rating": 7.6
+      "fecha_nacimiento": "2004-12-01",
+      "pj_2026": 13,
+      "minutos_2026": 888,
+      "goles_2026": 1,
+      "estatus": "Titular último 11",
+      "rating": 7.7
     },
     {
       "id": "maximiliano_olivera",
@@ -68,8 +93,14 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 34,
-      "rating": 7.6
+      "fecha_nacimiento": "1992-03-05",
+      "pj_2026": 21,
+      "minutos_2026": 1421,
+      "goles_2026": 3,
+      "estatus": "Titular último 11",
+      "rating": 8.0
     },
     {
       "id": "eric_remedi",
@@ -78,8 +109,14 @@
       "posicion": "MCD",
       "linea": "volante",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 31,
-      "rating": 7.6
+      "fecha_nacimiento": "1995-06-04",
+      "pj_2026": 29,
+      "minutos_2026": 2202,
+      "goles_2026": 1,
+      "estatus": "Titular último 11",
+      "rating": 8.1
     },
     {
       "id": "eduardo_darias",
@@ -88,8 +125,14 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 28,
-      "rating": 7.6
+      "fecha_nacimiento": "1998-02-28",
+      "pj_2026": 21,
+      "minutos_2026": 1529,
+      "goles_2026": 2,
+      "estatus": "Titular último 11",
+      "rating": 8.0
     },
     {
       "id": "javier_cabrera",
@@ -98,8 +141,14 @@
       "posicion": "ED",
       "linea": "ataque",
       "titular": true,
-      "edad": 20,
-      "rating": 7.6
+      "titular_ultimo_1891": true,
+      "edad": 34,
+      "fecha_nacimiento": "1992-03-18",
+      "pj_2026": 21,
+      "minutos_2026": 1457,
+      "goles_2026": 0,
+      "estatus": "Titular último 11",
+      "rating": 7.8
     },
     {
       "id": "leonardo_fernandez",
@@ -108,8 +157,14 @@
       "posicion": "MCO",
       "linea": "ataque",
       "titular": true,
+      "titular_ultimo_1891": false,
       "edad": 28,
-      "rating": 7.6
+      "fecha_nacimiento": "1998-11-08",
+      "pj_2026": 10,
+      "minutos_2026": 876,
+      "goles_2026": 1,
+      "estatus": "Referente del plantel",
+      "rating": 7.4
     },
     {
       "id": "leonel_jaime",
@@ -118,8 +173,14 @@
       "posicion": "EI",
       "linea": "ataque",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 20,
-      "rating": 7.6
+      "fecha_nacimiento": "2006-07-14",
+      "pj_2026": 19,
+      "minutos_2026": 1527,
+      "goles_2026": 5,
+      "estatus": "Titular último 11",
+      "rating": 8.1
     },
     {
       "id": "matias_arezo",
@@ -128,8 +189,14 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": true,
+      "titular_ultimo_1891": true,
       "edad": 23,
-      "rating": 7.6
+      "fecha_nacimiento": "2002-11-21",
+      "pj_2026": 34,
+      "minutos_2026": 2623,
+      "goles_2026": 15,
+      "estatus": "Titular último 11",
+      "rating": 8.8
     },
     {
       "id": "sebastian_britos",
@@ -138,8 +205,14 @@
       "posicion": "ARQ",
       "linea": "portero",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 38,
-      "rating": 7.6
+      "fecha_nacimiento": "1988-01-02",
+      "pj_2026": 6,
+      "minutos_2026": 540,
+      "goles_2026": 0,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.1
     },
     {
       "id": "mauricio_lemos",
@@ -148,8 +221,14 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 30,
-      "rating": 7.6
+      "fecha_nacimiento": "1995-12-28",
+      "pj_2026": 20,
+      "minutos_2026": 1328,
+      "goles_2026": 0,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.3
     },
     {
       "id": "lucas_ferreira",
@@ -158,8 +237,14 @@
       "posicion": "DFC",
       "linea": "defensa",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 26,
-      "rating": 7.6
+      "fecha_nacimiento": "2000-06-16",
+      "pj_2026": 31,
+      "minutos_2026": 2544,
+      "goles_2026": 2,
+      "estatus": "Referente del plantel",
+      "rating": 7.9
     },
     {
       "id": "diego_laxalt",
@@ -168,8 +253,14 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 33,
-      "rating": 7.6
+      "fecha_nacimiento": "1993-02-07",
+      "pj_2026": 13,
+      "minutos_2026": 613,
+      "goles_2026": 1,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.2
     },
     {
       "id": "thiago_espinosa",
@@ -178,8 +269,14 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 22,
-      "rating": 7.6
+      "fecha_nacimiento": "2004-11-09",
+      "pj_2026": 14,
+      "minutos_2026": 875,
+      "goles_2026": 1,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.3
     },
     {
       "id": "lucas_hernandez",
@@ -188,8 +285,14 @@
       "posicion": "LI",
       "linea": "defensa",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 34,
-      "rating": 7.6
+      "fecha_nacimiento": "1992-08-05",
+      "pj_2026": 17,
+      "minutos_2026": 570,
+      "goles_2026": 0,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.1
     },
     {
       "id": "jesus_trindade",
@@ -198,18 +301,30 @@
       "posicion": "MCD",
       "linea": "volante",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 33,
-      "rating": 7.6
+      "fecha_nacimiento": "1993-07-10",
+      "pj_2026": 22,
+      "minutos_2026": 1552,
+      "goles_2026": 1,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.5
     },
     {
-      "id": "roberto_fernandez",
+      "id": "nicolas_fernandez",
       "numero": 8,
-      "nombre": "Roberto Fernández",
+      "nombre": "Nicolás Fernández",
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 28,
-      "rating": 7.6
+      "fecha_nacimiento": "1998-03-02",
+      "pj_2026": 32,
+      "minutos_2026": 2425,
+      "goles_2026": 4,
+      "estatus": "Referente del plantel",
+      "rating": 8.0
     },
     {
       "id": "leandro_umpierrez",
@@ -218,8 +333,14 @@
       "posicion": "MCO",
       "linea": "ataque",
       "titular": false,
+      "titular_ultimo_1891": true,
       "edad": 22,
-      "rating": 7.6
+      "fecha_nacimiento": "2004-03-20",
+      "pj_2026": 31,
+      "minutos_2026": 2189,
+      "goles_2026": 5,
+      "estatus": "Titular último 11",
+      "rating": 8.1
     },
     {
       "id": "luis_miguel_angulo",
@@ -228,8 +349,14 @@
       "posicion": "EI",
       "linea": "ataque",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 22,
-      "rating": 7.6
+      "fecha_nacimiento": "2004-03-23",
+      "pj_2026": 20,
+      "minutos_2026": 809,
+      "goles_2026": 5,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.4
     },
     {
       "id": "abel_hernandez",
@@ -238,8 +365,14 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 36,
-      "rating": 7.6
+      "fecha_nacimiento": "1990-08-08",
+      "pj_2026": 25,
+      "minutos_2026": 1100,
+      "goles_2026": 9,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.7
     },
     {
       "id": "facundo_batista",
@@ -248,8 +381,14 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 27,
-      "rating": 7.6
+      "fecha_nacimiento": "1999-01-16",
+      "pj_2026": 24,
+      "minutos_2026": 674,
+      "goles_2026": 1,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.2
     },
     {
       "id": "jonathan_rodriguez",
@@ -258,8 +397,14 @@
       "posicion": "DC",
       "linea": "ataque",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 33,
-      "rating": 7.6
+      "fecha_nacimiento": "1993-07-06",
+      "pj_2026": 5,
+      "minutos_2026": 114,
+      "goles_2026": 0,
+      "estatus": "Relevo / Rotación",
+      "rating": 6.9
     },
     {
       "id": "franco_romero",
@@ -268,8 +413,14 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
-      "edad": 26,
-      "rating": 7.6
+      "titular_ultimo_1891": false,
+      "edad": 31,
+      "fecha_nacimiento": "1995-02-11",
+      "pj_2026": 9,
+      "minutos_2026": 365,
+      "goles_2026": 1,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.1
     },
     {
       "id": "franco_gonzalez",
@@ -278,8 +429,14 @@
       "posicion": "MC",
       "linea": "volante",
       "titular": false,
+      "titular_ultimo_1891": false,
       "edad": 22,
-      "rating": 7.6
+      "fecha_nacimiento": "2004-06-22",
+      "pj_2026": 11,
+      "minutos_2026": 221,
+      "goles_2026": 0,
+      "estatus": "Relevo / Rotación",
+      "rating": 7.0
     }
   ]
 }

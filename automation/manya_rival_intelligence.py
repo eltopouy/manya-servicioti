@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-MOTOR DE INTELIGENCIA DEPORTIVA Y SCOUTING DEL RIVAL — v3.0 (Plantel Real 2026 & Zero-Empty Duels)
-==================================================================================================
+MOTOR DE INTELIGENCIA DEPORTIVA Y SCOUTING DEL RIVAL — v3.1 (Manya v11.0 Zero-Hardcode)
+=======================================================================================
 Genera automáticamente el informe táctico, figuras a seguir, 4 duelos tácticos 1x1
 (usando el plantel real vigente 2026 de Peñarol) y certificación histórica 1891 BD
 para CUALQUIER rival del Campeonato Uruguayo o Copa Libertadores.
@@ -16,29 +16,24 @@ import sys
 import ssl
 import json
 import re
-import logging
+import time
+import random
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
-
-logger = logging.getLogger("ManyaRivalIntelligence")
-if not logger.handlers:
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUTOMATION_DIR = BASE_DIR / "automation"
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 UY_TZ = timezone(timedelta(hours=-3))
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
+
+logger = get_manya_logger("ManyaRivalIntelligence")
 
 from manya_directory_registry import ManyaDirectoryRegistry
 
@@ -192,27 +187,37 @@ def resolver_meta_rival(rival_query: str) -> dict:
     }
 
 
-def call_1891_mcp(tool_name: str, arguments: dict = None) -> Optional[dict]:
+def call_1891_mcp(tool_name: str, arguments: dict = None, cache_key: Optional[str] = None) -> Optional[dict]:
+    try:
+        from manya_match_engine import ManyaMatchEngine
+        return ManyaMatchEngine.call_1891_mcp(tool_name, arguments or {}, timeout=12, retries=3, cache_key=cache_key)
+    except Exception:
+        pass
+
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ManyaServicioTI/3.0",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ManyaServicioTI/3.1",
         "Content-Type": "application/json",
         "Accept": "application/json, text/event-stream"
     }
     payload = {"jsonrpc": "2.0", "id": 1891, "method": "tools/call", "params": {"name": tool_name, "arguments": arguments or {}}}
-    try:
-        req = urllib.request.Request("https://mcp.1891.uy/mcp", data=json.dumps(payload).encode("utf-8"), headers=headers)
-        with urllib.request.urlopen(req, context=ctx, timeout=12) as r:
-            for line in r.read().decode("utf-8", errors="ignore").split("\n"):
-                if line.startswith("data:"):
-                    obj = json.loads(line[5:].strip())
-                    content_list = obj.get("result", {}).get("content", [])
-                    if content_list and content_list[0].get("text"):
-                        return json.loads(content_list[0]["text"])
-    except Exception as e:
-        logger.warning(f"[1891 MCP] Aviso invocando {tool_name}: {e}")
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request("https://mcp.1891.uy/mcp", data=json.dumps(payload).encode("utf-8"), headers=headers)
+            with urllib.request.urlopen(req, context=ctx, timeout=12) as r:
+                for line in r.read().decode("utf-8", errors="ignore").split("\n"):
+                    if line.startswith("data:"):
+                        obj = json.loads(line[5:].strip())
+                        content_list = obj.get("result", {}).get("content", [])
+                        if content_list and content_list[0].get("text"):
+                            return json.loads(content_list[0]["text"])
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(0.7 * (2 ** attempt) + random.uniform(0.0, 0.2))
+            else:
+                logger.warning(f"[1891 MCP] Aviso invocando {tool_name}: {e}")
     return None
 
 
@@ -224,7 +229,10 @@ def obtener_o_generar_historial_1891(rival_query: str) -> dict:
     rival_nombre = meta.get("nombre_oficial", rival_query.title())
 
     logger.info(f"[1891 BD] Obteniendo historial oficial frente a {rival_nombre} (ID: {rival_id})...")
-    h2h_data = call_1891_mcp("get_head_to_head", {"rivalId": rival_id, "recentLimit": 5}) if rival_id > 0 else None
+    h2h_data = (
+        call_1891_mcp("get_head_to_head", {"rivalId": rival_id, "recentLimit": 5}, cache_key=f"1891_h2h_{rival_id}")
+        if rival_id > 0 else None
+    )
 
     historial_doc = None
     if h2h_data and "data" in h2h_data:
@@ -511,7 +519,7 @@ def generar_informe_rival(rival_query: str = "", dt_override: str = "") -> dict:
                 "Destaca por su solidez defensiva, ritmo intenso en tres cuartos y eficacia en transiciones rápidas."
             ),
             "figuras_a_seguir": [
-                {"nombre": "Abel Hernández / Frente Ofensivo Negriazul", "rol": "Ataque", "analisis": "Eficacia en el área y movilidad constante entre centrales."},
+                {"nombre": "Frente Ofensivo Negriazul", "rol": "Ataque", "analisis": "Eficacia en el área, diagonales cortas y movilidad constante entre centrales."},
                 {"nombre": "Eje de Mediocampo de Belvedere", "rol": "Volantes", "analisis": "Dinámica, presión tras pérdida y cambio de ritmo vertical."}
             ],
             "puntos_fuertes": [

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-GUARDIÁN DE AUTO-CURACIÓN Y SALUD CONTINUA — MANYA SERVICIOTI v10.0
+GUARDIÁN DE AUTO-CURACIÓN Y SALUD CONTINUA — MANYA SERVICIOTI v11.0
 ===================================================================
 Zero-Hardcode Self-Healing Watchdog:
   1. Limpia locks huérfanos (> 15 min) en `scratch/.locks` y `~/.manya_locks`.
@@ -13,35 +13,22 @@ Zero-Hardcode Self-Healing Watchdog:
 
 import sys
 import json
-import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import List, Dict, Any
-
-if hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 AUTOMATION_DIR = BASE_DIR / "automation"
 DATA_DIR = BASE_DIR / "data"
 LOGS_DIR = BASE_DIR / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
-sys.path.insert(0, str(AUTOMATION_DIR))
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from manya_logging import get_manya_logger
 
 UY_TZ = timezone(timedelta(hours=-3))
-
-logger = logging.getLogger("ManyaSelfHealing")
-if not logger.handlers:
-    h = logging.StreamHandler(sys.stdout)
-    h.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(h)
-    fh = logging.FileHandler(LOGS_DIR / "self_healing.log", encoding="utf-8")
-    fh.setFormatter(logging.Formatter("%(asctime)s - [%(name)s] - %(levelname)s - %(message)s"))
-    logger.addHandler(fh)
-    logger.setLevel(logging.INFO)
+logger = get_manya_logger("ManyaSelfHealing", log_file=LOGS_DIR / "self_healing.log")
 
 
 class ManyaSelfHealingWatchdog:
@@ -70,7 +57,7 @@ class ManyaSelfHealingWatchdog:
         return eliminados
 
     def ejecutar_ciclo_guardian(self, auto_push: bool = True) -> Dict[str, Any]:
-        logger.info("=== INICIANDO GUARDIÁN DE AUTO-CURACIÓN MANYA v10.0 ===")
+        logger.info("=== INICIANDO GUARDIÁN DE AUTO-CURACIÓN MANYA v11.0 ===")
         self.auto_limpiar_locks_huerfanos()
 
         from test_manya_ecosystem import ManyaEcosystemTester
