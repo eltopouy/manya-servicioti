@@ -30,17 +30,17 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@700;800&amp;display=swap" rel="stylesheet"/>
-<!-- Auto Cache-Buster & PWA Invalidator v10.0 -->
+<!-- Auto Cache-Buster & PWA Invalidator v11.0 -->
 <script>
     (function() {
-      var APP_VER = '10.0';
+      var APP_VER = '11.0';
       try {
         if (localStorage.getItem('manya_app_ver') !== APP_VER) {
           localStorage.setItem('manya_app_ver', APP_VER);
           if ('caches' in window) {
             caches.keys().then(function(keys) {
               keys.forEach(function(k) {
-                if (!k.includes('v10.0')) caches.delete(k);
+                if (!k.includes('v11.0')) caches.delete(k);
               });
             });
           }
@@ -53,7 +53,7 @@
       } catch(e) {}
     })();
   </script>
-<link href="css/styles.css?v=10.0" rel="stylesheet"/>
+<link href="css/styles.css?v=11.0" rel="stylesheet"/>
 <!-- Grafo Schema.org @graph (SportsTeam + WebApplication + FAQPage) -->
 <script type="application/ld+json">
   {
@@ -132,8 +132,9 @@
   </script>
 </head>
 <body>
+<a class="skip-link" href="#top">Saltar al contenido principal</a>
 <div aria-hidden="true" class="manya-top-stripes"></div>
-<!-- HEADER & NAVEGACIÓN COMPACTA v10.0 -->
+<!-- HEADER & NAVEGACIÓN COMPACTA v11.0 -->
 <header class="manya-header">
 <div class="manya-header-inner">
 <a class="manya-brand" href="#top" title="Manya — Club Atlético Peñarol">
@@ -144,7 +145,7 @@
 </div>
 </a>
 <nav aria-label="Secciones principales" class="manya-nav">
-<a class="active" href="#match-center">⚽ Match Center</a>
+<a aria-current="location" class="active" href="#match-center">⚽ Match Center</a>
 <a href="#resumen-ia">📰 El Diario</a>
 <a href="#tabla-simulador">🏆 Tablas</a>
 <a href="#pizarra-tactica">👕 Armá tu 11</a>
@@ -152,16 +153,18 @@
 <a href="#piel-carbonera">💉 Tatuajes</a>
 <a href="#museo-1891">🏛️ Museo 1891</a>
 <a class="nav-cta-blogger" href="https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html" rel="noopener noreferrer" target="_blank">📜 Archivo ↗</a>
+<button aria-label="Instalar aplicación Manya ServicioTI" class="pwa-install-btn" hidden="" id="pwa-install-btn" type="button">📲 Instalar App</button>
 </nav>
 </div>
 </header>
-<main class="manya-container" id="top">
+<main class="manya-container" id="top" tabindex="-1">
+<h1 class="sr-only">Club Atlético Peñarol en Vivo — Match Center, Tabla Anual 2026, Pizarra Táctica Armá tu 11, Prensa Deportiva e Historia 1891 | Manya ServicioTI</h1>
 <!-- SÍNTESIS EJECUTIVA -->
 <div class="manya-seo-banner" role="doc-abstract">
 <div>
 <strong>Manya ServicioTI:</strong> Central oficial en tiempo real del <strong>Club Atlético Peñarol (1891)</strong> — resultados verificados ESPN/AUF, archivo 1891 BD, pizarra táctica con plantel 2026 y cobertura de <a href="https://www.servicioti.com.uy/" rel="noopener noreferrer" style="color:#ffd100;font-weight:800;" target="_blank">servicioti.com.uy</a>.
       </div>
-<a class="btn-outline-gold" href="https://horarios.servicioti.com.uy/" style="padding:6px 12px;font-size:12px;">🚌 Ómnibus al Estadio en Vivo</a>
+<a class="btn-outline-gold" href="https://horarios.servicioti.com.uy/" rel="noopener noreferrer" style="padding:6px 12px;font-size:12px;" target="_blank">🚌 Ómnibus al Estadio en Vivo ↗</a>
 </div>
 <!-- TICKER DINÁMICO -->
 <div class="manya-live-ticker" id="manya-live-ticker" style="display:flex;margin-bottom:16px;background:#09090b;border:2px solid #ffd100;border-radius:10px;padding:12px 18px;color:#ffffff;font-weight:800;font-size:14px;box-shadow:0 4px 20px rgba(255,209,0,0.22);align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
@@ -172,7 +175,7 @@
 <section aria-label="Centro de Partido del Club Atlético Peñarol" class="match-hero" id="match-center">
 <div class="match-hero-top">
 <span class="badge-gold" id="hero-match-badge" style="background:#10b981;color:#052e16;font-weight:900;">🏁 RESULTADO FINAL • CAMPEONATO URUGUAYO • TORNEO CLAUSURA • FECHA 15</span>
-<span class="badge-weather" id="hero-weather">🌡️ Campeón del Siglo: 19.5°C • Templado en el Campeón del Siglo (Viento 7.0 km/h)</span>
+<span class="badge-weather" id="hero-weather">🌡️ Campeón del Siglo: 18.0°C • Templado en el Campeón del Siglo (Viento 5.7 km/h)</span>
 </div>
 <div class="match-scoreboard">
 <div class="team-hero-side">
@@ -399,13 +402,27 @@
 </article>
 <aside class="editorial-sidebar">
 <div class="sidebar-header">
-<h4>⚡ EL RESUMEN EN 60 SEGUNDOS</h4>
+<h3>⚡ EL RESUMEN EN 60 SEGUNDOS</h3>
 <span class="badge-gold">4 CLAVES</span>
 </div>
 <div class="claves-editorial-list" id="claves-editorial-container"></div>
-<div class="breaking-news-box">
-<h4 class="breaking-title">📰 PRENSA URUGUAYA EN VIVO</h4>
+<div aria-label="Prensa deportiva uruguaya en vivo" class="breaking-news-box" id="prensa-vivo">
+<div class="prensa-header-row">
+<h3 class="breaking-title">📰 PRENSA URUGUAYA EN VIVO</h3>
+<span aria-live="polite" class="prensa-count-badge" id="prensa-count-badge">En vivo</span>
+</div>
+<div class="prensa-controls">
+<div class="prensa-search-wrap">
+<label class="sr-only" for="prensa-search-input">Buscar noticias deportivas de Peñarol</label>
+<input autocomplete="off" class="prensa-search-input" id="prensa-search-input" placeholder="🔍 Buscar por jugador, rival o tema..." type="search"/>
+<button aria-label="Limpiar búsqueda" class="prensa-search-clear" hidden="" id="prensa-search-clear" type="button">×</button>
+</div>
+<div aria-label="Filtrar prensa por medio" class="prensa-source-chips" id="prensa-source-chips" role="tablist">
+<button aria-selected="true" class="prensa-chip active" data-source="all" role="tab" type="button">Todas</button>
+</div>
+</div>
 <div class="breaking-list" id="live-news-list"></div>
+<div class="prensa-more-wrap" id="prensa-load-more-wrap"></div>
 </div>
 </aside>
 </div>
@@ -469,10 +486,10 @@
 <h2 class="section-title" id="pizarra-title">👕 Pizarra Táctica: <span>Armá tu 11 para la Gran Final 2026</span></h2>
 <p class="section-sub" id="pizarra-subtitle">Plantel oficial noviembre 2026 • Elegí esquema, realizá cambios desde el banco y descargá tu 11 en PNG</p>
 </div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-<button class="sim-btn active" data-formation="4-2-3-1" type="button">4-2-3-1 (Aguirre)</button>
-<button class="sim-btn" data-formation="4-3-3" type="button">4-3-3 Ofensivo</button>
-<button class="sim-btn" data-formation="4-4-2" type="button">4-4-2 Clásico</button>
+<div class="tactical-toolbar" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+<button aria-pressed="true" class="sim-btn active" data-formation="4-2-3-1" type="button">4-2-3-1 (Aguirre)</button>
+<button aria-pressed="false" class="sim-btn" data-formation="4-3-3" type="button">4-3-3 Ofensivo</button>
+<button aria-pressed="false" class="sim-btn" data-formation="4-4-2" type="button">4-4-2 Clásico</button>
 <button class="sim-btn" id="reset-lineup-btn" style="padding:7px 12px;font-size:12.5px;color:var(--manya-gold);" type="button">↺ Restablecer 11</button>
 <button class="btn-manya" id="export-lineup-btn" style="padding:7px 14px;font-size:12.5px;" type="button">📥 Descargar PNG</button>
 <button class="btn-outline-gold" id="share-lineup-btn" style="padding:7px 14px;font-size:12.5px;" type="button">📤 Compartir 11</button>
@@ -500,10 +517,23 @@
 </div>
 </div>
 <div class="card-panel">
-<h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🔄 Banco de Relevos 2026 (DT: Diego Aguirre)</h3>
-<div class="tactical-hint-banner" id="tactical-guidance-banner">
+<div class="tactical-bench-header">
+<h3 style="font-size:16px;color:var(--manya-gold);margin:0;">🔄 Banco de Relevos 2026 (DT: Diego Aguirre)</h3>
+<div aria-label="Alineaciones preestablecidas" class="tactical-presets-bar">
+<button aria-pressed="false" class="preset-btn" id="preset-ultimo-11-btn" title="Cargar el último 11 titular oficial de Diego Aguirre (1891 BD)" type="button">📋 Último 11 de Aguirre</button>
+<button aria-pressed="true" class="preset-btn active" id="preset-ideal-11-btn" title="Cargar el 11 Ideal 2026 del plantel" type="button">⭐ 11 Ideal 2026</button>
+</div>
+</div>
+<div aria-live="polite" class="tactical-hint-banner" id="tactical-guidance-banner">
             💡 Tocá un titular en la cancha para sustituirlo o moverlo, o tocá un suplente para que ingrese.
           </div>
+<div aria-label="Filtrar suplentes por línea táctica" class="bench-line-filters" id="bench-line-filters" role="tablist">
+<button aria-selected="true" class="bench-filter-chip active" data-line="all" role="tab" type="button">Todos</button>
+<button aria-selected="false" class="bench-filter-chip" data-line="ARQ" role="tab" type="button">ARQ</button>
+<button aria-selected="false" class="bench-filter-chip" data-line="DEF" role="tab" type="button">DEF</button>
+<button aria-selected="false" class="bench-filter-chip" data-line="VOL" role="tab" type="button">VOL</button>
+<button aria-selected="false" class="bench-filter-chip" data-line="ATA" role="tab" type="button">ATA</button>
+</div>
 <div id="tactical-bench" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;"></div>
 <div style="background:rgba(255,209,0,0.08);border:1px solid var(--manya-border);border-radius:10px;padding:14px;font-size:13px;">
 <strong style="color:var(--manya-gold);">⭐ Plantel Sincronizado en Vivo (ESPN + 1891 BD):</strong><br/>
@@ -530,12 +560,12 @@
 <h2 class="section-title">📷 Archivo Gráfico: <span>Galerías Deportivas 2026</span></h2>
 <p class="section-sub">Fotografías oficiales de los últimos partidos desde 1891 BD, Los Aromos y las tribunas del Campeón del Siglo</p>
 </div>
-<div class="gallery-filter-tabs" id="gallery-filters" role="tablist">
-<button class="gallery-tab active" data-filter="all" type="button">Todas</button>
-<button class="gallery-tab" data-filter="1891" type="button">Fichas 1891 BD</button>
-<button class="gallery-tab" data-filter="partidos" type="button">Partidos &amp; Goles</button>
-<button class="gallery-tab" data-filter="los-aromos" type="button">Los Aromos</button>
-<button class="gallery-tab" data-filter="hinchada" type="button">Tribunas</button>
+<div aria-label="Filtrar archivo fotográfico" class="gallery-filter-tabs" id="gallery-filters" role="tablist">
+<button aria-selected="true" class="gallery-tab active" data-filter="all" role="tab" type="button">Todas</button>
+<button aria-selected="false" class="gallery-tab" data-filter="1891" role="tab" type="button">Fichas 1891 BD</button>
+<button aria-selected="false" class="gallery-tab" data-filter="partidos" role="tab" type="button">Partidos &amp; Goles</button>
+<button aria-selected="false" class="gallery-tab" data-filter="los-aromos" role="tab" type="button">Los Aromos</button>
+<button aria-selected="false" class="gallery-tab" data-filter="hinchada" role="tab" type="button">Tribunas</button>
 </div>
 </div>
 <div class="ig-grid" id="gallery-main-grid"></div>
@@ -552,34 +582,45 @@
 <h2 class="section-title" style="margin:10px 0 6px;">💉 Piel Carbonera: <span>Tatuajes de Peñarol</span></h2>
 <p class="section-sub" style="margin:0;max-width:800px;">Escudo de 1891, Estadio Campeón del Siglo, Fernando Morena, Diego Aguirre 1987 y caligrafía carbonera en la piel de la hinchada.</p>
 </div>
-<a class="btn-manya" href="https://www.instagram.com/explore/tags/peñarolenlapiel/" rel="noopener noreferrer" style="padding:8px 16px;font-size:12px;text-decoration:none;" target="_blank">📸 #PeñarolEnLaPiel en IG ↗</a>
+<a class="btn-manya" href="https://www.instagram.com/explore/tags/pe%C3%B1arolenlapiel/" rel="noopener noreferrer" style="padding:8px 16px;font-size:12px;text-decoration:none;" target="_blank">📸 #PeñarolEnLaPiel en IG ↗</a>
 </div>
 <div class="tattoo-artists-strip" id="tattoo-artists-list"></div>
-<div class="tattoo-filter-tabs" id="tattoo-filter-tabs" role="tablist">
-<button class="tattoo-filter-btn active" data-cat="all" type="button">⚡ Todos</button>
-<button class="tattoo-filter-btn" data-cat="escudos" type="button">🛡️ Escudos</button>
-<button class="tattoo-filter-btn" data-cat="idolos" type="button">⭐ Ídolos</button>
-<button class="tattoo-filter-btn" data-cat="estadio" type="button">🏟️ Campeón del Siglo</button>
-<button class="tattoo-filter-btn" data-cat="frases" type="button">✍️ Lettering</button>
-<button class="tattoo-filter-btn" data-cat="minimalistas" type="button">✨ Fine Line</button>
+<div aria-label="Filtrar tatuajes por estilo" class="tattoo-filter-tabs" id="tattoo-filter-tabs" role="tablist">
+<button aria-selected="true" class="tattoo-filter-btn active" data-cat="all" role="tab" type="button">⚡ Todos</button>
+<button aria-selected="false" class="tattoo-filter-btn" data-cat="escudos" role="tab" type="button">🛡️ Escudos</button>
+<button aria-selected="false" class="tattoo-filter-btn" data-cat="idolos" role="tab" type="button">⭐ Ídolos</button>
+<button aria-selected="false" class="tattoo-filter-btn" data-cat="estadio" role="tab" type="button">🏟️ Campeón del Siglo</button>
+<button aria-selected="false" class="tattoo-filter-btn" data-cat="frases" role="tab" type="button">✍️ Lettering</button>
+<button aria-selected="false" class="tattoo-filter-btn" data-cat="minimalistas" role="tab" type="button">✨ Fine Line</button>
 </div>
 <div class="tattoo-grid" id="tattoo-cards-grid"></div>
 </section>
-<!-- MODAL LIGHTBOX HD -->
-<div aria-hidden="true" class="manya-lightbox-modal" id="manya-lightbox" role="dialog" style="display:none;">
+<!-- MODAL LIGHTBOX HD ACCESIBLE v11.0 -->
+<div aria-describedby="lightbox-desc" aria-hidden="true" aria-labelledby="lightbox-title" aria-modal="true" class="manya-lightbox-modal" id="manya-lightbox" role="dialog" style="display:none;">
 <div class="lightbox-overlay" id="lightbox-overlay"></div>
-<div class="lightbox-content">
-<button aria-label="Cerrar" class="lightbox-close" id="lightbox-close" type="button">×</button>
-<div class="lightbox-img-wrap"><img alt="Vista ampliada" id="lightbox-img" src="assets/img/escudo_penarol_oficial.svg"/></div>
+<div class="lightbox-content" role="document">
+<button aria-label="Cerrar galería" class="lightbox-close" id="lightbox-close" title="Cerrar (Esc)" type="button">×</button>
+<div class="lightbox-img-wrap" id="lightbox-stage">
+<button aria-label="Fotografía anterior" class="lightbox-nav lightbox-prev" id="lightbox-prev" title="Anterior (←)" type="button">‹</button>
+<img alt="Vista ampliada" id="lightbox-img" src="assets/img/escudo_penarol_oficial.svg"/>
+<button aria-label="Fotografía siguiente" class="lightbox-nav lightbox-next" id="lightbox-next" title="Siguiente (→)" type="button">›</button>
+</div>
 <div class="lightbox-caption">
 <div class="lightbox-header-line">
 <span class="badge-gold" id="lightbox-badge">📸 Fotografía Oficial</span>
+<div class="lightbox-meta-right">
+<span aria-live="polite" class="lightbox-counter" id="lightbox-counter"></span>
 <span id="lightbox-meta" style="color:var(--text-secondary);font-size:13px;"></span>
 </div>
-<h3 id="lightbox-title" style="color:#fff;margin:8px 0 6px;font-size:18px;"></h3>
+</div>
+<h3 id="lightbox-title" style="color:#fff;margin:8px 0 6px;font-size:18px;">Galería Oficial del Club Atlético Peñarol</h3>
 <p id="lightbox-desc" style="color:#d4d4d8;font-size:14px;line-height:1.5;"></p>
-<div style="margin-top:12px;">
+<div class="lightbox-footer-row">
+<div class="lightbox-credit" id="lightbox-credit"></div>
+<div class="lightbox-actions">
+<span aria-hidden="true" class="lightbox-kbd-hint">← → Navegar • Esc Cerrar</span>
 <a class="btn-manya" href="#" id="lightbox-external-link" rel="noopener noreferrer" style="padding:6px 14px;font-size:12.5px;" target="_blank">Ver fuente original ↗</a>
+</div>
 </div>
 </div>
 </div>
@@ -591,7 +632,7 @@
 <h2 class="section-title">🚌 Cómo Llegar al <span>Campeón del Siglo</span></h2>
 <p class="section-sub">Integrado en directo con nuestro Radar de Transporte Metropolitano (horarios.servicioti.com.uy)</p>
 </div>
-<a class="btn-manya" href="https://horarios.servicioti.com.uy/">⚡ Abrir Radar de Ómnibus en Vivo →</a>
+<a class="btn-manya" href="https://horarios.servicioti.com.uy/" rel="noopener noreferrer" target="_blank">⚡ Abrir Radar de Ómnibus en Vivo ↗</a>
 </div>
 <div class="claves-grid">
 <div class="card-panel">
@@ -601,7 +642,7 @@
 <li><strong>Línea D8 (Diferencial):</strong> Ciudad Vieja / 18 de Julio → Ruta 8 Km 21 / Camino Mangangá.</li>
 <li><strong>Líneas 103 y 300:</strong> Combinación en Belloni y servicios especiales <em>Estadio Campeón del Siglo</em>.</li>
 </ul>
-<a class="btn-outline-gold" href="https://www.servicioti.com.uy/p/horarios-cutcsa-guia-de-lineas-c-d-y-l.html" style="font-size:12.5px;">Guía CUTCSA en ServicioTI →</a>
+<a class="btn-outline-gold" href="https://www.servicioti.com.uy/p/horarios-cutcsa-guia-de-lineas-c-d-y-l.html" rel="noopener noreferrer" style="font-size:12.5px;" target="_blank">Guía CUTCSA en ServicioTI ↗</a>
 </div>
 <div class="card-panel">
 <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🚍 Líneas Suburbanas COPSA</h3>
@@ -610,13 +651,13 @@
 <li><strong>Líneas 7A, 7E y 724:</strong> Corredor Camino Maldonado / Ruta 8 (empalme Ruta 102 / Zonamerica).</li>
 <li><strong>Líneas C1, C2, C3, C4 y 712:</strong> Conexión desde Costa de Oro hacia el anillo perimetral Ruta 102.</li>
 </ul>
-<a class="btn-outline-gold" href="https://www.servicioti.com.uy/p/horarios-copsa-guia-de-todas-las-lineas.html" style="font-size:12.5px;">Guía COPSA en ServicioTI →</a>
+<a class="btn-outline-gold" href="https://www.servicioti.com.uy/p/horarios-copsa-guia-de-todas-las-lineas.html" rel="noopener noreferrer" style="font-size:12.5px;" target="_blank">Guía COPSA en ServicioTI ↗</a>
 </div>
 <div class="card-panel" id="como-llegar-dinamico" style="border-color:rgba(255,209,0,0.4);background:rgba(255,209,0,0.03);">
 <div style="display:inline-block;background:var(--manya-gold);color:#000;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;">Definición Uruguayo 2026</div>
 <h3 style="font-size:16px;color:var(--manya-gold);margin-bottom:8px;">🏟️ Operativo Finales • Estadio Campeón del Siglo</h3>
 <p style="font-size:13.5px;color:#d4d4d8;margin-bottom:12px;">Accesos por Ruta 102 Km 23.500 y Camino Mangangá para las Finales del Campeonato Uruguayo (3 y 6 de diciembre).</p>
-<a class="btn-outline-gold" href="https://horarios.servicioti.com.uy/" style="font-size:12.5px;">Consultar Horarios en Vivo →</a>
+<a class="btn-outline-gold" href="https://horarios.servicioti.com.uy/" rel="noopener noreferrer" style="font-size:12.5px;" target="_blank">Consultar Horarios en Vivo ↗</a>
 </div>
 </div>
 </section>
@@ -685,7 +726,7 @@
 </details>
 <details class="card-panel">
 <summary style="font-weight:800;color:var(--manya-gold);cursor:pointer;">¿Qué líneas de ómnibus CUTCSA y COPSA llevan al Estadio Campeón del Siglo?</summary>
-<p style="margin-top:10px;font-size:14px;color:#d4d4d8;">Hacia el Campeón del Siglo (Ruta 102 Km 23.500) circulan <strong>CUTCSA (D8, 103, 300 y especiales Estadio)</strong> y <strong>COPSA (7A, 7E, 724 y corredor C)</strong>. Consultá el próximo coche en <a href="https://horarios.servicioti.com.uy/" style="color:var(--manya-gold);">horarios.servicioti.com.uy</a>.</p>
+<p style="margin-top:10px;font-size:14px;color:#d4d4d8;">Hacia el Campeón del Siglo (Ruta 102 Km 23.500) circulan <strong>CUTCSA (D8, 103, 300 y especiales Estadio)</strong> y <strong>COPSA (7A, 7E, 724 y corredor C)</strong>. Consultá el próximo coche en <a href="https://horarios.servicioti.com.uy/" rel="noopener noreferrer" style="color:var(--manya-gold);" target="_blank">horarios.servicioti.com.uy</a>.</p>
 </details>
 </div>
 </section>
@@ -694,18 +735,19 @@
 <div class="manya-footer-inner">
 <div>
 <div style="font-weight:900;color:var(--manya-gold);font-size:16px;margin-bottom:6px;">★ MANYA.SERVICIOTI.COM.UY — GLORIOSO PEÑAROL</div>
-<p>Desarrollado y dirigido por <strong>Andrés Franchi Ugartemendía</strong> • Ecosistema <a href="https://www.servicioti.com.uy/">ServicioTI Uruguay</a>.</p>
-<p id="footer-last-sync" style="font-size:12px;margin-top:4px;color:#34d399;font-weight:700;">Última sincronización automática: 20/11/2026 16:45 (UY)</p>
+<p>Desarrollado y dirigido por <strong>Andrés Franchi Ugartemendía</strong> • Ecosistema <a href="https://www.servicioti.com.uy/" rel="noopener noreferrer" target="_blank">ServicioTI Uruguay</a>.</p>
+<p id="footer-last-sync" style="font-size:12px;margin-top:4px;color:#34d399;font-weight:700;">Última sincronización automática: 20/11/2026 17:15 (UY)</p>
 </div>
 <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
 <a href="https://www.servicioti.com.uy/p/penarol-archivo-historico-de-analisis.html" rel="noopener noreferrer" style="color:var(--manya-gold);font-weight:700;" target="_blank">📜 Archivo Histórico</a>
-<a href="https://www.servicioti.com.uy/">ServicioTI</a>
-<a href="https://horarios.servicioti.com.uy/">Radar de Ómnibus</a>
-<a href="https://truco-uruguayo.servicioti.com.uy/">Truco Uruguayo</a>
+<a href="https://www.servicioti.com.uy/" rel="noopener noreferrer" target="_blank">ServicioTI</a>
+<a href="https://horarios.servicioti.com.uy/" rel="noopener noreferrer" target="_blank">Radar de Ómnibus</a>
+<a href="https://truco-uruguayo.servicioti.com.uy/" rel="noopener noreferrer" target="_blank">Truco Uruguayo</a>
 <a href="/llms.txt">llms.txt</a>
 </div>
 </div>
 </footer>
-<script defer="" src="js/app.js?v=10.0"></script>
+<div aria-atomic="true" aria-live="polite" class="manya-toast-region" id="manya-toast-region" role="status"></div>
+<script defer="" src="js/app.js?v=11.0"></script>
 </body>
 </html>
