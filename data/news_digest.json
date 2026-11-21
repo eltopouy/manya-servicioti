@@ -1,5 +1,5 @@
 {
-  "actualizado": "21/11/2026 20:15",
+  "actualizado": "21/11/2026 20:45",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "PREVIA",
@@ -96,7 +96,7 @@
       "fecha": "21/11/2026 03:05",
       "fecha_iso": "2026-11-21T03:05:03-03:00",
       "fecha_raw": "21/11/2026 03:05 hs",
-      "antiguedad_horas": 17.2,
+      "antiguedad_horas": 17.7,
       "timestamp": 1795241103.0,
       "peso": 1.25
     },
@@ -108,7 +108,7 @@
       "fecha": "20/11/2026 19:14",
       "fecha_iso": "2026-11-20T19:14:32-03:00",
       "fecha_raw": "20/11/2026 19:14 hs",
-      "antiguedad_horas": 25.0,
+      "antiguedad_horas": 25.5,
       "timestamp": 1795212872.0,
       "peso": 1.25
     },
@@ -120,7 +120,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 32.9,
+      "antiguedad_horas": 33.4,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -132,7 +132,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 33.5,
+      "antiguedad_horas": 34.0,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -144,7 +144,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 36.2,
+      "antiguedad_horas": 36.7,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -156,7 +156,7 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 40.5,
+      "antiguedad_horas": 41.0,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
@@ -168,7 +168,7 @@
       "fecha": "19/11/2026 20:33",
       "fecha_iso": "2026-11-19T20:33:06-03:00",
       "fecha_raw": "19/11/2026 20:33 hs",
-      "antiguedad_horas": 47.7,
+      "antiguedad_horas": 48.2,
       "timestamp": 1795131186.0,
       "peso": 1.05
     },
@@ -180,7 +180,7 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 48.3,
+      "antiguedad_horas": 48.8,
       "timestamp": 1795129020.0,
       "peso": 1.2
     },
@@ -192,7 +192,7 @@
       "fecha": "19/11/2026 19:38",
       "fecha_iso": "2026-11-19T19:38:00-03:00",
       "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 48.6,
+      "antiguedad_horas": 49.1,
       "timestamp": 1795127880.0,
       "peso": 1.2
     },
@@ -204,7 +204,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 49.4,
+      "antiguedad_horas": 49.9,
       "timestamp": 1795125060.0,
       "peso": 1.2
     }
