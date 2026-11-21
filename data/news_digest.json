@@ -1,5 +1,5 @@
 {
-  "actualizado": "21/11/2026 05:15",
+  "actualizado": "21/11/2026 05:45",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "CRONICA_POST_PARTIDO",
@@ -96,7 +96,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 17.9,
+      "antiguedad_horas": 18.4,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -108,7 +108,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 18.5,
+      "antiguedad_horas": 19.0,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -120,7 +120,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 21.2,
+      "antiguedad_horas": 21.7,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -132,7 +132,7 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 25.5,
+      "antiguedad_horas": 26.0,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
@@ -144,7 +144,7 @@
       "fecha": "19/11/2026 21:09",
       "fecha_iso": "2026-11-19T21:09:10-03:00",
       "fecha_raw": "19/11/2026 21:09 hs",
-      "antiguedad_horas": 32.1,
+      "antiguedad_horas": 32.6,
       "timestamp": 1795133350.0,
       "peso": 1.25
     },
@@ -156,20 +156,8 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 33.3,
+      "antiguedad_horas": 33.8,
       "timestamp": 1795129020.0,
-      "peso": 1.2
-    },
-    {
-      "titulo": "Peñarol: el abrazo de Ignacio Ruglio con Diego Aguirre y el mensaje para Lucas Ferreira",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWFVjME5sdFJGY2VPRUM4VzlRYnJhNEIzLWtkWDY2WnRldnNwd1h3cEQzNm9OX3BWUExfdU1oZDBGZHNvTWUxUmpRVDNuRUZJLXpLT2Z0cDFaRjVaUGVyX2xRdDl4XzBoWUp2TkxsNHJiVVZjQ1RNM1RvZWRCbE9Ra3FRbWRsWkRYWjNyN0ZqMi1lT1psSlllTExxTjlkRWdaUEZyUVRvNjRubVZUbkYtRHMtdDE1OVk4UHVVWTd5eTBRZEVYS21IeE9SNmdNYkHSAfMBQVVfeXFMUEUxNnNpNTR5MlZZLTNXZ2NKTHRxcW9qSmJQb1lWU1Vza0l1R2V6ZTBWMXR6WkNCcmM3bVdDdWUtNUtLa2VHYVE4Y1h4TndnMlg0QnVscEowakFzSzU5YnYydFdVT2kyUTB4X2UzN3pOTFBaU29iTFZnSWdiclZ6RjBrTU1pUWF6R0JxbTNRZl9KSnQyZmh3Q3l2a2tBZGI1M28zRUllUmJ5WHNBVGdDbTBlUmQxQmlvN0VYaGFYb01rcXNOd3gza1UwYnBQdDlteXA5TVBkRTcxTFF2eUM2enoycXNtY3hENl9HcVkyaG5DWmZJ?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:38 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 19:38",
-      "fecha_iso": "2026-11-19T19:38:00-03:00",
-      "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 33.6,
-      "timestamp": 1795127880.0,
       "peso": 1.2
     },
     {
@@ -180,7 +168,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 34.4,
+      "antiguedad_horas": 34.9,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -192,7 +180,7 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 34.6,
+      "antiguedad_horas": 35.1,
       "timestamp": 1795124345.0,
       "peso": 1.05
     },
@@ -204,9 +192,21 @@
       "fecha": "19/11/2026 18:31",
       "fecha_iso": "2026-11-19T18:31:00-03:00",
       "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 34.7,
+      "antiguedad_horas": 35.2,
       "timestamp": 1795123860.0,
       "peso": 1.1
+    },
+    {
+      "titulo": "Leonel Jaime, la joya de River Plate que lideró a Peñarol a obtener la tabla Anual",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPUU5XQUp1N2U0Y1pmYmJTTFJYMUIzMGIyODI2all2ZWtVMGFHV0ZMMm1FMHNzTTljZTV4N1BOcEMxblRpblhzNURIWW9BMG9acnlBWjFzLTdkYS1RNFhrQU1LTWtIdktMYklqUjhnRy1xc3R1MmhtRzEyLXFnYTNUekJfQUlGRTU5a3RPQ3JwSHM4ODRQWERRS1Bvdm4ybXVjTGpLcmpXVC0wY3ZMazdvYkFhTV85clhMdkVkd1Q1VnBwWV9DNk9DWg?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 18:27 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "19/11/2026 18:27",
+      "fecha_iso": "2026-11-19T18:27:00-03:00",
+      "fecha_raw": "19/11/2026 18:27 hs",
+      "antiguedad_horas": 35.3,
+      "timestamp": 1795123620.0,
+      "peso": 1.2
     }
   ]
 }
