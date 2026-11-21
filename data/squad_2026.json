@@ -1,5 +1,5 @@
 {
-  "actualizado": "20/11/2026 23:45",
+  "actualizado": "21/11/2026 00:05",
   "schema_version": "11.0",
   "fuente": "ESPN Official Roster API + 1891 BD (Estadísticas 2026, DOB verificadas y Último 11 oficial)",
   "director_tecnico": {
@@ -190,7 +190,7 @@
       "linea": "ataque",
       "titular": true,
       "titular_ultimo_1891": true,
-      "edad": 23,
+      "edad": 24,
       "fecha_nacimiento": "2002-11-21",
       "pj_2026": 34,
       "minutos_2026": 2623,
