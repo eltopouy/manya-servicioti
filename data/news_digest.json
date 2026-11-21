@@ -1,5 +1,5 @@
 {
-  "actualizado": "21/11/2026 14:45",
+  "actualizado": "21/11/2026 15:15",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "CRONICA_POST_PARTIDO",
@@ -96,7 +96,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 27.4,
+      "antiguedad_horas": 27.9,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -108,7 +108,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 28.0,
+      "antiguedad_horas": 28.5,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -120,7 +120,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 30.7,
+      "antiguedad_horas": 31.2,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -132,19 +132,19 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 35.0,
+      "antiguedad_horas": 35.5,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
     {
       "titulo": "El desahogo de los jugadores de Peñarol tras ganar la Tabla Anual: \"Necesitábamos un resultado así para afr...",
       "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxOSVRfcGJkOUFIa0M5VXA3LTU0VkkyOEV4QTRJY1JhLUg2R08wWTgzRWlJb3Nod01DZThuUmVIT21kWm01RzBSNHZxZWxCRzlMcnBWZElnaVBBU0lSTXE3Y0tscHJTYnpYeTJicHdFOEVkMkZmUEtrTF9aVzdSM2loNEhhM01fMjBfOFNBV0szb0VPYmtvcnN5dm9qdkZyZzFaekZsWWhVWEpfdGsyWkFzRFBjYVYyeUZXcW1kSmVsNjBFNXhRSzNtaFU0UzljYXphc1RHMUpMeDlKb3V6ZnlqMUhQSHh0OTBLRTFHeEJ6MDNGWm1HZllOelB4b21sMjNRR2RzYTRVZ3g0OHfSAZACQVVfeXFMUC1XQ0NlTHZEVjhpRDZ3cWZIbU90ZzNVVkpFRUllNmlfUks5anYwTjNkc2dlazAwc2ZEOGJMckRYZGlQRjhfNldISmVtSlcycXdxdzlsUXg0WTkzOTVwNDhGMDlkNktNQmFOcGlVcjRzMnlaR1FVVnVHS095dlViRVJvVl9uaTNXZ25HZlNmNFlLUTYwaF8yRFduV1poS1Jzb09XcS05azJ4YjdvMUtVc01RN1c4Q21pak1Id3BDMzB0eDVWUnFfY3NPODZyMTBHam5DdGNNRnNSY0REX1JIZk9LQTM5WldXTHBDeUMta2Q2UFRSOU5UWkhIWjZzdXZNeEZ5cElJeHJKUXdVS0E1YU0?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por dsports el 19/11/2026 a las 20:33 hs.",
-      "fuente": "dsports",
+      "resumen": "Cobertura deportiva verificada publicada por DSports el 19/11/2026 a las 20:33 hs.",
+      "fuente": "DSports",
       "fecha": "19/11/2026 20:33",
       "fecha_iso": "2026-11-19T20:33:06-03:00",
       "fecha_raw": "19/11/2026 20:33 hs",
-      "antiguedad_horas": 42.2,
+      "antiguedad_horas": 42.7,
       "timestamp": 1795131186.0,
       "peso": 1.05
     },
@@ -156,7 +156,7 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 42.8,
+      "antiguedad_horas": 43.3,
       "timestamp": 1795129020.0,
       "peso": 1.2
     },
@@ -168,7 +168,7 @@
       "fecha": "19/11/2026 19:38",
       "fecha_iso": "2026-11-19T19:38:00-03:00",
       "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 43.1,
+      "antiguedad_horas": 43.6,
       "timestamp": 1795127880.0,
       "peso": 1.2
     },
@@ -180,7 +180,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 43.9,
+      "antiguedad_horas": 44.4,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -192,7 +192,7 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 44.1,
+      "antiguedad_horas": 44.6,
       "timestamp": 1795124345.0,
       "peso": 1.05
     },
@@ -204,7 +204,7 @@
       "fecha": "19/11/2026 18:31",
       "fecha_iso": "2026-11-19T18:31:00-03:00",
       "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 44.2,
+      "antiguedad_horas": 44.7,
       "timestamp": 1795123860.0,
       "peso": 1.1
     }
