@@ -1,90 +1,90 @@
 {
-  "actualizado": "21/11/2026 18:15",
+  "actualizado": "21/11/2026 18:46",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
-  "fase_publicacion": "CRONICA_POST_PARTIDO",
-  "partido_id": "401934686",
-  "partido_nombre": "Peñarol vs Cerro Largo",
-  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-cronica-mando-jerarquia.html",
-  "titular_dia": "¡CAMPEÓN DE LA ANUAL! Peñarol 3 - 0 Cerro Largo: Peñarol cerró con 69 puntos y espera en la Gran Final",
-  "bajada_seo": "Peñarol venció 3 - 0 a Cerro Largo en Estadio Campeón del Siglo con goles de Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69', conquistó la Tabla Anual 2026 con 69 puntos (+27 DG), aseguró fase de grupos de la Libertadores 2027 y aguarda en la Gran Final del Uruguayo al vencedor de Racing (Campeón Apertura) vs Liverpool (Campeón Clausura).",
-  "epigrafe_estilo": "Análisis post-partido certificado • Peñarol 3 - 0 Cerro Largo • Tabla Anual: 69 pts",
+  "fase_publicacion": "PREVIA",
+  "partido_id": "uf2026_final_ida",
+  "partido_nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
+  "blogger_post_url": "https://www.servicioti.com.uy/2026/11/penarol-en-vivo-la-previa-la-cumbre.html",
+  "titular_dia": "Peñarol mira desde la cumbre: con la Tabla Anual en el bolsillo, Aguirre diagrama la Gran Final",
+  "bajada_seo": "El Carbonero aseguró el primer puesto de la Tabla Anual 2026 con 69 puntos, sacó boleto directo a fase de grupos de Libertadores y espera con calma táctica al vencedor de Racing y Liverpool.",
+  "epigrafe_estilo": "El reloj corre a favor del Manya en Los Aromos mientras la semifinal ajena define al retador por la gloria máxima del Uruguayo.",
   "claves_60_segundos": [
     {
-      "icono": "🏁",
-      "titulo": "Marcador: Peñarol 3 - 0 Cerro Largo",
-      "detalle": "Triunfo contundente en Estadio Campeón del Siglo (Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69')."
+      "icono": "🏆",
+      "titulo": "Anual asegurada y boleto copero",
+      "detalle": "Con 69 puntos y +27 de diferencia, el Mirasol abrochó la Tabla Anual 2026, sellando su presencia directa en la fase de grupos de la Copa Libertadores 2027."
     },
     {
-      "icono": "🏆",
-      "titulo": "Tabla Anual: 69 Puntos",
-      "detalle": "Peñarol lidera la acumulada en 37 PJ (+27 DG) y asegura fase de grupos de Libertadores 2027."
+      "icono": "⚔️",
+      "titulo": "Espía de lujo en la semifinal",
+      "detalle": "Peñarol aguarda rival en la Gran Final: Racing (campeón del Apertura) y Liverpool (campeón del Clausura) chocarán en duelo a matar o morir para ver quién cruza de vereda."
     },
     {
       "icono": "⚡",
-      "titulo": "Pizarrón de Aguirre",
-      "detalle": "Orden defensivo, intensidad y golpe decisivo ante el bloque de Cerro Largo (DT: Bruno Silva)."
+      "titulo": "Leonel Jaime pide pista",
+      "detalle": "El desequilibrio y golazo del pibe Jaime en el cierre del torneo ratifican que es una carta ofensiva determinante para el esquema final de Diego Aguirre."
     },
     {
-      "icono": "📅",
-      "titulo": "Horizonte: Gran Final",
-      "detalle": "Peñarol espera al ganador de Racing (Campeón Apertura) vs Liverpool (Campeón Clausura) para definir el Uruguayo (3 y 6 de diciembre)."
+      "icono": "🛡️",
+      "titulo": "Microciclo de puesta a punto",
+      "detalle": "Sin el desgaste de la semifinal, la Fiera Aguirre aprovecha dos semanas completas para recuperar soldados, calibrar la presión alta y pulir la pelota quieta."
     }
   ],
   "prismas_analisis": {
     "epica_tribuna": {
-      "eje": "El Pulso de la Tribuna",
-      "subtitulo": "Fiesta en Estadio Campeón del Siglo",
-      "texto": "El pueblo aurinegro festejó un 3 - 0 inapelable frente a Cerro Largo y la obtención de la Tabla Anual (69 pts), empujando al equipo hacia las finales de diciembre."
+      "eje": "El desahogo y la mística",
+      "subtitulo": "La recompensa a la resistencia de una temporada desgastante",
+      "texto": "Se sufrió, se masticó bronca en las bravas y se cerró la Anual con autoridad. El hincha aurinegro respira con ese orgullo indomable del que sabe pegar en el momento justo. Ganar la acumulada no es un trofeo decorativo: es la llave maestra del Campeonato Uruguayo. Ahora el Campeón del Siglo se prepara para ser una caldera en el desenlace definitivo."
     },
     "pizarron_tactico": {
-      "eje": "El Pizarrón de Aguirre",
-      "subtitulo": "Superioridad ante Cerro Largo",
-      "texto": "Bloque compacto, doble cinco firme y explosión por las bandas. Peñarol controló los tiempos y golpeó en los momentos exactos para neutralizar a Bruno Silva."
+      "eje": "Pizarra y dosificación",
+      "subtitulo": "Ventaja física y lectura analítica de Aguirre",
+      "texto": "Mientras el rival de turno tendrá que dejar el cuero en una semifinal extenuante, Peñarol dosifica cargas en Los Aromos. En el pizarrón, Aguirre consolida su 4-2-3-1 con repliegue agresivo y transiciones verticales letales. La irrupción de Leonel Jaime por banda le otorga cambio de ritmo y un mano a mano que puede dinamitar cualquier cerrojo en series de 180 minutos."
     },
     "trastienda_vestuario": {
-      "eje": "Vestuario y Plantel 2026",
-      "subtitulo": "Recuperación en Los Aromos",
-      "texto": "Columna vertebral sólida (Washington Aguerre, Ignacio Alegre, Nahuel Herrera, Germán Pezzella y compañía) más variantes frescas desde el banco para encarar las finales con el plantel entero."
+      "eje": "Blindaje y comunión",
+      "subtitulo": "Abrazo de desahogo y concentración máxima",
+      "texto": "El vestuario karbonero cerró filas. El abrazo entre Ignacio Ruglio y Diego Aguirre tras liquidar el torneo regular reflejó el alivio de haber sorteado semanas de altísima exigencia mediática e interna. Hay hambre de gloria; los referentes marcaron la cancha: 'necesitábamos este golpe de autoridad para encarar lo que viene con el pecho inflado'."
     },
     "aritmetica_campeonato": {
-      "eje": "La Matemática del Título",
-      "subtitulo": "69 pts • Directo a la Final",
-      "texto": "Con 69 unidades (+27 DG), Peñarol evitó la semifinal: jugará directamente la Gran Final del Uruguayo ante el ganador de Racing (Campeón Apertura) vs Liverpool (Campeón Clausura)."
+      "eje": "Los números no mienten",
+      "subtitulo": "La regularidad premia con ventaja deportiva",
+      "texto": "69 unidades alcanzaron para mandar en el Uruguay. Peñarol no solo fue el más consistente a lo largo del año calendario, sino que capitalizó su diferencia de gol (+27). Al ganar la Tabla Anual sin conquistar los torneos cortos, el Manya se posicionó directo en la Gran Final (ida y vuelta), eludiendo el desgaste del repechaje semifinal."
     }
   },
   "articulo_principal": {
-    "titulo": "¡CAMPEÓN DE LA ANUAL! Peñarol 3 - 0 Cerro Largo: Peñarol cerró con 69 puntos y espera en la Gran Final",
-    "subtitulo": "Crónica táctica de Peñarol 3 - 0 Cerro Largo en Estadio Campeón del Siglo y hoja de ruta hacia la definición del Campeonato Uruguayo 2026",
+    "titulo": "La cumbre aurinegra: Peñarol administra el aire y afila las garras para la Gran Final",
+    "subtitulo": "Dueño indiscutido de la Anual, el elenco de Diego Aguirre capitaliza el descanso mientras Racing y Liverpool definen al retador por el Uruguayo.",
     "parrafos": [
-      "Con carácter, jerarquía y contundencia en Estadio Campeón del Siglo, Peñarol venció 3 - 0 a Cerro Largo por Campeonato Uruguayo • Torneo Clausura • Fecha 15 bajo el arbitraje de Gustavo Tejera. Los tantos de Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69' desataron el festejo en la Catedral Aurinegra y permitieron al conjunto de Diego Aguirre alcanzar los 69 puntos oficiales en la Tabla Anual (37 PJ, +27 DG), consagrándose ganador indiscutido de la acumulada y asegurando boleto directo a la fase de grupos de la Copa Libertadores 2027.",
-      "En el pizarrón táctico, Diego Aguirre desactivó el planteo de Cerro Largo (conducido por Bruno Silva) desde la presión alta y la superioridad por las bandas. El equipo saltó al campo con Washington Aguerre, Ignacio Alegre, Nahuel Herrera, Germán Pezzella, Maximiliano Olivera, Eric Remedi, Eduardo Darias, Javier Cabrera, Leandro Umpiérrez, Leonel Jaime, Matías Arezo, encontrando equilibrio en el doble eje central, solidez defensiva y un despliegue ofensivo vertical que marcó la diferencia en los momentos decisivos.",
-      "Con la ventaja deportiva de la Tabla Anual en el bolsillo (69 unidades), el plantel carbonero abre ahora un ciclo de preparación focalizado en Los Aromos rumbo a la gran definición del Campeonato Uruguayo 2026. El horizonte inmediato marca la semifinal entre Racing (Campeón Apertura) vs Liverpool (Campeón Clausura), cuyo vencedor se medirá ante Peñarol en finales ida y vuelta (Peñarol (Campeón Tabla Anual) vs Ganador Semifinal — Ida: Jueves 3/12 • Vuelta: Domingo 6/12)."
+      "El pitazo que selló la Tabla Anual 2026 no fue una simple victoria estadística: fue la consagración de la resiliencia carbonera. Con 69 puntos en la tabla acumulada y una diferencia de goles de +27, Peñarol se adueñó del derecho sagrado de esperar en la Gran Final del Campeonato Uruguayo. El premio inmediato es mayúsculo: fase de grupos de la Copa Libertadores 2027 garantizada y la serenidad de mirar el barro ajeno desde la tribuna principal.",
+      "La foto del momento tiene nombre y apellido en la cancha: la frescura descarada de Leonel Jaime, autor de una faena antológica en la última fecha que revolucionó el ataque aurinegro. El juvenil demostró que la camiseta de Peñarol no le pesa y le entregó a Diego Aguirre una variante punzante para quebrar sistemas cerrados. Con un plantel que venía sintiendo la fricción de un calendario extenuante, el oxígeno que otorga evitar la semifinal es oro puro para la planificación física.",
+      "El horizonte ya está marcado: jueves 3 de diciembre para la ida tentativa y el domingo 6 para la batalla definitiva. La Fiera sabe que estas series no se juegan con lírica, se juegan con el cuchillo entre los dientes y la pizarra aceitada. Sea Racing con su disciplina táctica o Liverpool con su dinámica, en Los Aromos no se elige rival: se prepara la artillería para que el festejo del año sea completo."
     ],
-    "cita_destacada": "Cumplimos el primer gran objetivo del año: ganar la Tabla Anual con autoridad en casa y llegar enteros a las finales del Campeonato Uruguayo.",
-    "autor_cita": "Balance Editorial • Vestuario Aurinegro en el Campeón del Siglo"
+    "cita_destacada": "Necesitábamos un resultado así para afrontar lo que se viene con la cabeza despejada y el pecho inflado. Ganamos la Anual y ahora vamos por todo.",
+    "autor_cita": "Referente de Los Aromos tras sellar la Tabla Anual 2026"
   },
   "portada_visual": {
-    "titular_portada": "🏆 PEÑAROL 3 - 0 CERRO LARGO • PEÑAROL CAMPEÓN DE LA TABLA ANUAL (69 PTS)",
-    "bajada_portada": "Peñarol venció 3 - 0 a Cerro Largo en Estadio Campeón del Siglo con goles de Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69', conquistó la Tabla Anual 2026 con 69 puntos (+27 DG), aseguró fase de grupos de la Libertadores 2027 y aguarda en la Gran Final del Uruguayo al vencedor de Racing (Campeón Apertura) vs Liverpool (Campeón Clausura).",
+    "titular_portada": "⚡ La Previa Aurinegra: Peñarol vs Ganador Semifinal (Racing / Liverpool) en Estadio Campeón del Siglo / Sede a sortear • Camino al Título 2026",
+    "bajada_portada": "Peñarol prepara el duelo Peñarol vs Ganador Semifinal (Racing / Liverpool) (Jueves 03/12/2026 • Horario a confirmar AUF) en Estadio Campeón del Siglo / Sede a sortear por Campeonato Uruguayo 2026 • Gran Final (Ida y Vuelta). Tabla Anual: 69 pts (+27 DG). TV: VTV Plus / Disney+ Premium.",
     "cuenta": "@oficialcap",
-    "ubicacion": "📍 Estadio Campeón del Siglo • Montevideo",
+    "ubicacion": "📍 Estadio Campeón del Siglo / Sede a sortear",
     "categoria": "partidos 1891",
     "imagen_webp": "assets/gallery/1891_cerro_largo_32174_02.webp",
     "imagen_jpg": "assets/gallery/1891_cerro_largo_32174_02.jpg"
   },
   "preguntas_frecuentes": [
     {
-      "q": "¿Cómo salió Peñarol ante Cerro Largo?",
-      "a": "Peñarol venció 3 - 0 a Cerro Largo en Estadio Campeón del Siglo con goles de Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'."
+      "q": "¿Cómo y cuándo disputará Peñarol la definición del Campeonato Uruguayo 2026?",
+      "a": "Al conquistar la Tabla Anual 2026, Peñarol clasificó directo a la Gran Final del Campeonato Uruguayo. La definición se jugará en régimen de ida y vuelta (fechas tentativas: jueves 3 y domingo 6 de diciembre) ante el ganador de la semifinal entre Racing (campeón Apertura) y Liverpool (campeón Clausura)."
     },
     {
-      "q": "¿Cómo quedó Peñarol en la Tabla Anual 2026?",
-      "a": "Peñarol finalizó 1° y campeón de la Tabla Anual con 69 puntos (+27 DG), clasificando a la fase de grupos de la Libertadores 2027 y a la Gran Final del Uruguayo."
+      "q": "¿Qué ventaja tiene Peñarol al haber ganado la Tabla Anual?",
+      "a": "La ventaja principal es evitar la semifinal y descansar mientras sus potenciales rivales se desgastan en un cruce eliminatorio. Además, Peñarol se garantizó el pase directo a la fase de grupos de la Copa Libertadores 2027."
     },
     {
-      "q": "¿Cuándo y contra quién juega Peñarol la Gran Final?",
-      "a": "Peñarol espera al vencedor de la semifinal Racing (Campeón Apertura) vs Liverpool (Campeón Clausura) (tentativa 29/11). Las finales ida y vuelta están previstas para el 3 y 6 de diciembre de 2026."
+      "q": "¿Qué rival enfrentará Peñarol en la Gran Final?",
+      "a": "El rival saldrá de la semifinal única entre Racing y Liverpool. El ganador de dicho compromiso chocará contra el Carbonero en la serie decisiva a 180 minutos para resolver al Campeón Uruguayo 2026."
     }
   ],
   "noticias_fuentes": [
@@ -96,7 +96,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 30.9,
+      "antiguedad_horas": 31.4,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -108,7 +108,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 31.5,
+      "antiguedad_horas": 32.0,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -120,7 +120,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 34.2,
+      "antiguedad_horas": 34.7,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -132,7 +132,7 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 38.5,
+      "antiguedad_horas": 39.0,
       "timestamp": 1795157270.0,
       "peso": 1.25
     },
@@ -144,7 +144,7 @@
       "fecha": "19/11/2026 20:33",
       "fecha_iso": "2026-11-19T20:33:06-03:00",
       "fecha_raw": "19/11/2026 20:33 hs",
-      "antiguedad_horas": 45.7,
+      "antiguedad_horas": 46.2,
       "timestamp": 1795131186.0,
       "peso": 1.05
     },
@@ -156,7 +156,7 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 46.3,
+      "antiguedad_horas": 46.8,
       "timestamp": 1795129020.0,
       "peso": 1.2
     },
@@ -168,7 +168,7 @@
       "fecha": "19/11/2026 19:38",
       "fecha_iso": "2026-11-19T19:38:00-03:00",
       "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 46.6,
+      "antiguedad_horas": 47.1,
       "timestamp": 1795127880.0,
       "peso": 1.2
     },
@@ -180,7 +180,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 47.4,
+      "antiguedad_horas": 47.9,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -192,7 +192,7 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 47.6,
+      "antiguedad_horas": 48.1,
       "timestamp": 1795124345.0,
       "peso": 1.05
     },
@@ -204,7 +204,7 @@
       "fecha": "19/11/2026 18:31",
       "fecha_iso": "2026-11-19T18:31:00-03:00",
       "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 47.7,
+      "antiguedad_horas": 48.2,
       "timestamp": 1795123860.0,
       "peso": 1.1
     }

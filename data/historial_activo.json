@@ -1,56 +1,56 @@
 {
-  "rival": "Cerro Largo",
-  "rival_oficial": "Cerro Largo Fútbol Club",
-  "rival_id": 48,
-  "rival_slug": "cerro_largo",
-  "escudo_rival": "assets/img/escudos/escudo_cerro_largo.webp",
+  "rival": "Liverpool",
+  "rival_oficial": "Liverpool Fútbol Club",
+  "rival_id": 516,
+  "rival_slug": "liverpool",
+  "escudo_rival": "assets/img/escudos/escudo_liverpool.webp",
   "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
   "resumen": {
-    "partidos_jugados": 31,
-    "ganados_penarol": 19,
-    "empatados": 8,
-    "perdidos_penarol": 4,
-    "goles_penarol": 61,
-    "goles_rival": 26,
-    "diferencia_goles": "+35",
-    "ventaja_victorias": "+15 partidos a favor del Decano",
-    "efectividad_pct": "69.9%"
+    "partidos_jugados": 241,
+    "ganados_penarol": 161,
+    "empatados": 44,
+    "perdidos_penarol": 36,
+    "goles_penarol": 546,
+    "goles_rival": 226,
+    "diferencia_goles": "+320",
+    "ventaja_victorias": "+125 partidos a favor del Decano",
+    "efectividad_pct": "72.9%"
   },
   "ultimos_enfrentamientos": [
     {
-      "fecha": "2026-11-19",
-      "marcador": "Peñarol 3 - 0 Cerro Largo",
-      "estadio": "Campeón del Siglo",
+      "fecha": "2026-10-18",
+      "marcador": "Peñarol 0 - 1 Liverpool",
+      "estadio": "Parque Alfredo Víctor Viera",
       "torneo": "Torneo Clausura",
-      "incidencias": "Nahuel Herrera (P) 27', Leonel Jaime (P) 31' y Matías Arezo (P) 69'"
+      "incidencias": "Federico Martínez (L) 73'"
     },
     {
-      "fecha": "2026-08-01",
-      "marcador": "Peñarol 3 - 0 Cerro Largo",
+      "fecha": "2026-05-16",
+      "marcador": "Peñarol 2 - 1 Liverpool",
       "estadio": "Campeón del Siglo",
       "torneo": "Torneo Intermedio",
-      "incidencias": "Abel Hernández (P) 34', Abel Hernández (P) 55' y Matías Arezo (P) 59'"
+      "incidencias": "Jesús Trindade (P) 3', Federico Martínez (L) 4' y Roberto Fernández (P) 43'"
     },
     {
-      "fecha": "2026-05-11",
-      "marcador": "Peñarol 3 - 2 Cerro Largo",
-      "estadio": "Arquitecto Antonio Eleuterio Ubilla de Melo",
+      "fecha": "2026-04-13",
+      "marcador": "Peñarol 0 - 2 Liverpool",
+      "estadio": "Campeón del Siglo",
       "torneo": "Torneo Apertura",
-      "incidencias": "Diego Daguerre (C) 45+2', Facundo Batista (P) 60', Leandro Umpiérrez (P) 74', Federico Sellechchia (C) 83' y Abel Hernández (P) 87'"
+      "incidencias": "Ruben Bentancourt (L) 5' y Martín Rabuñal (L) 41'"
     },
     {
-      "fecha": "2025-09-27",
-      "marcador": "Peñarol 3 - 1 Cerro Largo",
+      "fecha": "2025-11-16",
+      "marcador": "Peñarol 2 - 1 Liverpool",
       "estadio": "Centenario",
-      "torneo": "Torneo Clausura",
-      "incidencias": "Lucas Correa (C) 21', Eric Remedi (P) 45+2', Maximiliano Silvera (P) 56' y Jaime Báez (P) 90+6'"
+      "torneo": "Campeonato Uruguayo",
+      "incidencias": "Abel Hernández (L) 92', Diego García (P) 103' y Leonardo Fernández (P) 115' de penal"
     },
     {
-      "fecha": "2025-06-01",
-      "marcador": "Peñarol 1 - 1 Cerro Largo",
-      "estadio": "Arquitecto Antonio Eleuterio Ubilla de Melo",
-      "torneo": "Torneo Intermedio",
-      "incidencias": "Diego García (P) 25' y Facundo Bonifazi (C) 28'"
+      "fecha": "2025-09-13",
+      "marcador": "Peñarol 2 - 2 Liverpool",
+      "estadio": "Belvedere",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Javier Méndez (P) 15', Lucas Acosta (L) 18', Abel Hernández (L) 34' y Maximiliano Olivera (P) 71'"
     }
   ]
 }

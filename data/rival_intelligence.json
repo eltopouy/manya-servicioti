@@ -1,138 +1,127 @@
 {
-  "generado_el": "21/11/2026 18:15",
-  "fase_contexto": "POST_PARTIDO",
-  "rival_nombre": "Cerro Largo Fútbol Club",
-  "rival_corto": "Cerro Largo",
-  "rival_slug": "cerro_largo",
-  "escudo_oficial": "assets/img/escudos/escudo_cerro_largo.webp",
+  "generado_el": "21/11/2026 18:45",
+  "fase_contexto": "PREVIA",
+  "rival_nombre": "Liverpool Fútbol Club",
+  "rival_corto": "Liverpool",
+  "rival_slug": "liverpool",
+  "escudo_oficial": "assets/img/escudos/escudo_liverpool.webp",
   "datos_institucionales_auf": {
-    "fundacion": "19 de noviembre de 2002",
-    "sede": "Melo, Cerro Largo, Uruguay",
-    "estadio_propio": "Estadio Arquitecto Antonio Eleuterio Ubilla (Melo)",
+    "fundacion": "15 de febrero de 1915",
+    "sede": "Belvedere, Montevideo, Uruguay",
+    "estadio_propio": "Estadio Belvedere (Montevideo)",
     "capacidad": 10000,
-    "web_oficial": "https://auf.org.uy/"
+    "web_oficial": "https://liverpoolfc.com.uy/"
   },
   "scouting_tactico": {
-    "entrenador": "Bruno Silva",
-    "esquema_base": "4-4-2 combativo de bloque medio y transiciones directas",
-    "propuesta_juego": "Cerro Largo, dirigido por Bruno Silva, llegó al Campeón del Siglo con un bloque defensivo ordenado, buscando friccionar la zona media con Santiago Marcel y Mario García y lanzar a Brian Lozano y Axel Pandiani al contraataque. Peñarol quebró su estructura con pelota quieta (Nahuel Herrera), desequilibrio individual (Leonel Jaime) y jerarquía de área (Matías Arezo) para golear 3-0 y consagrarse Campeón de la Tabla Anual.",
+    "entrenador": "Joaquín Papa",
+    "esquema_base": "4-3-3 dinámico, presión alta y verticalidad (Campeón del Clausura 2026)",
+    "propuesta_juego": "Liverpool, consagrado campeón del Torneo Clausura 2026 bajo la conducción de Joaquín Papa, es uno de los potenciales rivales de Peñarol en la Gran Final del Campeonato Uruguayo (juega la semifinal ante Racing). Destaca por su solidez defensiva, ritmo intenso en tres cuartos y eficacia en transiciones rápidas.",
     "figuras_a_seguir": [
       {
-        "nombre": "Brian Lozano",
-        "rol": "Volante Ofensivo / Pelota Quieta",
-        "analisis": "Pegada de media distancia y balón parado peligroso, neutralizado por la presión de Remedi y Darias."
+        "nombre": "Frente Ofensivo Negriazul",
+        "rol": "Ataque",
+        "analisis": "Eficacia en el área, diagonales cortas y movilidad constante entre centrales."
       },
       {
-        "nombre": "Martín Gianoli",
-        "rol": "Zaguero Central",
-        "analisis": "Referente defensivo arachán en el juego aéreo, exigido al límite por Arezo y Nahuel Herrera."
-      },
-      {
-        "nombre": "Axel Pandiani",
-        "rol": "Delantero",
-        "analisis": "Movilidad y despliegue físico en busca de pelotas largas y segundas jugadas."
-      },
-      {
-        "nombre": "Lucas Correa",
-        "rol": "Defensor",
-        "analisis": "Cierre por banda y cobertura de espacios frente a la velocidad de Leonel Jaime."
+        "nombre": "Eje de Mediocampo de Belvedere",
+        "rol": "Volantes",
+        "analisis": "Dinámica, presión tras pérdida y cambio de ritmo vertical."
       }
     ],
     "puntos_fuertes": [
-      "Intensidad física y orden en bloque 4-4-2 compacto.",
-      "Pelota parada ejecutada por Brian Lozano y juego aéreo en córners.",
-      "Despliegue colectivo en la zona de recuperación."
+      "Regularidad como ganador del Torneo Clausura 2026.",
+      "Alta intensidad física y presión sobre la salida rival.",
+      "Transiciones veloces explotando espacios a espaldas de laterales."
     ],
     "vulnerabilidades_a_explotar": [
-      "Sufrió ante los cambios de ritmo de Leonel Jaime y Javier Cabrera por los costados.",
-      "Desajustes en el marcaje de pelota quieta donde golpeó Nahuel Herrera (27').",
-      "Espacios entre líneas que aprovechó Matías Arezo para sentenciar el 3-0 (69')."
+      "Pelota quieta aérea ante Pezzella, Nahuel Herrera y la pegada de Leo Fernández.",
+      "Desgaste acumulado tras disputar la semifinal ante Racing antes de la Final."
     ]
   },
   "duelos_tacticos_1x1": [
     {
-      "id": "cl_duelo_herrera_gianoli",
-      "titulo": "Dominio Aéreo en Ambas Áreas: Nahuel Herrera vs. Martín Gianoli",
-      "zona_campo": "Áreas & Pelota Quieta",
+      "id": "duelo_creacion_2026",
+      "titulo": "Usina Creativa: Leo Fernández / Umpiérrez vs. Doble 5 de Liverpool",
+      "zona_campo": "Zona 14 / Tres Cuartos",
       "penarol": {
-        "jugador": "Nahuel Herrera",
-        "dorsal": "34",
-        "rol": "Zaguero Central / Goleador (27')",
-        "atributos_clave": "Anticipo feroz, juego aéreo dominante y el cabezazo/definición que abrió la consagración de la Anual."
+        "jugador": "Leonardo Fernández / Leandro Umpiérrez",
+        "dorsal": "10 / 32",
+        "rol": "Conducción y Pelota Quieta Aurinegra",
+        "atributos_clave": "Visión entre líneas, pegada de media distancia y desequilibrio en balón detenido."
       },
       "rival": {
-        "jugador": "Martín Gianoli",
-        "dorsal": "4",
-        "rol": "Zaguero Central de Cerro Largo",
-        "atributos_clave": "Fuerza física, marca férrea en el área y liderazgo en la última línea arachana."
+        "jugador": "Eje Central de Liverpool",
+        "dorsal": "5 / 8",
+        "rol": "Volantes de Contención",
+        "atributos_clave": "Orden táctico, cierre de líneas de pase y presión escalonada planteada por Joaquín Papa."
       },
-      "clave_del_duelo": "Herrera impuso su jerarquía aérea a los 27 minutos para romper el cero en el Campeón del Siglo y encaminar el título anual."
+      "clave_del_duelo": "Si Peñarol logra girar a espaldas del doble cinco de Liverpool, desarticula el bloque rival y genera situaciones claras de gol."
     },
     {
-      "id": "cl_duelo_jaime_correa",
-      "titulo": "Show de Desequilibrio: Leonel Jaime vs. Banda de Cerro Largo",
-      "zona_campo": "Carril Ofensivo Aurinegro",
-      "penarol": {
-        "jugador": "Leonel Jaime",
-        "dorsal": "11",
-        "rol": "Extremo / Figura y Golazo (31')",
-        "atributos_clave": "Gambeta eléctrica, verticalidad imparable y golazo decisivo cuatro minutos después de la apertura."
-      },
-      "rival": {
-        "jugador": "Lucas Correa & Alexander Hernández",
-        "dorsal": "2 / 6",
-        "rol": "Cobertura Lateral de Cerro Largo",
-        "atributos_clave": "Intento de doblar marca sobre el costado para frenar la explosión del juvenil."
-      },
-      "clave_del_duelo": "Leonel Jaime fue la gran figura de la tarde en el CDS: desbordó constantemente y liquidó el pleito en el primer tiempo."
-    },
-    {
-      "id": "cl_duelo_arezo_zaga",
-      "titulo": "Olfato Letal: Matías Arezo vs. Bloque Defensivo Arachán",
-      "zona_campo": "Área de Cerro Largo",
+      "id": "duelo_area_arezo",
+      "titulo": "Letalidad en el Área: Matías Arezo vs. Zaga Central de Liverpool",
+      "zona_campo": "Área de Liverpool",
       "penarol": {
         "jugador": "Matías Arezo",
         "dorsal": "19",
-        "rol": "Centrodelantero / Gol 3-0 (69')",
-        "atributos_clave": "Potencia, diagonales constantes y definición implacable para cerrar la goleada 3-0."
+        "rol": "Centrodelantero Goleador",
+        "atributos_clave": "Potencia física, diagonales cortas, presión sobre la salida y definición letal de primera."
       },
       "rival": {
-        "jugador": "Lukas González & Zaga Arachana",
-        "dorsal": "1 / 3",
-        "rol": "Arquero y Defensores de Cerro Largo",
-        "atributos_clave": "Reflejos en disparos cercanos, exigidos bajo el asedio constante carbonero."
+        "jugador": "Zaga Central de Liverpool",
+        "dorsal": "2 / 4",
+        "rol": "Defensores Centrales",
+        "atributos_clave": "Duelo aéreo, cobertura del área chica y marca personal en centros."
       },
-      "clave_del_duelo": "Arezo desgastó a toda la defensa rival durante 70 minutos hasta firmar el 3-0 definitivo que selló los 69 puntos en la Tabla Anual."
+      "clave_del_duelo": "La movilidad de Arezo fijando a los centrales libera pasillos interiores para la llegada sorpresiva de Leonel Jaime y Javier Cabrera."
     },
     {
-      "id": "cl_duelo_medio_remedi_lozano",
-      "titulo": "Control de la Medular: Eric Remedi & Eduardo Darias vs. Brian Lozano",
-      "zona_campo": "Mediocampo Central",
+      "id": "duelo_bandas_2026",
+      "titulo": "Desborde Eléctrico: Leonel Jaime & Javier Cabrera vs. Laterales de Liverpool",
+      "zona_campo": "Bandas • Estadio Belvedere (Montevideo)",
       "penarol": {
-        "jugador": "Eric Remedi & Eduardo Darias",
-        "dorsal": "5 / 13",
-        "rol": "Doble Eje Aurinegro",
-        "atributos_clave": "Recuperación inmediata, despliegue incansable y distribución limpia hacia las bandas."
+        "jugador": "Leonel Jaime & Javier Cabrera",
+        "dorsal": "11 / 7",
+        "rol": "Extremos de Desequilibrio",
+        "atributos_clave": "Aceleración explosiva, gambeta en el 1x1 y llegada al gol desde segunda línea."
       },
       "rival": {
-        "jugador": "Brian Lozano & Santiago Marcel",
-        "dorsal": "10 / 8",
-        "rol": "Creación y Contención de Cerro Largo",
-        "atributos_clave": "Intento de conectar transiciones rápidas y buscar faltas cercanas al área aurinegra."
+        "jugador": "Laterales de Liverpool",
+        "dorsal": "3 / 6",
+        "rol": "Marcadores de Punta",
+        "atributos_clave": "Cobertura de bandas y apoyo en las salidas rápidas por los carriles."
       },
-      "clave_del_duelo": "El tándem Remedi-Darias desconectó a Brian Lozano, secó el circuito visitante y dejó a Washington Aguerre con valla invicta."
+      "clave_del_duelo": "El mano a mano de Leonel Jaime —figura descollante en el cierre del Clausura— obliga a doblar marcas y abre espacios por el centro."
+    },
+    {
+      "id": "duelo_zaga_carbonera",
+      "titulo": "La Muralla Carbonera: Pezzella, Nahuel Herrera & Aguerre vs. Ataque de Liverpool",
+      "zona_campo": "Área Aurinegra",
+      "penarol": {
+        "jugador": "Germán Pezzella, Nahuel Herrera & Washington Aguerre",
+        "dorsal": "2 / 34 / 29",
+        "rol": "Zaga Central y Arco Decano",
+        "atributos_clave": "Jerarquía internacional, juego aéreo en ambas áreas y personalidad bajo los tres palos."
+      },
+      "rival": {
+        "jugador": "Frente Ofensivo de Liverpool",
+        "dorsal": "9 / 10",
+        "rol": "Delanteros Rivales",
+        "atributos_clave": "Búsqueda de transiciones rápidas y pelotas detenidas al corazón del área."
+      },
+      "clave_del_duelo": "La solidez aérea de Nahuel Herrera y la experiencia de Pezzella son decisivas para sostener el arco en cero y proyectar ataques desde el fondo."
     }
   ],
   "historial_certificacion_1891": {
-    "partidos_jugados": 31,
-    "ganados_penarol": 19,
-    "empatados": 8,
-    "perdidos_penarol": 4,
-    "goles_penarol": 61,
-    "goles_rival": 26,
-    "ventaja_victorias": "+15 partidos a favor del Decano",
-    "diferencia_goles": "+35",
-    "efectividad_pct": "69.9%"
+    "partidos_jugados": 241,
+    "ganados_penarol": 161,
+    "empatados": 44,
+    "perdidos_penarol": 36,
+    "goles_penarol": 546,
+    "goles_rival": 226,
+    "ventaja_victorias": "+125 partidos a favor del Decano",
+    "diferencia_goles": "+320",
+    "efectividad_pct": "72.9%"
   },
   "fuentes_consultadas": [
     "AUF - Asociación Uruguaya de Fútbol (auf.org.uy)",

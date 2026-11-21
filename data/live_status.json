@@ -1,14 +1,14 @@
 {
-  "actualizado": "21/11/2026 18:15",
+  "actualizado": "21/11/2026 18:45",
   "schema_version": "11.0",
-  "fase_partido": "POST_PARTIDO",
-  "estado_ciclo_vida": "POST_48H",
+  "fase_partido": "PREVIA",
+  "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 47.8,
-  "rival_activo_nombre": "Cerro Largo",
-  "rival_activo_slug": "cerro_largo",
+  "horas_desde_ultimo_partido": 48.3,
+  "rival_activo_nombre": "Liverpool",
+  "rival_activo_slug": "liverpool",
   "historial_file": "data/historial_activo.json",
-  "alerta_banner": "🏁 FINALIZADO: Peñarol 3 - 0 Cerro Largo • 🏆 CAMPEÓN DE LA TABLA ANUAL (69 pts) • ⚽ Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
+  "alerta_banner": "🏆 ¡PEÑAROL CAMPEÓN DE LA TABLA ANUAL (69 PTS)! Clasificado directo a la Gran Final del Uruguayo 2026 (rival: ganador de Racing vs Liverpool).",
   "resumen_temporada": {
     "penarol_anual_pts": 69,
     "penarol_anual_pos": 1,
@@ -28,110 +28,50 @@
     }
   },
   "partido_activo": {
-    "event_id": "401934686",
-    "es_partido_oficial_espn": true,
-    "nombre": "Peñarol vs Cerro Largo",
-    "fecha_iso": "2026-11-19T16:30:00-03:00",
-    "fecha_legible": "Jueves 19/11/2026 16:30 hs",
-    "torneo": "Campeonato Uruguayo • Torneo Clausura • Fecha 15",
-    "estadio": "Estadio Campeón del Siglo",
+    "event_id": "uf2026_final_ida",
+    "es_partido_oficial_espn": false,
+    "es_definicion_final": true,
+    "nombre": "Peñarol vs Ganador Semifinal (Racing / Liverpool)",
+    "fecha_iso": "2026-12-03T20:00:00-03:00",
+    "fecha_legible": "Jueves 03/12/2026 • Horario a confirmar AUF",
+    "torneo": "Campeonato Uruguayo 2026 • Gran Final (Ida y Vuelta)",
+    "estadio": "Estadio Campeón del Siglo / Sede a sortear",
     "local": {
       "id": "2683",
       "nombre": "Peñarol",
-      "abreviatura": "PEN",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png",
+      "abreviatura": "CAP",
       "escudo": "assets/img/escudos/escudo_penarol.webp",
-      "goles": "3",
+      "goles": "-",
       "es_penarol": true
     },
     "visitante": {
-      "id": "9902",
-      "nombre": "Cerro Largo",
-      "abreviatura": "CERR",
-      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9902.png",
-      "escudo": "assets/img/escudos/escudo_cerro_largo.webp",
-      "goles": "0",
+      "id": "tbd",
+      "nombre": "Ganador Racing / Liverpool",
+      "abreviatura": "SEM",
+      "escudo": "assets/img/escudos/escudo_auf.svg",
+      "goles": "-",
       "es_penarol": false
     },
-    "minuto_reloj": "90'+3'",
-    "tiempo_periodo": 2,
-    "completado": true,
-    "state": "post",
     "tv": "VTV Plus / Disney+ Premium",
+    "completado": false,
+    "state": "pre",
     "es_hoy": false,
-    "id_1891": 32174,
-    "fase_1891": "Fecha 15",
-    "juez": "Gustavo Tejera",
-    "goles_texto": "Nahuel Herrera 27', Leonel Jaime 31' y Matías Arezo 69'",
-    "observacion_oficial": "Peñarol obtiene la anual y se clasifica a la final del Campeonato Uruguayo",
-    "dt_rival": "Bruno Silva",
-    "video_youtube_id": "0BU8HYWYBiA",
-    "video_youtube_url": "https://www.youtube.com/watch?v=0BU8HYWYBiA",
-    "alineacion_1891": [
-      "Washington Aguerre",
-      "Ignacio Alegre",
-      "Nahuel Herrera",
-      "Germán Pezzella",
-      "Maximiliano Olivera",
-      "Eric Remedi",
-      "Eduardo Darias",
-      "Javier Cabrera",
-      "Leandro Umpiérrez",
-      "Leonel Jaime",
-      "Matías Arezo"
-    ],
-    "cambios_1891": [
-      {
-        "minuto": "66'",
-        "entra": "Lucas Ferreira",
-        "sale": "Nahuel Herrera"
-      },
-      {
-        "minuto": "76'",
-        "entra": "Jesús Trindade",
-        "sale": "Germán Pezzella"
-      },
-      {
-        "minuto": "46'",
-        "entra": "Thiago Espinosa",
-        "sale": "Maximiliano Olivera"
-      },
-      {
-        "minuto": "66'",
-        "entra": "Nicolás Fernández",
-        "sale": "Eric Remedi"
-      },
-      {
-        "minuto": "66'",
-        "entra": "Luis Angulo",
-        "sale": "Javier Cabrera"
-      }
-    ],
-    "fase": "POST_PARTIDO",
-    "detalles_avanzados": {
-      "goles": [
-        {
-          "minuto": "28'",
-          "texto": "Nahuel Herrera (Peñarol) Gol a los 28'",
-          "equipo": "Peñarol"
-        },
-        {
-          "minuto": "32'",
-          "texto": "Leonel Jaime (Peñarol) Gol a los 32'",
-          "equipo": "Peñarol"
-        },
-        {
-          "minuto": "70'",
-          "texto": "Matías Arezo (Peñarol) Gol a los 70'",
-          "equipo": "Peñarol"
-        }
-      ],
-      "tarjetas": [],
-      "estadisticas": {},
-      "titulares_penarol": [],
-      "suplentes_penarol": [],
-      "titulares_rival": []
-    }
+    "nota_definicion": "Peñarol conquistó la Tabla Anual con 69 puntos, aseguró fase de grupos de Copa Libertadores 2027 y espera directo en la Gran Final del Uruguayo (ida tentativa 3/12, vuelta 6/12) al ganador de la semifinal entre Racing (Apertura) y Liverpool (Clausura).",
+    "semifinal": {
+      "detectada_espn": false,
+      "event_id": "",
+      "equipos": "Racing vs Liverpool",
+      "fecha_tentativa": "Domingo 29/11/2026",
+      "fecha_iso": "",
+      "estadio": "Estadio Centenario (a confirmar AUF)",
+      "state": "pre",
+      "completado": false,
+      "marcador": "",
+      "ganador": "",
+      "contexto": "Campeón Apertura (Racing) vs Campeón Clausura (Liverpool)"
+    },
+    "fase": "PREVIA",
+    "detalles_avanzados": {}
   },
   "proximo_partido": {
     "event_id": "uf2026_final_ida",
@@ -1835,10 +1775,10 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 20.7,
-    "sensacion_c": 21.7,
-    "viento_kmh": 5.9,
-    "humedad_pct": 72,
+    "temperatura_c": 20.1,
+    "sensacion_c": 21.2,
+    "viento_kmh": 5.5,
+    "humedad_pct": 77,
     "weather_code": 3,
     "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
@@ -1847,7 +1787,7 @@
       "dias_faltantes": 12,
       "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 12 días)."
     },
-    "actualizado": "21/11/2026 18:15"
+    "actualizado": "21/11/2026 18:45"
   },
   "minuto_a_minuto": [
     {
