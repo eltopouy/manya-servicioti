@@ -1,10 +1,10 @@
 {
-  "actualizado": "20/11/2026 23:15",
+  "actualizado": "20/11/2026 23:45",
   "schema_version": "11.0",
   "fase_partido": "POST_PARTIDO",
   "estado_ciclo_vida": "POST_48H",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 28.8,
+  "horas_desde_ultimo_partido": 29.3,
   "rival_activo_nombre": "Cerro Largo",
   "rival_activo_slug": "cerro_largo",
   "historial_file": "data/historial_activo.json",
@@ -1835,19 +1835,19 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 15.9,
-    "sensacion_c": 17.5,
-    "viento_kmh": 2.2,
+    "temperatura_c": 15.8,
+    "sensacion_c": 17.1,
+    "viento_kmh": 4.4,
     "humedad_pct": 99,
-    "weather_code": 1,
-    "condicion": "Mayormente despejado en el Campeón del Siglo",
+    "weather_code": 3,
+    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
     "pronostico_partido": {
       "disponible": false,
       "dias_faltantes": 13,
       "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 13 días)."
     },
-    "actualizado": "20/11/2026 23:15"
+    "actualizado": "20/11/2026 23:45"
   },
   "minuto_a_minuto": [
     {
