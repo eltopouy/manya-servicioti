@@ -1,5 +1,5 @@
 {
-  "actualizado": "22/11/2026 00:45",
+  "actualizado": "22/11/2026 01:15",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "PREVIA",
@@ -85,6 +85,18 @@
   ],
   "noticias_fuentes": [
     {
+      "titulo": "La estadísticia que lideró Peñarol tras el cierre de la Tabla Anual y cómo repercutió en la consagración Mirasol",
+      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQMi1VNWFlX1hkX2QxZnh3LXh1SU1vNk1GLXNwTjl4SVFQRVdQbWZVZ1VCOTVSMUd1bVBPWlJjZzVGamVpcnRDc25WVVA1T3VIOHRwVzdzY041RjlGZGE0YVAxR0xPRUNBLUFicjBJSDBjeXFGa3dvUjlBUk9HckZaMm9MZExObGNoXzRydl9YVThhbGJaSUdTVV9nMUE4dFMwYURKUTJoV2d2dk0tam5JaGVxUHdCV1BaZ081UDE2T05ZelM3cTNvaW5VSDJnLUgtNmE5aS12VWx0SkFDZXp3c0VLWVJNaEZU?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 21/11/2026 a las 03:05 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "21/11/2026 03:05",
+      "fecha_iso": "2026-11-21T03:05:03-03:00",
+      "fecha_raw": "21/11/2026 03:05 hs",
+      "antiguedad_horas": 22.2,
+      "timestamp": 1795241103.0,
+      "peso": 1.25
+    },
+    {
       "titulo": "Marcelo Areco, exconsejero de Peñarol, se sumó a la Lista 1414 que encabeza Freddy García para las elecciones",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQUmZTQWdVRExKTXBRWGNIT25lS3J3aThYN0thUnNVNHJXcmU2a1dvQUw2TzBUMERhdF80eVdjREhFV1gzbHVWUTZrWHNFVzFSY0VyWHgtMWlLRzRObUNkRTN2ZWxyM09DZlVPLTBHYVVDcncyT01FdU9nVVVDUjFvNkhVSVoxNXJBSVNra2Rlak4zYjdYTDU0VlNFSnhnT0hiZHg5YkwtdUtfWWNwVXE5czRkRk5LZnFIcUcyaGlYa0hKeWF0X0xCTU5UNlFjeG5GY0lKRjNWTVZvTWZpTkZJWVJR?oc=5",
       "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 20/11/2026 a las 19:14 hs.",
@@ -92,7 +104,7 @@
       "fecha": "20/11/2026 19:14",
       "fecha_iso": "2026-11-20T19:14:32-03:00",
       "fecha_raw": "20/11/2026 19:14 hs",
-      "antiguedad_horas": 29.5,
+      "antiguedad_horas": 30.0,
       "timestamp": 1795212872.0,
       "peso": 1.25
     },
@@ -104,7 +116,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 37.4,
+      "antiguedad_horas": 37.9,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -116,7 +128,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 38.0,
+      "antiguedad_horas": 38.5,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -128,7 +140,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 40.7,
+      "antiguedad_horas": 41.2,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -140,21 +152,9 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 45.0,
+      "antiguedad_horas": 45.5,
       "timestamp": 1795157270.0,
       "peso": 1.25
-    },
-    {
-      "titulo": "Ruglio tras el 3-0 de Peñarol: “no tengo fuerzas”, “youtubers pagos” y “cuentas truchas”",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPTi1yUGhvMjhLWm5SdHl4ZlRMZHVuUG1ad2Q3S0tlYkc0Q20yTWRqWENCTUhRaFFDUlJWOXdQOGtNamtHbTRaaFdKWC1hbm1udlpLVm9wQkhWSnl2S2FFaFJaenVCc0JWS1NpdzFGZUZzMlhkbmktQTR4amh4S1IzREtGdlVHWFJIT3NETkFoYWZRMzZOaFBNVjdsaUhuNFJHVFZfbUgxLV93M0RWcElEX1Bwa0dRbVlLZkRlZ09YWmVEV0Nua3dPcWxlY9IB7wFBVV95cUxPWkVyZGJoMUNQcGRRczlCb3dGTy0zQW1ZS01CX3Nsemx2YWszbjZKU0ZNRTN1cXJiV3BkQU9jajBVVXo0eWdKNmdyNmZZSkpxYlc5b0l6YVQ2TDViUlVnckFRWUZnbUlJYUxCd2pxYlh6OFE3ejlxRXQ0ZFMzTWo2cWxNVHhNWVo1WTg5X2VQeThLOFV0TENJd1lBUUhHUXBEZEhZcTFhSlg2WHlzdzJsXzhhTld4SzBQNmVxNlNaWkNYYkRKLXlBbTdqVFhOUWw1RXZyUV85RDRZcEs3a2xtOGhrbFRlVEJrdC14Mi1Gcw?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:57 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 19:57",
-      "fecha_iso": "2026-11-19T19:57:00-03:00",
-      "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 52.8,
-      "timestamp": 1795129020.0,
-      "peso": 1.2
     },
     {
       "titulo": "Peñarol: el abrazo de Ignacio Ruglio con Diego Aguirre y el mensaje para Lucas Ferreira",
@@ -164,7 +164,7 @@
       "fecha": "19/11/2026 19:38",
       "fecha_iso": "2026-11-19T19:38:00-03:00",
       "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 53.1,
+      "antiguedad_horas": 53.6,
       "timestamp": 1795127880.0,
       "peso": 1.2
     },
@@ -176,7 +176,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 53.9,
+      "antiguedad_horas": 54.4,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -188,7 +188,7 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 54.1,
+      "antiguedad_horas": 54.6,
       "timestamp": 1795124345.0,
       "peso": 1.05
     },
@@ -200,7 +200,7 @@
       "fecha": "19/11/2026 18:31",
       "fecha_iso": "2026-11-19T18:31:00-03:00",
       "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 54.2,
+      "antiguedad_horas": 54.7,
       "timestamp": 1795123860.0,
       "peso": 1.1
     }
