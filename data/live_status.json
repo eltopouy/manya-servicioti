@@ -1,10 +1,10 @@
 {
-  "actualizado": "22/11/2026 02:15",
+  "actualizado": "22/11/2026 02:45",
   "schema_version": "11.0",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 55.8,
+  "horas_desde_ultimo_partido": 56.3,
   "rival_activo_nombre": "Liverpool",
   "rival_activo_slug": "liverpool",
   "historial_file": "data/historial_activo.json",
@@ -1775,19 +1775,19 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.8,
-    "sensacion_c": 15.0,
-    "viento_kmh": 6.3,
+    "temperatura_c": 14.6,
+    "sensacion_c": 14.5,
+    "viento_kmh": 8.6,
     "humedad_pct": 93,
-    "weather_code": 2,
-    "condicion": "Parcialmente nublado en Ruta 102",
+    "weather_code": 3,
+    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
     "pronostico_partido": {
       "disponible": false,
       "dias_faltantes": 11,
       "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 11 días)."
     },
-    "actualizado": "22/11/2026 02:15"
+    "actualizado": "22/11/2026 02:45"
   },
   "minuto_a_minuto": [
     {
