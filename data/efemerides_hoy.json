@@ -2,112 +2,98 @@
   "fecha_consulta": "22/11/2026",
   "dia_mes": "22 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 10,
+  "total_partidos_dia": 8,
   "partidos_historicos": [
     {
-      "fecha": "2009-11-21",
-      "ano": "2009",
+      "fecha": "2020-11-22",
+      "ano": "2020",
+      "rival": "Boston River",
+      "goles_penarol": 2,
+      "goles_rival": 0,
+      "resultado": "Peñarol 2 - 0 Boston River",
+      "torneo": "Torneo Intermedio",
+      "estadio": "Campeón del Siglo",
+      "goles_detalle": "David Terans (P) 40' y Agustín Álvarez Martínez (P) 82'"
+    },
+    {
+      "fecha": "2019-11-22",
+      "ano": "2019",
       "rival": "Fénix",
-      "goles_penarol": 1,
-      "goles_rival": 0,
-      "resultado": "Peñarol 1 - 0 Fénix",
-      "torneo": "Torneo Apertura",
-      "estadio": "Centenario",
-      "goles_detalle": "Gerardo Alcoba (P) 90+3'"
-    },
-    {
-      "fecha": "2004-11-21",
-      "ano": "2004",
-      "rival": "Plaza Colonia",
-      "goles_penarol": 3,
+      "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Plaza Colonia",
+      "resultado": "Peñarol 2 - 1 Fénix",
       "torneo": "Torneo Clausura",
-      "estadio": "Centenario",
-      "goles_detalle": "Carlos Bueno (Pe) 9', Carlos Bueno (Pe) 50', Mario Leguizamón (Pe) 67' y Oscar Torlacoff (Pl) 84'"
+      "estadio": "Campeón del Siglo",
+      "goles_detalle": "Roberto Fernández (F) 22', Lucas Viatri (P) 45+1' de penal y Xisco (P) 85'"
     },
     {
-      "fecha": "1990-11-21",
-      "ano": "1990",
-      "rival": "Boca Juniors (Arg)",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Boca Juniors (Arg)",
-      "torneo": "Supercopa Sudamericana",
-      "estadio": "Camilo Cichero de Buenos Aires",
-      "goles_detalle": "César Silvera (P) 38' y Jorge Villar (P) 84' de penal"
-    },
-    {
-      "fecha": "1987-11-21",
-      "ano": "1987",
-      "rival": "Rampla Juniors",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Rampla Juniors",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Ricardo Viera 79' y Jorge Cabrera 88'"
-    },
-    {
-      "fecha": "1981-11-21",
-      "ano": "1981",
-      "rival": "Defensor",
-      "goles_penarol": 3,
-      "goles_rival": 0,
-      "resultado": "Peñarol 3 - 0 Defensor",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Fernando Morena (3) 44', 79' y 88'"
-    },
-    {
-      "fecha": "1974-11-21",
-      "ano": "1974",
-      "rival": "Defensor",
-      "goles_penarol": 3,
+      "fecha": "1996-11-22",
+      "ano": "1996",
+      "rival": "Liverpool",
+      "goles_penarol": 5,
       "goles_rival": 2,
-      "resultado": "Peñarol 3 - 2 Defensor",
-      "torneo": "Campeonato Uruguayo",
+      "resultado": "Peñarol 5 - 2 Liverpool",
+      "torneo": "Torneo Liguilla Pre Libertadores",
       "estadio": "Centenario",
-      "goles_detalle": "Fernando Morena (2) 28' de penal y 65' y Daniel Quevedo 71'"
+      "goles_detalle": "Diego Aguirre (L) 8', Robert Lima (P) 12', Servando Marrero (L) 21' de penal, José Enrique De los Santos (P) 46', Martín García (P) 53', Marcelo De Souza (P) 79' y Andrée González (P) 88'"
     },
     {
-      "fecha": "1973-11-21",
-      "ano": "1973",
+      "fecha": "1978-11-22",
+      "ano": "1978",
+      "rival": "Huracán Buceo",
+      "goles_penarol": 1,
+      "goles_rival": 1,
+      "resultado": "Peñarol 1 - 1 Huracán Buceo",
+      "torneo": "Torneo Liga Mayor",
+      "estadio": "Centenario",
+      "goles_detalle": "Ildo Maneiro 19'"
+    },
+    {
+      "fecha": "1971-11-22",
+      "ano": "1971",
+      "rival": "Central Español",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Central Español",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Ruben Corbo 40' y Julio Losada 75'"
+    },
+    {
+      "fecha": "1970-11-22",
+      "ano": "1970",
       "rival": "Cerro",
       "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Cerro",
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Cerro",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Ruben Corbo 33' y Fernando Morena 88' de penal"
+      "goles_detalle": "Francisco Bertocchi (2) 18' y 73'"
     },
     {
-      "fecha": "1965-11-21",
-      "ano": "1965",
-      "rival": "Montevideo Wanderers",
-      "goles_penarol": 3,
+      "fecha": "1931-11-22",
+      "ano": "1931",
+      "rival": "Independiente de Mar del Plata (Arg)",
+      "goles_penarol": 2,
       "goles_rival": 1,
-      "resultado": "Peñarol 3 - 1 Montevideo Wanderers",
-      "torneo": "Campeonato Uruguayo",
-      "estadio": "Centenario",
-      "goles_detalle": "Pedro Rocha (3) 7', 38' y 60' de penal"
+      "resultado": "Peñarol 2 - 1 Independiente de Mar del Plata (Arg)",
+      "torneo": "Copa Samuel Benedetti",
+      "estadio": "Field Municipal de Mar del Plata",
+      "goles_detalle": "Botta (I) 15', Juan Peregrino Anselmo (P) 22' y Raúl Häeberli (P) 70'"
+    },
+    {
+      "fecha": "1914-11-22",
+      "ano": "1914",
+      "rival": "Nacional",
+      "goles_penarol": 2,
+      "goles_rival": 1,
+      "resultado": "Peñarol 2 - 1 Nacional",
+      "torneo": "Amistoso (local)",
+      "estadio": "Viejo Parque Central",
+      "goles_detalle": "Juan Gesuele (P) 25', Carlos Scarone (N) 41' de penal y Juan Gesuele (P) 56'"
     }
   ],
   "cumpleanos_glorias": [
-    {
-      "nombre": "Tomas Lewis",
-      "fecha_nacimiento": "1882-11-21T00:00:00.000Z",
-      "partidos": null,
-      "goles": null,
-      "titulos": 0
-    },
-    {
-      "nombre": "Ernesto Mascheroni",
-      "fecha_nacimiento": "1907-11-21T00:00:00.000Z",
-      "partidos": null,
-      "goles": null,
-      "titulos": 0
-    },
     {
       "nombre": "Jorge Fossati",
       "fecha_nacimiento": "1952-11-22T00:00:00.000Z",
