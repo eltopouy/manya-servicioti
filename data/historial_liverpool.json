@@ -1,0 +1,56 @@
+{
+  "rival": "Liverpool",
+  "rival_oficial": "Liverpool Fútbol Club",
+  "rival_id": 516,
+  "rival_slug": "liverpool",
+  "escudo_rival": "assets/img/escudos/escudo_liverpool.webp",
+  "fuente_oficial": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
+  "resumen": {
+    "partidos_jugados": 241,
+    "ganados_penarol": 161,
+    "empatados": 44,
+    "perdidos_penarol": 36,
+    "goles_penarol": 546,
+    "goles_rival": 226,
+    "diferencia_goles": "+320",
+    "ventaja_victorias": "+125 partidos a favor del Decano",
+    "efectividad_pct": "72.9%"
+  },
+  "ultimos_enfrentamientos": [
+    {
+      "fecha": "2026-10-18",
+      "marcador": "Peñarol 0 - 1 Liverpool",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Federico Martínez (L) 73'"
+    },
+    {
+      "fecha": "2026-05-16",
+      "marcador": "Peñarol 2 - 1 Liverpool",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Intermedio",
+      "incidencias": "Jesús Trindade (P) 3', Federico Martínez (L) 4' y Roberto Fernández (P) 43'"
+    },
+    {
+      "fecha": "2026-04-13",
+      "marcador": "Peñarol 0 - 2 Liverpool",
+      "estadio": "Campeón del Siglo",
+      "torneo": "Torneo Apertura",
+      "incidencias": "Ruben Bentancourt (L) 5' y Martín Rabuñal (L) 41'"
+    },
+    {
+      "fecha": "2025-11-16",
+      "marcador": "Peñarol 2 - 1 Liverpool",
+      "estadio": "Centenario",
+      "torneo": "Campeonato Uruguayo",
+      "incidencias": "Abel Hernández (L) 92', Diego García (P) 103' y Leonardo Fernández (P) 115' de penal"
+    },
+    {
+      "fecha": "2025-09-13",
+      "marcador": "Peñarol 2 - 2 Liverpool",
+      "estadio": "Belvedere",
+      "torneo": "Torneo Clausura",
+      "incidencias": "Javier Méndez (P) 15', Lucas Acosta (L) 18', Abel Hernández (L) 34' y Maximiliano Olivera (P) 71'"
+    }
+  ]
+}
