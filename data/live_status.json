@@ -1,10 +1,10 @@
 {
-  "actualizado": "22/11/2026 02:45",
+  "actualizado": "22/11/2026 03:15",
   "schema_version": "11.0",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 56.3,
+  "horas_desde_ultimo_partido": 56.8,
   "rival_activo_nombre": "Liverpool",
   "rival_activo_slug": "liverpool",
   "historial_file": "data/historial_activo.json",
@@ -1775,19 +1775,19 @@
   "clima_campeon_del_siglo": {
     "estadio": "Estadio Campeón del Siglo (Ruta 102 Km 23.500)",
     "coordenadas": "-34.7969, -56.0672",
-    "temperatura_c": 14.6,
-    "sensacion_c": 14.5,
-    "viento_kmh": 8.6,
+    "temperatura_c": 14.7,
+    "sensacion_c": 14.4,
+    "viento_kmh": 10.3,
     "humedad_pct": 93,
-    "weather_code": 3,
-    "condicion": "Cielo cubierto sobre la Catedral Aurinegra",
-    "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
+    "weather_code": 51,
+    "condicion": "Garúa leve en el Campeón del Siglo",
+    "recomendacion_hincha": "Posible llovizna en Bañados de Carrasco: llevar rompevientos impermeable.",
     "pronostico_partido": {
       "disponible": false,
       "dias_faltantes": 11,
       "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 11 días)."
     },
-    "actualizado": "22/11/2026 02:45"
+    "actualizado": "22/11/2026 03:15"
   },
   "minuto_a_minuto": [
     {

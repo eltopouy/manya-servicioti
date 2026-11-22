@@ -1,5 +1,5 @@
 {
-  "actualizado": "22/11/2026 02:45",
+  "actualizado": "22/11/2026 03:15",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "PREVIA",
@@ -92,7 +92,7 @@
       "fecha": "20/11/2026 19:14",
       "fecha_iso": "2026-11-20T19:14:32-03:00",
       "fecha_raw": "20/11/2026 19:14 hs",
-      "antiguedad_horas": 31.5,
+      "antiguedad_horas": 32.0,
       "timestamp": 1795212872.0,
       "peso": 1.25
     },
@@ -104,7 +104,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 39.4,
+      "antiguedad_horas": 39.9,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -116,7 +116,7 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 40.0,
+      "antiguedad_horas": 40.5,
       "timestamp": 1795182240.0,
       "peso": 1.25
     },
@@ -128,7 +128,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 42.7,
+      "antiguedad_horas": 43.2,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -140,8 +140,20 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 47.0,
+      "antiguedad_horas": 47.5,
       "timestamp": 1795157270.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "El desahogo de Ignacio Ruglio tras la conquista de Peñarol de la Tabla Anual y el mensaje que le mandó a Juan Pedro Damiani con \"respeto\" y una \"diferencia\"",
+      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPNGZiSzNBZVBwQy03UFFNcEZfRE4tTVdvY3NMNGVZV3p3d2lqR3pLTjNwRjJrV0pOWlVCVEExZ1M5eVJ0Qi1TVl96aTNrN0RSQ2Q0OGotQ09GN1ZxSG1aY3FKbGRRdllWZURDQ0swOHVicmF1aDZnLUlycml6bmoteVdwd2VlSzM3ZVdYZUVxOTRXOWo3WnBfNEFxckZha2NJZDh1R01ORi1zd2F6d3pyM0ZpOG1Ib0wwSFg2VXlQcjU1SlJGTUt3UVlOdHB2bFo4QndjU0F4aVNmSlpjNlo3aGs4eHNCaWVkZXhxZTNIUmE2dldmbnRlWnM2V19hMmR6VkhkN2FJdW9reHBk0gGSAkFVX3lxTFBjdlpxZXhJdFpTenJFd2ozaTV2b29XWXpLYlJWQ3BwSmM1SnFla2ZLbmlnRUxVaGs3bk14NjRXZUZ2NlhtWDFDN3BBUlRCbV9UMTJjanZLTS1GVWU3RmY5WTFLWVpOWHg4dFRmU0NBMWF1RnEzVjVNWXBpU1RwT1hfQldOTXhqcVFabEt2X2dCTW1EYjhMaGpLRXNaak4tWUlmY3YzX3VvbTItMThsRVluSXdLRXZZNm1nS18xUVJUMkp6bnlrY3hpc1VoUkFiT19WZGVsX1ZHbWFLUWVlQy16R0VmT1BRTm50ME5hZEdxRWJraEg2UFJUd2FDVzBMLXhMS0szVkI4eUJWTVRmRURZd3c?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 21:22 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "19/11/2026 21:22",
+      "fecha_iso": "2026-11-19T21:22:00-03:00",
+      "fecha_raw": "19/11/2026 21:22 hs",
+      "antiguedad_horas": 53.9,
+      "timestamp": 1795134120.0,
       "peso": 1.25
     },
     {
@@ -152,7 +164,7 @@
       "fecha": "19/11/2026 19:57",
       "fecha_iso": "2026-11-19T19:57:00-03:00",
       "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 54.8,
+      "antiguedad_horas": 55.3,
       "timestamp": 1795129020.0,
       "peso": 1.2
     },
@@ -164,7 +176,7 @@
       "fecha": "19/11/2026 19:38",
       "fecha_iso": "2026-11-19T19:38:00-03:00",
       "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 55.1,
+      "antiguedad_horas": 55.6,
       "timestamp": 1795127880.0,
       "peso": 1.2
     },
@@ -176,7 +188,7 @@
       "fecha": "19/11/2026 18:51",
       "fecha_iso": "2026-11-19T18:51:00-03:00",
       "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 55.9,
+      "antiguedad_horas": 56.4,
       "timestamp": 1795125060.0,
       "peso": 1.2
     },
@@ -188,21 +200,9 @@
       "fecha": "19/11/2026 18:39",
       "fecha_iso": "2026-11-19T18:39:05-03:00",
       "fecha_raw": "19/11/2026 18:39 hs",
-      "antiguedad_horas": 56.1,
+      "antiguedad_horas": 56.6,
       "timestamp": 1795124345.0,
       "peso": 1.05
-    },
-    {
-      "titulo": "Peñarol ganó la Anual tras golear 3-0 a Cerro Largo, y espera por Racing o Liverpool para definir el campeón 2026",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWTZJNmlyWVI5QUg0OVotLTVsd3hyeDlVcG9wMG1hYUtJYndMQXB4UWh3Y3M2dndWT2tpOGFNWDEzczhjcUF3UEsxcDhhLV9ucGUwWmhsaVlSbEg1OS1HelRnTjVLaWowR2ZhTUQ1Z3I5NXNFd0NPRGxpOHhvdDloZkZSSXVhU2NBMVp1bXp3VlN3MnVEMVRCUUdtNUVoOHZTdGN1R1dBTXBLX2ZQcWNsMEVBaHFzbDZVRTcyOGdudUQzbjlldmE2UVp4VkpjeW_SAdQBQVVfeXFMUHNTemlZb2t2b0V1VjUwZG51WHlNSVA5bHpIRi1OWXU3TDlOZW8yeUo5UmNuYUMyaU1GWF9DNXNiMXRfMGFjeW93MmRUREllYmFZS3JyY1JQWjhOZTBreTZ0amNjMnltVWxaZjRnOXhJd3NFSDBVNGRTSl9Hb1dlSWtpSkJVTnVtN0tHWVdmaVQ1cXpXMFBZNFNTWHhEc1AxNkhvY3Z2ME1ZczVScGNXTERhdHJWSXhpekhyaTI1V3NLdUg2SWdUNDhwN2dSeTBybU1hQ3E?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Subrayado Deportes el 19/11/2026 a las 18:31 hs.",
-      "fuente": "Subrayado Deportes",
-      "fecha": "19/11/2026 18:31",
-      "fecha_iso": "2026-11-19T18:31:00-03:00",
-      "fecha_raw": "19/11/2026 18:31 hs",
-      "antiguedad_horas": 56.2,
-      "timestamp": 1795123860.0,
-      "peso": 1.1
     }
   ]
 }
