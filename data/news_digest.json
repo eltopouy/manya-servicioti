@@ -1,5 +1,5 @@
 {
-  "actualizado": "22/11/2026 04:09",
+  "actualizado": "23/11/2026 04:55",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "PREVIA",
@@ -85,6 +85,30 @@
   ],
   "noticias_fuentes": [
     {
+      "titulo": "Cruce de encuestas electorales de Peñarol posicionan a Damiani favorito y disputa por el segundo puesto",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPazhwLWh2ZllWVDNPbGRudDB6c0FYX0dmTzEtVjVJTlg3WEdWYVFXVzJPSHFpaTNnNUVjTlpJNTBzeVdWNldlUHlrVGRVblU5Vl9IRlJBRVZkWnA5S2E2TWo5Z0ZsMGl0c1FGRl9GcnZ0MGxJWi1UVWlPN2N0NkRwRGhRay1kM2hTM3ltempJdHJ6TXBJTmd6VEFMaEZFQW1PNTVHczJkS21qdjJWZVkyMjhOUzQ1VEd0Q1NjMWhNXzg3UHliNDBxUGNJYmtDLXNCTVR1MHBmcS1aNlBr?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 22/11/2026 a las 16:31 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "22/11/2026 16:31",
+      "fecha_iso": "2026-11-22T16:31:26-03:00",
+      "fecha_raw": "22/11/2026 16:31 hs",
+      "antiguedad_horas": 12.4,
+      "timestamp": 1795375886.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "Peñarol: la lista de Damiani rechazó el debate con Evaristo González y le dejó un mensaje",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOUVGRXhRRGFLOU03SmpuTnJoMmpDWThOdVZnNDA0c29lZnV5NndMc09QWjVFR3lsOWk0WlJaOW1mNGRYSmQyc1VPTy1QQjZVUUF1Z1ZzRmtBU3N6b0hSSjY5WVhGN1Jia0tzSnBadlI2VkZkMFVROVN6MXNVZTlsd2x3SnE3amlqekd0NzVacjVYLXhTWDJOaURPUEJOMUVIVW5tTGVMMFlhMnFodVZ6OVhuX3IyVzFDdHZ6SEV6MWRmblZ1VHBkb2RpeVdPN0Q5V3fSAfYBQVVfeXFMUDVfcnpMV0RjcC1ncW5yMkFERmVLS19CNTRTOE1HZ0V2R1RUSEFHZUkyTE52M2FsNlhFVWxtU1lHaWlwNjBjLTZZZmlKT3c0U3VGX3hyRjBJMWpjOEtVUXZ0VVRuWXQ1T19lS0JWanlTbEF6MVNST3hTcHY5Zk1SeXYwbVpzdnNUUU9yVmE4bHVKY29VU3poQXlmSzc4STRiNzlTdm9OMzVJdUNrN2pwN3NQWmxEZ3ZLYkNYTlFMa1dlelVESUNWT2otV0poTk1ZQm5TVWRpbTYzSkYybThITUI3UG82WW8zaE94S1hrTFhlV25hSUlR?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 22/11/2026 a las 13:07 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "22/11/2026 13:07",
+      "fecha_iso": "2026-11-22T13:07:00-03:00",
+      "fecha_raw": "22/11/2026 13:07 hs",
+      "antiguedad_horas": 15.8,
+      "timestamp": 1795363620.0,
+      "peso": 1.2
+    },
+    {
       "titulo": "Diego Aguirre a Ovación: el llamado del contador Damiani que lo emocionó, su relación con el hincha y las elecciones",
       "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQaWRZWmFDU1lROWIyeE40SThsV1UySUVGR2U1MjJoWm1VT2dZUnNCQ19XWkJGZXJVcE1fNmdEbXJlSGhLZGFoZHJyU0Q5QjkwM3ZGOU1KbVBWX05tY1ZwQVYwWVlBWU05cjRaejBDbFFaeEZ1Ylpack95TUZESkJwOU81M0pGOWtRcTNrbDNzenF3YmE4RE9UYmY3LVBreU5KWmYzM2RHYjAzRHhOMkZud2g2X1A0TTl0aGFJT3EtUDE0dW00WW5XaWpQSUdheE44Y1ZyRjYtOUpNbE51QkNTbHMwNi1QeFp2R1o4?oc=5",
       "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 22/11/2026 a las 03:05 hs.",
@@ -92,8 +116,20 @@
       "fecha": "22/11/2026 03:05",
       "fecha_iso": "2026-11-22T03:05:37-03:00",
       "fecha_raw": "22/11/2026 03:05 hs",
-      "antiguedad_horas": 1.1,
+      "antiguedad_horas": 25.8,
       "timestamp": 1795327537.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "La estadísticia que lideró Peñarol tras el cierre de la Tabla Anual y cómo repercutió en la consagración Mirasol",
+      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQMi1VNWFlX1hkX2QxZnh3LXh1SU1vNk1GLXNwTjl4SVFQRVdQbWZVZ1VCOTVSMUd1bVBPWlJjZzVGamVpcnRDc25WVVA1T3VIOHRwVzdzY041RjlGZGE0YVAxR0xPRUNBLUFicjBJSDBjeXFGa3dvUjlBUk9HckZaMm9MZExObGNoXzRydl9YVThhbGJaSUdTVV9nMUE4dFMwYURKUTJoV2d2dk0tam5JaGVxUHdCV1BaZ081UDE2T05ZelM3cTNvaW5VSDJnLUgtNmE5aS12VWx0SkFDZXp3c0VLWVJNaEZU?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 21/11/2026 a las 03:05 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "21/11/2026 03:05",
+      "fecha_iso": "2026-11-21T03:05:03-03:00",
+      "fecha_raw": "21/11/2026 03:05 hs",
+      "antiguedad_horas": 49.8,
+      "timestamp": 1795241103.0,
       "peso": 1.25
     },
     {
@@ -104,7 +140,7 @@
       "fecha": "20/11/2026 19:14",
       "fecha_iso": "2026-11-20T19:14:32-03:00",
       "fecha_raw": "20/11/2026 19:14 hs",
-      "antiguedad_horas": 32.9,
+      "antiguedad_horas": 57.7,
       "timestamp": 1795212872.0,
       "peso": 1.25
     },
@@ -116,7 +152,7 @@
       "fecha": "20/11/2026 11:21",
       "fecha_iso": "2026-11-20T11:21:45-03:00",
       "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 40.8,
+      "antiguedad_horas": 65.6,
       "timestamp": 1795184505.0,
       "peso": 1.05
     },
@@ -128,9 +164,21 @@
       "fecha": "20/11/2026 10:44",
       "fecha_iso": "2026-11-20T10:44:00-03:00",
       "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 41.4,
+      "antiguedad_horas": 66.2,
       "timestamp": 1795182240.0,
       "peso": 1.25
+    },
+    {
+      "titulo": "Peñarol goleó a Cerro Largo y conquistó la Tabla Anual",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdHZYQnNCSjk4YVJIekRQYWFfWm9kLXQzQVd6V3lubkQ4ODN4LTY4THdaMmFqWU5FVmVoYWZJY2h4U3ExQTZlSlpGaUhTSEhENWtGeVpKOXJwb1poWG9VS0FSZTFlckRXTDZwNUJBM1V1d2xSU3dSZnFIQWRvcVN5VTlOMmc5UU9TZTloaUNpNFBVTUd0dTBRRGVvSFhDeXE2V1lV?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Club Atlético Peñarol el 20/11/2026 a las 08:23 hs.",
+      "fuente": "Club Atlético Peñarol",
+      "fecha": "20/11/2026 08:23",
+      "fecha_iso": "2026-11-20T08:23:54-03:00",
+      "fecha_raw": "20/11/2026 08:23 hs",
+      "antiguedad_horas": 68.5,
+      "timestamp": 1795173834.0,
+      "peso": 1.05
     },
     {
       "titulo": "Básquet: Peñarol derrotó a Goes de local y lidera la Liga Uruguaya de forma invicta",
@@ -140,7 +188,7 @@
       "fecha": "20/11/2026 08:02",
       "fecha_iso": "2026-11-20T08:02:00-03:00",
       "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 44.1,
+      "antiguedad_horas": 68.9,
       "timestamp": 1795172520.0,
       "peso": 1.2
     },
@@ -152,57 +200,9 @@
       "fecha": "20/11/2026 03:47",
       "fecha_iso": "2026-11-20T03:47:50-03:00",
       "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 48.4,
+      "antiguedad_horas": 73.1,
       "timestamp": 1795157270.0,
       "peso": 1.25
-    },
-    {
-      "titulo": "El desahogo de Ignacio Ruglio tras la conquista de Peñarol de la Tabla Anual y el mensaje que le mandó a Juan Pedro Damiani con \"respeto\" y una \"diferencia\"",
-      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPNGZiSzNBZVBwQy03UFFNcEZfRE4tTVdvY3NMNGVZV3p3d2lqR3pLTjNwRjJrV0pOWlVCVEExZ1M5eVJ0Qi1TVl96aTNrN0RSQ2Q0OGotQ09GN1ZxSG1aY3FKbGRRdllWZURDQ0swOHVicmF1aDZnLUlycml6bmoteVdwd2VlSzM3ZVdYZUVxOTRXOWo3WnBfNEFxckZha2NJZDh1R01ORi1zd2F6d3pyM0ZpOG1Ib0wwSFg2VXlQcjU1SlJGTUt3UVlOdHB2bFo4QndjU0F4aVNmSlpjNlo3aGs4eHNCaWVkZXhxZTNIUmE2dldmbnRlWnM2V19hMmR6VkhkN2FJdW9reHBk0gGSAkFVX3lxTFBjdlpxZXhJdFpTenJFd2ozaTV2b29XWXpLYlJWQ3BwSmM1SnFla2ZLbmlnRUxVaGs3bk14NjRXZUZ2NlhtWDFDN3BBUlRCbV9UMTJjanZLTS1GVWU3RmY5WTFLWVpOWHg4dFRmU0NBMWF1RnEzVjVNWXBpU1RwT1hfQldOTXhqcVFabEt2X2dCTW1EYjhMaGpLRXNaak4tWUlmY3YzX3VvbTItMThsRVluSXdLRXZZNm1nS18xUVJUMkp6bnlrY3hpc1VoUkFiT19WZGVsX1ZHbWFLUWVlQy16R0VmT1BRTm50ME5hZEdxRWJraEg2UFJUd2FDVzBMLXhMS0szVkI4eUJWTVRmRURZd3c?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 19/11/2026 a las 21:22 hs.",
-      "fuente": "Referí (El Observador)",
-      "fecha": "19/11/2026 21:22",
-      "fecha_iso": "2026-11-19T21:22:00-03:00",
-      "fecha_raw": "19/11/2026 21:22 hs",
-      "antiguedad_horas": 54.8,
-      "timestamp": 1795134120.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "Ruglio tras el 3-0 de Peñarol: “no tengo fuerzas”, “youtubers pagos” y “cuentas truchas”",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPTi1yUGhvMjhLWm5SdHl4ZlRMZHVuUG1ad2Q3S0tlYkc0Q20yTWRqWENCTUhRaFFDUlJWOXdQOGtNamtHbTRaaFdKWC1hbm1udlpLVm9wQkhWSnl2S2FFaFJaenVCc0JWS1NpdzFGZUZzMlhkbmktQTR4amh4S1IzREtGdlVHWFJIT3NETkFoYWZRMzZOaFBNVjdsaUhuNFJHVFZfbUgxLV93M0RWcElEX1Bwa0dRbVlLZkRlZ09YWmVEV0Nua3dPcWxlY9IB7wFBVV95cUxPWkVyZGJoMUNQcGRRczlCb3dGTy0zQW1ZS01CX3Nsemx2YWszbjZKU0ZNRTN1cXJiV3BkQU9jajBVVXo0eWdKNmdyNmZZSkpxYlc5b0l6YVQ2TDViUlVnckFRWUZnbUlJYUxCd2pxYlh6OFE3ejlxRXQ0ZFMzTWo2cWxNVHhNWVo1WTg5X2VQeThLOFV0TENJd1lBUUhHUXBEZEhZcTFhSlg2WHlzdzJsXzhhTld4SzBQNmVxNlNaWkNYYkRKLXlBbTdqVFhOUWw1RXZyUV85RDRZcEs3a2xtOGhrbFRlVEJrdC14Mi1Gcw?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:57 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 19:57",
-      "fecha_iso": "2026-11-19T19:57:00-03:00",
-      "fecha_raw": "19/11/2026 19:57 hs",
-      "antiguedad_horas": 56.2,
-      "timestamp": 1795129020.0,
-      "peso": 1.2
-    },
-    {
-      "titulo": "Peñarol: el abrazo de Ignacio Ruglio con Diego Aguirre y el mensaje para Lucas Ferreira",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOWFVjME5sdFJGY2VPRUM4VzlRYnJhNEIzLWtkWDY2WnRldnNwd1h3cEQzNm9OX3BWUExfdU1oZDBGZHNvTWUxUmpRVDNuRUZJLXpLT2Z0cDFaRjVaUGVyX2xRdDl4XzBoWUp2TkxsNHJiVVZjQ1RNM1RvZWRCbE9Ra3FRbWRsWkRYWjNyN0ZqMi1lT1psSlllTExxTjlkRWdaUEZyUVRvNjRubVZUbkYtRHMtdDE1OVk4UHVVWTd5eTBRZEVYS21IeE9SNmdNYkHSAfMBQVVfeXFMUEUxNnNpNTR5MlZZLTNXZ2NKTHRxcW9qSmJQb1lWU1Vza0l1R2V6ZTBWMXR6WkNCcmM3bVdDdWUtNUtLa2VHYVE4Y1h4TndnMlg0QnVscEowakFzSzU5YnYydFdVT2kyUTB4X2UzN3pOTFBaU29iTFZnSWdiclZ6RjBrTU1pUWF6R0JxbTNRZl9KSnQyZmh3Q3l2a2tBZGI1M28zRUllUmJ5WHNBVGdDbTBlUmQxQmlvN0VYaGFYb01rcXNOd3gza1UwYnBQdDlteXA5TVBkRTcxTFF2eUM2enoycXNtY3hENl9HcVkyaG5DWmZJ?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 19:38 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 19:38",
-      "fecha_iso": "2026-11-19T19:38:00-03:00",
-      "fecha_raw": "19/11/2026 19:38 hs",
-      "antiguedad_horas": 56.5,
-      "timestamp": 1795127880.0,
-      "peso": 1.2
-    },
-    {
-      "titulo": "Clasificación a copas: Peñarol a la Libertadores y varios esperan. ¿Qué necesita Nacional?",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQRkEtWmExVHBNRHBtbHE1RWpOckdDX3FtdGVBSEtDY2pjX2Vjalp6RXlyQThfVlZ5cVQ1cTBnejBLeW80YUJlc3kyX0FEQm1kQjB1R2R6YTFyTzliLXBXbjRLQ3V0aFlKSHlUMnRzRElMZzYzNW5NVk5TX2JsSG8yeWQ4dlBOTTF0cm1zMkxNYlJMSjROWm5VTlNQQkUxWEVDanlVZ1RRWmRRcmR5QVpqaUVtQUQ4QnZiRFU5S1ZSN3VRQTR0M2xQN09LMEJVUlFXdkE?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 19/11/2026 a las 18:51 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "19/11/2026 18:51",
-      "fecha_iso": "2026-11-19T18:51:00-03:00",
-      "fecha_raw": "19/11/2026 18:51 hs",
-      "antiguedad_horas": 57.3,
-      "timestamp": 1795125060.0,
-      "peso": 1.2
     }
   ]
 }

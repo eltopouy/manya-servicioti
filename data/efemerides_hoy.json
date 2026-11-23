@@ -1,105 +1,97 @@
 {
-  "fecha_consulta": "22/11/2026",
-  "dia_mes": "22 de Noviembre",
+  "fecha_consulta": "23/11/2026",
+  "dia_mes": "23 de Noviembre",
   "fuente": "1891 BD — Comisión de Historia y Patrimonio Histórico del Club Atlético Peñarol",
-  "total_partidos_dia": 8,
+  "total_partidos_dia": 10,
   "partidos_historicos": [
     {
-      "fecha": "2020-11-22",
-      "ano": "2020",
-      "rival": "Boston River",
-      "goles_penarol": 2,
-      "goles_rival": 0,
-      "resultado": "Peñarol 2 - 0 Boston River",
-      "torneo": "Torneo Intermedio",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "David Terans (P) 40' y Agustín Álvarez Martínez (P) 82'"
-    },
-    {
-      "fecha": "2019-11-22",
-      "ano": "2019",
+      "fecha": "2014-11-23",
+      "ano": "2014",
       "rival": "Fénix",
       "goles_penarol": 2,
       "goles_rival": 1,
       "resultado": "Peñarol 2 - 1 Fénix",
-      "torneo": "Torneo Clausura",
-      "estadio": "Campeón del Siglo",
-      "goles_detalle": "Roberto Fernández (F) 22', Lucas Viatri (P) 45+1' de penal y Xisco (P) 85'"
+      "torneo": "Torneo Apertura",
+      "estadio": "Parque Alfredo Víctor Viera",
+      "goles_detalle": "Gonzalo Papa (F) 41', Jonathan Rodríguez (P) 67' y Marcelo Zalayeta (P) 73'"
     },
     {
-      "fecha": "1996-11-22",
-      "ano": "1996",
-      "rival": "Liverpool",
+      "fecha": "2003-11-23",
+      "ano": "2003",
+      "rival": "Deportivo Colonia",
       "goles_penarol": 5,
       "goles_rival": 2,
-      "resultado": "Peñarol 5 - 2 Liverpool",
+      "resultado": "Peñarol 5 - 2 Deportivo Colonia",
+      "torneo": "Torneo Clausura",
+      "estadio": "Centenario",
+      "goles_detalle": "Sebastián García (D) 4', José Luis Chilavert (P) 19', Fabián Estoyanoff (P) 34', Carlos Bueno (P) 36', Gabriel Cedrés (P) 48', Leonardo Medina (D) 54' y Fabián Estoyanoff (P) 79'"
+    },
+    {
+      "fecha": "1997-11-23",
+      "ano": "1997",
+      "rival": "Defensor Sporting",
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 Defensor Sporting",
       "torneo": "Torneo Liguilla Pre Libertadores",
       "estadio": "Centenario",
-      "goles_detalle": "Diego Aguirre (L) 8', Robert Lima (P) 12', Servando Marrero (L) 21' de penal, José Enrique De los Santos (P) 46', Martín García (P) 53', Marcelo De Souza (P) 79' y Andrée González (P) 88'"
+      "goles_detalle": "Marcelo Zalayeta (P) 71'"
     },
     {
-      "fecha": "1978-11-22",
-      "ano": "1978",
-      "rival": "Huracán Buceo",
-      "goles_penarol": 1,
+      "fecha": "1994-11-23",
+      "ano": "1994",
+      "rival": "Cerro Corá (Par)",
+      "goles_penarol": 6,
       "goles_rival": 1,
-      "resultado": "Peñarol 1 - 1 Huracán Buceo",
-      "torneo": "Torneo Liga Mayor",
+      "resultado": "Peñarol 6 - 1 Cerro Corá (Par)",
+      "torneo": "Copa Conmebol",
       "estadio": "Centenario",
-      "goles_detalle": "Ildo Maneiro 19'"
+      "goles_detalle": "Martín Rodríguez (P) 2', Darío Silva (P) 18', Martín Rodríguez (P) 24', Antonio Pacheco (P) 25', Pablo Javier Bengoechea (P) 54' de penal, Martín Rodríguez (P) 90' y Arsenio Silvero (C) 93'"
     },
     {
-      "fecha": "1971-11-22",
-      "ano": "1971",
-      "rival": "Central Español",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Central Español",
+      "fecha": "1985-11-23",
+      "ano": "1985",
+      "rival": "Sud América",
+      "goles_penarol": 3,
+      "goles_rival": 2,
+      "resultado": "Peñarol 3 - 2 Sud América",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Ruben Corbo 40' y Julio Losada 75'"
+      "goles_detalle": "Antonio Alzamendi (2) 37' y 63' y José Perdomo 69'"
     },
     {
-      "fecha": "1970-11-22",
-      "ano": "1970",
+      "fecha": "1980-11-23",
+      "ano": "1980",
       "rival": "Cerro",
-      "goles_penarol": 2,
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 Cerro",
+      "torneo": "Torneo Montevideo",
+      "estadio": "Luis Franzini",
+      "goles_detalle": "John Yawson 32'"
+    },
+    {
+      "fecha": "1969-11-23",
+      "ano": "1969",
+      "rival": "Defensor",
+      "goles_penarol": 3,
       "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Cerro",
+      "resultado": "Peñarol 3 - 1 Defensor",
       "torneo": "Campeonato Uruguayo",
       "estadio": "Centenario",
-      "goles_detalle": "Francisco Bertocchi (2) 18' y 73'"
+      "goles_detalle": "Pedro Rocha (2) 6' de penal y 14' y Julio Losada 26'"
     },
     {
-      "fecha": "1931-11-22",
-      "ano": "1931",
-      "rival": "Independiente de Mar del Plata (Arg)",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Independiente de Mar del Plata (Arg)",
-      "torneo": "Copa Samuel Benedetti",
-      "estadio": "Field Municipal de Mar del Plata",
-      "goles_detalle": "Botta (I) 15', Juan Peregrino Anselmo (P) 22' y Raúl Häeberli (P) 70'"
-    },
-    {
-      "fecha": "1914-11-22",
-      "ano": "1914",
-      "rival": "Nacional",
-      "goles_penarol": 2,
-      "goles_rival": 1,
-      "resultado": "Peñarol 2 - 1 Nacional",
-      "torneo": "Amistoso (local)",
-      "estadio": "Viejo Parque Central",
-      "goles_detalle": "Juan Gesuele (P) 25', Carlos Scarone (N) 41' de penal y Juan Gesuele (P) 56'"
+      "fecha": "1968-11-23",
+      "ano": "1968",
+      "rival": "Racing",
+      "goles_penarol": 1,
+      "goles_rival": 0,
+      "resultado": "Peñarol 1 - 0 Racing",
+      "torneo": "Campeonato Uruguayo",
+      "estadio": "Centenario",
+      "goles_detalle": "Alberto Spencer 1'"
     }
   ],
-  "cumpleanos_glorias": [
-    {
-      "nombre": "Jorge Fossati",
-      "fecha_nacimiento": "1952-11-22T00:00:00.000Z",
-      "partidos": null,
-      "goles": null,
-      "titulos": 0
-    }
-  ]
+  "cumpleanos_glorias": []
 }
