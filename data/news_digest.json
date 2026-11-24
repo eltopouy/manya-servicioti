@@ -1,5 +1,5 @@
 {
-  "actualizado": "23/11/2026 04:55",
+  "actualizado": "24/11/2026 03:11",
   "schema_version": "11.0",
   "modelo_ia": "Manya Editorial Engine v11.0 (1891 BD + ESPN + Prensa Verificada)",
   "fase_publicacion": "PREVIA",
@@ -85,6 +85,78 @@
   ],
   "noticias_fuentes": [
     {
+      "titulo": "Peñarol se coronó tricampeón uruguayo en tercera división, tras vencer a Wanderers",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOSHdIQ0hSMVF2RnRmdkVTb1BRNERYWWN5emZNekJEdWxoel9BdW9RWktLWlM1VV9wenFMZm16SjhYVEtMeUFPSVkxSlVYWnNMTnlKbWhJeE1UT0pKaTJkVVVwR0VPVjJpOEdKcHNZTEJKdUpjLTNydENWZ1k5TUdSc0NJRTRnY3A4Zm45U1NLbnJxWjJDS2RuSmFLLWhDUGlEZjBsWTdoY3FzQlYzUHpCNXFUZkE0cGdabFNJY3VpS0FFRUtkNm1VR9IB7AFBVV95cUxOTDFNaktzVzBscGZaRXpuVlA5TmpuZ3IyN3JFdk1JYkNFRFdRUWVUT0RvS0pnVmhPaEsxSDNDWFBlN3cwZzJVQlk5SzF0a09uZWl0WVBBT3hfTnFiVktKN3hXUHVwUzU3Tl9wOHoxRkpEdnB2ZTgzREx4ZUhmWmFvRWh2eUNMYUFjdk1DLWNxYURvUFJWTVA4ZVlGejlTUnlwM2QtSloyU3RvLXQ3eVlWbVFnTEZ1ZDc5YmlmLWgwc1k0R1d6X1lvNXFhOHFhS09BRWM2NDlpVkRHeVhhOEtEWW1kb01FSXRvb0ZyTw?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 23/11/2026 a las 20:36 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "23/11/2026 20:36",
+      "fecha_iso": "2026-11-23T20:36:00-03:00",
+      "fecha_raw": "23/11/2026 20:36 hs",
+      "antiguedad_horas": 6.6,
+      "timestamp": 1795476960.0,
+      "peso": 1.2
+    },
+    {
+      "titulo": "Nacional y Peñarol en series separadas: así se jugará el Torneo Inicial 2027 desde enero y ya quedó el fixture",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNMjVneF8wWHd3RlFBUVhzVm1FM0tkbUpQcENfSDRQaHFOWUVObmdYWU9lR3lHeWZidkVxT3R1YjhjWTA0SW9xbDFtVmV0ZE4xQ3BzWXpiUHpMejZiakJ5OTlXNE9rTlZCUUUxdy1KMkxBZ1NpeDZtOFBqYU4zaTJtOG5hcDdaVUJUTDdRRkR5Nk9haThTbzNPejdCaURkcUplVTJuOFBaYU1PUFM3WHdhVUVlS0V5R2FGWklGX3FGZVRNRk9YRHBhRERrSGZPY3V0WjNTZ1B3R2xTRXVqU0V2cTN30gHnAUFVX3lxTFBOdDRnOHBVRUxjNkpsRS1SRlBaSU9oVkRhLVczV3FsR2JWOF90OE9Uc0piaTZRZzVwaloxeDJTWjVyRmEzNk5ET0hmVHVZRC1qdXpuTzdqWTEzRkZkUnhCdDFFbkF1c0F2RVNSYnoyNmwxekZETHp0ZlJ6U29kaGVhd3Mta1R6WURHVk5CMUU3SkRjOVUzZlV6VkpIem01TjdrSF9zelY2dHg3cWdoeHNsZVhsa3p4b05nTG5VaDRxYnVKYzZUdDZCMGlNdHpNRzFQZXJyVGY4SU1vbUJoRjFRcDFvRHkzbw?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 23/11/2026 a las 19:32 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "23/11/2026 19:32",
+      "fecha_iso": "2026-11-23T19:32:00-03:00",
+      "fecha_raw": "23/11/2026 19:32 hs",
+      "antiguedad_horas": 7.7,
+      "timestamp": 1795473120.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "Peñarol 1-0 Wanderers: el aurinegro ganó y logró proclamarse tricampeón Uruguayo en la Tercera División",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOVndQVmRzX0RfQmpRMHRLYXg3ZGRidG1ORzdGZGJhYkRjNzk3ZXBKUnNnekFUWHNvRzNIQmtDSzZBZUhTbGlDOTlmZzc0QmREMmdUYUNNSWo2b0tTN2w0N3k3RTZjVVlUU1lNbktiVWo2UHMtbzRvZzFkcHFEUlZTQ28yT3YzNFdvZ1hHbUFCNDFjbFY3MlNsbUJsYWNsQzhfTXlnWVZ5SUZnNmMzWm5BdkNfSlFmSmFfdVNiQzJ5eTEwZUhNdUJKcHoxajRIREtyUDRpUUd6MVAtRlpvWkE?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 23/11/2026 a las 17:30 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "23/11/2026 17:30",
+      "fecha_iso": "2026-11-23T17:30:52-03:00",
+      "fecha_raw": "23/11/2026 17:30 hs",
+      "antiguedad_horas": 9.7,
+      "timestamp": 1795465852.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "Así se juega la última fecha del Torneo Clausura, con Peñarol definiendo la Tabla Anual y Nacional buscando entrar a la Libertadores: horarios, canchas y árbitros",
+      "url": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxPN0UyanQzTDMwZ1VrUktlcjd6TF9nMFZ4OVRZaHVEZHY0TG95TTRDMGU4b18zQVlENnN5MmNZSzFsTXMydUJ5MU5TbGo3YWVXcHVsa2tCZmt5eG5mYWJOOGF3ZzJfSEl0OWFKUFA5MTYyTlh0Um5GdkFaSXdZMGtWeVlJeXBtOHl6Z0hId21IejJTUWh5ZE1YM3BkYUZXUHVBUnppdkVlQzhtY1NFMW9WdVZNZTZnaXJYU0pvN1VodENrWGhBMGpGUmFZTzdudENPZEZ2bFNRRkFBOVNFY1A4Qy00YTNBRjhoeThYbjVJNHBtQ0JXLXl2bVZBNU9rYXM5aktiVy1KM2NLZnFiYjBsMUxSeVhnUHdVU3FiVktrbDRMMzNGOWVYUtIBrgJBVV95cUxQR1REVUNVekV6ZlYwWEFzNmY0SjZQWFYyNENzRWVkcmVEMTlwWGUtN253azV1NE13UTR0OVZJS2xzcmUtN0RGLVowVFJ4Uy1qU2MtdGUtQWc5UUtaZE1wZG5mdEVGNGVvWkdYQ283WXgzb1FiTXJMbk94eUJORGV2ZDJxUFFmNzdvck1fdEs4ODIyTE9fTDRJcnZjaEcydC1va1dqNkdKendzOWVYQllIREt0cGR4SDl5a3plMUV6TmhzeWhXbkJ4YlQtdUYteG5ybGhMbFluVVl1SWxtLUVSN1pTVkE1aHl1dDROelN1ZHJkS0R2cWV5Mk1ndXJhQTRUMTdsNXh5cExDcEJOVm5RNWZ5Nk5KMVlUczRHZ3BUdVV0R0VsbjZCRjMxLWFCUQ?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 23/11/2026 a las 15:14 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "23/11/2026 15:14",
+      "fecha_iso": "2026-11-23T15:14:00-03:00",
+      "fecha_raw": "23/11/2026 15:14 hs",
+      "antiguedad_horas": 12.0,
+      "timestamp": 1795457640.0,
+      "peso": 1.25
+    },
+    {
+      "titulo": "Urretaviscaya habló de un sondeo de Peñarol y sugirió que vayan por un compañero",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWkwwZXpwbEIxREpLVFBIMy1ld1dyb0RndnVkSDlGWGpibDY0ZWtoWWlBNnJpUVNkWU5rS2hhOE5henIzYWxFd2ZkOElzTWFfUWUzM2czbEJ0SHFTWm9wSzEtX2ttSEtzbm05VTVrNHhqOVZNMW1lWktwNkFXMW4xY0dCdHVfVno0blAyM0k5RlMzTjYtQXF5anBIb05FLUhhN0c1RlVoMFg5SDVlT2duWlpqMnF5NnNuWm1EUkJma2RFLWMxaWtF0gHrAUFVX3lxTE5WeUpYQ2cyRWQ4MGloYjdCY3d2QkRpSmxGdDRZRnByNVF2UEFjN3hkeVktV052Si04eHJKeWhqXzBGMkVEWWpNMFBDeFpyRm9rdXkwUlVrSjFHM181Vjg5RjFBQTlMNC1TblJMdEJIaDJNNXR1cnVNOHF2ZUdzRV9STmdXbDhSajhmdmFqZFZpeTQzR2p4NlAwc0xkNEQ4M01hazVNV1BydGF6SE9Scmc5WkhFWmxOeUtOUXZwckg2X0lTS0xqV1Z1OF95dktTNkVtMVRWeXh0X0piNlpUUHhQMmptMkNLOUtYYTg?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 23/11/2026 a las 13:30 hs.",
+      "fuente": "FútbolUy (Montevideo Portal)",
+      "fecha": "23/11/2026 13:30",
+      "fecha_iso": "2026-11-23T13:30:00-03:00",
+      "fecha_raw": "23/11/2026 13:30 hs",
+      "antiguedad_horas": 13.7,
+      "timestamp": 1795451400.0,
+      "peso": 1.2
+    },
+    {
+      "titulo": "Un DT uruguayo en carpeta, charlas con un jugador de selección y plan en formativas: lo que arma Damiani en Peñarol",
+      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxPOHQ1T1l5dkd5b254ZnJxeHRBZ3dSdGw3NEM4OE9tSTZkQTRRTEFCMGxQNF9ubndHLU5yTHBtVFlDMDh2YjBOSExsMDFTOEY2Ri1wUGZGZzhqUWNiNHBhRXpWR3V0QXVDYzlrZXdUelFrS3cxLTFKaUo1V1FBdXhYQkg3VEtNdVFTTVhaaFpaaHNWZkE4eG9iX1E0RWZqUXNUNS1BS2JUcFJhYmVqYk5uX2pNYnhHNTNZUEJlTG5fTlZwckJKdjN2TVFHZGdaR1BFb3o0RG13b0d5WnFFWmR1Q3BZVGV5azR0WWc?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 23/11/2026 a las 09:20 hs.",
+      "fuente": "Ovación Digital (El País)",
+      "fecha": "23/11/2026 09:20",
+      "fecha_iso": "2026-11-23T09:20:32-03:00",
+      "fecha_raw": "23/11/2026 09:20 hs",
+      "antiguedad_horas": 17.9,
+      "timestamp": 1795436432.0,
+      "peso": 1.25
+    },
+    {
       "titulo": "Cruce de encuestas electorales de Peñarol posicionan a Damiani favorito y disputa por el segundo puesto",
       "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPazhwLWh2ZllWVDNPbGRudDB6c0FYX0dmTzEtVjVJTlg3WEdWYVFXVzJPSHFpaTNnNUVjTlpJNTBzeVdWNldlUHlrVGRVblU5Vl9IRlJBRVZkWnA5S2E2TWo5Z0ZsMGl0c1FGRl9GcnZ0MGxJWi1UVWlPN2N0NkRwRGhRay1kM2hTM3ltempJdHJ6TXBJTmd6VEFMaEZFQW1PNTVHczJkS21qdjJWZVkyMjhOUzQ1VEd0Q1NjMWhNXzg3UHliNDBxUGNJYmtDLXNCTVR1MHBmcS1aNlBr?oc=5",
       "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 22/11/2026 a las 16:31 hs.",
@@ -92,7 +164,7 @@
       "fecha": "22/11/2026 16:31",
       "fecha_iso": "2026-11-22T16:31:26-03:00",
       "fecha_raw": "22/11/2026 16:31 hs",
-      "antiguedad_horas": 12.4,
+      "antiguedad_horas": 34.7,
       "timestamp": 1795375886.0,
       "peso": 1.25
     },
@@ -104,9 +176,21 @@
       "fecha": "22/11/2026 13:07",
       "fecha_iso": "2026-11-22T13:07:00-03:00",
       "fecha_raw": "22/11/2026 13:07 hs",
-      "antiguedad_horas": 15.8,
+      "antiguedad_horas": 38.1,
       "timestamp": 1795363620.0,
       "peso": 1.2
+    },
+    {
+      "titulo": "Previo a la definición de la Liga AUF Uruguaya, Matías Arezo y Peñarol celebraron una marca muy especial para el goleador aurinegro",
+      "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPT1pBRUM2akZqX3JEUlZaS0JWeWNqTW1HZ245NkpnZVpwcE14LV93S2VoS0N2Y1hJYTFpWU9ELVAzVTl2NTU3ZThHVnZ0cHlvLU9yaVp2N3BhakRSclNiV1daMEpBRTB1WFNPTXhlQmpGcS1IcTFEdHBmS0JMRXlrdXg1WnZMbEJrMGM1X3ZUdC02Uzl2UW16dk5OTm43TkZOWGFrUVAxRjRXSk44aWpSVS1MZTA0T0pPRWJrYUZhOXJzb01VRHZTWTV6VEdCb2xZYlpTa1NDQmJGYkdLbmd6OXRHVzdmdUs3TEpiNEFqZV9pT1hqSmVYajlMTkLSAYICQVVfeXFMTjl0eEpZdFpPd0w5V1dQSDZBdnlSX054S2xWa1czYnJCeTgtNUw5VldaLXNKYU0yZDBXWjVKRElvSzB0S1N0TzBvQUpCa3Y2WEJZRk1KOW1waS1yZ2dmZS1lbEZiNE42Z0xseVdfN3NBY1BVWHBWdi1zNjBZTTFISDNYWnNkSm5tb0xxUHZxNjZ2YnREdVhhazJERnhtQ1RIeExIQ3FaTkxDQm1EcjhjanJMVk9rNEMwbnR4bDRNYUdTby12RGJieW8wSnNrWWZfOW5BQnRuMk44c3FBV1d3dllERk1POFN3NVdnaE9FaDBSaENxdGZFdDdaVERhTXNFYTB3?oc=5",
+      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 22/11/2026 a las 10:20 hs.",
+      "fuente": "Referí (El Observador)",
+      "fecha": "22/11/2026 10:20",
+      "fecha_iso": "2026-11-22T10:20:00-03:00",
+      "fecha_raw": "22/11/2026 10:20 hs",
+      "antiguedad_horas": 40.9,
+      "timestamp": 1795353600.0,
+      "peso": 1.25
     },
     {
       "titulo": "Diego Aguirre a Ovación: el llamado del contador Damiani que lo emocionó, su relación con el hincha y las elecciones",
@@ -116,92 +200,8 @@
       "fecha": "22/11/2026 03:05",
       "fecha_iso": "2026-11-22T03:05:37-03:00",
       "fecha_raw": "22/11/2026 03:05 hs",
-      "antiguedad_horas": 25.8,
+      "antiguedad_horas": 48.1,
       "timestamp": 1795327537.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "La estadísticia que lideró Peñarol tras el cierre de la Tabla Anual y cómo repercutió en la consagración Mirasol",
-      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQMi1VNWFlX1hkX2QxZnh3LXh1SU1vNk1GLXNwTjl4SVFQRVdQbWZVZ1VCOTVSMUd1bVBPWlJjZzVGamVpcnRDc25WVVA1T3VIOHRwVzdzY041RjlGZGE0YVAxR0xPRUNBLUFicjBJSDBjeXFGa3dvUjlBUk9HckZaMm9MZExObGNoXzRydl9YVThhbGJaSUdTVV9nMUE4dFMwYURKUTJoV2d2dk0tam5JaGVxUHdCV1BaZ081UDE2T05ZelM3cTNvaW5VSDJnLUgtNmE5aS12VWx0SkFDZXp3c0VLWVJNaEZU?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 21/11/2026 a las 03:05 hs.",
-      "fuente": "Ovación Digital (El País)",
-      "fecha": "21/11/2026 03:05",
-      "fecha_iso": "2026-11-21T03:05:03-03:00",
-      "fecha_raw": "21/11/2026 03:05 hs",
-      "antiguedad_horas": 49.8,
-      "timestamp": 1795241103.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "Marcelo Areco, exconsejero de Peñarol, se sumó a la Lista 1414 que encabeza Freddy García para las elecciones",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQUmZTQWdVRExKTXBRWGNIT25lS3J3aThYN0thUnNVNHJXcmU2a1dvQUw2TzBUMERhdF80eVdjREhFV1gzbHVWUTZrWHNFVzFSY0VyWHgtMWlLRzRObUNkRTN2ZWxyM09DZlVPLTBHYVVDcncyT01FdU9nVVVDUjFvNkhVSVoxNXJBSVNra2Rlak4zYjdYTDU0VlNFSnhnT0hiZHg5YkwtdUtfWWNwVXE5czRkRk5LZnFIcUcyaGlYa0hKeWF0X0xCTU5UNlFjeG5GY0lKRjNWTVZvTWZpTkZJWVJR?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 20/11/2026 a las 19:14 hs.",
-      "fuente": "Ovación Digital (El País)",
-      "fecha": "20/11/2026 19:14",
-      "fecha_iso": "2026-11-20T19:14:32-03:00",
-      "fecha_raw": "20/11/2026 19:14 hs",
-      "antiguedad_horas": 57.7,
-      "timestamp": 1795212872.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "Peñarol espera rival en la definición del Uruguayo: cuándo se juega Racing-Liverpool y qué fechas se manejan",
-      "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxQOTJTdWN2bWV2UWNwd2dWUFdCX0YxbVRlaklkc2tqdnFaUWNTWmZ1MlZ5dVNWYk1jSTdNbzBDam5sZzU3bDdwSFRmalhVc0pPN0E3N1RWcDlMbTVrd1pHemw3dzNvbTVScXhDS193aE52MDVNUVFXNVVMbVVWbkhIb2FZOUVLM1p6d3FtMi1yX1dRXzZEN0ExTUMtTFFEcDNZOG04MjVkM29obWhjdnJzOXNSS1pKbHVKUjEwN2xkMkd2UHliRl9MM3lGakJ5aFBGN0RzUVoyMFZydlpzdWlYcTk5ZUp2S1R1VE44dWZzS2hxcHhoYldVWUxYVVVMUdIBgwJBVV95cUxOQV80cmc5cHh6RFdlaGw4TFBwa1VMUU1yNXljRloyRmdKTERSd211ZGhwajk4dnF4THhIUVFTV2tzQmNNcXpQM21CcW5Yb1pZczBzeUJyUEpDeWxEOFdCbjhqajBvWFd4OFBldU1MWTJRNkdIX0JsNkIyUktkTmZEcHVBYTVOemRFbndycmFaOXZUdUdrczA4c0x6ZlZMVmtNT0NFRjhDV3A4WDlGOWg4b3JRZUdONVBPY1dGOHh4Y3c3ZmpIWFBtOUthNkdmckRqa1pRTEFqYm1ueU5sX2ZHd1ctOEx3UUpISWdhU2l5bkIxaXhUaDhqNDQ1UUlXV3ZrR1JR?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Teledoce.com el 20/11/2026 a las 11:21 hs.",
-      "fuente": "Teledoce.com",
-      "fecha": "20/11/2026 11:21",
-      "fecha_iso": "2026-11-20T11:21:45-03:00",
-      "fecha_raw": "20/11/2026 11:21 hs",
-      "antiguedad_horas": 65.6,
-      "timestamp": 1795184505.0,
-      "peso": 1.05
-    },
-    {
-      "titulo": "Peñarol empató al Nacional de 2020 como el ganador de la Tabla Anual con menos puntos del siglo: los números del carbonero y el curioso dato de Diego Aguirre",
-      "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOcER6X054N3gzQTJDb090elZoUlJrUVBfaU1MaExNQkZ1VmlDM1pLeWM3MTVRTm0tTUp3Um1WRlFXSnRSaG5kelRvaG51azZhU3NJRmhBZEtLRzRCMDNMdmdEYkhCZGtRSmN4OFFON2Y1ejVxMWFNcjVOQkh6NFZPa1JKa0hIMzlseFRRUV9Rb2pvSjNrX09KSkRxYk1EWTV1ZjZOZk8ydEVIMk8wVFcxbmlUcE9jSE15UE4yQ3dkMUhZVnRUWnBlNWdVaFRUYUt1LTJnSTZXSE1RUWJjdUNjdTdfaS1TTjlOd1FJeXM0MVNHS0pjekM0bXJOaElFT3V4WnBUVU1TVTM4OC12UDZQYzJ4eHlkTGJwREhV0gGgAkFVX3lxTE5OVlNjdjBja1cyTHBtWFF2SmhfSWdSa1RTc0JpZUN6MUdJZmN0UzFqSFNHejMtZXlDYzhZR1poZkJJbnEyMFlxZFRleWNZN3hnSHU4NkoyZUswMGxJUGtBM3JyTlJTUy1vZmZ3aWlYTlVKbWVPZHc0RHgxWXBLM3ozNHAxXzhVWkZ1WmZYRzEycXpucUEtYzFaeFIyR2x5TmNyMXVpLTBkQ1RYZkR6cUszV3hOQ2tXbDNMT1FSSTBIbFNQcjZBZ185cXpyTjNwZWlBcVZCLWxPbUtCdnpaZGQyNzBPVFpVaUlpRmd2dFQ3al9xcjNDVXBFamFMVDFNR1lDZUxOLUdNc3NmaEFidjNwT05qU3c5WU1pemdkRl9GNg?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Referí (El Observador) el 20/11/2026 a las 10:44 hs.",
-      "fuente": "Referí (El Observador)",
-      "fecha": "20/11/2026 10:44",
-      "fecha_iso": "2026-11-20T10:44:00-03:00",
-      "fecha_raw": "20/11/2026 10:44 hs",
-      "antiguedad_horas": 66.2,
-      "timestamp": 1795182240.0,
-      "peso": 1.25
-    },
-    {
-      "titulo": "Peñarol goleó a Cerro Largo y conquistó la Tabla Anual",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdHZYQnNCSjk4YVJIekRQYWFfWm9kLXQzQVd6V3lubkQ4ODN4LTY4THdaMmFqWU5FVmVoYWZJY2h4U3ExQTZlSlpGaUhTSEhENWtGeVpKOXJwb1poWG9VS0FSZTFlckRXTDZwNUJBM1V1d2xSU3dSZnFIQWRvcVN5VTlOMmc5UU9TZTloaUNpNFBVTUd0dTBRRGVvSFhDeXE2V1lV?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Club Atlético Peñarol el 20/11/2026 a las 08:23 hs.",
-      "fuente": "Club Atlético Peñarol",
-      "fecha": "20/11/2026 08:23",
-      "fecha_iso": "2026-11-20T08:23:54-03:00",
-      "fecha_raw": "20/11/2026 08:23 hs",
-      "antiguedad_horas": 68.5,
-      "timestamp": 1795173834.0,
-      "peso": 1.05
-    },
-    {
-      "titulo": "Básquet: Peñarol derrotó a Goes de local y lidera la Liga Uruguaya de forma invicta",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNdDlpRkt6dXVMci0tNGg1VkZ4VHVHcGlsQTh3Y182dDVIWFd6c29kTThtekc4ejBBM3NZTldOS0c0YWpNVkRjRjRsQlF3cTh2V2Z4ekd5ZEZ5WGpQdXpGeFZsMnNHRE14RDNqUVpYSmo2NEplMWVMc0tHWW5rdXByR0I0WHhkU19WZmZyT2Zic0FIeUtqeWRoT0U0ZmExcDlKYWl4Mkl0X24ySDFDdGRKRjJrS2ExNlZrUURrV0p4UjliNzhveWh4b0hB?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por FútbolUy (Montevideo Portal) el 20/11/2026 a las 08:02 hs.",
-      "fuente": "FútbolUy (Montevideo Portal)",
-      "fecha": "20/11/2026 08:02",
-      "fecha_iso": "2026-11-20T08:02:00-03:00",
-      "fecha_raw": "20/11/2026 08:02 hs",
-      "antiguedad_horas": 68.9,
-      "timestamp": 1795172520.0,
-      "peso": 1.2
-    },
-    {
-      "titulo": "Leonel Jaime dio un show para Peñarol: las jugadas claves, un golazo, su emoción y el mensaje a los hinchas",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQX29wamxXdUxkT05OU2FQck5Tc3lBTnZKbmxnMzZFT1BBRF9kbnZmZW1tWTZBampnNE9FRS10RUtPR3F5SC12ZWs3dldnY002RjVfbFZiUC1oOGRtR09zQVpjVzAybXo5eHpsM1RPMWJmdmlSVE45a3lLN0ZWR09WMkkxRzgxbUdWbHZYcVotLWtUVnhYdmlVTnUxaFFwdk1vd1d3elZ2cGhhQU5LSXRjeGV3eng1RTJtNnRkb0Y3bjVTYmVDY2Z6anBRaFVpX1pLMWRFR3k0T3lHdzFKWHc?oc=5",
-      "resumen": "Cobertura deportiva verificada publicada por Ovación Digital (El País) el 20/11/2026 a las 03:47 hs.",
-      "fuente": "Ovación Digital (El País)",
-      "fecha": "20/11/2026 03:47",
-      "fecha_iso": "2026-11-20T03:47:50-03:00",
-      "fecha_raw": "20/11/2026 03:47 hs",
-      "antiguedad_horas": 73.1,
-      "timestamp": 1795157270.0,
       "peso": 1.25
     }
   ]
