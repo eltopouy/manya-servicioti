@@ -1,10 +1,10 @@
 {
-  "actualizado": "24/11/2026 03:10",
+  "actualizado": "26/11/2026 08:08",
   "schema_version": "11.0",
   "fase_partido": "PREVIA",
   "estado_ciclo_vida": "PREVIA",
   "ventana_post_partido_horas": 48,
-  "horas_desde_ultimo_partido": 104.7,
+  "horas_desde_ultimo_partido": 157.6,
   "rival_activo_nombre": "Liverpool",
   "rival_activo_slug": "liverpool",
   "historial_file": "data/historial_activo.json",
@@ -1783,11 +1783,9 @@
     "condicion": "Mayormente despejado en el Campeón del Siglo",
     "recomendacion_hincha": "Clima ideal para ir con la aurinegra y campera liviana.",
     "pronostico_partido": {
-      "disponible": false,
-      "dias_faltantes": 9,
-      "motivo": "Pronóstico horario Open-Meteo disponible a partir de 7 días antes del partido (faltan 9 días)."
+      "disponible": false
     },
-    "actualizado": "24/11/2026 03:11"
+    "actualizado": "26/11/2026 08:09"
   },
   "minuto_a_minuto": [
     {
